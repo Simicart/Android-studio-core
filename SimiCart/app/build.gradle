@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.1'
+    defaultConfig {
+        applicationId "com.magestore.simicart"
+        minSdkVersion 15
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/MANIFEST.MF'
+    }
+
+    dexOptions {
+        javaMaxHeapSize "2g"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+
+    }
+}
+
+repositories {
+    maven { url 'https://zendesk.artifactoryonline.com/zendesk/repo' }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //    compile 'com.android.support:design:23.0.0'
+    compile 'org.apache:apache:17'
+    compile 'com.google.android.gms:play-services:8.3.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.7.0'
+    //build app over 65k methods
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.paypal.sdk:paypal-android-sdk:2.13.3'
+    compile 'com.android.support:recyclerview-v7:21.0.+'
+    compile project(':wheel')
+    //    compile project(':facebook')
+    compile project(':braintreelibrary')
+    compile project(':devsmartAndroid')
+    compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile group: 'com.zopim.android', name: 'sdk', version: '1.2.0.1'
+}

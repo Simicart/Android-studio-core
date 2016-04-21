@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list_products"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="20dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:scrollbars="none"
+        android:visibility="visible">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/rlt_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"
+        android:background="@drawable/core_background_search"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/menu_bottom_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#CCffffff"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/ll_to_filter"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:padding="2dp"></RelativeLayout>
+
+        <TextView
+            android:id="@+id/txt_totalitem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="items"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/ll_to_sort"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <ImageView
+                android:id="@+id/img_sort"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerHorizontal="true"
+                android:padding="2dp"
+                android:src="@drawable/icon_sort" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar_load"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/menu_bottom_search"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="#FFFFFF"
+        android:indeterminateDrawable="@drawable/progressbar_indeterminate"
+        android:visibility="visible" />
+
+</RelativeLayout>

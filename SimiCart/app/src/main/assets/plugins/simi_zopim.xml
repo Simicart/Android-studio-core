@@ -1,0 +1,36 @@
+   <events>
+    
+    <!--<event>
+        <name>com.simicart.add.navigation.more.zopimchat</name>
+	    <package>com.simicart.plugins.zopimchat</package>
+	    <class>SimiZopim</class>
+	    <method>addzopimtoslidemenu</method>
+	    <sku>simi_developer</sku>    
+    </event>-->
+
+       <event>
+           <name>com.simicart.leftmenu.slidemenucontroller.onnavigate.clickitem</name>
+           <package>com.simicart.plugins.zopimchat</package>
+           <class>SimiZopim</class>
+           <method>clickitemleftmenu</method>
+           <sku>simi_developer</sku>
+       </event>
+
+       <event>
+           <name>com.simicart.core.splashscreen.controller.parseJSONStoreView</name>
+           <package>com.simicart.plugins.zopimchat</package>
+           <class>SimiZopim</class>
+           <method>configzopim</method>
+           <sku>simi_developer</sku>
+       </event>
+
+       <event>
+           <name>com.simicart.core.menutop.block.MenuTopBlock</name>
+           <package>com.simicart.plugins.zopimchat</package>
+           <class>SimiZopim</class>
+           <method>addToMenuTop</method>
+           <sku>simi_developer</sku>
+       </event>
+
+</events>
+  
