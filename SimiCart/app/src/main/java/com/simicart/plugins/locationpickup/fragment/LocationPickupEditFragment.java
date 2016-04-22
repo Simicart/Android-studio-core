@@ -21,122 +21,121 @@ import com.simicart.plugins.locationpickup.block.LocationPickupEditBlock;
 import com.simicart.plugins.locationpickup.controller.LocationPickupEditController;
 
 public class LocationPickupEditFragment extends AddressBookDetailFragment {
-	protected GoogleMap ggmap;
-	protected MapView map;
-	protected ScrollView scroll;
-	protected LocationPickupEditBlock mBlock;
-	protected LocationPickupEditController mController;
-	protected MyAddress addressbook;
-	
-	protected int editAddressFor = Constants.KeyAddress.ALL_ADDRESS;
-	protected MyAddress mBillingAddress;
-	protected MyAddress mShippingAddress;
+    protected GoogleMap ggmap;
+    protected MapView map;
+    protected ScrollView scroll;
+    protected LocationPickupEditBlock mBlock;
+    protected LocationPickupEditController mController;
+    protected MyAddress addressbook;
 
-	public static LocationPickupEditFragment newInstance() {
-		LocationPickupEditFragment fragment = new LocationPickupEditFragment();
-		return fragment;
-	}
+    protected int editAddressFor = Constants.KeyAddress.ALL_ADDRESS;
+    protected MyAddress mBillingAddress;
+    protected MyAddress mShippingAddress;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		MapsInitializer.initialize(getActivity());
-//		LocationPickupBlock.setLattitude("");
-//		LocationPickupBlock.setLongtitude("");
-	}
+    public static LocationPickupEditFragment newInstance() {
+        LocationPickupEditFragment fragment = new LocationPickupEditFragment();
+        return fragment;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(
-				Rconfig.getInstance().layout("plugins_locationpickup_layout"),
-				container, false);
-		Context context = getActivity();
-		if (getArguments() != null) {
-			addressbook = (MyAddress) getArguments().getSerializable(
-					Constants.KeyData.BOOK_ADDRESS);
-			editAddressFor = getArguments().getInt(
-					Constants.KeyData.ADDRESS_FOR);
-			if (editAddressFor != Constants.KeyAddress.ALL_ADDRESS) {
-				mShippingAddress = (MyAddress) getArguments().getSerializable(
-						Constants.KeyData.SHIPPING_ADDRESS);
-				mBillingAddress = (MyAddress) getArguments().getSerializable(
-						Constants.KeyData.BILLING_ADDRESS);
-			}
-		}
-		// if(getArguments() != null){
-		// addressbook = (MyAddress)
-		// getArguments().getSerializable(Constants.KeyData.BOOK_ADDRESS);
-		// }
-		// Log.d("quangdd", "==LocationPickupEditFragment==" +addressbook.toString());
-		scroll = (ScrollView) view.findViewById(Rconfig.getInstance().id(
-				"scrollView"));
-		map = (MapView) view.findViewById(Rconfig.getInstance().id("map"));
-		map.onCreate(savedInstanceState);
-		ggmap = map.getMap();
-		ggmap.getUiSettings().setMyLocationButtonEnabled(false);
-		ggmap.getUiSettings().setZoomControlsEnabled(false);
-		ggmap.setMyLocationEnabled(false);
-		if (ggmap == null) {
-			showDiagloError(
-					Config.getInstance().getText("Error"),
-					Config.getInstance().getText(
-							"First, You must update Google Maps."));
-			return rootView;
-		}
-		
-		mBlock = new LocationPickupEditBlock(view, context);
-		mBlock.setAddressBookDetail(addressbook);
-		mBlock.setGgmap(ggmap);
-		mBlock.initView();
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MapsInitializer.initialize(getActivity());
+    }
 
-		if (mController == null) {
-			mController = new LocationPickupEditController();
-			mController.setDelegate(mBlock);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(
+                Rconfig.getInstance().layout("plugins_locationpickup_layout"),
+                container, false);
+        Context context = getActivity();
+        if (getArguments() != null) {
+            addressbook = (MyAddress) getArguments().getSerializable(
+                    Constants.KeyData.BOOK_ADDRESS);
+            editAddressFor = getArguments().getInt(
+                    Constants.KeyData.ADDRESS_FOR);
+            if (editAddressFor != Constants.KeyAddress.ALL_ADDRESS) {
+                mShippingAddress = (MyAddress) getArguments().getSerializable(
+                        Constants.KeyData.SHIPPING_ADDRESS);
+                mBillingAddress = (MyAddress) getArguments().getSerializable(
+                        Constants.KeyData.BILLING_ADDRESS);
+            }
+        }
+        scroll = (ScrollView) view.findViewById(Rconfig.getInstance().id(
+                "scrollView"));
+        map = (MapView) view.findViewById(Rconfig.getInstance().id("map"));
+        map.onCreate(savedInstanceState);
+        ggmap = map.getMap();
+        ggmap.getUiSettings().setMyLocationButtonEnabled(false);
+        ggmap.getUiSettings().setZoomControlsEnabled(false);
+        ggmap.setMyLocationEnabled(false);
+        if (ggmap == null) {
+            showDiagloError(
+                    Config.getInstance().getText("Error"),
+                    Config.getInstance().getText(
+                            "First, You must update Google Maps."));
+            return rootView;
+        }
 
-		mBlock.setSaveClicker(mController.getClickSave());
-		mBlock.setChooseCountry(mController.getChooseCountry());
-		mBlock.setChooseStates(mController.getChooseStates());
+        mBlock = new LocationPickupEditBlock(view, context);
+        mBlock.setAddressBookDetail(addressbook);
+        mBlock.setGgmap(ggmap);
+        mBlock.initView();
 
-		return view;
-	}
+        if (mController == null) {
+            mController = new LocationPickupEditController();
+            mController.setDelegate(mBlock);
+            mController.setBillingAddress(mBillingAddress);
+            mController.setShippingAddress(mShippingAddress);
+            mController.setEditAddressFor(editAddressFor);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.onResume();
+        }
 
-	public void showDiagloError(String title, String message) {
-		AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-		builder1.setTitle(title);
-		builder1.setMessage(message);
-		builder1.setCancelable(true);
-		builder1.setPositiveButton(Config.getInstance().getText("OK"),
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
+        mBlock.setSaveClicker(mController.getClickSave());
+        mBlock.setChooseCountry(mController.getChooseCountry());
+        mController.setBillingAddress(mBillingAddress);
+        mController.setShippingAddress(mShippingAddress);
+        mController.setEditAddressFor(editAddressFor);
+        mBlock.setChooseStates(mController.getChooseStates());
 
-		AlertDialog alert11 = builder1.create();
-		alert11.show();
-	}
+        return view;
+    }
 
-	@Override
-	public void onResume() {
-		map.onResume();
-		super.onResume();
-	}
+    public void showDiagloError(String title, String message) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+        builder1.setTitle(title);
+        builder1.setMessage(message);
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(Config.getInstance().getText("OK"),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		map.onDestroy();
-	}
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
 
-	@Override
-	public void onLowMemory() {
-		super.onLowMemory();
-		map.onLowMemory();
-	}
+    @Override
+    public void onResume() {
+        map.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        map.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        map.onLowMemory();
+    }
 }
