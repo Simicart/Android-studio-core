@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.model.entity.BusEntity;
 import com.simicart.core.catalog.product.block.CustomerReviewBlock;
 import com.simicart.core.catalog.product.controller.CustomerReviewController;
 import com.simicart.core.catalog.product.entity.Product;
@@ -71,15 +70,5 @@ public class CustomerReviewFragment extends SimiFragment {
 
 	}
 
-	@Override
-	public void onEvent(BusEntity event) {
-		super.onEvent(event);
-		if(event.getKey().equals(Constants.KeyBus.PRODUCT)){
-			
-			mProduct = (Product) event.getValue();
-			mID = mProduct.getId();
-			mRatingStar = mProduct.getStar();
-		}
-	}
-	
+
 }

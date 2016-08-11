@@ -2,13 +2,11 @@ package com.simicart.core.customer.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.model.entity.BusEntity;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -63,10 +61,6 @@ public class AddressBookDetailFragment extends SimiFragment {
                         Constants.KeyData.BILLING_ADDRESS);
             }
         }
-        BusEntity<MyAddress> busEntity = new BusEntity<>();
-        busEntity.setKey(Constants.KeyBus.BOOK_ADDRESS);
-        busEntity.setValue(addressbook);
-        EventBus.getDefault().postSticky(busEntity);
         mBlock = new AddressBookDetailBlock(view, context);
         mBlock.setAddressBookDetail(addressbook);
         mBlock.initView();
@@ -92,7 +86,7 @@ public class AddressBookDetailFragment extends SimiFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
     }

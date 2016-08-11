@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.simicart.core.adapter.TabAdapterFragment;
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.model.entity.BusEntity;
 import com.simicart.core.catalog.product.block.ProductMorePluginBlock;
 import com.simicart.core.catalog.product.controller.ProductMorePluginController;
 import com.simicart.core.catalog.product.entity.Product;
@@ -58,10 +57,6 @@ public class InformationFragment extends SimiFragment {
 			mProduct = (Product) getArguments().getSerializable(Constants.KeyData.PRODUCT);
 		}
 		if (null != mProduct) {
-			BusEntity<Product> busEntity = new BusEntity<>();
-			busEntity.setKey(Constants.KeyBus.PRODUCT);
-			busEntity.setValue(mProduct);
-			EventBus.getDefault().postSticky(busEntity);
 			initView();
 			// RelativeLayout ll_plugin = (RelativeLayout) mRootView
 			// .findViewById(Rconfig.getInstance().id("more_plugins"));

@@ -33,7 +33,7 @@ public class OrderProduct extends SimiEntity {
 		}
 	}
 
-	private void parse(JSONObject json) throws JSONException {
+	private boolean parse(JSONObject json) throws JSONException {
 
 		if (json.has(Constants.SPOT_ID)) {
 			mSpotId = json.getString(Constants.SPOT_ID);

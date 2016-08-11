@@ -11,22 +11,12 @@ import java.util.Map;
 
 @SuppressLint("DefaultLocale")
 public class Config {
+    private String mBaseUrl = "http://dev-vn.magestore.com/simicart/1800/index.php/";
+    private String mSecretKey = "63d7615890f126fc6569198ae5607e5e9e184";
+    private String mBaseCloudUrl = "http://dev-api.jajahub.com/rest";
+    private String mSecretCloudKey = "9631ac14616756b5fdb7ba46750fdf18867325a7";
+
     private String mThemeColor = "#FFFFFF";
-
-    //    private String mBaseUrl = "http://dev-vn.magestore.com/simicart/1800/index.php/";
-//    private String mSecretKey = "63d7615890f126fc6569198ae5607e5e9e184";
-    private String mBaseCloudUrl = "http://dev-api.jajahub.com/rest/";
-    private String mSecretCloudKey = "e3a732afe714198ca3e53bfc7ed2f238d380a5de";
-
-    //    private String mBaseCloudUrl = "http://api.jajahub.com/rest/";
-//    private String mSecretCloudKey = "9aa0e4b72526157d471401a1af6666df4c1e20e5";
-
-//    private String mBaseCloudUrl = "http://dev-api.jajahub.com/rest";
-//    private String mSecretCloudKey = "e3a732afe714198ca3e53bfc7ed2f238d380a5de";
-
-    private String mBaseUrl = "https://jadebloom.com/index.php/";
-    private String mSecretKey = "f86f87da4915da2215305a61d81cdc9aff90be53";
-
     private String key_color = "#607D8B";
     private String top_menu_icon_color = "#FFFFFF";
     private String button_background = "#0277BD";
@@ -50,28 +40,6 @@ public class Config {
     private String search_text_color = "#8b8b8b";
     private String search_icon_color = "#8b8b8b";
 
-//    private String key_color = "#FFFFFF";
-//    private String top_menu_icon_color = "#FFFFFF";
-//    private String button_background = "#BF360C";
-//    private String button_text_color = "#FFFFFF";
-//    private String menu_background = "#F21b1b1b";
-//    private String menu_text_color = "#ECEFF1";
-//    private String menu_line_color = "#444444";
-//    private String menu_icon_color = "#ECEFF1";
-//    private String app_backrground = "#FFFFFF";
-//    private String content_color = "#000000";
-//    private String line_color = "#CACACA";
-//    private String image_boder_color = "#d3d3d3";
-//    private String icon_color = "#000000";
-//    private String section_color = "#E0E0E0";
-//    private String section_text_color = "#000000";
-//    private String price_color = "#BF360C";
-//    private String special_price_color = "#BF360C";
-//    private String search_box_background = "#E6E0E0E0";
-//    private String out_stock_background = "#FF9800";
-//    private String out_stock_text = "#FFFFFF";
-//    private String search_text_color = "#8b8b8b";
-//    private String search_icon_color = "#8b8b8b";
 
     public int getTop_menu_icon_color() {
         return Color.parseColor(top_menu_icon_color);
@@ -103,6 +71,10 @@ public class Config {
         } else {
             return Color.parseColor(key_color);
         }
+    }
+
+    public String getBaseUrlCloud(){
+        return mBaseCloudUrl;
     }
 
     public void setButton_background(String button_background) {

@@ -1,8 +1,5 @@
 package com.simicart.plugins.locationpickup.controller;
 
-import java.util.List;
-
-import org.apache.http.NameValuePair;
 
 import android.util.Log;
 
@@ -34,14 +31,11 @@ public class LocationPickupController extends NewAddressBookController{
 				mDelegate.dismissLoading();
 				
 				if (isSuccess) {
-					Log.d("duyquang", "==1==");
 					if (mAfterController == Constants.NEW_ADDRESS) {
-						Log.d("duyquang", "==2==");
 						AddressBookFragment fragment = AddressBookFragment
 								.newInstance();
-						SimiManager.getIntance().replacePopupFragment(fragment);
+//						SimiManager.getIntance().replacePopupFragment(fragment);
 					} else {
-						Log.d("duyquang", "==22==");
 						MyAddress newAddress = (MyAddress) mModel
 								.getCollection().getCollection().get(0);
 
@@ -80,42 +74,22 @@ public class LocationPickupController extends NewAddressBookController{
 								default:
 									break;
 								}
-								Log.d("duyquang", "==3==");
 								ReviewOrderFragment fragment = ReviewOrderFragment
 										.newInstance(mAfterController, shippingAdd, billingAdd);
-//								switch (addressFor) {
-//								case AddressBookCheckoutFragment.ALL_ADDRESS:
-//									fragment.setBilingAddress(newAddress);
-//									fragment.setShippingAddress(newAddress);
-//									break;
-//								case AddressBookCheckoutFragment.BILLING_ADDRESS:
-//									fragment.setBilingAddress(newAddress);
-//									fragment.setShippingAddress(mShippingAddress);
-//									break;
-//								case AddressBookCheckoutFragment.SHIPPING_ADDRESS:
-//									fragment.setBilingAddress(mBillingAddress);
-//									fragment.setShippingAddress(newAddress);
-//									break;
-//								default:
-//									break;
-//								}
-								SimiManager.getIntance().replacePopupFragment(
-										fragment);
+//								SimiManager.getIntance().replacePopupFragment(
+//										fragment);
 							} else {
 								billingAdd = newAddress;
 								shippingAdd = newAddress;
-								Log.d("duyquang", "==4==");
 								ReviewOrderFragment fragment = ReviewOrderFragment
 										.newInstance(-1, shippingAdd, billingAdd);
-//								fragment.setBilingAddress(newAddress);
-//								fragment.setShippingAddress(newAddress);
-								SimiManager.getIntance().replacePopupFragment(
-										fragment);
+								//SimiManager.getIntance().replacePopupFragment(
+								//		fragment);
 							}
 						}
 					}
 				} else {
-					SimiManager.getIntance().showNotify("FAIL", message, "OK");
+					//SimiManager.getIntance().showNotify("FAIL", message, "OK");
 				}
 			}
 		});
@@ -134,18 +108,18 @@ public class LocationPickupController extends NewAddressBookController{
 			}
 		}
 
-		List<NameValuePair> params = address.toParamsRequest();
-		for (NameValuePair nameValuePair : params) {
-			String key = nameValuePair.getName();
-			String value = nameValuePair.getValue();
-			mModel.addParam(key, value);
-		}
-
-		String lat = address.getBundle().getString("lat");
-		String lng = address.getBundle().getString("long");
-		if(!lat.equals("") && !lng.equals("")){
-			mModel.addParam("latlng", lat + ", " + lng);
-		}
+//		List<NameValuePair> params = address.toParamsRequest();
+//		for (NameValuePair nameValuePair : params) {
+//			String key = nameValuePair.getName();
+//			String value = nameValuePair.getValue();
+//			mModel.addParam(key, value);
+//		}
+//
+//		String lat = address.getBundle().getString("lat");
+//		String lng = address.getBundle().getString("long");
+//		if(!lat.equals("") && !lng.equals("")){
+//			mModel.addParam("latlng", lat + ", " + lng);
+//		}
 		mModel.request();
 	}
 }

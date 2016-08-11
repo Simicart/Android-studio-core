@@ -26,8 +26,7 @@ import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -163,27 +162,27 @@ public class PaypalSimicart extends Activity {
         alertDialog.setCanceledOnTouchOutside(false);
     }
 
-    public static JSONObject endCode(List<NameValuePair> pair)
-            throws JSONException {
-        int total = pair.size();
-        JSONObject obj = new JSONObject();
-        for (int i = 0; i < total; i++) {
-            obj.put(pair.get(i).getName(), pair.get(i).getValue());
-        }
-        return obj;
-    }
-
-    public String endCodeJson(List<NameValuePair> pair) throws JSONException {
-        // List<NameValuePair> text = new ArrayList<NameValuePair>();
-        int total = pair.size();
-        JSONObject obj = new JSONObject();
-        for (int i = 0; i < total; i++) {
-            obj.put(pair.get(i).getName(), pair.get(i).getValue());
-        }
-
-        return obj.toString();
-
-    }
+//    public static JSONObject endCode(List<NameValuePair> pair)
+//            throws JSONException {
+//        int total = pair.size();
+//        JSONObject obj = new JSONObject();
+//        for (int i = 0; i < total; i++) {
+//            obj.put(pair.get(i).getName(), pair.get(i).getValue());
+//        }
+//        return obj;
+//    }
+//
+//    public String endCodeJson(List<NameValuePair> pair) throws JSONException {
+//        // List<NameValuePair> text = new ArrayList<NameValuePair>();
+//        int total = pair.size();
+//        JSONObject obj = new JSONObject();
+//        for (int i = 0; i < total; i++) {
+//            obj.put(pair.get(i).getName(), pair.get(i).getValue());
+//        }
+//
+//        return obj.toString();
+//
+//    }
 
     @SuppressLint("NewApi")
     public void requestUpdatePaypal(String invoice_number,
@@ -222,35 +221,35 @@ public class PaypalSimicart extends Activity {
         String intent = js_response.getString("intent");
 
         // put
-        List<NameValuePair> param_response_type = new ArrayList<NameValuePair>();
-        param_response_type.add(new BasicNameValuePair("response_type", ""
-                + response_type + ""));
-        JSONObject os_proof = endCode(param_response_type);
-
-        List<NameValuePair> o_client = new ArrayList<NameValuePair>();
-        o_client.add(new BasicNameValuePair("environment", "" + environment
-                + ""));
-        o_client.add(new BasicNameValuePair("product_name", "" + product_name
-                + ""));
-        o_client.add(new BasicNameValuePair("paypal_sdk_version", ""
-                + paypal_sdk_version + ""));
-        o_client.add(new BasicNameValuePair("platform", "" + platform + ""));
-        JSONObject os_client = endCode(o_client);
-
-        List<NameValuePair> o_response = new ArrayList<NameValuePair>();
-        o_response.add(new BasicNameValuePair("id", "" + id + ""));
-        o_response.add(new BasicNameValuePair("state", "" + state + ""));
-        o_response.add(new BasicNameValuePair("create_time", "" + create_time
-                + ""));
-        o_response.add(new BasicNameValuePair("intent", "" + intent + ""));
-        JSONObject os_response = endCode(o_response);
-
-        os_proof.put("client", os_client);
-        os_proof.put("response", os_response);
-
-        mModel.addParam("proof", os_proof);
-        mModel.addParam("invoice_number", "" + invoice_number + "");
-        mModel.addParam("payment_status", "" + payment_status + "");
+//        List<NameValuePair> param_response_type = new ArrayList<NameValuePair>();
+//        param_response_type.add(new BasicNameValuePair("response_type", ""
+//                + response_type + ""));
+//        JSONObject os_proof = endCode(param_response_type);
+//
+//        List<NameValuePair> o_client = new ArrayList<NameValuePair>();
+//        o_client.add(new BasicNameValuePair("environment", "" + environment
+//                + ""));
+//        o_client.add(new BasicNameValuePair("product_name", "" + product_name
+//                + ""));
+//        o_client.add(new BasicNameValuePair("paypal_sdk_version", ""
+//                + paypal_sdk_version + ""));
+//        o_client.add(new BasicNameValuePair("platform", "" + platform + ""));
+//        JSONObject os_client = endCode(o_client);
+//
+//        List<NameValuePair> o_response = new ArrayList<NameValuePair>();
+//        o_response.add(new BasicNameValuePair("id", "" + id + ""));
+//        o_response.add(new BasicNameValuePair("state", "" + state + ""));
+//        o_response.add(new BasicNameValuePair("create_time", "" + create_time
+//                + ""));
+//        o_response.add(new BasicNameValuePair("intent", "" + intent + ""));
+//        JSONObject os_response = endCode(o_response);
+//
+//        os_proof.put("client", os_client);
+//        os_proof.put("response", os_response);
+//
+//        mModel.addParam("proof", os_proof);
+//        mModel.addParam("invoice_number", "" + invoice_number + "");
+//        mModel.addParam("payment_status", "" + payment_status + "");
         mModel.request();
     }
 
@@ -275,8 +274,8 @@ public class PaypalSimicart extends Activity {
         };
         mModel.setDelegate(delegate);
 
-        mModel.addParam("invoice_number", "" + invoice_number + "");
-        mModel.addParam("payment_status", "" + payment_status + "");
+//        mModel.addParam("invoice_number", "" + invoice_number + "");
+//        mModel.addParam("payment_status", "" + payment_status + "");
         mModel.request();
     }
 
@@ -284,7 +283,7 @@ public class PaypalSimicart extends Activity {
         Toast toast = Toast.makeText(MainActivity.context, Config.getInstance()
                 .getText(message), Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(10000);
+//        toast.setDuration(10000);
         toast.show();
         Intent i = new Intent(PaypalSimicart.this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

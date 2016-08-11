@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.base.model.entity.BusEntity;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.price.ProductPriceViewDetail;
 import com.simicart.core.config.Config;
@@ -96,11 +95,4 @@ public class BasicInforFragment extends SimiFragment {
 		return rootView;
 	}
 	
-	@Override
-	public void onEvent(BusEntity event) {
-		super.onEvent(event);
-		if(event.getKey().toString().equals(Constants.KeyBus.PRODUCT)){
-			mProduct = (Product) event.getValue();
-	}
-	}
 }

@@ -78,7 +78,7 @@ public class BannerAnimation {
                     }
 
                     case MotionEvent.ACTION_UP: {
-                        SimiManager.getIntance().hideKeyboard();
+                      //  SimiManager.getIntance().hideKeyboard();
                         float currentX = touchevent.getX();
                         if (lastX == currentX) {
                             // dispatch event for sent google analytic
@@ -100,8 +100,8 @@ public class BannerAnimation {
 //									((ProductDetailParentFragment) fragment)
 //											.setProductID(banner_ad
 //													.getProductId());
-                                        SimiManager.getIntance().addFragment(
-                                                fragment);
+//                                        SimiManager.getIntance().addFragment(
+//                                                fragment);
                                     }
                                 } else if (banner_ad.getType()
                                         .equals(TYPE_CATEGORY)) {
@@ -130,16 +130,16 @@ public class BannerAnimation {
                                                 } else {
                                                     fragment = CategoryFragment.newInstance(
                                                             banner_ad.getCategoryId(), banner_ad.getCategoryName());
-                                                    SimiManager.getIntance()
-                                                            .addFragment(fragment);
+//                                                    SimiManager.getIntance()
+//                                                            .addFragment(fragment);
                                                 }
                                             } else {
                                                 fragment = ProductListFragment
                                                         .newInstance(banner_ad
                                                                 .getCategoryId(), banner_ad
                                                                 .getCategoryName(), null, null, null);
-                                                SimiManager.getIntance()
-                                                        .addFragment(fragment);
+//                                                SimiManager.getIntance()
+//                                                        .addFragment(fragment);
                                             }
                                         }
                                     }

@@ -85,7 +85,7 @@ public class CustomerReviewAdapter extends ArrayAdapter<CustomerReview> {
 				CustomerReviewMoreFragment fragment = CustomerReviewMoreFragment
 						.newInstance(customerReview);
 //				fragment.setCustomerReview(customerReview);
-				SimiManager.getIntance().addPopupFragment(fragment);
+//				SimiManager.getIntance().addPopupFragment(fragment);
 			}
 		});
 		return convertView;

@@ -3,7 +3,6 @@ package com.simicart.core.customer.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
@@ -167,15 +166,15 @@ public class NewAddressBookController extends SimiController implements
 						}
 						ConfigCheckout.getInstance().setStatusAddressBook(true);
 					} else {
-						SimiManager.getIntance().showNotify(
-								null,
-								Config.getInstance().getText(
-										"Invalid email address"),
-								Config.getInstance().getText("OK"));
+//						SimiManager.getIntance().showNotify(
+//								null,
+//								Config.getInstance().getText(
+//										"Invalid email address"),
+//								Config.getInstance().getText("OK"));
 					}
 				} else {
-					SimiManager.getIntance().showNotify(null,
-							"Please select all (*) fields", "OK");
+//					SimiManager.getIntance().showNotify(null,
+//							"Please select all (*) fields", "OK");
 				}
 			}
 		};
@@ -202,7 +201,6 @@ public class NewAddressBookController extends SimiController implements
 				}
 			}
 		};
-		Log.e("New Address Book Controller", mAfterController + "bbbb");
 		mDelegate.createView(mAfterController);
 	}
 
@@ -303,7 +301,7 @@ public class NewAddressBookController extends SimiController implements
 						}
 					}
 				} else {
-					SimiManager.getIntance().showNotify("FAIL", message, "OK");
+//					SimiManager.getIntance().showNotify("FAIL", message, "OK");
 				}
 			}
 		});
@@ -325,7 +323,7 @@ public class NewAddressBookController extends SimiController implements
 						Log.d("duyquang", "=2=");
 						AddressBookFragment fragment = AddressBookFragment
 								.newInstance();
-						SimiManager.getIntance().replacePopupFragment(fragment);
+//						SimiManager.getIntance().replacePopupFragment(fragment);
 					} else {
 						Log.d("duyquang", "=3=");
 						MyAddress newAddress = (MyAddress) mModel
@@ -385,7 +383,7 @@ public class NewAddressBookController extends SimiController implements
 						}
 					}
 				} else {
-					SimiManager.getIntance().showNotify("FAIL", message, "OK");
+//					SimiManager.getIntance().showNotify("FAIL", message, "OK");
 				}
 			}
 		});
@@ -404,12 +402,12 @@ public class NewAddressBookController extends SimiController implements
 			}
 		}
 
-		List<NameValuePair> params = address.toParamsRequest();
-		for (NameValuePair nameValuePair : params) {
-			String key = nameValuePair.getName();
-			String value = nameValuePair.getValue();
-			mModel.addParam(key, value);
-		}
+//		List<NameValuePair> params = address.toParamsRequest();
+//		for (NameValuePair nameValuePair : params) {
+//			String key = nameValuePair.getName();
+//			String value = nameValuePair.getValue();
+//			mModel.addParam(key, value);
+//		}
 
 		mModel.request();
 	}
@@ -532,7 +530,7 @@ public class NewAddressBookController extends SimiController implements
 		CountryFragment fragment = CountryFragment.newInstance(type,
 				list_country);
 		fragment.setChooseDelegate(this);
-		SimiManager.getIntance().replacePopupFragment(fragment);
+//		SimiManager.getIntance().replacePopupFragment(fragment);
 	}
 
 	public ArrayList<String> getStateFromCountry(String country,

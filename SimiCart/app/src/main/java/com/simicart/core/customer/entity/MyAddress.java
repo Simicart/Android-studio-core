@@ -1,15 +1,13 @@
 package com.simicart.core.customer.entity;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
+
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyAddress extends SimiEntity implements Serializable {
 	/**
@@ -343,127 +341,7 @@ public class MyAddress extends SimiEntity implements Serializable {
 		return this.mTaxVatCheckout;
 	}
 
-	public List<NameValuePair> toParamsRequest() {
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-		String addressID = "";
-		if (null == getAddressId() || getAddressId().equals("-1")
-				|| getAddressId().equals("")) {
-			addressID = "0";
-		} else {
-			addressID = getAddressId();
-		}
-		params.add(new BasicNameValuePair("address_id", addressID));
-
-		// name
-		String name = getName();
-		if (null != name && !name.equals("") && !name.equals("null")) {
-			params.add(new BasicNameValuePair("name", name));
-		}
-
-		// street
-		String street = getStreet();
-		if (null != street && !street.equals("")) {
-			params.add(new BasicNameValuePair("street", street));
-		}
-		// city
-		String city = getCity();
-		if (null != city && !city.equals("")) {
-			params.add(new BasicNameValuePair("city", city));
-		}
-		// state name
-		String statename = getStateName();
-		if (null != statename && !statename.equals("")
-				&& !statename.equals("null")) {
-			params.add(new BasicNameValuePair("state_code", getStateCode()));
-			params.add(new BasicNameValuePair("state_id", getStateId()));
-			params.add(new BasicNameValuePair("state_name", statename));
-		}
-		// country name
-		String countryname = getCountryName();
-
-		if (null != countryname && !countryname.equals("")) {
-			params.add(new BasicNameValuePair("country_code", getCountryCode()));
-			params.add(new BasicNameValuePair("country_name", countryname));
-		}
-		// ZIP code
-		String zipcode = getZipCode();
-		if (null != zipcode && !zipcode.equals("")) {
-			params.add(new BasicNameValuePair("zip", zipcode));
-		}
-		if (null != zipcode && !zipcode.equals("")) {
-			params.add(new BasicNameValuePair("zip_code", zipcode));
-		}
-		// phone
-		String phone = getPhone();
-		if (null != phone && !phone.equals("")) {
-			params.add(new BasicNameValuePair("phone", phone));
-		}
-		// email
-		String email = getEmail();
-		if (null != email && !email.equals("")) {
-			params.add(new BasicNameValuePair("email", email));
-		}
-		// prefix
-		String prefix = getPrefix();
-		if (null != prefix && !prefix.equals("")) {
-			params.add(new BasicNameValuePair("prefix", prefix));
-		}
-		// suffix
-		String suffix = getSuffix();
-		if (null != suffix && !suffix.equals("")) {
-			params.add(new BasicNameValuePair("suffix", suffix));
-		}
-		// tax vat
-		String taxvat = getTaxvat();
-		if (null != taxvat && !taxvat.equals("")) {
-			params.add(new BasicNameValuePair("taxvat", taxvat));
-		}
-		// tax vat check out
-		String taxvatcheckout = getTaxvatCheckout();
-		if (null != taxvatcheckout && !taxvatcheckout.equals("null")
-				&& !taxvatcheckout.equals("")) {
-			params.add(new BasicNameValuePair("vat_id", taxvatcheckout));
-		}
-		// gender
-		String gender = getGender();
-		if (null != gender && !gender.equals("")) {
-			params.add(new BasicNameValuePair("gender", Utils
-					.getValueGender(gender)));
-		}
-		String day1 = getDay();
-		if (null != day1 && !day1.equals("")) {
-			String day = "";
-			if (getDay().length() == 1) {
-				day = "0" + getDay();
-			} else {
-				day = getDay();
-			}
-			params.add(new BasicNameValuePair("day", "" + day + ""));
-			String month = "";
-			if (getMonth().length() == 1) {
-				month = "0" + getMonth();
-			} else {
-				month = getMonth();
-			}
-			params.add(new BasicNameValuePair("month", "" + month + ""));
-			params.add(new BasicNameValuePair("year", "" + getYear() + ""));
-			params.add(new BasicNameValuePair("dob", "" + month + "/" + day
-					+ "/" + getYear() + ""));
-		}
-		// Fax
-		String fax = getFax();
-		if (null != fax && !fax.equals("")) {
-			params.add(new BasicNameValuePair("fax", fax));
-		}
-		// company
-		String company = getCompany();
-		if (null != company && !company.equals("")) {
-			params.add(new BasicNameValuePair("company", company));
-		}
-
-		return params;
-	}
 
 	@Override
 	public String toString() {

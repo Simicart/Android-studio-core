@@ -36,7 +36,7 @@ public class Theme1Category extends SimiEntity {
 		mCategoryName = category.getCategoryName();
 	}
 
-	private void parse(JSONObject json) throws JSONException {
+	private boolean parse(JSONObject json) throws JSONException {
 
 		if (json.has(Constants.CATEGORY_ID)) {
 			mCategoryID = json.getString(Constants.CATEGORY_ID);

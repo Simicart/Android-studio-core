@@ -3,7 +3,6 @@ package com.simicart.core.customer.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.NameValuePair;
 
 import android.annotation.SuppressLint;
 import android.view.View;
@@ -133,8 +132,8 @@ public class AddressBookDetailController extends SimiController implements
 						break;
 					}
 				} else {
-					SimiManager.getIntance().showNotify(null,
-							"Please select all (*) fields", "OK");
+//					SimiManager.getIntance().showNotify(null,
+//							"Please select all (*) fields", "OK");
 				}
 			}
 		};
@@ -214,7 +213,7 @@ public class AddressBookDetailController extends SimiController implements
 						mDelegate.updateView(mModel.getCollection());
 					}
 				} else {
-					SimiManager.getIntance().showNotify("FAIL", message, "OK");
+//					SimiManager.getIntance().showNotify("FAIL", message, "OK");
 				}
 			}
 		});
@@ -223,32 +222,32 @@ public class AddressBookDetailController extends SimiController implements
 	}
 
 	protected void OnRequestChangeAddress(MyAddress address) {
-		mDelegate.showLoading();
-		mModel = new AddressBookDetailModel();
-		mModel.setDelegate(new ModelDelegate() {
-
-			@Override
-			public void callBack(String message, boolean isSuccess) {
-				mDelegate.dismissLoading();
-				if (isSuccess) {
-					AddressBookFragment fragment = AddressBookFragment
-							.newInstance();
-					SimiManager.getIntance().replacePopupFragment(fragment);
-
-				} else {
-					SimiManager.getIntance().showNotify("FAIL", message, "OK");
-				}
-			}
-		});
-
-		List<NameValuePair> params = address.toParamsRequest();
-		for (NameValuePair nameValuePair : params) {
-			String key = nameValuePair.getName();
-			String value = nameValuePair.getValue();
-			mModel.addParam(key, value);
-		}
-
-		mModel.request();
+//		mDelegate.showLoading();
+//		mModel = new AddressBookDetailModel();
+//		mModel.setDelegate(new ModelDelegate() {
+//
+//			@Override
+//			public void callBack(String message, boolean isSuccess) {
+//				mDelegate.dismissLoading();
+//				if (isSuccess) {
+//					AddressBookFragment fragment = AddressBookFragment
+//							.newInstance();
+//					SimiManager.getIntance().replacePopupFragment(fragment);
+//
+//				} else {
+//					SimiManager.getIntance().showNotify("FAIL", message, "OK");
+//				}
+//			}
+//		});
+//
+//		List<NameValuePair> params = address.toParamsRequest();
+//		for (NameValuePair nameValuePair : params) {
+//			String key = nameValuePair.getName();
+//			String value = nameValuePair.getValue();
+//			mModel.addParam(key, value);
+//		}
+//
+//		mModel.request();
 	}
 
 	protected boolean isCompleteRequired(MyAddress addressBookDetail) {
@@ -313,7 +312,7 @@ public class AddressBookDetailController extends SimiController implements
 		CountryFragment fragment_country = CountryFragment.newInstance(type,
 				list_country);
 		fragment_country.setChooseDelegate(this);
-		SimiManager.getIntance().replacePopupFragment(fragment_country);
+//		SimiManager.getIntance().replacePopupFragment(fragment_country);
 	}
 
 	public ArrayList<String> getStateFromCountry(String country,

@@ -12,7 +12,6 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.model.entity.BusEntity;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
@@ -72,12 +71,4 @@ public class DescriptionFragment extends SimiFragment {
 		return px;
 	}
 
-	@Override
-	public void onEvent(BusEntity event) {
-		super.onEvent(event);
-		if (event.getKey().toString().equals(Constants.KeyBus.PRODUCT)) {
-			Product product = (Product) event.getValue();
-			mDescription = product.getDecripition();
-		}
-	}
 }

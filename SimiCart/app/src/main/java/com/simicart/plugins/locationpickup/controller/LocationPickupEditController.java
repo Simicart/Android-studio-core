@@ -2,7 +2,6 @@ package com.simicart.plugins.locationpickup.controller;
 
 import java.util.List;
 
-import org.apache.http.NameValuePair;
 
 import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
@@ -24,25 +23,25 @@ public class LocationPickupEditController extends AddressBookDetailController {
 				if (isSuccess) {
 					AddressBookFragment fragment = AddressBookFragment
 							.newInstance();
-					SimiManager.getIntance().replacePopupFragment(fragment);
+//					SimiManager.getIntance().replacePopupFragment(fragment);
 				} else {
-					SimiManager.getIntance().showNotify("FAIL", message, "OK");
+//					SimiManager.getIntance().showNotify("FAIL", message, "OK");
 				}
 			}
 		});
 
-		List<NameValuePair> params = address.toParamsRequest();
-		for (NameValuePair nameValuePair : params) {
-			String key = nameValuePair.getName();
-			String value = nameValuePair.getValue();
-			mModel.addParam(key, value);
-		}
-
-		String lat = address.getBundle().getString("lat");
-		String lng = address.getBundle().getString("long");
-		if (!lat.equals("") && !lng.equals("")) {
-			mModel.addParam("latlng", lat + "," + lng);
-		}
+//		List<NameValuePair> params = address.toParamsRequest();
+//		for (NameValuePair nameValuePair : params) {
+//			String key = nameValuePair.getName();
+//			String value = nameValuePair.getValue();
+//			mModel.addParam(key, value);
+//		}
+//
+//		String lat = address.getBundle().getString("lat");
+//		String lng = address.getBundle().getString("long");
+//		if (!lat.equals("") && !lng.equals("")) {
+//			mModel.addParam("latlng", lat + "," + lng);
+//		}
 
 		mModel.request();
 	}

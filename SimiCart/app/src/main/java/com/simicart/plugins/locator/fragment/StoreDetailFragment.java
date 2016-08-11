@@ -17,8 +17,6 @@ import com.simicart.plugins.locator.common.DataLocator;
 import com.simicart.plugins.locator.common.ShowMapError;
 import com.simicart.plugins.locator.common.StoreLocatorConfig;
 import com.simicart.plugins.locator.entity.StoreObject;
-import com.simicart.plugins.locator.style.CircleTransform;
-import com.squareup.picasso.Picasso;
 
 import android.content.Context;
 import android.content.Intent;
@@ -183,7 +181,7 @@ public class StoreDetailFragment extends SimiFragment {
 				+ getResources().getDrawable(Rconfig.getInstance().getIdDraw("plugins_locator_maker_default")) + "|"
 				+ storeObject.getLatitude() + "," + storeObject.getLongtitude() + "&zoom=20&size=400x400&sensor=false";
 		img_map = (ImageView) view.findViewById(Rconfig.getInstance().getIdLayout("image_map"));
-		Picasso.with(getActivity()).load(url).transform(new CircleTransform()).into(img_map);
+		//Picasso.with(getActivity()).load(url).transform(new CircleTransform()).into(img_map);
 	}
 
 	protected void initOpeningHour() {

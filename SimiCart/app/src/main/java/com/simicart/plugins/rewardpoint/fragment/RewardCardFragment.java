@@ -7,10 +7,6 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -208,31 +204,31 @@ public class RewardCardFragment extends SimiFragment {
 			String url = params[0];
 			byte[] data;
 			// HttpClient httpclient = getNewHttpClient();
-			HttpClient httpclient = new DefaultHttpClient();
-			HttpPost httppost = new HttpPost(url);
-			String userAgent = System.getProperty("http.agent");
-			String cookie = Config.getInstance().getCookie();
-			httppost.setHeader("Cookie", cookie);
-			// read response
-			try {
-				HttpResponse response = httpclient.execute(httppost);
-				InputStream input = response.getEntity().getContent();
-				data = new byte[input.available()];
-				input.read(data);
-				File path = new File(Environment.getExternalStorageDirectory()
-						+ file_pkpass);
-				if (!path.isFile()) {
-					path.createNewFile();
-				}
-				OutputStream outputStream = new FileOutputStream(path);
-				int read = 0;
-				byte[] bytes = new byte[1024];
-				while ((read = input.read(bytes)) != -1) {
-					outputStream.write(bytes, 0, read);
-				}
-			} catch (Exception e) {
-				Log.d("Error:", e.getMessage());
-			}
+//			HttpClient httpclient = new DefaultHttpClient();
+//			HttpPost httppost = new HttpPost(url);
+//			String userAgent = System.getProperty("http.agent");
+//			String cookie = Config.getInstance().getCookie();
+//			httppost.setHeader("Cookie", cookie);
+//			// read response
+//			try {
+//				HttpResponse response = httpclient.execute(httppost);
+//				InputStream input = response.getEntity().getContent();
+//				data = new byte[input.available()];
+//				input.read(data);
+//				File path = new File(Environment.getExternalStorageDirectory()
+//						+ file_pkpass);
+//				if (!path.isFile()) {
+//					path.createNewFile();
+//				}
+//				OutputStream outputStream = new FileOutputStream(path);
+//				int read = 0;
+//				byte[] bytes = new byte[1024];
+//				while ((read = input.read(bytes)) != -1) {
+//					outputStream.write(bytes, 0, read);
+//				}
+//			} catch (Exception e) {
+//				Log.d("Error:", e.getMessage());
+//			}
 
 			return null;
 		}

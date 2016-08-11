@@ -2,19 +2,15 @@ package com.simicart.core.base.fragment;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.simicart.core.base.model.entity.BusEntity;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.event.fragment.CacheFragment;
 import com.simicart.core.event.fragment.EventFragment;
 
 import java.util.ArrayList;
-
-import de.greenrobot.event.EventBus;
 
 public class SimiFragment extends Fragment {
 
@@ -24,9 +20,6 @@ public class SimiFragment extends Fragment {
 
     public static SimiFragment newInstance() {
         SimiFragment fragment = new SimiFragment();
-//		Bundle bundle= new Bundle();
-//		setData(Constants.KeyData.CHECK_POPUP, isShowPopup, Constants.KeyData.TYPE_BOOLEAN, bundle);
-//		fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -56,7 +49,7 @@ public class SimiFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
     }
@@ -95,17 +88,6 @@ public class SimiFragment extends Fragment {
                 bundle.putIntegerArrayList(key, (ArrayList<Integer>) object);
 
                 break;
-//		case Constants.KeyData.TYPE_MODEL:
-//			bundle.putSerializable(key, (Serializable) object);
-//			
-//		case Constants.KeyData.TYPE_MODEL_PAR:
-//			bundle.putParcelable(key, (Parcelable) object);
-//
-//			break;
-//		case Constants.KeyData.TYPE_LIST_MODEL:
-//			bundle.putSerializable(key, (Serializable) object);
-//
-//			break;
             case Constants.KeyData.TYPE_JSONOBJECT:
                 bundle.putString(key, (String) object);
 
@@ -148,18 +130,6 @@ public class SimiFragment extends Fragment {
                 object = bundle.getString(key, "");
 
                 break;
-//		case Constants.KeyData.TYPE_MODEL:
-//			object = bundle.getSerializable(key);
-//
-//			break;
-//		case Constants.KeyData.TYPE_MODEL_PAR:
-//			object = bundle.getParcelable(key);
-//
-//			break;
-//		case Constants.KeyData.TYPE_LIST_MODEL:
-//			object = bundle.getSerializable(key);
-//
-//			break;
             case Constants.KeyData.TYPE_BOOLEAN:
                 object = bundle.getBoolean(key);
 
@@ -172,46 +142,6 @@ public class SimiFragment extends Fragment {
         return object;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EventBus.getDefault().registerSticky(SimiFragment.this);
-    }
 
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(SimiFragment.this);
-        super.onDestroy();
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-//		EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-//		EventBus.getDefault().unregister(this);
-        super.onStop();
-    }
-
-    @Override
-    public void onResume() {
-//		EventBus.getDefault().register(this);
-        super.onResume();
-
-    }
-
-    @Override
-    public void onPause() {
-//		EventBus.getDefault().unregister(this);
-        super.onPause();
-    }
-
-    public void onEvent(BusEntity event) {
-         /* Do something */
-    }
 
 }

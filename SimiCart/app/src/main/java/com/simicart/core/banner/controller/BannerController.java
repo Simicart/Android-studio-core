@@ -28,10 +28,10 @@ public class BannerController extends SimiController {
 
 			}
 		};
-		mModel = new BannerModel();
-		mModel.setDelegate(delegate);
-		mModel.addParam("limit", "10");
-		mModel.request();
+//		mModel = new BannerModel();
+//		mModel.setDelegate(delegate);
+//		mModel.addParam("limit", "10");
+//		mModel.request();
 	}
 
 	@Override

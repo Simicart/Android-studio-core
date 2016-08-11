@@ -4,12 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -45,33 +40,33 @@ public class FacebookLikesButton {
 		@Override
 		protected Long doInBackground(String... uri) {
 
-			HttpClient httpclient = new DefaultHttpClient();
-			HttpResponse response;
+//			HttpClient httpclient = new DefaultHttpClient();
+//			HttpResponse response;
 			Long shares = null;
-			try {
-
-				HttpGet getRequest = new HttpGet(
-						"http://graph.facebook.com/fql?q="
-								+ URLEncoder.encode(
-										"SELECT like_count FROM link_stat WHERE url='"
-												+ uri[0] + "'", "UTF-8"));
-				response = httpclient.execute(getRequest);
-				StatusLine statusLine = response.getStatusLine();
-				if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
-					ByteArrayOutputStream out = new ByteArrayOutputStream();
-					response.getEntity().writeTo(out);
-					out.close();
-					JSONObject result = new JSONObject(out.toString());
-					JSONArray data = result.getJSONArray("data");
-					shares = ((JSONObject) data.get(0)).getLong("like_count");
-				} else {
-					// Closes the connection.
-					response.getEntity().getContent().close();
-					throw new IOException(statusLine.getReasonPhrase());
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+//			try {
+//
+//				HttpGet getRequest = new HttpGet(
+//						"http://graph.facebook.com/fql?q="
+//								+ URLEncoder.encode(
+//										"SELECT like_count FROM link_stat WHERE url='"
+//												+ uri[0] + "'", "UTF-8"));
+//				response = httpclient.execute(getRequest);
+//				StatusLine statusLine = response.getStatusLine();
+//				if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+//					ByteArrayOutputStream out = new ByteArrayOutputStream();
+//					response.getEntity().writeTo(out);
+//					out.close();
+//					JSONObject result = new JSONObject(out.toString());
+//					JSONArray data = result.getJSONArray("data");
+//					shares = ((JSONObject) data.get(0)).getLong("like_count");
+//				} else {
+//					// Closes the connection.
+//					response.getEntity().getContent().close();
+//					throw new IOException(statusLine.getReasonPhrase());
+//				}
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 			return shares;
 
 		}

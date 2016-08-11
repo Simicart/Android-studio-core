@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.model.entity.BusEntity;
 import com.simicart.core.catalog.product.entity.Attributes;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
@@ -76,12 +75,4 @@ public class TechSpecsFragment extends SimiFragment {
 		return rootView;
 	}
 
-	@Override
-	public void onEvent(BusEntity event) {
-		super.onEvent(event);
-		if (event.getKey() == Constants.KeyBus.PRODUCT) {
-			Product product = (Product) event.getValue();
-			mAttributes = product.getAttributes();
-		}
-	}
 }

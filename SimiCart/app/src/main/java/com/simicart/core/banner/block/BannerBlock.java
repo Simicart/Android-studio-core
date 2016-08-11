@@ -171,7 +171,7 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
     }
 
     public void onSliderClickListener(BannerEntity banner_ad) {
-        SimiManager.getIntance().hideKeyboard();
+       // SimiManager.getIntance().hideKeyboard();
         EventController dispacth = new EventController();
         dispacth.dispatchEvent("com.simicart.banner.touchEvent",
                 banner_ad.getUrl());
@@ -185,9 +185,7 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
                         .equals("null")) {
                     fragment = ProductDetailParentFragment.newInstance(
                             banner_ad.getProductId(), null);
-                    // ((ProductDetailParentFragment) fragment)
-                    // .setProductID(banner_ad.getProductId());
-                    SimiManager.getIntance().addFragment(fragment);
+                  //  SimiManager.getIntance().addFragment(fragment);
                 }
             } else if (banner_ad.getType().equals(TYPE_CATEGORY)) {
                 if (banner_ad.getCategoryId() != null
@@ -210,13 +208,13 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
                                 fragment = CategoryFragment.newInstance(
                                         banner_ad.getCategoryId(),
                                         banner_ad.getCategoryName());
-                                SimiManager.getIntance().addFragment(fragment);
+                                //SimiManager.getIntance().addFragment(fragment);
                             }
                         } else {
                             fragment = ProductListFragment.newInstance(
                                     banner_ad.getCategoryId(), banner_ad.getCategoryName(), null,
                                     null, null);
-                            SimiManager.getIntance().addFragment(fragment);
+                           // SimiManager.getIntance().addFragment(fragment);
                         }
                     }
                 }
