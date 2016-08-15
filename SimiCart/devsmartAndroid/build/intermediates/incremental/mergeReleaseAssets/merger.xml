@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Volumes/Data/sourcecode/AS-v32-advance/SimiCart/devsmartAndroid/src/main/assets"/><source path="/Volumes/Data/sourcecode/AS-v32-advance/SimiCart/devsmartAndroid/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Volumes/Data/sourcecode/AS-v32-advance/SimiCart/devsmartAndroid/src/release/assets"/></dataSet></merger>

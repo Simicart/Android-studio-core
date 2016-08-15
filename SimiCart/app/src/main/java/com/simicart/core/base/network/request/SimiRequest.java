@@ -2,21 +2,16 @@ package com.simicart.core.base.network.request;
 
 import android.util.Log;
 
-import com.simicart.core.base.delegate.NetWorkDelegate;
-import com.simicart.core.base.helper.SimiHelper;
+import com.simicart.core.base.delegate.RequestCallBack;
 import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.network.response.CoreResponse;
+import com.simicart.core.base.network.response.SimiResponse;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 
 public class SimiRequest implements Comparable<SimiRequest> {
@@ -46,8 +41,7 @@ public class SimiRequest implements Comparable<SimiRequest> {
 	protected String mUrl;
 	protected HashMap<String, Object> mHashMapBody = new HashMap<String, Object>();
 	protected HashMap<String, String> mHeaderAddtional;
-	protected List<NameValuePair> mNameValue = new ArrayList<NameValuePair>();
-	protected NetWorkDelegate mDelegate;
+	protected RequestCallBack mCallBack;
 	protected Integer mSequence;
 	protected boolean mCancel;
 	protected JSONObject mJsonPostBody;
@@ -98,28 +92,28 @@ public class SimiRequest implements Comparable<SimiRequest> {
 		return mHeaderAddtional;
 	}
 
-	public SimiRequest(String url, NetWorkDelegate delegate) {
+	public SimiRequest(String url, RequestCallBack delegate) {
 		mUrl = url;
-		mDelegate = delegate;
+		mCallBack = delegate;
 	}
 
-	public SimiRequest(String url, NetWorkDelegate delegate, int typeMethod) {
+	public SimiRequest(String url, RequestCallBack delegate, int typeMethod) {
 		this(url, delegate);
 		mTypeMethod = typeMethod;
 	}
 
-	public SimiRequest(String url, NetWorkDelegate delegate, int typeMethod,
-			int typeRequest) {
+	public SimiRequest(String url, RequestCallBack delegate, int typeMethod,
+					   int typeRequest) {
 		this(url, delegate, typeMethod);
 		mTypeRequest = typeRequest;
 	}
 
-	public CoreResponse parseNetworkResponse(SimiNetworkResponse response) {
+	public SimiResponse parseNetworkResponse(SimiNetworkResponse response) {
 
 		return null;
 	}
 
-	public void deliveryCoreResponse(CoreResponse response) {
+	public void deliveryCoreResponse(SimiResponse response) {
 
 	}
 
@@ -187,7 +181,7 @@ public class SimiRequest implements Comparable<SimiRequest> {
 	@SuppressWarnings("rawtypes")
 	protected void prepareRequest() {
 		try {
-			mJsonPostBody = new JSONObject(SimiHelper.endCodeJson(mNameValue));
+			//mJsonPostBody = new JSONObject(SimiHelper.endCodeJson(mNameValue));
 			Iterator<Entry<String, Object>> iter = mHashMapBody.entrySet()
 					.iterator();
 			while (iter.hasNext()) {
@@ -201,7 +195,7 @@ public class SimiRequest implements Comparable<SimiRequest> {
 
 	public void addParams(String tag, String value) {
 		if (tag != null && value != null) {
-			mNameValue.add(new BasicNameValuePair(tag, value));
+		//	mNameValue.add(new BasicNameValuePair(tag, value));
 		}
 	}
 

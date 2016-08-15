@@ -2,15 +2,15 @@ package com.simicart.core.base.network.request;
 
 import android.util.Log;
 
-import com.simicart.core.base.delegate.NetWorkDelegate;
+import com.simicart.core.base.delegate.RequestCallBack;
 import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.network.response.CoreResponse;
+import com.simicart.core.base.network.response.SimiResponse;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
 
 public class SimiJSONRequest extends SimiRequest {
 
-	public SimiJSONRequest(String url, NetWorkDelegate delegate) {
+	public SimiJSONRequest(String url, RequestCallBack delegate) {
 		super(url, delegate);
 		this.url = url;
 	}
@@ -18,24 +18,24 @@ public class SimiJSONRequest extends SimiRequest {
 	String url;
 
 	@Override
-	public CoreResponse parseNetworkResponse(SimiNetworkResponse response) {
+	public SimiResponse parseNetworkResponse(SimiNetworkResponse response) {
 		if (null != response) {
 			byte[] data = response.getData();
 			if (null != data && data.length > 0) {
 				String content = new String(data);
-				CoreResponse coreResponse = new CoreResponse();
-				coreResponse.setData(content);
-				return coreResponse;
+				SimiResponse simiResponse = new SimiResponse();
+				simiResponse.setData(content);
+				return simiResponse;
 			}
 		}
 		return null;
 	}
 
 	@Override
-	public void deliveryCoreResponse(CoreResponse response) {
+	public void deliveryCoreResponse(SimiResponse response) {
 		if (null != response) {
 			if (response.parse()) {
-				mDelegate.callBack(response, true);
+				mCallBack.callBack(response, true);
 			} else {
 
 				mRequestQueue.finish(this);
@@ -50,13 +50,12 @@ public class SimiJSONRequest extends SimiRequest {
 				if (isShowNotify) {
 					SimiManager.getIntance().showNotify(message);
 				}
-				mDelegate.callBack(response, false);
-				// mRequestQueue.stop();
+				mCallBack.callBack(response, false);
 			}
 
 		} else {
 			mRequestQueue.finish(this);
-			mDelegate.callBack(response, false);
+			mCallBack.callBack(response, false);
 		}
 
 	}

@@ -5,11 +5,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.conn.ConnectTimeoutException;
-
 import android.util.Log;
 
 public class SimiBasicNetwork implements SimiNetwork {
@@ -70,11 +65,7 @@ public class SimiBasicNetwork implements SimiNetwork {
 				Log.e("SimiBasicNetwork " + request.getUrl(),
 						"SocketTimeoutException " + e.getMessage());
 				break;
-			} catch (ConnectTimeoutException e) {
-				Log.e("SimiBasicNetwork " + request.getUrl(),
-						"ConnectTimeoutException " + e.getMessage());
-				break;
-			} catch (MalformedURLException e) {
+			}  catch (MalformedURLException e) {
 				Log.e("SimiBasicNetwork " + request.getUrl(),
 						"MalformedURLException " + e.getMessage());
 				break;

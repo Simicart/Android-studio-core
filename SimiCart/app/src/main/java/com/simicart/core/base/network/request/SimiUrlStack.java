@@ -1,13 +1,23 @@
 package com.simicart.core.base.network.request;
 
-import org.apache.http.HttpResponse;
 
-public class SimiUrlStack implements SimiHttpStack {
+public class SimiUrlStack {
 
-	@Override
-	public HttpResponse performRequest(SimiRequest request) {
-		SimiUrlConnection urlConnection = new SimiUrlConnection();
-		return urlConnection.makeUrlConnection(request);
+	private static int DEFAULT_POOL_SIZE = 4096;
+
+	protected ByteArrayPool mPool = null;
+
+	public SimiUrlStack() {
+		this(new ByteArrayPool(DEFAULT_POOL_SIZE));
 	}
 
+	public SimiUrlStack(ByteArrayPool pool) {
+		mPool = pool;
+	}
+
+	public SimiNetworkResponse performRequest(SimiRequest request) {
+		SimiUrlConnection urlConnection = new SimiUrlConnection();
+		urlConnection.setPool(mPool);
+		return urlConnection.makeUrlConnection(request);
+	}
 }

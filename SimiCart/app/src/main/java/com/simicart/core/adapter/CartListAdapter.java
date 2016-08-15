@@ -97,8 +97,6 @@ public class CartListAdapter extends BaseAdapter {
 		tv_Qty.setTextColor(Config.getInstance().getContent_color());
 		tv_Qty.setText("" + cart.getQty());
 		if (null != mDelegate) {
-//			rl_quanity.setOnClickListener(mDelegate.getClickQtyItem(position,
-//					cart.getQty()));
 			rl_quanity.setOnClickListener(mDelegate.getClickQtyItem(position,
 					cart.getQty(), cart.getMinQtyAllow(), cart.getMaxQtyAllow()));
 		}

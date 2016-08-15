@@ -8,5 +8,5 @@ import org.apache.http.client.ClientProtocolException;
 public interface SimiHttpStack {
 
 	public HttpResponse performRequest(SimiRequest request)
-			throws ClientProtocolException, IOException;
+			throws  IOException;
 }

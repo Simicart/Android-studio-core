@@ -4,7 +4,7 @@ import java.util.concurrent.Executor;
 
 import android.os.Handler;
 
-import com.simicart.core.base.network.response.CoreResponse;
+import com.simicart.core.base.network.response.SimiResponse;
 
 public class SimiExecutorDelivery {
 	/** Used for posting responses, typically to the main thread. */
@@ -36,17 +36,17 @@ public class SimiExecutorDelivery {
 		mResponsePoster = executor;
 	}
 
-	public void postResponse(SimiRequest request, CoreResponse response) {
+	public void postResponse(SimiRequest request, SimiResponse response) {
 		mResponsePoster
 				.execute(new ResponseDeliveryRunnable(request, response));
 	}
 
 	private class ResponseDeliveryRunnable implements Runnable {
 		private final SimiRequest mRequest;
-		private final CoreResponse mResponse;
+		private final SimiResponse mResponse;
 
 		public ResponseDeliveryRunnable(SimiRequest request,
-				CoreResponse response) {
+				SimiResponse response) {
 			mRequest = request;
 			mResponse = response;
 		}

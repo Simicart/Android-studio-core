@@ -1,43 +1,29 @@
 package com.simicart.core.base.network.request;
 
+import android.util.Log;
+
+import com.simicart.core.base.network.request.SimiRequest.Method;
+import com.simicart.core.config.Config;
+
+import org.json.JSONObject;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.net.ssl.HttpsURLConnection;
-
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.ProtocolVersion;
-import org.apache.http.StatusLine;
-import org.apache.http.entity.BasicHttpEntity;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicHttpResponse;
-import org.apache.http.message.BasicStatusLine;
-import org.apache.http.protocol.HTTP;
-import org.json.JSONObject;
-
-import android.util.Log;
-
-import com.simicart.core.base.network.request.SimiRequest.Method;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.DataLocal;
 
 public class SimiUrlConnection {
 
@@ -45,6 +31,11 @@ public class SimiUrlConnection {
 	static final String COOKIES_HEADER = "Set-Cookie";
 	static CookieManager cookieManager = new CookieManager();
 	static boolean isSet = false;
+	protected ByteArrayPool mPool = null;
+
+	public void setPool(ByteArrayPool pool) {
+		mPool = pool;
+	}
 
 	public SimiUrlConnection() {
 		if (!isSet) {
@@ -53,35 +44,25 @@ public class SimiUrlConnection {
 		}
 	}
 
-	public HttpResponse makeUrlConnection(SimiRequest request) {
+	public SimiNetworkResponse makeUrlConnection(SimiRequest request) {
 
-		String url_extended = request.getUrl();
-		// if (url_extended.equals(Constants.SIGN_IN)) {
-		// request.onStopRequestQueue();
-		// }
 
-		String url = Config.getInstance().getBaseUrl() + url_extended;
-		Log.e("SimiUrlStack  ", "URL " + url);
+		String url = request.getUrl();
 		int type = request.getTypeMethod();
+		Log.e("SimiUrlConnection ","URL : " + url);
 
 		HttpURLConnection urlConnection = null;
 		try {
 			URL url_connection = new URL(url);
 			if (url.contains("https")) {
-				// HttpsURLConnection httpsUrlConnection = (HttpsURLConnection)
-				// urlConnection;
-				// SSLSocketFactory sslSocketFactory =
-				// createTrustAllSslSocketFactory();
 				urlConnection = (HttpsURLConnection) url_connection
 						.openConnection();
 				try {
 					((HttpsURLConnection) urlConnection)
 							.setSSLSocketFactory(new TLSSocketFactory());
 				} catch (KeyManagementException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} else {
@@ -91,37 +72,73 @@ public class SimiUrlConnection {
 
 			urlConnection.setDoInput(true);
 			urlConnection.setDoOutput(true);
-			urlConnection.setRequestProperty("Token", Config.getInstance()
-					.getSecretKey());
-			urlConnection.setRequestProperty("Content-Type",
-					"application/x-www-form-urlencoded");
 
-			String userAgent = System.getProperty("http.agent");
-			if (!DataLocal.isTablet) {
-				userAgent = userAgent + " Mobile";
+			// add Authorization, Content-Type Header
+			String secret_key = Config.getInstance().getSecretKey();
+			if (request.isCloud()) {
+				secret_key = Config.getInstance().getSecretKeyCloud();
 			}
-			urlConnection.setRequestProperty(HTTP.USER_AGENT, userAgent);
+
+			String token = "Bearer " + secret_key;
+
+			urlConnection.setRequestProperty("Authorization", token);
+			urlConnection.setRequestProperty("Content-Type",
+					"application/json");
+
 
 			// add header
 			HashMap<String, String> headerAddtional = request
-					.getHeaderAddtional();
+					.getHeader();
 			if (null != headerAddtional) {
 				for (String key : headerAddtional.keySet()) {
 					urlConnection.setRequestProperty(key,
 							headerAddtional.get(key));
 				}
 			}
+
+
+
 			if (type == Method.GET) {
 				urlConnection.setRequestMethod("GET");
-			} else {
+				urlConnection.setDoOutput(false);
+			} else if(type == Method.POST) {
 				urlConnection.setRequestMethod("POST");
-				JSONObject postBody = request.getPostBody();
+				JSONObject postBody = request.getBody();
 				if (null != postBody) {
-					Log.e("SimiUrlStack ", "PARAM " + postBody.toString());
+					Log.e("SimiUrlConnection ", "PARAM " + postBody.toString());
 					OutputStream os = urlConnection.getOutputStream();
 					BufferedWriter writer = new BufferedWriter(
 							new OutputStreamWriter(os, "UTF-8"));
-					writer.write(getEntity(postBody));
+					writer.write(postBody.toString());
+					writer.flush();
+					writer.close();
+					os.close();
+				}
+			}
+			else if (type == Method.PUT) {
+				urlConnection.setRequestMethod("PUT");
+				JSONObject putBody = request.getBody();
+				if (null != putBody) {
+					Log.e("SimiUrlConnection ", "PARAM " + putBody.toString());
+					OutputStream os = urlConnection.getOutputStream();
+					BufferedWriter writer = new BufferedWriter(
+							new OutputStreamWriter(os, "UTF-8"));
+					writer.write(putBody.toString());
+					writer.flush();
+					writer.close();
+					os.close();
+				}
+
+
+			} else if (type == Method.DELETE) {
+				urlConnection.setRequestMethod("DELETE");
+				JSONObject deleteBody = request.getBody();
+				if (null != deleteBody) {
+					Log.e("SimiUrlConnection ", "PARAM " + deleteBody.toString());
+					OutputStream os = urlConnection.getOutputStream();
+					BufferedWriter writer = new BufferedWriter(
+							new OutputStreamWriter(os, "UTF-8"));
+					writer.write(deleteBody.toString());
 					writer.flush();
 					writer.close();
 					os.close();
@@ -130,86 +147,59 @@ public class SimiUrlConnection {
 
 			Map<String, List<String>> headerFields = urlConnection
 					.getHeaderFields();
-
-			List<String> locationHeader = headerFields.get("Location");
-			if (null != locationHeader) {
-				for (String location : locationHeader) {
-					Log.e("SimiUrlConnection ", "LOCATION " + location);
-				}
-			}
-
 			List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
 
 			if (cookiesHeader != null) {
 				for (String cookie : cookiesHeader) {
-					if (cookie.contains("frontend")) {
-						Config.getInstance().setCookie(cookie);
-					}
 					HttpCookie httpCookie = HttpCookie.parse(cookie).get(0);
 					if (null != httpCookie) {
 						cookieManager.getCookieStore().add(null, httpCookie);
 					}
-
 				}
 			}
+
 
 			// process response
-			ProtocolVersion protocolVersion = new ProtocolVersion("HTTP", 1, 1);
 			int responseCode = urlConnection.getResponseCode();
 			if (responseCode != -1) {
-				StatusLine responseStatus = new BasicStatusLine(
-						protocolVersion, urlConnection.getResponseCode(),
-						urlConnection.getResponseMessage());
-				BasicHttpResponse response = new BasicHttpResponse(
-						responseStatus);
-				response.setEntity(entityFromConnection(urlConnection));
-				for (Entry<String, List<String>> header : urlConnection
-						.getHeaderFields().entrySet()) {
-					if (header.getKey() != null) {
-						Header h = new BasicHeader(header.getKey(), header
-								.getValue().get(0));
-						response.addHeader(h);
-					}
+				byte[] bytes = dataToBytes(urlConnection);
+				if (null == bytes) {
+					bytes = new byte[0];
 				}
-				// if (url_extended.equals(Constants.SIGN_IN)) {
-				// request.onStartRequestQueue();
-				// }
-				return response;
+				return new SimiNetworkResponse(responseCode, bytes);
 			}
-
 		} catch (IOException e) {
-			Log.e("SimiUrlStack ", "IOException " + e.getMessage());
+			Log.e("SimiUrlConnection ", "IOException " + e.getMessage());
 		}
-		// if (url_extended.equals(Constants.SIGN_IN)) {
-		// request.onStartRequestQueue();
-		// }
 		request.cancel(true);
 		return null;
 	}
 
-	protected String getEntity(JSONObject json)
-			throws UnsupportedEncodingException {
-		StringBuilder result = new StringBuilder();
-		result.append(URLEncoder.encode("data", "UTF-8"));
-		result.append("=");
-		result.append(URLEncoder.encode(json.toString(), "UTF-8"));
 
-		return result.toString();
-	}
-
-	protected HttpEntity entityFromConnection(HttpURLConnection connection) {
-		BasicHttpEntity entity = new BasicHttpEntity();
-		InputStream inputStream;
+	protected byte[] dataToBytes(HttpURLConnection urlConnection) throws IOException {
+		int length = urlConnection.getContentLength();
+		PoolingByteArrayOutputStream bytes = new PoolingByteArrayOutputStream(
+				mPool, length);
+		byte[] buffer = null;
 		try {
-			inputStream = connection.getInputStream();
-		} catch (IOException ioe) {
-			inputStream = connection.getErrorStream();
+			InputStream in = urlConnection.getInputStream();
+			if (null != in) {
+				buffer = mPool.getBuf(1024);
+				int count;
+				while ((count = in.read(buffer)) != -1) {
+					bytes.write(buffer, 0, count);
+				}
+				return bytes.toByteArray();
+			}
+		} finally {
+			try {
+				urlConnection.getInputStream().close();
+			} catch (IOException e) {
+			}
+			mPool.returnBuf(buffer);
+			bytes.close();
 		}
-		entity.setContent(inputStream);
-		entity.setContentLength(connection.getContentLength());
-		entity.setContentEncoding(connection.getContentEncoding());
-		entity.setContentType(connection.getContentType());
-		return entity;
+		return null;
 	}
 
 }

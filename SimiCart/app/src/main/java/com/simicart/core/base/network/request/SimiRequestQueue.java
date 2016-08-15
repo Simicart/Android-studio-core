@@ -72,11 +72,9 @@ public class SimiRequestQueue {
 		String key = request.getCacheKey();
 
 		if (null != key) {
-			Log.e("SimiRequestQueue getDataFromCacheL1", key);
 			return mCacheL1.get(key);
 		}
 
-		Log.e("SimiRequestQueue getDataFromCacheL1", "NULL");
 		return null;
 	}
 
