@@ -201,8 +201,8 @@ public class AppColorConfig extends SimiEntity {
         this.mButtonTextColor = mButtonTextColor;
     }
 
-    public String getContentColor() {
-        return mContentColor;
+    public int getContentColor() {
+        return Color.parseColor(mContentColor);
     }
 
     public void setContentColor(String mContentColor) {
@@ -241,8 +241,8 @@ public class AppColorConfig extends SimiEntity {
         this.mKeyColor = mKeyColor;
     }
 
-    public String getLineColor() {
-        return mLineColor;
+    public int getLineColor() {
+        return Color.parseColor(mLineColor);
     }
 
     public void setLineColor(String mLineColor) {

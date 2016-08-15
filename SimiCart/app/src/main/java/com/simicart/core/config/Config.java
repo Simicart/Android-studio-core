@@ -3,12 +3,6 @@ package com.simicart.core.config;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 
-import com.simicart.core.common.Utils;
-
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
-
 @SuppressLint("DefaultLocale")
 public class Config {
 
@@ -22,11 +16,6 @@ public class Config {
     private String mFontCustom = "fonts/ProximaNovaLight.ttf";
 
     private String mCookie = "";
-
-    private int mGuestCheckout = 1;
-    private int mEnableAgreements = 0;
-
-    private int mTheme = 0; // 0 : default, 1 : matrix , 2 ztheme
 
     private static Config instance;
 
@@ -46,14 +35,6 @@ public class Config {
         mDemoEnable = demo_enable;
     }
 
-    public int getTheme() {
-        return mTheme;
-    }
-
-    public void setTheme(int mTheme) {
-        this.mTheme = mTheme;
-    }
-
     public String getSecretKey() {
         return mSecretKey;
     }
@@ -64,22 +45,6 @@ public class Config {
 
     public void setSecretKey(String secret_key) {
         mSecretKey = secret_key;
-    }
-
-    public int getGuest_checkout() {
-        return mGuestCheckout;
-    }
-
-    public void setGuest_checkout(int guest_checkout) {
-        mGuestCheckout = guest_checkout;
-    }
-
-    public int getEnable_agreements() {
-        return mEnableAgreements;
-    }
-
-    public void setEnable_agreements(int enable_agreements) {
-        mEnableAgreements = enable_agreements;
     }
 
     public String getConnectorUrl() {
