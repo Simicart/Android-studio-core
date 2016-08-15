@@ -17,13 +17,13 @@ public class SimiNetworkDispatcher extends Thread {
     /**
      * The network interface for processing requests.
      */
-    protected SimiNetwork mNetwork;
+    protected SimiBasicNetwork mNetwork;
 
     protected SimiExecutorDelivery mDelivery;
     protected SimiNetworkCacheL1 mCache;
 
     public SimiNetworkDispatcher(BlockingQueue<SimiRequest> queue,
-                                 SimiNetwork network, SimiExecutorDelivery delivery,
+                                 SimiBasicNetwork network, SimiExecutorDelivery delivery,
                                  SimiNetworkCacheL1 cache) {
         mQueue = queue;
         mNetwork = network;
@@ -63,6 +63,12 @@ public class SimiNetworkDispatcher extends Thread {
                 mDelivery.postResponse(request, response);
                 return;
             }
+
+            int statusCode = netResponse.getStatusCode();
+            if (statusCode == 302 || statusCode == 301) {
+                return;
+            }
+
             SimiResponse response = request.parseNetworkResponse(netResponse);
             if (null == response) {
                 SimiManager.getIntance().getRequestQueue().getNetworkQueue()

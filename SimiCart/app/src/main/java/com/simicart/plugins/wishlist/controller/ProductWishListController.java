@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.catalog.product.controller.ProductController;
 import com.simicart.core.catalog.product.model.ProductModel;
 import com.simicart.core.config.Config;

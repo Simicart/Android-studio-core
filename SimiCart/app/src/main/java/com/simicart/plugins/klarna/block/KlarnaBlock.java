@@ -23,7 +23,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.fragment.CartFragment;
 import com.simicart.core.config.Config;

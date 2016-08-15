@@ -41,7 +41,7 @@ public class SimiRequestQueue {
 	protected static final int DEFAULT_NETWORK_THREAD_POOL_SIZE = 4;
 
 	/** Network interface for performing requests. */
-	protected SimiNetwork mNetwork;
+	protected SimiBasicNetwork mNetwork;
 
 	/** The network dispatchers. */
 	protected SimiNetworkDispatcher[] mDispatchers;

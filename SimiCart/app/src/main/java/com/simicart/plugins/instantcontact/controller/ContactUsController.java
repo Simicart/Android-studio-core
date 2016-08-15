@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.simicart.MainActivity;
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.config.Config;
 import com.simicart.plugins.instantcontact.delegate.ContactUsDelegate;
 import com.simicart.plugins.instantcontact.entity.ContactUsEntity;

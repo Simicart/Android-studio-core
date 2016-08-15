@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.controller.ReviewOrderController;
 import com.simicart.core.checkout.delegate.ReviewOrderDelegate;

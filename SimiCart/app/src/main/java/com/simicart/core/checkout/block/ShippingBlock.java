@@ -3,7 +3,6 @@ package com.simicart.core.checkout.block;
 import java.util.ArrayList;
 
 import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.checkout.controller.ReviewOrderController;

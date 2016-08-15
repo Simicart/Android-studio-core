@@ -1,7 +1,6 @@
 package com.simicart.core.catalog.product.controller;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.catalog.product.model.RelatedProductModel;
 

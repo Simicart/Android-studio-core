@@ -1,7 +1,6 @@
 package com.simicart.core.customer.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 import android.annotation.SuppressLint;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.checkout.fragment.ReviewOrderFragment;
@@ -22,9 +20,7 @@ import com.simicart.core.customer.entity.ConfigCustomerAddress;
 import com.simicart.core.customer.entity.CountryAllowed;
 import com.simicart.core.customer.entity.MyAddress;
 import com.simicart.core.customer.entity.StateOfCountry;
-import com.simicart.core.customer.fragment.AddressBookFragment;
 import com.simicart.core.customer.fragment.CountryFragment;
-import com.simicart.core.customer.model.AddressBookDetailModel;
 import com.simicart.core.customer.model.GetCountryModel;
 
 @SuppressLint("DefaultLocale")
@@ -222,32 +218,6 @@ public class AddressBookDetailController extends SimiController implements
 	}
 
 	protected void OnRequestChangeAddress(MyAddress address) {
-//		mDelegate.showLoading();
-//		mModel = new AddressBookDetailModel();
-//		mModel.setDelegate(new ModelDelegate() {
-//
-//			@Override
-//			public void callBack(String message, boolean isSuccess) {
-//				mDelegate.dismissLoading();
-//				if (isSuccess) {
-//					AddressBookFragment fragment = AddressBookFragment
-//							.newInstance();
-//					SimiManager.getIntance().replacePopupFragment(fragment);
-//
-//				} else {
-//					SimiManager.getIntance().showNotify("FAIL", message, "OK");
-//				}
-//			}
-//		});
-//
-//		List<NameValuePair> params = address.toParamsRequest();
-//		for (NameValuePair nameValuePair : params) {
-//			String key = nameValuePair.getName();
-//			String value = nameValuePair.getValue();
-//			mModel.addParam(key, value);
-//		}
-//
-//		mModel.request();
 	}
 
 	protected boolean isCompleteRequired(MyAddress addressBookDetail) {

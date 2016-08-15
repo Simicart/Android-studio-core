@@ -1,6 +1,5 @@
 package com.simicart.plugins.hiddenaddress;
 
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
 import com.simicart.core.event.block.CacheBlock;

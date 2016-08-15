@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.simicart.MainActivity;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.common.Utils;
 import com.simicart.core.notification.gcm.GCMRegistrar;
 import com.simicart.core.notification.model.RegisterIDModel;

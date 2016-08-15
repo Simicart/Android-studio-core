@@ -1,10 +1,6 @@
 package com.simicart.plugins.locationpickup.controller;
 
-import java.util.List;
 
-
-import com.simicart.core.base.delegate.ModelDelegate;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.customer.controller.AddressBookDetailController;
 import com.simicart.core.customer.entity.MyAddress;
 import com.simicart.core.customer.fragment.AddressBookFragment;

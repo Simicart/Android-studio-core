@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.simicart.MainActivity;
 import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.config.Config;
 import com.simicart.plugins.paypal.model.PaypalModel;
@@ -31,8 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PaypalSimicart extends Activity {
 

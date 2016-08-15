@@ -1,6 +1,5 @@
 package com.simicart.core.catalog.listproducts.controller;
 
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.catalog.listproducts.model.ConstantsSearch;
 import com.simicart.core.catalog.listproducts.model.ProductListCategoryModel;
 import com.simicart.core.catalog.listproducts.model.SearchListModel;

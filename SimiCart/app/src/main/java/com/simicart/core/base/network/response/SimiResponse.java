@@ -45,10 +45,13 @@ public class SimiResponse {
             if (mJSON.has(Constants.MESSAGE)) {
                 JSONArray mes = mJSON.getJSONArray(Constants.MESSAGE);
                 mMessage = mes.getString(0);
+                mError = new SimiError();
+                mError.setMessage(mMessage);
             }
 
 
             if (null == mStatus || equal(mStatus, "FAIL")) {
+                mError = new SimiError();
                 return false;
             }
 

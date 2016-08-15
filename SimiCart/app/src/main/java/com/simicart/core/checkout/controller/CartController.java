@@ -3,7 +3,6 @@ package com.simicart.core.checkout.controller;
 import org.json.JSONObject;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.checkout.model.CartModel;

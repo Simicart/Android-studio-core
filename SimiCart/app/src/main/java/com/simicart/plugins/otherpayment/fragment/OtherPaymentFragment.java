@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.simicart.MainActivity;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Config;

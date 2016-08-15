@@ -1,10 +1,6 @@
 package com.simicart.plugins.locationpickup.controller;
 
 
-import android.util.Log;
-
-import com.simicart.core.base.delegate.ModelDelegate;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.fragment.ReviewOrderFragment;
 import com.simicart.core.config.Constants;
 import com.simicart.core.customer.controller.NewAddressBookController;

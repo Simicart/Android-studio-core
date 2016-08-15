@@ -6,11 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.simicart.MainActivity;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.config.DataLocal;
 import com.simicart.plugins.wishlist.common.WishListConstants;
 import com.simicart.plugins.wishlist.delegate.MyWishListDelegate;

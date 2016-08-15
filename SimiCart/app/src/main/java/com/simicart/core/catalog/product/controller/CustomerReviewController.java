@@ -7,7 +7,6 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.catalog.product.delegate.CustomerReviewDelegate;
 import com.simicart.core.catalog.product.model.CustomerReviewModel;
 

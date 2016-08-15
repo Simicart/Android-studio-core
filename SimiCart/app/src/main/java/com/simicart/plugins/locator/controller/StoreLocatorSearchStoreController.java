@@ -1,7 +1,6 @@
 package com.simicart.plugins.locator.controller;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.DataLocal;

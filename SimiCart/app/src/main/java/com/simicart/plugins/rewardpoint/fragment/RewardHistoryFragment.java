@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.rewardpoint.adapter.AdapterListviewHistory;

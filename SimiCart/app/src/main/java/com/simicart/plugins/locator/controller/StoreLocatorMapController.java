@@ -3,7 +3,6 @@ package com.simicart.plugins.locator.controller;
 import java.util.ArrayList;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Config;
 import com.simicart.plugins.locator.delegate.StoreLocatorMapDelegate;

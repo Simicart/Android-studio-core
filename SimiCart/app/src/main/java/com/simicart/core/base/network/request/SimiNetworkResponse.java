@@ -3,8 +3,6 @@ package com.simicart.core.base.network.request;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.http.HttpStatus;
-
 public class SimiNetworkResponse {
 
 	/** The HTTP status code. */
@@ -58,12 +56,12 @@ public class SimiNetworkResponse {
 	}
 
 	public SimiNetworkResponse(byte[] data) {
-		this(HttpStatus.SC_OK, data, Collections.<String, String> emptyMap(),
+		this(200, data, Collections.<String, String> emptyMap(),
 				false, 0);
 	}
 
 	public SimiNetworkResponse(byte[] data, Map<String, String> headers) {
-		this(HttpStatus.SC_OK, data, headers, false, 0);
+		this(200, data, headers, false, 0);
 	}
 
 }

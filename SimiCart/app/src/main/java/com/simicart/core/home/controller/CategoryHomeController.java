@@ -3,7 +3,6 @@ package com.simicart.core.home.controller;
 import java.util.ArrayList;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.home.delegate.CategoryHomeDelegate;
 import com.simicart.core.home.model.CategoryHomeModel;

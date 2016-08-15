@@ -15,7 +15,6 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.simicart.MainActivity;
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.checkout.delegate.PaymentMethodDelegate;

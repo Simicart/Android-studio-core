@@ -3,7 +3,6 @@ package com.simicart.plugins.klarna.controller;
 import org.json.JSONArray;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.plugins.klarna.delegate.KlarnaDelegate;
 import com.simicart.plugins.klarna.model.KlarnaModel;
 

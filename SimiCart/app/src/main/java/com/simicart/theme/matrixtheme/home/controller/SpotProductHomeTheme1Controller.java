@@ -1,7 +1,6 @@
 package com.simicart.theme.matrixtheme.home.controller;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;

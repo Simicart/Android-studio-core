@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.google.android.gms.wallet.Cart;
 import com.simicart.MainActivity;
 import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Config;
@@ -137,51 +136,7 @@ public class BrainTreeActivity extends Activity {
     }
 
 
-//    private void confirmCancel() {
-//        new AlertDialog.Builder(this)
-//                .setMessage(
-//                        Config.getInstance()
-//                                .getText(
-//                                        "Are you sure that you want to cancel the order?"))
-//                .setPositiveButton(Config.getInstance().getText("Yes"),
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog,
-//                                                int which) {
-//                                cancelOrder();
-//                            }
-//                        })
-//                .setNegativeButton(Config.getInstance().getText("No"),
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog,
-//                                                int which) {
-//                                // do nothing
-//                                //getAuthorization();
-//                            }
-//                        }).show();
-//    }
 
-
-//    private void cancelOrder() {
-//        BraintreCancelModel cancelModel = new BraintreCancelModel();
-//        cancelModel.setDelegate(new ModelDelegate() {
-//            @Override
-//            public void onFail(SimiError error) {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(SimiCollection collection) {
-//                String message = "Your order has been canceled!";
-//                showMessage(message);
-//                backToHome();
-//
-//            }
-//        });
-//
-//        cancelModel.addDataExtendURL(orderID);
-//
-//        cancelModel.request();
-//    }
 
     public void showMessage(String message) {
         Toast toast = Toast.makeText(MainActivity.context, Config.getInstance()

@@ -8,15 +8,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.delegate.RequestCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.network.request.SimiJSONRequest;
 import com.simicart.core.base.network.request.SimiRequest;
 import com.simicart.core.base.network.request.SimiRequest.Priority;
@@ -28,99 +26,174 @@ import com.simicart.core.config.DataLocal;
 
 public class SimiModel {
 
-
     protected ModelSuccessCallBack mModelSuccessCallBack;
-    protected ModelFailCallBack mFailSuccessCallBack;
-
-
-    private RequestCallBack mDelegate;
-    private ModelDelegate bDelegate;
-    protected JSONObject mJSON;
+    protected ModelFailCallBack mModelFailCallBack;
+    protected RequestCallBack mRequestCallBack;
     protected SimiCollection collection = null;
-    protected String url_action;
+    protected String mUrlAction;
     protected boolean isShowNotify = true;
-    protected HashMap<String, Object> mHashMap;
+    protected HashMap<String, Object> mHashMapBody;
     protected SimiRequest mRequest;
     protected Priority mCurrentPriority = Priority.NORMAL;
+    protected JSONObject mJSON;
     protected boolean enableCache = false;
+    protected boolean isCloud;
+    protected JSONObject mJSONBodyEntity;
+    protected HashMap<String, String> mHeader;
 
 
     public SimiModel() {
-        mHashMap = new HashMap<String, Object>();
+        mHashMapBody = new HashMap<>();
+        mHeader = new HashMap<>();
     }
 
-    public JSONObject getJSON() {
-        return mJSON;
+    public void request() {
+        initRequest();
+        String cache_key = createCacheKey();
+        mRequest.setCacheKey(cache_key);
+        if (enableCache) {
+            getDataFromCache();
+        } else {
+            SimiManager.getIntance().getRequestQueue().add(mRequest);
+        }
     }
 
-    private void initDelegate() {
-        this.mDelegate = new RequestCallBack() {
+    protected void initRequest() {
+        initDelegate();
+        setUrlAction();
+        setShowNotifi();
+        setEnableCache();
+        mRequest = new SimiJSONRequest(mUrlAction, mRequestCallBack);
+        mRequest.setPriority(mCurrentPriority);
+        mRequest.setShowNotify(isShowNotify);
+        mRequest.setShouldCache(enableCache);
+        mRequest.setCloud(isCloud);
+        if (null != mJSONBodyEntity) {
+            if (DataLocal.isSignInComplete()
+                    && (!mUrlAction.equals(Constants.SIGN_IN) || !mUrlAction
+                    .equals(Constants.SIGN_OUT))) {
+                String email = DataLocal.getEmail();
+                String pass_word = DataLocal.getPassword();
+                try {
+                    mJSONBodyEntity.put(Constants.USER_EMAIL, email);
+                    mJSONBodyEntity.put(Constants.USER_PASSWORD, pass_word);
+                } catch (JSONException e) {
+
+                }
+
+            }
+            mRequest.setBody(mJSONBodyEntity);
+        } else {
+            createBodyEntity();
+        }
+        mRequest.setHeader(mHeader);
+    }
+
+    protected String createCacheKey() {
+        String class_name = this.getClass().getName();
+        String cache_key = class_name + mUrlAction;
+        String post_body = mRequest.getBody().toString();
+        if (Utils.validateString(post_body)) {
+            cache_key = cache_key + post_body;
+        }
+        return cache_key;
+    }
+
+
+    protected void initDelegate() {
+        mRequestCallBack = new RequestCallBack() {
 
             @Override
             public void callBack(SimiResponse simiResponse, boolean isSuccess) {
-                // TODO Auto-generated method stub
                 if (isSuccess) {
                     mJSON = simiResponse.getDataJSON();
-                    paserData();
+                    parseData();
+                    if (null != mModelSuccessCallBack) {
+                        mModelSuccessCallBack.onSuccess(simiResponse);
+                    }
+                } else {
+                    if (null != mModelFailCallBack) {
+                        SimiError error = null;
+                        if (null != simiResponse) {
+                            error = simiResponse.getSimiError();
+                        }
+                        mModelFailCallBack.onFail(error);
+                    }
                 }
-                bDelegate.callBack(simiResponse.getMessage(), isSuccess);
+
             }
         };
 
     }
 
+    protected void setUrlAction() {
+    }
 
-    public void addParam(String tag, String value) {
-        mHashMap.put(tag, value);
+    protected void setShowNotifi() {
+    }
+
+    protected void setEnableCache() {
 
     }
 
-    public void addParam(String tag, JSONArray value) {
-        mHashMap.put(tag, value);
-    }
-
-    public void addParam(String tag, JSONObject value) {
-        mHashMap.put(tag, value);
-    }
-
-    /**
-     * override this function to add params
-     */
-    private void addParams() {
+    private void createBodyEntity() {
 
         if (DataLocal.isSignInComplete()
-                && (!url_action.equals(Constants.SIGN_IN) || !url_action
+                && (!mUrlAction.equals(Constants.SIGN_IN) || !mUrlAction
                 .equals(Constants.SIGN_OUT))) {
             String email = DataLocal.getEmail();
             String pass_word = DataLocal.getPassword();
+            addBody(Constants.USER_EMAIL, email);
+            addBody(Constants.USER_PASSWORD, pass_word);
 
-            addParam(Constants.USER_EMAIL, email);
-            addParam(Constants.USER_PASSWORD, pass_word);
         }
 
-        if (!mHashMap.isEmpty()) {
-            Iterator<Entry<String, Object>> iterator = mHashMap.entrySet()
+        if (!mHashMapBody.isEmpty()) {
+            Iterator<Entry<String, Object>> iterator = mHashMapBody.entrySet()
                     .iterator();
             while (iterator.hasNext()) {
-                @SuppressWarnings("rawtypes")
                 Entry entry = (Entry) iterator.next();
                 Object value = entry.getValue();
                 String key = String.valueOf(entry.getKey());
                 if (value instanceof String) {
-                    mRequest.addParams(key, String.valueOf(value));
+                    mRequest.addBody(key, String.valueOf(value));
                 } else if (value instanceof JSONObject) {
-                    mRequest.addParams(key, (JSONObject) value);
+                    mRequest.addBody(key, (JSONObject) value);
                 } else if (value instanceof JSONArray) {
-                    mRequest.addParams(key, (JSONArray) value);
+                    mRequest.addBody(key, (JSONArray) value);
                 }
             }
         }
     }
 
-    /**
-     * override this function to change Entity
-     */
-    protected void paserData() {
+
+    public void addBody(String tag, String value) {
+        mHashMapBody.put(tag, value);
+
+    }
+
+    public void addBody(String tag, JSONArray value) {
+        mHashMapBody.put(tag, value);
+    }
+
+    public void addBody(String tag, JSONObject value) {
+        mHashMapBody.put(tag, value);
+    }
+
+    protected void getDataFromCache() {
+        JSONObject json = SimiManager.getIntance().getRequestQueue()
+                .getDataFromCacheL1(mRequest);
+        if (null != json) {
+            SimiResponse simiResponse = new SimiResponse();
+            simiResponse.parse(json.toString());
+            mRequestCallBack.callBack(simiResponse, true);
+        } else {
+            SimiManager.getIntance().getRequestQueue().add(mRequest);
+        }
+    }
+
+
+    protected void parseData() {
         try {
             JSONArray list = this.mJSON.getJSONArray("data");
             collection = new SimiCollection();
@@ -143,87 +216,40 @@ public class SimiModel {
         }
     }
 
-    /**
-     * override this function to set path url
-     */
-    protected void setUrlAction() {
-    }
 
-    public void setUrlActionSearch(String url) {
-        url_action = url;
-    }
-
-    protected void setShowNotifi() {
-    }
-
-    /**
-     * setUrlAction initial Request add parameter request
-     */
-    public void request() {
-        this.initRequest();
-        String class_name = this.getClass().getName();
-
-        String cache_key = class_name + url_action;
-        String post_body = mRequest.getPostBody().toString();
-        if (Utils.validateString(post_body)) {
-            cache_key = cache_key + post_body;
-        }
-        Log.e("SimiModel CACHE KEY ", cache_key);
-        mRequest.setCacheKey(cache_key);
-        if (enableCache) {
-            getDataFromCache();
-        } else {
-            SimiManager.getIntance().getRequestQueue().add(mRequest);
-        }
-    }
-
-    private void initRequest() {
-        this.initDelegate();
-        setUrlAction();
-        setShowNotifi();
-        setEnableCache();
-        mRequest = new SimiJSONRequest(url_action, mDelegate);
-        mRequest.setPriority(mCurrentPriority);
-        mRequest.setShowNotify(isShowNotify);
-        mRequest.setShouldCache(enableCache);
-
-        addParams();
-    }
-
-    private void getDataFromCache() {
-        JSONObject json = SimiManager.getIntance().getRequestQueue()
-                .getDataFromCacheL1(mRequest);
-        if (null != json) {
-            SimiResponse simiResponse = new SimiResponse();
-            simiResponse.parse(json.toString());
-            Log.e("SimiModel getDataFromCache ", json.toString());
-            mDelegate.callBack(simiResponse, true);
-        } else {
-            Log.e("SimiModel ", "getDataFromCache " + "NULLLLLLL");
-            SimiManager.getIntance().getRequestQueue().add(mRequest);
-        }
-    }
-
-    public void refreshRequest() {
-        SimiManager.getIntance().getRequestQueue().add(mRequest);
-    }
-
-    protected void setEnableCache() {
+    protected void setCloud() {
 
     }
+
 
     public JSONObject getDataJSON() {
         return mJSON;
     }
 
-    public void setDelegate(ModelDelegate delegate) {
-        bDelegate = delegate;
+
+    public void setJSONBodyEntity(JSONObject json) {
+        mJSONBodyEntity = json;
     }
+
 
     public SimiCollection getCollection() {
         if (collection == null)
             return new SimiCollection();
         return this.collection;
+    }
+
+    public void addHeader(String key, String value) {
+        if (Utils.validateString(key) && Utils.validateString(value)) {
+            mHeader.put(key, value);
+        }
+    }
+
+    public void setSuccessListener(ModelSuccessCallBack successListener) {
+        mModelSuccessCallBack = successListener;
+    }
+
+    public void setFailListener(ModelFailCallBack failListener) {
+        mModelFailCallBack = failListener;
     }
 
 }

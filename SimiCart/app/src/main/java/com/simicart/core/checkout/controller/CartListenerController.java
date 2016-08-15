@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import com.magestore.simicart.R;
 import com.simicart.MainActivity;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.checkout.checkoutwebview.fragment.CheckoutWebviewFragment;

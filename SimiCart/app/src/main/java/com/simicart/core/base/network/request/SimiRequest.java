@@ -1,7 +1,5 @@
 package com.simicart.core.base.network.request;
 
-import android.util.Log;
-
 import com.simicart.core.base.delegate.RequestCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.network.response.SimiResponse;
@@ -16,217 +14,258 @@ import java.util.Map.Entry;
 
 public class SimiRequest implements Comparable<SimiRequest> {
 
-	public interface Method {
-		int GET = 0;
-		int POST = 1;
-		int PUT = 2;
-		int DELETE = 3;
-		int HEAD = 4;
-		int OPTIONS = 5;
-		int TRACE = 6;
-		int PATCH = 7;
-	}
+    public interface Method {
+        int GET = 0;
+        int POST = 1;
+        int PUT = 2;
+        int DELETE = 3;
+        int HEAD = 4;
+        int OPTIONS = 5;
+        int TRACE = 6;
+        int PATCH = 7;
+    }
 
-	public enum Priority {
-		LOW, NORMAL, HIGH, IMMEDIATE
-	}
+    public enum Priority {
+        LOW, NORMAL, HIGH, IMMEDIATE
+    }
 
-	public interface TYPEREQUEST {
-		int HTTPCLIENT = 0;
-		int URL = 1;
-	}
+    public interface TYPEREQUEST {
+        int HTTPCLIENT = 0;
+        int URL = 1;
+    }
 
-	protected int mTypeMethod = Method.POST;
-	protected int mTypeRequest = TYPEREQUEST.HTTPCLIENT;
-	protected String mUrl;
-	protected HashMap<String, Object> mHashMapBody = new HashMap<String, Object>();
-	protected HashMap<String, String> mHeaderAddtional;
-	protected RequestCallBack mCallBack;
-	protected Integer mSequence;
-	protected boolean mCancel;
-	protected JSONObject mJsonPostBody;
-	protected SimiRequestQueue mRequestQueue;
-	protected Priority mCurrentPriority = Priority.NORMAL;
-	protected boolean isShowNotify = true;
-	protected boolean mShouldCache = false;
-	protected String mCacheKey;
+    protected int mTypeMethod = Method.POST;
+    protected int mTypeRequest = TYPEREQUEST.URL;
+    protected String mUrl;
+    protected HashMap<String, Object> mHashMapBody;
+    protected HashMap<String, String> mHeader;
+    protected RequestCallBack mCallBack;
+    protected Integer mSequence;
+    protected boolean mCancel;
+    protected JSONObject mJsonBody;
+    protected SimiRequestQueue mRequestQueue;
+    protected Priority mCurrentPriority = Priority.NORMAL;
+    protected boolean isShowNotify = true;
+    protected boolean mShouldCache = false;
+    protected String mCacheKey;
+    protected boolean isCloud;
+    protected boolean isRedirect;
+    protected String mUrlRedirect;
 
-	public void setShouldCache(boolean should_cache) {
-		mShouldCache = should_cache;
-	}
+    public SimiRequest(String url, RequestCallBack delegate) {
+        mUrl = url;
+        mCallBack = delegate;
+        mHashMapBody = new HashMap<>();
+    }
 
-	public boolean isShouldeCache() {
-		return mShouldCache;
-	}
+    public SimiRequest(String url, RequestCallBack delegate, int typeMethod) {
+        this(url, delegate);
+        mTypeMethod = typeMethod;
+    }
 
-	public boolean isShowNotify() {
-		return isShowNotify;
+    public SimiRequest(String url, RequestCallBack delegate, int typeMethod,
+                       int typeRequest) {
+        this(url, delegate, typeMethod);
+        mTypeRequest = typeRequest;
+    }
 
-	}
+    public SimiResponse parseNetworkResponse(SimiNetworkResponse response) {
 
-	public void setShowNotify(boolean isShowNotify) {
-		this.isShowNotify = isShowNotify;
-	}
+        return null;
+    }
 
-	public void setRequestQueue(SimiRequestQueue requestQueue) {
-		mRequestQueue = requestQueue;
-	}
+    public void deliveryCoreResponse(SimiResponse response) {
 
-	public void onStopRequestQueue() {
-		mRequestQueue.stop();
-	}
+    }
 
-	public void onStartRequestQueue() {
+    public final SimiRequest setSequence(int sequence) {
+        mSequence = sequence;
+        return this;
+    }
 
-		mRequestQueue.start();
-	}
+    public void finish() {
 
-	public JSONObject getPostBody() {
-		if (null == mJsonPostBody) {
-			prepareRequest();
-		}
-		return mJsonPostBody;
-	}
+    }
 
-	public HashMap<String, String> getHeaderAddtional() {
-		return mHeaderAddtional;
-	}
+    public boolean isCancel() {
+        return mCancel;
+    }
 
-	public SimiRequest(String url, RequestCallBack delegate) {
-		mUrl = url;
-		mCallBack = delegate;
-	}
+    public void cancel(boolean mCancel) {
+        this.mCancel = mCancel;
+    }
 
-	public SimiRequest(String url, RequestCallBack delegate, int typeMethod) {
-		this(url, delegate);
-		mTypeMethod = typeMethod;
-	}
+    public int getTypeMethod() {
+        return mTypeMethod;
+    }
 
-	public SimiRequest(String url, RequestCallBack delegate, int typeMethod,
-					   int typeRequest) {
-		this(url, delegate, typeMethod);
-		mTypeRequest = typeRequest;
-	}
+    public void setTypeMethod(int mTypeMethod) {
+        this.mTypeMethod = mTypeMethod;
+    }
 
-	public SimiResponse parseNetworkResponse(SimiNetworkResponse response) {
+    public int getTypeRequest() {
+        return mTypeRequest;
+    }
 
-		return null;
-	}
+    public void setTypeRequest(int mTypeRequest) {
+        this.mTypeRequest = mTypeRequest;
+    }
 
-	public void deliveryCoreResponse(SimiResponse response) {
+    public String getUrl() {
+        return mUrl;
+    }
 
-	}
+    public void setUrl(String mUrl) {
+        this.mUrl = mUrl;
+    }
 
-	public final SimiRequest setSequence(int sequence) {
-		mSequence = sequence;
-		return this;
-	}
+    public void setCacheKey(String cacheKey) {
+        mCacheKey = cacheKey;
+    }
 
-	public void finish() {
+    public String getCacheKey() {
+        boolean isRefreshCart = SimiManager.getIntance().isRereshCart();
+        if (mUrl.contains("get_cart") && isRefreshCart) {
+            return null;
+        }
 
-	}
+        return mCacheKey;
+    }
 
-	public boolean isCancel() {
-		return mCancel;
-	}
+    public String getCacheKeyForSaveResponse() {
+        return mCacheKey;
+    }
 
-	public void cancel(boolean mCancel) {
-		this.mCancel = mCancel;
-	}
+    protected void prepareRequest() {
+        try {
+            Iterator<Entry<String, Object>> iter = mHashMapBody.entrySet()
+                    .iterator();
+            while (iter.hasNext()) {
+                Entry mEntry = (Entry) iter.next();
+                mJsonBody.put((String) mEntry.getKey(), mEntry.getValue());
+            }
+        } catch (JSONException e) {
+            mJsonBody = null;
+        }
+    }
 
-	public int getTypeMethod() {
-		return mTypeMethod;
-	}
+    public void addBody(String key, String value) {
+        if (key != null && value != null) {
+            mHashMapBody.put(key, value);
+        }
+    }
 
-	public void setTypeMethod(int mTypeMethod) {
-		this.mTypeMethod = mTypeMethod;
-	}
+    public void addBody(String key, JSONArray value) {
+        if (key != null && value != null) {
+            mHashMapBody.put(key, value);
+        }
+    }
 
-	public int getTypeRequest() {
-		return mTypeRequest;
-	}
+    public void addBody(String key, JSONObject value) {
+        if (key != null && value != null) {
+            mHashMapBody.put(key, value);
+        }
+    }
 
-	public void setTypeRequest(int mTypeRequest) {
-		this.mTypeRequest = mTypeRequest;
-	}
+    public Priority getPriority() {
+        return mCurrentPriority;
+    }
 
-	public String getUrl() {
-		return mUrl;
-	}
+    public void setPriority(Priority priority) {
+        mCurrentPriority = priority;
+    }
 
-	public void setUrl(String mUrl) {
-		this.mUrl = mUrl;
-	}
 
-	public void setCacheKey(String cacheKey) {
-		mCacheKey = cacheKey;
-	}
+    public void setShouldCache(boolean should_cache) {
+        mShouldCache = should_cache;
+    }
 
-	public String getCacheKey() {
-		boolean isRefreshCart = SimiManager.getIntance().isRereshCart();
+    public boolean isShouldeCache() {
+        return mShouldCache;
+    }
 
-		Log.e("SimiRequest ", "getCacheKey " + isRefreshCart);
+    public boolean isShowNotify() {
+        return isShowNotify;
 
-		if (mUrl.contains("get_cart") && isRefreshCart) {
-			return null;
-		}
+    }
 
-		return mCacheKey;
-	}
+    public void setShowNotify(boolean isShowNotify) {
+        this.isShowNotify = isShowNotify;
+    }
 
-	public String getCacheKeyForSaveResponse() {
-		return mCacheKey;
-	}
+    public void setRequestQueue(SimiRequestQueue requestQueue) {
+        mRequestQueue = requestQueue;
+    }
 
-	@SuppressWarnings("rawtypes")
-	protected void prepareRequest() {
-		try {
-			//mJsonPostBody = new JSONObject(SimiHelper.endCodeJson(mNameValue));
-			Iterator<Entry<String, Object>> iter = mHashMapBody.entrySet()
-					.iterator();
-			while (iter.hasNext()) {
-				Entry mEntry = (Entry) iter.next();
-				mJsonPostBody.put((String) mEntry.getKey(), mEntry.getValue());
-			}
-		} catch (JSONException e) {
-			mJsonPostBody = null;
-		}
-	}
+    public void onStopRequestQueue() {
+        mRequestQueue.stop();
+    }
 
-	public void addParams(String tag, String value) {
-		if (tag != null && value != null) {
-		//	mNameValue.add(new BasicNameValuePair(tag, value));
-		}
-	}
+    public void onStartRequestQueue() {
 
-	public void addParams(String tag, JSONArray value) {
-		if (tag != null && value != null) {
-			mHashMapBody.put(tag, value);
-		}
-	}
+        mRequestQueue.start();
+    }
 
-	public void addParams(String tag, JSONObject value) {
-		if (tag != null && value != null) {
-			mHashMapBody.put(tag, value);
-		}
-	}
+    public JSONObject getBody() {
+        if (null == mJsonBody) {
+            prepareRequest();
+        }
 
-	public Priority getPriority() {
-		return mCurrentPriority;
-	}
+        JSONObject json = new JSONObject();
 
-	public void setPriority(Priority priority) {
-		mCurrentPriority = priority;
-	}
+        try {
+            json.put("data", mJsonBody);
+        } catch (JSONException e) {
 
-	@Override
-	public int compareTo(SimiRequest another) {
-		Priority left = this.getPriority();
-		Priority right = another.getPriority();
-		int tmp1 = this.mSequence - another.mSequence;
-		int tmp2 = right.ordinal() - left.ordinal();
-		int result = left == right ? tmp1 : tmp2;
-		return result;
-	}
+        }
+
+        return json;
+    }
+
+    public void setBody(JSONObject jsBody) {
+        mJsonBody = jsBody;
+    }
+
+    public HashMap<String, String> getHeader() {
+        return mHeader;
+    }
+
+    public void setHeader(HashMap<String, String> header) {
+        mHeader = header;
+    }
+
+    public void setCloud(boolean is_cloud) {
+        isCloud = is_cloud;
+    }
+
+    public boolean isCloud() {
+        return isCloud;
+    }
+
+    public void setRedirect(boolean is_redirect) {
+        isRedirect = is_redirect;
+    }
+
+    public boolean isRedirect() {
+        return this.isRedirect;
+    }
+
+    public void setUrlRedirect(String urlRedirect) {
+        mUrlRedirect = urlRedirect;
+    }
+
+    public String getUrlRedirect() {
+        return this.mUrlRedirect;
+    }
+
+    @Override
+    public int compareTo(SimiRequest another) {
+        Priority left = this.getPriority();
+        Priority right = another.getPriority();
+        int tmp1 = this.mSequence - another.mSequence;
+        int tmp2 = right.ordinal() - left.ordinal();
+        int result = left == right ? tmp1 : tmp2;
+        return result;
+    }
 
 }

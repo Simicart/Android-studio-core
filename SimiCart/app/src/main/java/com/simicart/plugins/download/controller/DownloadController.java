@@ -1,7 +1,6 @@
 package com.simicart.plugins.download.controller;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.plugins.download.delegate.DownloadDelegate;
 import com.simicart.plugins.download.model.DownloadModel;
 

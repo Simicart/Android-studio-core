@@ -8,7 +8,6 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 import com.simicart.MainActivity;
-import com.simicart.core.base.delegate.ModelDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Config;
 import com.simicart.core.event.activity.CacheActivity;

@@ -1,9 +1,7 @@
 package com.simicart.core.banner.controller;
 
 import com.simicart.core.banner.delegate.BannerDelegate;
-import com.simicart.core.banner.model.BannerModel;
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.delegate.ModelDelegate;
 
 public class BannerController extends SimiController {
 	protected BannerDelegate mDelegate;
