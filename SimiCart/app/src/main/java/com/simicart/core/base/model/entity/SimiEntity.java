@@ -1,9 +1,11 @@
 package com.simicart.core.base.model.entity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
+import android.util.Log;
 
 public class SimiEntity {
 	protected JSONObject mJSON;
@@ -35,4 +37,67 @@ public class SimiEntity {
 		}
 		return null;
 	}
+
+	public JSONObject getJSONObjectWithKey(JSONObject jsParent, String key) {
+		if (null != jsParent) {
+			if (jsParent.has(key)) {
+				try {
+					JSONObject jsChild = jsParent.getJSONObject(key);
+					return jsChild;
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return null;
+
+	}
+
+	public JSONArray getJSONArrayWithKey(JSONObject jsParent, String key) {
+		if (null != jsParent) {
+			if (jsParent.has(key)) {
+				try {
+					JSONArray array = jsParent.getJSONArray(key);
+					return array;
+				} catch (JSONException e) {
+					Log.e("SimiEntity ", "xxxx---> getJSONArrayWithKey Exception " + e.getMessage());
+				}
+			}
+
+		}
+		Log.e("SimiEntity ", "xxxxx-----> getJSONArrayWithKey NULL");
+		return null;
+	}
+
+	public boolean hasKey(String key) {
+		return mJSON.has(key);
+	}
+
+	public void parse(JSONObject json) {
+		mJSON = json;
+		this.parse();
+	}
+
+	public void parse() {
+	}
+
+	protected float parseFloat(String price) {
+		try {
+			return Float.parseFloat(price);
+		} catch (Exception e) {
+
+		}
+		return 0;
+	}
+
+	protected int parseInt(String price) {
+		try {
+			return Integer.parseInt(price);
+		} catch (Exception e) {
+
+		}
+		return 0;
+	}
+
 }
