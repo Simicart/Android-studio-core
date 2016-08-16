@@ -1,147 +1,57 @@
 package com.simicart.core.base.fragment;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.event.fragment.CacheFragment;
-import com.simicart.core.event.fragment.EventFragment;
+import com.simicart.core.base.model.entity.SimiData;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SimiFragment extends Fragment {
 
     protected View rootView;
-    protected boolean isShowPopup = false;
+    protected SimiData mData;
+    protected HashMap<String, Object> mHashMapData;
     protected String screenName = "";
 
-    public static SimiFragment newInstance() {
+    public static SimiFragment newInstance(SimiData data) {
         SimiFragment fragment = new SimiFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("data", data);
+        fragment.setArguments(bundle);
         return fragment;
+    }
+
+    protected void getDataFromBundle() {
+        Bundle bundle = getArguments();
+        mData = bundle.getParcelable("data");
+        mHashMapData = mData.getData();
+    }
+
+    public void setScreenName(String screenName) {
+
     }
 
     public String getScreenName() {
         return screenName;
     }
 
-    public void setShowPopup(boolean isShowPopup) {
-        this.isShowPopup = isShowPopup;
-    }
-
-    public boolean isShowPopup() {
-        return isShowPopup;
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        if (isVisibleToUser && getActivity() != null) {
-            if (DataLocal.isTablet) {
-                getActivity().setRequestedOrientation(
-                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            } else {
-                getActivity().setRequestedOrientation(
-                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            }
+    public HashMap<String, Object> getData() {
+        if (null != mData) {
+            return mData.getData();
         }
+        return null;
     }
 
-    @Override
-    public void onViewCreated(View view,  Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
-    public void setScreenName(String name) {
-        this.screenName = name;
-
-        CacheFragment cache = new CacheFragment();
-        cache.setFragment(this);
-        EventFragment event = new EventFragment();
-        event.dispatchEvent(
-                "com.simicart.core.base.fragment.SimiFragment.setName", cache);
-    }
-
-    @SuppressWarnings("unchecked")
-    public static void setData(String key, Object object, String type, Bundle bundle) {
-
-        switch (type) {
-            case Constants.KeyData.TYPE_STRING:
-                bundle.putString(key, (String) object);
-
-                break;
-            case Constants.KeyData.TYPE_INT:
-                bundle.putInt(key, (int) object);
-
-                break;
-            case Constants.KeyData.TYPE_FLOAT:
-                bundle.putFloat(key, (float) object);
-
-                break;
-            case Constants.KeyData.TYPE_LIST_STRING:
-                bundle.putStringArrayList(key, (ArrayList<String>) object);
-
-                break;
-            case Constants.KeyData.TYPE_LIST_INT:
-                bundle.putIntegerArrayList(key, (ArrayList<Integer>) object);
-
-                break;
-            case Constants.KeyData.TYPE_JSONOBJECT:
-                bundle.putString(key, (String) object);
-
-                break;
-            case Constants.KeyData.TYPE_BOOLEAN:
-                bundle.putBoolean(key, (boolean) object);
-
-                break;
-            default:
-                break;
+    public Object getValueWithKey(String key) {
+        if (null != mHashMapData) {
+            mHashMapData = getData();
         }
-
-    }
-
-    public static Object getData(String key, String type, Bundle bundle) {
-
-        Object object = new Object();
-        switch (type) {
-            case Constants.KeyData.TYPE_STRING:
-                object = bundle.getString(key, "");
-
-                break;
-            case Constants.KeyData.TYPE_INT:
-                object = bundle.getInt(key, 0);
-
-                break;
-            case Constants.KeyData.TYPE_FLOAT:
-                object = bundle.getFloat(key, 0);
-
-                break;
-            case Constants.KeyData.TYPE_LIST_STRING:
-                object = bundle.getStringArrayList(key);
-
-                break;
-            case Constants.KeyData.TYPE_LIST_INT:
-                object = bundle.getIntegerArrayList(key);
-
-                break;
-            case Constants.KeyData.TYPE_JSONOBJECT:
-                object = bundle.getString(key, "");
-
-                break;
-            case Constants.KeyData.TYPE_BOOLEAN:
-                object = bundle.getBoolean(key);
-
-                break;
-
-            default:
-                break;
+        if (null == mHashMapData) {
+            return null;
         }
-
-        return object;
+        return mHashMapData.get(key);
     }
-
-
 
 }

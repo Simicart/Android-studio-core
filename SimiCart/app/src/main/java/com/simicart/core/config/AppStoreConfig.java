@@ -170,7 +170,6 @@ public class AppStoreConfig extends SimiEntity {
                 return price + " " + mCurrencySymbol;
             }
         }
-        // return price + " " + mCurrencySymbol;
     }
 
     public String getPrice(String price, String symbol) {
@@ -195,7 +194,6 @@ public class AppStoreConfig extends SimiEntity {
                 return price + " " + mCurrencySymbol;
             }
         }
-        // return price + " " + symbol;
     }
 
     public String getCountryCode() {

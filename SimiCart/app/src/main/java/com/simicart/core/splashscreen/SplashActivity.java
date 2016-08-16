@@ -36,8 +36,9 @@ public class SplashActivity extends Activity implements SplashDelegate {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context context = getApplicationContext();
-        SimiManager.getIntance().setCurrentContext(context);
         SimiManager.getIntance().setCurrentActivity(this);
+        int idView = Rconfig.getInstance().layout("");
+
         setContentView(Rconfig.getInstance().getId(context,
                 "core_splash_screen", "layout"));
         DataLocal.isTablet = Utils.isTablet(context);
@@ -50,16 +51,7 @@ public class SplashActivity extends Activity implements SplashDelegate {
         View view = findViewById(Rconfig.getInstance().getId(
                 getApplicationContext(), "core_splash_screen", "id"));
 
-        EventListener.listEvent.clear();
-        UtilsEvent.itemsList.clear();
-        EventListener.setEvent("simi_developer");
-        // dispatch event for sent google analytic
-        CacheActivity cacheActivity = new CacheActivity();
-        cacheActivity.setActivity(this);
-        EventActivity dispacth = new EventActivity();
-        dispacth.dispatchEvent("com.simicart.splashscreen.onCreate",
-                cacheActivity);
-        // end dispatch
+        // need to dispatch event for Google Analytics
 
         SplashBlock block = new SplashBlock(view, context);
         block.initView();
@@ -101,55 +93,55 @@ public class SplashActivity extends Activity implements SplashDelegate {
 
     private void getDeepLinkItem() {
         final DeepLinkModel model = new DeepLinkModel();
-        model.setDelegate(new ModelDelegate() {
-
-            @Override
-            public void callBack(String message, boolean isSuccess) {
-                // TODO Auto-generated method stub
-                if (isSuccess) {
-                    Log.e("Deep link", "Success");
-                    ArrayList<SimiEntity> entity = model.getCollection()
-                            .getCollection();
-                    if (entity.size() > 0) {
-                        for (SimiEntity simiEntity : entity) {
-                            JSONObject obj = simiEntity.getJSONObject();
-                            if (obj.has("id")) {
-                                try {
-                                    DataLocal.deepLinkItemID = obj
-                                            .getString("id");
-                                    Log.e("Deep Link", DataLocal.deepLinkItemID);
-                                } catch (JSONException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
-                                }
-                            }
-                            if (obj.has("type")) {
-                                try {
-                                    DataLocal.deepLinkItemType = obj
-                                            .getInt("type");
-                                    Log.e("Deep Link", "++"
-                                            + DataLocal.deepLinkItemType);
-                                } catch (JSONException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
-                                }
-                            }
-                            if (obj.has("has_child")) {
-                                try {
-                                    DataLocal.deepLinkItemHasChild = obj
-                                            .getString("has_child");
-                                    Log.e("Deep Link", "++"
-                                            + DataLocal.deepLinkItemHasChild);
-                                } catch (JSONException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
+//        model.setDelegate(new ModelDelegate() {
+//
+//            @Override
+//            public void callBack(String message, boolean isSuccess) {
+//                // TODO Auto-generated method stub
+//                if (isSuccess) {
+//                    Log.e("Deep link", "Success");
+//                    ArrayList<SimiEntity> entity = model.getCollection()
+//                            .getCollection();
+//                    if (entity.size() > 0) {
+//                        for (SimiEntity simiEntity : entity) {
+//                            JSONObject obj = simiEntity.getJSONObject();
+//                            if (obj.has("id")) {
+//                                try {
+//                                    DataLocal.deepLinkItemID = obj
+//                                            .getString("id");
+//                                    Log.e("Deep Link", DataLocal.deepLinkItemID);
+//                                } catch (JSONException e) {
+//                                    // TODO Auto-generated catch block
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                            if (obj.has("type")) {
+//                                try {
+//                                    DataLocal.deepLinkItemType = obj
+//                                            .getInt("type");
+//                                    Log.e("Deep Link", "++"
+//                                            + DataLocal.deepLinkItemType);
+//                                } catch (JSONException e) {
+//                                    // TODO Auto-generated catch block
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                            if (obj.has("has_child")) {
+//                                try {
+//                                    DataLocal.deepLinkItemHasChild = obj
+//                                            .getString("has_child");
+//                                    Log.e("Deep Link", "++"
+//                                            + DataLocal.deepLinkItemHasChild);
+//                                } catch (JSONException e) {
+//                                    // TODO Auto-generated catch block
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        });
         model.addParam("link", DataLocal.deepLinkItemName);
         model.request();
     }

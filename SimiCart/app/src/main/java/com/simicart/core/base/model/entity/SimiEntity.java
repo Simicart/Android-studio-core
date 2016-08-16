@@ -61,12 +61,10 @@ public class SimiEntity {
 					JSONArray array = jsParent.getJSONArray(key);
 					return array;
 				} catch (JSONException e) {
-					Log.e("SimiEntity ", "xxxx---> getJSONArrayWithKey Exception " + e.getMessage());
 				}
 			}
 
 		}
-		Log.e("SimiEntity ", "xxxxx-----> getJSONArrayWithKey NULL");
 		return null;
 	}
 
