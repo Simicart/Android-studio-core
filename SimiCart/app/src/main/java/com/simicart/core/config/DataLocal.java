@@ -31,10 +31,6 @@ public class DataLocal {
 	public static boolean isNewSignIn = false;
 	public static String qtyCartAuto = "";
 
-	public static String deepLinkItemID = "";
-	public static String deepLinkItemName = "";
-	public static String deepLinkItemHasChild = "";
-	public static int deepLinkItemType = 0;
 
 	public static void init(Context context) {
 		listCms = new ArrayList<Cms>();

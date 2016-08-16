@@ -1,13 +1,5 @@
 package com.simicart.core.base.model;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.delegate.RequestCallBack;
@@ -19,9 +11,17 @@ import com.simicart.core.base.network.request.SimiJSONRequest;
 import com.simicart.core.base.network.request.SimiRequest;
 import com.simicart.core.base.network.request.SimiRequest.Priority;
 import com.simicart.core.base.network.response.SimiResponse;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 
 public class SimiModel {
@@ -69,11 +69,11 @@ public class SimiModel {
         mRequest.setShouldCache(enableCache);
         mRequest.setCloud(isCloud);
         if (null != mJSONBodyEntity) {
-            if (DataLocal.isSignInComplete()
+            if (DataPreferences.isSignInComplete()
                     && (!mUrlAction.equals(Constants.SIGN_IN) || !mUrlAction
                     .equals(Constants.SIGN_OUT))) {
-                String email = DataLocal.getEmail();
-                String pass_word = DataLocal.getPassword();
+                String email = DataPreferences.getEmail();
+                String pass_word = DataPreferences.getPassword();
                 try {
                     mJSONBodyEntity.put(Constants.USER_EMAIL, email);
                     mJSONBodyEntity.put(Constants.USER_PASSWORD, pass_word);
@@ -109,7 +109,7 @@ public class SimiModel {
                     mJSON = simiResponse.getDataJSON();
                     parseData();
                     if (null != mModelSuccessCallBack) {
-                        mModelSuccessCallBack.onSuccess(simiResponse);
+                        mModelSuccessCallBack.onSuccess(collection);
                     }
                 } else {
                     if (null != mModelFailCallBack) {
@@ -138,11 +138,11 @@ public class SimiModel {
 
     private void createBodyEntity() {
 
-        if (DataLocal.isSignInComplete()
+        if (DataPreferences.isSignInComplete()
                 && (!mUrlAction.equals(Constants.SIGN_IN) || !mUrlAction
                 .equals(Constants.SIGN_OUT))) {
-            String email = DataLocal.getEmail();
-            String pass_word = DataLocal.getPassword();
+            String email = DataPreferences.getEmail();
+            String pass_word = DataPreferences.getPassword();
             addBody(Constants.USER_EMAIL, email);
             addBody(Constants.USER_PASSWORD, pass_word);
 

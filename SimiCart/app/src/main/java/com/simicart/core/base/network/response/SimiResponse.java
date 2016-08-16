@@ -93,8 +93,8 @@ public class SimiResponse {
 
     public String getMessage() {
         if (mMessage == null) {
-            mMessage = Config.getInstance().getText(
-                    "Some errors occurred. Please try again later");
+//            mMessage = Config.getInstance().getText(
+//                    "Some errors occurred. Please try again later");
         }
         return mMessage;
     }
