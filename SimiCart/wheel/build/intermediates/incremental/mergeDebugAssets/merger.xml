@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Volumes/Data/sourcecode/AS-v32-advance/SimiCart/wheel/assets"/><source path="/Volumes/Data/sourcecode/AS-v32-advance/SimiCart/wheel/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/Volumes/Data/sourcecode/AS-v32-advance/SimiCart/wheel/build-types/debug/assets"/></dataSet></merger>

@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -119,6 +120,29 @@ public class Utils {
 			}
 		}
 		return "";
+	}
+
+	public static final boolean TRUE(String data) {
+		if (!Utils.validateString(data)) {
+			return false;
+		}
+
+		data = data.toLowerCase();
+
+		if (data.equals("no")) {
+			return false;
+		}
+
+		if (data.equals("0")) {
+			return false;
+		}
+
+		if (data.equals("false")) {
+			return false;
+		}
+
+
+		return true;
 	}
 
 	// hideKeyboard
@@ -226,15 +250,15 @@ public class Utils {
 
 	public static void changeColorEditText(EditText editText) {
 		if (editText != null) {
-			editText.setTextColor(Config.getInstance().getContent_color());
-			editText.setHintTextColor(Config.getInstance()
-					.getHintContent_color());
+			editText.setTextColor(AppColorConfig.getInstance().getContentColor());
+			editText.setHintTextColor(AppColorConfig.getInstance()
+					.getContentColor());
 		}
 	}
 
 	public static void changeColorTextView(TextView textView) {
 		if (textView != null) {
-			textView.setTextColor(Config.getInstance().getContent_color());
+			textView.setTextColor(AppColorConfig.getInstance().getContentColor());
 		}
 	}
 
@@ -243,7 +267,7 @@ public class Utils {
 		if (context != null && imageView != null && src != null) {
 			Drawable icon = context.getResources().getDrawable(
 					Rconfig.getInstance().drawable(src));
-			icon.setColorFilter(Config.getInstance().getContent_color(),
+			icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 					PorterDuff.Mode.SRC_ATOP);
 			imageView.setImageDrawable(icon);
 		}
@@ -251,15 +275,14 @@ public class Utils {
 
 	public static void changeColorListView(ListView listView) {
 		if (listView != null) {
-			ColorDrawable sage = new ColorDrawable(Config.getInstance()
-					.getLine_color());
+			ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance().getLineColor());
 			listView.setDivider(sage);
 			listView.setDividerHeight(1);
 		}
 	}
 
 	public static void changeColorLine(View view) {
-		view.setBackgroundColor(Config.getInstance().getLine_color());
+		view.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
 	}
 
 }
