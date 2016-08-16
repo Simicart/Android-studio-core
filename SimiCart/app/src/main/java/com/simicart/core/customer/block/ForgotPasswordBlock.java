@@ -2,6 +2,8 @@ package com.simicart.core.customer.block;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
@@ -39,26 +41,26 @@ public class ForgotPasswordBlock extends SimiBlock implements
 		lable_email = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("lable_email"));
 		lable_email.setTextColor(Color.GRAY);
-		lable_email.setText(Config.getInstance().getText("Enter Your Email")
+		lable_email.setText(SimiTranslator.newInstance().translate("Enter Your Email")
 				.toUpperCase()
 				+ ":");
 
 		// button sent
 		btn_Send = (ButtonRectangle) mView.findViewById(Rconfig.getInstance().id(
 				"bt_send"));
-		btn_Send.setText(Config.getInstance().getText("Reset my password"));
+		btn_Send.setText(SimiTranslator.newInstance().translate("Reset my password"));
 		btn_Send.setTextColor(Color.WHITE);
-		btn_Send.setBackgroundColor(Config.getInstance().getColorMain());
+		btn_Send.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 		btn_Send.setTextSize(Constants.SIZE_TEXT_BUTTON);
 
 		// Email Field
 		edt_Email = (EditText) mView.findViewById(Rconfig.getInstance().id(
 				"et_email"));
-		edt_Email.setHint(Config.getInstance().getText("Email"));
+		edt_Email.setHint(SimiTranslator.newInstance().translate("Email"));
 		
-		lable_email.setTextColor(Config.getInstance().getContent_color());
-		edt_Email.setTextColor(Config.getInstance().getContent_color());
-		edt_Email.setHintTextColor(Config.getInstance().getHintContent_color());
+		lable_email.setTextColor(AppColorConfig.getInstance().getContentColor());
+		edt_Email.setTextColor(AppColorConfig.getInstance().getContentColor());
+//		edt_Email.setHintTextColor(Config.getInstance().getHintContent_color());
 	}
 
 	@Override
@@ -67,7 +69,7 @@ public class ForgotPasswordBlock extends SimiBlock implements
 	}
 
 	public void showNotify(String message) {
-		SimiManager.getIntance().showNotify(message);
+		//SimiManager.getIntance().showNotify(message);
 	}
 
 }

@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.simicart.core.adapter.IndexableListAdapter;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.style.IndexableListView;
@@ -33,8 +34,7 @@ public class CountryAllowedBlock extends SimiBlock {
 		list_country = (IndexableListView) mView.findViewById(Rconfig
 				.getInstance().id("listview"));
 		
-		ColorDrawable sage = new ColorDrawable(Config.getInstance()
-				.getLine_color());
+		ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance().getLineColor());
 		list_country.setDivider(sage);
 		list_country.setDividerHeight(1);
 		if (mListContry.size() > 0) {

@@ -47,7 +47,6 @@ public class CountryAllowedAController extends SimiController {
 	protected void selectItem(int position) {
 		Collections.sort(list_country);
 		String country = list_country.get(position).toString();
-		Log.e("CountryAllowedAController selectItem", country);
 		chooseDelegate.chooseCountry(type, country);
 		SimiManager.getIntance().backPreviousFragment();
 	}

@@ -4,7 +4,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
 import com.simicart.core.customer.delegate.ForgotPasswordDelegate;
@@ -40,31 +42,23 @@ public class ForgotPasswordController extends SimiController {
 		Utils.hideKeyboard(v);
 		String email = mDelegate.getEmail();
 		if (null == email || email.equals("")) {
-			SimiManager.getIntance().showNotify(null,
-					Config.getInstance().getText("Please enter an email."),
-					Config.getInstance().getText("OK"));
+//			SimiManager.getIntance().showNotify(null,
+//					Config.getInstance().getText("Please enter an email."),
+//					Config.getInstance().getText("OK"));
 
 			return;
 		}
 		mDelegate.showLoading();
 		mModel = new ForgotPasswordModel();
-		mModel.setDelegate(new ModelDelegate() {
-
+		mModel.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
-			public void callBack(String message, boolean isSuccess) {
-				mDelegate.dismissLoading();
-				if (isSuccess) {
-					SimiManager.getIntance().showNotify(null, message,
-							Config.getInstance().getText("OK"));
-					SimiManager.getIntance().backPreviousFragment();
-				} 
-				else {
-					mDelegate.showNotify(message);
-				}
-
+			public void onSuccess(SimiCollection collection) {
+//				SimiManager.getIntance().showNotify(null, message,
+//						Config.getInstance().getText("OK"));
+				SimiManager.getIntance().backPreviousFragment();
 			}
 		});
-		mModel.addParam("user_email", email);
+		mModel.addBody("user_email", email);
 		mModel.request();
 	}
 

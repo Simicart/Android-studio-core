@@ -147,12 +147,12 @@ public class CacheOptionView {
 
         if (price.equals("") && mCacheOption.isRequired()) {
             tv_required.setText(SimiTranslator.newInstance().translate("*"));
-            tv_required.setTextColor(Color.parseColor(AppColorConfig.getInstance().getPriceColor()));
+            tv_required.setTextColor(AppColorConfig.getInstance().getPriceColor());
             if (price.equals("") && mCacheOption.isCompleteRequired()) {
                 tv_required.setText("");
             }
         } else {
-            tv_required.setTextColor(Color.parseColor(AppColorConfig.getInstance().getPriceColor()));
+            tv_required.setTextColor(AppColorConfig.getInstance().getPriceColor());
             if (mCacheOption.isDependence() && DataLocal.isCloud) {
                 tv_required.setText("");
             } else {

@@ -37,8 +37,8 @@ public class ProductPriceView {
     protected String color_Label = String.valueOf(AppColorConfig.getInstance().getContentColor());
 
     protected String color_Tire = "#528F94";
-    protected String color_Price = AppColorConfig.getInstance().getPriceColor();
-    protected String color_Price_Special = AppColorConfig.getInstance().getSpecialPriceColor();
+    protected int color_Price = AppColorConfig.getInstance().getPriceColor();
+    protected int color_Price_Special = AppColorConfig.getInstance().getSpecialPriceColor();
     protected String color_Other = "#000000";
     protected View mViewPrice;
 
@@ -261,8 +261,8 @@ public class ProductPriceView {
             TextView tv_price2 = new TextView(mContext);
             tv_price2.setPaintFlags(tv_price2.getPaintFlags()
                     | Paint.STRIKE_THRU_TEXT_FLAG);
-            tv_price1.setTextColor(Color.parseColor(AppColorConfig.getInstance().getPriceColor()
-            ));
+            tv_price1.setTextColor(AppColorConfig.getInstance().getPriceColor()
+            );
             tv_price1.setText(spannable);
 
             LayoutParams params = new LayoutParams(
@@ -312,14 +312,6 @@ public class ProductPriceView {
         mPriceUtils.setColorTire(color_Tire);
     }
 
-    public String getColorPrice() {
-        return color_Price;
-    }
-
-    public void setColorPrice(String color_Price) {
-        this.color_Price = color_Price;
-        mPriceUtils.setColorPrice(color_Price);
-    }
 
     public String getColorOther() {
         return color_Other;

@@ -14,8 +14,6 @@ import com.simicart.core.customer.block.AddressBookDetailBlock;
 import com.simicart.core.customer.controller.AddressBookDetailController;
 import com.simicart.core.customer.entity.MyAddress;
 
-import de.greenrobot.event.EventBus;
-
 public class AddressBookDetailFragment extends SimiFragment {
     protected MyAddress addressbook;
     protected AddressBookDetailBlock mBlock;

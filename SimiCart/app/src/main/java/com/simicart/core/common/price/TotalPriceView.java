@@ -26,7 +26,7 @@ public class TotalPriceView {
     protected TotalPrice mTotalPrice;
     protected Context mContext;
     protected String mColorLabel = String.valueOf(AppColorConfig.getInstance().getContentColor());
-    protected String mColorPrice = AppColorConfig.getInstance().getPriceColor();
+    protected int mColorPrice = AppColorConfig.getInstance().getPriceColor();
     protected int mTextSize = 16;
     protected String mSymbol;
 
@@ -45,9 +45,6 @@ public class TotalPriceView {
         mColorLabel = colorLabel;
     }
 
-    public void setColorPrice(String colorPrice) {
-        mColorPrice = colorPrice;
-    }
 
     public void setSizeText(int sizeText) {
         mTextSize = sizeText;
