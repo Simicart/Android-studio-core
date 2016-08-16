@@ -50,13 +50,12 @@ public class NewAddressBookFragment extends SimiFragment {
         }
         Context context = getActivity();
         //getdata
-        if (getArguments() != null) {
-            afterControl = (int) getData(Constants.KeyData.AFTER_CONTROL, Constants.KeyData.TYPE_INT, getArguments());
-            addressFor = (int) getData(Constants.KeyData.ADDRESS_FOR, Constants.KeyData.TYPE_INT, getArguments());
-            mBillingAddress = (MyAddress) getArguments().getSerializable(Constants.KeyData.BILLING_ADDRESS);
-            mShippingAddress = (MyAddress) getArguments().getSerializable(Constants.KeyData.SHIPPING_ADDRESS);
-        }
-        Log.d("quang123", "NewAddressBookFragment==getArguments==afterControl==" + afterControl);
+//        if (getArguments() != null) {
+//            afterControl = (int) getData(Constants.KeyData.AFTER_CONTROL, Constants.KeyData.TYPE_INT, getArguments());
+//            addressFor = (int) getData(Constants.KeyData.ADDRESS_FOR, Constants.KeyData.TYPE_INT, getArguments());
+//            mBillingAddress = (MyAddress) getArguments().getSerializable(Constants.KeyData.BILLING_ADDRESS);
+//            mShippingAddress = (MyAddress) getArguments().getSerializable(Constants.KeyData.SHIPPING_ADDRESS);
+//        }
 
         mBlock = new NewAddressBookBlock(view, context);
         mBlock.setAfterController(afterControl);

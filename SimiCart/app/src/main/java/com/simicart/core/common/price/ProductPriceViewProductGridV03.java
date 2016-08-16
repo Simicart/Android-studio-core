@@ -95,7 +95,7 @@ public class ProductPriceViewProductGridV03 extends ProductPriceView {
                 tv_regular_price.setLayoutParams(params);
                 tv_regular_price.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             }
-            tv_regular_price.setTextColor(Color.parseColor(color_Price));
+            tv_regular_price.setTextColor(color_Price);
             tv_regular_price.setText(Html.fromHtml(regular_price));
         }
 

@@ -21,8 +21,8 @@ public class ProductPriceUtils {
     protected String color_Label = String.valueOf(AppColorConfig.getInstance().getContentColor());
 
     protected String color_Tire = "#528F94";
-    protected String color_Price = AppColorConfig.getInstance().getPriceColor();
-    protected String color_Price_Special = AppColorConfig.getInstance().getSpecialPriceColor();
+    protected int color_Price = AppColorConfig.getInstance().getPriceColor();
+    protected int color_Price_Special = AppColorConfig.getInstance().getSpecialPriceColor();
     protected String color_Other = "#000000";
     protected boolean isShowZero = true;
 
@@ -1306,13 +1306,7 @@ public class ProductPriceUtils {
         this.color_Tire = color_Tire;
     }
 
-    public String getColorPrice() {
-        return color_Price;
-    }
 
-    public void setColorPrice(String color_Price) {
-        this.color_Price = color_Price;
-    }
 
     public String getColorOther() {
         return color_Other;

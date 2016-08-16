@@ -20,7 +20,10 @@ import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -100,9 +103,6 @@ public class NewAddressBookBlock extends SimiBlock implements
 
 	@Override
 	public void initView() {
-		// TextView tv_editAddress = (TextView) mView.findViewById(Rconfig
-		// .getInstance().id("lable_NewAddress"));
-		// tv_editAddress.setText(Config.getInstance().getText("New Address"));
 
 		edt_prefix = (EditText) mView.findViewById(Rconfig.getInstance().id(
 				"et_prefix_show"));
@@ -214,10 +214,10 @@ public class NewAddressBookBlock extends SimiBlock implements
 			editText.setVisibility(View.GONE);
 			break;
 		case "req":
-			editText.setHint(Config.getInstance().getText(input) + " (*)");
+			editText.setHint(SimiTranslator.newInstance().translate(input) + " (*)");
 			break;
 		case "opt":
-			editText.setHint(Config.getInstance().getText(input));
+			editText.setHint(SimiTranslator.newInstance().translate(input));
 			break;
 		default:
 			break;
@@ -225,7 +225,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 	}
 
 	protected void createPrefix(int control) {
-		edt_prefix.setHint(Config.getInstance().getText("Prefix") + " (*)");
+		edt_prefix.setHint(SimiTranslator.newInstance().translate("Prefix") + " (*)");
 		if (mAddress != null) {
 			String check = mAddress.getPrefix().toLowerCase();
 			setPropertyHidden(edt_prefix, check, "Prefix");
@@ -240,7 +240,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 	}
 
 	protected void createSuffix(int control) {
-		edt_suffix.setHint(Config.getInstance().getText("Suffix") + " (*)");
+		edt_suffix.setHint(SimiTranslator.newInstance().translate("Suffix") + " (*)");
 		if (mAddress != null) {
 			String check = mAddress.getSuffix().toLowerCase();
 			setPropertyHidden(edt_suffix, check, "Suffix");
@@ -278,25 +278,25 @@ public class NewAddressBookBlock extends SimiBlock implements
 	protected void createEmail(int control) {
 		if (control != Constants.NEW_ADDRESS
 				&& control != Constants.NEW_ADDRESS_CHECKOUT) {
-			String email = DataLocal.getEmail();
+			String email = DataPreferences.getEmail();
 			if (null != email && !email.equals("")
-					&& DataLocal.isSignInComplete()) {
+					&& DataPreferences.isSignInComplete()) {
 				edt_email.setText(email);
 				if (mAfterController != Constants.NEW_CUSTOMER
 						&& mAfterController != Constants.NEW_AS_GUEST) {
 					edt_email.setKeyListener(null);
 				}
 			} else {
-				edt_email.setHint(Config.getInstance().getText("Email")
+				edt_email.setHint(SimiTranslator.newInstance().translate("Email")
 						+ " (*)");
 			}
 		} else {
 			if (control == Constants.NEW_ADDRESS_CHECKOUT
-					&& !DataLocal.isSignInComplete()) {
-				edt_email.setHint(Config.getInstance().getText("Email")
+					&& !DataPreferences.isSignInComplete()) {
+				edt_email.setHint(SimiTranslator.newInstance().translate("Email")
 						+ " (*)");
 			} else {
-				String email = DataLocal.getEmail();
+				String email = DataPreferences.getEmail();
 				edt_email.setText(email);
 				edt_email.setVisibility(View.GONE);
 			}
@@ -304,7 +304,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 	}
 
 	protected void createDateBirth() {
-		if (DataLocal.isSignInComplete()) {
+		if (DataPreferences.isSignInComplete()) {
 			tv_date_birth.setVisibility(View.GONE);
 			return;
 		}
@@ -320,12 +320,12 @@ public class NewAddressBookBlock extends SimiBlock implements
 				tv_date_birth.setVisibility(View.GONE);
 				return;
 			case "req":
-				tv_date_birth.setHint(Config.getInstance().getText(
+				tv_date_birth.setHint(SimiTranslator.newInstance().translate(
 						"Date of Birth")
 						+ " (*):");
 				break;
 			case "opt":
-				tv_date_birth.setHint(Config.getInstance().getText(
+				tv_date_birth.setHint(SimiTranslator.newInstance().translate(
 						"Date of Birth")
 						+ ":");
 				break;
@@ -351,13 +351,13 @@ public class NewAddressBookBlock extends SimiBlock implements
 					tv_date_birth.setVisibility(View.GONE);
 					break;
 				case "req":
-					tv_date_birth.setText(Config.getInstance().getText(
+					tv_date_birth.setText(SimiTranslator.newInstance().translate(
 							"Date of Birth")
 							+ " (*): " + selectedDate);
 					mSelectedDate = selectedDate;
 					break;
 				case "opt":
-					tv_date_birth.setText(Config.getInstance().getText(
+					tv_date_birth.setText(SimiTranslator.newInstance().translate(
 							"Date of Birth")
 							+ ": " + selectedDate);
 					mSelectedDate = selectedDate;
@@ -422,10 +422,10 @@ public class NewAddressBookBlock extends SimiBlock implements
 				break;
 			case "req":
 				edt_state
-						.setHint(Config.getInstance().getText("State") + "(*)");
+						.setHint(SimiTranslator.newInstance().translate("State") + "(*)");
 				break;
 			case "opt":
-				edt_state.setHint(Config.getInstance().getText("State"));
+				edt_state.setHint(SimiTranslator.newInstance().translate("State"));
 				break;
 			default:
 				break;
@@ -435,13 +435,13 @@ public class NewAddressBookBlock extends SimiBlock implements
 
 	protected void createButtonSave() {
 		btn_save.setTextColor(Color.WHITE);
-		btn_save.setText(Config.getInstance().getText("Save"));
+		btn_save.setText(SimiTranslator.newInstance().translate("Save"));
 		btn_save.setTextSize(Constants.SIZE_TEXT_BUTTON);
-		btn_save.setBackgroundColor(Config.getInstance().getColorMain());
+		btn_save.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 	}
 
 	protected void createGender(int control) {
-		if (DataLocal.isSignInComplete()) {
+		if (DataPreferences.isSignInComplete()) {
 			rl_gender.setVisibility(View.GONE);
 			return;
 		}
@@ -449,7 +449,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 				"sp_gender"));
 		tv_gender = (TextView) rl_gender.findViewById(Rconfig.getInstance().id(
 				"tv_gender"));
-		tv_gender.setText(Config.getInstance().getText("Gender") + " (*):");
+		tv_gender.setText(SimiTranslator.newInstance().translate("Gender") + " (*):");
 		tv_gender.setVisibility(View.VISIBLE);
 		GenderAdapter adapter = new GenderAdapter(mContext);
 		sp_gender.setAdapter(adapter);
@@ -459,10 +459,10 @@ public class NewAddressBookBlock extends SimiBlock implements
 			rl_gender.setVisibility(View.GONE);
 			return;
 		case "req":
-			tv_gender.setText(Config.getInstance().getText("Gender") + " (*):");
+			tv_gender.setText(SimiTranslator.newInstance().translate("Gender") + " (*):");
 			break;
 		case "opt":
-			tv_gender.setText(Config.getInstance().getText("Gender") + ":");
+			tv_gender.setText(SimiTranslator.newInstance().translate("Gender") + ":");
 			break;
 		default:
 			break;
@@ -503,8 +503,8 @@ public class NewAddressBookBlock extends SimiBlock implements
 
 	protected void createPassAndPassConfirm(int control) {
 		if (control == Constants.NEW_CUSTOMER) {
-			edt_pass.setHint(Config.getInstance().getText("Password") + " (*)");
-			edt_confirmPass.setHint(Config.getInstance().getText(
+			edt_pass.setHint(SimiTranslator.newInstance().translate("Password") + " (*)");
+			edt_confirmPass.setHint(SimiTranslator.newInstance().translate(
 					"Confirm Password")
 					+ " (*)");
 		} else {
@@ -641,10 +641,10 @@ public class NewAddressBookBlock extends SimiBlock implements
 		String password = edt_pass.getText().toString();
 		if (null != password) {
 			if (password.length() < 6) {
-				SimiManager.getIntance().showNotify(
-						Config.getInstance().getText(
-								"Please enter 6 or more characters")
-								+ ".");
+//				SimiManager.getIntance().showNotify(
+//						SimiTranslator.newInstance().translate(
+//								"Please enter 6 or more characters")
+//								+ ".");
 				return null;
 			}
 			profile.setCurrentPass(password);
@@ -661,18 +661,18 @@ public class NewAddressBookBlock extends SimiBlock implements
 		}
 
 		if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-			SimiManager.getIntance().showNotify(null,
-					Config.getInstance().getText("Invalid email address"),
-					Config.getInstance().getText("OK"));
+//			SimiManager.getIntance().showNotify(null,
+//					SimiTranslator.newInstance().translate("Invalid email address"),
+//					SimiTranslator.newInstance().translate("OK"));
 			return null;
 
 		}
 		if (!password.equals(confirmpassword)) {
-			SimiManager.getIntance().showNotify(
-					null,
-					Config.getInstance().getText(
-							"Password and Confirm password don't match" + "."),
-					Config.getInstance().getText("OK"));
+//			SimiManager.getIntance().showNotify(
+//					null,
+//					SimiTranslator.newInstance().translate(
+//							"Password and Confirm password don't match" + "."),
+//					SimiTranslator.newInstance().translate("OK"));
 			return null;
 
 		}
@@ -701,7 +701,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 			}
 		} else {
 			edt_state.setVisibility(View.VISIBLE);
-			edt_state.setHint(Config.getInstance().getText("State"));
+			edt_state.setHint(SimiTranslator.newInstance().translate("State"));
 			rl_state.setVisibility(View.GONE);
 		}
 		if (mController != null) {

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.adapter.OrderHisAdapter;
@@ -52,9 +54,9 @@ public class OrderHistoryBlock extends SimiBlock implements
 				LayoutParams.MATCH_PARENT);
 		params.addRule(RelativeLayout.CENTER_IN_PARENT);
 		tv_empty.setGravity(Gravity.CENTER);
-		tv_empty.setText(Config.getInstance().getText("Order history is empty"));
+		tv_empty.setText(SimiTranslator.newInstance().translate("Order history is empty"));
 		tv_empty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-		tv_empty.setTextColor(Config.getInstance().getContent_color());
+		tv_empty.setTextColor(AppColorConfig.getInstance().getContentColor());
 		((LinearLayout) mView).addView(tv_empty, params);
 	}
 
@@ -62,8 +64,7 @@ public class OrderHistoryBlock extends SimiBlock implements
 	public void initView() {
 		listview_order_history = (ListView) mView.findViewById(Rconfig
 				.getInstance().id("list_order"));
-		ColorDrawable sage = new ColorDrawable(Config.getInstance()
-				.getLine_color());
+		ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance().getLineColor());
 		listview_order_history.setDivider(sage);
 		listview_order_history.setDividerHeight(1);
 	}

@@ -25,7 +25,7 @@ public class OrderHistoryDetailFragment extends SimiFragment {
 			fragment.setTargetFragment(fragment, targer);
 		}
 		Bundle bundle = new Bundle();
-		setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, bundle);
+		//setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, bundle);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -47,10 +47,10 @@ public class OrderHistoryDetailFragment extends SimiFragment {
 					false);
 		}
 		Context context = getActivity();
-		if(getArguments() != null){
-		mID = (String) getData(Constants.KeyData.ID,
-				Constants.KeyData.TYPE_STRING, getArguments());
-		}
+//		if(getArguments() != null){
+//		mID = (String) getData(Constants.KeyData.ID,
+//				Constants.KeyData.TYPE_STRING, getArguments());
+//		}
 
 		mBlock = new OrderHistoryDetailBlock(rootView, context);
 		mBlock.initView();

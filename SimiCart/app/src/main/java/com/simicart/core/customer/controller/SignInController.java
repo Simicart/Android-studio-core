@@ -1,7 +1,5 @@
 package com.simicart.core.customer.controller;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.text.Editable;
@@ -20,14 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.fragment.AddressBookCheckoutFragment;
 import com.simicart.core.checkout.model.CartModel;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -35,386 +37,375 @@ import com.simicart.core.customer.delegate.SignInDelegate;
 import com.simicart.core.customer.fragment.ForgotPasswordFragment;
 import com.simicart.core.customer.fragment.RegisterCustomerFragment;
 import com.simicart.core.customer.model.SignInModel;
-import com.simicart.core.event.controller.EventController;
-import com.simicart.core.event.fragment.CacheFragment;
-import com.simicart.core.event.fragment.EventFragment;
 import com.simicart.core.home.fragment.HomeFragment;
+
+import java.util.ArrayList;
 
 public class SignInController extends SimiController {
 
-	protected SignInDelegate mDelegate;
-	protected OnClickListener mSignInClicker;
-	protected OnClickListener mForgotPassClicker;
-	protected OnTouchListener mCreateAccClicker;
-	protected OnClickListener mOutSideClicker;
-	private TextWatcher mPassWatcher;
-	private TextWatcher mEmailWatcher;
-	protected OnCheckedChangeListener mOnCheckBox;
-	
+    protected SignInDelegate mDelegate;
+    protected OnClickListener mSignInClicker;
+    protected OnClickListener mForgotPassClicker;
+    protected OnTouchListener mCreateAccClicker;
+    protected OnClickListener mOutSideClicker;
+    private TextWatcher mPassWatcher;
+    private TextWatcher mEmailWatcher;
+    protected OnCheckedChangeListener mOnCheckBox;
 
-	protected boolean isCheckout = false, isVisibleSignIn = false;// sign in into checkout
 
-	public boolean getIsCheckout() {
-		return isCheckout;
-	}
+    protected boolean isCheckout = false, isVisibleSignIn = false;// sign in into checkout
 
-	public SignInDelegate getDelegate() {
-		return mDelegate;
-	}
+    public boolean getIsCheckout() {
+        return isCheckout;
+    }
 
-	@SuppressLint("ClickableViewAccessibility")
-	@Override
-	public void onStart() {
+    public SignInDelegate getDelegate() {
+        return mDelegate;
+    }
 
-		mDelegate.updateView(null);
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public void onStart() {
 
-		mPassWatcher = new TextWatcher() {
+        mDelegate.updateView(null);
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				String email = mDelegate.getEmail();
-				String password = mDelegate.getPassword();
-				if (email.length() != 0 && password.length() != 0) {
-					changeColorSignIn(Config.getInstance().getColorMain());
-				} else {
-					changeColorSignIn(Color.GRAY);
-				}
-			}
+        mPassWatcher = new TextWatcher() {
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                String email = mDelegate.getEmail();
+                String password = mDelegate.getPassword();
+                if (email.length() != 0 && password.length() != 0) {
+                    changeColorSignIn(AppColorConfig.getInstance().getKeyColor());
+                } else {
+                    changeColorSignIn(Color.GRAY);
+                }
+            }
 
-			@Override
-			public void afterTextChanged(Editable arg0) {
-			}
-		};
-		mEmailWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				String email = mDelegate.getEmail();
-				String password = mDelegate.getPassword();
-				if (email.length() != 0 && password.length() != 0) {
-					changeColorSignIn(Config.getInstance().getColorMain());
-				} else {
-					changeColorSignIn(Color.GRAY);
-				}
-			}
+            @Override
+            public void afterTextChanged(Editable arg0) {
+            }
+        };
+        mEmailWatcher = new TextWatcher() {
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                String email = mDelegate.getEmail();
+                String password = mDelegate.getPassword();
+                if (email.length() != 0 && password.length() != 0) {
+                    changeColorSignIn(AppColorConfig.getInstance().getKeyColor());
+                } else {
+                    changeColorSignIn(Color.GRAY);
+                }
+            }
 
-			@Override
-			public void afterTextChanged(Editable arg0) {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
 
-			}
-		};
-		mSignInClicker = new OnClickListener() {
+            @Override
+            public void afterTextChanged(Editable arg0) {
 
-			@Override
-			public void onClick(View v) {
-				Utils.hideKeyboard(v);
-				String email = mDelegate.getEmail();
-				String password = mDelegate.getPassword();
-				if (email.length() != 0 && password.length() != 0) {
-					onSignIn();
-				} else {
-					mDelegate.getSignIn().setBackgroundColor(Color.GRAY);
-				}
-			}
-		};
-		mCreateAccClicker = new OnTouchListener() {
+            }
+        };
+        mSignInClicker = new OnClickListener() {
 
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					Utils.hideKeyboard(v);
-					v.setBackgroundColor(0xCCCACACA);
-					break;
-				case MotionEvent.ACTION_UP:
-					v.setBackgroundColor(0xCCFFFFFF);
-					onCreateAccount();
-					break;
-				case MotionEvent.ACTION_CANCEL:
-					v.setBackgroundColor(0xCCFFFFFF);
-					break;
+            @Override
+            public void onClick(View v) {
+                Utils.hideKeyboard(v);
+                String email = mDelegate.getEmail();
+                String password = mDelegate.getPassword();
+                if (email.length() != 0 && password.length() != 0) {
+                    onSignIn();
+                } else {
+                    mDelegate.getSignIn().setBackgroundColor(Color.GRAY);
+                }
+            }
+        };
+        mCreateAccClicker = new OnTouchListener() {
 
-				default:
-					break;
-				}
-				return true;
-			}
-		};
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        Utils.hideKeyboard(v);
+                        v.setBackgroundColor(0xCCCACACA);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        v.setBackgroundColor(0xCCFFFFFF);
+                        onCreateAccount();
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        v.setBackgroundColor(0xCCFFFFFF);
+                        break;
 
-		mForgotPassClicker = new OnClickListener() {
+                    default:
+                        break;
+                }
+                return true;
+            }
+        };
 
-			@Override
-			public void onClick(View v) {
-				Utils.hideKeyboard(v);
-				onForgotPasswrod();
+        mForgotPassClicker = new OnClickListener() {
 
-			}
-		};
-		mOutSideClicker = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.hideKeyboard(v);
+                onForgotPasswrod();
 
-			@Override
-			public void onClick(View v) {
-				Utils.hideKeyboard(v);
-			}
-		};
+            }
+        };
+        mOutSideClicker = new OnClickListener() {
 
-		mOnCheckBox = new OnCheckedChangeListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.hideKeyboard(v);
+            }
+        };
 
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				if (isChecked == false) {
-					DataLocal.saveCheckRemember(false);
-				} else {
-					DataLocal.saveCheckRemember(true);
-				}
-			}
-		};
-	}
+        mOnCheckBox = new OnCheckedChangeListener() {
 
-	@SuppressWarnings("deprecation")
-	protected void changeColorSignIn(int color) {
-		// GradientDrawable gdDefault = new GradientDrawable();
-		// gdDefault.setColor(color);
-		// gdDefault.setCornerRadius(3);
-		mDelegate.getSignIn().setBackgroundColor(color);
-	}
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+                if (isChecked == false) {
+                    DataPreferences.saveCheckRemember(false);
+                } else {
+                    DataPreferences.saveCheckRemember(true);
+                }
+            }
+        };
+    }
 
-	protected void onSignIn() {
+    @SuppressWarnings("deprecation")
+    protected void changeColorSignIn(int color) {
+        // GradientDrawable gdDefault = new GradientDrawable();
+        // gdDefault.setColor(color);
+        // gdDefault.setCornerRadius(3);
+        mDelegate.getSignIn().setBackgroundColor(color);
+    }
 
-		final String email = mDelegate.getEmail();
-		final String password = mDelegate.getPassword();
-		onSingIn(email, password);
-	}
+    protected void onSignIn() {
 
-	protected void onSingIn(final String email, final String password) {
-		if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mDelegate.getEmail())
-				.matches()) {
-			mDelegate.showNotify(Config.getInstance().getText(
-					"Invalid email address"));
-			return;
-		}
-		if (null == email || email.equals("")) {
-			mDelegate.showNotify(Config.getInstance().getText(
-					"Email is empty.Please input an email."));
-			return;
-		}
-		if (null == password || password.equals("")) {
-			mDelegate.showNotify(Config.getInstance().getText(
-					"Password is empty.Please input a password."));
-			return;
-		}
+        final String email = mDelegate.getEmail();
+        final String password = mDelegate.getPassword();
+        onSingIn(email, password);
+    }
 
-		mDelegate.showLoading();
-		DataLocal.saveData(email, password);
+    protected void onSingIn(final String email, final String password) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mDelegate.getEmail())
+                .matches()) {
+            mDelegate.showNotify(SimiTranslator.newInstance().translate(
+                    "Invalid email address"));
+            return;
+        }
+        if (null == email || email.equals("")) {
+            mDelegate.showNotify(SimiTranslator.newInstance().translate(
+                    "Email is empty.Please input an email."));
+            return;
+        }
+        if (null == password || password.equals("")) {
+            mDelegate.showNotify(SimiTranslator.newInstance().translate(
+                    "Password is empty.Please input a password."));
+            return;
+        }
 
-		mModel = new SignInModel();
-		ModelDelegate delegate = new ModelDelegate() {
+        mDelegate.showLoading();
+        DataPreferences.saveData(email, password);
 
-			@Override
-			public void callBack(String message, boolean isSuccess) {
-				mDelegate.dismissLoading();
-				
-				SimiManager.getIntance().getRequestQueue().clearCacheL1();
-				Log.d("quangduy", "callBack");
-				mDelegate.getViewFull().setVisibility(View.GONE);
-				if (isSuccess) {
-					Log.d("quangduy", "success");
+        mModel = new SignInModel();
+
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
+
+                SimiManager.getIntance().getRequestQueue().clearCacheL1();
+                Log.d("quangduy", "callBack");
+                mDelegate.getViewFull().setVisibility(View.GONE);
 //					isVisibleSignIn = true;
-					mDelegate.getViewFull().setVisibility(View.VISIBLE);
-				showToastSignIn();
-				DataLocal.isNewSignIn = true;
-				DataLocal.saveTypeSignIn(Constants.NORMAL_SIGN_IN);
+                mDelegate.getViewFull().setVisibility(View.VISIBLE);
+                showToastSignIn();
+                DataLocal.isNewSignIn = true;
+                DataPreferences.saveTypeSignIn(Constants.NORMAL_SIGN_IN);
 
-				String name = ((SignInModel) mModel).getName();
-				String cartQty = ((SignInModel) mModel).getCartQty();
-				if (null != name) {
-					DataLocal.saveData(name, email, password);
-					DataLocal.saveEmailPassRemember(email, password);
-				}
-				DataLocal.saveSignInState(true);
-				showToastSignIn();
-				if (null != cartQty && !cartQty.equals("0")) {
-					SimiManager.getIntance().onUpdateCartQty(cartQty);
-				}
-				if (!isCheckout && DataLocal.isTablet) {
-					SimiManager.getIntance().clearAllChidFragment();
-					SimiManager.getIntance().removeDialog();
-				} else {
-					SimiManager.getIntance().backPreviousFragment();
-				}
-				// update wishlist_items_qty
-				EventController event = new EventController();
-				event.dispatchEvent(
-						"com.simicart.core.customer.controller.SignInController",
-						mModel.getJSON().toString());
+                String name = ((SignInModel) mModel).getName();
+                String cartQty = ((SignInModel) mModel).getCartQty();
+                if (null != name) {
+                    DataPreferences.saveData(name, email, password);
+                    DataPreferences.saveEmailPassRemember(email, password);
+                }
+                DataPreferences.saveSignInState(true);
+                showToastSignIn();
+                if (null != cartQty && !cartQty.equals("0")) {
+                    SimiManager.getIntance().onUpdateCartQty(cartQty);
+                }
+                if (!isCheckout && DataLocal.isTablet) {
+                    SimiManager.getIntance().clearAllChidFragment();
+                    SimiManager.getIntance().removeDialog();
+                } else {
+                    SimiManager.getIntance().backPreviousFragment();
+                }
+                // update wishlist_items_qty
+//				EventController event = new EventController();
+//				event.dispatchEvent(
+//						"com.simicart.core.customer.controller.SignInController",
+//						mModel.getJSON().toString());
 //				if (isSuccess) {
-					
-					if (isCheckout) {
 
-						mModel = new CartModel();
-						mDelegate.showLoading();
-						ModelDelegate delegate = new ModelDelegate() {
+                if (isCheckout) {
 
-							@Override
-							public void callBack(String message,
-									boolean isSuccess) {
-								mDelegate.dismissLoading();
-								if (isSuccess) {
-									int carQty = ((CartModel) mModel).getQty();
-									SimiManager.getIntance().onUpdateCartQty(
-											String.valueOf(carQty));
+                    mModel = new CartModel();
+                    mDelegate.showLoading();
 
-									ArrayList<SimiEntity> entity = mModel
-											.getCollection().getCollection();
-									if (null != entity && entity.size() > 0) {
-										ArrayList<Cart> carts = new ArrayList<Cart>();
-										DataLocal.listCarts.clear();
-										for (int i = 0; i < entity.size(); i++) {
-											SimiEntity simiEntity = entity
-													.get(i);
-											Cart cart = (Cart) simiEntity;
-											carts.add(cart);
-											DataLocal.listCarts.add(cart);
-										}
-									}
-								}
-							}
-						};
+                    mModel.setSuccessListener(new ModelSuccessCallBack() {
+                        @Override
+                        public void onSuccess(SimiCollection collection) {
+                            mDelegate.dismissLoading();
+                            int carQty = ((CartModel) mModel).getQty();
+                            SimiManager.getIntance().onUpdateCartQty(
+                                    String.valueOf(carQty));
 
-						mModel.setDelegate(delegate);
-						mModel.request();
-						SimiFragment fragment = null;
-						fragment = AddressBookCheckoutFragment.newInstance();
-						// event for wish list
-						CacheFragment cache = new CacheFragment();
-						cache.setFragment(fragment);
-						EventFragment eventFragment = new EventFragment();
-						eventFragment.dispatchEvent(
-								"com.simicart.event.wishlist.afterSignIn",
-								cache);
-						fragment = cache.getFragment();
+                            ArrayList<SimiEntity> entity = mModel
+                                    .getCollection().getCollection();
+                            if (null != entity && entity.size() > 0) {
+                                ArrayList<Cart> carts = new ArrayList<Cart>();
+                                DataLocal.listCarts.clear();
+                                for (int i = 0; i < entity.size(); i++) {
+                                    SimiEntity simiEntity = entity
+                                            .get(i);
+                                    Cart cart = (Cart) simiEntity;
+                                    carts.add(cart);
+                                    DataLocal.listCarts.add(cart);
+                                }
+                            }
+                        }
+                    });
+                    mModel.request();
+                    SimiFragment fragment = null;
+                    fragment = AddressBookCheckoutFragment.newInstance();
+                    // event for wish list
+//						CacheFragment cache = new CacheFragment();
+//						cache.setFragment(fragment);
+//						EventFragment eventFragment = new EventFragment();
+//						eventFragment.dispatchEvent(
+//								"com.simicart.event.wishlist.afterSignIn",
+//								cache);
+//						fragment = cache.getFragment();
 
-						SimiManager.getIntance().replacePopupFragment(fragment);
+                    SimiManager.getIntance().replacePopupFragment(fragment);
 
-					} else {
-						Log.d("quangduy", "HomeFragment");
-						SimiFragment fragment = null;
-						fragment = HomeFragment.newInstance();
+                } else {
+                    Log.d("quangduy", "HomeFragment");
+                    SimiFragment fragment = null;
+                    fragment = HomeFragment.newInstance();
 
 //						 event for wish list
-						CacheFragment cache = new CacheFragment();
-						cache.setFragment(fragment);
-						EventFragment eventFragment = new EventFragment();
-						eventFragment.dispatchEvent(
-								"com.simicart.event.wishlist.afterSignIn",
-								cache);
-						fragment = cache.getFragment();
+//						CacheFragment cache = new CacheFragment();
+//						cache.setFragment(fragment);
+//						EventFragment eventFragment = new EventFragment();
+//						eventFragment.dispatchEvent(
+//								"com.simicart.event.wishlist.afterSignIn",
+//								cache);
+//						fragment = cache.getFragment();
 
-						SimiManager.getIntance().replaceFragment(fragment);
-					
-					}
-					
-				}
-			}
-		};
-		// mModel.setPriority(Priority.IMMEDIATE);
-		mModel.setDelegate(delegate);
-		mModel.addParam(Constants.USER_EMAIL, email);
-		mModel.addParam(Constants.USER_PASSWORD, password);
-		mModel.request();
-	}
+                    SimiManager.getIntance().replaceFragment(fragment);
 
-	private void showToastSignIn() {
-		LayoutInflater inflater = SimiManager.getIntance().getCurrentActivity()
-				.getLayoutInflater();
-		View layout_toast = inflater
-				.inflate(
-						Rconfig.getInstance().layout(
-								"core_custom_toast_productlist"),
-						(ViewGroup) SimiManager
-								.getIntance()
-								.getCurrentActivity()
-								.findViewById(
-										Rconfig.getInstance().id(
-												"custom_toast_layout")));
-		TextView txt_toast = (TextView) layout_toast.findViewById(Rconfig
-				.getInstance().id("txt_custom_toast"));
-		Toast toast = new Toast(SimiManager.getIntance().getCurrentContext());
-		txt_toast.setText(String.format(Config.getInstance().getText("Welcome %s! Start shopping now"), DataLocal.getUsername())); 
-		toast.setView(layout_toast);
-		toast.setDuration(Toast.LENGTH_LONG);
-		toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 400);
-		toast.show();
-	}
+                }
 
-	protected void onCreateAccount() {
-		RegisterCustomerFragment fragment = RegisterCustomerFragment
-				.newInstance();
-		SimiManager.getIntance().replacePopupFragment(fragment);
-	}
+            }
+        });
+        mModel.addBody(Constants.USER_EMAIL, email);
+        mModel.addBody(Constants.USER_PASSWORD, password);
+        mModel.request();
+    }
 
-	protected void onForgotPasswrod() {
-		ForgotPasswordFragment fragment = ForgotPasswordFragment.newInstance();
-		SimiManager.getIntance().replacePopupFragment(fragment);
+    private void showToastSignIn() {
+        LayoutInflater inflater = SimiManager.getIntance().getCurrentActivity()
+                .getLayoutInflater();
+        View layout_toast = inflater
+                .inflate(
+                        Rconfig.getInstance().layout(
+                                "core_custom_toast_productlist"),
+                        (ViewGroup) SimiManager
+                                .getIntance()
+                                .getCurrentActivity()
+                                .findViewById(
+                                        Rconfig.getInstance().id(
+                                                "custom_toast_layout")));
+        TextView txt_toast = (TextView) layout_toast.findViewById(Rconfig
+                .getInstance().id("txt_custom_toast"));
+        Toast toast = new Toast(SimiManager.getIntance().getCurrentActivity());
+        txt_toast.setText(String.format(SimiTranslator.newInstance().translate("Welcome %s! Start shopping now"), DataPreferences.getUsername()));
+        toast.setView(layout_toast);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 400);
+        toast.show();
+    }
 
-	}
+    protected void onCreateAccount() {
+        RegisterCustomerFragment fragment = RegisterCustomerFragment
+                .newInstance();
+        SimiManager.getIntance().replacePopupFragment(fragment);
+    }
 
-	@Override
-	public void onResume() {
-		mDelegate.updateView(null);
-	}
+    protected void onForgotPasswrod() {
+        ForgotPasswordFragment fragment = ForgotPasswordFragment.newInstance();
+        SimiManager.getIntance().replacePopupFragment(fragment);
 
-	public void setDelegate(SignInDelegate delegate) {
-		mDelegate = delegate;
-	}
+    }
 
-	public OnClickListener getSignInClicker() {
-		return mSignInClicker;
-	}
+    @Override
+    public void onResume() {
+        mDelegate.updateView(null);
+    }
 
-	public OnClickListener getForgotPassClicker() {
-		return mForgotPassClicker;
-	}
+    public void setDelegate(SignInDelegate delegate) {
+        mDelegate = delegate;
+    }
 
-	public OnTouchListener getCreateAccClicker() {
-		return mCreateAccClicker;
-	}
+    public OnClickListener getSignInClicker() {
+        return mSignInClicker;
+    }
 
-	public void setCheckout(boolean isCheckout) {
-		this.isCheckout = isCheckout;
-	}
+    public OnClickListener getForgotPassClicker() {
+        return mForgotPassClicker;
+    }
 
-	public OnClickListener getOutSideClicker() {
-		return mOutSideClicker;
-	}
+    public OnTouchListener getCreateAccClicker() {
+        return mCreateAccClicker;
+    }
 
-	public TextWatcher getPassWatcher() {
-		return mPassWatcher;
-	}
+    public void setCheckout(boolean isCheckout) {
+        this.isCheckout = isCheckout;
+    }
 
-	public TextWatcher getEmailWatcher() {
-		return mEmailWatcher;
-	}
+    public OnClickListener getOutSideClicker() {
+        return mOutSideClicker;
+    }
 
-	public OnCheckedChangeListener getOnCheckBox() {
-		return mOnCheckBox;
-	}
+    public TextWatcher getPassWatcher() {
+        return mPassWatcher;
+    }
 
-	public boolean isVisibleSignIn() {
-		return isVisibleSignIn;
-	}
-	
+    public TextWatcher getEmailWatcher() {
+        return mEmailWatcher;
+    }
+
+    public OnCheckedChangeListener getOnCheckBox() {
+        return mOnCheckBox;
+    }
+
+    public boolean isVisibleSignIn() {
+        return isVisibleSignIn;
+    }
+
 }

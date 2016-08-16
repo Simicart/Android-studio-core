@@ -26,8 +26,8 @@ public class CountryFragment extends SimiFragment {
 	public static CountryFragment newInstance(int type, ArrayList<String> list_country) {
 		CountryFragment fragment = new CountryFragment();
 		Bundle bundle= new Bundle();
-		setData(Constants.KeyData.TYPE, type, Constants.KeyData.TYPE_INT, bundle);
-		setData(Constants.KeyData.LIST_COUNTRY, list_country, Constants.KeyData.TYPE_LIST_STRING, bundle);
+//		setData(Constants.KeyData.TYPE, type, Constants.KeyData.TYPE_INT, bundle);
+//		setData(Constants.KeyData.LIST_COUNTRY, list_country, Constants.KeyData.TYPE_LIST_STRING, bundle);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -46,10 +46,10 @@ public class CountryFragment extends SimiFragment {
 		Context context = getActivity();
 		
 		//getdata
-		if(getArguments() != null){
-		type = (int) getData(Constants.KeyData.TYPE, Constants.KeyData.TYPE_INT, getArguments());
-		mListCountry = (ArrayList<String>) getData(Constants.KeyData.LIST_COUNTRY, Constants.KeyData.TYPE_LIST_STRING, getArguments());
-		}
+//		if(getArguments() != null){
+//		type = (int) getData(Constants.KeyData.TYPE, Constants.KeyData.TYPE_INT, getArguments());
+//		mListCountry = (ArrayList<String>) getData(Constants.KeyData.LIST_COUNTRY, Constants.KeyData.TYPE_LIST_STRING, getArguments());
+//		}
 		
 		mBlock = new CountryAllowedBlock(view, context);
 		mBlock.setListContry(mListCountry);

@@ -9,9 +9,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.config.Constants;
@@ -47,35 +49,31 @@ public class AddressBookController extends SimiController {
 
         mDelegate.showLoading();
         mModel = new AddressBookModel();
-        mModel.setDelegate(new ModelDelegate() {
-
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
-            public void callBack(String message, boolean isSuccess) {
-                mDelegate.dismissLoading();
-                if (isSuccess) {
-                    mDelegate.updateView(mModel.getCollection());
-                }
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.updateView(mModel.getCollection());
             }
         });
-        mModel.addParam("is_get_order_address", "NO");
+        mModel.addBody("is_get_order_address", "NO");
         mModel.request();
 
         mListener = new OnTouchListener() {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                NewAddressBookFragment fragment = NewAddressBookFragment
-                        .newInstance();
-                Bundle bundleAfter = new Bundle();
-                SimiFragment.setData(Constants.KeyData.AFTER_CONTROL,
-                        Constants.NEW_ADDRESS, Constants.KeyData.TYPE_INT,
-                        bundleAfter);
-                if (DataLocal.isTablet) {
-                    SimiManager.getIntance().replacePopupFragment(fragment);
-                } else {
-                    SimiManager.getIntance().replaceFragment(fragment);
-                }
-                return false;
+//                NewAddressBookFragment fragment = NewAddressBookFragment
+//                        .newInstance();
+//                Bundle bundleAfter = new Bundle();
+//                SimiFragment.setData(Constants.KeyData.AFTER_CONTROL,
+//                        Constants.NEW_ADDRESS, Constants.KeyData.TYPE_INT,
+//                        bundleAfter);
+//                if (DataLocal.isTablet) {
+//                    SimiManager.getIntance().replacePopupFragment(fragment);
+//                } else {
+//                    SimiManager.getIntance().replaceFragment(fragment);
+//                }
+                return true;
             }
         };
 
