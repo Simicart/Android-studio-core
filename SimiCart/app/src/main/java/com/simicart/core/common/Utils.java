@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -36,253 +38,274 @@ import com.simicart.core.customer.entity.GenderConfig;
 
 public class Utils {
 
-	public static Bitmap scaleToFill(Bitmap b, int width, int height) {
-		float factorH = height / (float) b.getWidth();
-		float factorW = width / (float) b.getWidth();
-		float factorToUse = (factorH > factorW) ? factorW : factorH;
-		return Bitmap.createScaledBitmap(b, (int) (b.getWidth() * factorToUse),
-				(int) (b.getHeight() * factorToUse), true);
-	}
+    private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
 
-	public static void expand(final View v) {
-		v.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		final int targetHeight = v.getMeasuredHeight();
+    @SuppressLint("NewApi")
+    public static int generateViewId() {
 
-		// Older versions of android (pre API 21) cancel animations for views
-		// with a height of 0.
-		v.getLayoutParams().height = 1;
-		v.setVisibility(View.VISIBLE);
-		Animation a = new Animation() {
-			@Override
-			protected void applyTransformation(float interpolatedTime,
-					Transformation t) {
-				v.getLayoutParams().height = interpolatedTime == 1 ? LayoutParams.WRAP_CONTENT
-						: (int) (targetHeight * interpolatedTime);
-				v.requestLayout();
-			}
+        if (Build.VERSION.SDK_INT < 17) {
+            for (; ; ) {
+                final int result = sNextGeneratedId.get();
+                int newValue = result + 1;
+                if (newValue > 0x00FFFFFF)
+                    newValue = 1;
+                if (sNextGeneratedId.compareAndSet(result, newValue)) {
+                    return result;
+                }
+            }
+        } else {
+            return View.generateViewId();
+        }
 
-			@Override
-			public boolean willChangeBounds() {
-				return true;
-			}
-		};
+    }
 
-		// 1dp/ms
-		a.setDuration((int) (targetHeight / v.getContext().getResources()
-				.getDisplayMetrics().density));
-		v.startAnimation(a);
-	}
+    public static Bitmap scaleToFill(Bitmap b, int width, int height) {
+        float factorH = height / (float) b.getWidth();
+        float factorW = width / (float) b.getWidth();
+        float factorToUse = (factorH > factorW) ? factorW : factorH;
+        return Bitmap.createScaledBitmap(b, (int) (b.getWidth() * factorToUse),
+                (int) (b.getHeight() * factorToUse), true);
+    }
 
-	public static void collapse(final View v) {
-		final int initialHeight = v.getMeasuredHeight();
+    public static void expand(final View v) {
+        v.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        final int targetHeight = v.getMeasuredHeight();
 
-		Animation a = new Animation() {
-			@Override
-			protected void applyTransformation(float interpolatedTime,
-					Transformation t) {
-				if (interpolatedTime == 1) {
-					v.setVisibility(View.GONE);
-				} else {
-					v.getLayoutParams().height = initialHeight
-							- (int) (initialHeight * interpolatedTime);
-					v.requestLayout();
-				}
-			}
+        // Older versions of android (pre API 21) cancel animations for views
+        // with a height of 0.
+        v.getLayoutParams().height = 1;
+        v.setVisibility(View.VISIBLE);
+        Animation a = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime,
+                                               Transformation t) {
+                v.getLayoutParams().height = interpolatedTime == 1 ? LayoutParams.WRAP_CONTENT
+                        : (int) (targetHeight * interpolatedTime);
+                v.requestLayout();
+            }
 
-			@Override
-			public boolean willChangeBounds() {
-				return true;
-			}
-		};
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
 
-		// 1dp/ms
-		a.setDuration((int) (initialHeight / v.getContext().getResources()
-				.getDisplayMetrics().density));
-		v.startAnimation(a);
-	}
+        // 1dp/ms
+        a.setDuration((int) (targetHeight / v.getContext().getResources()
+                .getDisplayMetrics().density));
+        v.startAnimation(a);
+    }
 
+    public static void collapse(final View v) {
+        final int initialHeight = v.getMeasuredHeight();
 
-	public static String getLabelGender(String value) {
-		for (GenderConfig genderConfig : DataLocal.ConfigCustomerAddress
-				.getGenderConfigs()) {
-			if (genderConfig.getValue().equals(value)) {
-				return genderConfig.getLabel();
-			}
-		}
-		return "";
-	}
+        Animation a = new Animation() {
+            @Override
+            protected void applyTransformation(float interpolatedTime,
+                                               Transformation t) {
+                if (interpolatedTime == 1) {
+                    v.setVisibility(View.GONE);
+                } else {
+                    v.getLayoutParams().height = initialHeight
+                            - (int) (initialHeight * interpolatedTime);
+                    v.requestLayout();
+                }
+            }
 
-	public static String getValueGender(String label) {
-		for (GenderConfig genderConfig : DataLocal.ConfigCustomerAddress
-				.getGenderConfigs()) {
-			if (genderConfig.getLabel().equals(label)) {
-				return genderConfig.getValue();
-			}
-		}
-		return "";
-	}
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
 
-	public static final boolean TRUE(String data) {
-		if (!Utils.validateString(data)) {
-			return false;
-		}
-
-		data = data.toLowerCase();
-
-		if (data.equals("no")) {
-			return false;
-		}
-
-		if (data.equals("0")) {
-			return false;
-		}
-
-		if (data.equals("false")) {
-			return false;
-		}
+        // 1dp/ms
+        a.setDuration((int) (initialHeight / v.getContext().getResources()
+                .getDisplayMetrics().density));
+        v.startAnimation(a);
+    }
 
 
-		return true;
-	}
+    public static String getLabelGender(String value) {
+        for (GenderConfig genderConfig : DataLocal.ConfigCustomerAddress
+                .getGenderConfigs()) {
+            if (genderConfig.getValue().equals(value)) {
+                return genderConfig.getLabel();
+            }
+        }
+        return "";
+    }
 
-	// hideKeyboard
-	public static void hideKeyboard(View view) {
-		InputMethodManager imm = (InputMethodManager) view.getContext()
-				.getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(view.getRootView().getWindowToken(), 0);
-	}
+    public static String getValueGender(String label) {
+        for (GenderConfig genderConfig : DataLocal.ConfigCustomerAddress
+                .getGenderConfigs()) {
+            if (genderConfig.getLabel().equals(label)) {
+                return genderConfig.getValue();
+            }
+        }
+        return "";
+    }
 
-	// set padding
-	public static void setPadding(View v, int left, int top, int right,
-			int bottom) {
-		float unit = v.getContext().getResources().getDisplayMetrics().density;
-		left = (int) (left * unit + 0.5f);
-		right = (int) (right * unit + 0.5f);
-		top = (int) (top * unit + 0.5f);
-		bottom = (int) (bottom * unit + 0.5f);
-		v.setPadding(left, top, right, bottom);
-	}
+    public static final boolean TRUE(String data) {
+        if (!Utils.validateString(data)) {
+            return false;
+        }
 
-	public static String capitalizes(String source) {
-		StringBuilder builder = new StringBuilder();
-		source = source.toLowerCase();
-		String[] arr = source.split(" ");
-		for (String string : arr) {
-			String tmp = string.substring(0, 1).toUpperCase()
-					+ string.substring(1) + " ";
-			builder.append(tmp);
-		}
-		return builder.toString().trim();
-	}
+        data = data.toLowerCase();
 
-	public static int getValueDp(int value) {
-		float unit = SimiManager.getIntance().getCurrentContext()
-				.getResources().getDisplayMetrics().density;
-		return (int) (value * unit + 0.5f);
-	}
+        if (data.equals("no")) {
+            return false;
+        }
 
-	public static void changeTextview(String color, float size) {
+        if (data.equals("0")) {
+            return false;
+        }
 
-	}
+        if (data.equals("false")) {
+            return false;
+        }
 
-	public static boolean isTablet(Context context) {
 
-		String type_device = context.getString(Rconfig.getInstance().getId(
-				context, "type_device", "string"));
-		if (type_device.equals("phone")) {
-			return false;
-		}
-		return true;
+        return true;
+    }
 
-	}
+    // hideKeyboard
+    public static void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getRootView().getWindowToken(), 0);
+    }
 
-	@SuppressLint("SimpleDateFormat")
-	public static void getTimeLoadPage(String namePage) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-		String currentDateandTime = sdf.format(new Date());
-		System.err.println("Time Start " + namePage + ":" + currentDateandTime);
-		Log.e("Time Start " + namePage + ":", currentDateandTime);
-	}
+    // set padding
+    public static void setPadding(View v, int left, int top, int right,
+                                  int bottom) {
+        float unit = v.getContext().getResources().getDisplayMetrics().density;
+        left = (int) (left * unit + 0.5f);
+        right = (int) (right * unit + 0.5f);
+        top = (int) (top * unit + 0.5f);
+        bottom = (int) (bottom * unit + 0.5f);
+        v.setPadding(left, top, right, bottom);
+    }
 
-	public static boolean validateString(String content) {
-		if (null == content) {
-			return false;
-		}
-		if (content.equals("")) {
-			return false;
-		}
-		if (content.equals("null")) {
-			return false;
-		}
+    public static String capitalizes(String source) {
+        StringBuilder builder = new StringBuilder();
+        source = source.toLowerCase();
+        String[] arr = source.split(" ");
+        for (String string : arr) {
+            String tmp = string.substring(0, 1).toUpperCase()
+                    + string.substring(1) + " ";
+            builder.append(tmp);
+        }
+        return builder.toString().trim();
+    }
 
-		return true;
-	}
+    public static int getValueDp(int value) {
+        float unit = SimiManager.getIntance().getCurrentActivity()
+                .getResources().getDisplayMetrics().density;
+        return (int) (value * unit + 0.5f);
+    }
 
-	public static void setBackgroundView(View view, String color) {
-		view.setBackgroundColor(Color.parseColor(color));
-	}
+    public static void changeTextview(String color, float size) {
 
-	public static final String md5(final String s) {
-		final String MD5 = "MD5";
-		try {
-			// Create MD5 Hash
-			MessageDigest digest = MessageDigest.getInstance(MD5);
-			if (s != null) {
-				digest.update(s.getBytes());
-			}
-			byte messageDigest[] = digest.digest();
+    }
 
-			// Create Hex String
-			StringBuilder hexString = new StringBuilder();
-			for (byte aMessageDigest : messageDigest) {
-				String h = Integer.toHexString(0xFF & aMessageDigest);
-				while (h.length() < 2)
-					h = "0" + h;
-				hexString.append(h);
-			}
-			return hexString.toString();
+    public static boolean isTablet(Context context) {
 
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return s;
-	}
+        String type_device = context.getString(Rconfig.getInstance().getId(
+                context, "type_device", "string"));
+        if (type_device.equals("phone")) {
+            return false;
+        }
+        return true;
 
-	public static void changeColorEditText(EditText editText) {
-		if (editText != null) {
-			editText.setTextColor(AppColorConfig.getInstance().getContentColor());
-			editText.setHintTextColor(AppColorConfig.getInstance()
-					.getContentColor());
-		}
-	}
+    }
 
-	public static void changeColorTextView(TextView textView) {
-		if (textView != null) {
-			textView.setTextColor(AppColorConfig.getInstance().getContentColor());
-		}
-	}
+    @SuppressLint("SimpleDateFormat")
+    public static void getTimeLoadPage(String namePage) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        String currentDateandTime = sdf.format(new Date());
+        System.err.println("Time Start " + namePage + ":" + currentDateandTime);
+        Log.e("Time Start " + namePage + ":", currentDateandTime);
+    }
 
-	public static void changeColorImageview(Context context,
-			ImageView imageView, String src) {
-		if (context != null && imageView != null && src != null) {
-			Drawable icon = context.getResources().getDrawable(
-					Rconfig.getInstance().drawable(src));
-			icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
-					PorterDuff.Mode.SRC_ATOP);
-			imageView.setImageDrawable(icon);
-		}
-	}
+    public static boolean validateString(String content) {
+        if (null == content) {
+            return false;
+        }
+        if (content.equals("")) {
+            return false;
+        }
+        if (content.equals("null")) {
+            return false;
+        }
 
-	public static void changeColorListView(ListView listView) {
-		if (listView != null) {
-			ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance().getLineColor());
-			listView.setDivider(sage);
-			listView.setDividerHeight(1);
-		}
-	}
+        return true;
+    }
 
-	public static void changeColorLine(View view) {
-		view.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
-	}
+    public static void setBackgroundView(View view, String color) {
+        view.setBackgroundColor(Color.parseColor(color));
+    }
+
+    public static final String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = MessageDigest.getInstance(MD5);
+            if (s != null) {
+                digest.update(s.getBytes());
+            }
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
+    public static void changeColorEditText(EditText editText) {
+        if (editText != null) {
+            editText.setTextColor(AppColorConfig.getInstance().getContentColor());
+            editText.setHintTextColor(AppColorConfig.getInstance()
+                    .getContentColor());
+        }
+    }
+
+    public static void changeColorTextView(TextView textView) {
+        if (textView != null) {
+            textView.setTextColor(AppColorConfig.getInstance().getContentColor());
+        }
+    }
+
+    public static void changeColorImageview(Context context,
+                                            ImageView imageView, String src) {
+        if (context != null && imageView != null && src != null) {
+            Drawable icon = context.getResources().getDrawable(
+                    Rconfig.getInstance().drawable(src));
+            icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
+                    PorterDuff.Mode.SRC_ATOP);
+            imageView.setImageDrawable(icon);
+        }
+    }
+
+    public static void changeColorListView(ListView listView) {
+        if (listView != null) {
+            ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance().getLineColor());
+            listView.setDivider(sage);
+            listView.setDividerHeight(1);
+        }
+    }
+
+    public static void changeColorLine(View view) {
+        view.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
+    }
 
 }

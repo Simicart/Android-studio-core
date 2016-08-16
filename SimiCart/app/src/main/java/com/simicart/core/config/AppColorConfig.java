@@ -60,7 +60,7 @@ public class AppColorConfig extends SimiEntity {
     private String section_color = "section_color";
 
     public static AppColorConfig getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new AppColorConfig();
         }
         return instance;

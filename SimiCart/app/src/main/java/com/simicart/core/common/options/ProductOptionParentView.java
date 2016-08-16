@@ -46,7 +46,7 @@ public class ProductOptionParentView {
 	public View initOptionView() {
 		LinearLayout ll_option = null;
 		ll_option = new LinearLayout(SimiManager.getIntance()
-				.getCurrentContext());
+				.getCurrentActivity());
 		LayoutParams params = new LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		ll_option.setOrientation(LinearLayout.VERTICAL);

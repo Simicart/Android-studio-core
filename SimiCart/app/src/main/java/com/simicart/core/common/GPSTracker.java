@@ -62,41 +62,41 @@ public class GPSTracker extends Service implements LocationListener {
 				// showSettingsAlert();
 				Log.e(getClass().getName(), "no network provider is enabled");
 			} else {
-				this.canGetLocation = true;
-				// First get location from Network Provider
-				if (isNetworkEnabled) {
-					locationManager.requestLocationUpdates(
-							LocationManager.NETWORK_PROVIDER,
-							MIN_TIME_BW_UPDATES,
-							MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-					Log.d("Network", "Network");
-					if (locationManager != null) {
-						location = locationManager
-								.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-						if (location != null) {
-							latitude = location.getLatitude();
-							longitude = location.getLongitude();
-						}
-					}
-				}
-				// if GPS Enabled get lat/long using GPS Services
-				if (isGPSEnabled) {
-					if (location == null) {
-						locationManager.requestLocationUpdates(
-								LocationManager.GPS_PROVIDER,
-								MIN_TIME_BW_UPDATES,
-								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-						Log.d("GPS Enabled", "GPS Enabled");
-						if (locationManager != null) {
-							location = locationManager
-									.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-							if (location != null) {
-								latitude = location.getLatitude();
-								longitude = location.getLongitude();
-							}
-						}
-					}
-				}
+//				this.canGetLocation = true;
+//				// First get location from Network Provider
+//				if (isNetworkEnabled) {
+//					locationManager.requestLocationUpdates(
+//							LocationManager.NETWORK_PROVIDER,
+//							MIN_TIME_BW_UPDATES,
+//							MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+//					Log.d("Network", "Network");
+//					if (locationManager != null) {
+//						location = locationManager
+//								.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+//						if (location != null) {
+//							latitude = location.getLatitude();
+//							longitude = location.getLongitude();
+//						}
+//					}
+//				}
+//				// if GPS Enabled get lat/long using GPS Services
+//				if (isGPSEnabled) {
+//					if (location == null) {
+//						locationManager.requestLocationUpdates(
+//								LocationManager.GPS_PROVIDER,
+//								MIN_TIME_BW_UPDATES,
+//								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+//						Log.d("GPS Enabled", "GPS Enabled");
+//						if (locationManager != null) {
+//							location = locationManager
+//									.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//							if (location != null) {
+//								latitude = location.getLatitude();
+//								longitude = location.getLongitude();
+//							}
+//						}
+//					}
+//				}
 			}
 
 		} catch (Exception e) {
@@ -112,7 +112,7 @@ public class GPSTracker extends Service implements LocationListener {
 	 * */
 	public void stopUsingGPS() {
 		if (locationManager != null) {
-			locationManager.removeUpdates(GPSTracker.this);
+			//locationManager.removeUpdates(GPSTracker.this);
 		}
 	}
 

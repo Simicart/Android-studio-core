@@ -36,7 +36,6 @@ import com.simicart.core.checkout.fragment.CreditCardFragment;
 import com.simicart.core.checkout.model.PaymentMethodModel;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
-import com.simicart.core.common.ViewIdGenerator;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;

@@ -11,7 +11,7 @@ public class Rconfig {
 	private Context mContext;
 
 	private Rconfig() {
-		mContext = SimiManager.getIntance().getCurrentContext();
+		mContext = SimiManager.getIntance().getCurrentActivity();
 	}
 
 	public static Rconfig getInstance() {

@@ -13,7 +13,6 @@ import com.simicart.core.catalog.category.delegate.FilterRequestDelegate;
 import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
 import com.simicart.core.catalog.filter.fragment.FilterFragment;
-import com.simicart.core.common.ViewIdGenerator;
 
 public class FilterView {
 
