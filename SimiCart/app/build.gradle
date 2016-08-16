@@ -38,7 +38,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //build app over 65k methods
     compile project(':wheel')
-    compile project(':braintreelibrary')
     compile project(':devsmartAndroid')
 
     compile 'com.android.support:cardview-v7:24.0.0-beta1'
