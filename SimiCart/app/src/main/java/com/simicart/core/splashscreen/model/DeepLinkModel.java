@@ -10,27 +10,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-public class DeepLinkModel extends SimiModel implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
-    public void paserData() {
-        try {
-            JSONObject obj = this.getDataJSON().getJSONObject("data");
-            collection = new SimiCollection();
-            collection.setJSON(mJSON);
-            if (null != obj) {
-                SimiEntity entity = new SimiEntity();
-                entity.setJSONObject(obj);
-                collection.addEntity(entity);
-            }
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+public class DeepLinkModel extends SimiModel  {
 
     @Override
     protected void setShowNotifi() {
@@ -39,6 +19,6 @@ public class DeepLinkModel extends SimiModel implements Serializable {
 
     @Override
     protected void setUrlAction() {
-        url_action = Constants.DEEP_LINK;
+        mUrlAction = Constants.DEEP_LINK;
     }
 }
