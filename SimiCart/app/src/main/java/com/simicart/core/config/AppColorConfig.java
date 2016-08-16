@@ -71,10 +71,17 @@ public class AppColorConfig extends SimiEntity {
         mContext = SimiManager.getIntance().getCurrentActivity();
     }
 
+    public int parseColor(String color) {
+        try {
+            return parseColor(color.trim());
+        } catch (Exception e) {
+            return Color.parseColor("#ffffff");
+        }
+    }
+
     @Override
     public void parse() {
         if (mJSON != null) {
-
 
             if (mJSON.has(key_color)) {
                 mKeyColor = getData(key_color);
@@ -156,7 +163,7 @@ public class AppColorConfig extends SimiEntity {
         }
 
         try {
-            return Color.parseColor(codeColor);
+            return parseColor(codeColor);
         } catch (Exception e) {
             return 0;
         }
@@ -165,24 +172,28 @@ public class AppColorConfig extends SimiEntity {
     public Drawable getIcon(String id) {
         int idIcon = Rconfig.getInstance().drawable(id);
         Drawable icon = mContext.getResources().getDrawable(idIcon);
-        icon.setColorFilter(Color.parseColor(mIconColor), PorterDuff.Mode.SRC_ATOP);
+        icon.setColorFilter(parseColor(mIconColor), PorterDuff.Mode.SRC_ATOP);
         return icon;
     }
 
-    public String getAppBackground() {
-        return mAppBackground;
+    public int getAppBackground() {
+        return parseColor(mAppBackground);
     }
 
     public void setAppBackground(String mAppBackground) {
         this.mAppBackground = mAppBackground;
     }
 
+    public int getColorButtonBackground() {
+        return parseColor(mButtonBackground);
+    }
+
     public ColorStateList getButtonBackground() {
-        return new ColorStateList(new int[][]{{0}}, new int[]{Color.parseColor(mButtonBackground)});
+        return new ColorStateList(new int[][]{{0}}, new int[]{parseColor(mButtonBackground)});
     }
 
     public ColorStateList getButtonBackground(String color) {
-        return new ColorStateList(new int[][]{{0}}, new int[]{Color.parseColor(color)});
+        return new ColorStateList(new int[][]{{0}}, new int[]{parseColor(color)});
     }
 
     public ColorStateList getButtonBackground(int color) {
@@ -193,8 +204,8 @@ public class AppColorConfig extends SimiEntity {
         this.mButtonBackground = mButtonBackground;
     }
 
-    public String getButtonTextColor() {
-        return mButtonTextColor;
+    public int getButtonTextColor() {
+        return parseColor(mButtonTextColor);
     }
 
     public void setButtonTextColor(String mButtonTextColor) {
@@ -202,7 +213,7 @@ public class AppColorConfig extends SimiEntity {
     }
 
     public int getContentColor() {
-        return Color.parseColor(mContentColor);
+        return parseColor(mContentColor);
     }
 
     public void setContentColor(String mContentColor) {
@@ -217,24 +228,24 @@ public class AppColorConfig extends SimiEntity {
         this.mContext = mContext;
     }
 
-    public String getIconColor() {
-        return mIconColor;
+    public int getIconColor() {
+        return parseColor(mIconColor);
     }
 
     public void setIconColor(String mIconColor) {
         this.mIconColor = mIconColor;
     }
 
-    public String getImageBorderColor() {
-        return mImageBorderColor;
+    public int getImageBorderColor() {
+        return parseColor(mImageBorderColor);
     }
 
     public void setImageBorderColor(String mImageBorderColor) {
         this.mImageBorderColor = mImageBorderColor;
     }
 
-    public String getKeyColor() {
-        return mKeyColor;
+    public int getKeyColor() {
+        return parseColor(mKeyColor);
     }
 
     public void setKeyColor(String mKeyColor) {
@@ -242,90 +253,99 @@ public class AppColorConfig extends SimiEntity {
     }
 
     public int getLineColor() {
-        return Color.parseColor(mLineColor);
+        return parseColor(mLineColor);
     }
 
     public void setLineColor(String mLineColor) {
         this.mLineColor = mLineColor;
     }
 
-    public String getMenuBackground() {
-        return mMenuBackground;
+    public int getMenuBackground() {
+        return parseColor(mMenuBackground);
     }
 
     public void setMenuBackground(String mMenuBackground) {
         this.mMenuBackground = mMenuBackground;
     }
 
-    public String getMenuIconColor() {
-        return mMenuIconColor;
+    public int getMenuIconColor() {
+        return parseColor(mMenuIconColor);
     }
 
     public void setMenuIconColor(String mMenuIconColor) {
         this.mMenuIconColor = mMenuIconColor;
     }
 
-    public String getMenuLineColor() {
-        return mMenuLineColor;
+    public int getMenuLineColor() {
+        return parseColor(mMenuLineColor);
     }
 
     public void setMenuLineColor(String mMenuLineColor) {
         this.mMenuLineColor = mMenuLineColor;
     }
 
-    public String getMenuTextColor() {
-        return mMenuTextColor;
+    public int getMenuTextColor() {
+        return parseColor(mMenuTextColor);
     }
 
     public void setMenuTextColor(String mMenuTextColor) {
         this.mMenuTextColor = mMenuTextColor;
     }
 
-    public String getPriceColor() {
-        return mPriceColor;
+    public int getPriceColor() {
+        return parseColor(mPriceColor);
     }
 
     public void setPriceColor(String mPriceColor) {
         this.mPriceColor = mPriceColor;
     }
 
-    public String getSearchBoxBackground() {
-        return mSearchBoxBackground;
+    public int getSearchBoxBackground() {
+        return parseColor(mSearchBoxBackground);
     }
 
     public void setSearchBoxBackground(String mSearchBoxBackground) {
         this.mSearchBoxBackground = mSearchBoxBackground;
     }
 
-    public String getSearchTextColor() {
-        return mSearchTextColor;
+    public int getSearchTextColor() {
+        return parseColor(mSearchTextColor);
     }
 
     public void setSearchTextColor(String mSearchTextColor) {
         this.mSearchTextColor = mSearchTextColor;
     }
 
-    public String getSectionColor() {
-        return mSectionColor;
+    public int getSectionColor() {
+        return parseColor(mSectionColor);
     }
 
     public void setSectionColor(String mSectionColor) {
         this.mSectionColor = mSectionColor;
     }
 
-    public String getSpecialPriceColor() {
-        return mSpecialPriceColor;
+    public int getSpecialPriceColor() {
+        return parseColor(mSpecialPriceColor);
     }
 
     public void setSpecialPriceColor(String mSpecialPriceColor) {
         this.mSpecialPriceColor = mSpecialPriceColor;
     }
 
-    public String getTopMenuIconColor() {
-        return mTopMenuIconColor;
+    public int getTopMenuIconColor() {
+        return parseColor(mTopMenuIconColor);
     }
 
     public void setTopMenuIconColor(String mTopMenuIconColor) {
         this.mTopMenuIconColor = mTopMenuIconColor;
     }
+
+    public int getOutStockBackgroundColor() {
+        return parseColor("#c5c5c6");
+    }
+
+    public int getOutStockTextColor() {
+        return parseColor("#ffffff");
+    }
+
 }
