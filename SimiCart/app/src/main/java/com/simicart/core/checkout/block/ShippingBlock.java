@@ -13,7 +13,6 @@ import com.simicart.core.checkout.entity.ShippingMethod;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.checkout.model.ShippingMethodModel;
 import com.simicart.core.common.Utils;
-import com.simicart.core.common.ViewIdGenerator;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;

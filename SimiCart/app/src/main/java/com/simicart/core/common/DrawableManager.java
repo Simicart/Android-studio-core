@@ -1,32 +1,14 @@
 package com.simicart.core.common;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-
-import javax.net.ssl.HttpsURLConnection;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.util.LruCache;
@@ -35,12 +17,21 @@ import android.view.Display;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.simicart.MainActivity;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.network.request.TLSSocketFactory;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.style.imagesimicart.SimiImageView;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class DrawableManager {
 
@@ -107,7 +98,7 @@ public class DrawableManager {
                     addBitmapToMemoryCache(urlString, bitmap);
                 } else {
                     Resources resource = SimiManager.getIntance()
-                            .getCurrentContext().getResources();
+                            .getCurrentActivity().getResources();
                     bitmap = BitmapFactory.decodeResource(resource, Rconfig
                             .getInstance().drawable("default_icon"));
                     bitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, true);
@@ -127,7 +118,7 @@ public class DrawableManager {
         Bitmap cache_bitMap = getBitmapFromMemCache(urlString);
 
         if (null != cache_bitMap) {
-            Resources resource = SimiManager.getIntance().getCurrentContext()
+            Resources resource = SimiManager.getIntance().getCurrentActivity()
                     .getResources();
             Drawable drawable = new BitmapDrawable(resource, cache_bitMap);
             drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
@@ -142,7 +133,7 @@ public class DrawableManager {
                 Bitmap bitmap = (Bitmap) message.obj;
                 addBitmapToMemoryCache(urlString, bitmap);
                 Resources resource = SimiManager.getIntance()
-                        .getCurrentContext().getResources();
+                        .getCurrentActivity().getResources();
                 Drawable drawable = null;
                 if (bitmap != null) {
                     drawable = new BitmapDrawable(resource, bitmap);
@@ -186,7 +177,7 @@ public class DrawableManager {
                     addBitmapToMemoryCache(urlString, bitmap);
                 } else {
                     Resources resources = SimiManager.getIntance()
-                            .getCurrentContext().getResources();
+                            .getCurrentActivity().getResources();
                     bitmap = BitmapFactory.decodeResource(resources, Rconfig
                             .getInstance().drawable("default_icon"));
                     bitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, true);
@@ -235,7 +226,7 @@ public class DrawableManager {
                     }
                 } else {
                     Resources resources = SimiManager.getIntance()
-                            .getCurrentContext().getResources();
+                            .getCurrentActivity().getResources();
                     bitmap = BitmapFactory.decodeResource(resources, Rconfig
                             .getInstance().drawable("default_icon"));
                     Matrix mat = new Matrix();
@@ -263,7 +254,7 @@ public class DrawableManager {
                 Bitmap bitmap = (Bitmap) message.obj;
                 if (bitmap != null) {
                     Resources resource = SimiManager.getIntance()
-                            .getCurrentContext().getResources();
+                            .getCurrentActivity().getResources();
                     Drawable drawable = new BitmapDrawable(resource, bitmap);
                     textview.setBackgroundDrawable(drawable);
                 } else {
@@ -286,7 +277,7 @@ public class DrawableManager {
             public void handleMessage(Message message) {
                 Bitmap bitmap = (Bitmap) message.obj;
                 Resources resource = SimiManager.getIntance()
-                        .getCurrentContext().getResources();
+                        .getCurrentActivity().getResources();
                 if (bitmap != null) {
                     Drawable drawable = new BitmapDrawable(resource, bitmap);
                     imageView.setImageDrawable(drawable);
@@ -392,7 +383,7 @@ public class DrawableManager {
                     addBitmapToMemoryCache(urlImage, bitmap);
                 } else {
                     Resources resources = SimiManager.getIntance()
-                            .getCurrentContext().getResources();
+                            .getCurrentActivity().getResources();
                     bitmap = BitmapFactory.decodeResource(resources, Rconfig
                             .getInstance().drawable("default_icon"));
                     bitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, true);

@@ -38,15 +38,10 @@ public class ProductPriceViewV03 extends ProductPriceView {
 		} else {
 			if (mPriceUtils.getTaxSpecial().isEmpty()) {
 				// if no special price, show tax price
-				// Log.e("ProductPriceViewDetailZTheme getViewPriceType1",
-				// "003");
 				ll_price.addView(showPriceTax(), params);
 				return ll_price;
 			} else {
 				// show special price tax
-				// ll_price.addView(showRegularPriceStrike(), params);
-				// Log.e("ProductPriceViewDetailZTheme getViewPriceType1",
-				// "004");
 				ll_price.addView(showPriceSpecial(), params);
 				return ll_price;
 			}

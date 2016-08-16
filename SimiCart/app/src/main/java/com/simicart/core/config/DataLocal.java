@@ -1,20 +1,14 @@
 package com.simicart.core.config;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.entity.Cart;
-import com.simicart.core.checkout.entity.CreditcardEntity;
-import com.simicart.core.checkout.entity.ObjectSerializer;
 import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.setting.entity.CurrencyEntity;
 import com.simicart.core.store.entity.Stores;
+
+import java.util.ArrayList;
 
 public class DataLocal {
 	public static Context mContext;

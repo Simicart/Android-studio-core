@@ -33,7 +33,6 @@ import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.checkout.fragment.CreditCardFragment;
 import com.simicart.core.checkout.model.PaymentMethodModel;
 import com.simicart.core.common.Utils;
-import com.simicart.core.common.ViewIdGenerator;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;

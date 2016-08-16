@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.ProductOption;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.options.base.OptionView;
@@ -70,7 +71,7 @@ public class OptionSingle extends OptionView {
 
 		if (isNone) {
 			String none = "<font color='grey'>"
-					+ Config.getInstance().getText("None") + "</font>";
+					+ SimiTranslator.newInstance().translate("None") + "</font>";
 			tv_title.setText(Html.fromHtml(none));
 			tv_price.setVisibility(View.INVISIBLE);
 		} else {

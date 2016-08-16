@@ -39,7 +39,6 @@ import com.simicart.core.checkout.entity.ShippingMethod;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.checkout.fragment.ConditionFragment;
 import com.simicart.core.common.Utils;
-import com.simicart.core.common.ViewIdGenerator;
 import com.simicart.core.common.price.TotalPriceView;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;

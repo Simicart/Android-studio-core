@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.simicart.core.catalog.product.entity.CacheOption;
 import com.simicart.core.catalog.product.entity.ProductOption;
-import com.simicart.core.common.ViewIdGenerator;
+import com.simicart.core.common.Utils;
 import com.simicart.core.common.options.base.CacheOptionView;
 import com.simicart.core.common.price.ProductPriceView;
 import com.simicart.core.common.price.ProductPriceViewDetail;
@@ -100,7 +100,7 @@ public class CacheOptionGroupView extends CacheOptionView {
 
 			// image add
 			ImageView im_add = new ImageView(mContext);
-			im_add.setId(ViewIdGenerator.generateViewId());
+			im_add.setId(Utils.generateViewId());
 			RelativeLayout.LayoutParams imAdd_lp = new RelativeLayout.LayoutParams(
 					scale30, scale30);
 			imAdd_lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);

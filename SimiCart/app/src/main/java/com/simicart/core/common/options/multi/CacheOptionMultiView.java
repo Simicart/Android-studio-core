@@ -39,17 +39,6 @@ public class CacheOptionMultiView extends CacheOptionView implements
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 		for (final ProductOption option : mCacheOption.getAllOption()) {
 			OptionMulti option_multi = new OptionMulti(option, mContext, this);
-			// event single
-			// DataOptionSingle data = new DataOptionSingle();
-			// data.setContext(mContext);
-			// data.setMultiDelegate(this);
-			// data.setOptions(option);
-			// data.setOptionsMulti(option_multi);
-			// OptionSingleEvent single_event = new OptionSingleEvent();
-			// single_event.dispatchEvent(
-			// "com.simicart.common.options.single.OptionSignle", data);
-			// option_multi = data.getOptionsMulti();
-			// end event
 			View view = option_multi.createView();
 			ll_body.addView(view, param);
 
