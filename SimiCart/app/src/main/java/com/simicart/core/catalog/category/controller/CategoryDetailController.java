@@ -4,8 +4,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.category.model.ListProductModel;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.config.Constants;
@@ -48,23 +50,19 @@ public class CategoryDetailController extends SimiController {
         // mDelegate.showDialogLoading();
         mModel = new ListProductModel();
         ((ListProductModel) mModel).setCategoryID(mID);
-        mModel.addParam("category_id", mID);
-        mModel.addParam("offset", "0");
-        mModel.addParam("limit", "10");
+        mModel.addBody("category_id", mID);
+        mModel.addBody("offset", "0");
+        mModel.addBody("limit", "10");
         // mModel.addParam("sort_option", mSortType);
-        mModel.addParam("width", "300");
-        mModel.addParam("height", "300");
+        mModel.addBody("width", "300");
+        mModel.addBody("height", "300");
         // if (null != jsonFilter) {
         // mModel.addParam("filter", jsonFilter);
         // }
-        mModel.setDelegate(new ModelDelegate() {
-
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
-            public void callBack(String message, boolean isSuccess) {
-                // mDelegate.dismissDialogLoading();
-                if (isSuccess) {
-                    mDelegate.updateView(mModel.getCollection());
-                }
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.updateView(mModel.getCollection());
             }
         });
         mModel.request();

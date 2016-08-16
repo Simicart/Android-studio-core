@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -71,7 +72,7 @@ public class HomeCategoryAdapter extends BaseAdapter {
 		TextView txt_name = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("txt_category_item_home"));
 		txt_name.setText(category.getCategoryName());
-		txt_name.setTextColor(Config.getInstance().getContent_color());
+		txt_name.setTextColor(AppColorConfig.getInstance().getContentColor());
 		if (DataLocal.isLanguageRTL) {
 			txt_name.setGravity(Gravity.RIGHT);
 		} else {

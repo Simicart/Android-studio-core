@@ -1,21 +1,5 @@
 package com.simicart.core.home.block;
 
-import java.util.ArrayList;
-
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.devsmart.android.ui.HorizontalListView;
-import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.home.adapter.HomeCategoryAdapter;
-import com.simicart.core.home.controller.CategoryHomeListener;
-import com.simicart.core.home.delegate.CategoryHomeDelegate;
-
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -23,6 +7,22 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.devsmart.android.ui.HorizontalListView;
+import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.catalog.category.entity.Category;
+import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.Config;
+import com.simicart.core.config.DataLocal;
+import com.simicart.core.home.adapter.HomeCategoryAdapter;
+import com.simicart.core.home.controller.CategoryHomeListener;
+import com.simicart.core.home.delegate.CategoryHomeDelegate;
+
+import java.util.ArrayList;
 
 public class CategoryHomeBlock extends SimiBlock implements
 		CategoryHomeDelegate {
@@ -52,11 +52,11 @@ public class CategoryHomeBlock extends SimiBlock implements
 		int padd = Utils.getValueDp(2);
 		tv_name.setPadding(Utils.getValueDp(7), Utils.getValueDp(10),
 				Utils.getValueDp(7), Utils.getValueDp(10));
-		tv_name.setText(Config.getInstance().getText("Category").toUpperCase());
+		tv_name.setText(SimiTranslator.getInstance().translate("Category").toUpperCase());
 		if (DataLocal.isLanguageRTL) {
 			tv_name.setGravity(Gravity.RIGHT);
 		}
-		tv_name.setTextColor(Config.getInstance().getContent_color());
+		tv_name.setTextColor(AppColorConfig.getInstance().getContentColor());
 
 		LinearLayout ll_cat = new LinearLayout(mContext);
 		if (DataLocal.isTablet) {
@@ -92,12 +92,10 @@ public class CategoryHomeBlock extends SimiBlock implements
 		ll_category.addView(ll_cat);
 
 		View view = new View(mContext);
-		view.setBackgroundColor(Config.getInstance().getLine_color());
+		view.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
 		LinearLayout.LayoutParams lp_view = new LinearLayout.LayoutParams(
 				RelativeLayout.LayoutParams.MATCH_PARENT, 1);
 		ll_category.addView(view, lp_view);
-
-		YoYo.with(Techniques.Shake).duration(2000).playOn(listview_category);
 
 	}
 

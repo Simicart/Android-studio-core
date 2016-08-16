@@ -17,6 +17,7 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.catalog.product.entity.Attributes;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
@@ -55,7 +56,7 @@ public class TechSpecsFragment extends SimiFragment {
 				tv_title.setText(title);
 				tv_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
 				tv_title.setTypeface(Typeface.DEFAULT_BOLD);
-				tv_title.setTextColor(Config.getInstance().getContent_color());
+				tv_title.setTextColor(AppColorConfig.getInstance().getContentColor());
 				tv_title.setPadding(0, Utils.getValueDp(10), 0, 0);
 				ll_techSpecs.addView(tv_title);
 			}
@@ -64,13 +65,13 @@ public class TechSpecsFragment extends SimiFragment {
 				TextView tv_value = new TextView(inflater.getContext());
 				tv_value.setLayoutParams(lp);
 				tv_value.setText(Html.fromHtml(("<font color='"
-						+ Config.getInstance().getContent_color_string() + "'>"
+						+ AppColorConfig.getInstance().getContentColor() + "'>"
 						+ value + "</font>")));
 				ll_techSpecs.addView(tv_value);
 			}
 		}
 
-		rootView.setBackgroundColor(Config.getInstance().getApp_backrground());
+		rootView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 
 		return rootView;
 	}

@@ -1,7 +1,5 @@
 package com.simicart.core.home.block;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -10,20 +8,21 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.devsmart.android.ui.HorizontalListView;
 import com.simicart.MainActivity;
 import com.simicart.core.adapter.ProductBaseAdapter;
 import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductList;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.controller.ProductListListenerController;
 import com.simicart.core.home.delegate.ProductListDelegate;
+
+import java.util.ArrayList;
 
 public class ProductListHomeBlock extends SimiBlock implements ProductListDelegate {
 
@@ -68,9 +67,9 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 								int padd = Utils.getValueDp(4);
 								tv_name.setPadding(Utils.getValueDp(6), Utils.getValueDp(10),
 										Utils.getValueDp(7), Utils.getValueDp(10));
-								tv_name.setText(Config.getInstance().getText(
+								tv_name.setText(SimiTranslator.getInstance().translate(
 										productList.get(i).getTitle().toUpperCase()));
-								tv_name.setTextColor(Config.getInstance().getContent_color());
+								tv_name.setTextColor(AppColorConfig.getInstance().getContentColor());
 								if (DataLocal.isTablet) {
 									tv_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 21);
 								} else {
@@ -122,13 +121,11 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 								ll_listProduct.addView(llspot);
 								if (i != count - 1) {
 									View view = new View(mContext);
-									view.setBackgroundColor(Config.getInstance().getLine_color());
+									view.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
 									LinearLayout.LayoutParams lp_view = new LinearLayout.LayoutParams(
 											RelativeLayout.LayoutParams.MATCH_PARENT, 1);
 									ll_listProduct.addView(view, lp_view);
 								}
-								YoYo.with(Techniques.Shake).duration(2000)
-										.playOn(listview_spotproduct);
 							}
 						}
 					});

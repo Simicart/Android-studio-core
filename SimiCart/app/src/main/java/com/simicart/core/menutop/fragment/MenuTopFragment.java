@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.menutop.block.MenuTopBlock;
@@ -38,7 +39,7 @@ public class MenuTopFragment extends SimiFragment {
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(Rconfig.getInstance()
 				.layout("core_menutop"), container, false);
-		rootView.setBackgroundColor(Config.getInstance().getKey_color());
+		rootView.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 
 		Context mContext = getActivity();
 

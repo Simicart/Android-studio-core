@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.delegate.FilterRequestDelegate;
 import com.simicart.core.catalog.filter.common.FilterAdapter;
 import com.simicart.core.catalog.filter.common.SelectedFilterAdapter;
@@ -81,7 +82,7 @@ public class FilterBlock extends SimiBlock implements FilterDelegate {
 		// label select a filter
 		tv_label = (TextView) mView.findViewById(Rconfig.getInstance().id(
 				"tv_label"));
-		tv_label.setText(Config.getInstance().getText("Select a filter"));
+		tv_label.setText(SimiTranslator.getInstance().translate("Select a filter"));
 		txt_name_category = (TextView) mView.findViewById(Rconfig.getInstance()
 				.id("txt_category_filter"));
 		rlt_category_name = (RelativeLayout) mView.findViewById(Rconfig
@@ -117,10 +118,10 @@ public class FilterBlock extends SimiBlock implements FilterDelegate {
 				AdapterDialog adapter = new AdapterDialog(mContext, arr_str,
 						entity);
 				mDialog = new AlertDialog.Builder(mContext)
-						.setTitle(Config.getInstance().getText("Filter"))
+						.setTitle(SimiTranslator.getInstance().translate("Filter"))
 						.setAdapter(adapter, null)
 						.setPositiveButton(
-								Config.getInstance().getText("Cancel"),
+								SimiTranslator.getInstance().translate("Cancel"),
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int whichButton) {
@@ -226,13 +227,13 @@ public class FilterBlock extends SimiBlock implements FilterDelegate {
 				.findViewById(Rconfig.getInstance().id("ll_selected_filter"));
 		if (null != states && states.size() > 0) {
 			btn_clearAll.setVisibility(View.VISIBLE);
-			btn_clearAll.setText(Config.getInstance().getText("Clear All"));
+			btn_clearAll.setText(SimiTranslator.getInstance().translate("Clear All"));
 
 			ll_selectedFilter.setVisibility(View.VISIBLE);
 			// label
 			TextView tv_label = (TextView) mView.findViewById(Rconfig
 					.getInstance().id("tv_selected_filter"));
-			tv_label.setText(Config.getInstance().getText("Selected Filter"));
+			tv_label.setText(SimiTranslator.getInstance().translate("Selected Filter"));
 			tv_label.setVisibility(View.VISIBLE);
 
 			// selected filter list

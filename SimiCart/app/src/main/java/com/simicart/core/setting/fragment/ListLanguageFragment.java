@@ -29,7 +29,7 @@ public class ListLanguageFragment extends SimiFragment {
 	public static ListLanguageFragment newInstance(String currentItem) {
 		ListLanguageFragment fragment = new ListLanguageFragment();
 		Bundle bundle= new Bundle();
-		setData(Constants.KeyData.CURRENT_ITEM, currentItem, Constants.KeyData.TYPE_STRING, bundle);
+//		setData(Constants.KeyData.CURRENT_ITEM, currentItem, Constants.KeyData.TYPE_STRING, bundle);
 		fragment.setArguments(bundle);
 		fragment.setListLanguage(DataLocal.listStores);
 		return fragment;
@@ -51,7 +51,7 @@ public class ListLanguageFragment extends SimiFragment {
 				false);
 		Context context = getActivity();
 		if(getArguments() != null){
-		current_item = (String) getData(Constants.KeyData.CURRENT_ITEM, Constants.KeyData.TYPE_STRING, getArguments());
+//		current_item = (String) getData(Constants.KeyData.CURRENT_ITEM, Constants.KeyData.TYPE_STRING, getArguments());
 		}
 
 		mBlock = new ListViewIndexableBlock(view, context);

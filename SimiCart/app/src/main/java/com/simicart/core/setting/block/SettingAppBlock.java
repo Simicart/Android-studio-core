@@ -12,6 +12,10 @@ import android.widget.ToggleButton;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.DataPreferences;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -42,45 +46,46 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 	public void initView() {
 		tv_language = (TextView) mView.findViewById(Rconfig.getInstance().id(
 				"tv_language"));
-		tv_language.setText(Config.getInstance().getText("Language"));
-		tv_language.setTextColor(Config.getInstance().getContent_color());
+		tv_language.setText(SimiTranslator.getInstance().translate("Language"));
+		tv_language.setTextColor(AppColorConfig.getInstance().getContentColor());
 		tv_language_selected = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("tv_language_selected"));
 		rl_language = (LayoutRipple) mView.findViewById(Rconfig.getInstance()
 				.id("rl_language"));
 		tv_currency = (TextView) mView.findViewById(Rconfig.getInstance().id(
 				"tv_currency"));
-		tv_currency.setText(Config.getInstance().getText("Currency"));
-		tv_currency.setTextColor(Config.getInstance().getContent_color());
+		tv_currency.setText(SimiTranslator.getInstance().translate("Currency"));
+		tv_currency.setTextColor(AppColorConfig.getInstance().getContentColor());
 		tv_currency_selected = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("tv_currency_selected"));
 		rl_currency = (LayoutRipple) mView.findViewById(Rconfig.getInstance()
 				.id("rl_currency"));
 		tv_notification = (TextView) mView.findViewById(Rconfig.getInstance()
 				.id("tv_notification"));
-		tv_notification.setBackgroundColor(Config.getInstance()
-				.getApp_backrground());
-		tv_notification.setTextColor(Config.getInstance().getContent_color());
-		tv_notification.setText(Config.getInstance().getText(
+		tv_notification.setBackgroundColor(AppColorConfig.getInstance()
+				.getAppBackground());
+		tv_notification.setTextColor(AppColorConfig.getInstance().getContentColor());
+		tv_notification.setText(SimiTranslator.getInstance().translate(
 				"Show Notification"));
 		rl_notification = (RelativeLayout) mView.findViewById(Rconfig
 				.getInstance().id("rl_notification"));
-		rl_notification.setBackgroundColor(Config.getInstance()
-				.getApp_backrground());
+		rl_notification.setBackgroundColor(AppColorConfig.getInstance()
+				.getAppBackground());
 		tv_locator = (TextView) mView.findViewById(Rconfig.getInstance().id(
 				"tv_locator"));
-		tv_locator.setTextColor(Config.getInstance().getContent_color());
-		tv_locator.setText(Config.getInstance().getText("Location Setting"));
+		tv_locator.setTextColor(AppColorConfig.getInstance().getContentColor());
+		tv_locator.setText(SimiTranslator.getInstance().translate("Location Setting"));
 		rl_locator = (LayoutRipple) mView.findViewById(Rconfig.getInstance()
 				.id("rl_locator"));
 
 		View v_under = (View) mView.findViewById(Rconfig.getInstance().id(
 				"v_under"));
-		v_under.setBackgroundColor(Config.getInstance().getApp_backrground());
+		v_under.setBackgroundColor(AppColorConfig.getInstance()
+				.getAppBackground());
 
 		tb_notification = (ToggleButton) mView.findViewById(Rconfig
 				.getInstance().id("tb_notification"));
-		if (DataLocal.enableNotification()) {
+		if (DataPreferences.enableNotification()) {
 			tb_notification.setChecked(true);
 		} else {
 			tb_notification.setChecked(false);
@@ -114,7 +119,7 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 				.getInstance().id("im_locator_extend"));
 		Drawable icon = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("ic_extend"));
-		icon.setColorFilter(Config.getInstance().getContent_color(),
+		icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		im_language_extend.setImageDrawable(icon);
 		im_currency_extend.setImageDrawable(icon);
@@ -124,7 +129,7 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 				.getInstance().id("im_language"));
 		Drawable ic_lang = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("ic_lang"));
-		ic_lang.setColorFilter(Config.getInstance().getContent_color(),
+		ic_lang.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		im_language.setImageDrawable(ic_lang);
 
@@ -132,7 +137,7 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 				.getInstance().id("im_currency"));
 		Drawable ic_currency = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("ic_currency"));
-		ic_currency.setColorFilter(Config.getInstance().getContent_color(),
+		ic_currency.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		im_currency.setImageDrawable(ic_currency);
 
@@ -140,7 +145,7 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 				.getInstance().id("im_notification"));
 		Drawable ic_notification = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("ic_notification"));
-		ic_notification.setColorFilter(Config.getInstance().getContent_color(),
+		ic_notification.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		im_notification.setImageDrawable(ic_notification);
 
@@ -148,8 +153,8 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 				.getInstance().id("im_locator"));
 		Drawable ic_location_setting = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("ic_location_setting"));
-		ic_location_setting.setColorFilter(Config.getInstance()
-				.getContent_color(), PorterDuff.Mode.SRC_ATOP);
+		ic_location_setting.setColorFilter(AppColorConfig.getInstance()
+				.getContentColor(), PorterDuff.Mode.SRC_ATOP);
 		im_locator.setImageDrawable(ic_location_setting);
 
 		View v_language = (View) mView.findViewById(Rconfig.getInstance().id(
@@ -160,12 +165,13 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 				.id("v_notification"));
 		View v_locator = (View) mView.findViewById(Rconfig.getInstance().id(
 				"v_locator"));
-		v_language.setBackgroundColor(Config.getInstance().getLine_color());
-		v_currency.setBackgroundColor(Config.getInstance().getLine_color());
-		v_notification.setBackgroundColor(Config.getInstance().getLine_color());
-		v_locator.setBackgroundColor(Config.getInstance().getLine_color());
+		v_language.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
+		v_currency.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
+		v_notification.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
+		v_locator.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
 
-		mView.setBackgroundColor(Config.getInstance().getApp_backrground());
+		mView.setBackgroundColor(AppColorConfig.getInstance()
+				.getAppBackground());
 	}
 
 	@Override
@@ -174,9 +180,9 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 
 	@Override
 	public void setCurrency() {
-		if (DataLocal.listCurrency != null && DataLocal.listCurrency.size() > 0) {
-			for (CurrencyEntity entity : DataLocal.listCurrency) {
-				if (entity.getValue().equals(DataLocal.getCurrencyID())) {
+		if (DataPreferences.listCurrency != null && DataPreferences.listCurrency.size() > 0) {
+			for (CurrencyEntity entity : DataPreferences.listCurrency) {
+				if (entity.getValue().equals(DataPreferences.getCurrencyID())) {
 					tv_currency_selected.setText(entity.getTitle());
 				}
 			}
@@ -194,7 +200,7 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 		} else {
 			rl_language.setVisibility(View.GONE);
 		}
-		if (DataLocal.listCurrency.size() > 1) {
+		if (DataPreferences.listCurrency.size() > 1) {
 			rl_currency.setVisibility(View.VISIBLE);
 		} else {
 			rl_currency.setVisibility(View.GONE);
@@ -205,13 +211,13 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 	public void setLanguage() {
 		if (DataLocal.listStores != null && DataLocal.listStores.size() > 0) {
 			for (Stores stores : DataLocal.listStores) {
-				if (stores.getStoreID().equals(DataLocal.getStoreID())) {
+				if (stores.getStoreID().equals(DataPreferences.getStoreID())) {
 					tv_language_selected.setText(stores.getStoreName());
 				}
 			}
 		}
 		if (tv_language_selected.getText().length() < 1) {
-			tv_language_selected.setText(Config.getInstance().getStoreName());
+			tv_language_selected.setText(AppStoreConfig.getInstance().getStoreName());
 		}
 
 	}
@@ -220,10 +226,10 @@ public class SettingAppBlock extends SimiBlock implements SettingAppDelegate {
 	public void updateSettingNotification() {
 		if (tb_notification.isChecked()) {
 			tb_notification.setChecked(false);
-			DataLocal.saveNotificationSet(false);
+			DataPreferences.saveNotificationSet(false);
 		} else {
 			tb_notification.setChecked(true);
-			DataLocal.saveNotificationSet(true);
+			DataPreferences.saveNotificationSet(true);
 		}
 
 	}

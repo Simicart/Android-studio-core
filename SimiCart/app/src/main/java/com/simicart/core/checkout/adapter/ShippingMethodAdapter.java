@@ -1,10 +1,7 @@
 package com.simicart.core.checkout.adapter;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +11,13 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.entity.ShippingMethod;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 @SuppressLint("ViewHolder")
 public class ShippingMethodAdapter extends BaseAdapter {
@@ -87,18 +88,17 @@ public class ShippingMethodAdapter extends BaseAdapter {
 		String price = shippintMethod.getS_method_fee();
 
 		if (incl_tax == null || incl_tax.equals("") || incl_tax.equals("null")) {
-			tv_price.setText(Config.getInstance().getPrice(price));
-			tv_price.setTextColor(Color.parseColor(Config.getInstance()
-					.getPrice_color()));
+			tv_price.setText(AppStoreConfig.getInstance().getPrice(price));
+			tv_price.setTextColor(AppColorConfig.getInstance().getPriceColor());
 		} else {
 			String price_method = "<font  color='"
-					+ Config.getInstance().getPrice_color() + "'>"
-					+ Config.getInstance().getPrice(price)
+					+ AppColorConfig.getInstance().getPriceColor() + "'>"
+					+ AppStoreConfig.getInstance().getPrice(price)
 					+ "</font> (<font color='grey'>+"
-					+ Config.getInstance().getText("Incl. Tax")
+					+ SimiTranslator.getInstance().translate("Incl. Tax")
 					+ "</font> <font  color='"
-					+ Config.getInstance().getPrice_color() + "'> "
-					+ Config.getInstance().getPrice(incl_tax) + "</font>)";
+					+ AppColorConfig.getInstance().getPriceColor() + "'> "
+					+ AppStoreConfig.getInstance().getPrice(incl_tax) + "</font>)";
 			tv_price.setText(Html.fromHtml(price_method));
 		}
 

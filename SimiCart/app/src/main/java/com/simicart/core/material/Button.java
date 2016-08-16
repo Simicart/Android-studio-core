@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.magestore.simicart.R;
+import com.simicart.core.config.AppColorConfig;
 
 public abstract class Button extends CustomView {
 
@@ -28,8 +29,7 @@ public abstract class Button extends CustomView {
 	Integer rippleColor;
 	OnClickListener onClickListener;
 	boolean clickAfterRipple = true;
-	int backgroundColor = com.simicart.core.config.Config.getInstance()
-			.getColorMain();
+	int backgroundColor = AppColorConfig.getInstance().getKeyColor();
 	TextView textButton;
 
 	public Button(Context context, AttributeSet attrs) {
@@ -100,14 +100,14 @@ public abstract class Button extends CustomView {
 		return true;
 	}
 
-	@Override
-	protected void onFocusChanged(boolean gainFocus, int direction,
-			Rect previouslyFocusedRect) {
-		if (!gainFocus) {
-			x = -1;
-			y = -1;
-		}
-	}
+//	@Override
+//	protected void onFocusChanged(boolean gainFocus, int direction,
+//			Rect previouslyFocusedRect) {
+//		if (!gainFocus) {
+//			x = -1;
+//			y = -1;
+//		}
+//	}
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -167,8 +167,7 @@ public abstract class Button extends CustomView {
 	// Set color of background
 	public void setBackgroundColor(int color) {
 		// this.backgroundColor = color;
-		this.backgroundColor = com.simicart.core.config.Config.getInstance()
-				.getButton_background();
+		this.backgroundColor = AppColorConfig.getInstance().getColorButtonBackground();
 		if (isEnabled())
 			beforeBackground = backgroundColor;
 		try {
@@ -220,8 +219,7 @@ public abstract class Button extends CustomView {
 
 	public void setTextColor(int color) {
 		// textButton.setTextColor(color);
-		textButton.setTextColor(com.simicart.core.config.Config.getInstance()
-				.getButton_text_color());
+		textButton.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
 	}
 
 	public void setTextSize(int size) {

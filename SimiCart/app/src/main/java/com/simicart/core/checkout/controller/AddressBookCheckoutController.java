@@ -9,9 +9,11 @@ import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.checkout.fragment.ReviewOrderFragment;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.controller.AddressBookController;
@@ -64,8 +66,8 @@ public class AddressBookCheckoutController extends AddressBookController {
                 NewAddressBookFragment fragment = NewAddressBookFragment
                         .newInstance();
                 Bundle bundle = new Bundle();
-                SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_ADDRESS_CHECKOUT, Constants.KeyData.TYPE_INT, bundle);
-                SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, addressFor, Constants.KeyData.TYPE_INT, bundle);
+//                SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_ADDRESS_CHECKOUT, Constants.KeyData.TYPE_INT, bundle);
+//                SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, addressFor, Constants.KeyData.TYPE_INT, bundle);
                 bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, mBillingAddress);
                 bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, mShippingAddress);
                 fragment.setArguments(bundle);
@@ -92,20 +94,17 @@ public class AddressBookCheckoutController extends AddressBookController {
     }
 
     private void request() {
-        if (DataLocal.isSignInComplete()) {
+        if (DataPreferences.isSignInComplete()) {
             mDelegate.showLoading();
             mModel = new AddressBookModel();
-            mModel.setDelegate(new ModelDelegate() {
-
+            mModel.setSuccessListener(new ModelSuccessCallBack() {
                 @Override
-                public void callBack(String message, boolean isSuccess) {
+                public void onSuccess(SimiCollection collection) {
                     mDelegate.dismissLoading();
-                    if (isSuccess) {
-                        mDelegate.updateView(mModel.getCollection());
-                    }
+                    mDelegate.updateView(mModel.getCollection());
                 }
             });
-            mModel.addParam("is_get_order_address", "YES");
+            mModel.addBody("is_get_order_address", "YES");
             mModel.request();
         }
     }

@@ -1,7 +1,9 @@
 package com.simicart.core.catalog.product.controller;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.delegate.SimiDelegate;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.product.model.RelatedProductModel;
 
 public class RelatedProductController extends SimiController {
@@ -20,22 +22,18 @@ public class RelatedProductController extends SimiController {
 	@Override
 	public void onStart() {
 		mDelegate.showLoading();
-		ModelDelegate delegate = new ModelDelegate() {
-
+		mModel.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
-			public void callBack(String message, boolean isSuccess) {
+			public void onSuccess(SimiCollection collection) {
 				mDelegate.dismissLoading();
-				if (isSuccess) {
-					mDelegate.updateView(mModel.getCollection());
-				}
+				mDelegate.updateView(mModel.getCollection());
 			}
-		};
+		});
 		mModel = new RelatedProductModel();
-		mModel.addParam("product_id", mID);
-		mModel.addParam("limit", "15");
-		mModel.addParam("width", "300");
-		mModel.addParam("height", "300");
-		mModel.setDelegate(delegate);
+		mModel.addBody("product_id", mID);
+		mModel.addBody("limit", "15");
+		mModel.addBody("width", "300");
+		mModel.addBody("height", "300");
 		mModel.request();
 	}
 

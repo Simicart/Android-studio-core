@@ -124,8 +124,8 @@ public class PopupCheckoutController extends SimiController {
                         NewAddressBookFragment fragment = NewAddressBookFragment
                                 .newInstance();
                         Bundle bundle = new Bundle();
-                        SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_CUSTOMER, Constants.KeyData.TYPE_INT, bundle);
-                        SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, 0, Constants.KeyData.TYPE_INT, bundle);
+//                        SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_CUSTOMER, Constants.KeyData.TYPE_INT, bundle);
+//                        SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, 0, Constants.KeyData.TYPE_INT, bundle);
                         bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, null);
                         bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, null);
                         fragment.setArguments(bundle);
@@ -162,8 +162,8 @@ public class PopupCheckoutController extends SimiController {
                         NewAddressBookFragment fragment = NewAddressBookFragment
                                 .newInstance();
                         Bundle bundle = new Bundle();
-                        SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_AS_GUEST, Constants.KeyData.TYPE_INT, bundle);
-                        SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, 0, Constants.KeyData.TYPE_INT, bundle);
+//                        SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_AS_GUEST, Constants.KeyData.TYPE_INT, bundle);
+//                        SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, 0, Constants.KeyData.TYPE_INT, bundle);
                         bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, null);
                         bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, null);
                         fragment.setArguments(bundle);

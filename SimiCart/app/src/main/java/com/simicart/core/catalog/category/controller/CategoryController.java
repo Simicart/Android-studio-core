@@ -5,9 +5,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.category.model.CategoryModel;
@@ -38,23 +40,18 @@ public class CategoryController extends SimiController {
 
     private void requestListCategories() {
         mDelegate.showLoading();
-        ModelDelegate delegate = new ModelDelegate() {
-
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
-            public void callBack(String message, boolean isSuccess) {
+            public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissLoading();
-                if (isSuccess) {
-                    mDelegate.updateView(mModel.getCollection());
-                }
-
+                mDelegate.updateView(mModel.getCollection());
             }
-        };
+        });
         mModel = new CategoryModel();
         ((CategoryModel) mModel).setCategoryID(mID);
-        mModel.setDelegate(delegate);
         if (!mID.equals("-1")) {
             ((CategoryModel) mModel).setCategoryID(mID);
-            mModel.addParam("category_id", mID);
+            mModel.addBody("category_id", mID);
         }
         mModel.request();
 

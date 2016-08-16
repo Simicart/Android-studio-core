@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.product.block;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -9,12 +7,12 @@ import android.view.View.OnClickListener;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.catalog.product.entity.Product;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.event.block.CacheBlock;
-import com.simicart.core.event.block.EventBlock;
 import com.simicart.core.style.material.floatingactionbutton.FloatingActionButton;
 import com.simicart.core.style.material.floatingactionbutton.FloatingActionsMenu;
+
+import java.util.ArrayList;
 
 public class ProductMorePluginBlock extends SimiBlock {
 	protected Product mProduct;
@@ -44,10 +42,10 @@ public class ProductMorePluginBlock extends SimiBlock {
 		mListButton = new ArrayList<FloatingActionButton>();
 		mMultipleActions = (FloatingActionsMenu) mView.findViewById(Rconfig
 				.getInstance().id("more_plugins_action"));
-		mMultipleActions.createButton(mContext, Config.getInstance()
-				.getButton_background(), Config.getInstance()
-				.getButton_background(), Config.getInstance()
-				.getButton_text_color());
+		mMultipleActions.createButton(mContext, AppColorConfig.getInstance()
+				.getColorButtonBackground(), AppColorConfig.getInstance()
+				.getColorButtonBackground(), AppColorConfig.getInstance()
+				.getButtonTextColor());
 		more_share = new FloatingActionButton(mContext);
 		more_share.setColorNormal(Color.parseColor("#FFFFFF"));
 		more_share.setColorPressed(Color.parseColor("#f4f4f4"));
@@ -56,14 +54,14 @@ public class ProductMorePluginBlock extends SimiBlock {
 		for (int i = 0; i < mListButton.size(); i++) {
 			mMultipleActions.addButton(mListButton.get(i));
 		}
-		EventBlock event = new EventBlock();
-		CacheBlock cacheBlock = new CacheBlock();
-		cacheBlock.setBlock(this);
-		cacheBlock.setView(mView);
-		cacheBlock.setContext(mContext);
-		cacheBlock.setSimiEntity(mProduct);
-		event.dispatchEvent(
-				"com.simicart.core.catalog.product.block.ProductMorePluginBlock",
-				cacheBlock);
+//		EventBlock event = new EventBlock();
+//		CacheBlock cacheBlock = new CacheBlock();
+//		cacheBlock.setBlock(this);
+//		cacheBlock.setView(mView);
+//		cacheBlock.setContext(mContext);
+//		cacheBlock.setSimiEntity(mProduct);
+//		event.dispatchEvent(
+//				"com.simicart.core.catalog.product.block.ProductMorePluginBlock",
+//				cacheBlock);
 	}
 }

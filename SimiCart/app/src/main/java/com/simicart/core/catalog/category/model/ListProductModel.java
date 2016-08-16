@@ -24,15 +24,15 @@ public class ListProductModel extends SimiModel {
 	@Override
 	protected void setUrlAction() {
 		if (mID.equals("-1")) {
-			url_action = Constants.GET_ALL_PRODUCTS;
+			mUrlAction = Constants.GET_ALL_PRODUCTS;
 		} else {
-			url_action = Constants.GET_CATEGORY_PRODUCTS;
+			mUrlAction = Constants.GET_CATEGORY_PRODUCTS;
 		}
 
 	}
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			if (null == collection) {

@@ -3,6 +3,8 @@ package com.simicart.core.catalog.product.controller;
 import android.util.Log;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.product.delegate.ProductDelegate;
 import com.simicart.core.catalog.product.delegate.ProductDetailAdapterDelegate;
@@ -64,15 +66,10 @@ public class ProductDetailChildController extends SimiController {
         // productDelegate.getLayoutMore().setVisibility(View.GONE);
         // }
         mModel = new ProductModel();
-        ModelDelegate delegate = new ModelDelegate() {
-
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
-            public void callBack(String message, boolean isSuccess) {
+            public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissLoading();
-//				if (productDelegate != null) {
-//					productDelegate.getLayoutMore().setVisibility(View.VISIBLE);
-//				}
-                if (isSuccess) {
                     mDelegate.updateView(mModel.getCollection());
 
                     if (null != mAdapterDelegate) {
@@ -86,14 +83,11 @@ public class ProductDetailChildController extends SimiController {
                             mDelegate.updateIndicator();
                         }
                     }
-
-                }
             }
-        };
-        mModel.addParam("product_id", id);
-        mModel.setDelegate(delegate);
-        mModel.addParam("width", "600");
-        mModel.addParam("height", "600");
+        });
+        mModel.addBody("product_id", id);
+        mModel.addBody("width", "600");
+        mModel.addBody("height", "600");
         mModel.request();
     }
 

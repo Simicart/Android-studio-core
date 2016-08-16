@@ -1,7 +1,5 @@
 package com.simicart.core.adapter;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
@@ -21,10 +19,11 @@ import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.price.ProductPriceView;
 import com.simicart.core.common.price.ProductPriceViewProductGridV03;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.event.block.EventBlock;
+
+import java.util.ArrayList;
 
 @SuppressLint("ViewHolder")
 public class ProductBaseAdapter extends BaseAdapter {
@@ -86,7 +85,7 @@ public class ProductBaseAdapter extends BaseAdapter {
 
 		// name
 		holder.tv_name.setText(product.getName());
-		holder.tv_name.setTextColor(Config.getInstance().getContent_color());
+		holder.tv_name.setTextColor(AppColorConfig.getInstance().getContentColor());
 		if (isHome) {
 			if (DataLocal.isLanguageRTL) {
 				holder.tv_name.setGravity(Gravity.RIGHT);
@@ -149,9 +148,9 @@ public class ProductBaseAdapter extends BaseAdapter {
 		RelativeLayout rl_product_list = (RelativeLayout) convertView
 				.findViewById(Rconfig.getInstance().id("rel_product_list_spot"));
 
-		EventBlock eventBlock = new EventBlock();
-		eventBlock.dispatchEvent("com.simicart.image.product.home",
-				rl_product_list, product);
+//		EventBlock eventBlock = new EventBlock();
+//		eventBlock.dispatchEvent("com.simicart.image.product.home",
+//				rl_product_list, product);
 
 		return convertView;
 	}

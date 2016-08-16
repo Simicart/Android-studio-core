@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.simicart.core.catalog.listproducts.entity.ItemListPopup;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
@@ -32,10 +33,10 @@ public class ListPopupAdapter extends BaseAdapter {
 		mIDIconNormal = Rconfig.getInstance().drawable("core_radiobox");
 		mIDIconChecked = Rconfig.getInstance().drawable("core_radiobox2");
 		icon_nomal = mContext.getResources().getDrawable(mIDIconNormal);
-		icon_nomal.setColorFilter(Config.getInstance().getColorMain(),
+		icon_nomal.setColorFilter(AppColorConfig.getInstance().getKeyColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		icon_checked = mContext.getResources().getDrawable(mIDIconChecked);
-		icon_checked.setColorFilter(Config.getInstance().getColorMain(),
+		icon_checked.setColorFilter(AppColorConfig.getInstance().getKeyColor(),
 				PorterDuff.Mode.SRC_ATOP);
 	}
 

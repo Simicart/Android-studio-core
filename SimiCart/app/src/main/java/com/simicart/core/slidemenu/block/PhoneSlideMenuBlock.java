@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -43,8 +44,8 @@ public class PhoneSlideMenuBlock implements SlideMenuDelegate {
 	public void initView() {
 		lv_navigation = (ListView) mView.findViewById(Rconfig.getInstance().id(
 				"lv_navigation"));
-		ColorDrawable sage = new ColorDrawable(Config.getInstance()
-				.getMenu_line_color());
+		ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance()
+				.getMenuLineColor());
 		lv_navigation.setDivider(sage);
 		lv_navigation.setDividerHeight(1);
 		ll_personal = (LinearLayout) mView.findViewById(Rconfig.getInstance()
@@ -58,7 +59,7 @@ public class PhoneSlideMenuBlock implements SlideMenuDelegate {
 				.getInstance().id("img_icon"));
 		Drawable icon = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("ic_menu_personal"));
-		icon.setColorFilter(Config.getInstance().getMenu_icon_color(),
+		icon.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		img_icon.setImageDrawable(icon);
 
@@ -66,12 +67,12 @@ public class PhoneSlideMenuBlock implements SlideMenuDelegate {
 				.getInstance().id("img_extended"));
 		Drawable ic_menu_extended = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("ic_menu_extended"));
-		ic_menu_extended.setColorFilter(Config.getInstance()
-				.getMenu_icon_color(), PorterDuff.Mode.SRC_ATOP);
+		ic_menu_extended.setColorFilter(AppColorConfig.getInstance()
+				.getMenuIconColor(), PorterDuff.Mode.SRC_ATOP);
 		img_extended.setImageDrawable(ic_menu_extended);
 
-		v_line.setBackgroundColor(Config.getInstance().getMenu_line_color());
-		tv_acc.setTextColor(Config.getInstance().getMenu_text_color());
+		v_line.setBackgroundColor(AppColorConfig.getInstance().getMenuIconColor());
+		tv_acc.setTextColor(AppColorConfig.getInstance().getMenuTextColor());
 
 		if (DataLocal.isLanguageRTL) {
 			tv_acc.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);

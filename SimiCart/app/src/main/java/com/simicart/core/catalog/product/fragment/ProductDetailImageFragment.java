@@ -34,7 +34,7 @@ public class ProductDetailImageFragment extends SimiFragment {
 	public static ProductDetailImageFragment newInstance(String url) {
 			ProductDetailImageFragment fragment = new ProductDetailImageFragment();
 			Bundle bundle = new Bundle();
-			setData(Constants.KeyData.URL, url, Constants.KeyData.TYPE_STRING, bundle);
+//			setData(Constants.KeyData.URL, url, Constants.KeyData.TYPE_STRING, bundle);
 			fragment.setArguments(bundle);
 			return fragment;
 	}
@@ -51,7 +51,7 @@ public class ProductDetailImageFragment extends SimiFragment {
 				Rconfig.getInstance().layout("core_product_detail_image"),
 				container, false);
 		if(getArguments() != null){
-		mURL = (String) getData(Constants.KeyData.URL, Constants.KeyData.TYPE_STRING, getArguments());
+//		mURL = (String) getData(Constants.KeyData.URL, Constants.KeyData.TYPE_STRING, getArguments());
 		}
 		try {
 

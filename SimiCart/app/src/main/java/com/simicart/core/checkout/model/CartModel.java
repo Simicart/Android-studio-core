@@ -20,7 +20,7 @@ public class CartModel extends SimiModel {
 	}
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			collection = new SimiCollection();
@@ -53,7 +53,7 @@ public class CartModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.GET_CART;
+		mUrlAction = Constants.GET_CART;
 	}
 
 	public TotalPrice getTotalPrice() {

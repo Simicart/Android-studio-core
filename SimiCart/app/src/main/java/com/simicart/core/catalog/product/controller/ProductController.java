@@ -1,11 +1,5 @@
 package com.simicart.core.catalog.product.controller;
 
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -19,8 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.notify.SimiNotify;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.delegate.ProductDelegate;
 import com.simicart.core.catalog.product.entity.CacheOption;
 import com.simicart.core.catalog.product.entity.Product;
@@ -31,8 +29,14 @@ import com.simicart.core.common.options.ProductOptionParentView;
 import com.simicart.core.common.options.base.CacheOptionView;
 import com.simicart.core.common.options.delegate.OptionProductDelegate;
 import com.simicart.core.common.price.ProductPriceViewDetail;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 @SuppressLint({ "DefaultLocale", "ClickableViewAccessibility" })
 public class ProductController extends SimiController implements
@@ -77,12 +81,10 @@ public class ProductController extends SimiController implements
 	@Override
 	public void onStart() {
 		mDelegate.showLoading();
-		ModelDelegate delegate = new ModelDelegate() {
-
+		mModel.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
-			public void callBack(String message, boolean isSuccess) {
+			public void onSuccess(SimiCollection collection) {
 				mDelegate.dismissLoading();
-				if (isSuccess) {
 					mDelegate.updateView(mModel.getCollection());
 					onUpdatePriceView();
 					onUpdateOptionView();
@@ -92,12 +94,10 @@ public class ProductController extends SimiController implements
 							// showInforDetail();
 						}
 					}
-				}
 			}
-		};
+		});
 		mModel = new ProductModel();
-		mModel.addParam("product_id", mID);
-		mModel.setDelegate(delegate);
+		mModel.addBody("product_id", mID);
 		mModel.request();
 
 		mListenerAddToCart = new OnTouchListener() {
@@ -123,7 +123,7 @@ public class ProductController extends SimiController implements
 
 					if (getProductFromCollection().getStock()) {
 						GradientDrawable gdDefault = new GradientDrawable();
-						gdDefault.setColor(Config.getInstance().getColorMain());
+						gdDefault.setColor(AppColorConfig.getInstance().getKeyColor());
 						gdDefault.setCornerRadius(15);
 						v.setBackgroundDrawable(gdDefault);
 
@@ -233,7 +233,7 @@ public class ProductController extends SimiController implements
 
 	protected View onShowPriceView(Product product) {
 		LinearLayout ll_price = new LinearLayout(SimiManager.getIntance()
-				.getCurrentContext());
+				.getCurrentActivity());
 		LayoutParams params = new LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		mPriceView = new ProductPriceViewDetail(product);
@@ -257,8 +257,8 @@ public class ProductController extends SimiController implements
 
 	protected void addtoCart(String url) {
 		if (!checkSelectedAllOption()) {
-			SimiManager.getIntance().showToast(
-					Config.getInstance().getText("Please select all options"));
+			SimiNotify.getInstance().showToast(
+					SimiTranslator.getInstance().translate("Please select all options"));
 			return;
 		}
 		onShowOptionView();
@@ -267,49 +267,40 @@ public class ProductController extends SimiController implements
 		ArrayList<CacheOption> options = getCacheOptions();
 		mDelegate.showDialogLoading();
 		final AddToCartModel model = new AddToCartModel();
-		model.setDelegate(new ModelDelegate() {
-
+		mModel.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
-			public void callBack(String message, boolean isSuccess) {
+			public void onSuccess(SimiCollection collection) {
 				mDelegate.dismissDialogLoading();
-				if (isSuccess) {
 					int mQty = getCartQtyFromJsonobject(model.getDataJSON());
 //					ConfigCheckout.getInstance().setmQty(String.valueOf(mQty));
 					SimiManager.getIntance().onUpdateCartQty(mQty + "");
-					SimiManager.getIntance().showToast(
-							Config.getInstance().getText("Added to Cart"));
+					SimiNotify.getInstance().showToast(
+							SimiTranslator.getInstance().translate("Added to Cart"));
 //					ConfigCheckout.getInstance().setCheckStatusCart(true);
-				} else {
-					// SimiManager.getIntance().showNotify(message);
-					// SimiManager.getIntance().showToast(message);
-					// View view_option = onShowOptionView();
-					// mDelegate.onUpdateOptionView(view_option);
-				}
-
 			}
 		});
 
-		model.addParam("product_id", getProductFromCollection().getId());
+		model.addBody("product_id", getProductFromCollection().getId());
 		if (getProductFromCollection().getData("variant_id") != null) {
-			model.addParam("variant_id",
+			model.addBody("variant_id",
 					getProductFromCollection().getData("variant_id"));
 		}
 		if (getProductFromCollection().getData("product_type") != null) {
-			model.addParam("product_type",
+			model.addBody("product_type",
 					getProductFromCollection().getData("product_type"));
 		}
-		model.addParam("product_qty",
+		model.addBody("product_qty",
 				String.valueOf(getProductFromCollection().getQty()));
 
 		if (null != options) {
 			try {
 				JSONArray array = convertCacheOptionToParams(options);
 				if (array != null && array.length() > 0) {
-					model.addParam("options", array);
+					model.addBody("options", array);
 				}
 			} catch (JSONException e) {
 				mDelegate.dismissLoading();
-				SimiManager.getIntance().showNotify("Cannot convert data");
+				SimiNotify.getInstance().showNotify("Cannot convert data");
 				e.printStackTrace();
 				return;
 			}

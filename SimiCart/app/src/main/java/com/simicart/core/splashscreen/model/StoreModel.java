@@ -6,14 +6,14 @@ import com.simicart.core.config.Constants;
 public class StoreModel extends SimiModel {
 
     @Override
-    protected void paserData() {
+    protected void parseData() {
         // TODO Auto-generated method stub
-        super.paserData();
+        super.parseData();
     }
 
     @Override
     protected void setUrlAction() {
-        url_action = Constants.GET_STORES;
+        mUrlAction = Constants.GET_STORES;
     }
 
     @Override

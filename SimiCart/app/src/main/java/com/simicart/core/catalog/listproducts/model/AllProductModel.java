@@ -10,6 +10,6 @@ public class AllProductModel extends ProductListCategoryModel {
 
     @Override
     protected void setUrlAction() {
-        this.url_action = Constants.GET_ALL_PRODUCTS;
+        mUrlAction = Constants.GET_ALL_PRODUCTS;
     }
 }

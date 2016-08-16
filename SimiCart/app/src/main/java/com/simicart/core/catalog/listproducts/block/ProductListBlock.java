@@ -23,6 +23,7 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.filter.FilterEvent;
 import com.simicart.core.catalog.filter.common.FilterConstant;
 import com.simicart.core.catalog.listproducts.adapter.ProductGridAdapter;
@@ -31,6 +32,7 @@ import com.simicart.core.catalog.listproducts.delegate.ProductListDelegate;
 import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -246,18 +248,18 @@ public class ProductListBlock extends SimiBlock implements ProductListDelegate {
             if (DataLocal.isTablet) {
                 txt_total_item.setText("");
                 if (i_qty > 1) {
-                    qty = qty + " " + Config.getInstance().getText("Items");
+                    qty = qty + " " + SimiTranslator.getInstance().translate("Items");
                 } else {
-                    qty = qty + " " + Config.getInstance().getText("Item");
+                    qty = qty + " " + SimiTranslator.getInstance().translate("Item");
                 }
                 txt_total_item.setText(qty);
             } else {
                 if (is_loadmore == false && mView.getContext() != null) {
                     Toast toast = new Toast(mView.getContext());
                     if (i_qty > 1) {
-                        qty = qty + " " + Config.getInstance().getText("Items");
+                        qty = qty + " " + SimiTranslator.getInstance().translate("Items");
                     } else {
-                        qty = qty + " " + Config.getInstance().getText("item");
+                        qty = qty + " " + SimiTranslator.getInstance().translate("item");
                     }
                     tv_toastQty.setText(qty);
                     toast.setView(layout_toastQty);
@@ -278,10 +280,10 @@ public class ProductListBlock extends SimiBlock implements ProductListDelegate {
     public void visiableView() {
         ((ViewGroup) mView).removeAllViewsInLayout();
         TextView tv_notify = new TextView(mContext);
-        tv_notify.setText(Config.getInstance().getText(
+        tv_notify.setText(SimiTranslator.getInstance().translate(
                 "Result products is empty"));
         tv_notify.setTypeface(null, Typeface.BOLD);
-        tv_notify.setTextColor(Config.getInstance().getContent_color());
+        tv_notify.setTextColor(AppColorConfig.getInstance().getContentColor());
         if (DataLocal.isTablet) {
             tv_notify.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         } else {

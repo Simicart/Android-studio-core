@@ -6,13 +6,13 @@ import com.simicart.core.config.Constants;
 public class SaveCurrencyModel extends SimiModel {
 
 	@Override
-	protected void paserData() {
-		super.paserData();
+	protected void parseData() {
+		super.parseData();
 	}
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.SAVE_CURRENCY;
+		mUrlAction = Constants.SAVE_CURRENCY;
 	}
 
 	@Override

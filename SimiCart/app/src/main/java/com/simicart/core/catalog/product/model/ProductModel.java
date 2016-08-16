@@ -16,10 +16,11 @@ public class ProductModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		this.url_action = Constants.GET_PRODUCT_DETAIL;
+		this.mUrlAction = Constants.GET_PRODUCT_DETAIL;
 	}
 
-	public void paserData() {
+	@Override
+	public void parseData() {
 		try {
 			JSONArray list = this.getDataJSON().getJSONArray("data");
 			collection = new SimiCollection();

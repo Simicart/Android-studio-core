@@ -19,6 +19,7 @@ import com.simicart.core.adapter.CartListAdapter;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.controller.CartListenerController;
 import com.simicart.core.checkout.controller.PopupCheckoutController;
 import com.simicart.core.checkout.delegate.CartDelegate;
@@ -26,7 +27,8 @@ import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.TotalPriceView;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppCheckoutConfig;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -68,7 +70,7 @@ public class CartBlock extends SimiBlock implements CartDelegate {
         // check out button
         btn_Checkout = (ButtonRectangle) mView.findViewById(Rconfig
                 .getInstance().id("checkout"));
-        btn_Checkout.setText(Config.getInstance().getText("Checkout"));
+        btn_Checkout.setText(SimiTranslator.getInstance().translate("Checkout"));
         btn_Checkout.setTextColor(Color.parseColor("#FFFFFF"));
         btn_Checkout.setTextSize(Constants.SIZE_TEXT_BUTTON);
         btn_Checkout.setOnClickListener(mListenerController
@@ -159,8 +161,8 @@ public class CartBlock extends SimiBlock implements CartDelegate {
     public void visiableView() {
         ((ViewGroup) mView).removeAllViewsInLayout();
         TextView tv_notify = new TextView(mContext);
-        tv_notify.setTextColor(Config.getInstance().getContent_color());
-        tv_notify.setText(Config.getInstance().getText(
+        tv_notify.setTextColor(AppColorConfig.getInstance().getContentColor());
+        tv_notify.setText(SimiTranslator.getInstance().translate(
                 "Your shopping cart is empty"));
         tv_notify.setTypeface(null, Typeface.BOLD);
         if (DataLocal.isTablet) {
@@ -195,27 +197,27 @@ public class CartBlock extends SimiBlock implements CartDelegate {
 
         tv_cancel = (TextView) pp_checkout.findViewById(Rconfig.getInstance()
                 .id("method_cancel"));
-        tv_cancel.setText(Config.getInstance().getText("Cancel"));
+        tv_cancel.setText(SimiTranslator.getInstance().translate("Cancel"));
         tv_cancel.setOnTouchListener(mPCheckoutController.getOnCancel());
 
         tv_excustomer = (TextView) pp_checkout.findViewById(Rconfig
                 .getInstance().id("method_excustomer"));
-        tv_excustomer.setText(Config.getInstance().getText(
+        tv_excustomer.setText(SimiTranslator.getInstance().translate(
                 "Checkout as existing customer"));
         tv_excustomer
                 .setOnTouchListener(mPCheckoutController.getOnExcustomer());
 
         tv_newcustomer = (TextView) pp_checkout.findViewById(Rconfig
                 .getInstance().id("method_newcustomer"));
-        tv_newcustomer.setText(Config.getInstance().getText(
+        tv_newcustomer.setText(SimiTranslator.getInstance().translate(
                 "Checkout as new customer"));
         tv_newcustomer.setOnTouchListener(mPCheckoutController
                 .getOnNewcustomer());
 
         tv_guest = (TextView) pp_checkout.findViewById(Rconfig.getInstance()
                 .id("method_guest"));
-        if (Config.getInstance().getGuest_checkout() == 1) {
-            tv_guest.setText(Config.getInstance().getText("Checkout as guest"));
+        if (AppCheckoutConfig.getInstance().isGuestCheckout() == true) {
+            tv_guest.setText(SimiTranslator.getInstance().translate("Checkout as guest"));
             tv_guest.setOnTouchListener(mPCheckoutController.getOnAsguest());
         } else {
             tv_guest.setVisibility(View.GONE);

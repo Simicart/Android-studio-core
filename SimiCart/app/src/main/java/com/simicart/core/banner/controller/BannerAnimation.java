@@ -12,13 +12,11 @@ import android.widget.ViewFlipper;
 
 import com.simicart.core.banner.entity.BannerEntity;
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.event.controller.EventController;
 import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 
 @SuppressLint("ClickableViewAccessibility")
@@ -82,10 +80,10 @@ public class BannerAnimation {
                         float currentX = touchevent.getX();
                         if (lastX == currentX) {
                             // dispatch event for sent google analytic
-                            EventController dispacth = new EventController();
-                            dispacth.dispatchEvent(
-                                    "com.simicart.banner.touchEvent",
-                                    banner_ad.getUrl());
+//                            EventController dispacth = new EventController();
+//                            dispacth.dispatchEvent(
+//                                    "com.simicart.banner.touchEvent",
+//                                    banner_ad.getUrl());
                             // end dispatch
                             SimiFragment fragment = null;
                             if (banner_ad.getType() != null) {

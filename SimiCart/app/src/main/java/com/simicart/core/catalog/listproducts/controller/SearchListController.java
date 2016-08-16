@@ -1,5 +1,7 @@
 package com.simicart.core.catalog.listproducts.controller;
 
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.listproducts.model.ConstantsSearch;
 import com.simicart.core.catalog.listproducts.model.ProductListCategoryModel;
 import com.simicart.core.catalog.listproducts.model.SearchListModel;
@@ -35,55 +37,52 @@ public class SearchListController extends ProductListController {
         String param_categoryid = getValueListParam(ConstantsSearch.PARAM_CATEGORY_ID);
         if (param_categoryid != null && !param_categoryid.equals("")
                 && !param_categoryid.equals("-1")) {
-            mModel.addParam(ConstantsSearch.PARAM_CATEGORY_ID, param_categoryid);
+            mModel.addBody(ConstantsSearch.PARAM_CATEGORY_ID, param_categoryid);
         }
         String param_offset = getValueListParam(ConstantsSearch.PARAM_OFFSET);
         if (param_offset != null && !param_offset.equals("")) {
-            mModel.addParam(ConstantsSearch.PARAM_OFFSET,
+            mModel.addBody(ConstantsSearch.PARAM_OFFSET,
                     String.valueOf(param_offset));
         } else {
-            mModel.addParam(ConstantsSearch.PARAM_OFFSET,
+            mModel.addBody(ConstantsSearch.PARAM_OFFSET,
                     String.valueOf(mCurrentOffset));
         }
         String param_limit = getValueListParam(ConstantsSearch.PARAM_LIMIT);
         if (param_limit != null && !param_limit.equals("")) {
-            mModel.addParam(ConstantsSearch.PARAM_LIMIT,
+            mModel.addBody(ConstantsSearch.PARAM_LIMIT,
                     String.valueOf(param_limit));
         } else {
-            mModel.addParam(ConstantsSearch.PARAM_LIMIT, String.valueOf(limit));
+            mModel.addBody(ConstantsSearch.PARAM_LIMIT, String.valueOf(limit));
         }
         String param_query = getValueListParam(ConstantsSearch.PARAM_QUERY);
         if (param_query != null && !param_query.equals("")) {
-            mModel.addParam(ConstantsSearch.PARAM_QUERY, param_query);
+            mModel.addBody(ConstantsSearch.PARAM_QUERY, param_query);
         }
         String param_sort_option = getValueListParam(ConstantsSearch.PARAM_SORT_OPTION);
         if (param_sort_option != null && !param_sort_option.equals("")) {
-            mModel.addParam(ConstantsSearch.PARAM_SORT_OPTION,
+            mModel.addBody(ConstantsSearch.PARAM_SORT_OPTION,
                     param_sort_option);
         } else {
-            mModel.addParam(ConstantsSearch.PARAM_SORT_OPTION, mSortID);
+            mModel.addBody(ConstantsSearch.PARAM_SORT_OPTION, mSortID);
         }
-        mModel.addParam(ConstantsSearch.PARAM_WIDTH, "300");
-        mModel.addParam(ConstantsSearch.PARAM_HEIGHT, "300");
+        mModel.addBody(ConstantsSearch.PARAM_WIDTH, "300");
+        mModel.addBody(ConstantsSearch.PARAM_HEIGHT, "300");
         if (null != jsonFilter) {
-            mModel.addParam("filter", jsonFilter);
+            mModel.addBody("filter", jsonFilter);
         } else {
-            mModel.addParam("filter", "");
+            mModel.addBody("filter", "");
         }
-        mModel.setDelegate(new ModelDelegate() {
-
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
-            public void callBack(String message, boolean isSuccess) {
+            public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissLoading();
                 mDelegate.removeFooterView();
-                if (isSuccess) {
-                    resultNumber = message;
-                    mDelegate.setQty(resultNumber);
-                    listProduct = ((ProductListCategoryModel) mModel).getListProduct();
-                    listProductIds = ((ProductListCategoryModel) mModel).getListProductIds();
-                    mDelegate.updateView(mModel.getCollection());
-                    isOnscroll = true;
-                }
+//                    resultNumber = message;
+                mDelegate.setQty(resultNumber);
+                listProduct = ((ProductListCategoryModel) mModel).getListProduct();
+                listProductIds = ((ProductListCategoryModel) mModel).getListProductIds();
+                mDelegate.updateView(mModel.getCollection());
+                isOnscroll = true;
             }
         });
         mModel.request();

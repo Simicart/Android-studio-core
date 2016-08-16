@@ -10,6 +10,7 @@ import android.view.View.OnTouchListener;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.delegate.CreditCardDelegate;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 
@@ -47,7 +48,7 @@ public class CreditCardController extends SimiController {
 
 				case MotionEvent.ACTION_CANCEL: {
 					GradientDrawable gdDefault = new GradientDrawable();
-					gdDefault.setColor(Config.getInstance().getColorMain());
+					gdDefault.setColor(AppColorConfig.getInstance().getKeyColor());
 					gdDefault.setCornerRadius(15);
 					v.setBackgroundDrawable(gdDefault);
 					break;

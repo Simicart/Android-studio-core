@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.simicart.MainActivity;
+import com.simicart.core.base.delegate.ModelFailCallBack;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.common.Utils;
 import com.simicart.core.notification.gcm.GCMRegistrar;
 import com.simicart.core.notification.model.RegisterIDModel;
@@ -22,22 +26,25 @@ public final class ServerUtilities {
 	public static void register(final Context context, final String regId,
 			String latitude, String longitude) {
 		RegisterIDModel model = new RegisterIDModel();
-		model.setDelegate(new ModelDelegate() {
-
+		model.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
-			public void callBack(String message, boolean isSuccess) {
+			public void onSuccess(SimiCollection collection) {
 				stopRegisterService();
-				if (isSuccess) {
-					Log.e(getClass().getName(), "RegisterIDModel: " + message);
+//					Log.e(getClass().getName(), "RegisterIDModel: " + message);
 					GCMRegistrar.setRegisteredOnServer(context, true);
 					GCMRegistrar.setRegistrationId(context, regId);
-				}
 			}
 		});
-		model.addParam("device_token", regId);
+		model.setFailListener(new ModelFailCallBack() {
+			@Override
+			public void onFail(SimiError error) {
+				stopRegisterService();
+			}
+		});
+		model.addBody("device_token", regId);
 		if (Utils.validateString(longitude) && Utils.validateString(latitude)) {
-			model.addParam("latitude", latitude);
-			model.addParam("longitude", longitude);
+			model.addBody("latitude", latitude);
+			model.addBody("longitude", longitude);
 		}
 		model.request();
 	}

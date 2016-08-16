@@ -32,6 +32,8 @@ import android.util.Log;
 
 import com.magestore.simicart.R;
 import com.simicart.MainActivity;
+import com.simicart.core.common.DataPreferences;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -54,7 +56,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	public static NotificationEntity notificationData;
 
 	public GCMIntentService() {
-		super(Config.getInstance().getSenderId());
+		super(AppStoreConfig.getInstance().getSenderID());
 	}
 
 	
@@ -144,7 +146,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 				if (notificationData == null) {
 					// Log.e("MESS NHAN DUOC LA ", "333333333");
 					notificationData = notificationTemp;
-					if (DataLocal.enableNotification(context)) {
+					if (DataPreferences.enableNotification(context)) {
 						// Log.e("MESS NHAN DUOC LA ", "44444444");
 						onRecieveMessage(context);
 					}
@@ -153,7 +155,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 					if (!notificationTemp.equals(notificationData)) {
 						// Log.e("MESS NHAN DUOC LA ", "6666666666");
 						notificationData = notificationTemp;
-						if (DataLocal.enableNotification(context)) {
+						if (DataPreferences.enableNotification(context)) {
 							// Log.e("MESS NHAN DUOC LA ", "777777777777");
 							onRecieveMessage(context);
 						}

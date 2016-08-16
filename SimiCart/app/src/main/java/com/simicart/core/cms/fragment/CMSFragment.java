@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
@@ -23,7 +24,7 @@ public class CMSFragment extends SimiFragment {
 	public static CMSFragment newInstance(String content) {
 		CMSFragment fragment = new CMSFragment();
 		Bundle bundle= new Bundle();
-		setData(Constants.KeyData.CONTENT, content, Constants.KeyData.TYPE_STRING, bundle);
+//		setData(Constants.KeyData.CONTENT, content, Constants.KeyData.TYPE_STRING, bundle);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -37,11 +38,11 @@ public class CMSFragment extends SimiFragment {
 						"core_information_description_layout"), container,
 				false);
 		if(getArguments() != null){
-		mContent = (String) getData(Constants.KeyData.CONTENT, Constants.KeyData.TYPE_STRING, getArguments());
+//		mContent = (String) getData(Constants.KeyData.CONTENT, Constants.KeyData.TYPE_STRING, getArguments());
 		}
 
 		WebView webView = (WebView) rootView.findViewById(Rconfig.getInstance().id("webview"));
-		webView.setBackgroundColor(Config.getInstance().getApp_backrground());
+		webView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 		webView.getSettings().setLoadWithOverviewMode(true);
@@ -54,7 +55,7 @@ public class CMSFragment extends SimiFragment {
 		webView.setHorizontalScrollBarEnabled(false);
 		webView.loadDataWithBaseURL(
 				null,
-				StringHTML("<html><body style=\"color:"+Config.getInstance().getContent_color_string()+";font-family:Helvetica;font-size:40px;\"'background-color:transparent' >"
+				StringHTML("<html><body style=\"color:"+AppColorConfig.getInstance().getContentColor()+";font-family:Helvetica;font-size:40px;\"'background-color:transparent' >"
 						+ "<p align=\"justify\">"
 						+ mContent
 						+ "</p>"

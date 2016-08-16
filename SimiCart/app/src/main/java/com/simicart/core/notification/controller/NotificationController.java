@@ -18,11 +18,15 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.simicart.MainActivity;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.notify.SimiNotify;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.GPSTracker;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -72,9 +76,9 @@ public class NotificationController {
     }
 
     public void registerNotification() {
-        checkNotNull(Config.getInstance().getSenderId(), "SENDER_ID");
+        checkNotNull(AppStoreConfig.getInstance().getSenderID(), "SENDER_ID");
         Log.e(getClass().getName(), "SENDER_ID:   "
-                + Config.getInstance().getSenderId());
+                + AppStoreConfig.getInstance().getSenderID());
         GCMRegistrar.checkDevice(mContext);
         GCMRegistrar.checkManifest(mContext);
 
@@ -83,7 +87,7 @@ public class NotificationController {
         // send deviceid to server
         if (regId.equals("")) {
             // Automatically registers application on startup.
-            GCMRegistrar.register(mContext, Config.getInstance().getSenderId());
+            GCMRegistrar.register(mContext, AppStoreConfig.getInstance().getSenderID());
             Log.e(getClass().getName(),
                     "Automatically registers application on startup.");
         } else {
@@ -146,13 +150,13 @@ public class NotificationController {
         tv.setMaxLines(2);
         tv.setEllipsize(TruncateAt.END);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-        alertboxDowload.setTitle(Config.getInstance().getText(
+        alertboxDowload.setTitle(SimiTranslator.getInstance().translate(
                 notificationData.getTitle()));
         alertboxDowload.setCancelable(false);
 
         TextView tv_close = (TextView) view.findViewById(Rconfig.getInstance()
                 .id("tv_close"));
-        tv_close.setText(Config.getInstance().getText("CLOSE"));
+        tv_close.setText(SimiTranslator.getInstance().translate("CLOSE"));
         tv_close.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -163,7 +167,7 @@ public class NotificationController {
         });
         TextView tv_show = (TextView) view.findViewById(Rconfig.getInstance()
                 .id("tv_show"));
-        tv_show.setText(Config.getInstance().getText("SHOW"));
+        tv_show.setText(SimiTranslator.getInstance().translate("SHOW"));
         tv_show.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -195,12 +199,12 @@ public class NotificationController {
         // context.startActivity(intent);
         // }
 
-        if (DataLocal.enableNotification()) {
-            DataLocal.saveNotificationSet(false);
-            SimiManager.getIntance().showToast("Disable recieve notification");
+        if (DataPreferences.enableNotification()) {
+            DataPreferences.saveNotificationSet(false);
+            SimiNotify.getInstance().showToast("Disable recieve notification");
         } else {
-            DataLocal.saveNotificationSet(true);
-            SimiManager.getIntance().showToast("Enable recieve notification");
+            DataPreferences.saveNotificationSet(true);
+            SimiNotify.getInstance().showToast("Enable recieve notification");
         }
     }
 

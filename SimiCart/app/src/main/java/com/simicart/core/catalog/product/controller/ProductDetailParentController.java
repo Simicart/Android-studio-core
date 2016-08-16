@@ -223,7 +223,7 @@ public class ProductDetailParentController extends ProductController implements 
     @Override
     protected View onShowPriceView(Product product) {
         LinearLayout ll_price = new LinearLayout(SimiManager.getIntance()
-                .getCurrentContext());
+                .getCurrentActivity());
         LayoutParams params = new LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;

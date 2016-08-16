@@ -24,8 +24,8 @@ public class CreditCardFragment extends SimiFragment {
 			PaymentMethod paymentMethod) {
 		CreditCardFragment fragment = new CreditCardFragment();
 		Bundle bundle = new Bundle();
-		setData(Constants.KeyData.CHECK_METHOD, isCheckedMethod,
-				Constants.KeyData.TYPE_BOOLEAN, bundle);
+//		setData(Constants.KeyData.CHECK_METHOD, isCheckedMethod,
+//				Constants.KeyData.TYPE_BOOLEAN, bundle);
 		bundle.putSerializable(Constants.KeyData.PAYMENT_METHOD, paymentMethod);
 		fragment.setArguments(bundle);
 		return fragment;
@@ -39,8 +39,8 @@ public class CreditCardFragment extends SimiFragment {
 				container, false);
 		Context context = getActivity();
 		if (getArguments() != null) {
-			isCheckedMethod = (boolean) getData(Constants.KeyData.CHECK_METHOD,
-					Constants.KeyData.TYPE_BOOLEAN, getArguments());
+//			isCheckedMethod = (boolean) getData(Constants.KeyData.CHECK_METHOD,
+//					Constants.KeyData.TYPE_BOOLEAN, getArguments());
 			mPaymentMethod = (PaymentMethod) getArguments().getSerializable(
 					Constants.KeyData.PAYMENT_METHOD);
 		}

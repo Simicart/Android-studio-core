@@ -35,8 +35,8 @@ public class ReviewOrderFragment extends SimiFragment {
 		ReviewOrderFragment fragment = new ReviewOrderFragment();
 		fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_REVIEWORDER);
 		Bundle bundle = new Bundle();
-		setData(Constants.KeyData.AFTER_CONTROL, afterControll,
-				Constants.KeyData.TYPE_INT, bundle);
+//		setData(Constants.KeyData.AFTER_CONTROL, afterControll,
+//				Constants.KeyData.TYPE_INT, bundle);
 		bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, shippingAdd);
 		bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, billingAdd);
 		fragment.setArguments(bundle);
@@ -74,8 +74,8 @@ public class ReviewOrderFragment extends SimiFragment {
 
 		// getdata
 		if (getArguments() != null) {
-			mAfterControll = (int) getData(Constants.KeyData.AFTER_CONTROL,
-					Constants.KeyData.TYPE_INT, getArguments());
+//			mAfterControll = (int) getData(Constants.KeyData.AFTER_CONTROL,
+//					Constants.KeyData.TYPE_INT, getArguments());
 			mShippingAddress = (MyAddress) getArguments().getSerializable(
 					Constants.KeyData.SHIPPING_ADDRESS);
 			mBillingAddress = (MyAddress) getArguments().getSerializable(

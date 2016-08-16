@@ -23,11 +23,11 @@ public class ReviewOrderModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.GET_ORDER_CONFIG;
+		mUrlAction = Constants.GET_ORDER_CONFIG;
 	}
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 
 			JSONArray js_data = this.mJSON.getJSONArray("data");

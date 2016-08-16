@@ -1,7 +1,5 @@
 package com.simicart.core.adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -13,9 +11,11 @@ import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.style.StringMatcher;
+
+import java.util.ArrayList;
 public class IndexableListAdapter extends BaseAdapter implements SectionIndexer {
 
 	private String mSections = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -75,7 +75,7 @@ public class IndexableListAdapter extends BaseAdapter implements SectionIndexer 
 		TextView tv_label = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("tv_label"));
 		String labelItem = mList.get(position);
-		tv_label.setTextColor(Config.getInstance().getContent_color());
+		tv_label.setTextColor(AppColorConfig.getInstance().getContentColor());
 		tv_label.setText(labelItem);
 
 		ImageView im_check = (ImageView) convertView.findViewById(Rconfig
@@ -91,7 +91,7 @@ public class IndexableListAdapter extends BaseAdapter implements SectionIndexer 
 	private void changeColorImageView (ImageView img,String src) {
 		Drawable icon = context.getResources().getDrawable(
 				Rconfig.getInstance().drawable(src));
-		icon.setColorFilter(Config.getInstance().getContent_color(),
+		icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		img.setImageDrawable(icon);
 	}

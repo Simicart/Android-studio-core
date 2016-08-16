@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.BasicInforFragment;
 import com.simicart.core.catalog.product.fragment.CustomerReviewFragment;
@@ -12,9 +13,6 @@ import com.simicart.core.catalog.product.fragment.DescriptionFragment;
 import com.simicart.core.catalog.product.fragment.RelatedProductFragment;
 import com.simicart.core.catalog.product.fragment.TechSpecsFragment;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
-import com.simicart.core.event.block.CacheBlock;
-import com.simicart.core.event.block.EventBlock;
 
 import java.util.ArrayList;
 
@@ -82,26 +80,26 @@ public class TabAdapterFragment extends FragmentStatePagerAdapter {
 	}
 
 	private void addTitle() {
-		mListTitle.add(Config.getInstance().getText("Basic Info"));
+		mListTitle.add(SimiTranslator.getInstance().translate("Basic Info"));
 		if (Utils.validateString(mProduct.getDecripition())) {
-			mListTitle.add(Config.getInstance().getText("Description"));
+			mListTitle.add(SimiTranslator.getInstance().translate("Description"));
 		}
 		if (!mProduct.getAttributes().isEmpty()) {
-			mListTitle.add(Config.getInstance().getText("Tech Specs"));
+			mListTitle.add(SimiTranslator.getInstance().translate("Tech Specs"));
 		}
 		if (mProduct.getRate() > 0 && mProduct.getReviewNumber() > 0) {
-			mListTitle.add(Config.getInstance().getText("Review"));
+			mListTitle.add(SimiTranslator.getInstance().translate("Review"));
 		}
-		mListTitle.add(Config.getInstance().getText("Related Products"));
+		mListTitle.add(SimiTranslator.getInstance().translate("Related Products"));
 	}
 
 	public void EventTabFragment() {
-		EventBlock event = new EventBlock();
-		CacheBlock cacheBlock = new CacheBlock();
-		cacheBlock.setListFragment(mListFragment);
-		cacheBlock.setListName(mListTitle);
-		cacheBlock.setSimiEntity(mProduct);
-		event.dispatchEvent("com.simicart.core.adapter.TabAdapterFragment",
-				cacheBlock);
+//		EventBlock event = new EventBlock();
+//		CacheBlock cacheBlock = new CacheBlock();
+//		cacheBlock.setListFragment(mListFragment);
+//		cacheBlock.setListName(mListTitle);
+//		cacheBlock.setSimiEntity(mProduct);
+//		event.dispatchEvent("com.simicart.core.adapter.TabAdapterFragment",
+//				cacheBlock);
 	}
 }

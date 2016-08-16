@@ -13,6 +13,7 @@ import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.category.adapter.CategoryBaseAdapter;
 import com.simicart.core.catalog.category.entity.Category;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -46,14 +47,14 @@ public class CategoryBlock extends SimiBlock {
 				"v_line2"));
 		ColorDrawable sage ;
 		if(DataLocal.isTablet) {
-			 sage = new ColorDrawable(Config.getInstance()
-						.getMenu_line_color());
-			 ll_category.setBackgroundColor(Config.getInstance().getMenu_background());
-			 v_line.setBackgroundColor(Config.getInstance().getMenu_line_color());
+			 sage = new ColorDrawable(AppColorConfig.getInstance()
+						.getMenuLineColor());
+			 ll_category.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
+			 v_line.setBackgroundColor(AppColorConfig.getInstance().getMenuLineColor());
 		}else {
-			 sage = new ColorDrawable(Config.getInstance()
-						.getLine_color());
-			 v_line.setBackgroundColor(Config.getInstance().getLine_color());
+			 sage = new ColorDrawable(AppColorConfig.getInstance()
+						.getLineColor());
+			 v_line.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
 		}
 		lv_Category.setDivider(sage);
 		lv_Category.setDividerHeight(1);

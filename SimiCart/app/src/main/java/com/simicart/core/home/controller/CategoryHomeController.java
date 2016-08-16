@@ -3,6 +3,8 @@ package com.simicart.core.home.controller;
 import java.util.ArrayList;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.home.delegate.CategoryHomeDelegate;
 import com.simicart.core.home.model.CategoryHomeModel;
@@ -26,18 +28,13 @@ public class CategoryHomeController extends SimiController {
 	@Override
 	public void onStart() {
 		// mDelegate.showLoading();
-		ModelDelegate delegate = new ModelDelegate() {
-
+		mModel.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
-			public void callBack(String message, boolean isSuccess) {
-				// mDelegate.dismissLoading();
-				if (isSuccess) {
-					mDelegate.updateView(mModel.getCollection());
-				}
+			public void onSuccess(SimiCollection collection) {
+				mDelegate.updateView(mModel.getCollection());
 			}
-		};
+		});
 		mModel = new CategoryHomeModel();
-		mModel.setDelegate(delegate);
 		mModel.request();
 	}
 

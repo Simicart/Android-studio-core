@@ -14,8 +14,10 @@ import android.widget.TextView;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.adapter.RelatedProductListAdapter;
 import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -36,8 +38,8 @@ public class RelatedProductBlock extends SimiBlock {
     public void initView() {
         lv_relatedProduct = (ListView) mView.findViewById(Rconfig.getInstance()
                 .id("lv_relatedProduct"));
-        ColorDrawable sage = new ColorDrawable(Config.getInstance()
-                .getLine_color());
+        ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance()
+                .getLineColor());
         lv_relatedProduct.setDivider(sage);
         lv_relatedProduct.setDividerHeight(1);
 
@@ -85,9 +87,9 @@ public class RelatedProductBlock extends SimiBlock {
     public void visiableView() {
         ((ViewGroup) mView).removeAllViewsInLayout();
         TextView tv_notify = new TextView(mContext);
-        tv_notify.setText(Config.getInstance().getText(
+        tv_notify.setText(SimiTranslator.getInstance().translate(
                 "Related product is empty"));
-        tv_notify.setTextColor(Config.getInstance().getContent_color());
+        tv_notify.setTextColor(AppColorConfig.getInstance().getContentColor());
         tv_notify.setTypeface(null, Typeface.BOLD);
         if (DataLocal.isTablet) {
             tv_notify.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);

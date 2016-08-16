@@ -12,6 +12,7 @@ import com.simicart.core.catalog.category.block.CategoryBlock;
 import com.simicart.core.catalog.category.block.CategoryDetailBlock;
 import com.simicart.core.catalog.category.controller.CategoryController;
 import com.simicart.core.catalog.category.controller.CategoryDetailController;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -28,8 +29,8 @@ public class CategoryFragment extends SimiFragment {
     public static CategoryFragment newInstance(String id, String name) {
         CategoryFragment fragment = new CategoryFragment();
         Bundle bundle = new Bundle();
-        setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, bundle);
-        setData(Constants.KeyData.NAME, name, Constants.KeyData.TYPE_STRING, bundle);
+//        setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, bundle);
+//        setData(Constants.KeyData.NAME, name, Constants.KeyData.TYPE_STRING, bundle);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -44,8 +45,8 @@ public class CategoryFragment extends SimiFragment {
                 container, false);
         Context context = getActivity();
         if (getArguments() != null) {
-            mCategoryID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
-            mCategoryName = (String) getData(Constants.KeyData.NAME, Constants.KeyData.TYPE_STRING, getArguments());
+//            mCategoryID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
+//            mCategoryName = (String) getData(Constants.KeyData.NAME, Constants.KeyData.TYPE_STRING, getArguments());
         }
 
         mCategoryDetailBlock = new CategoryDetailBlock(view, context);
@@ -87,7 +88,7 @@ public class CategoryFragment extends SimiFragment {
         mCategoryBlock.setClicker(mCategoryController.getClicker());
 
         // save
-        DataLocal.saveCateID(mCategoryID, mCategoryName);
+        DataPreferences.saveCateID(mCategoryID, mCategoryName);
         return view;
     }
 

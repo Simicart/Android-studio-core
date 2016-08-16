@@ -13,21 +13,18 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.cms.fragment.CMSFragment;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.fragment.MyAccountFragment;
 import com.simicart.core.customer.fragment.OrderHistoryFragment;
 import com.simicart.core.customer.fragment.SignInFragment;
-import com.simicart.core.event.block.EventBlock;
-import com.simicart.core.event.slidemenu.EventSlideMenu;
-import com.simicart.core.event.slidemenu.SlideMenuData;
 import com.simicart.core.home.fragment.HomeFragment;
 import com.simicart.core.setting.fragment.SettingAppFragment;
 import com.simicart.core.slidemenu.delegate.CloseSlideMenuDelegate;
@@ -35,6 +32,7 @@ import com.simicart.core.slidemenu.delegate.SlideMenuDelegate;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
 import com.simicart.core.slidemenu.entity.ItemNavigation.TypeItem;
 import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
+import com.simicart.core.splashscreen.entity.DeepLinkEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,7 +100,7 @@ public class PhoneSlideMenuController {
             public void onClick(View v) {
                 SimiFragment fragment = null;
                 mCloseDelegate.closeSlideMenu();
-                if (DataLocal.isSignInComplete()) {
+                if (DataPreferences.isSignInComplete()) {
                     // profile
                     fragment = MyAccountFragment.newInstance();
                 } else {
@@ -122,7 +120,7 @@ public class PhoneSlideMenuController {
             mDelegate.setAdapter(mItems);
         }
         // open home page
-        if (DataLocal.deepLinkItemName.equals("")) {
+        if (DeepLinkEntity.getInstance().getName().equals("")) {
             onNaviagte(DEFAULT_POSITION);
         } else {
             openDeepLink();
@@ -132,49 +130,49 @@ public class PhoneSlideMenuController {
     private void openDeepLink() {
         SimiFragment fragment = null;
 
-        if (!DataLocal.deepLinkItemID.equals("")
-                && DataLocal.deepLinkItemType != 0) {
-            if (DataLocal.deepLinkItemType == 1) {
+        if (!DeepLinkEntity.getInstance().getID().equals("")
+                && DeepLinkEntity.getInstance().getType() != 0) {
+            if (DeepLinkEntity.getInstance().getType() == 1) {
                 Log.e("Open deep link", "1");
                 ArrayList<String> listID = new ArrayList<String>();
-                listID.add(DataLocal.deepLinkItemID);
+                listID.add(DeepLinkEntity.getInstance().getID());
                 fragment = ProductDetailParentFragment.newInstance(
-                        DataLocal.deepLinkItemID, listID);
+                        DeepLinkEntity.getInstance().getID(), listID);
                 SimiManager.getIntance().replaceFragment(fragment);
-            } else if (DataLocal.deepLinkItemType == 2) {
+            } else if (DeepLinkEntity.getInstance().getType() == 2) {
                 Log.e("Open deep link", "2");
-                if (DataLocal.deepLinkItemHasChild.equals("1")) {
+                if (DeepLinkEntity.getInstance().isHasChild() == true) {
                     if (DataLocal.isTablet) {
                         fragment = CategoryFragment.newInstance(
-                                DataLocal.deepLinkItemID,
-                                DataLocal.deepLinkItemName);
+                                DeepLinkEntity.getInstance().getID(),
+                                DeepLinkEntity.getInstance().getName());
                         CateSlideMenuFragment.getIntance()
                                 .replaceFragmentCategoryMenu(fragment);
                         CateSlideMenuFragment.getIntance().openMenu();
                     } else {
                         fragment = CategoryFragment.newInstance(
-                                DataLocal.deepLinkItemID,
-                                DataLocal.deepLinkItemName);
+                                DeepLinkEntity.getInstance().getID(),
+                                DeepLinkEntity.getInstance().getName());
                         SimiManager.getIntance().replaceFragment(fragment);
                     }
                 } else {
                     fragment = ProductListFragment.newInstance(
-                            DataLocal.deepLinkItemID, DataLocal.deepLinkItemName, null, null, null);
+                            DeepLinkEntity.getInstance().getID(), DeepLinkEntity.getInstance().getName(), null, null, null);
                     SimiManager.getIntance().replaceFragment(fragment);
                 }
             }
         }
-        DataLocal.deepLinkItemID = "";
-        DataLocal.deepLinkItemName = "";
-        DataLocal.deepLinkItemHasChild = "";
-        DataLocal.deepLinkItemType = 0;
+        DeepLinkEntity.getInstance().setID("");
+        DeepLinkEntity.getInstance().setName("");
+        DeepLinkEntity.getInstance().setHasChild(false);
+        DeepLinkEntity.getInstance().setType(0);
     }
 
     public void initDataAdapter() {
         addPersonal();
         addHome();
         addCategory();
-        if (DataLocal.isSignInComplete()) {
+        if (DataPreferences.isSignInComplete()) {
             addItemRelatedPersonal();
         }
         addMoreItems();
@@ -186,10 +184,10 @@ public class PhoneSlideMenuController {
 
         String name = "";
 
-        if (DataLocal.isSignInComplete()) {
-            name = DataLocal.getUsername();
+        if (DataPreferences.isSignInComplete()) {
+            name = DataPreferences.getUsername();
         } else {
-            name = Config.getInstance().getText("Sign in");
+            name = SimiTranslator.getInstance().translate("Sign in");
             removeItemRelatedPersonal();
         }
         mDelegate.setUpdateSignIn(name);
@@ -215,22 +213,22 @@ public class PhoneSlideMenuController {
             mItemsAccount.add(item);
 
             // event for rewards, wish list
-            SlideMenuData slideMenuData = new SlideMenuData();
-            slideMenuData.setItemNavigations(mItemsAccount);
-            slideMenuData.setPluginFragment(mPluginFragment);
-            EventSlideMenu eventSlideMenu = new EventSlideMenu();
-            eventSlideMenu.dispatchEvent("com.simicart.add.navigation.account",
-                    slideMenuData);
-
-            eventSlideMenu.dispatchEvent(
-                    "com.simicart.add.navigation.account.downloadable",
-                    slideMenuData);
-            eventSlideMenu.dispatchEvent(
-                    "com.simicart.add.navigation.account.loyalty",
-                    slideMenuData);
-            eventSlideMenu.dispatchEvent(
-                    "com.simicart.add.navigation.account.wishlist",
-                    slideMenuData);
+//            SlideMenuData slideMenuData = new SlideMenuData();
+//            slideMenuData.setItemNavigations(mItemsAccount);
+//            slideMenuData.setPluginFragment(mPluginFragment);
+//            EventSlideMenu eventSlideMenu = new EventSlideMenu();
+//            eventSlideMenu.dispatchEvent("com.simicart.add.navigation.account",
+//                    slideMenuData);
+//
+//            eventSlideMenu.dispatchEvent(
+//                    "com.simicart.add.navigation.account.downloadable",
+//                    slideMenuData);
+//            eventSlideMenu.dispatchEvent(
+//                    "com.simicart.add.navigation.account.loyalty",
+//                    slideMenuData);
+//            eventSlideMenu.dispatchEvent(
+//                    "com.simicart.add.navigation.account.wishlist",
+//                    slideMenuData);
 
             int index_category = checkElement(CATEGORY);
             if (DataLocal.isTablet) {
@@ -253,12 +251,12 @@ public class PhoneSlideMenuController {
         }
 
         // event my account
-        SlideMenuData slideMenuData = new SlideMenuData();
-        slideMenuData.setItemNavigations(mItems);
-        slideMenuData.setPluginFragment(mPluginFragment);
-        EventSlideMenu eventSlideMenu = new EventSlideMenu();
-        eventSlideMenu.dispatchEvent(
-                "com.simicart.remove.navigation.myaccount", slideMenuData);
+//        SlideMenuData slideMenuData = new SlideMenuData();
+//        slideMenuData.setItemNavigations(mItems);
+//        slideMenuData.setPluginFragment(mPluginFragment);
+//        EventSlideMenu eventSlideMenu = new EventSlideMenu();
+//        eventSlideMenu.dispatchEvent(
+//                "com.simicart.remove.navigation.myaccount", slideMenuData);
     }
 
     public void addHome() {
@@ -305,19 +303,19 @@ public class PhoneSlideMenuController {
         mItems.add(item);
 
         // event for add barcode to slidemenu
-        SlideMenuData slideMenuData = new SlideMenuData();
-        slideMenuData.setItemNavigations(mItems);
-        slideMenuData.setPluginFragment(mPluginFragment);
-        EventSlideMenu eventSlideMenu = new EventSlideMenu();
-        eventSlideMenu.dispatchEvent("com.simicart.add.navigation.more",
-                slideMenuData);
-
-        eventSlideMenu.dispatchEvent("com.simicart.add.navigation.more.qrbarcode",
-                slideMenuData);
-        eventSlideMenu.dispatchEvent("com.simicart.add.navigation.more.locator",
-                slideMenuData);
-        eventSlideMenu.dispatchEvent("com.simicart.add.navigation.more.contactus",
-                slideMenuData);
+//        SlideMenuData slideMenuData = new SlideMenuData();
+//        slideMenuData.setItemNavigations(mItems);
+//        slideMenuData.setPluginFragment(mPluginFragment);
+//        EventSlideMenu eventSlideMenu = new EventSlideMenu();
+//        eventSlideMenu.dispatchEvent("com.simicart.add.navigation.more",
+//                slideMenuData);
+//
+//        eventSlideMenu.dispatchEvent("com.simicart.add.navigation.more.qrbarcode",
+//                slideMenuData);
+//        eventSlideMenu.dispatchEvent("com.simicart.add.navigation.more.locator",
+//                slideMenuData);
+//        eventSlideMenu.dispatchEvent("com.simicart.add.navigation.more.contactus",
+//                slideMenuData);
 
         // CMS
         addCMS();
@@ -363,16 +361,16 @@ public class PhoneSlideMenuController {
             if (!item.isSparator()) {
                 // event click barcode leftmenu
                 String nameItem = item.getName();
-                EventBlock block = new EventBlock();
-                Constants.itemName = nameItem;
-                block.dispatchEvent("com.simicart.leftmenu.slidemenucontroller.onnavigate.clickitem");
+//                EventBlock block = new EventBlock();
+//                Constants.itemName = nameItem;
+//                block.dispatchEvent("com.simicart.leftmenu.slidemenucontroller.onnavigate.clickitem");
                 TypeItem type = item.getType();
                 SimiFragment fragment = null;
                 if (type == TypeItem.NORMAL) {
                     fragment = navigateNormal(item);
                 } else if (type == TypeItem.PLUGIN) {
                     fragment = navigatePlugin(item);
-                    fragment.setShowPopup(item.isShowPopup());
+//                    fragment.setShowPopup(item.isShowPopup());
                 } else if (type == TypeItem.CMS) {
                     fragment = navigateCMS(item);
                 }
@@ -386,12 +384,12 @@ public class PhoneSlideMenuController {
                         check_keyboard_first = true;
                     } else {
                         // replace for tablet
-                        if (fragment.isShowPopup()) {
-                            SimiManager.getIntance().replacePopupFragment(
-                                    fragment);
-                        } else {
-                            SimiManager.getIntance().replaceFragment(fragment);
-                        }
+//                        if (fragment.isShowPopup()) {
+//                            SimiManager.getIntance().replacePopupFragment(
+//                                    fragment);
+//                        } else {
+//                            SimiManager.getIntance().replaceFragment(fragment);
+//                        }
                     }
 
                 }
@@ -419,7 +417,7 @@ public class PhoneSlideMenuController {
                 break;
             case "Setting":
                 fragment = SettingAppFragment.newInstance();
-                fragment.setShowPopup(true);
+//                fragment.setShowPopup(true);
                 break;
             default:
                 break;
@@ -546,13 +544,13 @@ public class PhoneSlideMenuController {
     }
 
     public void updateSignIn() {
-        String name = Config.getInstance().getText("My Account");
+        String name = SimiTranslator.getInstance().translate("My Account");
 
-        if (DataLocal.isSignInComplete()) {
-            name = DataLocal.getUsername();
+        if (DataPreferences.isSignInComplete()) {
+            name = DataPreferences.getUsername();
             addItemRelatedPersonal();
         } else {
-            name = Config.getInstance().getText("Sign in");
+            name = SimiTranslator.getInstance().translate("Sign in");
             removeItemRelatedPersonal();
         }
         mDelegate.setUpdateSignIn(name);

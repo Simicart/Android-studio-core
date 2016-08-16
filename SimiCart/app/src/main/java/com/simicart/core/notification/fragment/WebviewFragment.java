@@ -17,7 +17,7 @@ public class WebviewFragment extends SimiFragment {
 	public static WebviewFragment newInstance(String url) {
 		WebviewFragment fragment = new WebviewFragment();
 		Bundle bundle= new Bundle();
-		setData(Constants.KeyData.URL, url, Constants.KeyData.TYPE_STRING, bundle);
+//		setData(Constants.KeyData.URL, url, Constants.KeyData.TYPE_STRING, bundle);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -31,7 +31,7 @@ public class WebviewFragment extends SimiFragment {
 				Rconfig.getInstance().layout("core_webview_layout"), container,
 				false);
 		if(getArguments() != null){
-		url = (String) getData(Constants.KeyData.URL, Constants.KeyData.TYPE_STRING, getArguments());
+//		url = (String) getData(Constants.KeyData.URL, Constants.KeyData.TYPE_STRING, getArguments());
 		}
 		
 		final WebView webview = (WebView) rootView.findViewById(Rconfig

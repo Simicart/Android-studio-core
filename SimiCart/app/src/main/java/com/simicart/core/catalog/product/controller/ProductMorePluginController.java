@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.Config;
 
@@ -43,8 +44,8 @@ public class ProductMorePluginController extends SimiController {
 						.getIntance()
 						.getCurrentActivity()
 						.startActivity(
-								Intent.createChooser(sharingIntent, Config
-										.getInstance().getText("Share via")));
+								Intent.createChooser(sharingIntent, SimiTranslator
+										.getInstance().translate("Share via")));
 			}
 		};
 	}

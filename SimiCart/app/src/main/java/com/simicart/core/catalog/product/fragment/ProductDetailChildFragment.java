@@ -44,7 +44,7 @@ public class ProductDetailChildFragment extends SimiFragment {
 		ProductDetailChildFragment fragment = new ProductDetailChildFragment();
 		
 		Bundle bundle= new Bundle();
-		  setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, bundle);
+//		  setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, bundle);
 		    fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -65,7 +65,7 @@ public class ProductDetailChildFragment extends SimiFragment {
 				null, false);
 		SimiManager.getIntance().setChildFragment(getChildFragmentManager());
 		if(getArguments() != null){
-		mID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
+//		mID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
 		}
 
 		mBlock = new ProductDetailChildBlock(view, getActivity(),

@@ -10,6 +10,8 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.simicart.core.config.AppColorConfig;
+
 public class LayoutRipple extends CustomView {
 
 	int background;
@@ -17,8 +19,7 @@ public class LayoutRipple extends CustomView {
 	int rippleSize = 3;
 
 	OnClickListener onClickListener;
-	int backgroundColor = com.simicart.core.config.Config.getInstance()
-			.getApp_backrground();
+	int backgroundColor = AppColorConfig.getInstance().getColorButtonBackground();
 
 	Integer rippleColor;
 	Float xRippleOrigin;
@@ -122,14 +123,14 @@ public class LayoutRipple extends CustomView {
 		return true;
 	}
 
-	@Override
-	protected void onFocusChanged(boolean gainFocus, int direction,
-			Rect previouslyFocusedRect) {
-		if (!gainFocus) {
-			x = -1;
-			y = -1;
-		}
-	}
+//	@Override
+//	protected void onFocusChanged(boolean gainFocus, int direction,
+//			Rect previouslyFocusedRect) {
+//		if (!gainFocus) {
+//			x = -1;
+//			y = -1;
+//		}
+//	}
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {

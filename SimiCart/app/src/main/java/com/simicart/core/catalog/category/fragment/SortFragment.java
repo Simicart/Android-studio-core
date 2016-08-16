@@ -1,10 +1,5 @@
 package com.simicart.core.catalog.category.fragment;
 
-import java.util.ArrayList;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,12 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.block.SortBlock;
 import com.simicart.core.catalog.category.controller.SortController;
 import com.simicart.core.catalog.category.entity.Sort;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class SortFragment extends SimiFragment {
 
@@ -36,16 +35,16 @@ public class SortFragment extends SimiFragment {
 	public static SortFragment newInstance(String url, String id, String name, String sortTag, JSONObject json, String key, String query, String sortType) {
 			SortFragment fragment = new SortFragment();
 			Bundle bundle= new Bundle();
-			setData(Constants.KeyData.URL, url, Constants.KeyData.TYPE_STRING, bundle);
-			setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, bundle);
-			setData(Constants.KeyData.NAME, name, Constants.KeyData.TYPE_STRING, bundle);
-			setData(Constants.KeyData.SORT_TAG, sortTag, Constants.KeyData.TYPE_STRING, bundle);
-			if(json != null){
-			setData(Constants.KeyData.JSON_FILTER, json.toString(), Constants.KeyData.TYPE_JSONOBJECT, bundle);
-			}
-			setData(Constants.KeyData.KEY, key, Constants.KeyData.TYPE_STRING, bundle);
-			setData(Constants.KeyData.QUERY, query, Constants.KeyData.TYPE_STRING, bundle);
-			setData(Constants.KeyData.SORT_TYPE, sortType, Constants.KeyData.TYPE_STRING, bundle);
+//			setData(Constants.KeyData.URL, url, Constants.KeyData.TYPE_STRING, bundle);
+//			setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, bundle);
+//			setData(Constants.KeyData.NAME, name, Constants.KeyData.TYPE_STRING, bundle);
+//			setData(Constants.KeyData.SORT_TAG, sortTag, Constants.KeyData.TYPE_STRING, bundle);
+//			if(json != null){
+//			setData(Constants.KeyData.JSON_FILTER, json.toString(), Constants.KeyData.TYPE_JSONOBJECT, bundle);
+//			}
+//			setData(Constants.KeyData.KEY, key, Constants.KeyData.TYPE_STRING, bundle);
+//			setData(Constants.KeyData.QUERY, query, Constants.KeyData.TYPE_STRING, bundle);
+//			setData(Constants.KeyData.SORT_TYPE, sortType, Constants.KeyData.TYPE_STRING, bundle);
 		    fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -58,21 +57,21 @@ public class SortFragment extends SimiFragment {
 				false);
 		Context context = getActivity();
 		if(getArguments() != null){
-		mCategoryID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
-		mCategoryName = (String) getData(Constants.KeyData.NAME, Constants.KeyData.TYPE_STRING, getArguments());
-		url_search = (String) getData(Constants.KeyData.URL, Constants.KeyData.TYPE_STRING, getArguments());
-		KEY = (String) getData(Constants.KeyData.KEY, Constants.KeyData.TYPE_STRING, getArguments());
-		sort_tag = (String) getData(Constants.KeyData.SORT_TAG, Constants.KeyData.TYPE_STRING, getArguments());
-		String json = (String) getData(Constants.KeyData.JSON_FILTER, Constants.KeyData.TYPE_JSONOBJECT, getArguments());
-		try {
-			jsonFilter = new JSONObject(json);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		mCategoryID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
+//		mCategoryName = (String) getData(Constants.KeyData.NAME, Constants.KeyData.TYPE_STRING, getArguments());
+//		url_search = (String) getData(Constants.KeyData.URL, Constants.KeyData.TYPE_STRING, getArguments());
+//		KEY = (String) getData(Constants.KeyData.KEY, Constants.KeyData.TYPE_STRING, getArguments());
+//		sort_tag = (String) getData(Constants.KeyData.SORT_TAG, Constants.KeyData.TYPE_STRING, getArguments());
+//		String json = (String) getData(Constants.KeyData.JSON_FILTER, Constants.KeyData.TYPE_JSONOBJECT, getArguments());
+//		try {
+//			jsonFilter = new JSONObject(json);
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
-		mQuery = (String) getData(Constants.KeyData.QUERY, Constants.KeyData.TYPE_STRING, getArguments());
-		mSortType = (String) getData(Constants.KeyData.SORT_TYPE, Constants.KeyData.TYPE_STRING, getArguments());
+//		mQuery = (String) getData(Constants.KeyData.QUERY, Constants.KeyData.TYPE_STRING, getArguments());
+//		mSortType = (String) getData(Constants.KeyData.SORT_TYPE, Constants.KeyData.TYPE_STRING, getArguments());
 		}
 		
 		listSort = new ArrayList<Sort>();
@@ -81,7 +80,7 @@ public class SortFragment extends SimiFragment {
 		for (int i = 0; i < key.length; i++) {
 			Sort item = new Sort();
 			item.setId(i);
-			item.setTitle(Config.getInstance().getText(key[i]));
+			item.setTitle(SimiTranslator.getInstance().translate(key[i]));
 			listSort.add(item);
 		}
 		mBlock = new SortBlock(view, context);

@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.event.block.CacheBlock;
-import com.simicart.core.event.block.EventBlock;
 
 public class SimiBlock implements SimiDelegate {
     protected View mView;
@@ -23,7 +21,7 @@ public class SimiBlock implements SimiDelegate {
 
     public SimiBlock(View view, Context context) {
         mView = view;
-        mView.setBackgroundColor(Config.getInstance().getApp_backrground());
+        mView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 
         mContext = context;
         LayoutInflater inflater = (LayoutInflater) mContext
@@ -79,13 +77,13 @@ public class SimiBlock implements SimiDelegate {
     }
 
     public void event(String name, SimiCollection collection) {
-        CacheBlock cacheBlock = new CacheBlock();
-        cacheBlock.setBlock(this);
-        cacheBlock.setView(mView);
-        cacheBlock.setContext(mContext);
-        cacheBlock.setSimiCollection(collection);
-        EventBlock eventBlock = new EventBlock();
-        eventBlock.dispatchEvent(name, cacheBlock);
+//        CacheBlock cacheBlock = new CacheBlock();
+//        cacheBlock.setBlock(this);
+//        cacheBlock.setView(mView);
+//        cacheBlock.setContext(mContext);
+//        cacheBlock.setSimiCollection(collection);
+//        EventBlock eventBlock = new EventBlock();
+//        eventBlock.dispatchEvent(name, cacheBlock);
     }
 
     public View id(String id) {

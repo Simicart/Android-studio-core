@@ -19,7 +19,6 @@ import com.simicart.core.banner.delegate.BannerDelegate;
 import com.simicart.core.banner.entity.BannerEntity;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
@@ -28,7 +27,6 @@ import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.event.controller.EventController;
 import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 
 import java.util.ArrayList;
@@ -172,9 +170,9 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
 
     public void onSliderClickListener(BannerEntity banner_ad) {
        // SimiManager.getIntance().hideKeyboard();
-        EventController dispacth = new EventController();
-        dispacth.dispatchEvent("com.simicart.banner.touchEvent",
-                banner_ad.getUrl());
+//        EventController dispacth = new EventController();
+//        dispacth.dispatchEvent("com.simicart.banner.touchEvent",
+//                banner_ad.getUrl());
         // end dispatch
         SimiFragment fragment = null;
         if (banner_ad.getType() != null) {

@@ -14,15 +14,15 @@ import android.widget.TextView;
 
 import com.magestore.simicart.R;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.ProductPriceViewProductGridV03;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.event.block.EventBlock;
 
 import java.util.ArrayList;
 
@@ -98,20 +98,20 @@ public class ProductGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             tv_name = (TextView) v.findViewById(Rconfig
                     .getInstance().id("tv_name"));
             tv_name
-                    .setTextColor(Config.getInstance().getContent_color());
+                    .setTextColor(AppColorConfig.getInstance().getContentColor());
             ll_price = (LinearLayout) v.findViewById(Rconfig
                     .getInstance().id("ll_price"));
             img_avartar = (ImageView) v.findViewById(Rconfig
                     .getInstance().id("img_avartar"));
             layout_stock = (LinearLayout) v
                     .findViewById(Rconfig.getInstance().id("layout_stock"));
-            layout_stock.setBackgroundColor(Config.getInstance()
-                    .getOut_stock_background());
+            layout_stock.setBackgroundColor(AppColorConfig.getInstance()
+                    .getOutStockBackgroundColor());
 
             txt_outstock = (TextView) v.findViewById(Rconfig
                     .getInstance().id("txt_out_stock"));
-            txt_outstock.setTextColor(Config.getInstance()
-                    .getOut_stock_text());
+            txt_outstock.setTextColor(AppColorConfig.getInstance()
+                    .getOutStockTextColor());
             rl_product_list = (RelativeLayout) v
                     .findViewById(Rconfig.getInstance().id("rel_product_list"));
             LinearLayout.LayoutParams paramsLayout2 = new LinearLayout.LayoutParams(
@@ -178,7 +178,7 @@ public class ProductGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 vhItem.layout_stock.setVisibility(View.GONE);
             } else {
                 vhItem.layout_stock.setVisibility(View.VISIBLE);
-                vhItem.txt_outstock.setText(Config.getInstance().getText(
+                vhItem.txt_outstock.setText(SimiTranslator.getInstance().translate(
                         "Out Stock"));
             }
 
@@ -223,14 +223,14 @@ public class ProductGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             });
 
-            EventBlock eventBlock = new EventBlock();
-            if (headercount == 4) {
-                eventBlock.dispatchEvent("com.simicart.image.product.grid4col",
-                        vhItem.rl_product_list, product);
-            } else {
-                eventBlock.dispatchEvent("com.simicart.image.product.grid",
-                        vhItem.rl_product_list, product);
-            }
+//            EventBlock eventBlock = new EventBlock();
+//            if (headercount == 4) {
+//                eventBlock.dispatchEvent("com.simicart.image.product.grid4col",
+//                        vhItem.rl_product_list, product);
+//            } else {
+//                eventBlock.dispatchEvent("com.simicart.image.product.grid",
+//                        vhItem.rl_product_list, product);
+//            }
         }
 
     }

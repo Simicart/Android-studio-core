@@ -20,9 +20,11 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.delegate.CustomerReviewDelegate;
 import com.simicart.core.catalog.product.entity.CustomerReview;
 import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
@@ -51,8 +53,8 @@ public class CustomerReviewBlock extends SimiBlock implements
 	public void initView() {
 		lv_customerReview = (ListView) mView.findViewById(Rconfig.getInstance()
 				.id("lv_customerReview"));
-		ColorDrawable sage = new ColorDrawable(Config.getInstance()
-				.getLine_color());
+		ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance()
+				.getLineColor());
 		lv_customerReview.setDivider(sage);
 		lv_customerReview.setDividerHeight(1);
 		mReviews = new ArrayList<CustomerReview>();
@@ -94,7 +96,7 @@ public class CustomerReviewBlock extends SimiBlock implements
 		LayerDrawable starcolor = (LayerDrawable) ratingBar
 				.getProgressDrawable();
 		starcolor.getDrawable(2).setColorFilter(
-				Config.getInstance().getColorMain(), PorterDuff.Mode.SRC_ATOP);
+				AppColorConfig.getInstance().getKeyColor(), PorterDuff.Mode.SRC_ATOP);
 
 		int starQuantity1 = mRatingStar.get(0);
 		int starQuantity2 = mRatingStar.get(1);
@@ -116,7 +118,7 @@ public class CustomerReviewBlock extends SimiBlock implements
 		// set color
 		LayerDrawable process5 = (LayerDrawable) pr5.getProgressDrawable();
 		process5.getDrawable(2).setColorFilter(
-				Config.getInstance().getColorMain(), PorterDuff.Mode.SRC_ATOP);
+				AppColorConfig.getInstance().getKeyColor(), PorterDuff.Mode.SRC_ATOP);
 		TextView tv_starQuantity5 = (TextView) header.findViewById(Rconfig
 				.getInstance().id("tv_quantity5"));
 
@@ -128,7 +130,7 @@ public class CustomerReviewBlock extends SimiBlock implements
 				.getInstance().id("progressBar4"));
 		LayerDrawable process4 = (LayerDrawable) pr4.getProgressDrawable();
 		process4.getDrawable(2).setColorFilter(
-				Config.getInstance().getColorMain(), PorterDuff.Mode.SRC_ATOP);
+				AppColorConfig.getInstance().getKeyColor(), PorterDuff.Mode.SRC_ATOP);
 
 		TextView tv_starQuantity4 = (TextView) header.findViewById(Rconfig
 				.getInstance().id("tv_quantity4"));
@@ -141,7 +143,7 @@ public class CustomerReviewBlock extends SimiBlock implements
 		// set color
 		LayerDrawable process3 = (LayerDrawable) pr3.getProgressDrawable();
 		process3.getDrawable(2).setColorFilter(
-				Config.getInstance().getColorMain(), PorterDuff.Mode.SRC_ATOP);
+				AppColorConfig.getInstance().getKeyColor(), PorterDuff.Mode.SRC_ATOP);
 
 		TextView tv_starQuantity3 = (TextView) header.findViewById(Rconfig
 				.getInstance().id("tv_quantity3"));
@@ -154,7 +156,7 @@ public class CustomerReviewBlock extends SimiBlock implements
 		// set color
 		LayerDrawable process2 = (LayerDrawable) pr2.getProgressDrawable();
 		process2.getDrawable(2).setColorFilter(
-				Config.getInstance().getColorMain(), PorterDuff.Mode.SRC_ATOP);
+				AppColorConfig.getInstance().getKeyColor(), PorterDuff.Mode.SRC_ATOP);
 		TextView tv_quantity2 = (TextView) header.findViewById(Rconfig
 				.getInstance().id("tv_quantity2"));
 		tv_quantity2.setText("" + starQuantity2);
@@ -166,49 +168,49 @@ public class CustomerReviewBlock extends SimiBlock implements
 		// set color
 		LayerDrawable process1 = (LayerDrawable) pr1.getProgressDrawable();
 		process1.getDrawable(2).setColorFilter(
-				Config.getInstance().getColorMain(), PorterDuff.Mode.SRC_ATOP);
+				AppColorConfig.getInstance().getKeyColor(), PorterDuff.Mode.SRC_ATOP);
 		TextView tv_quantity1 = (TextView) header.findViewById(Rconfig
 				.getInstance().id("tv_quantity1"));
 		tv_quantity1.setText("" + starQuantity1);
 
 		TextView star5 = (TextView) header.findViewById(Rconfig.getInstance()
 				.id("tv_star5"));
-		star5.setText("5 " + Config.getInstance().getText("Star"));
+		star5.setText("5 " + SimiTranslator.getInstance().translate("Star"));
 
 		TextView star4 = (TextView) header.findViewById(Rconfig.getInstance()
 				.id("tv_star4"));
-		star4.setText("4 " + Config.getInstance().getText("Star"));
+		star4.setText("4 " + SimiTranslator.getInstance().translate("Star"));
 
 		TextView star3 = (TextView) header.findViewById(Rconfig.getInstance()
 				.id("tv_star3"));
-		star3.setText("3 " + Config.getInstance().getText("Star"));
+		star3.setText("3 " + SimiTranslator.getInstance().translate("Star"));
 
 		TextView star2 = (TextView) header.findViewById(Rconfig.getInstance()
 				.id("tv_star2"));
-		star2.setText("2 " + Config.getInstance().getText("Star"));
+		star2.setText("2 " + SimiTranslator.getInstance().translate("Star"));
 
 		TextView star1 = (TextView) header.findViewById(Rconfig.getInstance()
 				.id("tv_star1"));
-		star1.setText("1 " + Config.getInstance().getText("Star"));
+		star1.setText("1 " + SimiTranslator.getInstance().translate("Star"));
 
 		TextView tv_title = (TextView) header.findViewById(Rconfig
 				.getInstance().id("tv_titleHeader"));
-		tv_title.setTextColor(Config.getInstance().getContent_color());
+		tv_title.setTextColor(AppColorConfig.getInstance().getContentColor());
 		tv_title.setText(mProduct.getName());
 
 		TextView txt_stock = (TextView) header.findViewById(Rconfig
 				.getInstance().id("txt_stock"));
-		txt_stock.setTextColor(Config.getInstance().getContent_color());
+		txt_stock.setTextColor(AppColorConfig.getInstance().getContentColor());
 		if (mProduct.getStock()) {
-			txt_stock.setText(Config.getInstance().getText("In Stock"));
+			txt_stock.setText(SimiTranslator.getInstance().translate("In Stock"));
 		} else {
-			txt_stock.setText(Config.getInstance().getText("Out Stock"));
+			txt_stock.setText(SimiTranslator.getInstance().translate("Out Stock"));
 		}
 
 		TextView tvTitle = (TextView) header.findViewById(Rconfig.getInstance()
 				.id("txt_titleReview"));
-		tvTitle.setText(Config.getInstance().getText("Customer Reviews"));
-		tvTitle.setTextColor(Config.getInstance().getContent_color());
+		tvTitle.setText(SimiTranslator.getInstance().translate("Customer Reviews"));
+		tvTitle.setTextColor(AppColorConfig.getInstance().getContentColor());
 
 		lv_customerReview.addHeaderView(header);
 	}

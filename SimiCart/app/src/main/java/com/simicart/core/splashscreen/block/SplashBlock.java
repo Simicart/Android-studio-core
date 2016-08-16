@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
@@ -34,7 +35,7 @@ public class SplashBlock {
 				.getInstance().getId(mContext, "core_splash_screen_tv_demo",
 						"id"));
 		tv_demo.setText(Html.fromHtml(textdemo));
-		tv_demo.setTextColor(Config.getInstance().getColorMain());
+		tv_demo.setTextColor(AppColorConfig.getInstance().getKeyColor());
 		if (Config.getInstance().getDemoEnable().equals("DEMO_ENABLE")
 				|| Config.getInstance().getDemoEnable().toUpperCase()
 						.equals("YES")) {

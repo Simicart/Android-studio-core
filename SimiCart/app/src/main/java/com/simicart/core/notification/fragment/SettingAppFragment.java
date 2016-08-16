@@ -14,6 +14,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -34,14 +36,14 @@ public class SettingAppFragment extends SimiFragment {
 
 		final TextView tv_notification = (TextView) rootView
 				.findViewById(Rconfig.getInstance().id("tv_notification"));
-		tv_notification.setText(Config.getInstance().getText(
+		tv_notification.setText(SimiTranslator.getInstance().translate(
 				"Show notifications"));
 
 //		final ToggleButton tg_button = (ToggleButton) rootView
 //				.findViewById(Rconfig.getInstance().id("tg_button"));
 		Switch tg_button = (Switch) rootView.findViewById(Rconfig.getInstance().id("tg_button"));
 		
-		if (DataLocal.enableNotification()) {
+		if (DataPreferences.enableNotification()) {
 			tg_button.setChecked(true);
 		} else {
 			tg_button.setChecked(false);
@@ -50,7 +52,7 @@ public class SettingAppFragment extends SimiFragment {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				DataLocal.saveNotificationSet(isChecked);
+				DataPreferences.saveNotificationSet(isChecked);
 			}
 		});
 		
@@ -69,7 +71,7 @@ public class SettingAppFragment extends SimiFragment {
 
 		final TextView tv_location = (TextView) rootView.findViewById(Rconfig
 				.getInstance().id("tv_location"));
-		tv_location.setText(Config.getInstance().getText("Location Setting"));
+		tv_location.setText(SimiTranslator.getInstance().translate("Location Setting"));
 
 		return rootView;
 	}

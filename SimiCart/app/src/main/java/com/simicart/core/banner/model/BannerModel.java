@@ -7,7 +7,7 @@ public class BannerModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.GET_LIST_BANNER;
+		mUrlAction = Constants.GET_LIST_BANNER;
 	}
 
 	@Override

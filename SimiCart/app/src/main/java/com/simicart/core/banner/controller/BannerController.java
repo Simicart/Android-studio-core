@@ -2,6 +2,8 @@ package com.simicart.core.banner.controller;
 
 import com.simicart.core.banner.delegate.BannerDelegate;
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.model.collection.SimiCollection;
 
 public class BannerController extends SimiController {
 	protected BannerDelegate mDelegate;
@@ -17,15 +19,21 @@ public class BannerController extends SimiController {
 	@Override
 	public void onStart() {
 		// mDelegate.showLoading();
-		ModelDelegate delegate = new ModelDelegate() {
-
+		mModel.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
-			public void callBack(String message, boolean isSuccess) {
-				// mDelegate.dismissLoading();
+			public void onSuccess(SimiCollection collection) {
 				mDelegate.updateView(mModel.getCollection());
-
 			}
-		};
+		});
+//		ModelDelegate delegate = new ModelDelegate() {
+//
+//			@Override
+//			public void callBack(String message, boolean isSuccess) {
+//				// mDelegate.dismissLoading();
+//				mDelegate.updateView(mModel.getCollection());
+//
+//			}
+//		};
 //		mModel = new BannerModel();
 //		mModel.setDelegate(delegate);
 //		mModel.addParam("limit", "10");

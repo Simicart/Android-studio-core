@@ -341,11 +341,19 @@ public class AppColorConfig extends SimiEntity {
     }
 
     public int getOutStockBackgroundColor() {
-        return parseColor("#c5c5c6");
+        return parseColor("#8b8b8b");
     }
 
     public int getOutStockTextColor() {
         return parseColor("#ffffff");
+    }
+
+    public int getSectionTextColor() {
+        return parseColor("#000000");
+    }
+
+    public int getSearchIConColor() {
+        return parseColor("#8b8b8b");
     }
 
 }

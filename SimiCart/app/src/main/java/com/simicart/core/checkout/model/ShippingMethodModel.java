@@ -32,7 +32,7 @@ public class ShippingMethodModel extends SimiModel {
 	}
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray data = this.mJSON.getJSONArray("data");
 			collection = new SimiCollection();
@@ -83,7 +83,7 @@ public class ShippingMethodModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.SAVE_SHIPPING_METHOD;
+		mUrlAction = Constants.SAVE_SHIPPING_METHOD;
 	}
 
 }

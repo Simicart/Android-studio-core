@@ -11,6 +11,7 @@ import android.webkit.WebSettings.TextSize;
 import android.webkit.WebView;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
@@ -21,8 +22,8 @@ public class ConditionFragment extends SimiFragment {
 	public static ConditionFragment newInstance(String content) {
 		ConditionFragment fragment = new ConditionFragment();
 		Bundle bundle = new Bundle();
-		setData(Constants.KeyData.CONTENT, content,
-				Constants.KeyData.TYPE_STRING, bundle);
+//		setData(Constants.KeyData.CONTENT, content,
+//				Constants.KeyData.TYPE_STRING, bundle);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -37,15 +38,15 @@ public class ConditionFragment extends SimiFragment {
 						"core_information_description_layout"), container,
 				false);
 		if (getArguments() != null) {
-			mContent = (String) getData(Constants.KeyData.CONTENT,
-					Constants.KeyData.TYPE_STRING, getArguments());
+//			mContent = (String) getData(Constants.KeyData.CONTENT,
+//					Constants.KeyData.TYPE_STRING, getArguments());
 		}
 
 		WebView webView = (WebView) rootView.findViewById(Rconfig.getInstance()
 				.id("webview"));
 
 		WebSettings setting = webView.getSettings();
-		webView.setBackgroundColor(Config.getInstance().getApp_backrground());
+		webView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 		setting.setJavaScriptEnabled(true);
 		setting.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 		setting.setLoadWithOverviewMode(true);

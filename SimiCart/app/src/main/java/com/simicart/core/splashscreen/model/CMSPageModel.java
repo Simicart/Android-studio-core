@@ -6,9 +6,9 @@ import com.simicart.core.config.Constants;
 public class CMSPageModel extends SimiModel {
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		// TODO Auto-generated method stub
-		super.paserData();
+		super.parseData();
 	}
 
 	@Override
@@ -18,7 +18,7 @@ public class CMSPageModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.GET_CMS_PAGES;
+		mUrlAction = Constants.GET_CMS_PAGES;
 	}
 
 }

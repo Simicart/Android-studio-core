@@ -16,7 +16,7 @@ public class SimiTranslator {
         mLanguages = new HashMap<String, String>();
     }
 
-    public static SimiTranslator newInstance() {
+    public static SimiTranslator getInstance() {
         if(instance == null) {
             instance = new SimiTranslator();
         }

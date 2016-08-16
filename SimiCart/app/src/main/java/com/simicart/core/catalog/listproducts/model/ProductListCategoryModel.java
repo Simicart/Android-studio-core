@@ -23,7 +23,7 @@ public class ProductListCategoryModel extends SimiModel {
     private ArrayList<Product> listProduct = new ArrayList<>();
 
     @Override
-    protected void paserData() {
+    protected void parseData() {
         try {
             JSONArray list = this.mJSON.getJSONArray("data");
             if (null == collection) {
@@ -86,7 +86,7 @@ public class ProductListCategoryModel extends SimiModel {
 
     @Override
     protected void setUrlAction() {
-        url_action = Constants.GET_CATEGORY_PRODUCTS;
+        mUrlAction = Constants.GET_CATEGORY_PRODUCTS;
     }
 
     @Override

@@ -18,11 +18,11 @@ public class CategoryModel extends SimiModel {
 
     @Override
     protected void setUrlAction() {
-        url_action = Constants.GET_CATEGORY_LIST;
+        mUrlAction = Constants.GET_CATEGORY_LIST;
     }
 
     @Override
-    protected void paserData() {
+    protected void parseData() {
         try {
             JSONArray list = this.mJSON.getJSONArray("data");
             collection = new SimiCollection();

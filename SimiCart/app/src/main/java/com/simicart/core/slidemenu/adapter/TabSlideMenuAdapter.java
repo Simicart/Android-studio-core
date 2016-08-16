@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.config.Config;
 
 public class TabSlideMenuAdapter extends FragmentStatePagerAdapter {
@@ -36,8 +37,8 @@ public class TabSlideMenuAdapter extends FragmentStatePagerAdapter {
 	}
 
 	private void addTitle() {
-		mListTitle.add(Config.getInstance().getText("Menu"));
-		mListTitle.add(Config.getInstance().getText("Category"));
+		mListTitle.add(SimiTranslator.getInstance().translate("Menu"));
+		mListTitle.add(SimiTranslator.getInstance().translate("Category"));
 	}
 
 	// @Override

@@ -9,7 +9,7 @@ public class SearchListModel extends ProductListCategoryModel {
 
     @Override
     protected void setUrlAction() {
-        url_action = Constants.SEARCH_PRODUCTS;
+        mUrlAction = Constants.SEARCH_PRODUCTS;
     }
 
 }

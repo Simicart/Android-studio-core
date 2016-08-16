@@ -24,6 +24,7 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.delegate.ProductDelegate;
 import com.simicart.core.catalog.product.delegate.ProductDetailAdapterDelegate;
 import com.simicart.core.catalog.product.entity.CacheOption;
@@ -31,7 +32,7 @@ import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.OptionFragment;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -87,8 +88,8 @@ public class ProductDetailParentBlock extends SimiBlock implements
                 "ll_bottom_product_detail"));
         rlt_top.setBackgroundResource(Rconfig.getInstance().drawable(
                 "core_backgroud_top_product_detail"));
-        rlt_top.setBackgroundColor(Color.parseColor(Config.getInstance()
-                .getSection_color()));
+        rlt_top.setBackgroundColor(AppColorConfig.getInstance()
+                .getSectionColor());
         rlt_top.getBackground().setAlpha(100);
 
         // details
@@ -98,13 +99,13 @@ public class ProductDetailParentBlock extends SimiBlock implements
 
         TextView tv_more = (TextView) mView.findViewById(Rconfig.getInstance()
                 .id("tv_more"));
-        tv_more.setText(Config.getInstance().getText("More"));
-        tv_more.setTextColor(Config.getInstance().getContent_color());
+        tv_more.setText(SimiTranslator.getInstance().translate("More"));
+        tv_more.setTextColor(AppColorConfig.getInstance().getContentColor());
         ImageView img_icon_more = (ImageView) mView.findViewById(Rconfig
                 .getInstance().id("img_more"));
         Drawable icon = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("core_icon_more"));
-        icon.setColorFilter(Config.getInstance().getContent_color(),
+        icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
                 PorterDuff.Mode.SRC_ATOP);
         img_icon_more.setImageDrawable(icon);
 
@@ -114,7 +115,7 @@ public class ProductDetailParentBlock extends SimiBlock implements
         Drawable icon_img_seprate = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("core_background_right_border"));
         icon_img_seprate.setColorFilter(
-                Config.getInstance().getContent_color(),
+                AppColorConfig.getInstance().getContentColor(),
                 PorterDuff.Mode.SRC_ATOP);
         img_seprate.setImageDrawable(icon_img_seprate);
         /* end Frank: fix bug display "More" length */
@@ -137,7 +138,7 @@ public class ProductDetailParentBlock extends SimiBlock implements
         // indicator
         mIndicator = (CirclePageIndicator) mView.findViewById(Rconfig
                 .getInstance().id("indicator"));
-        mIndicator.setFillColor(Config.getInstance().getColorMain());
+        mIndicator.setFillColor(AppColorConfig.getInstance().getKeyColor());
         if (DataLocal.isTablet) {
             mIndicator.setScaleX(1.5f);
             mIndicator.setScaleY(1.5f);
@@ -195,8 +196,7 @@ public class ProductDetailParentBlock extends SimiBlock implements
         if (null != mProduct) {
             String name_product = mProduct.getName();
             tv_name_product.setVisibility(View.VISIBLE);
-            tv_name_product.setTextColor(Config.getInstance()
-                    .getContent_color());
+            tv_name_product.setTextColor(AppColorConfig.getInstance().getContentColor());
             if (Utils.validateString(name_product)) {
 
                 Log.e("ProductDetailParentBlock ", "showNameProduct "
@@ -215,21 +215,21 @@ public class ProductDetailParentBlock extends SimiBlock implements
         if (null == options || options.size() == 0) {
 
             bg_button.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
-            btn_option.setText(Config.getInstance().getText("No Option"));
+            btn_option.setText(SimiTranslator.getInstance().translate("No Option"));
             btn_option.setTextColor(Color.parseColor("#FFFFFF"));
             btn_option.setClickable(false);
             btn_option.setVisibility(View.GONE);
             btn_option.setTextSize(Constants.SIZE_TEXT_BUTTON);
-            btn_option.setBackgroundColor(Config.getInstance().getColorMain());
+            btn_option.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
         } else {
-            bg_button.setColorFilter(Config.getInstance().getColorMain(),
+            bg_button.setColorFilter(AppColorConfig.getInstance().getKeyColor(),
                     PorterDuff.Mode.SRC_ATOP);
             btn_option.setVisibility(View.VISIBLE);
-            btn_option.setText(Config.getInstance().getText("Options"));
+            btn_option.setText(SimiTranslator.getInstance().translate("Options"));
             btn_option.setTextColor(Color.parseColor("#FFFFFF"));
             btn_option.setClickable(true);
             btn_option.setTextSize(Constants.SIZE_TEXT_BUTTON);
-            btn_option.setBackgroundColor(Config.getInstance().getColorMain());
+            btn_option.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
         }
     }
 
@@ -239,16 +239,15 @@ public class ProductDetailParentBlock extends SimiBlock implements
                 Rconfig.getInstance().drawable("core_background_button"));
 
         if (stock) {
-            bg_button.setColorFilter(Config.getInstance().getColorMain(),
+            bg_button.setColorFilter(AppColorConfig.getInstance().getKeyColor(),
                     PorterDuff.Mode.SRC_ATOP);
-            btn_addtocart.setText(Config.getInstance().getText("Add To Cart"));
+            btn_addtocart.setText(SimiTranslator.getInstance().translate("Add To Cart"));
             btn_addtocart.setTextColor(Color.parseColor("#FFFFFF"));
-            btn_addtocart.setBackgroundColor(Config.getInstance()
-                    .getColorMain());
+            btn_addtocart.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
             btn_addtocart.setTextSize(Constants.SIZE_TEXT_BUTTON);
         } else {
             bg_button.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
-            btn_addtocart.setText(Config.getInstance().getText("Out Stock"));
+            btn_addtocart.setText(SimiTranslator.getInstance().translate("Out Stock"));
             btn_addtocart.setTextColor(Color.parseColor("#FFFFFF"));
             btn_addtocart.setBackgroundColor(Color.GRAY);
             btn_addtocart.setTextSize(Constants.SIZE_TEXT_BUTTON);

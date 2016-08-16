@@ -15,14 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.event.block.EventBlock;
 
 import java.util.ArrayList;
 
@@ -60,18 +61,18 @@ public class RelatedProductListAdapter extends BaseAdapter {
             holder.txtName = (TextView) convertView.findViewById(Rconfig
                     .getInstance().id("tv_productItemName"));
             holder.txtName
-                    .setTextColor(Config.getInstance().getContent_color());
+                    .setTextColor(AppColorConfig.getInstance().getContentColor());
             holder.imageView = (ImageView) convertView.findViewById(Rconfig
                     .getInstance().id("iv_productItemImage"));
             holder.layoutStock = (LinearLayout) convertView
                     .findViewById(Rconfig.getInstance().id("layout_stock"));
-            holder.layoutStock.setBackgroundColor(Config.getInstance()
-                    .getOut_stock_background());
+            holder.layoutStock.setBackgroundColor(AppColorConfig.getInstance()
+                    .getOutStockBackgroundColor());
             ImageView ic_expand = (ImageView) convertView.findViewById(Rconfig
                     .getInstance().id("ic_expand"));
             Drawable icon = mContext.getResources().getDrawable(
                     Rconfig.getInstance().drawable("ic_extend"));
-            icon.setColorFilter(Config.getInstance().getContent_color(),
+            icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
                     PorterDuff.Mode.SRC_ATOP);
             ic_expand.setImageDrawable(icon);
 
@@ -83,8 +84,8 @@ public class RelatedProductListAdapter extends BaseAdapter {
                     .findViewById(Rconfig.getInstance().id("tv_minimal"));
             holder.txt_outstock = (TextView) convertView.findViewById(Rconfig
                     .getInstance().id("txt_out_stock"));
-            holder.txt_outstock.setTextColor(Config.getInstance()
-                    .getOut_stock_text());
+            holder.txt_outstock.setTextColor(AppColorConfig.getInstance()
+                    .getOutStockTextColor());
 
             convertView.setTag(holder);
         } else {
@@ -139,16 +140,16 @@ public class RelatedProductListAdapter extends BaseAdapter {
             holder.layoutStock.setVisibility(View.GONE);
         } else {
             holder.layoutStock.setVisibility(View.VISIBLE);
-            holder.txt_outstock.setText(Config.getInstance().getText(
+            holder.txt_outstock.setText(SimiTranslator.getInstance().translate(
                     "Out Stock"));
         }
 
         RelativeLayout rl_product_list = (RelativeLayout) convertView
                 .findViewById(Rconfig.getInstance().id("rel_product_list"));
 
-        EventBlock eventBlock = new EventBlock();
-        eventBlock.dispatchEvent("com.simicart.image.product.list",
-                rl_product_list, product);
+//        EventBlock eventBlock = new EventBlock();
+//        eventBlock.dispatchEvent("com.simicart.image.product.list",
+//                rl_product_list, product);
         return convertView;
     }
 
@@ -267,8 +268,8 @@ public class RelatedProductListAdapter extends BaseAdapter {
             float incl_tax_to = priceV2.getInclTaxTo();
             float excl_tax_from = priceV2.getExclTaxFrom();
             float excl_tax_to = priceV2.getExclTaxTo();
-            String from_text = Config.getInstance().getText("From");
-            String to_text = Config.getInstance().getText("To");
+            String from_text = SimiTranslator.getInstance().translate("From");
+            String to_text = SimiTranslator.getInstance().translate("To");
             if (incl_tax_from > -1) {
                 holder.tv_regular_price.setText(Html.fromHtml(getHtmlForPrice(
                         incl_tax_from, from_text)));
@@ -310,19 +311,19 @@ public class RelatedProductListAdapter extends BaseAdapter {
     }
 
     protected String getHtmlForPrice(float price) {
-        return "<font color='" + Config.getInstance().getPrice_color() + "'>"
-                + Config.getInstance().getPrice("" + price) + "</font>";
+        return "<font color='" + AppColorConfig.getInstance().getPriceColor() + "'>"
+                + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
     protected String getHtmlForPrice(float price, String label) {
-        return "<font color='" + Config.getInstance().getPrice_color() + "'>"
+        return "<font color='" + AppColorConfig.getInstance().getPriceColor() + "'>"
                 + label + ": </font><font color='"
-                + Config.getInstance().getPrice_color() + "'>"
-                + Config.getInstance().getPrice("" + price) + "</font>";
+                + AppColorConfig.getInstance().getPriceColor() + "'>"
+                + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
     protected String getHtmlForSpecialPrice(float price) {
-        return "<font color='" + Config.getInstance().getSpecial_price_color()
-                + "'>" + Config.getInstance().getPrice("" + price) + "</font>";
+        return "<font color='" + AppColorConfig.getInstance().getSpecialPriceColor()
+                + "'>" + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 }

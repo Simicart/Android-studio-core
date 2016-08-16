@@ -35,7 +35,7 @@ public class PlaceOrderModel extends SimiModel {
 	}
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 
 			Log.e("PlaceOrderModel JSON : ", mJSON.toString());
@@ -95,7 +95,7 @@ public class PlaceOrderModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.PLACE_ORDER;
+		mUrlAction = Constants.PLACE_ORDER;
 	}
 
 }

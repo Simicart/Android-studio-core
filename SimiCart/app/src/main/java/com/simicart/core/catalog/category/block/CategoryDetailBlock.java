@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.category.block;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -13,20 +11,21 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.devsmart.android.ui.HorizontalListView;
 import com.simicart.core.adapter.ProductBaseAdapter;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.controller.ProductListListenerController;
 import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
+
+import java.util.ArrayList;
 
 public class CategoryDetailBlock extends SimiBlock implements SimiDelegate {
 	protected String mName;
@@ -43,7 +42,7 @@ public class CategoryDetailBlock extends SimiBlock implements SimiDelegate {
 	public CategoryDetailBlock(View view, Context context) {
 		super(view, context);
 		if (DataLocal.isTablet) {
-			view.setBackgroundColor(Config.getInstance().getMenu_background());
+			view.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
 		}
 	}
 
@@ -68,7 +67,7 @@ public class CategoryDetailBlock extends SimiBlock implements SimiDelegate {
 				.getInstance().id("rl_categoryParentLable"));
 		tv_CategoryName = (TextView) mView.findViewById(Rconfig.getInstance()
 				.id("tv_category"));
-		tv_CategoryName.setText(Config.getInstance().getText(mName)
+		tv_CategoryName.setText(SimiTranslator.getInstance().translate(mName)
 				.toUpperCase());
 		if (DataLocal.isLanguageRTL) {
 			tv_CategoryName.setGravity(Gravity.RIGHT);
@@ -76,20 +75,20 @@ public class CategoryDetailBlock extends SimiBlock implements SimiDelegate {
 		tv_viewmore = (TextView) mView.findViewById(Rconfig.getInstance().id(
 				"tv_viewmore"));
 		if (DataLocal.isTablet) {
-			tv_viewmore.setTextColor(Config.getInstance().getMenu_text_color());
-			tv_CategoryName.setTextColor(Config.getInstance()
-					.getMenu_text_color());
+			tv_viewmore.setTextColor(AppColorConfig.getInstance().getMenuTextColor());
+			tv_CategoryName.setTextColor(AppColorConfig.getInstance()
+					.getMenuTextColor());
 		} else {
-			tv_viewmore.setTextColor(Config.getInstance().getContent_color());
-			tv_CategoryName.setTextColor(Config.getInstance()
-					.getContent_color());
+			tv_viewmore.setTextColor(AppColorConfig.getInstance().getContentColor());
+			tv_CategoryName.setTextColor(AppColorConfig.getInstance()
+					.getContentColor());
 		}
-		tv_viewmore.setText(Config.getInstance().getText("View more"));
+		tv_viewmore.setText(SimiTranslator.getInstance().translate("View more"));
 		iv_showmore = (ImageView) mView.findViewById(Rconfig.getInstance().id(
 				"iv_showmore"));
 		Drawable icon = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("ic_view_all"));
-		icon.setColorFilter(Config.getInstance().getContent_color(),
+		icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		iv_showmore.setImageDrawable(icon);
 
@@ -101,9 +100,9 @@ public class CategoryDetailBlock extends SimiBlock implements SimiDelegate {
 		View v_line = (View) mView.findViewById(Rconfig.getInstance().id(
 				"v_line"));
 		if (DataLocal.isTablet) {
-			v_line.setBackgroundColor(Config.getInstance().getMenu_line_color());
+			v_line.setBackgroundColor(AppColorConfig.getInstance().getMenuLineColor());
 		} else {
-			v_line.setBackgroundColor(Config.getInstance().getLine_color());
+			v_line.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
 		}
 	}
 
@@ -118,7 +117,7 @@ public class CategoryDetailBlock extends SimiBlock implements SimiDelegate {
 					.getInstance().id("iv_back"));
 			Drawable icon_back = mContext.getResources().getDrawable(
 					Rconfig.getInstance().drawable("ic_back"));
-			icon_back.setColorFilter(Config.getInstance().getMenu_icon_color(),
+			icon_back.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
 					PorterDuff.Mode.SRC_ATOP);
 			iv_back.setImageDrawable(icon_back);
 
@@ -136,7 +135,7 @@ public class CategoryDetailBlock extends SimiBlock implements SimiDelegate {
 			});
 			Drawable icon = mContext.getResources().getDrawable(
 					Rconfig.getInstance().drawable("ic_view_all"));
-			icon.setColorFilter(Config.getInstance().getMenu_icon_color(),
+			icon.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
 					PorterDuff.Mode.SRC_ATOP);
 			iv_showmore.setImageDrawable(icon);
 		} else {
@@ -166,8 +165,6 @@ public class CategoryDetailBlock extends SimiBlock implements SimiDelegate {
 							.createTouchProductList());
 					ll_listParent.addView(listview_spotproduct);
 
-					YoYo.with(Techniques.Shake).duration(2000)
-							.playOn(listview_spotproduct);
 					layout_category.setVisibility(View.VISIBLE);
 				}
 

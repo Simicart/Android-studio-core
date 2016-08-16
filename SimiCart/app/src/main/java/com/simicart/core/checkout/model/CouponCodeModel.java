@@ -6,7 +6,7 @@ public class CouponCodeModel extends ShippingMethodModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.SET_COUPON;
+		mUrlAction = Constants.SET_COUPON;
 	}
 
 }

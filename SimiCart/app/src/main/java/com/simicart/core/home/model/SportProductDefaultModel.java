@@ -7,7 +7,7 @@ public class SportProductDefaultModel extends SimiModel {
 
     @Override
     protected void setUrlAction() {
-        url_action = Constants.GET_SPOT_PRODUCTV2;
+        mUrlAction = Constants.GET_SPOT_PRODUCTV2;
     }
 
     @Override

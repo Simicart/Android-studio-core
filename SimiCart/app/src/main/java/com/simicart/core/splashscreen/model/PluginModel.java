@@ -6,14 +6,14 @@ import com.simicart.core.config.Constants;
 public class PluginModel extends SimiModel {
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		// TODO Auto-generated method stub
-		super.paserData();
+		super.parseData();
 	}
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.GET_LIST_PLUGIN;
+		mUrlAction = Constants.GET_LIST_PLUGIN;
 	}
 
 }

@@ -26,10 +26,12 @@ import android.widget.RelativeLayout;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.listproducts.fragment.SearchListFragment;
 import com.simicart.core.catalog.listproducts.adapter.ListPopupAdapter;
 import com.simicart.core.catalog.listproducts.entity.ItemListPopup;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
@@ -69,8 +71,7 @@ public class SearchHomeBlock extends SimiBlock {
     public void initView() {
         LinearLayout ll_search = (LinearLayout) mView.findViewById(Rconfig
                 .getInstance().id("ll_search"));
-        ll_search.setBackgroundColor(Config.getInstance()
-                .getSearch_box_background());
+        ll_search.setBackgroundColor(AppColorConfig.getInstance().getSearchBoxBackground());
 
         rlt_layout = (RelativeLayout) mView.findViewById(Rconfig.getInstance()
                 .id("rlt_layout"));
@@ -80,16 +81,16 @@ public class SearchHomeBlock extends SimiBlock {
                 .getInstance().id("img_ic_search"));
         Drawable drawable = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("ic_search"));
-        drawable.setColorFilter(Config.getInstance().getSearch_icon_color(),
+        drawable.setColorFilter(AppColorConfig.getInstance().getSearchIConColor(),
                 PorterDuff.Mode.SRC_ATOP);
         img_ic_search.setImageDrawable(drawable);
 
         et_search = (EditText) mView.findViewById(Rconfig.getInstance().id(
                 "et_search"));
-        et_search.setHint(Config.getInstance().getText("Search"));
+        et_search.setHint(SimiTranslator.getInstance().translate("Search"));
         if (!mCatName.equals("")
-                && !mCatName.equals(Config.getInstance()
-                .getText("all products"))) {
+                && !mCatName.equals(SimiTranslator.getInstance()
+                .translate("all products"))) {
             et_search.setHint("" + mCatName);
             et_search.setTypeface(null, Typeface.BOLD);
         }
@@ -97,8 +98,8 @@ public class SearchHomeBlock extends SimiBlock {
             et_search.setText(mQuery);
         }
         et_search.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        et_search.setTextColor(Config.getInstance().getSearch_text_color());
-        et_search.setHintTextColor(Config.getInstance().getSearch_text_color());
+        et_search.setTextColor(AppColorConfig.getInstance().getSearchTextColor());
+        et_search.setHintTextColor(AppColorConfig.getInstance().getSearchTextColor());
         et_search.setOnFocusChangeListener(new OnFocusChangeListener() {
 
             @Override
@@ -177,7 +178,7 @@ public class SearchHomeBlock extends SimiBlock {
         item1.setCheckSearch(false);
         listItem.add(item1);
         ItemListPopup item2 = new ItemListPopup();
-        item2.setName(Config.getInstance().getText("all categories"));
+        item2.setName(SimiTranslator.getInstance().translate("all categories"));
         item2.setCheckSearch(true);
         listItem.add(item2);
         ListPopupAdapter adapter = new ListPopupAdapter(mContext, listItem);

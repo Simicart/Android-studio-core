@@ -19,7 +19,7 @@ public class StoreViewModel extends SimiModel {
     ConfigCustomerAddress configCustomerAddress = new ConfigCustomerAddress();
 
     @Override
-    protected void paserData() {
+    protected void parseData() {
         try {
             JSONArray list = this.mJSON.getJSONArray("data");
             JSONObject jsonResult = list.getJSONObject(0);
@@ -170,7 +170,7 @@ public class StoreViewModel extends SimiModel {
 
     @Override
     protected void setUrlAction() {
-        url_action = Constants.GET_STORE_VIEW;
+        mUrlAction = Constants.GET_STORE_VIEW;
     }
 
 

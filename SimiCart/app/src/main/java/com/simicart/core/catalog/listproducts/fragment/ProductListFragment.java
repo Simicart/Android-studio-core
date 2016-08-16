@@ -48,17 +48,17 @@ public class ProductListFragment extends SimiFragment {
         ProductListFragment fragment = new ProductListFragment();
         fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_LISTPRODUCT);
         Bundle bundle = new Bundle();
-        setData(Constants.KeyData.ID, catId, Constants.KeyData.TYPE_STRING, bundle);
-        setData(Constants.KeyData.NAME, catName, Constants.KeyData.TYPE_STRING,
-                bundle);
-        setData(Constants.KeyData.TAG, tagView, Constants.KeyData.TYPE_STRING,
-                bundle);
-        setData(Constants.KeyData.SORT_ID, sortId,
-                Constants.KeyData.TYPE_STRING, bundle);
-        if (jsonFilter != null) {
-            setData(Constants.KeyData.JSON_FILTER, jsonFilter.toString(),
-                    Constants.KeyData.TYPE_JSONOBJECT, bundle);
-        }
+//        setData(Constants.KeyData.ID, catId, Constants.KeyData.TYPE_STRING, bundle);
+//        setData(Constants.KeyData.NAME, catName, Constants.KeyData.TYPE_STRING,
+//                bundle);
+//        setData(Constants.KeyData.TAG, tagView, Constants.KeyData.TYPE_STRING,
+//                bundle);
+//        setData(Constants.KeyData.SORT_ID, sortId,
+//                Constants.KeyData.TYPE_STRING, bundle);
+//        if (jsonFilter != null) {
+//            setData(Constants.KeyData.JSON_FILTER, jsonFilter.toString(),
+//                    Constants.KeyData.TYPE_JSONOBJECT, bundle);
+//        }
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -73,23 +73,23 @@ public class ProductListFragment extends SimiFragment {
 
         // data
         if (getArguments() != null) {
-            mSortID = (String) getData(Constants.KeyData.SORT_ID,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            mCatName = (String) getData(Constants.KeyData.NAME,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            mCatID = (String) getData(Constants.KeyData.ID,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            setScreenName("List Category ID:" + mCatID);//tracking Screen
-            String json = (String) getData(Constants.KeyData.JSON_FILTER,
-                    Constants.KeyData.TYPE_JSONOBJECT, getArguments());
-            try {
-                jsonFilter = new JSONObject(json);
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            tagView = (String) getData(Constants.KeyData.TAG,
-                    Constants.KeyData.TYPE_STRING, getArguments());
+//            mSortID = (String) getData(Constants.KeyData.SORT_ID,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            mCatName = (String) getData(Constants.KeyData.NAME,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            mCatID = (String) getData(Constants.KeyData.ID,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            setScreenName("List Category ID:" + mCatID);//tracking Screen
+//            String json = (String) getData(Constants.KeyData.JSON_FILTER,
+//                    Constants.KeyData.TYPE_JSONOBJECT, getArguments());
+//            try {
+//                jsonFilter = new JSONObject(json);
+//            } catch (JSONException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//            tagView = (String) getData(Constants.KeyData.TAG,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
             setTagView(tagView);
         }
 
@@ -160,11 +160,11 @@ public class ProductListFragment extends SimiFragment {
         } else {
             if (tag == null || (!tag.equals(TagSearch.TAG_GRIDVIEW) && !tag.equals(TagSearch.TAG_GRIDVIEW))) {
                 tagView = TagSearch.TAG_LISTVIEW;
-                if (Config.getInstance().getDefaultList() != null
-                        && Config.getInstance().getDefaultList().equals("1")) {
-                    // neu gia tri 1: Gridview
-                    tagView = TagSearch.TAG_GRIDVIEW;
-                }
+//                if (Config.getInstance().getDefaultList() != null
+//                        && Config.getInstance().getDefaultList().equals("1")) {
+//                    // neu gia tri 1: Gridview
+//                    tagView = TagSearch.TAG_GRIDVIEW;
+//                }
             } else {
                 tagView = tag;
             }

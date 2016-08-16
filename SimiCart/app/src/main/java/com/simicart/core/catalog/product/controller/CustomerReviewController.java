@@ -7,6 +7,8 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.product.delegate.CustomerReviewDelegate;
 import com.simicart.core.catalog.product.model.CustomerReviewModel;
 
@@ -38,22 +40,18 @@ public class CustomerReviewController extends SimiController {
 	@Override
 	public void onStart() {
 		mDelegate.showLoading();
-		ModelDelegate delegate = new ModelDelegate() {
-
+		mModel.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
-			public void callBack(String message, boolean isSuccess) {
+			public void onSuccess(SimiCollection collection) {
 				mDelegate.dismissLoading();
-				if (isSuccess) {
 					mDelegate.onUpdateHeaderView(mRatingStar);
 					mDelegate.updateView(mModel.getCollection());
-				}
 			}
-		};
+		});
 		mModel = new CustomerReviewModel();
-		mModel.addParam("product_id", mID);
-		mModel.addParam("offset", "" + mOffset + "");
-		mModel.addParam("limit", "" + 5 + "");
-		mModel.setDelegate(delegate);
+		mModel.addBody("product_id", mID);
+		mModel.addBody("offset", "" + mOffset + "");
+		mModel.addBody("limit", "" + 5 + "");
 		mModel.request();
 
 		mScrollListener = new OnScrollListener() {
@@ -94,26 +92,19 @@ public class CustomerReviewController extends SimiController {
 		checkOnscroll = false;
 		// show load more
 		mDelegate.addFooterView();
-
-		ModelDelegate delegate = new ModelDelegate() {
-
+		mModel.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
-			public void callBack(String message, boolean isSuccess) {
+			public void onSuccess(SimiCollection collection) {
 				Log.e("Done", "Done");
 				checkOnscroll = true;
 				mDelegate.removeFooterView();
-				if (isSuccess) {
-					
 					mDelegate.updateView(mModel.getCollection());
-					
-				}
 			}
-		};
+		});
 		
-		mModel.addParam("product_id", mID);
-		mModel.addParam("offset", "" + mOffset + "");
-		mModel.addParam("limit", "" + 5 + "");
-		mModel.setDelegate(delegate);
+		mModel.addBody("product_id", mID);
+		mModel.addBody("offset", "" + mOffset + "");
+		mModel.addBody("limit", "" + 5 + "");
 		mModel.request();
 
 	}

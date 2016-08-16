@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.common.DrawableManager;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -67,13 +69,13 @@ public class ProductOrderAdapter extends BaseAdapter {
 					Rconfig.getInstance().layout(
 							"core_listitem_product_orderhis"), null);
 		}
-		convertView.setBackgroundColor(Config.getInstance().getApp_backrground());
+		convertView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 		if(mListCart != null){
 		Cart cart = mListCart.get(position);
 		
 		TextView name = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("name_product"));
-		name.setTextColor(Config.getInstance().getContent_color());
+		name.setTextColor(AppColorConfig.getInstance().getContentColor());
 		if (DataLocal.isLanguageRTL) {
 			name.setGravity(Gravity.RIGHT);
 		}
@@ -83,19 +85,19 @@ public class ProductOrderAdapter extends BaseAdapter {
 		if (DataLocal.isLanguageRTL) {
 			tv_price.setGravity(Gravity.RIGHT);
 		}
-		tv_price.setTextColor(Color.parseColor(Config.getInstance()
-				.getPrice_color()));
-		String price = Config.getInstance().getPrice(
+		tv_price.setTextColor(AppColorConfig.getInstance()
+				.getPriceColor());
+		String price = AppStoreConfig.getInstance().getPrice(
 				Float.toString(cart.getProduct_price()));
 		if (null != mCurrecySymbol) {
-			price = Config.getInstance().getPrice(
+			price = AppStoreConfig.getInstance().getPrice(
 					Float.toString(cart.getProduct_price()), mCurrecySymbol);
 		}
 
 		tv_price.setText(price);
 		TextView qty = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("qty_product"));
-		qty.setTextColor(Config.getInstance().getContent_color());
+		qty.setTextColor(AppColorConfig.getInstance().getContentColor());
 		qty.setText("" + cart.getQty());
 
 		ImageView image = (ImageView) convertView.findViewById(Rconfig

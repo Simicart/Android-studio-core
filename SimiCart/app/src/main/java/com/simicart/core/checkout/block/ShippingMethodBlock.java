@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.adapter.ShippingMethodAdapter;
 import com.simicart.core.checkout.delegate.ShippingMethodDelegate;
 import com.simicart.core.checkout.entity.ShippingMethod;
@@ -34,8 +35,8 @@ public class ShippingMethodBlock extends SimiBlock implements
 		// title
 		TextView tv_name = (TextView) mView.findViewById(Rconfig.getInstance()
 				.id("label_shipping"));
-		tv_name.setText(Config.getInstance()
-				.getText("Select a shipping method"));
+		tv_name.setText(SimiTranslator.getInstance()
+				.translate("Select a shipping method"));
 
 		// initial list view
 		lv_shippingMethod = (ListView) mView.findViewById(Rconfig.getInstance()

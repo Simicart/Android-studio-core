@@ -18,9 +18,11 @@ import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.catalog.listproducts.fragment.SearchListFragment;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -45,7 +47,7 @@ public class MenuTopBlock extends SimiBlock implements MenuTopDelegate {
 
     public MenuTopBlock(View view, Context context) {
         super(view, context);
-        mView.setBackgroundColor(Config.getInstance().getKey_color());
+        mView.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
         this.context = context;
     }
 
@@ -63,7 +65,7 @@ public class MenuTopBlock extends SimiBlock implements MenuTopDelegate {
                 .getInstance().id("img_ic_search2"));
         Drawable ic_search = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("icon_search_arrow"));
-        ic_search.setColorFilter(Config.getInstance().getTop_menu_icon_color(),
+        ic_search.setColorFilter(AppColorConfig.getInstance().getTopMenuIconColor(),
                 PorterDuff.Mode.SRC_ATOP);
         img_search.setImageDrawable(ic_search);
         ll_search = (LinearLayout) mView.findViewById(Rconfig.getInstance().id(
@@ -105,15 +107,14 @@ public class MenuTopBlock extends SimiBlock implements MenuTopDelegate {
                 .getInstance().id("img_ic_search"));
         Drawable drawable_search = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("ic_search_tablet"));
-        drawable_search.setColorFilter(Config.getInstance()
-                .getTop_menu_icon_color(), PorterDuff.Mode.SRC_ATOP);
+        drawable_search.setColorFilter(AppColorConfig.getInstance().getTopMenuIconColor(), PorterDuff.Mode.SRC_ATOP);
         img_ic_search.setImageDrawable(drawable_search);
 
         final ImageView img_cancel = (ImageView) mView.findViewById(Rconfig
                 .getInstance().id("img_ic_cancel"));
         Drawable drawable = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("icon_delete_white"));
-        drawable.setColorFilter(Config.getInstance().getTop_menu_icon_color(),
+        drawable.setColorFilter(AppColorConfig.getInstance().getTopMenuIconColor(),
                 PorterDuff.Mode.SRC_ATOP);
         img_cancel.setImageDrawable(drawable);
         img_cancel.setOnClickListener(new OnClickListener() {
@@ -132,11 +133,10 @@ public class MenuTopBlock extends SimiBlock implements MenuTopDelegate {
 
         final EditText et_search = (EditText) mView.findViewById(Rconfig
                 .getInstance().id("et_search"));
-        et_search.setHint(Config.getInstance().getText("Search"));
+        et_search.setHint(SimiTranslator.getInstance().translate("Search"));
         // et_search.setHintTextColor(Color.parseColor("#C7C7C7"));
-        et_search.setHintTextColor(Config.getInstance()
-                .getTop_menu_icon_color());
-        et_search.setTextColor(Config.getInstance().getTop_menu_icon_color());
+        et_search.setHintTextColor(AppColorConfig.getInstance().getTopMenuIconColor());
+        et_search.setTextColor(AppColorConfig.getInstance().getTopMenuIconColor());
         et_search.setOnKeyListener(new OnKeyListener() {
 
             @Override
@@ -163,7 +163,7 @@ public class MenuTopBlock extends SimiBlock implements MenuTopDelegate {
                 "img_menu"));
         Drawable ic_menu = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("ic_drawer2"));
-        ic_menu.setColorFilter(Config.getInstance().getTop_menu_icon_color(),
+        ic_menu.setColorFilter(AppColorConfig.getInstance().getTopMenuIconColor(),
                 PorterDuff.Mode.SRC_ATOP);
         imv_menu.setImageDrawable(ic_menu);
     }
@@ -183,7 +183,7 @@ public class MenuTopBlock extends SimiBlock implements MenuTopDelegate {
     protected void initIconCart() {
         iconCart = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("ic_cart"));
-        iconCart.setColorFilter(Config.getInstance().getTop_menu_icon_color(),
+        iconCart.setColorFilter(AppColorConfig.getInstance().getTopMenuIconColor(),
                 PorterDuff.Mode.SRC_ATOP);
     }
 

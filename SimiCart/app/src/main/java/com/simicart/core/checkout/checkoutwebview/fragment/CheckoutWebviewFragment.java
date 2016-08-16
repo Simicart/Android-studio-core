@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -24,10 +25,10 @@ public class CheckoutWebviewFragment extends SimiFragment {
 			boolean isCheckout) {
 		CheckoutWebviewFragment fragment = new CheckoutWebviewFragment();
 		Bundle bundle = new Bundle();
-		setData(Constants.KeyData.URL, url, Constants.KeyData.TYPE_STRING,
-				bundle);
-		setData(Constants.KeyData.CHECK_BOO, isCheckout,
-				Constants.KeyData.TYPE_BOOLEAN, bundle);
+//		setData(Constants.KeyData.URL, url, Constants.KeyData.TYPE_STRING,
+//				bundle);
+//		setData(Constants.KeyData.CHECK_BOO, isCheckout,
+//				Constants.KeyData.TYPE_BOOLEAN, bundle);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -47,8 +48,8 @@ public class CheckoutWebviewFragment extends SimiFragment {
 				RelativeLayout.LayoutParams.MATCH_PARENT);
 		lp.addRule(RelativeLayout.CENTER_IN_PARENT);
 		if (getArguments() != null) {
-			Url = (String) getData(Constants.KeyData.URL,
-					Constants.KeyData.TYPE_STRING, getArguments());
+//			Url = (String) getData(Constants.KeyData.URL,
+//					Constants.KeyData.TYPE_STRING, getArguments());
 		}
 		mImageView.setLayoutParams(lp);
 		// add loading View
@@ -63,12 +64,12 @@ public class CheckoutWebviewFragment extends SimiFragment {
 		String url_site = "";
 		String url_cp = "";
 
-		if (DataLocal.isSignInComplete()) {
+		if (DataPreferences.isSignInComplete()) {
 			if (Url.contains("email_value")) {
 
-				url_site = Url.replace("email_value", DataLocal.getEmail());
+				url_site = Url.replace("email_value", DataPreferences.getEmail());
 				url_cp = url_site.replace("password_value",
-						DataLocal.getPassword());
+						DataPreferences.getPassword());
 
 				webview.loadUrl(url_cp);
 			}

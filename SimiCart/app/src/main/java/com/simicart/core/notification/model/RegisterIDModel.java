@@ -10,12 +10,12 @@ public class RegisterIDModel extends SimiModel {
 	}
 
 	@Override
-	protected void paserData() {
-		super.paserData();
+	protected void parseData() {
+		super.parseData();
 	}
 
 	@Override
 	protected void setUrlAction() {
-		url_action = "connector/config/register_device";
+		mUrlAction = "connector/config/register_device";
 	}
 }

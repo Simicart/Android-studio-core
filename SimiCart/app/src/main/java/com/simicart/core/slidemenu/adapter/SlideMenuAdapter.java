@@ -16,8 +16,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -72,8 +74,8 @@ public class SlideMenuAdapter extends BaseAdapter {
 					.getInstance().id("img_icon"));
 			holder.tv_name = (TextView) convertView.findViewById(Rconfig
 					.getInstance().id("tv_name"));
-			holder.tv_name.setTextColor(Config.getInstance()
-					.getMenu_text_color());
+			holder.tv_name.setTextColor(AppColorConfig.getInstance()
+					.getMenuTextColor());
 			if (DataLocal.isLanguageRTL) {
 				holder.tv_name.setGravity(Gravity.RIGHT
 						| Gravity.CENTER_VERTICAL);
@@ -92,7 +94,7 @@ public class SlideMenuAdapter extends BaseAdapter {
 		holder.tv_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		int id_icon = Rconfig.getInstance().drawable("ic_menu_extended");
 		Drawable icon = mContext.getResources().getDrawable(id_icon);
-		icon.setColorFilter(Config.getInstance().getMenu_icon_color(),
+		icon.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		holder.img_extended.setImageDrawable(icon);
 
@@ -113,12 +115,12 @@ public class SlideMenuAdapter extends BaseAdapter {
 
 		String name = item.getName();
 		if (Utils.validateString(name)) {
-			name = Config.getInstance().getText(name);
+			name = SimiTranslator.getInstance().translate(name);
 			if (item.isSparator()) {
 
 				name = name.toUpperCase();
 			}
-			holder.tv_name.setText(Config.getInstance().getText(name));
+			holder.tv_name.setText(SimiTranslator.getInstance().translate(name));
 		}
 
 		String url = item.getUrl();
@@ -126,12 +128,12 @@ public class SlideMenuAdapter extends BaseAdapter {
 			// DrawableManager.fetchDrawableIConOnThread(url, holder.img_icon,
 			// mContext, Color.parseColor("#ffffff"));
 			DrawableManager.fetchDrawableIConOnThread(url, holder.img_icon,
-					mContext, Config.getInstance().getMenu_icon_color());
+					mContext, AppColorConfig.getInstance().getMenuIconColor());
 		} else {
 			Drawable drawable = item.getIcon();
 			if (null != drawable) {
-				drawable.setColorFilter(Config.getInstance()
-						.getMenu_icon_color(), PorterDuff.Mode.SRC_ATOP);
+				drawable.setColorFilter(AppColorConfig.getInstance()
+						.getMenuIconColor(), PorterDuff.Mode.SRC_ATOP);
 				holder.img_icon.setImageDrawable(drawable);
 			}
 		}

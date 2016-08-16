@@ -17,15 +17,16 @@ import android.widget.TextView;
 
 import com.magestore.simicart.R;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.event.block.EventBlock;
 
 import java.util.ArrayList;
 
@@ -82,18 +83,18 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             txtName = (TextView) v.findViewById(Rconfig
                     .getInstance().id("tv_productItemName"));
             txtName
-                    .setTextColor(Config.getInstance().getContent_color());
+                    .setTextColor(AppColorConfig.getInstance().getContentColor());
             imageView = (ImageView) v.findViewById(Rconfig
                     .getInstance().id("iv_productItemImage"));
             layoutStock = (LinearLayout) v
                     .findViewById(Rconfig.getInstance().id("layout_stock"));
-            layoutStock.setBackgroundColor(Config.getInstance()
-                    .getOut_stock_background());
+            layoutStock.setBackgroundColor(AppColorConfig.getInstance()
+                    .getOutStockBackgroundColor());
             ImageView ic_expand = (ImageView) v.findViewById(Rconfig
                     .getInstance().id("ic_expand"));
             Drawable icon = mContext.getResources().getDrawable(
                     Rconfig.getInstance().drawable("ic_extend"));
-            icon.setColorFilter(Config.getInstance().getContent_color(),
+            icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
                     PorterDuff.Mode.SRC_ATOP);
             ic_expand.setImageDrawable(icon);
 
@@ -105,8 +106,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     .findViewById(Rconfig.getInstance().id("tv_minimal"));
             txt_outstock = (TextView) v.findViewById(Rconfig
                     .getInstance().id("txt_out_stock"));
-            txt_outstock.setTextColor(Config.getInstance()
-                    .getOut_stock_text());
+            txt_outstock.setTextColor(AppColorConfig.getInstance()
+                    .getOutStockTextColor());
 
             rl_product_list = (RelativeLayout) v
                     .findViewById(Rconfig.getInstance().id("rel_product_list"));
@@ -212,7 +213,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 vhItem.layoutStock.setVisibility(View.GONE);
             } else {
                 vhItem.layoutStock.setVisibility(View.VISIBLE);
-                vhItem.txt_outstock.setText(Config.getInstance().getText(
+                vhItem.txt_outstock.setText(SimiTranslator.getInstance().translate(
                         "Out Stock"));
             }
 
@@ -230,9 +231,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             });
 
-            EventBlock eventBlock = new EventBlock();
-            eventBlock.dispatchEvent("com.simicart.image.product.list",
-                    vhItem.rl_product_list, product);
+//            EventBlock eventBlock = new EventBlock();
+//            eventBlock.dispatchEvent("com.simicart.image.product.list",
+//                    vhItem.rl_product_list, product);
         }
 
     }
@@ -363,8 +364,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             float incl_tax_to = priceV2.getInclTaxTo();
             float excl_tax_from = priceV2.getExclTaxFrom();
             float excl_tax_to = priceV2.getExclTaxTo();
-            String from_text = Config.getInstance().getText("From");
-            String to_text = Config.getInstance().getText("To");
+            String from_text = SimiTranslator.getInstance().translate("From");
+            String to_text = SimiTranslator.getInstance().translate("To");
             if (incl_tax_from > -1) {
                 holder.tv_regular_price.setText(Html.fromHtml(getHtmlForPrice(
                         incl_tax_from, from_text)));
@@ -406,20 +407,20 @@ public class ProductListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     protected String getHtmlForPrice(float price) {
-        return "<font color='" + Config.getInstance().getPrice_color() + "'>"
-                + Config.getInstance().getPrice("" + price) + "</font>";
+        return "<font color='" + AppColorConfig.getInstance().getPriceColor() + "'>"
+                + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
     protected String getHtmlForPrice(float price, String label) {
-        return "<font color='" + Config.getInstance().getPrice_color() + "'>"
+        return "<font color='" + AppColorConfig.getInstance().getPriceColor() + "'>"
                 + label + ": </font><font color='"
-                + Config.getInstance().getPrice_color() + "'>"
-                + Config.getInstance().getPrice("" + price) + "</font>";
+                + AppColorConfig.getInstance().getPriceColor() + "'>"
+                + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
     protected String getHtmlForSpecialPrice(float price) {
-        return "<font color='" + Config.getInstance().getSpecial_price_color()
-                + "'>" + Config.getInstance().getPrice("" + price) + "</font>";
+        return "<font color='" + AppColorConfig.getInstance().getSpecialPriceColor()
+                + "'>" + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
 

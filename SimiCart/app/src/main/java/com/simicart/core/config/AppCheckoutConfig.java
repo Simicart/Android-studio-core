@@ -16,6 +16,15 @@ public class AppCheckoutConfig extends SimiEntity {
     private String enable_agreements = "enable_agreements";
     private String taxvat_show = "taxvat_show";
 
+    public static AppCheckoutConfig instance;
+
+    public static AppCheckoutConfig getInstance() {
+        if(instance == null) {
+            instance = new AppCheckoutConfig();
+        }
+        return instance;
+    }
+
     @Override
     public void parse() {
 

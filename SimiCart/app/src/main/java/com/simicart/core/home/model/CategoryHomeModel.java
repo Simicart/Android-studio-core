@@ -11,7 +11,7 @@ import com.simicart.core.config.Constants;
 public class CategoryHomeModel extends SimiModel {
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			collection = new SimiCollection();
@@ -28,7 +28,7 @@ public class CategoryHomeModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.GET_CATEGORY_HOME;
+		mUrlAction = Constants.GET_CATEGORY_HOME;
 	}
 
 	@Override

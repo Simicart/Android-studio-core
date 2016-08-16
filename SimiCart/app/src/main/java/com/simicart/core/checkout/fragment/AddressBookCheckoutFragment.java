@@ -27,8 +27,8 @@ public class AddressBookCheckoutFragment extends AddressBookFragment {
 	public static AddressBookCheckoutFragment newInstance(int afterControl, int addressFor, MyAddress billingAddress, MyAddress shippingAddress) {
 		AddressBookCheckoutFragment fragment = new AddressBookCheckoutFragment();
 		Bundle bundle= new Bundle();
-		setData(Constants.KeyData.AFTER_CONTROL, afterControl, Constants.KeyData.TYPE_INT, bundle);
-		setData(Constants.KeyData.ADDRESS_FOR, addressFor, Constants.KeyData.TYPE_INT, bundle);
+//		setData(Constants.KeyData.AFTER_CONTROL, afterControl, Constants.KeyData.TYPE_INT, bundle);
+//		setData(Constants.KeyData.ADDRESS_FOR, addressFor, Constants.KeyData.TYPE_INT, bundle);
 		bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, billingAddress);
 		bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, shippingAddress);
 		fragment.setArguments(bundle);
@@ -51,8 +51,8 @@ public class AddressBookCheckoutFragment extends AddressBookFragment {
 
 		//getdata
 		if(getArguments() != null){
-			mAfterController = (int) getData(Constants.KeyData.AFTER_CONTROL, Constants.KeyData.TYPE_INT, getArguments());
-			addressFor = (int) getData(Constants.KeyData.ADDRESS_FOR, Constants.KeyData.TYPE_INT, getArguments());
+//			mAfterController = (int) getData(Constants.KeyData.AFTER_CONTROL, Constants.KeyData.TYPE_INT, getArguments());
+//			addressFor = (int) getData(Constants.KeyData.ADDRESS_FOR, Constants.KeyData.TYPE_INT, getArguments());
 			mBillingAddress = (MyAddress) getArguments().getSerializable(Constants.KeyData.BILLING_ADDRESS);
 			mShippingAddress = (MyAddress) getArguments().getSerializable(Constants.KeyData.SHIPPING_ADDRESS);
 		}

@@ -10,7 +10,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.CustomerReview;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
@@ -44,31 +46,31 @@ public class CustomerReviewMoreFragment extends SimiFragment {
 		ratingBar.setRating(Float.parseFloat(mCustomerReview.getRate()));
 		LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
 		stars.getDrawable(2).setColorFilter(
-				Config.getInstance().getColorMain(), PorterDuff.Mode.SRC_ATOP);
+				AppColorConfig.getInstance().getKeyColor(), PorterDuff.Mode.SRC_ATOP);
 
 		TextView title = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("tv_reviewTitle"));
-		title.setTextColor(Config.getInstance().getContent_color());
+		title.setTextColor(AppColorConfig.getInstance().getContentColor());
 		title.setText(mCustomerReview.getTitle());
 
 		TextView content = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("tv_reviewContent"));
-		content.setTextColor(Config.getInstance().getContent_color());
+		content.setTextColor(AppColorConfig.getInstance().getContentColor());
 		content.setText(mCustomerReview.getContent());
 
 		TextView date = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("tv_reviewDate"));
-		date.setTextColor(Config.getInstance().getContent_color());
+		date.setTextColor(AppColorConfig.getInstance().getContentColor());
 		date.setText(mCustomerReview.getTime());
 
 		TextView review_customer = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("tv_nameReviewCustomer"));
-		review_customer.setTextColor(Config.getInstance().getContent_color());
-		review_customer.setText(Config.getInstance().getText("By") + " "
+		review_customer.setTextColor(AppColorConfig.getInstance().getContentColor());
+		review_customer.setText(SimiTranslator.getInstance().translate("By") + " "
 				+ mCustomerReview.getCustomer_name());
 
-		convertView.setBackgroundColor(Config.getInstance()
-				.getApp_backrground());
+		convertView.setBackgroundColor(AppColorConfig.getInstance()
+				.getAppBackground());
 
 		return convertView;
 	}

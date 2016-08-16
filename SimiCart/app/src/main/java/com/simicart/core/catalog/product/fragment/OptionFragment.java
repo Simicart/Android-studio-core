@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
@@ -49,11 +50,11 @@ public class OptionFragment extends SimiFragment {
 
 		TextView tv_cancel = (TextView) mRootView.findViewById(Rconfig
 				.getInstance().id("tv_cancel"));
-		tv_cancel.setText(Config.getInstance().getText("Cancel"));
+		tv_cancel.setText(SimiTranslator.getInstance().translate("Cancel"));
 
 		TextView tv_done = (TextView) mRootView.findViewById(Rconfig
 				.getInstance().id("tv_done"));
-		tv_done.setText(Config.getInstance().getText("Done"));
+		tv_done.setText(SimiTranslator.getInstance().translate("Done"));
 
 		ScrollView scroll_view = (ScrollView) mRootView.findViewById(Rconfig
 				.getInstance().id("scl_body"));
@@ -61,7 +62,7 @@ public class OptionFragment extends SimiFragment {
 			((ViewGroup) view.getParent()).removeView(view);
 		scroll_view.addView(view);
 		Animation animationToTop = AnimationUtils.loadAnimation(SimiManager
-				.getIntance().getCurrentContext(),
+				.getIntance().getCurrentActivity(),
 				Rconfig.getInstance().getId("down_to_top", "anim"));
 		animationToTop.setStartOffset(10);
 		view.setAnimation(animationToTop);

@@ -6,8 +6,12 @@ import org.json.JSONObject;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.notify.SimiNotify;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.controller.ConfigCheckout;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -46,10 +50,10 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 		ThankyouFragment fragment = new ThankyouFragment();
 		fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_REVIEWORDER);
 		Bundle bundle= new Bundle();
-		setData(Constants.KeyData.MESSAGE, message, Constants.KeyData.TYPE_STRING, bundle);
-		if(jsonObject != null){
-		setData(Constants.KeyData.JSON_FILTER, jsonObject.toString(), Constants.KeyData.TYPE_JSONOBJECT, bundle);
-		}
+//		setData(Constants.KeyData.MESSAGE, message, Constants.KeyData.TYPE_STRING, bundle);
+//		if(jsonObject != null){
+//		setData(Constants.KeyData.JSON_FILTER, jsonObject.toString(), Constants.KeyData.TYPE_JSONOBJECT, bundle);
+//		}
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -61,17 +65,17 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 				Rconfig.getInstance().layout("core_thankyou_layout"),
 				container, false);
 		if(getArguments() != null){
-		message = (String) getData(Constants.KeyData.MESSAGE, Constants.KeyData.TYPE_STRING, getArguments());
-		String json = (String) getData(Constants.KeyData.JSON_FILTER, Constants.KeyData.TYPE_JSONOBJECT, getArguments());
-		try {
-			jsonObject = new JSONObject(json);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		message = (String) getData(Constants.KeyData.MESSAGE, Constants.KeyData.TYPE_STRING, getArguments());
+//		String json = (String) getData(Constants.KeyData.JSON_FILTER, Constants.KeyData.TYPE_JSONOBJECT, getArguments());
+//		try {
+//			jsonObject = new JSONObject(json);
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		}
 		
-		view.setBackgroundColor(Config.getInstance().getApp_backrground());
+		view.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 		view.setOnKeyListener(this);
 		parseJson(jsonObject);
 		initView(view);
@@ -86,25 +90,25 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 				"txt_order"));
 		txt_content_message = (TextView) rootView.findViewById(Rconfig
 				.getInstance().id("txt_content_message"));
-		txt_title_message.setTextColor(Config.getInstance().getContent_color());
-		txt_order.setTextColor(Config.getInstance().getContent_color());
-		txt_content_message.setTextColor(Config.getInstance().getContent_color());
+		txt_title_message.setTextColor(AppColorConfig.getInstance().getContentColor());
+		txt_order.setTextColor(AppColorConfig.getInstance().getContentColor());
+		txt_content_message.setTextColor(AppColorConfig.getInstance().getContentColor());
 		layout_order = (LayoutRipple) rootView.findViewById(Rconfig
 				.getInstance().id("layout_order"));
 		btn_continue_shopping = (ButtonRectangle) rootView.findViewById(Rconfig
 				.getInstance().id("btn_continue_shopping"));
-		btn_continue_shopping.setText(Config.getInstance().getText("Continue Shopping"));
+		btn_continue_shopping.setText(SimiTranslator.getInstance().translate("Continue Shopping"));
 		btn_continue_shopping.setTextColor(Color.parseColor("#ffffff"));
-		btn_continue_shopping.setBackgroundColor(Config.getInstance()
-				.getColorMain());
+		btn_continue_shopping.setBackgroundColor(AppColorConfig.getInstance()
+				.getKeyColor());
 		imageView = (ImageView) rootView.findViewById(Rconfig
 				.getInstance().id("img_order"));
-		Utils.changeColorImageview(SimiManager.getIntance().getCurrentContext(), imageView, "ic_extend");
+		Utils.changeColorImageview(SimiManager.getIntance().getCurrentActivity(), imageView, "ic_extend");
 		//set data
-		txt_title_message.setText(Config.getInstance().getText(message));
-		txt_order.setText(Config.getInstance().getText("Your order # is:")+ invoice_number);
-		txt_content_message.setText(Config.getInstance().getText("You will receive an order confirmation email with detail of your order and alink to track its progress"));
-		if(DataLocal.isSignInComplete()){
+		txt_title_message.setText(SimiTranslator.getInstance().translate(message));
+		txt_order.setText(SimiTranslator.getInstance().translate("Your order # is:")+ invoice_number);
+		txt_content_message.setText(SimiTranslator.getInstance().translate("You will receive an order confirmation email with detail of your order and alink to track its progress"));
+		if(DataPreferences.isSignInComplete()){
 			layout_order.setVisibility(View.VISIBLE);
 		}else{
 			layout_order.setVisibility(View.GONE);
@@ -154,7 +158,7 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 	@Override
 	public boolean onKey(View v, int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK	) {
-			SimiManager.getIntance().showToast("Thankyou page back");
+			SimiNotify.getInstance().showToast("Thankyou page back");
 			return true;
 		}
 		return true;

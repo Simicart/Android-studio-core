@@ -31,6 +31,7 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.adapter.ProductOrderAdapter;
 import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.checkout.delegate.ReviewOrderDelegate;
@@ -41,6 +42,8 @@ import com.simicart.core.checkout.fragment.ConditionFragment;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ViewIdGenerator;
 import com.simicart.core.common.price.TotalPriceView;
+import com.simicart.core.config.AppCheckoutConfig;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -96,7 +99,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 		scrollView = (CustomScrollView) mView.findViewById(Rconfig
 				.getInstance().id("scrollView1"));
 		scrollView
-				.setBackgroundColor(Config.getInstance().getApp_backrground());
+				.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 		// button place now
 		initButtonPlaceNowView();
 
@@ -119,27 +122,27 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 	protected void initButtonPlaceNowView() {
 		bt_placenow = (ButtonRectangle) mView.findViewById(Rconfig
 				.getInstance().id("bt_placenow2"));
-		bt_placenow.setText(Config.getInstance().getText("Place now"));
+		bt_placenow.setText(SimiTranslator.getInstance().translate("Place now"));
 		bt_placenow.setTextColor(Color.WHITE);
 		bt_placenow.setTextSize(Constants.SIZE_TEXT_BUTTON);
-		bt_placenow.setBackgroundColor(Config.getInstance().getColorMain());
+		bt_placenow.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 	}
 
 	protected void initAddressView() {
 		// billing address
 		TextView tv_billing_address = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("tv_billing_address"));
-		tv_billing_address.setText(Config.getInstance().getText(
+		tv_billing_address.setText(SimiTranslator.getInstance().translate(
 				"Billing Address"));
-		tv_billing_address.setTextColor(Config.getInstance()
-				.getSection_text_color());
-		tv_billing_address.setBackgroundColor(Color.parseColor(Config
-				.getInstance().getSection_color()));
+		tv_billing_address.setTextColor(AppColorConfig.getInstance()
+				.getSectionTextColor());
+		tv_billing_address.setBackgroundColor(AppColorConfig
+				.getInstance().getSectionColor());
 		// rl_billingAddress = (RelativeLayout) mView.findViewById(Rconfig
 		// .getInstance().id("billing_address"));
 		Drawable ic_edit = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("core_icon_edit"));
-		ic_edit.setColorFilter(Config.getInstance().getContent_color(),
+		ic_edit.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		img_editBilling = (ImageView) mView.findViewById(Rconfig.getInstance()
 				.id("img_edit_b_address"));
@@ -148,12 +151,12 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 		// shipping address
 		TextView tv_shipping_address = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("tv_shipping_address"));
-		tv_shipping_address.setText(Config.getInstance().getText(
+		tv_shipping_address.setText(SimiTranslator.getInstance().translate(
 				"Shipping Address"));
-		tv_shipping_address.setTextColor(Config.getInstance()
-				.getSection_text_color());
-		tv_shipping_address.setBackgroundColor(Color.parseColor(Config
-				.getInstance().getSection_color()));
+		tv_shipping_address.setTextColor(AppColorConfig.getInstance()
+				.getSectionTextColor());
+		tv_shipping_address.setBackgroundColor(AppColorConfig
+				.getInstance().getSectionColor());
 		// rl_shippingAddress = (RelativeLayout) mView.findViewById(Rconfig
 		// .getInstance().id("shipping_address"));
 		img_editShipping = (ImageView) mView.findViewById(Rconfig.getInstance()
@@ -167,14 +170,13 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 				.findViewById(Rconfig.getInstance().id("shipping_method_rl"));
 		TextView tv_shippingMethod = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("shipping_methods"));
-		tv_shippingMethod.setText(Config.getInstance().getText(
+		tv_shippingMethod.setText(SimiTranslator.getInstance().translate(
 				"Shipping Method"));
-		layout_shipping.setBackgroundColor(Color.parseColor(Config
-				.getInstance().getSection_color()));
-		tv_shippingMethod.setBackgroundColor(Color.parseColor(Config
-				.getInstance().getSection_color()));
-		tv_shippingMethod.setTextColor(Config.getInstance()
-				.getSection_text_color());
+		layout_shipping.setBackgroundColor(AppColorConfig
+				.getInstance().getSectionColor());
+		tv_shippingMethod.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
+		tv_shippingMethod.setTextColor(AppColorConfig.getInstance()
+				.getSectionTextColor());
 		ll_shipping = (LinearLayout) mView.findViewById(Rconfig.getInstance()
 				.id("ll_shipping"));
 		final ImageView ic_expand = (ImageView) mView.findViewById(Rconfig
@@ -201,18 +203,17 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 		edt_couponCode = (EditText) mView.findViewById(Rconfig.getInstance()
 				.id("edt_counponCode"));
 		edt_couponCode.setHighlightColor(Color.parseColor("#b2b2b2"));
-		edt_couponCode.setHint(Config.getInstance().getText(
+		edt_couponCode.setHint(SimiTranslator.getInstance().translate(
 				"Enter a coupon code"));
 	}
 
 	protected void initShipmentDetailsView() {
 		TextView tv_shipment_details = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("tv_shipment_details"));
-		tv_shipment_details.setBackgroundColor(Color.parseColor(Config
-				.getInstance().getSection_color()));
-		tv_shipment_details.setTextColor(Config.getInstance()
-				.getSection_text_color());
-		tv_shipment_details.setText(Config.getInstance().getText(
+		tv_shipment_details.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
+		tv_shipment_details.setTextColor(AppColorConfig.getInstance()
+				.getSectionTextColor());
+		tv_shipment_details.setText(SimiTranslator.getInstance().translate(
 				"Shipment Details"));
 		setProductList();
 	}
@@ -225,13 +226,13 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 		TextView tv_label_payment_method = (TextView) mView
 				.findViewById(Rconfig.getInstance().id("tv_payment"));
 		tv_label_payment_method
-				.setText(Config.getInstance().getText("Payment"));
-		rl_payment.setBackgroundColor(Color.parseColor(Config.getInstance()
-				.getSection_color()));
-		tv_label_payment_method.setBackgroundColor(Color.parseColor(Config
-				.getInstance().getSection_color()));
-		tv_label_payment_method.setTextColor(Config.getInstance()
-				.getSection_text_color());
+				.setText(SimiTranslator.getInstance().translate("Payment"));
+		rl_payment.setBackgroundColor(AppColorConfig.getInstance()
+				.getSectionColor());
+		tv_label_payment_method.setBackgroundColor(AppColorConfig
+				.getInstance().getSectionColor());
+		tv_label_payment_method.setTextColor(AppColorConfig.getInstance()
+				.getSectionTextColor());
 		ll_payment = (LinearLayout) mView.findViewById(Rconfig.getInstance()
 				.id("ll_payment"));
 		rl_payment.setOnClickListener(new OnClickListener() {
@@ -305,7 +306,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 				final int index = i;
 				check[index] = conditions.get(index).isChecked();
 				if (!check[index]) {
-					Config.getInstance().setEnable_agreements(0);
+					AppCheckoutConfig.getInstance().setenableAgreements(false);
 				}
 				final RelativeLayout rlt_termCondition = new RelativeLayout(
 						mContext);
@@ -336,7 +337,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 				tv_confirm.setPadding(0, 0, Utils.getValueDp(20), 0);
 				tv_confirm.setLayoutParams(lp);
 				tv_confirm
-						.setTextColor(Config.getInstance().getContent_color());
+						.setTextColor(AppColorConfig.getInstance().getContentColor());
 				if (DataLocal.isTablet) {
 					tv_confirm.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
 				} else {
@@ -408,7 +409,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 						Jsoup.parse(conditions.get(i).getCheckText())
 								.toString()).toString();
 				checkBox.setText(Html.fromHtml(checkboxTitle).toString());
-				checkBox.setTextColor(Config.getInstance().getContent_color());
+				checkBox.setTextColor(AppColorConfig.getInstance().getContentColor());
 				// checkBox.setButtonDrawable(Rconfig.getInstance().drawable(
 				// "check_box"));
 				checkBox.setLayoutParams(lp3);
@@ -424,10 +425,10 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 						ConfigCheckout.checkCondition = true;
 						for (int i = 0; i < check.length; i++) {
 							if (!check[i]) {
-								Config.getInstance().setEnable_agreements(0);
+								AppCheckoutConfig.getInstance().setenableAgreements(false);
 								break;
 							}
-							Config.getInstance().setEnable_agreements(1);
+							AppCheckoutConfig.getInstance().setenableAgreements(true);
 						}
 					}
 				});
@@ -443,7 +444,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 	private void changeColorImageView(ImageView img, String src) {
 		Drawable icon = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable(src));
-		icon.setColorFilter(Config.getInstance().getContent_color(),
+		icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		img.setImageDrawable(icon);
 	}
@@ -455,7 +456,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 		// label
 		TextView lb_feeDetail = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("tv_feeDetail"));
-		lb_feeDetail.setText(Config.getInstance().getText("Fee Detail")
+		lb_feeDetail.setText(SimiTranslator.getInstance().translate("Fee Detail")
 				.toUpperCase());
 		lb_feeDetail.setVisibility(View.GONE);
 
@@ -499,19 +500,19 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 		// billing address
 		Drawable ic_name = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("core_bg_name_customer"));
-		ic_name.setColorFilter(Config.getInstance().getContent_color(),
+		ic_name.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		Drawable ic_address = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("core_bg_location"));
-		ic_address.setColorFilter(Config.getInstance().getContent_color(),
+		ic_address.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		Drawable ic_phone = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("core_bg_call"));
-		ic_phone.setColorFilter(Config.getInstance().getContent_color(),
+		ic_phone.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		Drawable ic_email = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("core_icon_email"));
-		ic_email.setColorFilter(Config.getInstance().getContent_color(),
+		ic_email.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 
 		ImageView img_iconBName = (ImageView) mView.findViewById(Rconfig
@@ -535,10 +536,10 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 				.id("tv_b_phone"));
 		TextView email = (TextView) mView.findViewById(Rconfig.getInstance()
 				.id("tv_b_email"));
-		name.setTextColor(Config.getInstance().getContent_color());
-		street.setTextColor(Config.getInstance().getContent_color());
-		phone.setTextColor(Config.getInstance().getContent_color());
-		email.setTextColor(Config.getInstance().getContent_color());
+		name.setTextColor(AppColorConfig.getInstance().getContentColor());
+		street.setTextColor(AppColorConfig.getInstance().getContentColor());
+		phone.setTextColor(AppColorConfig.getInstance().getContentColor());
+		email.setTextColor(AppColorConfig.getInstance().getContentColor());
 		name.setText(address.getName());
 
 		String street_text = address.getStreet();
@@ -604,10 +605,10 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 		TextView email = (TextView) mView.findViewById(Rconfig.getInstance()
 				.id("tv_s_email"));
 
-		name.setTextColor(Config.getInstance().getContent_color());
-		street.setTextColor(Config.getInstance().getContent_color());
-		phone.setTextColor(Config.getInstance().getContent_color());
-		email.setTextColor(Config.getInstance().getContent_color());
+		name.setTextColor(AppColorConfig.getInstance().getContentColor());
+		street.setTextColor(AppColorConfig.getInstance().getContentColor());
+		phone.setTextColor(AppColorConfig.getInstance().getContentColor());
+		email.setTextColor(AppColorConfig.getInstance().getContentColor());
 
 		name.setText(address.getName());
 		String street_text = address.getStreet();
@@ -640,18 +641,18 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 		TextView tv_shippingMethod = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("shipping_methods"));
 		if (shippingName.equals("")) {
-			tv_shippingMethod.setText(Config.getInstance().getText(
+			tv_shippingMethod.setText(SimiTranslator.getInstance().translate(
 					"Shipping Method"));
 		} else {
 			if (DataLocal.isLanguageRTL) {
-				tv_shippingMethod.setText(Config.getInstance().getText(
+				tv_shippingMethod.setText(SimiTranslator.getInstance().translate(
 						shippingName)
 						+ " :"
-						+ Config.getInstance().getText("Shipping Method"));
+						+ SimiTranslator.getInstance().translate("Shipping Method"));
 			} else {
-				tv_shippingMethod.setText(Config.getInstance().getText(
+				tv_shippingMethod.setText(SimiTranslator.getInstance().translate(
 						"Shipping Method")
-						+ ": " + Config.getInstance().getText(shippingName));
+						+ ": " + SimiTranslator.getInstance().translate(shippingName));
 			}
 		}
 	}
@@ -661,17 +662,17 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 		TextView tv_label_payment_method = (TextView) mView
 				.findViewById(Rconfig.getInstance().id("tv_payment"));
 		if (paymentName.equals("")) {
-			tv_label_payment_method.setText(Config.getInstance().getText(
+			tv_label_payment_method.setText(SimiTranslator.getInstance().translate(
 					"Payment"));
 		} else {
 			if (DataLocal.isLanguageRTL) {
-				tv_label_payment_method.setText(Config.getInstance().getText(
+				tv_label_payment_method.setText(SimiTranslator.getInstance().translate(
 						paymentName)
-						+ " :" + Config.getInstance().getText("Payment"));
+						+ " :" + SimiTranslator.getInstance().translate("Payment"));
 			} else {
-				tv_label_payment_method.setText(Config.getInstance().getText(
+				tv_label_payment_method.setText(SimiTranslator.getInstance().translate(
 						"Payment")
-						+ ": " + Config.getInstance().getText(paymentName));
+						+ ": " + SimiTranslator.getInstance().translate(paymentName));
 			}
 		}
 	}

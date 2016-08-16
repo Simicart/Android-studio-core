@@ -19,11 +19,11 @@ public class CustomerReviewModel extends SimiModel {
 	@Override
 	protected void setUrlAction() {
 		// TODO Auto-generated method stub
-		this.url_action = Constants.GET_PRODUCT_REVIEW;
+		this.mUrlAction = Constants.GET_PRODUCT_REVIEW;
 	}
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			Log.e("CustomerReviewModel JSON ", mJSON.toString());

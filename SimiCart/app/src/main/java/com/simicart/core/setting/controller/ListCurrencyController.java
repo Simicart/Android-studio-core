@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.entity.MyAddress;
 import com.simicart.core.setting.entity.CurrencyEntity;
@@ -43,15 +44,15 @@ public class ListCurrencyController extends SimiController {
 	protected void selectItem(int position) {
 		Collections.sort(list_currency);
 		String currency = list_currency.get(position).toString();
-		String id = DataLocal.getCurrencyID();
-		for (CurrencyEntity entity : DataLocal.listCurrency) {
+		String id = DataPreferences.getCurrencyID();
+		for (CurrencyEntity entity : DataPreferences.listCurrency) {
 			if (currency.equals(entity.getTitle())) {
 
 				String currency_id = entity.getValue();
 
 				if (!id.equals(currency_id)) {
 
-					DataLocal.saveCurrencyID(currency_id);
+					DataPreferences.saveCurrencyID(currency_id);
 					SimiManager.getIntance().changeStoreView();
 					// saveCurrency(currency_id);
 				}

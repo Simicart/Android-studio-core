@@ -13,6 +13,7 @@ import android.webkit.WebView;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
@@ -38,7 +39,7 @@ public class DescriptionFragment extends SimiFragment {
 
 		WebView webView = (WebView) rootView.findViewById(Rconfig.getInstance()
 				.id("webview"));
-		webView.setBackgroundColor(Config.getInstance().getApp_backrground());
+		webView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 		webView.getSettings().setLoadWithOverviewMode(true);

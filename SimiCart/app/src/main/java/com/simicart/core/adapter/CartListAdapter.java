@@ -17,10 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.delegate.CartAdapterDelegate;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.Option;
 import com.simicart.core.common.DrawableManager;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -62,20 +65,20 @@ public class CartListAdapter extends BaseAdapter {
 							Rconfig.getInstance().layout(
 									"core_item_cart_layout"), null);
 		}
-		convertView.setBackgroundColor(Config.getInstance().getApp_backrground());
+		convertView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 
 		final Cart cart = (Cart) getItem(position);
 
 		// name
 		TextView tv_name = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("item_cart_name"));
-		tv_name.setTextColor(Config.getInstance().getContent_color());
+		tv_name.setTextColor(AppColorConfig.getInstance().getContentColor());
 		tv_name.setText(cart.getProduct_name());
 
 		// id
 		TextView tv_id = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("item_cart_id"));
-		tv_id.setTextColor(Config.getInstance().getContent_color());
+		tv_id.setTextColor(AppColorConfig.getInstance().getContentColor());
 		tv_id.setText("" + cart.getId());
 
 		// image
@@ -87,14 +90,14 @@ public class CartListAdapter extends BaseAdapter {
 		// quantity
 		TextView tv_quantity = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("tv_quantity"));
-		tv_quantity.setTextColor(Config.getInstance().getContent_color());
-		tv_quantity.setText(Config.getInstance().getText("Quantity"));
+		tv_quantity.setTextColor(AppColorConfig.getInstance().getContentColor());
+		tv_quantity.setText(SimiTranslator.getInstance().translate("Quantity"));
 		RelativeLayout rl_quanity = (RelativeLayout) convertView
 				.findViewById(Rconfig.getInstance().id("rl_item_cart_quantity"));
 
 		TextView tv_Qty = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("item_cart_qty"));
-		tv_Qty.setTextColor(Config.getInstance().getContent_color());
+		tv_Qty.setTextColor(AppColorConfig.getInstance().getContentColor());
 		tv_Qty.setText("" + cart.getQty());
 		if (null != mDelegate) {
 			rl_quanity.setOnClickListener(mDelegate.getClickQtyItem(position,
@@ -106,7 +109,7 @@ public class CartListAdapter extends BaseAdapter {
 				.getInstance().id("item_cart_del"));
 		Drawable icon = mContext.getResources().getDrawable(
 				Rconfig.getInstance().drawable("ic_delete"));
-		icon.setColorFilter(Config.getInstance().getContent_color(),
+		icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
 				PorterDuff.Mode.SRC_ATOP);
 		tv_delete.setImageDrawable(icon);
 		
@@ -124,7 +127,7 @@ public class CartListAdapter extends BaseAdapter {
 		// option
 		TextView tv_options = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("item_cart_option"));
-		tv_options.setTextColor(Config.getInstance().getContent_color());
+		tv_options.setTextColor(AppColorConfig.getInstance().getContentColor());
 		ArrayList<Option> options = cart.getOptions();
 		if (options != null) {
 			displayOptions(tv_options, options);
@@ -135,19 +138,19 @@ public class CartListAdapter extends BaseAdapter {
 		// price
 		TextView tv_price = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("item_cart_price"));
-		tv_price.setText(Config.getInstance().getPrice(
+		tv_price.setText(AppStoreConfig.getInstance().getPrice(
 				Float.toString(cart.getProduct_price())));
-		tv_price.setTextColor(Color.parseColor(Config.getInstance()
-				.getPrice_color()));
+		tv_price.setTextColor(AppColorConfig.getInstance()
+				.getPriceColor());
 
 		// stock
 		LinearLayout ll_stock = (LinearLayout) convertView.findViewById(Rconfig
 				.getInstance().id("ll_stock"));
-		ll_stock.setBackgroundColor(Config.getInstance().getColorMain());
+		ll_stock.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 		TextView txt_out_stock = (TextView) convertView.findViewById(Rconfig
 				.getInstance().id("txt_out_stock"));
-		txt_out_stock.setText(Config.getInstance().getText("Quantity"));
-		if (cart.getStock().equals(Config.getInstance().getText("Out Stock"))) {
+		txt_out_stock.setText(SimiTranslator.getInstance().translate("Quantity"));
+		if (cart.getStock().equals(SimiTranslator.getInstance().translate("Out Stock"))) {
 			ll_stock.setVisibility(View.VISIBLE);
 		} else {
 			ll_stock.setVisibility(View.GONE);
@@ -156,8 +159,8 @@ public class CartListAdapter extends BaseAdapter {
 		// if (DataLocal.isTablet) {
 		View line_cart_bottom = (View) convertView.findViewById(Rconfig
 				.getInstance().id("line_cart_bottom"));
-		line_cart_bottom.setBackgroundColor(Config.getInstance()
-				.getLine_color());
+		line_cart_bottom.setBackgroundColor(AppColorConfig.getInstance()
+				.getLineColor());
 		// }
 
 		return convertView;

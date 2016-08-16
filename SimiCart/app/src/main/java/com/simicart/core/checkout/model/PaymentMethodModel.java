@@ -15,7 +15,7 @@ public class PaymentMethodModel extends SimiModel{
 	}
 	
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray data = this.mJSON.getJSONArray("data");
 			if (null != data && data.length() > 0) {
@@ -34,6 +34,6 @@ public class PaymentMethodModel extends SimiModel{
 	
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.SAVE_PAYMENT_METHOD;
+		mUrlAction = Constants.SAVE_PAYMENT_METHOD;
 	}
 }

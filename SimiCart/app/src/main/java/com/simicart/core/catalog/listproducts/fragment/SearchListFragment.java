@@ -33,19 +33,19 @@ public class SearchListFragment extends ProductListFragment {
         SearchListFragment fragment = new SearchListFragment();
         fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_LISTPRODUCT);
         Bundle bundle = new Bundle();
-        setData(Constants.KeyData.QUERY, query, Constants.KeyData.TYPE_STRING,
-                bundle);
-        setData(Constants.KeyData.ID, catId, Constants.KeyData.TYPE_STRING, bundle);
-        setData(Constants.KeyData.NAME, catName, Constants.KeyData.TYPE_STRING,
-                bundle);
-        setData(Constants.KeyData.TAG, tagView, Constants.KeyData.TYPE_STRING,
-                bundle);
-        setData(Constants.KeyData.SORT_ID, sortId,
-                Constants.KeyData.TYPE_STRING, bundle);
-        if (jsonFilter != null) {
-            setData(Constants.KeyData.JSON_FILTER, jsonFilter.toString(),
-                    Constants.KeyData.TYPE_JSONOBJECT, bundle);
-        }
+//        setData(Constants.KeyData.QUERY, query, Constants.KeyData.TYPE_STRING,
+//                bundle);
+//        setData(Constants.KeyData.ID, catId, Constants.KeyData.TYPE_STRING, bundle);
+//        setData(Constants.KeyData.NAME, catName, Constants.KeyData.TYPE_STRING,
+//                bundle);
+//        setData(Constants.KeyData.TAG, tagView, Constants.KeyData.TYPE_STRING,
+//                bundle);
+//        setData(Constants.KeyData.SORT_ID, sortId,
+//                Constants.KeyData.TYPE_STRING, bundle);
+//        if (jsonFilter != null) {
+//            setData(Constants.KeyData.JSON_FILTER, jsonFilter.toString(),
+//                    Constants.KeyData.TYPE_JSONOBJECT, bundle);
+//        }
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -60,25 +60,25 @@ public class SearchListFragment extends ProductListFragment {
 
         // data
         if (getArguments() != null) {
-            mQuery = (String) getData(Constants.KeyData.QUERY,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            mSortID = (String) getData(Constants.KeyData.SORT_ID,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            mCatName = (String) getData(Constants.KeyData.NAME,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            mCatID = (String) getData(Constants.KeyData.ID,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            setScreenName("Search Screen");//tracking Screen
-            String json = (String) getData(Constants.KeyData.JSON_FILTER,
-                    Constants.KeyData.TYPE_JSONOBJECT, getArguments());
-            try {
-                jsonFilter = new JSONObject(json);
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            tagView = (String) getData(Constants.KeyData.TAG,
-                    Constants.KeyData.TYPE_STRING, getArguments());
+//            mQuery = (String) getData(Constants.KeyData.QUERY,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            mSortID = (String) getData(Constants.KeyData.SORT_ID,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            mCatName = (String) getData(Constants.KeyData.NAME,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            mCatID = (String) getData(Constants.KeyData.ID,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            setScreenName("Search Screen");//tracking Screen
+//            String json = (String) getData(Constants.KeyData.JSON_FILTER,
+//                    Constants.KeyData.TYPE_JSONOBJECT, getArguments());
+//            try {
+//                jsonFilter = new JSONObject(json);
+//            } catch (JSONException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//            tagView = (String) getData(Constants.KeyData.TAG,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
             setTagView(tagView);
         }
         setListParam(ConstantsSearch.PARAM_QUERY, mQuery);

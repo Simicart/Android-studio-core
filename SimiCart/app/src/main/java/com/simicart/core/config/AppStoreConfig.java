@@ -46,7 +46,7 @@ public class AppStoreConfig extends SimiEntity {
 
     public static AppStoreConfig instance;
 
-    public static AppStoreConfig newInstance() {
+    public static AppStoreConfig getInstance() {
         if(instance == null) {
             instance = new AppStoreConfig();
         }

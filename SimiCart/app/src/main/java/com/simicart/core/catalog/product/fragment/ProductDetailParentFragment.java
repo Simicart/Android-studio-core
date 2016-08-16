@@ -36,8 +36,8 @@ public class ProductDetailParentFragment extends SimiFragment {
         ProductDetailParentFragment fragment = new ProductDetailParentFragment();
 
         Bundle args = new Bundle();
-        setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, args);
-        setData(Constants.KeyData.LIST_ID, ids, Constants.KeyData.TYPE_LIST_STRING, args);
+//        setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, args);
+//        setData(Constants.KeyData.LIST_ID, ids, Constants.KeyData.TYPE_LIST_STRING, args);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,8 +63,8 @@ public class ProductDetailParentFragment extends SimiFragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null) {
-            mID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
-            mListID = (ArrayList<String>) getData(Constants.KeyData.LIST_ID, Constants.KeyData.TYPE_LIST_STRING, getArguments());
+//            mID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
+//            mListID = (ArrayList<String>) getData(Constants.KeyData.LIST_ID, Constants.KeyData.TYPE_LIST_STRING, getArguments());
         }
         Log.d("quangdd", "==" + mID + "===" + mListID);
         mBlock = new ProductDetailParentBlock(view, getActivity());

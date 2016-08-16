@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.simicart.core.adapter.IndexableListAdapter;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.style.IndexableListView;
@@ -33,8 +34,8 @@ public class ListViewIndexableBlock extends SimiBlock {
 	public void initView() {
 		lv_language = (IndexableListView) mView.findViewById(Rconfig
 				.getInstance().id("listview"));
-		ColorDrawable sage = new ColorDrawable(Config.getInstance()
-				.getLine_color());
+		ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance()
+				.getLineColor());
 		lv_language.setDivider(sage);
 		lv_language.setDividerHeight(1);
 		if (mList.size() > 0) {
