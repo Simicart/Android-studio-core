@@ -41,14 +41,14 @@ public class ForgotPasswordBlock extends SimiBlock implements
 		lable_email = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("lable_email"));
 		lable_email.setTextColor(Color.GRAY);
-		lable_email.setText(SimiTranslator.newInstance().translate("Enter Your Email")
+		lable_email.setText(SimiTranslator.getInstance().translate("Enter Your Email")
 				.toUpperCase()
 				+ ":");
 
 		// button sent
 		btn_Send = (ButtonRectangle) mView.findViewById(Rconfig.getInstance().id(
 				"bt_send"));
-		btn_Send.setText(SimiTranslator.newInstance().translate("Reset my password"));
+		btn_Send.setText(SimiTranslator.getInstance().translate("Reset my password"));
 		btn_Send.setTextColor(Color.WHITE);
 		btn_Send.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 		btn_Send.setTextSize(Constants.SIZE_TEXT_BUTTON);
@@ -56,7 +56,7 @@ public class ForgotPasswordBlock extends SimiBlock implements
 		// Email Field
 		edt_Email = (EditText) mView.findViewById(Rconfig.getInstance().id(
 				"et_email"));
-		edt_Email.setHint(SimiTranslator.newInstance().translate("Email"));
+		edt_Email.setHint(SimiTranslator.getInstance().translate("Email"));
 		
 		lable_email.setTextColor(AppColorConfig.getInstance().getContentColor());
 		edt_Email.setTextColor(AppColorConfig.getInstance().getContentColor());

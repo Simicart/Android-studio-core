@@ -59,38 +59,38 @@ public class OrderHistoryDetailBlock extends SimiBlock implements
 		view_order_date.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 		TextView lb_date = (TextView) mView.findViewById(Rconfig.getInstance()
 				.id("lb_date"));
-		lb_date.setText(SimiTranslator.newInstance().translate("Order Date"));
+		lb_date.setText(SimiTranslator.getInstance().translate("Order Date"));
 		lb_date.setTextColor(AppColorConfig.getInstance().getContentColor());
 		TextView lb_orderT = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("lb_orderT"));
-		lb_orderT.setText(SimiTranslator.newInstance().translate("Order Number"));
+		lb_orderT.setText(SimiTranslator.getInstance().translate("Order Number"));
 		lb_orderT.setTextColor(AppColorConfig.getInstance().getContentColor());
 		TextView lb_total = (TextView) mView.findViewById(Rconfig.getInstance()
 				.id("lb_total"));
-		lb_total.setText(SimiTranslator.newInstance().translate("Order Total"));
+		lb_total.setText(SimiTranslator.getInstance().translate("Order Total"));
 		lb_total.setTextColor(AppColorConfig.getInstance().getContentColor());
 
 		TextView lb_shipto = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("lb_shipto"));
 		lb_shipto
-				.setText(SimiTranslator.newInstance().translate("Ship to").toUpperCase());
+				.setText(SimiTranslator.getInstance().translate("Ship to").toUpperCase());
 		lb_shipto.setTextColor(AppColorConfig.getInstance().getSectionColor());
 		lb_shipto.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
 		TextView lb_items = (TextView) mView.findViewById(Rconfig.getInstance()
 				.id("lb_items"));
-		lb_items.setText(SimiTranslator.newInstance().translate("Items").toUpperCase());
+		lb_items.setText(SimiTranslator.getInstance().translate("Items").toUpperCase());
 		lb_items.setTextColor(AppColorConfig.getInstance().getSectionColor());
 		lb_items.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
 		TextView lb_payment = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("lb_payment"));
-		lb_payment.setText(SimiTranslator.newInstance().translate("Payment")
+		lb_payment.setText(SimiTranslator.getInstance().translate("Payment")
 				.toUpperCase());
 		lb_payment.setTextColor(AppColorConfig.getInstance().getSectionColor());
 		lb_payment.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
 		bt_reorder = (ButtonRectangle) mView.findViewById(Rconfig.getInstance()
 				.id("bt_reorder"));
 		bt_reorder.setTextColor(Color.WHITE);
-		bt_reorder.setText(SimiTranslator.newInstance().translate("Reorder"));
+		bt_reorder.setText(SimiTranslator.getInstance().translate("Reorder"));
 		bt_reorder.setTextSize(16);
 		bt_reorder.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 	}
@@ -113,10 +113,10 @@ public class OrderHistoryDetailBlock extends SimiBlock implements
 			tv_total.setTextColor(AppColorConfig.getInstance().getPriceColor());
 
 			String symbol = orderHisDetail.getTotal_price().getCurrencySymbol();
-			String price = AppStoreConfig.newInstance().getPrice(
+			String price = AppStoreConfig.getInstance().getPrice(
 					orderHisDetail.getOrder_total());
 			if (null != symbol) {
-				price = AppStoreConfig.newInstance().getPrice(
+				price = AppStoreConfig.getInstance().getPrice(
 						orderHisDetail.getOrder_total(), symbol);
 			}
 			tv_total.setText(price);
@@ -258,11 +258,11 @@ public class OrderHistoryDetailBlock extends SimiBlock implements
 			p_couponCode.setTextColor(AppColorConfig.getInstance().getContentColor());
 			if (orderHisDetail.getOrder_gift_code() == null
 					|| orderHisDetail.getOrder_gift_code().equals("null")) {
-				p_couponCode.setText(SimiTranslator.newInstance().translate("Coupon Code")
+				p_couponCode.setText(SimiTranslator.getInstance().translate("Coupon Code")
 						+ ": "
-						+ SimiTranslator.newInstance().translate("NONE").toUpperCase());
+						+ SimiTranslator.getInstance().translate("NONE").toUpperCase());
 			} else {
-				p_couponCode.setText(SimiTranslator.newInstance().translate("Coupon Code")
+				p_couponCode.setText(SimiTranslator.getInstance().translate("Coupon Code")
 						+ ": "
 						+ orderHisDetail.getOrder_gift_code());
 			}
@@ -290,7 +290,7 @@ public class OrderHistoryDetailBlock extends SimiBlock implements
 			if (null != view) {
 				ll_price.removeAllViews();
 				ll_price.addView(view, params);
-				tv_label_price.setText(SimiTranslator.newInstance().translate("FEE DETAIL").toUpperCase());
+				tv_label_price.setText(SimiTranslator.getInstance().translate("FEE DETAIL").toUpperCase());
 			} else {
 				tv_label_price.setVisibility(View.GONE);
 				ll_price.setVisibility(View.GONE);

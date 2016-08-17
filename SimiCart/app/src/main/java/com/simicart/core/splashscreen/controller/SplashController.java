@@ -4,13 +4,18 @@ import android.content.Context;
 
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.event.base.ReadXML;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.ReadXMLLanguage;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.splashscreen.model.AppConfigModel;
@@ -19,8 +24,14 @@ import com.simicart.core.splashscreen.model.ListIDPluginModel;
 import com.simicart.core.splashscreen.model.ListSKUPluginModel;
 import com.simicart.core.splashscreen.model.SaveCurrencyModel;
 import com.simicart.core.splashscreen.model.StoreViewModel;
+import com.simicart.core.store.entity.Stores;
+import com.simicart.theme.matrixtheme.MatrixTheme;
+import com.simicart.theme.ztheme.ZTheme;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SplashController {
 
@@ -32,10 +43,8 @@ public class SplashController {
 
     public void create() {
         initCommon();
-
         getAppConfig();
         getAvaiablePlugin();
-
         String currencyID = DataPreferences.getCurrencyID();
         if (Utils.validateString(currencyID)) {
             saveCurrency(currencyID);
@@ -45,7 +54,7 @@ public class SplashController {
         }
     }
 
-    private void initCommon() {
+    protected void initCommon() {
         DataLocal.init();
         Config.getInstance().setBaseUrl();
         DataLocal.listCms.clear();
@@ -56,8 +65,8 @@ public class SplashController {
         appConfigModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
+                enableTheme();
                 if (canOpenMain) {
-                    enableTheme();
                     SimiManager.getIntance().toMainActivity();
                 } else {
                     canOpenMain = true;
@@ -77,6 +86,14 @@ public class SplashController {
     }
 
     protected void enableTheme() {
+        String themeType = AppColorConfig.getInstance().getThemeType();
+        if (Utils.validateString(themeType)) {
+            if (themeType.equals(MATRIX_THEME)) {
+                new MatrixTheme();
+            } else if (themeType.equals(ZARA_THEME)) {
+                new ZTheme();
+            }
+        }
     }
 
 
@@ -108,12 +125,15 @@ public class SplashController {
     }
 
     private void getSKUPlugin(String ids) {
-        ListSKUPluginModel listSKUPluginModel = new ListSKUPluginModel();
+        final ListSKUPluginModel listSKUPluginModel = new ListSKUPluginModel();
 
         listSKUPluginModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-
+                ArrayList<String> listSKU = listSKUPluginModel.getListSKU();
+                if (null != listSKU && listSKU.size() > 0) {
+                    enablePlugins(listSKU);
+                }
             }
         });
 
@@ -129,6 +149,13 @@ public class SplashController {
         listSKUPluginModel.addBody("ids", ids);
         listSKUPluginModel.request();
     }
+
+    protected void enablePlugins(ArrayList<String> listSKU) {
+        Context context = SimiManager.getIntance().getCurrentActivity();
+        ReadXML readXml = new ReadXML(context, listSKU);
+        readXml.read();
+    }
+
 
     protected void saveCurrency(String id) {
         SaveCurrencyModel saveCurrencyModel = new SaveCurrencyModel();
@@ -222,28 +249,32 @@ public class SplashController {
 
 
     private void changeBaseUrl() {
-//        for (Stores store : DataLocal.listStores) {
-//            if (store.getStoreID().equals(
-//                    "" + Config.getInstance().getStore_id())) {
-//                int leg = Config.getInstance().getBaseUrl().split("/").length;
-//                String last = Config.getInstance().getBaseUrl().split("/")[leg - 1];
-//                Config.getInstance().setBase_url(
-//                        Config.getInstance().getBaseUrl()
-//                                .replace(last, store.getStoreCode()));
-//            }
-//        }
+        String currentStoreID = AppStoreConfig.getInstance().getStoreID();
+        String baseUrl = Config.getInstance().getBaseUrl();
+        for (Stores store : DataLocal.listStores) {
+            String id = store.getStoreID();
+            if (id.equals(currentStoreID)) {
+                int length = baseUrl.split("/").length;
+                String last = baseUrl.split("/")[length - 1];
+                baseUrl = baseUrl.replace(last, store.getStoreCode());
+                Config.getInstance().setBase_url(baseUrl);
+            }
+        }
     }
 
     private void createLanguage() {
-//        try {
-//            ReadXMLLanguage readlanguage = new ReadXMLLanguage(mContext);
-//            readlanguage.parseXML(Config.getInstance().getLocale_identifier()
-//                    + "/localize.xml");
-//            Config.getInstance().setLanguages(readlanguage.getLanguages());
-//        } catch (Exception e) {
-//            Map<String, String> languages = new HashMap<String, String>();
-//            Config.getInstance().setLanguages(languages);
-//        }
+
+        try {
+            Context context = SimiManager.getIntance().getCurrentActivity();
+            ReadXMLLanguage readlanguage = new ReadXMLLanguage(context);
+            String identifier = AppStoreConfig.getInstance().getLocaleIdentifier();
+            readlanguage.parseXML(identifier + "/localize.xml");
+            Map<String, String> languages = readlanguage.getLanguages();
+            SimiTranslator.getInstance().setLanguages(languages);
+        } catch (Exception e) {
+            Map<String, String> languages = new HashMap<>();
+            SimiTranslator.getInstance().setLanguages(languages);
+        }
 
     }
 }

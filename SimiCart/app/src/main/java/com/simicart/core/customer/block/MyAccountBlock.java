@@ -55,7 +55,7 @@ public class MyAccountBlock extends SimiBlock {
                 .id("rl_profile"));
         lb_profile = (TextView) mView.findViewById(Rconfig.getInstance().id(
                 "lb_profile"));
-        lb_profile.setText(SimiTranslator.newInstance().translate("Profile"));
+        lb_profile.setText(SimiTranslator.getInstance().translate("Profile"));
         lb_profile.setTextColor(AppColorConfig.getInstance().getContentColor());
 
         rlt_addressBook = (LayoutRipple) mView.findViewById(Rconfig
@@ -63,20 +63,20 @@ public class MyAccountBlock extends SimiBlock {
         lb_addressBook = (TextView) mView.findViewById(Rconfig.getInstance()
                 .id("lb_addressBook"));
         lb_addressBook.setTextColor(AppColorConfig.getInstance().getContentColor());
-        lb_addressBook.setText(SimiTranslator.newInstance().translate("Address Book"));
+        lb_addressBook.setText(SimiTranslator.getInstance().translate("Address Book"));
 
         rlt_orderHistory = (LayoutRipple) mView.findViewById(Rconfig
                 .getInstance().id("rl_orderHistory"));
         lb_orderHistory = (TextView) mView.findViewById(Rconfig.getInstance()
                 .id("lb_orderHistory"));
-        lb_orderHistory.setText(SimiTranslator.newInstance().translate("Order History"));
+        lb_orderHistory.setText(SimiTranslator.getInstance().translate("Order History"));
         lb_orderHistory.setTextColor(AppColorConfig.getInstance().getContentColor());
 
         rlt_signOut = (LayoutRipple) mView.findViewById(Rconfig.getInstance()
                 .id("rl_logout"));
         lb_logout = (TextView) mView.findViewById(Rconfig.getInstance().id(
                 "lb_logout"));
-        lb_logout.setText(SimiTranslator.newInstance().translate("Sign Out"));
+        lb_logout.setText(SimiTranslator.getInstance().translate("Sign Out"));
         lb_logout.setTextColor(AppColorConfig.getInstance().getContentColor());
 
         LinearLayout ll_space = (LinearLayout) mView.findViewById(Rconfig

@@ -6,15 +6,10 @@ import com.simicart.core.config.DataLocal;
 
 public class SignOutModel extends SimiModel {
 
-	@Override
-	protected void paserData() {
-		// TODO Auto-generated method stub
-		super.paserData();
-	}
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.SIGN_OUT;
+		mUrlAction = Constants.SIGN_OUT;
 	}
 
 }

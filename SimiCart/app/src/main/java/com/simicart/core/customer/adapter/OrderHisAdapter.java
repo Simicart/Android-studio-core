@@ -137,7 +137,7 @@ public class OrderHisAdapter extends BaseAdapter {
         int id = Rconfig.getInstance().id(idView);
         TextView tvLabel = (TextView) convertView.findViewById(id);
         tvLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
-        String labelTranslated = SimiTranslator.newInstance().translate(label);
+        String labelTranslated = SimiTranslator.getInstance().translate(label);
         tvLabel.setText(labelTranslated);
     }
 

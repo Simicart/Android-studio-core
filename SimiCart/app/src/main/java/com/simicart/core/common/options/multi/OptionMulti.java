@@ -133,13 +133,13 @@ public class OptionMulti extends OptionView {
             }
 
             mOptions.setOptionCart(mOptions.getOptionId());
-            if (!AppStoreConfig.newInstance().isShowZeroPrice()
+            if (!AppStoreConfig.getInstance().isShowZeroPrice()
                     && ((CacheOptionMultiDelegate) mDelegate).getPriceMulti() == 0) {
                 mDelegate.updatePriceForHeader("");
             } else {
                 mDelegate
                         .updatePriceForHeader(""
-                                + AppStoreConfig.newInstance()
+                                + AppStoreConfig.getInstance()
                                 .getPrice(
                                         ""
                                                 + ((CacheOptionMultiDelegate) mDelegate)
@@ -158,19 +158,19 @@ public class OptionMulti extends OptionView {
             if (((CacheOptionMultiDelegate) mDelegate).getPriceMulti() == 0
                     && !((CacheOptionMultiDelegate) mDelegate).isCheckedAll()) {
                 if (((CacheOptionMultiDelegate) mDelegate).isRequired()) {
-                    mDelegate.updatePriceForHeader(SimiTranslator.newInstance().translate("*"));
+                    mDelegate.updatePriceForHeader(SimiTranslator.getInstance().translate("*"));
                 } else {
                     mDelegate.updatePriceForHeader("");
                 }
             } else {
                 mDelegate
                         .updatePriceForHeader(""
-                                + AppStoreConfig.newInstance()
+                                + AppStoreConfig.getInstance()
                                 .getPrice(
                                         ""
                                                 + ((CacheOptionMultiDelegate) mDelegate)
                                                 .getPriceMulti()));
-                if (!AppStoreConfig.newInstance().isShowZeroPrice() && ((CacheOptionMultiDelegate) mDelegate)
+                if (!AppStoreConfig.getInstance().isShowZeroPrice() && ((CacheOptionMultiDelegate) mDelegate)
                         .getPriceMulti() == 0) {
                     mDelegate.updatePriceForHeader("");
                 }

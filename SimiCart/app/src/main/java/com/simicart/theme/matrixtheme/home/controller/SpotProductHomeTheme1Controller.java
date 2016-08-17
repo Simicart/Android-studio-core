@@ -13,22 +13,22 @@ public class SpotProductHomeTheme1Controller extends SimiController {
 	@Override
 	public void onStart() {
 		// mDelegate.showLoading();
-		ModelDelegate delegate = new ModelDelegate() {
-
-			@Override
-			public void callBack(String message, boolean isSuccess) {
-				// mDelegate.dismissLoading();
-				if (isSuccess) {
-					mDelegate.updateView(mModel.getCollection());
-				}
-			}
-		};
-
-		mModel = new SpotProductHomeTheme1Model();
-		if (DataLocal.isTablet) {
-			mModel.addParam(Constants.PHONE_TYPE, "tablet");
-		}
-		mModel.setDelegate(delegate);
+//		ModelDelegate delegate = new ModelDelegate() {
+//
+//			@Override
+//			public void callBack(String message, boolean isSuccess) {
+//				// mDelegate.dismissLoading();
+//				if (isSuccess) {
+//					mDelegate.updateView(mModel.getCollection());
+//				}
+//			}
+//		};
+//
+//		mModel = new SpotProductHomeTheme1Model();
+//		if (DataLocal.isTablet) {
+//			mModel.addParam(Constants.PHONE_TYPE, "tablet");
+//		}
+//		mModel.setDelegate(delegate);
 		mModel.request();
 	}
 

@@ -211,18 +211,18 @@ public class ProductPriceViewProductGridV03 extends ProductPriceView {
 
     protected String getHtmlForPrice(float price) {
         return "<font color='" + color_Price + "'>"
-                + AppStoreConfig.newInstance().getPrice("" + price) + "</font>";
+                + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
     protected String getHtmlForSpecialPrice(float price) {
         return "<font color='" + color_Price_Special + "'>"
-                + AppStoreConfig.newInstance().getPrice("" + price) + "</font>";
+                + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
     protected String getHtmlForPrice(float price, String label) {
         return "<font color='" + color_Price + "'>" + label
                 + ": </font><font color='" + color_Price + "'>"
-                + AppStoreConfig.newInstance().getPrice("" + price) + "</font>";
+                + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
 }

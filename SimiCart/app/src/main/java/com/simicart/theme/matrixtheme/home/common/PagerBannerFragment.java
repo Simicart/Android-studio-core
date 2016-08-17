@@ -63,9 +63,9 @@ public class PagerBannerFragment extends SimiFragment {
     public static PagerBannerFragment newInstance(int postion, float scale, boolean isBlured, BannerEntity bannerEntity) {
         PagerBannerFragment fragment = new PagerBannerFragment();
         Bundle bundle = new Bundle();
-        setData(Constants.KeyData.POSITON, postion, Constants.KeyData.TYPE_INT, bundle);
-        setData(Constants.KeyData.SCALE, scale, Constants.KeyData.TYPE_FLOAT, bundle);
-        setData(Constants.KeyData.CHECK_BLURED, isBlured, Constants.KeyData.TYPE_BOOLEAN, bundle);
+//        setData(Constants.KeyData.POSITON, postion, Constants.KeyData.TYPE_INT, bundle);
+//        setData(Constants.KeyData.SCALE, scale, Constants.KeyData.TYPE_FLOAT, bundle);
+//        setData(Constants.KeyData.CHECK_BLURED, isBlured, Constants.KeyData.TYPE_BOOLEAN, bundle);
 //	setData(Constants.KeyData.BANNERENTITY, bannerEntity, Constants.KeyData.TYPE_MODEL, bundle);
         bundle.putSerializable(Constants.KeyData.BANNERENTITY, bannerEntity);
         fragment.setArguments(bundle);
@@ -90,10 +90,10 @@ public class PagerBannerFragment extends SimiFragment {
 
         //getdata
         if (getArguments() != null) {
-            position = (int) getData(Constants.KeyData.POSITON, Constants.KeyData.TYPE_INT, getArguments());
-            scale = (float) getData(Constants.KeyData.SCALE, Constants.KeyData.TYPE_FLOAT, getArguments());
-            isBlured = (boolean) getData(Constants.KeyData.CHECK_BLURED, Constants.KeyData.TYPE_BOOLEAN, getArguments());
-            bannerEntity = (BannerEntity) getArguments().getSerializable(Constants.KeyData.BANNERENTITY);
+//            position = (int) getData(Constants.KeyData.POSITON, Constants.KeyData.TYPE_INT, getArguments());
+//            scale = (float) getData(Constants.KeyData.SCALE, Constants.KeyData.TYPE_FLOAT, getArguments());
+//            isBlured = (boolean) getData(Constants.KeyData.CHECK_BLURED, Constants.KeyData.TYPE_BOOLEAN, getArguments());
+//            bannerEntity = (BannerEntity) getArguments().getSerializable(Constants.KeyData.BANNERENTITY);
         }
         if (bannerEntity.getImage() != null) {
             DrawableManager.fetchDrawableOnThread(bannerEntity.getImage(),
@@ -191,9 +191,5 @@ public class PagerBannerFragment extends SimiFragment {
         return rootView;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroyView();
-    }
 
 }

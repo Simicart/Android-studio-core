@@ -64,7 +64,7 @@ public class CacheOptionDateView extends CacheOptionView {
                 tv_date.setText(day + "-" + month + "-" + year);
                 if (isAddPrice && !isselectedOptionDate) {
                     mCacheOption.setCompleteRequired(true);
-                    updatePriceHeader(AppStoreConfig.newInstance().getPrice(
+                    updatePriceHeader(AppStoreConfig.getInstance().getPrice(
                             ""
                                     + mCacheOption.getAllOption().get(0)
                                     .getOptionPrice()));
@@ -86,7 +86,7 @@ public class CacheOptionDateView extends CacheOptionView {
             }
             tv_date.setText(day + "-" + month + "-" + mCacheOption.getYear());
             mCacheOption.setCompleteRequired(true);
-            updatePriceHeader(AppStoreConfig.newInstance().getPrice(
+            updatePriceHeader(AppStoreConfig.getInstance().getPrice(
                     "" + mCacheOption.getAllOption().get(0).getOptionPrice()));
             updatePriceForParent(mCacheOption.getAllOption().get(0), ADD_OPERATOR);
             datePicker.init(mCacheOption.getYear(),

@@ -13,7 +13,7 @@ import com.simicart.core.config.Constants;
 public class AddressBookDetailModel extends SimiModel{
 	protected String mCountry;
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			collection = new SimiCollection();
@@ -30,7 +30,7 @@ public class AddressBookDetailModel extends SimiModel{
 	
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.SAVE_ADDRESS;
+		mUrlAction = Constants.SAVE_ADDRESS;
 	}
 
 	public void setTextCountry(String country) {

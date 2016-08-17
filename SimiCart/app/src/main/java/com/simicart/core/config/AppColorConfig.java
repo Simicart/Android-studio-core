@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiEntity;
@@ -38,6 +39,8 @@ public class AppColorConfig extends SimiEntity {
     protected String mSpecialPriceColor;
     protected String mIconColor;
     protected String mSectionColor;
+    // theme
+    protected String mThemeType;
 
     private String key_color = "key_color";
     private String top_menu_icon_color = "top_menu_icon_color";
@@ -58,6 +61,7 @@ public class AppColorConfig extends SimiEntity {
     private String special_price_color = "special_price_color";
     private String icon_color = "icon_color";
     private String section_color = "section_color";
+    private String layout = "layout";
 
     public static AppColorConfig getInstance() {
         if (instance == null) {
@@ -67,17 +71,10 @@ public class AppColorConfig extends SimiEntity {
     }
 
     public AppColorConfig() {
-        parse();
         mContext = SimiManager.getIntance().getCurrentActivity();
     }
 
-    public int parseColor(String color) {
-        try {
-            return parseColor(color.trim());
-        } catch (Exception e) {
-            return Color.parseColor("#ffffff");
-        }
-    }
+
 
     @Override
     public void parse() {
@@ -153,6 +150,10 @@ public class AppColorConfig extends SimiEntity {
 
             if (mJSON.has(search_text_color)) {
                 mSearchTextColor = getData(search_text_color);
+            }
+
+            if (mJSON.has(layout)) {
+                mThemeType = getData(layout);
             }
         }
     }
@@ -356,4 +357,17 @@ public class AppColorConfig extends SimiEntity {
         return parseColor("#8b8b8b");
     }
 
+    public String getThemeType() {
+        return mThemeType;
+    }
+
+    public int parseColor(String color) {
+        try {
+            return Color.parseColor(color);
+        } catch (Exception e) {
+            Log.e("AppColorConfig ","parse color Exception " + e.getMessage());
+
+        }
+        return Color.parseColor("#ffffff");
+    }
 }

@@ -44,7 +44,7 @@ public class Option extends SimiEntity {
 		this.mprice = option_price;
 	}
 
-	public boolean parse(JSONObject json) {
+	public void parse(JSONObject json) {
 		try {
 			if (json.has(Constants.OPTION_PRICE)) {
 				mprice = json.getString(Constants.OPTION_PRICE);
@@ -57,9 +57,7 @@ public class Option extends SimiEntity {
 			if (json.has(Constants.OPTION_VALUE)) {
 				mvalue = json.getString(Constants.OPTION_VALUE);
 			}
-			return true;
 		} catch (JSONException e) {
-			return false;
 		}
 
 	}

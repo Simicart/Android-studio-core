@@ -11,7 +11,7 @@ import org.json.JSONObject;
 public class SpotProductHomeTheme1Model extends SimiModel {
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray list = this.mJSON.getJSONArray("data");
 
@@ -30,7 +30,7 @@ public class SpotProductHomeTheme1Model extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = "themeone/api/get_order_spots";
+		mUrlAction = "themeone/api/get_order_spots";
 	}
 
 	@Override

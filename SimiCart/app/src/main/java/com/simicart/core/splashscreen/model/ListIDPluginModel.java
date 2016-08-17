@@ -1,5 +1,7 @@
 package com.simicart.core.splashscreen.model;
 
+import android.util.Log;
+
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.network.request.SimiRequest;
 import com.simicart.core.common.Utils;
@@ -34,13 +36,14 @@ public class ListIDPluginModel extends SimiModel {
 
     @Override
     protected void setUrlAction() {
-        mUrlAction = "site-plugins";
+        mUrlAction = "/site-plugins";
     }
 
     @Override
     protected void parseData() {
         if (mJSON.has(site_plugins)) {
             try {
+                Log.e("ListIDPluginModel ","DATA " + mJSON);
                 JSONArray array = mJSON.getJSONArray(site_plugins);
                 if (null != array && array.length() > 0) {
                     for (int i = 0; i < array.length(); i++) {

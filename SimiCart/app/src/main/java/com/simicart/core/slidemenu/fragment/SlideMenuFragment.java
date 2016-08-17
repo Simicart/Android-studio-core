@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -68,8 +69,7 @@ public class SlideMenuFragment extends SimiFragment implements
 		mDrawerLayout.setDrawerShadow(
 				Rconfig.getInstance().drawable("drawer_shadow"),
 				GravityCompat.START);
-		mDrawerLayout.setBackgroundColor(Config.getInstance()
-				.getApp_backrground());
+		mDrawerLayout.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 
 		mDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout,
 				mIdIconDrawer, Rconfig.getInstance().string(
@@ -137,11 +137,11 @@ public class SlideMenuFragment extends SimiFragment implements
 
 		PagerSlidingTabStrip title_tab = (PagerSlidingTabStrip) rootView
 				.findViewById(Rconfig.getInstance().id("pager_title_strip"));
-		title_tab.setTextColor(Config.getInstance().getMenu_text_color());
+		title_tab.setTextColor(AppColorConfig.getInstance().getMenuTextColor());
 		// title_tab.setTextSize(20);
-		title_tab.setBackgroundColor(Config.getInstance().getMenu_background());
-		title_tab.setDividerColor(Config.getInstance().getMenu_background());
-		title_tab.setIndicatorColor(Config.getInstance().getMenu_text_color());
+		title_tab.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
+		title_tab.setDividerColor(AppColorConfig.getInstance().getMenuBackground());
+		title_tab.setIndicatorColor(AppColorConfig.getInstance().getMenuTextColor());
 		title_tab.setIndicatorHeight(3);
 		title_tab.setAllCaps(false);
 		title_tab.setShouldExpand(true);

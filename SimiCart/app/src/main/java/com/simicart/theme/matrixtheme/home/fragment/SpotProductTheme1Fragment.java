@@ -35,18 +35,18 @@ public class SpotProductTheme1Fragment extends ProductListFragment {
         SpotProductTheme1Fragment fragment = new SpotProductTheme1Fragment();
         fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_LISTPRODUCT);
         Bundle bundle = new Bundle();
-        setData(Constants.KeyData.KEY, key, Constants.KeyData.TYPE_STRING,
-                bundle);
-        setData(Constants.KeyData.CAT_NAME, spotName, Constants.KeyData.TYPE_STRING,
-                bundle);
-        setData(Constants.KeyData.TAG, tagView, Constants.KeyData.TYPE_STRING,
-                bundle);
-        setData(Constants.KeyData.SORT_ID, sortId,
-                Constants.KeyData.TYPE_STRING, bundle);
-        if (jsonFilter != null) {
-            setData(Constants.KeyData.JSON_FILTER, jsonFilter.toString(),
-                    Constants.KeyData.TYPE_JSONOBJECT, bundle);
-        }
+//        setData(Constants.KeyData.KEY, key, Constants.KeyData.TYPE_STRING,
+//                bundle);
+//        setData(Constants.KeyData.CAT_NAME, spotName, Constants.KeyData.TYPE_STRING,
+//                bundle);
+//        setData(Constants.KeyData.TAG, tagView, Constants.KeyData.TYPE_STRING,
+//                bundle);
+//        setData(Constants.KeyData.SORT_ID, sortId,
+//                Constants.KeyData.TYPE_STRING, bundle);
+//        if (jsonFilter != null) {
+//            setData(Constants.KeyData.JSON_FILTER, jsonFilter.toString(),
+//                    Constants.KeyData.TYPE_JSONOBJECT, bundle);
+//        }
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -60,26 +60,26 @@ public class SpotProductTheme1Fragment extends ProductListFragment {
         Context context = getActivity();
 
         // data
-        if (getArguments() != null) {
-            mKey = (String) getData(Constants.KeyData.KEY,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            mCatName = (String) getData(Constants.KeyData.CAT_NAME,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            mSortID = (String) getData(Constants.KeyData.SORT_ID,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            setScreenName("List Spot Product:" + mKey);//tracking Screen
-            String json = (String) getData(Constants.KeyData.JSON_FILTER,
-                    Constants.KeyData.TYPE_JSONOBJECT, getArguments());
-            try {
-                jsonFilter = new JSONObject(json);
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            tagView = (String) getData(Constants.KeyData.TAG,
-                    Constants.KeyData.TYPE_STRING, getArguments());
-            setTagView(tagView);
-        }
+//        if (getArguments() != null) {
+//            mKey = (String) getData(Constants.KeyData.KEY,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            mCatName = (String) getData(Constants.KeyData.CAT_NAME,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            mSortID = (String) getData(Constants.KeyData.SORT_ID,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            setScreenName("List Spot Product:" + mKey);//tracking Screen
+//            String json = (String) getData(Constants.KeyData.JSON_FILTER,
+//                    Constants.KeyData.TYPE_JSONOBJECT, getArguments());
+//            try {
+//                jsonFilter = new JSONObject(json);
+//            } catch (JSONException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//            tagView = (String) getData(Constants.KeyData.TAG,
+//                    Constants.KeyData.TYPE_STRING, getArguments());
+//            setTagView(tagView);
+//        }
         setListParam(ConstantsSearch.PARAM_KEY, mKey);
         setListParam(ConstantsSearch.PARAM_SORT_OPTION, mSortID);
 

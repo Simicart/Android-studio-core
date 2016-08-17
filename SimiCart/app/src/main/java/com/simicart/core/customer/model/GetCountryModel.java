@@ -10,7 +10,7 @@ import com.simicart.core.customer.entity.CountryAllowed;
 
 public class GetCountryModel extends SimiModel {
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			collection = new SimiCollection();
@@ -27,7 +27,7 @@ public class GetCountryModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.GET_ALLOWED_COUNTRIES;
+		mUrlAction = Constants.GET_ALLOWED_COUNTRIES;
 	}
 
 	@Override

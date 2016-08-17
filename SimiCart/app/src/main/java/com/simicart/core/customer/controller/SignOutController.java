@@ -90,7 +90,7 @@ public class SignOutController extends SimiController {
         TextView txt_toast = (TextView) layout_toast.findViewById(Rconfig
                 .getInstance().id("txt_custom_toast"));
         Toast toast = new Toast(SimiManager.getIntance().getCurrentActivity());
-        txt_toast.setText(SimiTranslator.newInstance().translate("Logout Success"));
+        txt_toast.setText(SimiTranslator.getInstance().translate("Logout Success"));
         toast.setView(layout_toast);
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 400);

@@ -71,7 +71,7 @@ public class OptionSingle extends OptionView {
 
 		if (isNone) {
 			String none = "<font color='grey'>"
-					+ SimiTranslator.newInstance().translate("None") + "</font>";
+					+ SimiTranslator.getInstance().translate("None") + "</font>";
 			tv_title.setText(Html.fromHtml(none));
 			tv_price.setVisibility(View.INVISIBLE);
 		} else {

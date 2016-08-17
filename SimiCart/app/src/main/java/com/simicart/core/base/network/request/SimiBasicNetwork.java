@@ -41,7 +41,7 @@ public class SimiBasicNetwork {
                     throw new IOException();
                 }
                 int statusCode = simiResponse.getStatusCode();
-                Log.e("SimiBasicNetwork " + request.getUrl(), "002 "
+                Log.e("SimiBasicNetwork " + request.getUrl(), "status code  "
                         + statusCode);
                 // Some responses such as 204s do not have content. We must
                 // check.

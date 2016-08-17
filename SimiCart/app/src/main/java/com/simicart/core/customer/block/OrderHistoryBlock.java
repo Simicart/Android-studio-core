@@ -54,7 +54,7 @@ public class OrderHistoryBlock extends SimiBlock implements
 				LayoutParams.MATCH_PARENT);
 		params.addRule(RelativeLayout.CENTER_IN_PARENT);
 		tv_empty.setGravity(Gravity.CENTER);
-		tv_empty.setText(SimiTranslator.newInstance().translate("Order history is empty"));
+		tv_empty.setText(SimiTranslator.getInstance().translate("Order history is empty"));
 		tv_empty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
 		tv_empty.setTextColor(AppColorConfig.getInstance().getContentColor());
 		((LinearLayout) mView).addView(tv_empty, params);

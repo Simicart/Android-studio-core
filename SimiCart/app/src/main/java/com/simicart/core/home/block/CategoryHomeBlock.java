@@ -125,9 +125,7 @@ public class CategoryHomeBlock extends SimiBlock implements
 				showCategorys(categories);
 			}
 		} else {
-			if (Config.getInstance().getDemoEnable().equals("DEMO_ENABLE")
-					|| Config.getInstance().getDemoEnable().toUpperCase()
-							.equals("YES")) {
+			if (Config.getInstance().isDemoVersion()) {
 				showFakeCategorys();
 			} else {
 				mView.setVisibility(View.GONE);

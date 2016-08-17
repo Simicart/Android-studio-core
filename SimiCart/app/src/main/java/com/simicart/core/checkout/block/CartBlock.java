@@ -25,7 +25,6 @@ import com.simicart.core.checkout.controller.PopupCheckoutController;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.TotalPrice;
-import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.TotalPriceView;
 import com.simicart.core.config.AppCheckoutConfig;
 import com.simicart.core.config.AppColorConfig;
@@ -91,9 +90,9 @@ public class CartBlock extends SimiBlock implements CartDelegate {
                     "line_bottom"));
             line_vertical = mView.findViewById(Rconfig.getInstance().id(
                     "line_vertical"));
-            Utils.changeColorLine(line_price);
-            Utils.changeColorLine(line_bottom);
-            Utils.changeColorLine(line_vertical);
+//            Utils.changeColorLine(line_price);
+//            Utils.changeColorLine(line_bottom);
+//            Utils.changeColorLine(line_vertical);
         }
     }
 

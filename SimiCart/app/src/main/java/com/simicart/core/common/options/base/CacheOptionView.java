@@ -88,7 +88,7 @@ public class CacheOptionView {
         tv_name.setText(mCacheOption.getOptionTitle());
         // initial required text
         if (mCacheOption.isRequired()) {
-            tv_required.setText(SimiTranslator.newInstance().translate("*"));
+            tv_required.setText(SimiTranslator.getInstance().translate("*"));
             tv_required.setTextColor(Color.RED);
         }
 
@@ -119,7 +119,7 @@ public class CacheOptionView {
             tv_required = (TextView) mView.findViewById(Rconfig.getInstance()
                     .id("core_cache_option_layout_tv_required"));
             if (mCacheOption.isRequired()) {
-                tv_required.setText(SimiTranslator.newInstance().translate("*"));
+                tv_required.setText(SimiTranslator.getInstance().translate("*"));
                 tv_required.setTextColor(Color.RED);
             }
         } catch (Exception e) {
@@ -146,7 +146,7 @@ public class CacheOptionView {
         }
 
         if (price.equals("") && mCacheOption.isRequired()) {
-            tv_required.setText(SimiTranslator.newInstance().translate("*"));
+            tv_required.setText(SimiTranslator.getInstance().translate("*"));
             tv_required.setTextColor(AppColorConfig.getInstance().getPriceColor());
             if (price.equals("") && mCacheOption.isCompleteRequired()) {
                 tv_required.setText("");
@@ -210,20 +210,20 @@ public class CacheOptionView {
         float f_price = option.getOptionPrice();
 
         String price = "<font color='red'> +"
-                + AppStoreConfig.newInstance().getPrice("" + f_price) + "</font>";
+                + AppStoreConfig.getInstance().getPrice("" + f_price) + "</font>";
 
         content = title + price;
         if (option.getOptionPrice() == 0
-                && !AppStoreConfig.newInstance().isShowZeroPrice()) {
+                && !AppStoreConfig.getInstance().isShowZeroPrice()) {
             content = title;
         }
         if (option.getOption_price_incl_tax() != -1) {
             String price_tax = "<font color='grey'> (</font><font color='red'>+"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + option.getOption_price_incl_tax())
                     + "</font> <font color='grey'>"
-                    + SimiTranslator.newInstance().translate("Incl. Tax") + ")</font>";
-            if (!AppStoreConfig.newInstance().isShowZeroPrice()
+                    + SimiTranslator.getInstance().translate("Incl. Tax") + ")</font>";
+            if (!AppStoreConfig.getInstance().isShowZeroPrice()
                     && option.getOption_price_incl_tax() == 0) {
             } else {
                 content = content + price_tax;

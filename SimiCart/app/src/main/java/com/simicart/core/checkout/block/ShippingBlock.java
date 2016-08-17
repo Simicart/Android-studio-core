@@ -160,7 +160,7 @@ public class ShippingBlock extends SimiBlock implements ShippingDelegate {
 
                 // title
                 TextView tv_title = new TextView(ll_shipping.getContext());
-                tv_title.setId(ViewIdGenerator.generateViewId());
+                tv_title.setId(Utils.generateViewId());
                 tv_title.setText(shppingMethod.getS_method_title(),
                         TextView.BufferType.SPANNABLE);
                 tv_title.setTextColor(AppColorConfig.getInstance().getContentColor());
@@ -187,7 +187,7 @@ public class ShippingBlock extends SimiBlock implements ShippingDelegate {
                 // content
                 TextView tv_content = new TextView(ll_shipping.getContext());
                 tv_content.setTextColor(AppColorConfig.getInstance().getContentColor());
-                tv_content.setId(ViewIdGenerator.generateViewId());
+                tv_content.setId(Utils.generateViewId());
                 if (shppingMethod.getS_method_name() != null
                         && !shppingMethod.getS_method_name().equals("")
                         && !shppingMethod.getS_method_name().equals("null")) {
@@ -228,7 +228,7 @@ public class ShippingBlock extends SimiBlock implements ShippingDelegate {
                 checkBox.setImageDrawable(icon_nomal);
 
                 rl_value.addView(checkBox);
-                checkBox.setId(ViewIdGenerator.generateViewId());
+                checkBox.setId(Utils.generateViewId());
                 lisCheckBoxs.add(checkBox);
                 onTouchShipping(rl_value, lisCheckBoxs, checkBox.getId(),
                         shppingMethod, list_shippingMethods, i);

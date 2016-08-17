@@ -29,23 +29,23 @@ public class CategoryZTheme extends Category {
                 JSONArray array = getJSONObject().getJSONArray(
                         ConstantsZTheme.CHILD_CAT);
                 if (null != array && array.length() > 0) {
-                    if (Config.getInstance().isShow_link_all_product()) {
-                        CategoryZTheme categoryZTheme = new CategoryZTheme();
-                        categoryZTheme.setType(TYPE_CAT);
-                        categoryZTheme.setTitle(Config.getInstance().getText(
-                                "All Products"));
-                        categoryZTheme.setCategoryId(getCategoryId());
-                        categoryZTheme.setCategoryName(Config.getInstance()
-                                .getText("All Products"));
-                        categoryZTheme.setChild(false);
-                        mCategories.add(categoryZTheme);
-                    }
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject object = array.getJSONObject(i);
-                        CategoryZTheme category = new CategoryZTheme();
-                        category.setJSONObject(object);
-                        mCategories.add(category);
-                    }
+//                    if (Config.getInstance().isShow_link_all_product()) {
+//                        CategoryZTheme categoryZTheme = new CategoryZTheme();
+//                        categoryZTheme.setType(TYPE_CAT);
+//                        categoryZTheme.setTitle(Config.getInstance().getText(
+//                                "All Products"));
+//                        categoryZTheme.setCategoryId(getCategoryId());
+//                        categoryZTheme.setCategoryName(Config.getInstance()
+//                                .getText("All Products"));
+//                        categoryZTheme.setChild(false);
+//                        mCategories.add(categoryZTheme);
+//                    }
+//                    for (int i = 0; i < array.length(); i++) {
+//                        JSONObject object = array.getJSONObject(i);
+//                        CategoryZTheme category = new CategoryZTheme();
+//                        category.setJSONObject(object);
+//                        mCategories.add(category);
+//                    }
                 }
             }
         } catch (Exception e) {

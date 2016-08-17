@@ -24,23 +24,22 @@ public class SignInModel extends SimiModel {
 	}
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		// TODO Auto-generated method stub
-		super.paserData();
+		super.parseData();
 		try {
 			JSONArray arr = mJSON.getJSONArray(Constants.DATA);
 			JSONObject json = arr.getJSONObject(0);
 			mUserName = json.getString(Constants.USER_NAME);
 			mCartQty = json.getString(Constants.CART_QTY);
 		} catch (JSONException e) {
-			Log.e("SignInModel JSONException ", e.getMessage());
 		}
 
 	}
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.SIGN_IN;
+		mUrlAction = Constants.SIGN_IN;
 	}
 
 }

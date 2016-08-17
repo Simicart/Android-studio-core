@@ -64,7 +64,7 @@ public class ProductPriceView {
         float price = mProduct.getPrice();
         if (price > -1) {
             String content = "<font color='" + color_Price + "'>"
-                    + AppStoreConfig.newInstance().getPrice("" + price) + "</font>";
+                    + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
 
 
             TextView tv_price = new TextView(mContext);
@@ -183,7 +183,7 @@ public class ProductPriceView {
         if (priceConfig.isEmpty()) {
 
             String price = "<font color='" + color_Label + "'>"
-                    + SimiTranslator.newInstance().translate("Price as configured")
+                    + SimiTranslator.getInstance().translate("Price as configured")
                     + ": </font> <br/>";
             price = price + mPriceUtils.getPriceTax();
 

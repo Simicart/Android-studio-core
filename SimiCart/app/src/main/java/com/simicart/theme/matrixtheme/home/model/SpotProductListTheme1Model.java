@@ -8,6 +8,6 @@ import com.simicart.core.catalog.listproducts.model.ProductListCategoryModel;
 public class SpotProductListTheme1Model extends ProductListCategoryModel {
     @Override
     protected void setUrlAction() {
-        this.url_action = "themeone/api/get_spot_products";
+        this.mUrlAction = "themeone/api/get_spot_products";
     }
 }

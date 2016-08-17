@@ -145,32 +145,32 @@ public class AddressBookDetailBlock extends SimiBlock implements
     }
 
     private void changeColor() {
-        Utils.changeColorEditText(et_prefix);
-        Utils.changeColorEditText(et_fullname);
-        Utils.changeColorEditText(et_suffix);
-        Utils.changeColorEditText(et_street);
-        Utils.changeColorEditText(et_city);
-        Utils.changeColorEditText(et_state);
-        Utils.changeColorEditText(et_zipcode);
-        Utils.changeColorEditText(et_company);
-        Utils.changeColorEditText(et_phone);
-        Utils.changeColorEditText(et_fax);
-        Utils.changeColorEditText(et_taxvat);
-        Utils.changeColorEditText(et_email);
-        Utils.changeColorEditText(et_pass);
-        Utils.changeColorEditText(et_confirm_pass);
-        Utils.changeColorEditText(et_tax_checkout);
-
-        Utils.changeColorTextView(tv_state);
-        Utils.changeColorTextView(tv_country);
-        Utils.changeColorTextView(tv_date_birth);
-
-        Utils.changeColorImageview(mContext, img_state, "ic_extend");
-        Utils.changeColorImageview(mContext, img_country, "ic_extend");
+//        Utils.changeColorEditText(et_prefix);
+//        Utils.changeColorEditText(et_fullname);
+//        Utils.changeColorEditText(et_suffix);
+//        Utils.changeColorEditText(et_street);
+//        Utils.changeColorEditText(et_city);
+//        Utils.changeColorEditText(et_state);
+//        Utils.changeColorEditText(et_zipcode);
+//        Utils.changeColorEditText(et_company);
+//        Utils.changeColorEditText(et_phone);
+//        Utils.changeColorEditText(et_fax);
+//        Utils.changeColorEditText(et_taxvat);
+//        Utils.changeColorEditText(et_email);
+//        Utils.changeColorEditText(et_pass);
+//        Utils.changeColorEditText(et_confirm_pass);
+//        Utils.changeColorEditText(et_tax_checkout);
+//
+//        Utils.changeColorTextView(tv_state);
+//        Utils.changeColorTextView(tv_country);
+//        Utils.changeColorTextView(tv_date_birth);
+//
+//        Utils.changeColorImageview(mContext, img_state, "ic_extend");
+//        Utils.changeColorImageview(mContext, img_country, "ic_extend");
     }
 
     private void createPrefix() {
-        et_prefix.setHint(SimiTranslator.newInstance().translate("Prefix") + " (*)");
+        et_prefix.setHint(SimiTranslator.getInstance().translate("Prefix") + " (*)");
         if (null != mAddressBookDetail) {
             String prefix = mAddressBookDetail.getPrefix();
             if (null != prefix && !prefix.equals("") && !prefix.equals("null")) {
@@ -183,11 +183,11 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     et_prefix.setVisibility(View.GONE);
                     break;
                 case "req":
-                    et_prefix.setHint(SimiTranslator.newInstance().translate("Prefix")
+                    et_prefix.setHint(SimiTranslator.getInstance().translate("Prefix")
                             + " (*)");
                     break;
                 case "opt":
-                    et_prefix.setHint(SimiTranslator.newInstance().translate("Prefix"));
+                    et_prefix.setHint(SimiTranslator.getInstance().translate("Prefix"));
                     break;
                 default:
                     break;
@@ -203,13 +203,13 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     && !fullname.equals("null")) {
                 et_fullname.setText(fullname);
             }
-            et_fullname.setHint(SimiTranslator.newInstance().translate("Full name")
+            et_fullname.setHint(SimiTranslator.getInstance().translate("Full name")
                     + " (*)");
         }
     }
 
     private void createSuffix() {
-        et_suffix.setHint(SimiTranslator.newInstance().translate("Suffix") + " (*)");
+        et_suffix.setHint(SimiTranslator.getInstance().translate("Suffix") + " (*)");
         if (mAddressBookDetail != null) {
             String suffix = mAddressBookDetail.getSuffix();
             if (null != suffix && !suffix.equals("") && !suffix.equals("null")) {
@@ -222,11 +222,11 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     et_suffix.setVisibility(View.GONE);
                     break;
                 case "req":
-                    et_suffix.setHint(SimiTranslator.newInstance().translate("Suffix")
+                    et_suffix.setHint(SimiTranslator.getInstance().translate("Suffix")
                             + " (*)");
                     break;
                 case "opt":
-                    et_suffix.setHint(SimiTranslator.newInstance().translate("Suffix"));
+                    et_suffix.setHint(SimiTranslator.getInstance().translate("Suffix"));
                     break;
                 default:
                     break;
@@ -235,7 +235,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
     }
 
     private void createStreet() {
-        et_street.setHint(SimiTranslator.newInstance().translate("Street") + " (*)");
+        et_street.setHint(SimiTranslator.getInstance().translate("Street") + " (*)");
         if (mAddressBookDetail != null) {
             String street = mAddressBookDetail.getStreet();
             if (null != street && !street.equals("") && !street.equals("null")) {
@@ -248,11 +248,11 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     et_street.setVisibility(View.GONE);
                     break;
                 case "req":
-                    et_street.setHint(SimiTranslator.newInstance().translate("Street")
+                    et_street.setHint(SimiTranslator.getInstance().translate("Street")
                             + " (*)");
                     break;
                 case "opt":
-                    et_street.setHint(SimiTranslator.newInstance().translate("Street"));
+                    et_street.setHint(SimiTranslator.getInstance().translate("Street"));
                     break;
                 default:
                     break;
@@ -262,7 +262,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
 
     private void createCity() {
 
-        et_city.setHint(SimiTranslator.newInstance().translate("City") + " (*)");
+        et_city.setHint(SimiTranslator.getInstance().translate("City") + " (*)");
         if (mAddressBookDetail != null) {
             String city = mAddressBookDetail.getCity();
             if (null != city && !city.equals("") && !city.equals("null")) {
@@ -275,10 +275,10 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     et_city.setVisibility(View.GONE);
                     break;
                 case "req":
-                    et_city.setHint(SimiTranslator.newInstance().translate("Prefix") + " (*)");
+                    et_city.setHint(SimiTranslator.getInstance().translate("Prefix") + " (*)");
                     break;
                 case "opt":
-                    et_city.setHint(SimiTranslator.newInstance().translate("Prefix"));
+                    et_city.setHint(SimiTranslator.getInstance().translate("Prefix"));
                     break;
                 default:
                     break;
@@ -288,7 +288,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
 
     private void createZipCode() {
 
-        et_zipcode.setHint(SimiTranslator.newInstance().translate("Post/Zip Code")
+        et_zipcode.setHint(SimiTranslator.getInstance().translate("Post/Zip Code")
                 + " (*)");
         if (mAddressBookDetail != null) {
             String zipcode = mAddressBookDetail.getZipCode();
@@ -304,10 +304,10 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     et_zipcode.setVisibility(View.GONE);
                     break;
                 case "req":
-                    et_zipcode.setHint(SimiTranslator.newInstance().translate("Post/Zip Code") + " (*)");
+                    et_zipcode.setHint(SimiTranslator.getInstance().translate("Post/Zip Code") + " (*)");
                     break;
                 case "opt":
-                    et_zipcode.setHint(SimiTranslator.newInstance().translate("Post/Zip Code"));
+                    et_zipcode.setHint(SimiTranslator.getInstance().translate("Post/Zip Code"));
                     break;
                 default:
                     break;
@@ -316,7 +316,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
     }
 
     private void createPhone() {
-        et_phone.setHint(SimiTranslator.newInstance().translate("Phone") + " (*)");
+        et_phone.setHint(SimiTranslator.getInstance().translate("Phone") + " (*)");
         if (mAddressBookDetail != null) {
             String phone = mAddressBookDetail.getPhone();
             if (null != phone && !phone.equals("") && !phone.equals("null")) {
@@ -329,10 +329,10 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     et_phone.setVisibility(View.GONE);
                     break;
                 case "req":
-                    et_phone.setHint(SimiTranslator.newInstance().translate("Phone") + " (*)");
+                    et_phone.setHint(SimiTranslator.getInstance().translate("Phone") + " (*)");
                     break;
                 case "opt":
-                    et_phone.setHint(SimiTranslator.newInstance().translate("Phone"));
+                    et_phone.setHint(SimiTranslator.getInstance().translate("Phone"));
                     break;
                 default:
                     break;
@@ -356,7 +356,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
     }
 
     private void createCompany() {
-        et_company.setHint(SimiTranslator.newInstance().translate("Company") + " (*)");
+        et_company.setHint(SimiTranslator.getInstance().translate("Company") + " (*)");
         if (mAddressBookDetail != null) {
             String company = mAddressBookDetail.getCompany();
 
@@ -372,12 +372,12 @@ public class AddressBookDetailBlock extends SimiBlock implements
                             et_company.setVisibility(View.GONE);
                             break;
                         case "req":
-                            et_company.setHint(SimiTranslator.newInstance().translate(
+                            et_company.setHint(SimiTranslator.getInstance().translate(
                                     "Company")
                                     + " (*)");
                             break;
                         case "opt":
-                            et_company.setHint(SimiTranslator.newInstance().translate(
+                            et_company.setHint(SimiTranslator.getInstance().translate(
                                     "Company"));
                             break;
                         default:
@@ -420,7 +420,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
             if (states.size() <= 0) {
                 et_state.setVisibility(View.VISIBLE);
                 rl_state.setVisibility(View.GONE);
-                et_state.setHint(SimiTranslator.newInstance().translate("State"));
+                et_state.setHint(SimiTranslator.getInstance().translate("State"));
             } else {
                 rl_state.setVisibility(View.VISIBLE);
                 et_state.setVisibility(View.GONE);
@@ -445,10 +445,10 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     et_state.setVisibility(View.GONE);
                     break;
                 case "req":
-                    et_state.setHint(SimiTranslator.newInstance().translate("State") + "(*)");
+                    et_state.setHint(SimiTranslator.getInstance().translate("State") + "(*)");
                     break;
                 case "opt":
-                    et_state.setHint(SimiTranslator.newInstance().translate("State"));
+                    et_state.setHint(SimiTranslator.getInstance().translate("State"));
                     break;
                 default:
                     break;
@@ -459,7 +459,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
 
     private void createButtonSave() {
         bt_save.setTextColor(Color.WHITE);
-        bt_save.setText(SimiTranslator.newInstance().translate("Save"));
+        bt_save.setText(SimiTranslator.getInstance().translate("Save"));
         bt_save.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
         bt_save.setTextSize(Constants.SIZE_TEXT_BUTTON);
     }
@@ -469,7 +469,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
     }
 
     private void createFax() {
-        et_fax.setHint(SimiTranslator.newInstance().translate("Fax") + " (*)");
+        et_fax.setHint(SimiTranslator.getInstance().translate("Fax") + " (*)");
         if (mAddressBookDetail != null) {
             String fax = mAddressBookDetail.getFax();
             if (null != fax && !fax.equals("") && !fax.equals("null")) {
@@ -483,10 +483,10 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     et_fax.setVisibility(View.GONE);
                     break;
                 case "req":
-                    et_fax.setHint(SimiTranslator.newInstance().translate("Fax") + " (*)");
+                    et_fax.setHint(SimiTranslator.getInstance().translate("Fax") + " (*)");
                     break;
                 case "opt":
-                    et_fax.setHint(SimiTranslator.newInstance().translate("Fax"));
+                    et_fax.setHint(SimiTranslator.getInstance().translate("Fax"));
                     break;
                 default:
                     break;
@@ -529,7 +529,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
     private void createTaxVatCheckOut() {
         et_tax_checkout.setVisibility(View.VISIBLE);
 
-        et_tax_checkout.setHint(SimiTranslator.newInstance().translate("Tax/VAT number")
+        et_tax_checkout.setHint(SimiTranslator.getInstance().translate("Tax/VAT number")
                 + " (*)");
         if (mAddressBookDetail != null) {
             String vatNumber = mAddressBookDetail.getTaxvatCheckout();
@@ -544,12 +544,12 @@ public class AddressBookDetailBlock extends SimiBlock implements
                     et_tax_checkout.setVisibility(View.GONE);
                     return;
                 case "req":
-                    et_tax_checkout.setHint(SimiTranslator.newInstance().translate(
+                    et_tax_checkout.setHint(SimiTranslator.getInstance().translate(
                             "VAT number")
                             + " (*)");
                     break;
                 case "opt":
-                    et_tax_checkout.setHint(SimiTranslator.newInstance().translate(
+                    et_tax_checkout.setHint(SimiTranslator.getInstance().translate(
                             "VAT number"));
                     break;
                 default:

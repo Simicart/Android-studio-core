@@ -13,6 +13,7 @@ import com.simicart.core.catalog.category.delegate.FilterRequestDelegate;
 import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
 import com.simicart.core.catalog.filter.fragment.FilterFragment;
+import com.simicart.core.common.Utils;
 
 public class FilterView {
 
@@ -38,7 +39,8 @@ public class FilterView {
 
 	public View initView(final String catName) {
 		Button btn_filter = new Button(mContext);
-		btn_filter.setId(ViewIdGenerator.generateViewId());
+		btn_filter.setId(
+				Utils.generateViewId());
 		// btn_filter.setText(Config.getInstance().getText("Filter"));
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT,

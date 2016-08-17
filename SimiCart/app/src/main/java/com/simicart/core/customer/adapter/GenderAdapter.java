@@ -36,7 +36,7 @@ public class GenderAdapter extends BaseAdapter {
         if (position == 0) {
             return "";
         } else {
-            return SimiTranslator.newInstance().translate(
+            return SimiTranslator.getInstance().translate(
                     genderConfigs.get(position - 1).getLabel());
         }
     }
@@ -57,7 +57,7 @@ public class GenderAdapter extends BaseAdapter {
         if (position == 0) {
             textView.setText("");
         } else {
-            textView.setText(SimiTranslator.newInstance().translate(
+            textView.setText(SimiTranslator.getInstance().translate(
                     genderConfigs.get(position - 1).getLabel()));
         }
         if (DataLocal.isLanguageRTL) {

@@ -11,7 +11,7 @@ import com.simicart.theme.ztheme.home.entity.CategoryZTheme;
 public class CategoryTreeZThemeModel extends SimiModel {
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray array = this.mJSON.getJSONArray("data");
 			collection = new SimiCollection();
@@ -29,7 +29,7 @@ public class CategoryTreeZThemeModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = "ztheme/api/get_category_tree";
+		mUrlAction = "ztheme/api/get_category_tree";
 	}
 
 	@Override

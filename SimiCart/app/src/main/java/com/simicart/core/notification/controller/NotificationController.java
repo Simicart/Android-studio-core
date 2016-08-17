@@ -56,7 +56,7 @@ public class NotificationController {
     public NotificationController(FragmentActivity activity) {
         TAG = getClass().getName();
         this.mActivity = activity;
-        this.mContext = MainActivity.context;
+        this.mContext = activity;
 
         GPSTracker gps = new GPSTracker(activity);
         // check if GPS enabled

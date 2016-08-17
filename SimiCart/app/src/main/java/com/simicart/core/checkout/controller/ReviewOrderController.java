@@ -543,10 +543,10 @@ public class ReviewOrderController extends SimiController implements
     }
 
     private void recieveNotification(NotificationEntity notificationData) {
-        Intent i = new Intent(MainActivity.context, NotificationActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.putExtra("NOTIFICATION_DATA", notificationData);
-        MainActivity.context.startActivity(i);
+//        Intent i = new Intent(MainActivity.context, NotificationActivity.class);
+//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        i.putExtra("NOTIFICATION_DATA", notificationData);
+//        MainActivity.context.startActivity(i);
     }
 
     protected void updateView() {

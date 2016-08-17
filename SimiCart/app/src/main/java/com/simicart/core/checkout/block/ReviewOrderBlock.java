@@ -313,9 +313,9 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 						RelativeLayout.LayoutParams.MATCH_PARENT,
 						RelativeLayout.LayoutParams.WRAP_CONTENT);
 				if (DataLocal.isTablet) {
-					Utils.setPadding(rlt_termCondition, 20, 5, 18, 2);
+					//Utils.setPadding(rlt_termCondition, 20, 5, 18, 2);
 				} else {
-					Utils.setPadding(rlt_termCondition, 10, 5, 5, 2);
+				//	Utils.setPadding(rlt_termCondition, 10, 5, 5, 2);
 				}
 				rlt_termCondition.setLayoutParams(lp2);
 				ll_confirm.addView(rlt_termCondition);
@@ -331,7 +331,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 				lp.addRule(RelativeLayout.CENTER_VERTICAL);
 
 				TextView tv_confirm = new TextView(mContext);
-				int id_tvConfirm = ViewIdGenerator.generateViewId();
+				int id_tvConfirm = Utils.generateViewId();
 				tv_confirm.setId(id_tvConfirm);
 				tv_confirm.setPadding(0, 0, Utils.getValueDp(20), 0);
 				tv_confirm.setLayoutParams(lp);

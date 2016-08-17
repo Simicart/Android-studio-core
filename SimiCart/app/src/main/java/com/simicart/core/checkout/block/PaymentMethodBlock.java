@@ -129,7 +129,7 @@ public class PaymentMethodBlock extends SimiBlock implements
             // title
             TextView tv_title = new TextView(ll_payment.getContext());
             tv_title.setTextColor(AppColorConfig.getInstance().getContentColor());
-            tv_title.setId(ViewIdGenerator.generateViewId());
+            tv_title.setId(Utils.generateViewId());
             tv_title.setText(paymentMethod.getTitle(),
                     TextView.BufferType.SPANNABLE);
             RelativeLayout.LayoutParams tvtitle_lp = new RelativeLayout.LayoutParams(
@@ -152,7 +152,7 @@ public class PaymentMethodBlock extends SimiBlock implements
             int show_type = paymentMethod.getShow_type();
             TextView tv_content = new TextView(ll_payment.getContext());
             tv_content.setTextColor(AppColorConfig.getInstance().getContentColor());
-            tv_content.setId(ViewIdGenerator.generateViewId());
+            tv_content.setId(Utils.generateViewId());
             if (show_type == 0 && paymentMethod.getData("content") != null
                     && !paymentMethod.getData("content").equals("")
                     && !paymentMethod.getData("content").equals("null")) {
@@ -188,7 +188,7 @@ public class PaymentMethodBlock extends SimiBlock implements
             checkBox.setImageDrawable(icon_nomal);
 
             rl_value.addView(checkBox);
-            checkBox.setId(ViewIdGenerator.generateViewId());
+            checkBox.setId(Utils.generateViewId());
             lisCheckBoxs.add(checkBox);
             if (show_type == 1) {
                 final ImageView img_edit = new ImageView(

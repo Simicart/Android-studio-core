@@ -31,7 +31,7 @@ public class ListSKUPluginModel extends SimiModel {
 
     @Override
     protected void setUrlAction() {
-        mUrlAction = "public-plugins";
+        mUrlAction = "/public-plugins";
 
     }
 
@@ -42,9 +42,10 @@ public class ListSKUPluginModel extends SimiModel {
 
     @Override
     protected void parseData() {
+        Log.e("ListSKUPluginModel ","DATA " + mJSON.toString());
         if (mJSON.has(public_plugins)) {
             try {
-                mSKU = new ArrayList<String>();
+                mSKU = new ArrayList<>();
                 JSONArray array = mJSON.getJSONArray(public_plugins);
                 if (null != array && array.length() > 0) {
                     for (int i = 0; i < array.length(); i++) {

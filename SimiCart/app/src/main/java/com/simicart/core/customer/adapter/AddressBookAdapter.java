@@ -81,14 +81,13 @@ public class AddressBookAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         convertView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
-        Utils.changeColorTextView(holder.tv_name);
-        Utils.changeColorTextView(holder.tv_street);
-        Utils.changeColorTextView(holder.tv_city);
-        Utils.changeColorTextView(holder.tv_country);
-        Utils.changeColorTextView(holder.tv_phone);
-        Utils.changeColorTextView(holder.tv_email);
-
-        Utils.changeColorImageview(mContext, holder.img_extend, "ic_extend");
+//        Utils.changeColorTextView(holder.tv_name);
+//        Utils.changeColorTextView(holder.tv_street);
+//        Utils.changeColorTextView(holder.tv_city);
+//        Utils.changeColorTextView(holder.tv_country);
+//        Utils.changeColorTextView(holder.tv_phone);
+//        Utils.changeColorTextView(holder.tv_email);
+//        Utils.changeColorImageview(mContext, holder.img_extend, "ic_extend");
 
         // name
         String name = myAddress.getName();

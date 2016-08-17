@@ -68,6 +68,7 @@ public class SimiNetworkDispatcher extends Thread {
             if (statusCode == 302 || statusCode == 301) {
                 return;
             }
+            Log.e("SimiNetworkDispatcher " ,"RUN " + statusCode);
 
             SimiResponse response = request.parseNetworkResponse(netResponse);
             if (null == response) {

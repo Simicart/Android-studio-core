@@ -103,7 +103,7 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 				.getKeyColor());
 		imageView = (ImageView) rootView.findViewById(Rconfig
 				.getInstance().id("img_order"));
-		Utils.changeColorImageview(SimiManager.getIntance().getCurrentActivity(), imageView, "ic_extend");
+	//	Utils.changeColorImageview(SimiManager.getIntance().getCurrentActivity(), imageView, "ic_extend");
 		//set data
 		txt_title_message.setText(SimiTranslator.getInstance().translate(message));
 		txt_order.setText(SimiTranslator.getInstance().translate("Your order # is:")+ invoice_number);

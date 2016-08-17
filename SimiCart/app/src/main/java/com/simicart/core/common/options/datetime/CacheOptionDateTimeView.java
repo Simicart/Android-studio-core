@@ -98,7 +98,7 @@ public class CacheOptionDateTimeView extends CacheOptionView {
                 if (isAddPrice && mCacheOption.getHour() != -1
                         && !isselectedOptionDateTime) {
                     mCacheOption.setCompleteRequired(true);
-                    updatePriceHeader(AppStoreConfig.newInstance().getPrice(
+                    updatePriceHeader(AppStoreConfig.getInstance().getPrice(
                             "" + option.getOptionPrice()));
                     updatePriceForParent(option, ADD_OPERATOR);
                     isAddPrice = false;
@@ -137,7 +137,7 @@ public class CacheOptionDateTimeView extends CacheOptionView {
 
             isselectedOptionDateTime = true;
             mCacheOption.setCompleteRequired(true);
-            updatePriceHeader(AppStoreConfig.newInstance().getPrice(
+            updatePriceHeader(AppStoreConfig.getInstance().getPrice(
                     "" + option.getOptionPrice()));
             updatePriceForParent(option, ADD_OPERATOR);
         } else {
@@ -168,7 +168,7 @@ public class CacheOptionDateTimeView extends CacheOptionView {
                 if (isAddPrice && mCacheOption.getDay() != -1
                         && !isselectedOptionDateTime) {
                     mCacheOption.setCompleteRequired(true);
-                    updatePriceHeader(AppStoreConfig.newInstance().getPrice(
+                    updatePriceHeader(AppStoreConfig.getInstance().getPrice(
                             "" + option.getOptionPrice()));
                     updatePriceForParent(option, ADD_OPERATOR);
                     isAddPrice = false;

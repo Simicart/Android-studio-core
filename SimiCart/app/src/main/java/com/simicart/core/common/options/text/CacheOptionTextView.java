@@ -35,7 +35,7 @@ public class CacheOptionTextView extends CacheOptionView {
         edt_option.setLayoutParams(param);
         edt_option.setPadding(Utils.getValueDp(5), Utils.getValueDp(10),
                 Utils.getValueDp(5), Utils.getValueDp(10));
-        edt_option.setHint(SimiTranslator.newInstance().translate("Text"));
+        edt_option.setHint(SimiTranslator.getInstance().translate("Text"));
         edt_option.setHintTextColor(Color.GRAY);
         edt_option.setTextColor(Color.parseColor("#000000"));
         ll_body.addView(edt_option);
@@ -43,7 +43,7 @@ public class CacheOptionTextView extends CacheOptionView {
 
         if ((null != mCacheOption.getText())
                 && !mCacheOption.getText().equals("")) {
-            updatePriceHeader(AppStoreConfig.newInstance().getPrice(
+            updatePriceHeader(AppStoreConfig.getInstance().getPrice(
                     "" + option.getOptionPrice()));
             edt_option.setText(mCacheOption.getText());
             // if (!isShowWhenStart) {
@@ -64,7 +64,7 @@ public class CacheOptionTextView extends CacheOptionView {
                 if (textOption.length() != 0) {
                     mCacheOption.setText(edt_option.getText().toString());
                     mCacheOption.setCompleteRequired(true);
-                    updatePriceHeader(AppStoreConfig.newInstance().getPrice(
+                    updatePriceHeader(AppStoreConfig.getInstance().getPrice(
                             "" + option.getOptionPrice()));
                     if (isAddPrice && !ischeckedOptionText) {
                         isAddPrice = false;
@@ -74,7 +74,7 @@ public class CacheOptionTextView extends CacheOptionView {
                     mCacheOption.setText("");
                     mCacheOption.setCompleteRequired(false);
                     if (mCacheOption.isRequired()) {
-                        updatePriceHeader(SimiTranslator.newInstance().translate(
+                        updatePriceHeader(SimiTranslator.getInstance().translate(
                                 "required"));
                     } else {
                         updatePriceHeader("");

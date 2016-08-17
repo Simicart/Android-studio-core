@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
@@ -35,7 +36,7 @@ public class CateSlideMenuFragment extends SimiFragment {
 		View view = inflater.inflate(
 				Rconfig.getInstance().layout("core_cate_slidemenu"), container,
 				false);
-		view.setBackgroundColor(Config.getInstance().getMenu_background());
+		view.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
 		CategoryFragment fragment = CategoryFragment.newInstance(
 				"-1", "all categories");
 		replaceFragmentCategoryMenu(fragment);

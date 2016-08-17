@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 
@@ -27,9 +28,9 @@ public class Cart extends SimiEntity {
 		}
 		if (null != mProductStock && (mProductStock.equals("TRUE")
 				|| mProductStock.equals("true") || mProductStock.equals("1"))) {
-			return Config.getInstance().getText("In Stock");
+			return SimiTranslator.getInstance().translate("In Stock");
 		}
-		return Config.getInstance().getText("Out Stock");
+		return SimiTranslator.getInstance().translate("Out Stock");
 	}
 
 	public void setStock(String stock) {

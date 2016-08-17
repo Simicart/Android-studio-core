@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
@@ -106,7 +107,7 @@ public class CategoryCustomAdapter extends BaseAdapter {
         tv_title.setGravity(Gravity.CENTER);
         String name = product.getSpotName();
         if (null != name) {
-            tv_title.setText(Config.getInstance().getText(
+            tv_title.setText(SimiTranslator.getInstance().translate(
                     Utils.capitalizes(name)));
             if (DataLocal.isTablet) {
                 tv_title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);

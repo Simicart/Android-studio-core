@@ -154,8 +154,8 @@ public class ProductPriceViewProductListV03 extends ProductPriceView {
             float incl_tax_to = priceV2.getInclTaxTo();
             float excl_tax_from = priceV2.getExclTaxFrom();
             float excl_tax_to = priceV2.getExclTaxTo();
-            String from_text = SimiTranslator.newInstance().translate("From");
-            String to_text = SimiTranslator.newInstance().translate("To");
+            String from_text = SimiTranslator.getInstance().translate("From");
+            String to_text = SimiTranslator.getInstance().translate("To");
             if (incl_tax_from > -1) {
                 tv_regular_price.setText(Html.fromHtml(getHtmlForPrice(
                         incl_tax_from, from_text)));
@@ -216,18 +216,18 @@ public class ProductPriceViewProductListV03 extends ProductPriceView {
 
     protected String getHtmlForPrice(float price) {
         return "<font color='" + color_Price + "'>"
-                + AppStoreConfig.newInstance().getPrice("" + price) + "</font>";
+                + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
     protected String getHtmlForPrice(float price, String label) {
         return "<font color='" + color_Price + "'>" + label
                 + ": </font><font color='" + color_Price + "'>"
-                + AppStoreConfig.newInstance().getPrice("" + price) + "</font>";
+                + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
     protected String getHtmlForSpecialPrice(float price) {
         return "<font color='" + AppColorConfig.getInstance().getSpecialPriceColor()
-                + "'>" + AppStoreConfig.newInstance().getPrice("" + price) + "</font>";
+                + "'>" + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
     }
 
 }

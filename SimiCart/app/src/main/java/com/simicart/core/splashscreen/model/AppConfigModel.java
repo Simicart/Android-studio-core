@@ -1,5 +1,7 @@
 package com.simicart.core.splashscreen.model;
 
+import android.util.Log;
+
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.config.AppColorConfig;
@@ -15,20 +17,18 @@ public class AppConfigModel extends SimiModel {
 
     @Override
     protected void parseData() {
+        Log.e("AppConfigModel ","DATA " + mJSON.toString());
         collection = new SimiCollection();
         onParse();
     }
 
     protected void onParse() {
         try {
-            AppColorConfig appEntity = new AppColorConfig();
-
             if (mJSON.has("app-configs")) {
                 JSONArray array = mJSON.getJSONArray("app-configs");
                 if (null != array && array.length() > 0) {
                     JSONObject js_app = array.getJSONObject(0);
-                    appEntity.setJSONObject(js_app);
-                    appEntity.parse();
+                    AppColorConfig.getInstance().parse(js_app);
                 }
             }
         } catch (Exception e) {
@@ -42,6 +42,6 @@ public class AppConfigModel extends SimiModel {
 
     @Override
     protected void setUrlAction() {
-        mUrlAction = "app-configs/";
+        mUrlAction = "/app-configs/";
     }
 }

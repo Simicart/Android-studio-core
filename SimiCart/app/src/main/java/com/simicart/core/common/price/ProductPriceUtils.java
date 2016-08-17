@@ -26,18 +26,18 @@ public class ProductPriceUtils {
     protected String color_Other = "#000000";
     protected boolean isShowZero = true;
 
-    public final String PRICE = SimiTranslator.newInstance().translate("Price");
-    public final String FROM = SimiTranslator.newInstance().translate("From");
-    public final String TO = SimiTranslator.newInstance().translate("To");
-    public final String CONFIG = SimiTranslator.newInstance().translate(
+    public final String PRICE = SimiTranslator.getInstance().translate("Price");
+    public final String FROM = SimiTranslator.getInstance().translate("From");
+    public final String TO = SimiTranslator.getInstance().translate("To");
+    public final String CONFIG = SimiTranslator.getInstance().translate(
             "Price as configured");
-    public final String SPECIAL_PRICE = SimiTranslator.newInstance().translate(
+    public final String SPECIAL_PRICE = SimiTranslator.getInstance().translate(
             "Special Price");
-    public final String EXCL = SimiTranslator.newInstance().translate("Excl.Tax");
-    public final String INCL = SimiTranslator.newInstance().translate("Incl.Tax");
+    public final String EXCL = SimiTranslator.getInstance().translate("Excl.Tax");
+    public final String INCL = SimiTranslator.getInstance().translate("Incl.Tax");
 
     public ProductPriceUtils() {
-        isShowZero = AppStoreConfig.newInstance().isShowZeroPrice();
+        isShowZero = AppStoreConfig.getInstance().isShowZeroPrice();
     }
 
     public String getNormalPrice() {
@@ -49,12 +49,12 @@ public class ProductPriceUtils {
                 price = "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getPrice())
                         + "</font>    <strike><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getRegularPrice())
                         + "</font></strike>";
 
@@ -66,7 +66,7 @@ public class ProductPriceUtils {
                         + ": </font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getRegularPrice()) + "</font>";
             }
         } else {
@@ -78,7 +78,7 @@ public class ProductPriceUtils {
                         + ": </font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getPrice()) + "</font>";
             }
         }
@@ -125,12 +125,12 @@ public class ProductPriceUtils {
                 content = "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getPrice())
                         + "</font><strike><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getRegularPrice())
                         + "</font></strike>";
 
@@ -155,7 +155,7 @@ public class ProductPriceUtils {
                         + ": </font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getRegularPrice()) + "</font>";
             }
         } else {
@@ -180,7 +180,7 @@ public class ProductPriceUtils {
                         + ": </font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getPrice()) + "</font>";
             }
         }
@@ -220,12 +220,12 @@ public class ProductPriceUtils {
                 content = "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getPrice())
                         + "</font><strike><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getRegularPrice())
                         + "</font></strike>";
 
@@ -250,7 +250,7 @@ public class ProductPriceUtils {
                         + ": </font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getRegularPrice()) + "</font>";
             }
         } else {
@@ -275,7 +275,7 @@ public class ProductPriceUtils {
                         + ": </font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getPrice()) + "</font>";
             }
         }
@@ -301,7 +301,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price_Special
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getExclTaxSpecial()) + "</font>";
             }
 
@@ -314,7 +314,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price_Special
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getInclTaxSpecial()) + "</font>";
             }
 
@@ -380,7 +380,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price_Special
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getExclTaxSpecial()) + "</font>";
             }
 
@@ -406,7 +406,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price_Special
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getInclTaxSpecial()) + "</font>";
             }
 
@@ -464,7 +464,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price_Special
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getExclTaxSpecial()) + "</font>";
             }
 
@@ -490,7 +490,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price_Special
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getInclTaxSpecial()) + "</font>";
             }
 
@@ -507,7 +507,7 @@ public class ProductPriceUtils {
             price = "<html><font color='"
                     + color_Price
                     + "'>"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mPriceV2.getRegularPrice()) + "</font></html>";
         }
 
@@ -520,7 +520,7 @@ public class ProductPriceUtils {
             price = "<html><strike><font color='"
                     + color_Price
                     + "'>"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mPriceV2.getRegularPrice())
                     + "</font></strike></html>";
         }
@@ -559,7 +559,7 @@ public class ProductPriceUtils {
             content = "<html><strike><font color='"
                     + color_Price
                     + "'>"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mPriceV2.getRegularPrice())
                     + "</font></strike></html>";
         }
@@ -582,7 +582,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getExclTax()) + "</font>";
             }
 
@@ -595,7 +595,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getInclTax()) + "</font>";
             }
 
@@ -614,7 +614,7 @@ public class ProductPriceUtils {
         if (mPriceV2.getExclTax() > -1.00f) {
             excl_tax = "<font color='" + color_Label + "'>" + EXCL + ": "
                     + "</font><font color='" + color_Price + "'>"
-                    + AppStoreConfig.newInstance().getPrice("" + mPriceV2.getExclTax())
+                    + AppStoreConfig.getInstance().getPrice("" + mPriceV2.getExclTax())
                     + "</font>";
         }
 
@@ -626,7 +626,7 @@ public class ProductPriceUtils {
         if (mPriceV2.getInclTax() > -1.00f) {
             incl_tax = "<font color='" + color_Label + "'>" + INCL + ": "
                     + "</font><font color='" + color_Price + "'>"
-                    + AppStoreConfig.newInstance().getPrice("" + mPriceV2.getInclTax())
+                    + AppStoreConfig.getInstance().getPrice("" + mPriceV2.getInclTax())
                     + "</font>";
         }
         return incl_tax;
@@ -683,7 +683,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getExclTax()) + "</font>";
             }
 
@@ -709,7 +709,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getInclTax()) + "</font>";
             }
 
@@ -767,7 +767,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getExclTax()) + "</font>";
             }
 
@@ -793,7 +793,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getInclTax()) + "</font>";
             }
 
@@ -836,7 +836,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getExclTaxFrom()) + "</font>";
             }
 
@@ -849,7 +849,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getInclTaxFrom()) + "</font>";
             }
 
@@ -875,7 +875,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getExclTaxTo()) + "</font>";
             }
 
@@ -883,12 +883,12 @@ public class ProductPriceUtils {
                 incl_tax = "<br><font color='"
                         + color_Label
                         + "'>"
-                        + SimiTranslator.newInstance().translate(INCL)
+                        + SimiTranslator.getInstance().translate(INCL)
                         + ": "
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getInclTaxTo()) + "</font>";
             }
 
@@ -905,7 +905,7 @@ public class ProductPriceUtils {
                 minimal_label = "<font color='"
                         + color_Label
                         + "'>"
-                        + SimiTranslator.newInstance().translate(
+                        + SimiTranslator.getInstance().translate(
                         mPriceV2.getMinimalPriceLabel()) + ": </font>";
             }
 
@@ -920,7 +920,7 @@ public class ProductPriceUtils {
             String minimal = "<font color='"
                     + color_Price
                     + "'>"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mPriceV2.getMinimalPrice()) + "</font>";
             return minimal;
         }
@@ -934,7 +934,7 @@ public class ProductPriceUtils {
             minimal_label = "<font color='"
                     + color_Label
                     + "'>"
-                    + SimiTranslator.newInstance().translate(
+                    + SimiTranslator.getInstance().translate(
                     mPriceV2.getMinimalPriceLabel()) + ": </font>";
         }
 
@@ -951,7 +951,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getExclTaxMinimal()) + "</font>";
             }
             if (mPriceV2.getInclTaxMinimal() > -1.00f) {
@@ -963,7 +963,7 @@ public class ProductPriceUtils {
                         + "</font><font color='"
                         + color_Price
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(
+                        + AppStoreConfig.getInstance().getPrice(
                         "" + mPriceV2.getInclTaxMinimal()) + "</font>";
             }
             return minimal_label + excl_tax + incl_tax;
@@ -986,7 +986,7 @@ public class ProductPriceUtils {
                     + "</font><font color='"
                     + color_Price_Special
                     + "'>"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mPriceV2.getExclTaxSpecial()) + "</font>";
         }
 
@@ -999,7 +999,7 @@ public class ProductPriceUtils {
                     + "</font><font color='"
                     + color_Price_Special
                     + "'>"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mPriceV2.getInclTaxSpecial()) + "</font>";
         }
         taxSpecial = excl_tax + incl_tax;
@@ -1019,7 +1019,7 @@ public class ProductPriceUtils {
                     + "</font><font color='"
                     + color_Price
                     + "'>"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mPriceV2.getProductPriceConfig()) + "</font>";
             return price;
 
@@ -1038,7 +1038,7 @@ public class ProductPriceUtils {
                             + "</font><font color='"
                             + color_Price
                             + "'>"
-                            + AppStoreConfig.newInstance().getPrice(
+                            + AppStoreConfig.getInstance().getPrice(
                             "" + mPriceV2.getExclTaxConfig())
                             + "</font>";
                 }
@@ -1052,7 +1052,7 @@ public class ProductPriceUtils {
                             + "</font><font color='"
                             + color_Price
                             + "'>"
-                            + AppStoreConfig.newInstance().getPrice(
+                            + AppStoreConfig.getInstance().getPrice(
                             "" + mPriceV2.getInclTaxConfig())
                             + "</font>";
                 }
@@ -1113,7 +1113,7 @@ public class ProductPriceUtils {
                             + "</font><font color='"
                             + color_Price
                             + "'>"
-                            + AppStoreConfig.newInstance().getPrice(
+                            + AppStoreConfig.getInstance().getPrice(
                             "" + mPriceV2.getExclTaxConfig())
                             + "</font>";
                 }
@@ -1140,7 +1140,7 @@ public class ProductPriceUtils {
                             + "</font><font color='"
                             + color_Price
                             + "'>"
-                            + AppStoreConfig.newInstance().getPrice(
+                            + AppStoreConfig.getInstance().getPrice(
                             "" + mPriceV2.getInclTaxConfig())
                             + "</font>";
                 }
@@ -1168,7 +1168,7 @@ public class ProductPriceUtils {
                     + "</font><font color='"
                     + color_Price
                     + "'>"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mPriceV2.getProductPriceConfig()) + "</font>";
         }
 
@@ -1207,12 +1207,12 @@ public class ProductPriceUtils {
             price = "<font color='"
                     + color_Label
                     + "'>"
-                    + SimiTranslator.newInstance().translate("Price as configured")
+                    + SimiTranslator.getInstance().translate("Price as configured")
                     + ": </font> "
                     + "<font color='"
                     + color_Price
                     + "'>"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mPriceV2.getProductPriceConfig()) + "</font>";
         }
         return price;

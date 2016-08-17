@@ -11,7 +11,7 @@ import com.simicart.core.customer.entity.OrderHistory;
 public class OrderHistoryModel extends SimiModel {
 
 	@Override
-	protected void paserData() {
+	protected void parseData() {
 		try {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			if (null == collection) {
@@ -31,7 +31,7 @@ public class OrderHistoryModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		url_action = Constants.GET_ORDER_HISTORY;
+		mUrlAction = Constants.GET_ORDER_HISTORY;
 	}
 
 }

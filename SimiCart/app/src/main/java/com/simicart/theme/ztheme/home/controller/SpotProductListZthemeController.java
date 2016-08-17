@@ -34,53 +34,53 @@ public class SpotProductListZthemeController extends ProductListController {
 
         String param_offset = getValueListParam(ConstantsSearch.PARAM_OFFSET);
         if (param_offset != null && !param_offset.equals("")) {
-            mModel.addParam(ConstantsSearch.PARAM_OFFSET,
+            mModel.addBody(ConstantsSearch.PARAM_OFFSET,
                     String.valueOf(param_offset));
         } else {
-            mModel.addParam(ConstantsSearch.PARAM_OFFSET,
+            mModel.addBody(ConstantsSearch.PARAM_OFFSET,
                     String.valueOf(mCurrentOffset));
         }
         String param_limit = getValueListParam(ConstantsSearch.PARAM_LIMIT);
         if (param_limit != null && !param_limit.equals("")) {
-            mModel.addParam(ConstantsSearch.PARAM_LIMIT,
+            mModel.addBody(ConstantsSearch.PARAM_LIMIT,
                     String.valueOf(param_limit));
         } else {
-            mModel.addParam(ConstantsSearch.PARAM_LIMIT, String.valueOf(limit));
+            mModel.addBody(ConstantsSearch.PARAM_LIMIT, String.valueOf(limit));
         }
         String param_key = getValueListParam(ConstantsSearch.PARAM_KEY);
         if (param_key != null && !param_key.equals("")) {
-            mModel.addParam(ConstantsSearch.PARAM_KEY, param_key);
+            mModel.addBody(ConstantsSearch.PARAM_KEY, param_key);
         }
         String param_sort_option = getValueListParam(ConstantsSearch.PARAM_SORT_OPTION);
         if (param_sort_option != null && !param_sort_option.equals("")) {
-            mModel.addParam(ConstantsSearch.PARAM_SORT_OPTION,
+            mModel.addBody(ConstantsSearch.PARAM_SORT_OPTION,
                     param_sort_option);
         } else {
-            mModel.addParam(ConstantsSearch.PARAM_SORT_OPTION, mSortID);
+            mModel.addBody(ConstantsSearch.PARAM_SORT_OPTION, mSortID);
         }
-        mModel.addParam(ConstantsSearch.PARAM_WIDTH, "300");
-        mModel.addParam(ConstantsSearch.PARAM_HEIGHT, "300");
+        mModel.addBody(ConstantsSearch.PARAM_WIDTH, "300");
+        mModel.addBody(ConstantsSearch.PARAM_HEIGHT, "300");
         if (null != jsonFilter) {
-            mModel.addParam("filter", jsonFilter);
+            mModel.addBody("filter", jsonFilter);
         } else {
-            mModel.addParam("filter", "");
+            mModel.addBody("filter", "");
         }
-        mModel.setDelegate(new ModelDelegate() {
-
-            @Override
-            public void callBack(String message, boolean isSuccess) {
-                mDelegate.dismissLoading();
-                mDelegate.removeFooterView();
-                if (isSuccess) {
-                    resultNumber = message;
-                    mDelegate.setQty(resultNumber);
-                    listProduct = ((ProductListCategoryModel) mModel).getListProduct();
-                    listProductIds = ((ProductListCategoryModel) mModel).getListProductIds();
-                    mDelegate.updateView(mModel.getCollection());
-                    isOnscroll = true;
-                }
-            }
-        });
+//        mModel.setDelegate(new ModelDelegate() {
+//
+//            @Override
+//            public void callBack(String message, boolean isSuccess) {
+//                mDelegate.dismissLoading();
+//                mDelegate.removeFooterView();
+//                if (isSuccess) {
+//                    resultNumber = message;
+//                    mDelegate.setQty(resultNumber);
+//                    listProduct = ((ProductListCategoryModel) mModel).getListProduct();
+//                    listProductIds = ((ProductListCategoryModel) mModel).getListProductIds();
+//                    mDelegate.updateView(mModel.getCollection());
+//                    isOnscroll = true;
+//                }
+//            }
+//        });
         mModel.request();
     }
 }

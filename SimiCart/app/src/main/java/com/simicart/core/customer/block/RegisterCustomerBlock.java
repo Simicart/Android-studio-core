@@ -86,16 +86,16 @@ public class RegisterCustomerBlock extends SimiBlock implements
 				"et_suffix_show"));
 		edt_name = (EditText) mView.findViewById(Rconfig.getInstance().id(
 				"et_fullname"));
-		edt_name.setHint(SimiTranslator.newInstance().translate("Full Name") + "(*)");
+		edt_name.setHint(SimiTranslator.getInstance().translate("Full Name") + "(*)");
 		edt_email = (EditText) mView.findViewById(Rconfig.getInstance().id(
 				"et_email"));
-		edt_email.setHint(SimiTranslator.newInstance().translate("Email") + "(*)");
+		edt_email.setHint(SimiTranslator.getInstance().translate("Email") + "(*)");
 		edt_pass = (EditText) mView.findViewById(Rconfig.getInstance().id(
 				"et_pass"));
-		edt_pass.setHint(SimiTranslator.newInstance().translate("Password") + "(*)");
+		edt_pass.setHint(SimiTranslator.getInstance().translate("Password") + "(*)");
 		edt_confirmPass = (EditText) mView.findViewById(Rconfig.getInstance()
 				.id("et_confirm_pass"));
-		edt_confirmPass.setHint(SimiTranslator.newInstance().translate("Confirm Password") + "(*)");
+		edt_confirmPass.setHint(SimiTranslator.getInstance().translate("Confirm Password") + "(*)");
 		edt_taxvat = (EditText) mView.findViewById(Rconfig.getInstance().id(
 				"et_taxvat_show"));
 		// set text color
@@ -131,7 +131,7 @@ public class RegisterCustomerBlock extends SimiBlock implements
 		tv_dateBirth.setTextColor(AppColorConfig.getInstance().getContentColor());
 		btn_register = (ButtonRectangle) mView.findViewById(Rconfig
 				.getInstance().id("bt_register"));
-		btn_register.setText(SimiTranslator.newInstance().translate("Register"));
+		btn_register.setText(SimiTranslator.getInstance().translate("Register"));
 		btn_register.setTextColor(Color.WHITE);
 		btn_register.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 		btn_register.setTextSize(Constants.SIZE_TEXT_BUTTON);
@@ -156,16 +156,16 @@ public class RegisterCustomerBlock extends SimiBlock implements
 	}
 
 	private void createPrefix() {
-		edt_prefix.setHint(SimiTranslator.newInstance().translate("Prefix") + " (*)");
+		edt_prefix.setHint(SimiTranslator.getInstance().translate("Prefix") + " (*)");
 		switch (mCustomer.getPrefix().toLowerCase()) {
 		case "":
 			edt_prefix.setVisibility(View.GONE);
 			break;
 		case "req":
-			edt_prefix.setHint(SimiTranslator.newInstance().translate("Prefix") + "(*)");
+			edt_prefix.setHint(SimiTranslator.getInstance().translate("Prefix") + "(*)");
 			break;
 		case "opt":
-			edt_prefix.setHint(SimiTranslator.newInstance().translate("Prefix"));
+			edt_prefix.setHint(SimiTranslator.getInstance().translate("Prefix"));
 			break;
 		default:
 			break;
@@ -173,16 +173,16 @@ public class RegisterCustomerBlock extends SimiBlock implements
 	}
 
 	private void createSuffix() {
-		edt_suffix.setHint(SimiTranslator.newInstance().translate("Suffix") + " (*)");
+		edt_suffix.setHint(SimiTranslator.getInstance().translate("Suffix") + " (*)");
 		switch (mCustomer.getSuffix().toLowerCase()) {
 		case "":
 			edt_suffix.setVisibility(View.GONE);
 			break;
 		case "req":
-			edt_suffix.setHint(SimiTranslator.newInstance().translate("Suffix") + "(*)");
+			edt_suffix.setHint(SimiTranslator.getInstance().translate("Suffix") + "(*)");
 			break;
 		case "opt":
-			edt_suffix.setHint(SimiTranslator.newInstance().translate("Suffix"));
+			edt_suffix.setHint(SimiTranslator.getInstance().translate("Suffix"));
 			break;
 		default:
 			break;
@@ -190,18 +190,18 @@ public class RegisterCustomerBlock extends SimiBlock implements
 	}
 
 	private void createTaxVat() {
-		edt_taxvat.setHint(SimiTranslator.newInstance().translate("Tax/VAT number")
+		edt_taxvat.setHint(SimiTranslator.getInstance().translate("Tax/VAT number")
 				+ " (*)");
 		switch (mCustomer.getTaxvat().toLowerCase()) {
 		case "":
 			edt_taxvat.setVisibility(View.GONE);
 			break;
 		case "req":
-			edt_taxvat.setHint(SimiTranslator.newInstance().translate("Tax/VAT number")
+			edt_taxvat.setHint(SimiTranslator.getInstance().translate("Tax/VAT number")
 					+ "(*)");
 			break;
 		case "opt":
-			edt_taxvat.setHint(SimiTranslator.newInstance().translate("Tax/VAT number"));
+			edt_taxvat.setHint(SimiTranslator.getInstance().translate("Tax/VAT number"));
 			break;
 		default:
 			break;
@@ -209,7 +209,7 @@ public class RegisterCustomerBlock extends SimiBlock implements
 	}
 
 	private void createGender() {
-		tv_gender.setText(SimiTranslator.newInstance().translate("Gender") + "(*):");
+		tv_gender.setText(SimiTranslator.getInstance().translate("Gender") + "(*):");
 		GenderAdapter adapter = new GenderAdapter(mContext);
 		sp_gender.setAdapter(adapter);
 		switch (mCustomer.getGender().toLowerCase()) {
@@ -217,10 +217,10 @@ public class RegisterCustomerBlock extends SimiBlock implements
 			rl_gender.setVisibility(View.GONE);
 			break;
 		case "req":
-			tv_gender.setText(SimiTranslator.newInstance().translate("Gender") + "(*):");
+			tv_gender.setText(SimiTranslator.getInstance().translate("Gender") + "(*):");
 			break;
 		case "opt":
-			tv_gender.setText(SimiTranslator.newInstance().translate("Gender") + ":");
+			tv_gender.setText(SimiTranslator.getInstance().translate("Gender") + ":");
 			break;
 		default:
 			break;
@@ -239,11 +239,11 @@ public class RegisterCustomerBlock extends SimiBlock implements
 			layout_date_of_birt.setVisibility(View.GONE);
 			break;
 		case "req":
-			tv_dateBirth.setHint(SimiTranslator.newInstance().translate("Date of Birth")
+			tv_dateBirth.setHint(SimiTranslator.getInstance().translate("Date of Birth")
 					+ "(*)");
 			break;
 		case "opt":
-			tv_dateBirth.setHint(SimiTranslator.newInstance().translate("Date of Birth"));
+			tv_dateBirth.setHint(SimiTranslator.getInstance().translate("Date of Birth"));
 			break;
 
 		default:
@@ -280,11 +280,11 @@ public class RegisterCustomerBlock extends SimiBlock implements
 				layout_date_of_birt.setVisibility(View.GONE);
 				break;
 			case "req":
-				tv_dateBirth.setText(SimiTranslator.newInstance().translate("Date of Birth")
+				tv_dateBirth.setText(SimiTranslator.getInstance().translate("Date of Birth")
 						+ "(*): " + selectedDate);
 				break;
 			case "opt":
-				tv_dateBirth.setText(SimiTranslator.newInstance().translate("Date of Birth")
+				tv_dateBirth.setText(SimiTranslator.getInstance().translate("Date of Birth")
 						+ ": " + selectedDate);
 				break;
 			default:

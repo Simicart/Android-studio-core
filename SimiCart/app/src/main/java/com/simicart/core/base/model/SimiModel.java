@@ -1,5 +1,7 @@
 package com.simicart.core.base.model;
 
+import android.util.Log;
+
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.delegate.RequestCallBack;
@@ -50,9 +52,9 @@ public class SimiModel {
 
     public void request() {
         initRequest();
-        String cache_key = createCacheKey();
-        mRequest.setCacheKey(cache_key);
         if (enableCache) {
+            String cache_key = createCacheKey();
+            mRequest.setCacheKey(cache_key);
             getDataFromCache();
         } else {
             SimiManager.getIntance().getRequestQueue().add(mRequest);
@@ -65,6 +67,7 @@ public class SimiModel {
         setShowNotifi();
         setEnableCache();
         setTypeMethod();
+        setCloud();
         mRequest = new SimiJSONRequest(mUrlAction, mRequestCallBack);
         mRequest.setPriority(mCurrentPriority);
         mRequest.setShowNotify(isShowNotify);
@@ -108,13 +111,17 @@ public class SimiModel {
 
             @Override
             public void callBack(SimiResponse simiResponse, boolean isSuccess) {
+                Log.e("SimiMOdel  ","REQUEST CALL BACK 001");
                 if (isSuccess) {
+                    Log.e("SimiMOdel  ","REQUEST CALL BACK 002");
                     mJSON = simiResponse.getDataJSON();
+                    Log.e("SimiMOdel  ","REQUEST CALL BACK 003");
                     parseData();
                     if (null != mModelSuccessCallBack) {
                         mModelSuccessCallBack.onSuccess(collection);
                     }
                 } else {
+                    Log.e("SimiMOdel  ","REQUEST CALL BACK 004");
                     if (null != mModelFailCallBack) {
                         SimiError error = null;
                         if (null != simiResponse) {
@@ -198,6 +205,7 @@ public class SimiModel {
 
     protected void parseData() {
         try {
+            Log.e("SimiModel ","DATA " + mJSON.toString());
             JSONArray list = this.mJSON.getJSONArray("data");
             collection = new SimiCollection();
             for (int i = 0; i < list.length(); i++) {

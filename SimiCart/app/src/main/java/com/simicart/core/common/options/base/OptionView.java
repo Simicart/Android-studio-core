@@ -63,11 +63,11 @@ public class OptionView {
         if (isSelected) {
             updateView(true);
             mDelegate.updateStateCacheOption(mOptions.getOptionId(), true);
-            if (!AppStoreConfig.newInstance().isShowZeroPrice()
+            if (!AppStoreConfig.getInstance().isShowZeroPrice()
                     && mOptions.getOptionPrice() == 0) {
                 mDelegate.updatePriceForHeader("");
             } else {
-                mDelegate.updatePriceForHeader(AppStoreConfig.newInstance().getPrice(
+                mDelegate.updatePriceForHeader(AppStoreConfig.getInstance().getPrice(
                         "" + getPrice()));
             }
 
@@ -154,23 +154,23 @@ public class OptionView {
 
     public String getPriceOption() {
         if (mOptions.getOptionPrice() == 0
-                && !AppStoreConfig.newInstance().isShowZeroPrice()) {
+                && !AppStoreConfig.getInstance().isShowZeroPrice()) {
             return "";
         }
         float f_price = mOptions.getOptionPrice();
         String price = "<font color='#7F7F7F'> +"
-                + AppStoreConfig.newInstance().getPrice("" + f_price) + "</font>";
+                + AppStoreConfig.getInstance().getPrice("" + f_price) + "</font>";
 
         if (mOptions.getOption_price_incl_tax() != -1) {
             String price_tax = "<font color='#7F7F7F'> (</font><font color='"
                     + AppColorConfig.getInstance().getPriceColor()
                     + "'>+"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mOptions.getOption_price_incl_tax())
                     + "</font> <font color='#7F7F7F'>"
-                    + SimiTranslator.newInstance().translate("Incl. Tax") + ")</font>";
+                    + SimiTranslator.getInstance().translate("Incl. Tax") + ")</font>";
 
-            if (!AppStoreConfig.newInstance().isShowZeroPrice()
+            if (!AppStoreConfig.getInstance().isShowZeroPrice()
                     && mOptions.getOption_price_incl_tax() == 0) {
                 return "";
             } else {
@@ -206,23 +206,23 @@ public class OptionView {
         float f_price = mOptions.getOptionPrice();
 
         String price = "<font color='" + AppColorConfig.getInstance().getPriceColor()
-                + "'> +" + AppStoreConfig.newInstance().getPrice("" + f_price)
+                + "'> +" + AppStoreConfig.getInstance().getPrice("" + f_price)
                 + "</font>";
 
         content = title + price;
         if (mOptions.getOptionPrice() == 0
-                && !AppStoreConfig.newInstance().isShowZeroPrice()) {
+                && !AppStoreConfig.getInstance().isShowZeroPrice()) {
             content = title;
         }
         if (mOptions.getOption_price_incl_tax() != -1) {
             String price_tax = "<font color='grey'> (</font><font color='"
                     + AppColorConfig.getInstance().getPriceColor()
                     + "'>+"
-                    + AppStoreConfig.newInstance().getPrice(
+                    + AppStoreConfig.getInstance().getPrice(
                     "" + mOptions.getOption_price_incl_tax())
                     + "</font> <font color='grey'>"
-                    + SimiTranslator.newInstance().translate("Incl. Tax") + ")</font>";
-            if (!AppStoreConfig.newInstance().isShowZeroPrice()
+                    + SimiTranslator.getInstance().translate("Incl. Tax") + ")</font>";
+            if (!AppStoreConfig.getInstance().isShowZeroPrice()
                     && mOptions.getOption_price_incl_tax() == 0) {
             } else {
                 content = content + price_tax;

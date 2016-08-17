@@ -79,7 +79,7 @@ public class SimiUrlConnection {
             // add Authorization, Content-Type Header
             String token = "";
             if (request.isCloud) {
-//                token = "Bearer " + Config.getInstance().getSecretCloudKey();
+                token = "Bearer " + Config.getInstance().getSecretCloudKey();
                 urlConnection.setRequestProperty("Authorization", token);
             } else {
                 urlConnection.setRequestProperty("Token", Config.getInstance().getSecretKey());

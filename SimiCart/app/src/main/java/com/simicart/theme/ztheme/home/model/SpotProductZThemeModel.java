@@ -6,7 +6,7 @@ public class SpotProductZThemeModel extends ProductListCategoryModel {
 
     @Override
     protected void setUrlAction() {
-        url_action = "ztheme/api/get_spot_products";
+        mUrlAction = "ztheme/api/get_spot_products";
     }
 
 }

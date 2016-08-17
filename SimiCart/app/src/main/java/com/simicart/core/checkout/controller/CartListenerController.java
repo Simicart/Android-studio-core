@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -237,7 +238,8 @@ public class CartListenerController implements CartAdapterDelegate {
 
     private void showDialogNumberPicker(final int position, final int qty,
                                         int min, int max) {
-        final Dialog dialoglayout = new Dialog(MainActivity.context);
+        Context context = SimiManager.getIntance().getCurrentActivity();
+        final Dialog dialoglayout = new Dialog(context);
         dialoglayout.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialoglayout.setContentView(Rconfig.getInstance().layout(
                 "core_cart_dialog_layout"));
@@ -263,7 +265,7 @@ public class CartListenerController implements CartAdapterDelegate {
             max = 1;
         }
         final NumericWheelAdapter minAdapter = new NumericWheelAdapter(
-                MainActivity.context, min, max);
+                context, min, max);
         wheel.setViewAdapter(minAdapter);
         if (qty > 0) {
             wheel.setCurrentItem((qty - 1));

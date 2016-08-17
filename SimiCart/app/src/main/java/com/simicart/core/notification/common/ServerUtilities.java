@@ -7,6 +7,7 @@ import android.util.Log;
 import com.simicart.MainActivity;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.common.Utils;
@@ -59,7 +60,7 @@ public final class ServerUtilities {
 	}
 
 	public static void stopRegisterService() {
-		Context context = MainActivity.instance;
+		Context context = SimiManager.getIntance().getCurrentActivity();
 		if (context != null) {
 			context.stopService(new Intent(context, ServiceNotification.class));
 		}

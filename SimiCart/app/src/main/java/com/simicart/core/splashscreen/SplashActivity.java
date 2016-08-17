@@ -53,7 +53,7 @@ public class SplashActivity extends Activity {
         }
 
         View view = findViewById(Rconfig.getInstance().getId(
-                getApplicationContext(), "core_activity_splash", "id"));
+                getApplicationContext(), "rlt_splash", "id"));
 
         // need to dispatch event for Google Analytics
 

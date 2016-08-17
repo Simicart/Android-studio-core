@@ -54,7 +54,7 @@ public class CacheOptionTimeView extends CacheOptionView {
                 minuteS = "0" + mCacheOption.getMinute();
             }
             mCacheOption.setCompleteRequired(true);
-            tv_required.setText(AppStoreConfig.newInstance().getPrice(
+            tv_required.setText(AppStoreConfig.getInstance().getPrice(
                     "" + option.getOptionPrice()));
             tv_time.setText(hour + ":" + minuteS);
             timePicker.setCurrentHour(mCacheOption.getHour());
@@ -79,7 +79,7 @@ public class CacheOptionTimeView extends CacheOptionView {
                 tv_time.setText(hour + ":" + minuteS);
                 if (isAddPrice && !isselectedOptionTime) {
                     mCacheOption.setCompleteRequired(true);
-                    tv_required.setText(AppStoreConfig.newInstance().getPrice(
+                    tv_required.setText(AppStoreConfig.getInstance().getPrice(
                             "" + option.getOptionPrice()));
                     updatePriceForParent(option, ADD_OPERATOR);
                     isAddPrice = false;

@@ -182,30 +182,30 @@ public class NewAddressBookBlock extends SimiBlock implements
 	}
 
 	private void changeColorComponent() {
-		Utils.changeColorTextView(tv_state);
-		Utils.changeColorTextView(tv_country);
-		Utils.changeColorTextView(tv_date_birth);
-		Utils.changeColorTextView(tv_gender);
-
-		Utils.changeColorEditText(edt_prefix);
-		Utils.changeColorEditText(edt_fullname);
-		Utils.changeColorEditText(edt_suffix);
-		Utils.changeColorEditText(edt_street);
-		Utils.changeColorEditText(edt_city);
-		Utils.changeColorEditText(edt_state);
-		Utils.changeColorEditText(edt_zipcode);
-		Utils.changeColorEditText(edt_company);
-		Utils.changeColorEditText(edt_phone);
-		Utils.changeColorEditText(edt_fax);
-		Utils.changeColorEditText(edt_taxvat);
-		Utils.changeColorEditText(edt_email);
-		Utils.changeColorEditText(edt_pass);
-		Utils.changeColorEditText(edt_confirmPass);
-		Utils.changeColorEditText(edt_tax_checkout);
-
-		Utils.changeColorImageview(mContext, img_gender, "ic_extend");
-		Utils.changeColorImageview(mContext, img_state, "ic_extend");
-		Utils.changeColorImageview(mContext, img_country, "ic_extend");
+//		Utils.changeColorTextView(tv_state);
+//		Utils.changeColorTextView(tv_country);
+//		Utils.changeColorTextView(tv_date_birth);
+//		Utils.changeColorTextView(tv_gender);
+//
+//		Utils.changeColorEditText(edt_prefix);
+//		Utils.changeColorEditText(edt_fullname);
+//		Utils.changeColorEditText(edt_suffix);
+//		Utils.changeColorEditText(edt_street);
+//		Utils.changeColorEditText(edt_city);
+//		Utils.changeColorEditText(edt_state);
+//		Utils.changeColorEditText(edt_zipcode);
+//		Utils.changeColorEditText(edt_company);
+//		Utils.changeColorEditText(edt_phone);
+//		Utils.changeColorEditText(edt_fax);
+//		Utils.changeColorEditText(edt_taxvat);
+//		Utils.changeColorEditText(edt_email);
+//		Utils.changeColorEditText(edt_pass);
+//		Utils.changeColorEditText(edt_confirmPass);
+//		Utils.changeColorEditText(edt_tax_checkout);
+//
+//		Utils.changeColorImageview(mContext, img_gender, "ic_extend");
+//		Utils.changeColorImageview(mContext, img_state, "ic_extend");
+//		Utils.changeColorImageview(mContext, img_country, "ic_extend");
 	}
 
 	private void setPropertyHidden(EditText editText, String check, String input) {
@@ -214,10 +214,10 @@ public class NewAddressBookBlock extends SimiBlock implements
 			editText.setVisibility(View.GONE);
 			break;
 		case "req":
-			editText.setHint(SimiTranslator.newInstance().translate(input) + " (*)");
+			editText.setHint(SimiTranslator.getInstance().translate(input) + " (*)");
 			break;
 		case "opt":
-			editText.setHint(SimiTranslator.newInstance().translate(input));
+			editText.setHint(SimiTranslator.getInstance().translate(input));
 			break;
 		default:
 			break;
@@ -225,7 +225,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 	}
 
 	protected void createPrefix(int control) {
-		edt_prefix.setHint(SimiTranslator.newInstance().translate("Prefix") + " (*)");
+		edt_prefix.setHint(SimiTranslator.getInstance().translate("Prefix") + " (*)");
 		if (mAddress != null) {
 			String check = mAddress.getPrefix().toLowerCase();
 			setPropertyHidden(edt_prefix, check, "Prefix");
@@ -240,7 +240,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 	}
 
 	protected void createSuffix(int control) {
-		edt_suffix.setHint(SimiTranslator.newInstance().translate("Suffix") + " (*)");
+		edt_suffix.setHint(SimiTranslator.getInstance().translate("Suffix") + " (*)");
 		if (mAddress != null) {
 			String check = mAddress.getSuffix().toLowerCase();
 			setPropertyHidden(edt_suffix, check, "Suffix");
@@ -287,13 +287,13 @@ public class NewAddressBookBlock extends SimiBlock implements
 					edt_email.setKeyListener(null);
 				}
 			} else {
-				edt_email.setHint(SimiTranslator.newInstance().translate("Email")
+				edt_email.setHint(SimiTranslator.getInstance().translate("Email")
 						+ " (*)");
 			}
 		} else {
 			if (control == Constants.NEW_ADDRESS_CHECKOUT
 					&& !DataPreferences.isSignInComplete()) {
-				edt_email.setHint(SimiTranslator.newInstance().translate("Email")
+				edt_email.setHint(SimiTranslator.getInstance().translate("Email")
 						+ " (*)");
 			} else {
 				String email = DataPreferences.getEmail();
@@ -320,12 +320,12 @@ public class NewAddressBookBlock extends SimiBlock implements
 				tv_date_birth.setVisibility(View.GONE);
 				return;
 			case "req":
-				tv_date_birth.setHint(SimiTranslator.newInstance().translate(
+				tv_date_birth.setHint(SimiTranslator.getInstance().translate(
 						"Date of Birth")
 						+ " (*):");
 				break;
 			case "opt":
-				tv_date_birth.setHint(SimiTranslator.newInstance().translate(
+				tv_date_birth.setHint(SimiTranslator.getInstance().translate(
 						"Date of Birth")
 						+ ":");
 				break;
@@ -351,13 +351,13 @@ public class NewAddressBookBlock extends SimiBlock implements
 					tv_date_birth.setVisibility(View.GONE);
 					break;
 				case "req":
-					tv_date_birth.setText(SimiTranslator.newInstance().translate(
+					tv_date_birth.setText(SimiTranslator.getInstance().translate(
 							"Date of Birth")
 							+ " (*): " + selectedDate);
 					mSelectedDate = selectedDate;
 					break;
 				case "opt":
-					tv_date_birth.setText(SimiTranslator.newInstance().translate(
+					tv_date_birth.setText(SimiTranslator.getInstance().translate(
 							"Date of Birth")
 							+ ": " + selectedDate);
 					mSelectedDate = selectedDate;
@@ -422,10 +422,10 @@ public class NewAddressBookBlock extends SimiBlock implements
 				break;
 			case "req":
 				edt_state
-						.setHint(SimiTranslator.newInstance().translate("State") + "(*)");
+						.setHint(SimiTranslator.getInstance().translate("State") + "(*)");
 				break;
 			case "opt":
-				edt_state.setHint(SimiTranslator.newInstance().translate("State"));
+				edt_state.setHint(SimiTranslator.getInstance().translate("State"));
 				break;
 			default:
 				break;
@@ -435,7 +435,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 
 	protected void createButtonSave() {
 		btn_save.setTextColor(Color.WHITE);
-		btn_save.setText(SimiTranslator.newInstance().translate("Save"));
+		btn_save.setText(SimiTranslator.getInstance().translate("Save"));
 		btn_save.setTextSize(Constants.SIZE_TEXT_BUTTON);
 		btn_save.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 	}
@@ -449,7 +449,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 				"sp_gender"));
 		tv_gender = (TextView) rl_gender.findViewById(Rconfig.getInstance().id(
 				"tv_gender"));
-		tv_gender.setText(SimiTranslator.newInstance().translate("Gender") + " (*):");
+		tv_gender.setText(SimiTranslator.getInstance().translate("Gender") + " (*):");
 		tv_gender.setVisibility(View.VISIBLE);
 		GenderAdapter adapter = new GenderAdapter(mContext);
 		sp_gender.setAdapter(adapter);
@@ -459,10 +459,10 @@ public class NewAddressBookBlock extends SimiBlock implements
 			rl_gender.setVisibility(View.GONE);
 			return;
 		case "req":
-			tv_gender.setText(SimiTranslator.newInstance().translate("Gender") + " (*):");
+			tv_gender.setText(SimiTranslator.getInstance().translate("Gender") + " (*):");
 			break;
 		case "opt":
-			tv_gender.setText(SimiTranslator.newInstance().translate("Gender") + ":");
+			tv_gender.setText(SimiTranslator.getInstance().translate("Gender") + ":");
 			break;
 		default:
 			break;
@@ -503,8 +503,8 @@ public class NewAddressBookBlock extends SimiBlock implements
 
 	protected void createPassAndPassConfirm(int control) {
 		if (control == Constants.NEW_CUSTOMER) {
-			edt_pass.setHint(SimiTranslator.newInstance().translate("Password") + " (*)");
-			edt_confirmPass.setHint(SimiTranslator.newInstance().translate(
+			edt_pass.setHint(SimiTranslator.getInstance().translate("Password") + " (*)");
+			edt_confirmPass.setHint(SimiTranslator.getInstance().translate(
 					"Confirm Password")
 					+ " (*)");
 		} else {
@@ -701,7 +701,7 @@ public class NewAddressBookBlock extends SimiBlock implements
 			}
 		} else {
 			edt_state.setVisibility(View.VISIBLE);
-			edt_state.setHint(SimiTranslator.newInstance().translate("State"));
+			edt_state.setHint(SimiTranslator.getInstance().translate("State"));
 			rl_state.setVisibility(View.GONE);
 		}
 		if (mController != null) {

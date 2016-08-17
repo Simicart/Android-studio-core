@@ -19,6 +19,7 @@ import com.simicart.core.banner.delegate.BannerDelegate;
 import com.simicart.core.banner.entity.BannerEntity;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
@@ -96,8 +97,9 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
             bannerEntity.setCategoryId("");
             bannerEntity.setHasChild("");
             bannerEntity.setProductId("");
+            Context context  = SimiManager.getIntance().getCurrentActivity();
             DefaultSliderView textSliderView = new DefaultSliderView(
-                    MainActivity.instance);
+                    context);
             textSliderView.image(Rconfig.getInstance().drawable("fake_banner"))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(new OnSliderClickListener() {
@@ -129,8 +131,9 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
             bannerEntity.setCategoryId(entity.getData("categoryID"));
             bannerEntity.setHasChild(entity.getData(Constants.HAS_CHILD));
             bannerEntity.setProductId(entity.getData("productID"));
+            Context context = SimiManager.getIntance().getCurrentActivity();
             DefaultSliderView textSliderView = new DefaultSliderView(
-                    MainActivity.instance);
+                    context);
             textSliderView.image(bannerEntity.getImage())
                     .setOnSliderClickListener(new OnSliderClickListener() {
 

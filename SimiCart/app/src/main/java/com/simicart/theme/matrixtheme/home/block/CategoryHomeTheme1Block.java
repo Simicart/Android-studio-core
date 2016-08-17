@@ -19,9 +19,11 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.common.DrawableManager;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -66,11 +68,10 @@ public class CategoryHomeTheme1Block extends SimiBlock implements
                 "bt_all_category"));
         tv_view_all_category = (TextView) mView.findViewById(Rconfig
                 .getInstance().id("tv_view_all_category"));
-        tv_view_all_category.setText(Config.getInstance()
-                .getText("VIEW ALL CATEGORIES").toUpperCase());
+        tv_view_all_category.setText(SimiTranslator.getInstance().translate("VIEW ALL CATEGORIES").toUpperCase());
         TextView tv_viewnow = (TextView) mView.findViewById(Rconfig
                 .getInstance().id("tv_viewnow"));
-        tv_viewnow.setText(Config.getInstance().getText("View now"));
+        tv_viewnow.setText(SimiTranslator.getInstance().translate("View now"));
         tv_viewmore1 = (TextView) mView.findViewById(Rconfig.getInstance().id(
                 "tv_viewmore1"));
         tv_viewmore2 = (TextView) mView.findViewById(Rconfig.getInstance().id(
@@ -83,9 +84,9 @@ public class CategoryHomeTheme1Block extends SimiBlock implements
             tv_viewmore2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             tv_viewmore3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         }
-        tv_viewmore1.setText(Config.getInstance().getText("View more") + ">>");
-        tv_viewmore2.setText(Config.getInstance().getText("View more") + ">>");
-        tv_viewmore3.setText(Config.getInstance().getText("View more") + ">>");
+        tv_viewmore1.setText(SimiTranslator.getInstance().translate("View more") + ">>");
+        tv_viewmore2.setText(SimiTranslator.getInstance().translate("View more") + ">>");
+        tv_viewmore3.setText(SimiTranslator.getInstance().translate("View more") + ">>");
         tv_viewmore1.setTextColor(Color.parseColor("#4E4E4E"));
         tv_viewmore2.setTextColor(Color.parseColor("#4E4E4E"));
         tv_viewmore3.setTextColor(Color.parseColor("#4E4E4E"));
@@ -95,11 +96,11 @@ public class CategoryHomeTheme1Block extends SimiBlock implements
         tv_Category1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         tv_Category2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         tv_Category3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-        tv_Category1.setText(Config.getInstance().getText("No category")
+        tv_Category1.setText(SimiTranslator.getInstance().translate("No category")
                 .toUpperCase());
-        tv_Category2.setText(Config.getInstance().getText("No category")
+        tv_Category2.setText(SimiTranslator.getInstance().translate("No category")
                 .toUpperCase());
-        tv_Category3.setText(Config.getInstance().getText("No category")
+        tv_Category3.setText(SimiTranslator.getInstance().translate("No category")
                 .toUpperCase());
     }
 
@@ -363,7 +364,7 @@ public class CategoryHomeTheme1Block extends SimiBlock implements
         String name = category.getCategoryName();
         if (null != name) {
             name = name.toUpperCase();
-            tv_view_all_category.setText(Config.getInstance().getText(name));
+            tv_view_all_category.setText(SimiTranslator.getInstance().translate(name));
             if (DataLocal.isTablet) {
                 tv_view_all_category
                         .setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
@@ -452,13 +453,13 @@ public class CategoryHomeTheme1Block extends SimiBlock implements
     private void viewAllCategory() {
         if (DataLocal.isTablet) {
             CategoryFragment fr_Category = CategoryFragment.newInstance("-1",
-                    Config.getInstance().getText("all categories"));
+                    SimiTranslator.getInstance().translate("all categories"));
             CateSlideMenuFragment.getIntance().replaceFragmentCategoryMenu(
                     fr_Category);
             CateSlideMenuFragment.getIntance().openMenu();
         } else {
             CategoryFragment fr_Category = CategoryFragment.newInstance("-1",
-                    Config.getInstance().getText("all categories"));
+                    SimiTranslator.getInstance().translate("all categories"));
             SimiManager.getIntance().replacePopupFragment(fr_Category);
         }
     }

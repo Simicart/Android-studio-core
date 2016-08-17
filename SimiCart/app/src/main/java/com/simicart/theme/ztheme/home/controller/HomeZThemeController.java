@@ -35,31 +35,31 @@ public class HomeZThemeController extends SimiController {
 
         mModel = new HomeZThemeModel();
         mDelegate.showLoading();
-        mModel.setDelegate(new ModelDelegate() {
-
-            @Override
-            public void callBack(String message, boolean isSuccess) {
-                mDelegate.dismissLoading();
-                if (isSuccess) {
-                    ArrayList<SimiEntity> entity = mModel.getCollection()
-                            .getCollection();
-
-                    if (null != entity && entity.size() > 0) {
-                        ArrayList<CategoryZTheme> categories = new ArrayList<CategoryZTheme>();
-                        for (SimiEntity simiEntity : entity) {
-                            CategoryZTheme category = (CategoryZTheme) simiEntity;
-                            categories.add(category);
-                        }
-                        mCategories = categories;
-                    }
-                    mDelegate.updateView(mModel.getCollection());
-                }
-
-            }
-        });
-        if (DataLocal.isTablet) {
-            mModel.addParam(Constants.PHONE_TYPE, Constants.TABLET);
-        }
+//        mModel.setDelegate(new ModelDelegate() {
+//
+//            @Override
+//            public void callBack(String message, boolean isSuccess) {
+//                mDelegate.dismissLoading();
+//                if (isSuccess) {
+//                    ArrayList<SimiEntity> entity = mModel.getCollection()
+//                            .getCollection();
+//
+//                    if (null != entity && entity.size() > 0) {
+//                        ArrayList<CategoryZTheme> categories = new ArrayList<CategoryZTheme>();
+//                        for (SimiEntity simiEntity : entity) {
+//                            CategoryZTheme category = (CategoryZTheme) simiEntity;
+//                            categories.add(category);
+//                        }
+//                        mCategories = categories;
+//                    }
+//                    mDelegate.updateView(mModel.getCollection());
+//                }
+//
+//            }
+//        });
+//        if (DataLocal.isTablet) {
+//            mModel.addParam(Constants.PHONE_TYPE, Constants.TABLET);
+//        }
         mModel.request();
     }
 

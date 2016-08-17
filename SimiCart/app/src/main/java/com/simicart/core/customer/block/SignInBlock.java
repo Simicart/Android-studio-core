@@ -89,16 +89,16 @@ public class SignInBlock extends SimiBlock implements SignInDelegate {
 
         cb_remember_password = (CheckBox) mView.findViewById(Rconfig
                 .getInstance().id("cb_re_password"));
-        cb_remember_password.setText(SimiTranslator.newInstance().translate("Remember password"));
+        cb_remember_password.setText(SimiTranslator.getInstance().translate("Remember password"));
         cb_remember_password.setTextColor(AppColorConfig.getInstance().getContentColor());
 
         txt_label_create_account = (TextView) mView.findViewById(Rconfig
                 .getInstance().id("lable_createAccount"));
-        txt_label_create_account.setText(SimiTranslator.newInstance().translate("Don't have an account ") + "?");
+        txt_label_create_account.setText(SimiTranslator.getInstance().translate("Don't have an account ") + "?");
 
         btn_SignIn = (ButtonRectangle) mView.findViewById(Rconfig.getInstance()
                 .id("bt_signIn"));
-        btn_SignIn.setText(SimiTranslator.newInstance().translate("Sign In"));
+        btn_SignIn.setText(SimiTranslator.getInstance().translate("Sign In"));
         btn_SignIn.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
         btn_SignIn.setBackgroundColor(AppColorConfig.getInstance().getColorButtonBackground());
         btn_SignIn.setTextSize(Constants.SIZE_TEXT_BUTTON);
@@ -107,7 +107,7 @@ public class SignInBlock extends SimiBlock implements SignInDelegate {
         // initial Email Field
         edt_Email = (EditText) mView.findViewById(Rconfig.getInstance().id(
                 "et_email"));
-        edt_Email.setHint(SimiTranslator.newInstance().translate("Email"));
+        edt_Email.setHint(SimiTranslator.getInstance().translate("Email"));
 
         edt_Email.setTextColor(AppColorConfig.getInstance().getContentColor());
         edt_Email.setHintTextColor(AppColorConfig.getInstance().getContentColor());
@@ -115,7 +115,7 @@ public class SignInBlock extends SimiBlock implements SignInDelegate {
         // initial Password Field
         edt_Password = (EditText) mView.findViewById(Rconfig.getInstance().id(
                 "et_pass"));
-        edt_Password.setHint(SimiTranslator.newInstance().translate("Password"));
+        edt_Password.setHint(SimiTranslator.getInstance().translate("Password"));
         edt_Password.setTextColor(AppColorConfig.getInstance().getContentColor());
         edt_Password.setHintTextColor(AppColorConfig.getInstance().getContentColor());
         // initial Forgot Password

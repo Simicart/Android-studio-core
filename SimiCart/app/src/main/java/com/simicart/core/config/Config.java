@@ -10,7 +10,7 @@ public class Config {
 
     private String mBaseUrl = "http://dev-vn.magestore.com/simicart/1800/index.php/";
     private String mSecretKey = "63d7615890f126fc6569198ae5607e5e9e184";
-    private String mBaseCloudUrl = "http://dev-api.jajahub.com/rest";
+    private String mBaseCloudUrl = "https://api.jajahub.com/rest/";
     private String mSecretCloudKey = "9631ac14616756b5fdb7ba46750fdf18867325a7";
 
     private String mDemoEnable = "DEMO_ENABLE11";

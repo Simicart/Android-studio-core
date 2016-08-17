@@ -56,15 +56,15 @@ public class AddressBookBlock extends SimiBlock {
         TextView tv_chooseAddress = (TextView) mView.findViewById(Rconfig
                 .getInstance().id("tv_chooseAddress"));
         if (isCheckout) {
-            tv_chooseAddress.setText(SimiTranslator.newInstance().translate(
+            tv_chooseAddress.setText(SimiTranslator.getInstance().translate(
                     "Or choose an address"));
         } else {
-            tv_chooseAddress.setText(SimiTranslator.newInstance().translate(
+            tv_chooseAddress.setText(SimiTranslator.getInstance().translate(
                     "Or choose an address for editing"));
         }
         tv_addAddress = (TextView) mView.findViewById(Rconfig.getInstance().id(
                 "addAddress"));
-        tv_addAddress.setText(SimiTranslator.newInstance().translate("Add an address"));
+        tv_addAddress.setText(SimiTranslator.getInstance().translate("Add an address"));
 
         lv_Address = (ListView) mView.findViewById(Rconfig.getInstance().id(
                 "lv_listAddress"));
@@ -74,8 +74,8 @@ public class AddressBookBlock extends SimiBlock {
                 .id("iv_add"));
         img_address_right = (ImageView) mView.findViewById(Rconfig
                 .getInstance().id("iv_extend"));
-        Utils.changeColorImageview(mContext, img_address_left, "ic_action_add");
-        Utils.changeColorImageview(mContext, img_address_right, "ic_extend");
+//        Utils.changeColorImageview(mContext, img_address_left, "ic_action_add");
+//        Utils.changeColorImageview(mContext, img_address_right, "ic_extend");
         rlt_layout_addadress.setBackgroundColor(AppColorConfig.getInstance().getColorButtonBackground());
         tv_addAddress.setBackgroundColor(AppColorConfig.getInstance().getColorButtonBackground());
 

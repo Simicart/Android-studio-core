@@ -28,6 +28,7 @@ public class AppStoreConfig extends SimiEntity {
     private boolean isShowLinkAllProduct;
     private boolean isReloadPaymentMethod;
     private String mSenderID = "";
+    private String mTypeProductList;
 
     private String country_code = "country_code";
     private String country_name = "country_name";
@@ -47,7 +48,7 @@ public class AppStoreConfig extends SimiEntity {
     public static AppStoreConfig instance;
 
     public static AppStoreConfig getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new AppStoreConfig();
         }
         return instance;
@@ -79,9 +80,9 @@ public class AppStoreConfig extends SimiEntity {
             String id = getData(store_id);
             setStoreID(id);
         }
-        
+
         // store name
-        if(hasKey(store_name)) {
+        if (hasKey(store_name)) {
             String storeName = getData(store_name);
             setStoreName(storeName);
         }
@@ -117,31 +118,31 @@ public class AppStoreConfig extends SimiEntity {
             String position = getData(currency_position);
             setCurrencyPosition(position);
         }
-        
-        if(hasKey(use_store)) {
+
+        if (hasKey(use_store)) {
             String useStore = getData(use_store);
-            if(Utils.TRUE(useStore)) {
+            if (Utils.TRUE(useStore)) {
                 setUseStore(true);
             }
         }
 
-        if(hasKey(is_show_zero_price)) {
+        if (hasKey(is_show_zero_price)) {
             String isShowZeroPrice = getData(is_show_zero_price);
-            if(Utils.TRUE(isShowZeroPrice)) {
+            if (Utils.TRUE(isShowZeroPrice)) {
                 setShowZeroPrice(true);
             }
         }
 
-        if(hasKey(is_reload_payment_method)) {
+        if (hasKey(is_reload_payment_method)) {
             String isReloadPaymentMethod = getData(is_reload_payment_method);
-            if(Utils.TRUE(isReloadPaymentMethod)) {
+            if (Utils.TRUE(isReloadPaymentMethod)) {
                 setReloadPaymentMethod(true);
             }
         }
 
-        if(hasKey(is_show_link_all_product)) {
+        if (hasKey(is_show_link_all_product)) {
             String isShowLinkAllProduct = getData(is_show_link_all_product);
-            if(Utils.TRUE(isShowLinkAllProduct)) {
+            if (Utils.TRUE(isShowLinkAllProduct)) {
                 setShowLinkAllProduct(true);
             }
         }
@@ -323,4 +324,14 @@ public class AppStoreConfig extends SimiEntity {
     public void setSenderID(String senderID) {
         this.mSenderID = senderID;
     }
+
+    public void setTypeProductList(String typeProductList) {
+        mTypeProductList = typeProductList;
+    }
+
+    public String getTypeProductList() {
+        return mTypeProductList;
+    }
+
+
 }

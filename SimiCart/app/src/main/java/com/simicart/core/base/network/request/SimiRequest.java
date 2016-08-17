@@ -3,6 +3,7 @@ package com.simicart.core.base.network.request;
 import com.simicart.core.base.delegate.RequestCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.network.response.SimiResponse;
+import com.simicart.core.config.Config;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -112,7 +113,12 @@ public class SimiRequest implements Comparable<SimiRequest> {
     }
 
     public String getUrl() {
-        return mUrl;
+        String baseUrl = Config.getInstance().getBaseUrl();
+        if(isCloud){
+            baseUrl = Config.getInstance().getBaseCloudUrl();
+        }
+        String fullUrl = baseUrl + mUrl;
+        return fullUrl;
     }
 
     public void setUrl(String mUrl) {

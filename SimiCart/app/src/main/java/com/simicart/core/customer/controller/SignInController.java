@@ -203,17 +203,17 @@ public class SignInController extends SimiController {
     protected void onSingIn(final String email, final String password) {
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mDelegate.getEmail())
                 .matches()) {
-            mDelegate.showNotify(SimiTranslator.newInstance().translate(
+            mDelegate.showNotify(SimiTranslator.getInstance().translate(
                     "Invalid email address"));
             return;
         }
         if (null == email || email.equals("")) {
-            mDelegate.showNotify(SimiTranslator.newInstance().translate(
+            mDelegate.showNotify(SimiTranslator.getInstance().translate(
                     "Email is empty.Please input an email."));
             return;
         }
         if (null == password || password.equals("")) {
-            mDelegate.showNotify(SimiTranslator.newInstance().translate(
+            mDelegate.showNotify(SimiTranslator.getInstance().translate(
                     "Password is empty.Please input a password."));
             return;
         }
@@ -344,7 +344,7 @@ public class SignInController extends SimiController {
         TextView txt_toast = (TextView) layout_toast.findViewById(Rconfig
                 .getInstance().id("txt_custom_toast"));
         Toast toast = new Toast(SimiManager.getIntance().getCurrentActivity());
-        txt_toast.setText(String.format(SimiTranslator.newInstance().translate("Welcome %s! Start shopping now"), DataPreferences.getUsername()));
+        txt_toast.setText(String.format(SimiTranslator.getInstance().translate("Welcome %s! Start shopping now"), DataPreferences.getUsername()));
         toast.setView(layout_toast);
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 400);

@@ -153,14 +153,14 @@ public class TotalPriceView {
                 && !subTotalExcl.equals("")) {
 
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("SubTotal") + " ("
-                    + SimiTranslator.newInstance().translate("Excl.Tax") + ")"
+                    + SimiTranslator.getInstance().translate("SubTotal") + " ("
+                    + SimiTranslator.getInstance().translate("Excl.Tax") + ")"
                     + ": </font>";
             String price = "<font color='" + mColorPrice + "'>"
-                    + AppStoreConfig.newInstance().getPrice(subTotalExcl) + "</font>";
+                    + AppStoreConfig.getInstance().getPrice(subTotalExcl) + "</font>";
             if (null != mSymbol) {
                 price = "<font color='" + mColorPrice + "'>"
-                        + AppStoreConfig.newInstance().getPrice(subTotalExcl, mSymbol)
+                        + AppStoreConfig.getInstance().getPrice(subTotalExcl, mSymbol)
                         + "</font>";
             }
             TextView tv_label = (TextView) showView(label);
@@ -174,12 +174,12 @@ public class TotalPriceView {
             }
         } else {
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("SubTotal") + ": </font>";
+                    + SimiTranslator.getInstance().translate("SubTotal") + ": </font>";
             String price = "<font color='" + mColorPrice + "'>"
-                    + AppStoreConfig.newInstance().getPrice(subTotal) + "</font>";
+                    + AppStoreConfig.getInstance().getPrice(subTotal) + "</font>";
             if (null != mSymbol) {
                 price = "<font color='" + mColorPrice + "'>"
-                        + AppStoreConfig.newInstance().getPrice(subTotal, mSymbol)
+                        + AppStoreConfig.getInstance().getPrice(subTotal, mSymbol)
                         + "</font>";
             }
             TextView tv_label = (TextView) showView(label);
@@ -201,15 +201,15 @@ public class TotalPriceView {
                 && !subtotalIncl.equals("null")) {
             TableRow tbr_subTotalIncl = new TableRow(mContext);
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("SubTotal") + " ("
-                    + SimiTranslator.newInstance().translate("Incl.Tax") + ")"
+                    + SimiTranslator.getInstance().translate("SubTotal") + " ("
+                    + SimiTranslator.getInstance().translate("Incl.Tax") + ")"
                     + ": </font>";
             String price = "<font color='" + mColorPrice + "'>"
-                    + AppStoreConfig.newInstance().getPrice(subtotalIncl) + "</font>";
+                    + AppStoreConfig.getInstance().getPrice(subtotalIncl) + "</font>";
 
             if (null != mSymbol) {
                 price = "<font color='" + mColorPrice + "'>"
-                        + AppStoreConfig.newInstance().getPrice(subtotalIncl, mSymbol)
+                        + AppStoreConfig.getInstance().getPrice(subtotalIncl, mSymbol)
                         + "</font>";
             }
 
@@ -236,17 +236,17 @@ public class TotalPriceView {
                 && !shippingTotalExcl.equals("")
                 && !shippingTotalExcl.equals("0")) {
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("Shipping & Handling")
-                    + " (" + SimiTranslator.newInstance().translate("Excl.Tax") + ")"
+                    + SimiTranslator.getInstance().translate("Shipping & Handling")
+                    + " (" + SimiTranslator.getInstance().translate("Excl.Tax") + ")"
                     + ": </font>";
             String price = "<font color='" + mColorPrice + "'>"
-                    + AppStoreConfig.newInstance().getPrice(shippingTotalExcl)
+                    + AppStoreConfig.getInstance().getPrice(shippingTotalExcl)
                     + "</font>";
             if (null != mSymbol) {
                 price = "<font color='"
                         + mColorPrice
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(shippingTotalExcl,
+                        + AppStoreConfig.getInstance().getPrice(shippingTotalExcl,
                         mSymbol) + "</font>";
             }
 
@@ -264,17 +264,17 @@ public class TotalPriceView {
             if (shippingTotal != null && !shippingTotal.equals("0")) {
 
                 String label = "<font color='" + mColorLabel + "'>"
-                        + SimiTranslator.newInstance().translate("Shipping & Handling")
+                        + SimiTranslator.getInstance().translate("Shipping & Handling")
                         + ": </font>";
                 String price = "<font color='" + mColorPrice + "'>"
-                        + AppStoreConfig.newInstance().getPrice(shippingTotal)
+                        + AppStoreConfig.getInstance().getPrice(shippingTotal)
                         + "</font>";
 
                 if (null != mSymbol) {
                     price = "<font color='"
                             + mColorPrice
                             + "'>"
-                            + AppStoreConfig.newInstance().getPrice(shippingTotal,
+                            + AppStoreConfig.getInstance().getPrice(shippingTotal,
                             mSymbol) + "</font>";
                 }
 
@@ -303,17 +303,17 @@ public class TotalPriceView {
                 && !shippingHandlingIncl.equals("0")) {
             TableRow tbr_shippingHandlingIncl = new TableRow(mContext);
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("Shipping & Handling")
-                    + " (" + SimiTranslator.newInstance().translate("Incl.Tax") + ")"
+                    + SimiTranslator.getInstance().translate("Shipping & Handling")
+                    + " (" + SimiTranslator.getInstance().translate("Incl.Tax") + ")"
                     + ": </font>";
             String price = "<font color='" + mColorPrice + "'>"
-                    + AppStoreConfig.newInstance().getPrice(shippingHandlingIncl)
+                    + AppStoreConfig.getInstance().getPrice(shippingHandlingIncl)
                     + "</font>";
             if (null != mSymbol) {
                 price = "<font color='"
                         + mColorPrice
                         + "'>"
-                        + AppStoreConfig.newInstance().getPrice(shippingHandlingIncl,
+                        + AppStoreConfig.getInstance().getPrice(shippingHandlingIncl,
                         mSymbol) + "</font>";
             }
             TextView tv_label = (TextView) showView(label);
@@ -339,17 +339,17 @@ public class TotalPriceView {
                 && !grandTotalExcl.equals("")) {
             TableRow tbr_grandTotal = new TableRow(mContext);
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("Grand Total") + " ("
-                    + SimiTranslator.newInstance().translate("Excl.Tax") + ")"
+                    + SimiTranslator.getInstance().translate("Grand Total") + " ("
+                    + SimiTranslator.getInstance().translate("Excl.Tax") + ")"
                     + ": </font>";
             String price = "<font color='" + mColorPrice + "'>"
-                    + AppStoreConfig.newInstance().getPrice(grandTotalExcl) + "</font>";
+                    + AppStoreConfig.getInstance().getPrice(grandTotalExcl) + "</font>";
 
             if (null != mSymbol) {
                 price = "<font color='"
                         + mColorPrice
                         + "'>"
-                        + AppStoreConfig.newInstance()
+                        + AppStoreConfig.getInstance()
                         .getPrice(grandTotalExcl, mSymbol) + "</font>";
             }
 
@@ -376,13 +376,13 @@ public class TotalPriceView {
                 && !grandTotal.equals("null")) {
             TableRow tbr_grandTotal = new TableRow(mContext);
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("Grand Total") + ": </font>";
+                    + SimiTranslator.getInstance().translate("Grand Total") + ": </font>";
             String price = "<font color='" + mColorPrice + "'>"
-                    + AppStoreConfig.newInstance().getPrice(grandTotal) + "</font>";
+                    + AppStoreConfig.getInstance().getPrice(grandTotal) + "</font>";
 
             if (null != mSymbol) {
                 price = "<font color='" + mColorPrice + "'>"
-                        + AppStoreConfig.newInstance().getPrice(grandTotal, mSymbol)
+                        + AppStoreConfig.getInstance().getPrice(grandTotal, mSymbol)
                         + "</font>";
             }
 
@@ -408,16 +408,16 @@ public class TotalPriceView {
                 && !grandTotalIncl.equals("null")) {
             TableRow tbr_grandTotalIncl = new TableRow(mContext);
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("Grand Total") + " ("
-                    + SimiTranslator.newInstance().translate("Incl.Tax") + ")"
+                    + SimiTranslator.getInstance().translate("Grand Total") + " ("
+                    + SimiTranslator.getInstance().translate("Incl.Tax") + ")"
                     + ": </font>";
             String price = "<font color='" + mColorPrice + "'>"
-                    + AppStoreConfig.newInstance().getPrice(grandTotalIncl) + "</font>";
+                    + AppStoreConfig.getInstance().getPrice(grandTotalIncl) + "</font>";
             if (null != mSymbol) {
                 price = "<font color='"
                         + mColorPrice
                         + "'>"
-                        + AppStoreConfig.newInstance()
+                        + AppStoreConfig.getInstance()
                         .getPrice(grandTotalIncl, mSymbol) + "</font>";
             }
 
@@ -443,13 +443,13 @@ public class TotalPriceView {
         if (tax != null && !tax.equals("0") && !tax.equals("null")) {
             TableRow tbr_Tax = new TableRow(mContext);
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("Tax") + ": </font>";
+                    + SimiTranslator.getInstance().translate("Tax") + ": </font>";
             String price = "<font color='" + mColorPrice + "'>"
-                    + AppStoreConfig.newInstance().getPrice(tax) + "</font>";
+                    + AppStoreConfig.getInstance().getPrice(tax) + "</font>";
 
             if (null != mSymbol) {
                 price = "<font color='" + mColorPrice + "'>"
-                        + AppStoreConfig.newInstance().getPrice(tax, mSymbol)
+                        + AppStoreConfig.getInstance().getPrice(tax, mSymbol)
                         + "</font>";
             }
             Log.e("TotalPriceView ", label + price);
@@ -475,12 +475,12 @@ public class TotalPriceView {
                 && !discount.equals("null")) {
             TableRow tbr_discount = new TableRow(mContext);
             String label = "<font color='" + mColorLabel + "'>"
-                    + SimiTranslator.newInstance().translate("Discount") + ": </font>";
+                    + SimiTranslator.getInstance().translate("Discount") + ": </font>";
             String price = "<font color='" + mColorPrice + "'>" + "-"
-                    + AppStoreConfig.newInstance().getPrice(discount) + "</font>";
+                    + AppStoreConfig.getInstance().getPrice(discount) + "</font>";
             if (null != mSymbol) {
                 price = "<font color='" + mColorPrice + "'>" + ""
-                        + AppStoreConfig.newInstance().getPrice(discount, mSymbol)
+                        + AppStoreConfig.getInstance().getPrice(discount, mSymbol)
                         + "</font>";
             }
 
