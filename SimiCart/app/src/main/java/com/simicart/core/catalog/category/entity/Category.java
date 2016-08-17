@@ -11,7 +11,7 @@ public class Category extends SimiEntity {
 	
 	public boolean hasChild() {
 		if (null == hasChild) {
-			hasChild = getData(Constants.HAS_CHILD);
+			hasChild = getData("has child");
 		}
 		if (null != hasChild && (hasChild.equals("YES") || hasChild.equals("yes")
 				|| hasChild.equals("1"))) {

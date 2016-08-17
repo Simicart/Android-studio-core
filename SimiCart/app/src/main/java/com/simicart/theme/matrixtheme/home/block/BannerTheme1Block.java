@@ -103,14 +103,14 @@ public class BannerTheme1Block extends SimiBlock implements BannerDelegate {
 		for (int i = 0; i < count; i++) {
 			BannerEntity bannerEntity = new BannerEntity();
 			bannerEntity.setImage(listBanner.get(i).getData(
-					Constants.IMAGE_PATH));
-			bannerEntity.setUrl(listBanner.get(i).getData(Constants.URL));
+					"image path"));
+			bannerEntity.setUrl(listBanner.get(i).getData("url"));
 			bannerEntity.setType(listBanner.get(i).getData("type"));
 			bannerEntity.setCategoryName(listBanner.get(i).getData(
 					"categoryName"));
 			bannerEntity.setCategoryId(listBanner.get(i).getData("categoryID"));
 			bannerEntity.setHasChild(listBanner.get(i).getData(
-					Constants.HAS_CHILD));
+					"has_child"));
 			bannerEntity.setProductId(listBanner.get(i).getData("productID"));
 			mListBanner.add(bannerEntity);
 		}

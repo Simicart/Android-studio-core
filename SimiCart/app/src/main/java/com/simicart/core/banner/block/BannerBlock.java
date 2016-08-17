@@ -120,53 +120,6 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
     }
 
     private void showBannersNew(ArrayList<SimiEntity> listBanner) {
-        for (int i = 0; i < listBanner.size(); i++) {
-            SimiEntity entity = listBanner.get(i);
-            final BannerEntity bannerEntity = new BannerEntity();
-            bannerEntity.setUrl(entity.getData(Constants.URL));
-            bannerEntity.setImage(listBanner.get(i).getData(
-                    Constants.IMAGE_PATH));
-            bannerEntity.setType(entity.getData("type"));
-            bannerEntity.setCategoryName(entity.getData("categoryName"));
-            bannerEntity.setCategoryId(entity.getData("categoryID"));
-            bannerEntity.setHasChild(entity.getData(Constants.HAS_CHILD));
-            bannerEntity.setProductId(entity.getData("productID"));
-            Context context = SimiManager.getIntance().getCurrentActivity();
-            DefaultSliderView textSliderView = new DefaultSliderView(
-                    context);
-            textSliderView.image(bannerEntity.getImage())
-                    .setOnSliderClickListener(new OnSliderClickListener() {
-
-                        @Override
-                        public void onSliderClick(BaseSliderView slider) {
-                            final BannerEntity banner_ad = bannerEntity;
-                            onSliderClickListener(banner_ad);
-                        }
-                    });
-            if (DataLocal.isTablet) {
-                textSliderView
-                        .setScaleType(BaseSliderView.ScaleType.CenterInside);
-            } else {
-                textSliderView.setScaleType(BaseSliderView.ScaleType.Fit);
-            }
-            mSliderLayout.addSlider(textSliderView);
-        }
-        mSliderLayout.setPresetTransformer(SliderLayout.Transformer.Default);
-        mSliderLayout
-                .setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mSliderLayout.setIndicatorVisibility(IndicatorVisibility.Invisible);
-        mSliderLayout.setCustomAnimation(new DescriptionAnimation());
-        // mSliderLayout.set
-        mSliderLayout.setDuration(3000);
-        if (listBanner.size() < 2) {
-            mSliderLayout.setDuration(0);
-            mSliderLayout.stopAutoCycle();
-            mSliderLayout.setPagerTransformer(false, new BaseTransformer() {
-                @Override
-                protected void onTransform(View view, float v) {
-                }
-            });
-        }
 
     }
 

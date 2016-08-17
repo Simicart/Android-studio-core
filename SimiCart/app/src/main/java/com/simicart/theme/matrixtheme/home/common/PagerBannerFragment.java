@@ -67,7 +67,7 @@ public class PagerBannerFragment extends SimiFragment {
 //        setData(Constants.KeyData.SCALE, scale, Constants.KeyData.TYPE_FLOAT, bundle);
 //        setData(Constants.KeyData.CHECK_BLURED, isBlured, Constants.KeyData.TYPE_BOOLEAN, bundle);
 //	setData(Constants.KeyData.BANNERENTITY, bannerEntity, Constants.KeyData.TYPE_MODEL, bundle);
-        bundle.putSerializable(Constants.KeyData.BANNERENTITY, bannerEntity);
+//        bundle.putSerializable(Constants.KeyData.BANNERENTITY, bannerEntity);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -118,34 +118,34 @@ public class PagerBannerFragment extends SimiFragment {
                             SimiManager.getIntance().addFragment(fragment);
                         }
                     } else if (bannerEntity.getType().equals(TYPE_CATEGORY)) {
-                        if (bannerEntity.getCategoryId() != null
-                                && !bannerEntity.getCategoryId().equals("")
-                                && !bannerEntity.getCategoryId().toLowerCase()
-                                .equals("null")) {
-                            if (bannerEntity.getHasChild() != null
-                                    && !bannerEntity.getHasChild().equals("")
-                                    && !bannerEntity.getHasChild()
-                                    .toLowerCase().equals("null")) {
-                                if (bannerEntity.getHasChild().equals("1")) {
-                                    if (DataLocal.isTablet) {
-                                        fragment = CategoryFragment.newInstance(
-                                                bannerEntity.getCategoryId(), bannerEntity.getCategoryName());
-                                        CateSlideMenuFragment.getIntance()
-                                                .replaceFragmentCategoryMenu(
-                                                        fragment);
-                                    } else {
-                                        fragment = CategoryFragment.newInstance(
-                                                bannerEntity.getCategoryId(), bannerEntity.getCategoryName());
-                                        SimiManager.getIntance().addFragment(
-                                                fragment);
-                                    }
-                                } else {
-                                    fragment = ProductListFragment.newInstance(bannerEntity.getCategoryId(), bannerEntity.getCategoryName(), null, null, null);
-                                    SimiManager.getIntance().addFragment(
-                                            fragment);
-                                }
-                            }
-                        }
+//                        if (bannerEntity.getCategoryId() != null
+//                                && !bannerEntity.getCategoryId().equals("")
+//                                && !bannerEntity.getCategoryId().toLowerCase()
+//                                .equals("null")) {
+//                            if (bannerEntity.getHasChild() != null
+//                                    && !bannerEntity.getHasChild().equals("")
+//                                    && !bannerEntity.getHasChild()
+//                                    .toLowerCase().equals("null")) {
+//                                if (bannerEntity.getHasChild().equals("1")) {
+//                                    if (DataLocal.isTablet) {
+//                                        fragment = CategoryFragment.newInstance(
+//                                                bannerEntity.getCategoryId(), bannerEntity.getCategoryName());
+//                                        CateSlideMenuFragment.getIntance()
+//                                                .replaceFragmentCategoryMenu(
+//                                                        fragment);
+//                                    } else {
+//                                        fragment = CategoryFragment.newInstance(
+//                                                bannerEntity.getCategoryId(), bannerEntity.getCategoryName());
+//                                        SimiManager.getIntance().addFragment(
+//                                                fragment);
+//                                    }
+//                                } else {
+//                                    fragment = ProductListFragment.newInstance(bannerEntity.getCategoryId(), bannerEntity.getCategoryName(), null, null, null);
+//                                    SimiManager.getIntance().addFragment(
+//                                            fragment);
+//                                }
+//                            }
+//                        }
                     } else if (bannerEntity.getType().equals(TYPE_WEB)) {
                         if (null != bannerEntity.getUrl()
                                 && !bannerEntity.getUrl().equals("")

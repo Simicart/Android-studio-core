@@ -40,9 +40,9 @@ public class Theme1Category extends SimiEntity {
             if (json.has(Constants.CATEGORY_NAME)) {
                 mCategoryName = json.getString(Constants.CATEGORY_NAME);
             }
-            if (json.has(Constants.HAS_CHILD)) {
+            if (json.has("has child")) {
 
-                String child = json.getString(Constants.HAS_CHILD);
+                String child = json.getString("has child");
                 if (child.equals(Constants.YES)) {
                     hasChild = true;
                 }

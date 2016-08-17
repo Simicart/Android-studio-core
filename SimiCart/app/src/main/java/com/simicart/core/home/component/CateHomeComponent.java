@@ -1,5 +1,6 @@
 package com.simicart.core.home.component;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -31,7 +32,9 @@ public class CateHomeComponent extends SimiComponent {
         rootView = findLayout("core_component_cate_home");
         tvTitle = (TextView) findView("tv_title");
         rcvCate = (RecyclerView) findView("rcv_cate");
-        
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rcvCate.setLayoutManager(manager);
         showTitle();
         showCate();
         return rootView;
