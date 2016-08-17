@@ -31,15 +31,6 @@
                     android:id="@+id/rlt_banner_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
-
-                    <!--
-                         <ViewFlipper
-                        android:id="@+id/banner_slider"
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:layout_marginTop="1dp" />
-                    -->
-
                     <com.simicart.core.banner.animation.SliderLayout
                         android:id="@+id/banner_slider"
                         android:layout_width="match_parent"

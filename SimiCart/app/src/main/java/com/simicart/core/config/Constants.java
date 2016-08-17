@@ -17,11 +17,8 @@ public class Constants {
     // tag json category
     public static String CATEGORY_ID = "category_id";
     public static String CATEGORY_NAME = "category_name";
-    public static String HAS_CHILD = "has_child";
     public static String CATEGORY_IMAGE = "category_image";
     public static String IMAGES = "images";
-    public static String IMAGE_PATH = "image_path";
-    public static String URL = "url";
 
     // tag json order spot product
     public static String SPOT_ID = "spot_id";
@@ -254,12 +251,10 @@ public class Constants {
     public static String GET_CATEGORY_LIST = "connector/catalog/get_categories";
     public static String GET_PRODUCT_REVIEW = "connector/catalog/get_product_review";
     public static String GET_SPOT_PRODUCTV2 = "spotproduct/index/get_spot_products_v2";
-    public static String GET_CATEGORY_HOME = "simicategory/api/get_categories";
 
     // url extension config
     public static String GET_STORES = "connector/config/get_stores";
     public static String GET_STORE_VIEW = "connector/config/get_store_view";
-    public static String GET_LIST_BANNER = "connector/config/get_banner";
     public static String GET_MERCHANT_INFO_REMOVE = "connector/config/get_merchant_info";
     public static String REGISTER_DEVICE = "connector/config/register_device";
     public static String GET_LIST_PLUGIN = "connector/config/get_plugins";

@@ -28,7 +28,7 @@ public class CategoryHomeModel extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		mUrlAction = Constants.GET_CATEGORY_HOME;
+		mUrlAction = "simicategory/api/get_categories";
 	}
 
 	@Override

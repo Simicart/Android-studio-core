@@ -159,7 +159,6 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
         // mSliderLayout.set
         mSliderLayout.setDuration(3000);
         if (listBanner.size() < 2) {
-            // disable scroll, tranfer
             mSliderLayout.setDuration(0);
             mSliderLayout.stopAutoCycle();
             mSliderLayout.setPagerTransformer(false, new BaseTransformer() {
@@ -172,79 +171,7 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
     }
 
     public void onSliderClickListener(BannerEntity banner_ad) {
-       // SimiManager.getIntance().hideKeyboard();
-//        EventController dispacth = new EventController();
-//        dispacth.dispatchEvent("com.simicart.banner.touchEvent",
-//                banner_ad.getUrl());
-        // end dispatch
-        SimiFragment fragment = null;
-        if (banner_ad.getType() != null) {
-            if (banner_ad.getType().equals(TYPE_PRODUCT)) {
-                if (banner_ad.getProductId() != null
-                        && !banner_ad.getProductId().equals("")
-                        && !banner_ad.getProductId().toLowerCase()
-                        .equals("null")) {
-                    fragment = ProductDetailParentFragment.newInstance(
-                            banner_ad.getProductId(), null);
-                  //  SimiManager.getIntance().addFragment(fragment);
-                }
-            } else if (banner_ad.getType().equals(TYPE_CATEGORY)) {
-                if (banner_ad.getCategoryId() != null
-                        && !banner_ad.getCategoryId().equals("")
-                        && !banner_ad.getCategoryId().toLowerCase()
-                        .equals("null")) {
-                    if (banner_ad.getHasChild() != null
-                            && !banner_ad.getHasChild().equals("")
-                            && !banner_ad.getHasChild().toLowerCase()
-                            .equals("null")) {
-                        if (banner_ad.getHasChild().equals("1")) {
-                            if (DataLocal.isTablet) {
-                                fragment = CategoryFragment.newInstance(
-                                        banner_ad.getCategoryId(),
-                                        banner_ad.getCategoryName());
-                                CateSlideMenuFragment.getIntance()
-                                        .replaceFragmentCategoryMenu(fragment);
-                                CateSlideMenuFragment.getIntance().openMenu();
-                            } else {
-                                fragment = CategoryFragment.newInstance(
-                                        banner_ad.getCategoryId(),
-                                        banner_ad.getCategoryName());
-                                //SimiManager.getIntance().addFragment(fragment);
-                            }
-                        } else {
-                            fragment = ProductListFragment.newInstance(
-                                    banner_ad.getCategoryId(), banner_ad.getCategoryName(), null,
-                                    null, null);
-                           // SimiManager.getIntance().addFragment(fragment);
-                        }
-                    }
-                }
-            } else if (banner_ad.getType().equals(TYPE_WEB)) {
-                if (banner_ad.getUrl() != null
-                        && !banner_ad.getUrl().equals("null")
-                        && !banner_ad.getUrl().equals("")
-                        && URLUtil.isValidUrl(banner_ad.getUrl())) {
-                    try {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-                                Uri.parse(banner_ad.getUrl()));
-                        mContext.startActivity(browserIntent);
-                    } catch (Exception e) {
-                    }
-                }
-            } else {
-                if (banner_ad.getUrl() != null
-                        && !banner_ad.getUrl().equals("null")
-                        && !banner_ad.getUrl().equals("")
-                        && URLUtil.isValidUrl(banner_ad.getUrl())) {
-                    try {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-                                Uri.parse(banner_ad.getUrl()));
-                        mContext.startActivity(browserIntent);
-                    } catch (Exception e) {
-                    }
-                }
-            }
-        }
+
     }
 
 }
