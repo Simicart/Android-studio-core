@@ -8,10 +8,10 @@ import com.simicart.core.common.Utils;
 @SuppressLint("DefaultLocale")
 public class Config {
 
-    private String mBaseUrl = "http://dev-vn.magestore.com/simicart/1800/index.php/";
-    private String mSecretKey = "63d7615890f126fc6569198ae5607e5e9e184";
+    private String mBaseUrl = "http://www.kalkifashion.com/index.php";
+    private String mSecretKey = "b60692583049b01d87d498530f9839e8";
     private String mBaseCloudUrl = "https://api.jajahub.com/rest/";
-    private String mSecretCloudKey = "9631ac14616756b5fdb7ba46750fdf18867325a7";
+    private String mSecretCloudKey = "f77132fc93d049cc5e0fd3229c45ac786704ab61";
 
     private String mDemoEnable = "DEMO_ENABLE11";
     private String mColorSplashScreen = "#FFFFFF";

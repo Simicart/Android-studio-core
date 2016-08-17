@@ -17,7 +17,7 @@ import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 import com.simicart.theme.ztheme.home.adapter.HomeZThemeAdapterTablet;
-import com.simicart.theme.ztheme.home.entity.CategoryZTheme;
+import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
 
 import java.util.ArrayList;
 
@@ -26,10 +26,10 @@ public class HomeZThemeBlockTablet extends HomeZThemeBlock implements
 
     ListView lv_category;
     FrameLayout fr_layout;
-    CategoryZTheme current_Category;
+    ZThemeCatalogEntity current_Category;
     RelativeLayout rlt_home;
 
-    ArrayList<CategoryZTheme> categoriesTree;
+    ArrayList<ZThemeCatalogEntity> categoriesTree;
 
     public HomeZThemeBlockTablet(View view, Context context) {
         super(view, context);
@@ -73,28 +73,28 @@ public class HomeZThemeBlockTablet extends HomeZThemeBlock implements
         // lv_category.setOnTouchListener(this);
     }
 
-    protected void showCategoriesView(ArrayList<CategoryZTheme> categories) {
+    protected void showCategoriesView(ArrayList<ZThemeCatalogEntity> categories) {
         HomeZThemeAdapterTablet adapter = new HomeZThemeAdapterTablet(mContext,
                 categories);
         lv_category.setAdapter(adapter);
     }
 
     @Override
-    public void showCatSub(CategoryZTheme category) {
-        if (category.hasChild()) {
-            CategoryFragment fragment = CategoryFragment.newInstance(
-                    category.getCategoryId(), category.getCategoryName());
-            CateSlideMenuFragment.getIntance().openMenu();
-            CateSlideMenuFragment.getIntance().replaceFragmentCategoryMenu(
-                    fragment);
-        } else {
-            ProductListFragment fragment = ProductListFragment.newInstance(category.getCategoryId(), category.getCategoryName(), null, null, null);
-            SimiManager.getIntance().replaceFragment(fragment);
-        }
+    public void showCatSub(ZThemeCatalogEntity category) {
+//        if (category.hasChild()) {
+//            CategoryFragment fragment = CategoryFragment.newInstance(
+//                    category.getCategoryId(), category.getCategoryName());
+//            CateSlideMenuFragment.getIntance().openMenu();
+//            CateSlideMenuFragment.getIntance().replaceFragmentCategoryMenu(
+//                    fragment);
+//        } else {
+//            ProductListFragment fragment = ProductListFragment.newInstance(category.getCategoryId(), category.getCategoryName(), null, null, null);
+//            SimiManager.getIntance().replaceFragment(fragment);
+//        }
     }
 
     @Override
-    public void setCategoryTree(ArrayList<CategoryZTheme> categoriesTree) {
+    public void setCategoryTree(ArrayList<ZThemeCatalogEntity> categoriesTree) {
         this.categoriesTree = categoriesTree;
     }
 

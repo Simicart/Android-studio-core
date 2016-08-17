@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.theme.ztheme.home.entity.CategoryZTheme;
+import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
 
 public class CategoryTreeZThemeModel extends SimiModel {
 
@@ -18,9 +18,9 @@ public class CategoryTreeZThemeModel extends SimiModel {
 			if (null != array && array.length() > 0) {
 				for (int i = 0; i < array.length(); i++) {
 					JSONObject object = array.getJSONObject(i);
-					CategoryZTheme categoryZTheme = new CategoryZTheme();
-					categoryZTheme.setJSONObject(object);
-					collection.addEntity(categoryZTheme);
+					ZThemeCatalogEntity ZThemeCatalogEntity = new ZThemeCatalogEntity();
+					ZThemeCatalogEntity.setJSONObject(object);
+					collection.addEntity(ZThemeCatalogEntity);
 				}
 			}
 		} catch (JSONException e) {

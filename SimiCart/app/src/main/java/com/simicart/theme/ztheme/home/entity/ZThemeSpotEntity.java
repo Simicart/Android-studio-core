@@ -3,17 +3,32 @@ package com.simicart.theme.ztheme.home.entity;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.theme.ztheme.home.common.ConstantsZTheme;
 
-public class SpotProductZTheme extends SimiEntity {
+public class ZThemeSpotEntity extends SimiEntity {
 
 	protected String mID;
 	protected String mName;
 	protected String mImage;
 	protected String mKey;
 
+	private String id = "spot_id";
+	private String name = "spot_name";
+	private String image = "spot_image";
+	private String key = "spot_key";
+
+	@Override
+	public void parse() {
+
+		mID = getData(id);
+
+		mName = getData(name);
+
+		mImage = getData(image);
+
+		mKey = getData(key);
+
+	}
+
 	public String getID() {
-		if (null == mID) {
-			mID = getData(ConstantsZTheme.SPOT_ID);
-		}
 		return mID;
 	}
 
@@ -22,9 +37,6 @@ public class SpotProductZTheme extends SimiEntity {
 	}
 
 	public String getName() {
-		if (null == mName) {
-			mName = getData(ConstantsZTheme.SPOT_NAME);
-		}
 		return mName;
 	}
 
@@ -33,9 +45,6 @@ public class SpotProductZTheme extends SimiEntity {
 	}
 
 	public String getImage() {
-		if (null == mImage) {
-			mImage = getData(ConstantsZTheme.SPOT_IMAGE);
-		}
 		return mImage;
 	}
 
@@ -44,9 +53,6 @@ public class SpotProductZTheme extends SimiEntity {
 	}
 
 	public String getKey() {
-		if (null == mKey) {
-			mKey = getData(ConstantsZTheme.SPOT_KEY);
-		}
 		return mKey;
 	}
 

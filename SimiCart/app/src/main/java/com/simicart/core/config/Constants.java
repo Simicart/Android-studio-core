@@ -2,6 +2,9 @@ package com.simicart.core.config;
 
 public class Constants {
 
+    public static  final String ENTITY = "entity";
+    public static final  String METHOD = "method";
+
     // type sign in
     public static String NORMAL_SIGN_IN = "normal_sign_in";
     public static String OTHER_SIGN_IN = "other_sign_in";

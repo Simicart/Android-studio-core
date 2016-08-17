@@ -86,7 +86,7 @@ public class SplashController {
     }
 
     protected void enableTheme() {
-        String themeType = AppColorConfig.getInstance().getThemeType();
+        String themeType = ZARA_THEME;
         if (Utils.validateString(themeType)) {
             if (themeType.equals(MATRIX_THEME)) {
                 new MatrixTheme();

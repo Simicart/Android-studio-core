@@ -4,11 +4,18 @@ import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class Category extends SimiEntity {
     protected String mID;
     protected String mName;
     protected String mImage;
     protected String hasChild;
+	protected ArrayList<Category> listChildCategory;
 
     @Override
     public void parse() {
@@ -16,6 +23,22 @@ public class Category extends SimiEntity {
         mImage = getData(Constants.CATEGORY_IMAGE);
         mName = getData(Constants.CATEGORY_NAME);
         mID = getData(Constants.CATEGORY_ID);
+
+		if(hasKey("child_cat")) {
+			listChildCategory = new ArrayList<>();
+			try {
+				JSONArray childCatArr = mJSON.getJSONArray("child_cat");
+				for(int i=0;i<childCatArr.length();i++) {
+					JSONObject childCatObj = childCatArr.getJSONObject(i);
+					Category childCat = new Category();
+					childCat.setJSONObject(childCatObj);
+					childCat.parse();
+					listChildCategory.add(childCat);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
     }
 
     public boolean hasChild() {
@@ -52,4 +75,11 @@ public class Category extends SimiEntity {
         this.mID = category_id;
     }
 
+	public ArrayList<Category> getListChildCategory() {
+		return listChildCategory;
+	}
+
+	public void setListChildCategory(ArrayList<Category> listChildCategory) {
+		this.listChildCategory = listChildCategory;
+	}
 }

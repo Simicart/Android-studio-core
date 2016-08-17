@@ -272,5 +272,12 @@ public class Utils {
         return s;
     }
 
+    public static int toDp(int value) {
+        Context context = SimiManager.getIntance().getCurrentActivity();
+        float unit = context.getResources().getDisplayMetrics().density;
+        int result = (int) (value / unit + 0.5f);
+        return result;
+    }
+
 
 }

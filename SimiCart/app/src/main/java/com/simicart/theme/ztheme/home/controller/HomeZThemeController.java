@@ -6,8 +6,10 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
@@ -16,8 +18,8 @@ import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 import com.simicart.theme.ztheme.home.delegate.HomeZThemeDelegate;
-import com.simicart.theme.ztheme.home.entity.CategoryZTheme;
-import com.simicart.theme.ztheme.home.entity.SpotProductZTheme;
+import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
+import com.simicart.theme.ztheme.home.entity.ZThemeSpotEntity;
 import com.simicart.theme.ztheme.home.fragment.SpotProductListZthemeFragment;
 import com.simicart.theme.ztheme.home.model.HomeZThemeModel;
 
@@ -27,7 +29,7 @@ public class HomeZThemeController extends SimiController {
     protected HomeZThemeDelegate mDelegate;
     protected OnGroupClickListener mGroupExpand;
     protected OnChildClickListener mChildClick;
-    ArrayList<CategoryZTheme> mCategories;
+    ArrayList<ZThemeCatalogEntity> mCategories;
 
     @Override
     public void onStart() {
@@ -35,31 +37,16 @@ public class HomeZThemeController extends SimiController {
 
         mModel = new HomeZThemeModel();
         mDelegate.showLoading();
-//        mModel.setDelegate(new ModelDelegate() {
-//
-//            @Override
-//            public void callBack(String message, boolean isSuccess) {
-//                mDelegate.dismissLoading();
-//                if (isSuccess) {
-//                    ArrayList<SimiEntity> entity = mModel.getCollection()
-//                            .getCollection();
-//
-//                    if (null != entity && entity.size() > 0) {
-//                        ArrayList<CategoryZTheme> categories = new ArrayList<CategoryZTheme>();
-//                        for (SimiEntity simiEntity : entity) {
-//                            CategoryZTheme category = (CategoryZTheme) simiEntity;
-//                            categories.add(category);
-//                        }
-//                        mCategories = categories;
-//                    }
-//                    mDelegate.updateView(mModel.getCollection());
-//                }
-//
-//            }
-//        });
-//        if (DataLocal.isTablet) {
-//            mModel.addParam(Constants.PHONE_TYPE, Constants.TABLET);
-//        }
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
+                mDelegate.updateView(mModel.getCollection());
+            }
+        });
+        if (DataLocal.isTablet) {
+            mModel.addBody(Constants.PHONE_TYPE, Constants.TABLET);
+        }
         mModel.request();
     }
 
@@ -69,19 +56,19 @@ public class HomeZThemeController extends SimiController {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
-                switch (mCategories.get(groupPosition).getType()) {
-                    case CategoryZTheme.TYPE_CAT:
-                        if (!mCategories.get(groupPosition).hasChild()) {
-                            selecteCat(mCategories.get(groupPosition));
-                        }
-                        break;
-                    case CategoryZTheme.TYPE_SPOT:
-                        selecteSpot(mCategories.get(groupPosition)
-                                .getSpotProductZTheme());
-                        break;
-                    default:
-                        break;
-                }
+//                switch (mCategories.get(groupPosition).getType()) {
+//                    case ZThemeCatalogEntity.TYPE_CAT:
+//                        if (!mCategories.get(groupPosition).hasChild()) {
+//                            selecteCat(mCategories.get(groupPosition));
+//                        }
+//                        break;
+//                    case ZThemeCatalogEntity.TYPE_SPOT:
+//                        selecteSpot(mCategories.get(groupPosition)
+//                                .getZThemeSpotEntity());
+//                        break;
+//                    default:
+//                        break;
+//                }
                 return false;
             }
         };
@@ -91,16 +78,16 @@ public class HomeZThemeController extends SimiController {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                selecteCat(mCategories.get(groupPosition).getmCategories()
-                        .get(childPosition));
+//                selecteCat(mCategories.get(groupPosition).getmCategories()
+//                        .get(childPosition));
                 return true;
             }
         };
 
     }
 
-    protected void selecteSpot(SpotProductZTheme spotProductZTheme) {
-        SpotProductListZthemeFragment fragment = SpotProductListZthemeFragment.newInstance(spotProductZTheme.getKey(), spotProductZTheme.getName(), null, null, null);
+    protected void selecteSpot(ZThemeSpotEntity ZThemeSpotEntity) {
+        SpotProductListZthemeFragment fragment = SpotProductListZthemeFragment.newInstance(ZThemeSpotEntity.getKey(), ZThemeSpotEntity.getName(), null, null, null);
         SimiManager.getIntance().replaceFragment(fragment);
     }
 

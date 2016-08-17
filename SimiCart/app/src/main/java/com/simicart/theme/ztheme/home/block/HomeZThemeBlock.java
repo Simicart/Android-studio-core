@@ -20,7 +20,7 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.theme.ztheme.home.adapter.HomeZThemeAdapter;
 import com.simicart.theme.ztheme.home.delegate.HomeZThemeDelegate;
-import com.simicart.theme.ztheme.home.entity.CategoryZTheme;
+import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
 
 public class HomeZThemeBlock extends SimiBlock implements HomeZThemeDelegate {
 
@@ -82,23 +82,25 @@ public class HomeZThemeBlock extends SimiBlock implements HomeZThemeDelegate {
 
 	@Override
 	public void drawView(SimiCollection collection) {
+
 		ArrayList<SimiEntity> entity = collection.getCollection();
-		ArrayList<CategoryZTheme> categories = new ArrayList<CategoryZTheme>();
+		ArrayList<ZThemeCatalogEntity> categories = new ArrayList<ZThemeCatalogEntity>();
 		if (null != entity && entity.size() > 0) {
 			for (SimiEntity simiEntity : entity) {
-				CategoryZTheme categoryZTheme = new CategoryZTheme();
-				categoryZTheme.setJSONObject(simiEntity.getJSONObject());
-				categories.add(categoryZTheme);
+				ZThemeCatalogEntity ZThemeCatalogEntity = new ZThemeCatalogEntity();
+				ZThemeCatalogEntity.setJSONObject(simiEntity.getJSONObject());
+				ZThemeCatalogEntity.parse();
+				categories.add(ZThemeCatalogEntity);
 			}
 		} else {
-			for (int i = 1; i < 5; i++) {
-				CategoryZTheme categoryZTheme = new CategoryZTheme();
-				categoryZTheme.setCategoryId("fake");
-				categoryZTheme.setType(CategoryZTheme.TYPE_CAT);
-				categoryZTheme.setCategoryName("Category " + i);
-				categoryZTheme.setTitle("Category " + i);
-				categories.add(categoryZTheme);
-			}
+//			for (int i = 1; i < 5; i++) {
+//				ZThemeCatalogEntity ZThemeCatalogEntity = new ZThemeCatalogEntity();
+//				ZThemeCatalogEntity.setCategoryId("fake");
+//				ZThemeCatalogEntity.setType(ZThemeCatalogEntity.TYPE_CAT);
+//				ZThemeCatalogEntity.setCategoryName("Category " + i);
+//				ZThemeCatalogEntity.setTitle("Category " + i);
+//				categories.add(ZThemeCatalogEntity);
+//			}
 		}
 
 		if (categories.size() > 0) {
@@ -106,13 +108,13 @@ public class HomeZThemeBlock extends SimiBlock implements HomeZThemeDelegate {
 		}
 	}
 
-	protected void showCategoriesView(ArrayList<CategoryZTheme> categories) {
+	protected void showCategoriesView(ArrayList<ZThemeCatalogEntity> categories) {
 		HomeZThemeAdapter adapter = new HomeZThemeAdapter(mContext, categories);
 		lv_category.setAdapter(adapter);
 	}
 
 	@Override
-	public void showCatSub(CategoryZTheme category) {
+	public void showCatSub(ZThemeCatalogEntity category) {
 		// TODO Auto-generated method stub
 
 	}
@@ -124,7 +126,7 @@ public class HomeZThemeBlock extends SimiBlock implements HomeZThemeDelegate {
 	}
 
 	@Override
-	public void setCategoryTree(ArrayList<CategoryZTheme> categoriesTree) {
+	public void setCategoryTree(ArrayList<ZThemeCatalogEntity> categoriesTree) {
 		// TODO Auto-generated method stub
 	}
 }

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.block.SearchHomeBlock;
+import com.simicart.core.home.component.SearchComponent;
 import com.simicart.theme.ztheme.home.block.HomeZThemeBlock;
 import com.simicart.theme.ztheme.home.controller.HomeZThemeController;
 
@@ -33,7 +35,7 @@ public class HomeZThemeFragment extends SimiFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(
-				Rconfig.getInstance().layout("ztheme_home_layout"), null);
+				Rconfig.getInstance().layout("theme_z_fragment_home"), null);
 
 		Context context = getActivity();
 
@@ -51,15 +53,10 @@ public class HomeZThemeFragment extends SimiFragment {
 		mBlock.setChildCategoryListener(mController.getmChildClick());
 
 		// initial search
-		View searchView = rootView.findViewById(Rconfig.getInstance().id(
-				"rlt_search"));
-		if (DataLocal.isTablet) {
-			searchView.setVisibility(View.GONE);
-		} else {
-			mSearchHomeBlock = new SearchHomeBlock(searchView, context);
-			mSearchHomeBlock.setTag(TagSearch.TAG_LISTVIEW);
-			mSearchHomeBlock.initView();
-		}
+		SearchComponent searchComponent = new SearchComponent();
+		View searchView = searchComponent.createView();
+		LinearLayout llSearch = (LinearLayout) rootView.findViewById(Rconfig.getInstance().id("ll_search"));
+		llSearch.addView(searchView);
 
 		return rootView;
 	}
