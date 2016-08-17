@@ -12,29 +12,39 @@ import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.shortcutbadger.ShortcutBadgeException;
 import com.simicart.core.shortcutbadger.ShortcutBadger;
 import com.simicart.core.splashscreen.block.SplashBlock;
 import com.simicart.core.splashscreen.controller.SplashController;
-import com.simicart.core.splashscreen.delegate.SplashDelegate;
 import com.simicart.core.splashscreen.entity.DeepLinkEntity;
 import com.simicart.core.splashscreen.model.DeepLinkModel;
 
-public class SplashActivity extends Activity implements SplashDelegate {
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context context = getApplicationContext();
         SimiManager.getIntance().setCurrentActivity(this);
-        int idView = Rconfig.getInstance().layout("");
+        Utils.getDeviceInfor();
+        int idView = Rconfig.getInstance().getId(context,
+                "core_activity_splash", "layout");
+        if(Config.getInstance().isFullSplash()){
+            idView = Rconfig.getInstance().getId(context,
+                    "core_activity_splash_full", "layout");
+        }
 
-        setContentView(Rconfig.getInstance().getId(context,
-                "core_splash_screen", "layout"));
+        setContentView(idView);
         DataLocal.isTablet = Utils.isTablet(context);
         if (DataLocal.isTablet) {
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -43,14 +53,14 @@ public class SplashActivity extends Activity implements SplashDelegate {
         }
 
         View view = findViewById(Rconfig.getInstance().getId(
-                getApplicationContext(), "core_splash_screen", "id"));
+                getApplicationContext(), "core_activity_splash", "id"));
 
         // need to dispatch event for Google Analytics
 
-        SplashBlock block = new SplashBlock(view, context);
+        SplashBlock block = new SplashBlock(view, this);
         block.initView();
-        SplashController model = new SplashController(this, context);
-        model.create();
+        SplashController controller = new SplashController();
+        controller.create();
 
         // Update badge
         try {
@@ -65,7 +75,7 @@ public class SplashActivity extends Activity implements SplashDelegate {
     private void onOpenDeepLink() {
         Intent intent = getIntent();
         Uri link = intent.getData();
-        if (null != link){
+        if (null != link) {
             String deepLink = link.toString();
             if (deepLink != null && deepLink.contains(".html")) {
                 deepLink = deepLink.substring(deepLink.lastIndexOf("/") + 1,
@@ -84,7 +94,12 @@ public class SplashActivity extends Activity implements SplashDelegate {
         model.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-
+                ArrayList<SimiEntity> entities = collection.getCollection();
+                if (null != entities && entities.size() > 0) {
+                    SimiEntity entity = entities.get(0);
+                    JSONObject json = entity.getJSONObject();
+                    DeepLinkEntity.getInstance().parse(json);
+                }
             }
         });
 
@@ -100,13 +115,5 @@ public class SplashActivity extends Activity implements SplashDelegate {
         model.request();
     }
 
-    @Override
-    public void creatMain() {
-        SimiManager.getIntance().toMainActivity();
-    }
-
-    @Override
-    public void onBackPressed() {
-    }
 
 }

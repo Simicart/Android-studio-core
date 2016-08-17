@@ -40,6 +40,7 @@ public class SimiModel {
     protected boolean isCloud;
     protected JSONObject mJSONBodyEntity;
     protected HashMap<String, String> mHeader;
+    protected int mTypeMethod = SimiRequest.Method.POST;
 
 
     public SimiModel() {
@@ -63,11 +64,13 @@ public class SimiModel {
         setUrlAction();
         setShowNotifi();
         setEnableCache();
+        setTypeMethod();
         mRequest = new SimiJSONRequest(mUrlAction, mRequestCallBack);
         mRequest.setPriority(mCurrentPriority);
         mRequest.setShowNotify(isShowNotify);
         mRequest.setShouldCache(enableCache);
         mRequest.setCloud(isCloud);
+        mRequest.setTypeMethod(mTypeMethod);
         if (null != mJSONBodyEntity) {
             if (DataPreferences.isSignInComplete()
                     && (!mUrlAction.equals(Constants.SIGN_IN) || !mUrlAction
@@ -218,6 +221,10 @@ public class SimiModel {
 
 
     protected void setCloud() {
+
+    }
+
+    protected void setTypeMethod() {
 
     }
 

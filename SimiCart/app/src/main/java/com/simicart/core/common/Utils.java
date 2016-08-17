@@ -11,14 +11,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
@@ -39,6 +43,23 @@ import com.simicart.core.customer.entity.GenderConfig;
 public class Utils {
 
     private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
+    public static int SCREEN_WIDTH;
+    public static int SCREEN_HEIGHT;
+    public static boolean ISTABLET = false;
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    public static void getDeviceInfor() {
+        Activity activity = SimiManager.getIntance().getCurrentActivity();
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        SCREEN_WIDTH = size.x;
+        SCREEN_HEIGHT = size.y;
+
+        ISTABLET = isTablet(activity);
+
+    }
+
 
     @SuppressLint("NewApi")
     public static int generateViewId() {
@@ -175,16 +196,6 @@ public class Utils {
         imm.hideSoftInputFromWindow(view.getRootView().getWindowToken(), 0);
     }
 
-    // set padding
-    public static void setPadding(View v, int left, int top, int right,
-                                  int bottom) {
-        float unit = v.getContext().getResources().getDisplayMetrics().density;
-        left = (int) (left * unit + 0.5f);
-        right = (int) (right * unit + 0.5f);
-        top = (int) (top * unit + 0.5f);
-        bottom = (int) (bottom * unit + 0.5f);
-        v.setPadding(left, top, right, bottom);
-    }
 
     public static String capitalizes(String source) {
         StringBuilder builder = new StringBuilder();
@@ -219,13 +230,6 @@ public class Utils {
 
     }
 
-    @SuppressLint("SimpleDateFormat")
-    public static void getTimeLoadPage(String namePage) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        String currentDateandTime = sdf.format(new Date());
-        System.err.println("Time Start " + namePage + ":" + currentDateandTime);
-        Log.e("Time Start " + namePage + ":", currentDateandTime);
-    }
 
     public static boolean validateString(String content) {
         if (null == content) {
@@ -241,9 +245,6 @@ public class Utils {
         return true;
     }
 
-    public static void setBackgroundView(View view, String color) {
-        view.setBackgroundColor(Color.parseColor(color));
-    }
 
     public static final String md5(final String s) {
         final String MD5 = "MD5";
@@ -271,41 +272,5 @@ public class Utils {
         return s;
     }
 
-    public static void changeColorEditText(EditText editText) {
-        if (editText != null) {
-            editText.setTextColor(AppColorConfig.getInstance().getContentColor());
-            editText.setHintTextColor(AppColorConfig.getInstance()
-                    .getContentColor());
-        }
-    }
-
-    public static void changeColorTextView(TextView textView) {
-        if (textView != null) {
-            textView.setTextColor(AppColorConfig.getInstance().getContentColor());
-        }
-    }
-
-    public static void changeColorImageview(Context context,
-                                            ImageView imageView, String src) {
-        if (context != null && imageView != null && src != null) {
-            Drawable icon = context.getResources().getDrawable(
-                    Rconfig.getInstance().drawable(src));
-            icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
-                    PorterDuff.Mode.SRC_ATOP);
-            imageView.setImageDrawable(icon);
-        }
-    }
-
-    public static void changeColorListView(ListView listView) {
-        if (listView != null) {
-            ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance().getLineColor());
-            listView.setDivider(sage);
-            listView.setDividerHeight(1);
-        }
-    }
-
-    public static void changeColorLine(View view) {
-        view.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
-    }
 
 }

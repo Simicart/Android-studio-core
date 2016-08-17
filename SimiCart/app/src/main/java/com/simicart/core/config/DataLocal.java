@@ -26,7 +26,7 @@ public class DataLocal {
 	public static String qtyCartAuto = "";
 
 
-	public static void init(Context context) {
+	public static void init() {
 		listCms = new ArrayList<Cms>();
 		listStores = new ArrayList<Stores>();
 		listCarts = new ArrayList<Cart>();

@@ -3,6 +3,8 @@ package com.simicart.core.config;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 
+import com.simicart.core.common.Utils;
+
 @SuppressLint("DefaultLocale")
 public class Config {
 
@@ -14,6 +16,8 @@ public class Config {
     private String mDemoEnable = "DEMO_ENABLE11";
     private String mColorSplashScreen = "#FFFFFF";
     private String mFontCustom = "fonts/ProximaNovaLight.ttf";
+    private String mUseStore;
+    private String isFullSplash;
 
     private String mCookie = "";
 
@@ -27,9 +31,42 @@ public class Config {
         return instance;
     }
 
-    public String getDemoEnable() {
-        return mDemoEnable;
+    public boolean isUseStore() {
+        if (!Utils.validateString(mUseStore)) {
+            return false;
+        }
+
+        if (mUseStore.equals("1")) {
+            return true;
+        }
+
+        return false;
     }
+
+    public boolean isFullSplash() {
+        if (!Utils.validateString(isFullSplash)) {
+            return false;
+        }
+
+        if (isFullSplash.equals("1")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean isDemoVersion() {
+        if (!Utils.validateString(mDemoEnable)) {
+            return false;
+        }
+
+        mDemoEnable = mDemoEnable.toUpperCase();
+        if (mDemoEnable.equals("DEMO_ENABLE") || mDemoEnable.equals("YES")) {
+            return true;
+        }
+        return false;
+    }
+
 
     public void setDemoEnable(String demo_enable) {
         mDemoEnable = demo_enable;
