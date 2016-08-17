@@ -6,26 +6,23 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
-import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.home.adapter.HomeCategoryAdapter;
-import com.simicart.core.home.delegate.CateHomeCallBack;
+import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.catalog.product.entity.ProductList;
+import com.simicart.core.home.adapter.SpotProductAdapter;
 
 import java.util.ArrayList;
 
 /**
  * Created by frank on 17/08/2016.
  */
-public class CateHomeComponent extends SimiComponent {
+public class SpotProductComponent extends SimiComponent {
 
+    protected ProductList mProductList;
     protected TextView tvTitle;
     protected RecyclerView rcvCate;
-    protected CateHomeCallBack mCallBack;
-    protected ArrayList<Category> mListCate;
 
-    public CateHomeComponent(ArrayList<Category> categories) {
-        super();
-        mListCate = categories;
+    public SpotProductComponent(ProductList productList) {
+        mProductList = productList;
     }
 
     @Override
@@ -42,17 +39,13 @@ public class CateHomeComponent extends SimiComponent {
     }
 
     protected void showTitle() {
-        String title = SimiTranslator.getInstance().translate("Category").toUpperCase();
+        String title = mProductList.getTitle();
         tvTitle.setText(title);
     }
 
     protected void showCate() {
-        HomeCategoryAdapter adapter = new HomeCategoryAdapter(mListCate);
+        ArrayList<Product> products = mProductList.getSpotProduct();
+        SpotProductAdapter adapter = new SpotProductAdapter(products);
         rcvCate.setAdapter(adapter);
     }
-
-    public void setCallBack(CateHomeCallBack callBack){
-        mCallBack = callBack;
-    }
-
 }

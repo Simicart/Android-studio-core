@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.util.Log;
 
@@ -14,31 +15,31 @@ public class ProductList extends SimiEntity {
 	private ArrayList<Product> mSpotProduct;
 	private String mTitle;
 
-	public ArrayList<Product> getSpotProduct() {
+	@Override
+	public void parse() {
+		mTitle = getData(Constants.TITLE);
+		parseListSpot();
+	}
 
-		if ((null == mSpotProduct) || (mSpotProduct.size() < 0)) {
-			try {
-				mSpotProduct = new ArrayList<Product>();
-				JSONArray productList = new JSONArray(getData(Constants.DATA));
-				// Log.e("ProductList ", productList.toString());
-				if (null != productList && productList.length() > 0) {
-					for (int i = 0; i < productList.length(); i++) {
-						Product product = new Product();
-						if (null != productList.getJSONObject(i)) {
-							product.setJSONObject(productList.getJSONObject(i));
-							mSpotProduct.add(product);
-						} else {
-							Log.e("Product List ", "Null " + i);
-						}
-
+	protected void parseListSpot(){
+		try {
+			mSpotProduct = new ArrayList<>();
+			JSONArray productList = new JSONArray(getData(Constants.DATA));
+			if (null != productList && productList.length() > 0) {
+				for (int i = 0; i < productList.length(); i++) {
+					Product product = new Product();
+					JSONObject json = productList.getJSONObject(i);
+					if (null != json) {
+						product.setJSONObject(json);
+						mSpotProduct.add(product);
 					}
 				}
-			} catch (JSONException e) {
-				Log.e("ProductList JSONException :", e.getMessage());
-				return null;
 			}
+		} catch (JSONException e) {
 		}
+	}
 
+	public ArrayList<Product> getSpotProduct() {
 		return mSpotProduct;
 	}
 
@@ -47,9 +48,6 @@ public class ProductList extends SimiEntity {
 	}
 
 	public String getTitle() {
-		if (null == mTitle) {
-			mTitle = getData(Constants.TITLE);
-		}
 		return mTitle;
 	}
 

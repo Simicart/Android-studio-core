@@ -10,7 +10,10 @@ import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.catalog.category.entity.Category;
+import com.simicart.core.catalog.product.entity.ProductList;
 import com.simicart.core.home.component.BannerComponent;
+import com.simicart.core.home.component.CateHomeComponent;
 import com.simicart.core.home.delegate.HomeDelegate;
 import com.simicart.core.home.model.CategoryHomeModel;
 import com.simicart.core.home.model.SportProductDefaultModel;
@@ -25,6 +28,8 @@ import java.util.ArrayList;
 public class HomeController extends SimiController {
 
     protected ArrayList<BannerEntity> mListBanner;
+    protected ArrayList<Category> mListCate;
+    protected ArrayList<ProductList> mProductList;
     protected HomeDelegate mDelegate;
 
 
@@ -72,7 +77,11 @@ public class HomeController extends SimiController {
         categoryHomeModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-
+                ArrayList<SimiEntity> entities = collection.getCollection();
+                if (null != entities && entities.size() > 0) {
+                    parseListCate(entities);
+                }
+                showCate();
             }
         });
 
@@ -88,11 +97,15 @@ public class HomeController extends SimiController {
     }
 
     protected void requestSpotProduct() {
-        SportProductDefaultModel sportProductDefaultModel = new SportProductDefaultModel();
+        final SportProductDefaultModel sportProductDefaultModel = new SportProductDefaultModel();
         sportProductDefaultModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-
+                ArrayList<SimiEntity> entities = collection.getCollection();
+                if(null != entities && entities.size() > 0){
+                    parseSportProduct(entities);
+                }
+                showSportProduct();
             }
         });
 
@@ -128,9 +141,42 @@ public class HomeController extends SimiController {
         }
     }
 
+    protected void parseListCate(ArrayList<SimiEntity> entities) {
+        mListCate = new ArrayList<>();
+        for (int i = 0; i < entities.size(); i++) {
+            Category category = (Category) entities.get(i);
+            mListCate.add(category);
+        }
+
+    }
+
+    protected void showCate() {
+        if (mListCate.size() == 0) {
+            mDelegate.showCateHome(null);
+        } else {
+            CateHomeComponent cateHomeComponent = new CateHomeComponent(mListCate);
+            View cateHomeView = cateHomeComponent.createView();
+            mDelegate.showCateHome(cateHomeView);
+        }
+    }
+
+    protected  void parseSportProduct(ArrayList<SimiEntity> entities){
+        mProductList = new ArrayList<>();
+        for (SimiEntity simiEntity : entities) {
+            ProductList product = new ProductList();
+            product.parse(simiEntity.getJSONObject());
+            mProductList.add(product);
+        }
+    }
+
+    protected void showSportProduct(){
+        
+    }
+
 
     @Override
     public void onResume() {
         showBanner();
+        showCate();
     }
 }

@@ -89,15 +89,9 @@ public class ProductBaseAdapter extends BaseAdapter {
 		if (isHome) {
 			if (DataLocal.isLanguageRTL) {
 				holder.tv_name.setGravity(Gravity.RIGHT);
-			} else {
-				holder.tv_name.setGravity(Gravity.LEFT);
-			}
-		}
-		// price
-		if (isHome) {
-			if (DataLocal.isLanguageRTL) {
 				holder.ll_price.setGravity(Gravity.RIGHT);
 			} else {
+				holder.tv_name.setGravity(Gravity.LEFT);
 				holder.ll_price.setGravity(Gravity.LEFT);
 			}
 		}
@@ -128,7 +122,6 @@ public class ProductBaseAdapter extends BaseAdapter {
 				holder.ll_price.addView(view, params);
 			}
 		} else {
-			Log.e("ProductBaseAdapter ", " get Price Home");
 			ProductPriceView viewPrice = new ProductPriceView(product);
 			View view = viewPrice.getViewPriceHome();
 			if (null != view) {
@@ -158,8 +151,9 @@ public class ProductBaseAdapter extends BaseAdapter {
 	static class ViewHolder {
 		ImageView img_avartar;
 		TextView tv_name;
-		LinearLayout layoutStock;
 		LinearLayout ll_price;
+		LinearLayout layoutStock;
+
 	}
 
 }

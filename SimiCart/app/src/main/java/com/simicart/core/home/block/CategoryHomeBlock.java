@@ -36,66 +36,6 @@ public class CategoryHomeBlock extends SimiBlock implements
 	}
 
 	public void showCategorys(ArrayList<Category> listCategory) {
-		LinearLayout ll_category = (LinearLayout) mView;
-		// name
-		RelativeLayout.LayoutParams title_lp = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.MATCH_PARENT,
-				RelativeLayout.LayoutParams.WRAP_CONTENT);
-		TextView tv_name = new TextView(mContext);
-		tv_name.setLayoutParams(title_lp);
-		int height = 0;
-		if (DataLocal.isTablet) {
-			tv_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 21);
-		} else {
-			tv_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
-		}
-		int padd = Utils.getValueDp(2);
-		tv_name.setPadding(Utils.getValueDp(7), Utils.getValueDp(10),
-				Utils.getValueDp(7), Utils.getValueDp(10));
-		tv_name.setText(SimiTranslator.getInstance().translate("Category").toUpperCase());
-		if (DataLocal.isLanguageRTL) {
-			tv_name.setGravity(Gravity.RIGHT);
-		}
-		tv_name.setTextColor(AppColorConfig.getInstance().getContentColor());
-
-		LinearLayout ll_cat = new LinearLayout(mContext);
-		if (DataLocal.isTablet) {
-			height = Utils.getValueDp(250);
-			LinearLayout.LayoutParams spot_ll = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT, height);
-			ll_cat.setPadding(0, padd, 0, 0);
-			ll_cat.setLayoutParams(spot_ll);
-		} else {
-			height = Utils.getValueDp(140);
-			LinearLayout.LayoutParams spot_ll = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT, height);
-			ll_cat.setPadding(0, padd, 0, 0);
-			ll_cat.setLayoutParams(spot_ll);
-		}
-		HorizontalListView listview_category = new HorizontalListView(mContext,
-				null);
-		RelativeLayout.LayoutParams listh = new RelativeLayout.LayoutParams(
-				RelativeLayout.LayoutParams.MATCH_PARENT,
-				RelativeLayout.LayoutParams.WRAP_CONTENT);
-		listview_category.setLayoutParams(listh);
-
-		HomeCategoryAdapter adapter = new HomeCategoryAdapter(mContext,
-				listCategory);
-		listview_category.setAdapter(adapter);
-		categoryHomeListener = new CategoryHomeListener();
-		categoryHomeListener.setListCategory(listCategory);
-		listview_category.setOnItemClickListener(categoryHomeListener
-				.createOnTouchCategory());
-
-		ll_cat.addView(listview_category);
-		ll_category.addView(tv_name);
-		ll_category.addView(ll_cat);
-
-		View view = new View(mContext);
-		view.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
-		LinearLayout.LayoutParams lp_view = new LinearLayout.LayoutParams(
-				RelativeLayout.LayoutParams.MATCH_PARENT, 1);
-		ll_category.addView(view, lp_view);
 
 	}
 

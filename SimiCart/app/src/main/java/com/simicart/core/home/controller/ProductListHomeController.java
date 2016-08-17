@@ -15,7 +15,7 @@ public class ProductListHomeController extends SimiController {
     protected ArrayList<ProductList> mProductList;
 
     public ProductListHomeController() {
-        this.mProductList = new ArrayList<ProductList>();
+        this.mProductList = new ArrayList<>();
     }
 
     public void setDelegate(ProductListDelegate delegate) {
@@ -33,7 +33,7 @@ public class ProductListHomeController extends SimiController {
                         .getCollection();
                 for (SimiEntity simiEntity : entity) {
                     ProductList product = new ProductList();
-                    product.setJSONObject(simiEntity.getJSONObject());
+                    product.parse(simiEntity.getJSONObject());
                     mProductList.add(product);
                 }
                 mDelegate.onUpdate(mProductList);
