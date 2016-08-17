@@ -144,6 +144,10 @@ public class SimiRequest implements Comparable<SimiRequest> {
 
     protected void prepareRequest() {
         try {
+            if(null == mJsonBody){
+                mJsonBody = new JSONObject();
+            }
+
             Iterator<Entry<String, Object>> iter = mHashMapBody.entrySet()
                     .iterator();
             while (iter.hasNext()) {

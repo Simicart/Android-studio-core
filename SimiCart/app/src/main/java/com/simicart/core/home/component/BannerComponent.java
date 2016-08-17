@@ -1,9 +1,14 @@
 package com.simicart.core.home.component;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 
+import com.simicart.core.banner.animation.Animations.DescriptionAnimation;
+import com.simicart.core.banner.animation.Indicators.PagerIndicator;
 import com.simicart.core.banner.animation.SliderLayout;
 import com.simicart.core.banner.animation.SliderTypes.BaseSliderView;
 import com.simicart.core.banner.animation.SliderTypes.DefaultSliderView;
@@ -39,6 +44,8 @@ public class BannerComponent extends SimiComponent {
         rootView = findLayout("core_component_banner");
         mSliderLayout = (SliderLayout) findView("sld_banner");
         if (null != mListBanner && mListBanner.size() > 0) {
+            Log.e("BannerComponent ", "SIZE " + mListBanner.size());
+
             for (int i = 0; i < mListBanner.size(); i++) {
                 BannerEntity banner = mListBanner.get(i);
                 DefaultSliderView slider = createBannerItem(banner);
@@ -52,6 +59,12 @@ public class BannerComponent extends SimiComponent {
                     protected void onTransform(View view, float v) {
                     }
                 });
+            } else {
+                mSliderLayout
+                        .setPresetTransformer(SliderLayout.Transformer.Default);
+                mSliderLayout.setIndicatorVisibility(PagerIndicator.IndicatorVisibility.Invisible);
+                mSliderLayout.setCustomAnimation(new DescriptionAnimation());
+                mSliderLayout.setDuration(3000);
             }
         }
 
@@ -59,8 +72,12 @@ public class BannerComponent extends SimiComponent {
     }
 
     protected DefaultSliderView createBannerItem(final BannerEntity banner) {
-        DefaultSliderView bannerSlider = new DefaultSliderView(mContext);
+        Context context = ((Activity) mContext).getApplicationContext();
+        DefaultSliderView bannerSlider = new DefaultSliderView(context);
         String urlImage = banner.getImage();
+
+        Log.e("BannerComponent ", "createBannerItem " + urlImage);
+
         if (Utils.validateString(urlImage)) {
             bannerSlider.image(urlImage).setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                 @Override

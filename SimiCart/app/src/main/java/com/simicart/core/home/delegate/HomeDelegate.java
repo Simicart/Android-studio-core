@@ -4,6 +4,8 @@ import android.view.View;
 
 import com.simicart.core.base.delegate.SimiDelegate;
 
+import java.util.ArrayList;
+
 /**
  * Created by frank on 17/08/2016.
  */
@@ -13,6 +15,6 @@ public interface HomeDelegate extends SimiDelegate{
 
     public void showCateHome(View cateView);
 
-    public void showSpotProduct(View spotProductView);
+    public void showSpotProduct(ArrayList<View> views);
 
 }

@@ -10,13 +10,6 @@ import android.widget.ImageView;
 import com.magestore.simicart.R;
 import com.simicart.core.common.DrawableManager;
 
-/**
- * When you want to make your own slider view, you must extends from this class.
- * BaseSliderView provides some useful methods. I provide two example:
- * {@link com.daimajia.slider.library.SliderTypes.DefaultSliderView} and
- * {@link com.daimajia.slider.library.SliderTypes.TextSliderView} if you want to
- * show progressbar, you just need to set a progressbar id as @+id/loading_bar.
- */
 public abstract class BaseSliderView {
 
 	protected Context mContext;
@@ -221,8 +214,6 @@ public abstract class BaseSliderView {
 
 		v.findViewById(R.id.loading_bar).setVisibility(View.INVISIBLE);
 
-		// Picasso p = Picasso.with(mContext);
-		// RequestCreator rq = null;
 		if (mUrl != null) {
 			DrawableManager.fetchDrawableOnThread(mUrl, targetImageView);
 		} else if (mFile != null) {
@@ -233,54 +224,6 @@ public abstract class BaseSliderView {
 			return;
 		}
 
-		// if (rq == null) {
-		// return;
-		// }
-
-		// if (getEmpty() != 0) {
-		// rq.placeholder(getEmpty());
-		// }
-
-		// if (getError() != 0) {
-		// rq.error(getError());
-		// }
-
-		// switch (mScaleType) {
-		// case Fit:
-		// rq.fit();
-		// break;
-		// case CenterCrop:
-		// rq.fit().centerCrop();
-		// break;
-		// case CenterInside:
-		// rq.fit().centerInside();
-		// break;
-		// }
-		//
-		// rq.into(targetImageView, new Callback() {
-		// @Override
-		// public void onSuccess() {
-		// if (v.findViewById(R.id.loading_bar) != null) {
-		// v.findViewById(R.id.loading_bar).setVisibility(
-		// View.INVISIBLE);
-		// }
-		// }
-		//
-		// @Override
-		// public void onError() {
-		// if (mLoadListener != null) {
-		// mLoadListener.onEnd(false, me);
-		// }
-		// if (v.findViewById(R.id.loading_bar) != null) {
-		// v.findViewById(R.id.loading_bar).setVisibility(
-		// View.INVISIBLE);
-		// targetImageView.setImageResource(Rconfig.getInstance()
-		// .drawable("fake_banner"));
-		// targetImageView
-		// .setScaleType(android.widget.ImageView.ScaleType.FIT_XY);
-		// }
-		// }
-		// });
 	}
 
 	public BaseSliderView setScaleType(ScaleType type) {

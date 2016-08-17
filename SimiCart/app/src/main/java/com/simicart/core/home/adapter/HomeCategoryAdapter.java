@@ -2,6 +2,7 @@ package com.simicart.core.home.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,8 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
         Category category = mListCate.get(position);
 
         String name = category.getCategoryName();
+        Log.e("HomeCategoryAdapter"," NAME " + name);
+
         if (Utils.validateString(name)) {
             holder.tvName.setText(name);
         }

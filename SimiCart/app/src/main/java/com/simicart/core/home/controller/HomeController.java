@@ -14,6 +14,7 @@ import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.product.entity.ProductList;
 import com.simicart.core.home.component.BannerComponent;
 import com.simicart.core.home.component.CateHomeComponent;
+import com.simicart.core.home.component.SpotProductComponent;
 import com.simicart.core.home.delegate.HomeDelegate;
 import com.simicart.core.home.model.CategoryHomeModel;
 import com.simicart.core.home.model.SportProductDefaultModel;
@@ -102,7 +103,7 @@ public class HomeController extends SimiController {
             @Override
             public void onSuccess(SimiCollection collection) {
                 ArrayList<SimiEntity> entities = collection.getCollection();
-                if(null != entities && entities.size() > 0){
+                if (null != entities && entities.size() > 0) {
                     parseSportProduct(entities);
                 }
                 showSportProduct();
@@ -160,7 +161,7 @@ public class HomeController extends SimiController {
         }
     }
 
-    protected  void parseSportProduct(ArrayList<SimiEntity> entities){
+    protected void parseSportProduct(ArrayList<SimiEntity> entities) {
         mProductList = new ArrayList<>();
         for (SimiEntity simiEntity : entities) {
             ProductList product = new ProductList();
@@ -169,8 +170,17 @@ public class HomeController extends SimiController {
         }
     }
 
-    protected void showSportProduct(){
-        
+    protected void showSportProduct() {
+        ArrayList<View> views = new ArrayList<>();
+        if (null != mProductList && mProductList.size() > 0) {
+            for (int i = 0; i < mProductList.size(); i++) {
+                ProductList productList = mProductList.get(i);
+                SpotProductComponent spotProductComponent = new SpotProductComponent(productList);
+                View sportProductView = spotProductComponent.createView();
+                views.add(sportProductView);
+            }
+        }
+        mDelegate.showSpotProduct(views);
     }
 
 
@@ -178,5 +188,10 @@ public class HomeController extends SimiController {
     public void onResume() {
         showBanner();
         showCate();
+        showSportProduct();
+    }
+
+    public void setDelegate(HomeDelegate delegate) {
+        mDelegate = delegate;
     }
 }
