@@ -10,14 +10,17 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import com.simicart.MainActivity;
+import com.simicart.core.base.event.fragment.SimiEventFragmentEntity;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.network.request.SimiRequestQueue;
+import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -172,8 +175,26 @@ public class SimiManager {
     }
 
     public SimiFragment eventFragment(SimiFragment fragment) {
+        return eventFragment(fragment, "createFragment");
+    }
+
+    public SimiFragment eventFragment(SimiFragment fragment, String method) {
+
         String nameFragment = fragment.getClass().getName();
+        Intent intent = new Intent(nameFragment);
+        SimiEventFragmentEntity entity = new SimiEventFragmentEntity();
+        entity.setmFragment(fragment);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("entity", entity);
+        if (!Utils.validateString(method)) {
+            method = "";
+        }
+        bundle.putString("method", method);
+        intent.putExtra(Constants.DATA, bundle);
+        LocalBroadcastManager.getInstance(mCurrentActivity).sendBroadcastSync(intent);
+        fragment = entity.getFragment();
         return fragment;
+
     }
 
     public void addFragment(SimiFragment fragment) {
