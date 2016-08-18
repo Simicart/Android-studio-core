@@ -56,23 +56,12 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
         }
         tv_viewmore = (TextView) mView.findViewById(Rconfig.getInstance().id(
                 "tv_viewmore"));
-        if (DataLocal.isTablet) {
-            tv_viewmore.setTextColor(AppColorConfig.getInstance().getMenuTextColor());
-            tv_CategoryName.setTextColor(AppColorConfig.getInstance()
-                    .getMenuTextColor());
-        } else {
-            tv_viewmore.setTextColor(AppColorConfig.getInstance().getContentColor());
-            tv_CategoryName.setTextColor(AppColorConfig.getInstance()
-                    .getContentColor());
-        }
         tv_viewmore.setText(SimiTranslator.getInstance().translate("View more"));
+
         iv_showmore = (ImageView) mView.findViewById(Rconfig.getInstance().id(
                 "iv_showmore"));
         Drawable icon = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("ic_view_all"));
-        icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
-                PorterDuff.Mode.SRC_ATOP);
-        iv_showmore.setImageDrawable(icon);
 
         ll_listProducts = (LinearLayout) mView.findViewById(Rconfig.getInstance()
                 .id("ll_listProduct"));
@@ -82,9 +71,32 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
         View v_line = (View) mView.findViewById(Rconfig.getInstance().id(
                 "v_line2"));
         if (DataLocal.isTablet) {
-            llCategory.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
+            ImageView iv_back = (ImageView) mView.findViewById(Rconfig.getInstance().id("iv_back"));
+            Drawable iconBack = mContext.getResources().getDrawable(
+                    Rconfig.getInstance().drawable("ic_back"));
+            iconBack.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
+                    PorterDuff.Mode.SRC_ATOP);
+            iv_back.setImageDrawable(iconBack);
+
+            icon.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
+                    PorterDuff.Mode.SRC_ATOP);
+            iv_showmore.setImageDrawable(icon);
+
+            tv_viewmore.setTextColor(AppColorConfig.getInstance().getMenuTextColor());
+            tv_CategoryName.setTextColor(AppColorConfig.getInstance()
+                    .getMenuTextColor());
+
+            mView.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
             v_line.setBackgroundColor(AppColorConfig.getInstance().getMenuLineColor());
         } else {
+            tv_viewmore.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+            icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
+                    PorterDuff.Mode.SRC_ATOP);
+
+            tv_CategoryName.setTextColor(AppColorConfig.getInstance()
+                    .getContentColor());
+
             v_line.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
         }
 

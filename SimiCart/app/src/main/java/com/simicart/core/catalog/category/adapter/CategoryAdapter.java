@@ -16,13 +16,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.category.entity.Category;
+import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Martial on 8/18/2016.
