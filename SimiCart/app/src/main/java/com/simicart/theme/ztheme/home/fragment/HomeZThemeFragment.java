@@ -19,7 +19,6 @@ import com.simicart.theme.ztheme.home.controller.HomeZThemeController;
 public class HomeZThemeFragment extends SimiFragment {
 	protected HomeZThemeController mController;
 	protected HomeZThemeBlock mBlock;
-	protected SearchHomeBlock mSearchHomeBlock;
 
 	public static HomeZThemeFragment newInstance() {
 		HomeZThemeFragment fragment = new HomeZThemeFragment();
@@ -49,14 +48,15 @@ public class HomeZThemeFragment extends SimiFragment {
 			mController.setDelegate(mBlock);
 			mController.onResume();
 		}
-		mBlock.setCategoryListener(mController.getmGroupExpand());
-		mBlock.setChildCategoryListener(mController.getmChildClick());
+		mBlock.setListViewListener(mController.getOnGroupClickListener(), mController.getOnChildClickListener());
 
 		// initial search
-		SearchComponent searchComponent = new SearchComponent();
-		View searchView = searchComponent.createView();
-		LinearLayout llSearch = (LinearLayout) rootView.findViewById(Rconfig.getInstance().id("ll_search"));
-		llSearch.addView(searchView);
+		if(!DataLocal.isTablet) {
+			SearchComponent searchComponent = new SearchComponent();
+			View searchView = searchComponent.createView();
+			LinearLayout llSearch = (LinearLayout) rootView.findViewById(Rconfig.getInstance().id("ll_search"));
+			llSearch.addView(searchView);
+		}
 
 		return rootView;
 	}

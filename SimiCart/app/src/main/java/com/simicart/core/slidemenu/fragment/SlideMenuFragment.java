@@ -107,14 +107,14 @@ public class SlideMenuFragment extends SimiFragment implements
 	}
 
 	public void initView() {
-		if (DataLocal.isTablet) {
-			Log.e("SlideMenuFragment ", "initView Tablet");
-			initSlideTablet();
-		} else {
+//		if (DataLocal.isTablet) {
+//			Log.e("SlideMenuFragment ", "initView Tablet");
+//			initSlideTablet();
+//		} else {
 			PhoneSlideMenuFragment fragment = PhoneSlideMenuFragment.newInstance(this);
 //			fragment.setCloseDelegate(this);
 			replaceFragment(fragment);
-		}
+//		}
 	}
 
 	ViewPager mPager;

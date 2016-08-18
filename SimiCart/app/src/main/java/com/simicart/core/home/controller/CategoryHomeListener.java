@@ -34,10 +34,10 @@ public class CategoryHomeListener {
                 boolean hasChild = cate.hasChild();
 
                 if (hasChild) {
-                    CategoryFragment fragment = CategoryFragment.newInstance(
-                            idCat, name);
-                    SimiManager.getIntance().replaceFragment(fragment);
-                    SimiManager.getIntance().hideKeyboard();
+//                    CategoryFragment fragment = CategoryFragment.newInstance(
+//                            idCat, name);
+//                    SimiManager.getIntance().replaceFragment(fragment);
+//                    SimiManager.getIntance().hideKeyboard();
                 } else {
                     if (idCat.equals("-1")) {
                         urlSearch = Constants.GET_ALL_PRODUCTS;

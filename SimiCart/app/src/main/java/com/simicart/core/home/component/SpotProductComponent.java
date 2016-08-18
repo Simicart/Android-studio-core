@@ -2,12 +2,14 @@ package com.simicart.core.home.component;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductList;
+import com.simicart.core.common.Utils;
 import com.simicart.core.home.adapter.SpotProductAdapter;
 
 import java.util.ArrayList;
@@ -40,11 +42,16 @@ public class SpotProductComponent extends SimiComponent {
 
     protected void showTitle() {
         String title = mProductList.getTitle();
-        tvTitle.setText(title);
+        if(Utils.validateString(title)) {
+            tvTitle.setText(title);
+        } else {
+            tvTitle.setVisibility(View.GONE);
+        }
     }
 
     protected void showCate() {
         ArrayList<Product> products = mProductList.getSpotProduct();
+        Log.e("abc", "--" + products);
         SpotProductAdapter adapter = new SpotProductAdapter(products);
         rcvCate.setAdapter(adapter);
     }

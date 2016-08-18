@@ -8,8 +8,11 @@ import com.simicart.core.config.Constants;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 public class CategoryModel extends SimiModel {
 
+    protected ArrayList<Category> listCategories;
     protected String mID;
 
     public void setCategoryID(String id) {
@@ -34,9 +37,12 @@ public class CategoryModel extends SimiModel {
             // shop_category.setChild(false);
             // collection.addEntity(shop_category);
             // }
+            listCategories = new ArrayList<>();
             for (int i = 0; i < list.length(); i++) {
                 Category category = new Category();
                 category.setJSONObject(list.getJSONObject(i));
+                category.parse();
+                listCategories.add(category);
                 collection.addEntity(category);
             }
         } catch (JSONException e) {
@@ -48,4 +54,9 @@ public class CategoryModel extends SimiModel {
     protected void setEnableCache() {
         this.enableCache = true;
     }
+
+    public ArrayList<Category> getListCategory() {
+        return listCategories;
+    }
+
 }

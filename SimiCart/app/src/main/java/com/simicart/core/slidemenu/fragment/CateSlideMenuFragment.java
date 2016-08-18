@@ -37,9 +37,9 @@ public class CateSlideMenuFragment extends SimiFragment {
 				Rconfig.getInstance().layout("core_cate_slidemenu"), container,
 				false);
 		view.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
-		CategoryFragment fragment = CategoryFragment.newInstance(
-				"-1", "all categories");
-		replaceFragmentCategoryMenu(fragment);
+//		CategoryFragment fragment = CategoryFragment.newInstance(
+//				"-1", "all categories");
+//		replaceFragmentCategoryMenu(fragment);
 		return view;
 	}
 

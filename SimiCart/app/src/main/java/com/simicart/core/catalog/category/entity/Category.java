@@ -19,7 +19,7 @@ public class Category extends SimiEntity {
 
     @Override
     public void parse() {
-        hasChild = getData("has child");
+        hasChild = getData("has_child");
         mImage = getData(Constants.CATEGORY_IMAGE);
         mName = getData(Constants.CATEGORY_NAME);
         mID = getData(Constants.CATEGORY_ID);

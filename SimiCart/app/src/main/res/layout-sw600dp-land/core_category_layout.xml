@@ -69,9 +69,9 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/ll_listParent"
+                android:id="@+id/ll_listProduct"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="160dp"
                 android:orientation="vertical"
                 android:visibility="gone" >
             </LinearLayout>
@@ -83,19 +83,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_categories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <com.simicart.core.style.NoScrollListView
-                android:id="@+id/lv_categories"
+            <LinearLayout
+                android:id="@+id/ll_categories"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@null"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
-            </com.simicart.core.style.NoScrollListView>
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+            </LinearLayout>
 
             <View
                 android:id="@+id/v_line2"

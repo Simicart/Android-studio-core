@@ -29,6 +29,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="category_height_recyclerview">160dp</dimen>
 
+    <dimen name="size_0.5">0.5dp</dimen>
     <dimen name="size_1">1dp</dimen>
     <dimen name="size_2">2dp</dimen>
     <dimen name="size_3">3dp</dimen>
@@ -93,6 +94,7 @@
     <dimen name="size_200">200dp</dimen>
     <dimen name="size_230">230dp</dimen>
     <dimen name="size_300">300dp</dimen>
+    <dimen name="size_600">600dp</dimen>
 
     <dimen name="height_button">55dp</dimen>
     <dimen name="height_button_tablet">60dp</dimen>

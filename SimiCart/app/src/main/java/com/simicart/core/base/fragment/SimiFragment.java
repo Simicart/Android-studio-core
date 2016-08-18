@@ -15,6 +15,8 @@ public class SimiFragment extends Fragment {
     protected HashMap<String, Object> mHashMapData;
     protected String screenName = "";
 
+    protected static final String KEY_DATA = "data";
+
     public static SimiFragment newInstance(SimiData data) {
         SimiFragment fragment = new SimiFragment();
         Bundle bundle = new Bundle();

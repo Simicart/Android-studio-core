@@ -143,17 +143,17 @@ public class PhoneSlideMenuController {
                 Log.e("Open deep link", "2");
                 if (DeepLinkEntity.getInstance().isHasChild() == true) {
                     if (DataLocal.isTablet) {
-                        fragment = CategoryFragment.newInstance(
-                                DeepLinkEntity.getInstance().getID(),
-                                DeepLinkEntity.getInstance().getName());
-                        CateSlideMenuFragment.getIntance()
-                                .replaceFragmentCategoryMenu(fragment);
-                        CateSlideMenuFragment.getIntance().openMenu();
+//                        fragment = CategoryFragment.newInstance(
+//                                DeepLinkEntity.getInstance().getID(),
+//                                DeepLinkEntity.getInstance().getName());
+//                        CateSlideMenuFragment.getIntance()
+//                                .replaceFragmentCategoryMenu(fragment);
+//                        CateSlideMenuFragment.getIntance().openMenu();
                     } else {
-                        fragment = CategoryFragment.newInstance(
-                                DeepLinkEntity.getInstance().getID(),
-                                DeepLinkEntity.getInstance().getName());
-                        SimiManager.getIntance().replaceFragment(fragment);
+//                        fragment = CategoryFragment.newInstance(
+//                                DeepLinkEntity.getInstance().getID(),
+//                                DeepLinkEntity.getInstance().getName());
+//                        SimiManager.getIntance().replaceFragment(fragment);
                     }
                 } else {
                     fragment = ProductListFragment.newInstance(
@@ -388,7 +388,7 @@ public class PhoneSlideMenuController {
 //                            SimiManager.getIntance().replacePopupFragment(
 //                                    fragment);
 //                        } else {
-//                            SimiManager.getIntance().replaceFragment(fragment);
+                            SimiManager.getIntance().replaceFragment(fragment);
 //                        }
                     }
 
@@ -410,7 +410,7 @@ public class PhoneSlideMenuController {
                 fragment = HomeFragment.newInstance();
                 break;
             case "Category":
-                fragment = CategoryFragment.newInstance("-1", "all categories");
+//                fragment = CategoryFragment.newInstance("-1", "all categories");
                 break;
             case "Order History":
                 fragment = OrderHistoryFragment.newInstance();

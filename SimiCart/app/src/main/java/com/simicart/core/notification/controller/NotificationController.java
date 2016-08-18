@@ -226,17 +226,17 @@ public class NotificationController {
                     .equals("null")) {
                 if (notificationData.getHasChild().equals("1")) {
                     if (DataLocal.isTablet) {
-                        fragment = CategoryFragment.newInstance(
-                                notificationData.getCategoryID(),
-                                notificationData.getCategoryName());
-                        CateSlideMenuFragment.getIntance()
-                                .replaceFragmentCategoryMenu(fragment);
-                        CateSlideMenuFragment.getIntance().openMenu();
+//                        fragment = CategoryFragment.newInstance(
+//                                notificationData.getCategoryID(),
+//                                notificationData.getCategoryName());
+//                        CateSlideMenuFragment.getIntance()
+//                                .replaceFragmentCategoryMenu(fragment);
+//                        CateSlideMenuFragment.getIntance().openMenu();
                         return;
                     } else {
-                        fragment = CategoryFragment.newInstance(
-                                notificationData.getCategoryID(),
-                                notificationData.getCategoryName());
+//                        fragment = CategoryFragment.newInstance(
+//                                notificationData.getCategoryID(),
+//                                notificationData.getCategoryName());
                     }
                 } else {
                     fragment = ProductListFragment.newInstance(
