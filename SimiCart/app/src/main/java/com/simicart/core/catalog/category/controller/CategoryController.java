@@ -34,7 +34,7 @@ public class CategoryController extends SimiController {
     @Override
     public void onStart() {
         requestListCategories();
-        if(!DataLocal.isTablet) {
+        if (!DataLocal.isTablet) {
             requestListProducts();
         }
     }

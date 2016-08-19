@@ -8,7 +8,7 @@ import com.simicart.core.common.Utils;
 @SuppressLint("DefaultLocale")
 public class Config {
 
-//    private String mBaseUrl = "http://www.kalkifashion.com/index.php";
+    //private String mBaseUrl = "http://www.kalkifashion.com/index.php";
     private String mBaseUrl = "http://dev-vn.magestore.com/simicart/1800/index.php";
     private String mSecretKey = "b60692583049b01d87d498530f9839e8";
     private String mBaseCloudUrl = "https://api.jajahub.com/rest/";

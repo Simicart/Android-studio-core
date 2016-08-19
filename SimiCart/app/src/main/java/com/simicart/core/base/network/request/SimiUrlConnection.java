@@ -88,7 +88,7 @@ public class SimiUrlConnection {
             }
 
             urlConnection.setRequestProperty("Content-Type",
-                    "application/json");
+                    "application/x-www-form-urlencoded");
 
 
             // add header
@@ -113,7 +113,9 @@ public class SimiUrlConnection {
                     OutputStream os = urlConnection.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(
                             new OutputStreamWriter(os, "UTF-8"));
-                    writer.write(getEntity(postBody));
+                    String bodyEntity = getEntity(postBody);
+                    Log.e("SimiUrlConnection ", "POST BODY " + bodyEntity);
+                    writer.write(bodyEntity);
                     writer.flush();
                     writer.close();
                     os.close();
@@ -173,7 +175,6 @@ public class SimiUrlConnection {
         result.append(URLEncoder.encode(json.toString(), "UTF-8"));
         return result.toString();
     }
-
 
 
     protected byte[] dataToBytes(HttpURLConnection urlConnection) throws IOException {
