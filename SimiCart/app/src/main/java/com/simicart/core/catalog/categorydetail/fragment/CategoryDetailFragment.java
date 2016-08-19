@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.catalog.category.block.CategoryDetailBlock;
+import com.simicart.core.catalog.categorydetail.controller.CategoryDetailController;
 import com.simicart.core.config.Rconfig;
 
 /**
@@ -14,10 +17,41 @@ import com.simicart.core.config.Rconfig;
  */
 public class CategoryDetailFragment extends SimiFragment {
 
+    public static String ALL = "all";
+    public static String SEARCH = "search";
+    public static String CATE = "cate";
+    public static String CUSTOM = "custom";
+
+    public static CategoryDetailFragment newInstance(SimiData data) {
+        CategoryDetailFragment fragment = new CategoryDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("data", data);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    protected CategoryDetailController mController;
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         int idView = Rconfig.getInstance().layout("core_fragment_category_detail");
         rootView = inflater.inflate(idView, null, false);
+
+//        CategoryDetailBlock block = new CategoryDetailBlock()
+
+        if (null == mController) {
+            mController = new CategoryDetailController();
+            mController.setData(mHashMapData);
+
+            mController.onStart();
+
+        } else {
+
+            mController.onResume();
+        }
+
+
         return rootView;
     }
 }

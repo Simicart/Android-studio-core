@@ -19,7 +19,10 @@ import android.widget.ImageView;
 import com.simicart.MainActivity;
 import com.simicart.core.base.event.fragment.SimiEventFragmentEntity;
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.request.SimiRequestQueue;
+import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
+import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -32,6 +35,7 @@ import com.simicart.core.slidemenu.fragment.SlideMenuFragment;
 import com.simicart.core.splashscreen.SplashActivity;
 import com.simicart.core.style.FragmentDialogHandle;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class SimiManager {
@@ -63,9 +67,15 @@ public class SimiManager {
         return instance;
     }
 
-    public void openHomePage(){
-//        HomeFragment fragment  = HomeFragment.newInstance();
-//        replaceFragment(fragment);
+    public void openHomePage() {
+        HomeFragment fragment = HomeFragment.newInstance();
+        replaceFragment(fragment);
+    }
+
+    public void openCategoryDetail(HashMap<String, Object> hm) {
+        SimiData data = new SimiData(hm);
+        CategoryDetailFragment fragment = CategoryDetailFragment.newInstance(data);
+        replaceFragment(fragment);
     }
 
     public Activity getCurrentActivity() {
