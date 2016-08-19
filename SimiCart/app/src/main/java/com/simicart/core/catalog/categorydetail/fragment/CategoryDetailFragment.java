@@ -1,14 +1,13 @@
 package com.simicart.core.catalog.categorydetail.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.catalog.category.block.CategoryDetailBlock;
+import com.simicart.core.catalog.categorydetail.block.CategoryDetailBlock;
 import com.simicart.core.catalog.categorydetail.controller.CategoryDetailController;
 import com.simicart.core.config.Rconfig;
 
@@ -38,12 +37,13 @@ public class CategoryDetailFragment extends SimiFragment {
         int idView = Rconfig.getInstance().layout("core_fragment_category_detail");
         rootView = inflater.inflate(idView, null, false);
 
-//        CategoryDetailBlock block = new CategoryDetailBlock()
+        CategoryDetailBlock block = new CategoryDetailBlock(rootView, getActivity());
+        block.initView();
 
         if (null == mController) {
             mController = new CategoryDetailController();
             mController.setData(mHashMapData);
-
+            mController.setDelegate(block);
             mController.onStart();
 
         } else {

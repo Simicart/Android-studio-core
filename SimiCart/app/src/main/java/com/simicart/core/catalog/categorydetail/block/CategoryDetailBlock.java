@@ -13,6 +13,7 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.categorydetail.adapter.CategoryDetailAdapter;
+import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.listproducts.adapter.ProductListAdapter;
 import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.catalog.product.entity.Product;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Created by Martial on 8/19/2016.
  */
-public class CategoryDetailBlock extends SimiBlock {
+public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDelegate{
 
     protected RelativeLayout rlBottom, rlChangeView, rlSort, rlFilter;
     protected ImageView ivChangeView;
@@ -99,4 +100,8 @@ public class CategoryDetailBlock extends SimiBlock {
         }
     }
 
+    @Override
+    public void showLoadMore(boolean isShow) {
+
+    }
 }
