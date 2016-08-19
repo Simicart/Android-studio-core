@@ -141,7 +141,7 @@ public class CategoryCustomAdapter extends BaseAdapter {
                     ImageView imageview = new ImageView(
                             viewflipper.getContext());
                     imageview.setScaleType(ScaleType.FIT_XY);
-                    DrawableManager.fetchItemDrawableOnThread(url, imageview);
+                    DrawableManager.fetchDrawableOnThread(url, imageview);
                     viewflipper.addView(imageview);
                 } else {
                     viewflipper.setInAnimation(mContext, Rconfig.getInstance()
@@ -155,7 +155,7 @@ public class CategoryCustomAdapter extends BaseAdapter {
                         ImageView imageview = new ImageView(
                                 viewflipper.getContext());
                         imageview.setScaleType(ScaleType.FIT_XY);
-                        DrawableManager.fetchItemDrawableOnThread(url,
+                        DrawableManager.fetchDrawableOnThread(url,
                                 imageview);
                         viewflipper.addView(imageview);
                     }

@@ -17,7 +17,6 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.catalog.product.controller.ProductDetailParentController;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.style.TouchImageViewTwo;
@@ -80,7 +79,7 @@ public class ProductDetailImageFragment extends SimiFragment {
 
 			if (null != mURL) {
 				Log.e("ProductDetailImageFragment - newInstance:", "drawImage");
-				DrawableManager.fetchDrawableOnThreadForZTheme(mURL, imv_image);
+				DrawableManager.fetchDrawableOnThreadForDetail(mURL, imv_image);
 			}
 
 		} catch (Exception e) {

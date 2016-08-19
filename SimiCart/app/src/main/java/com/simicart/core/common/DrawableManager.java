@@ -56,59 +56,14 @@ public class DrawableManager {
     }
 
 
-    public static void addBitmapToMemoryCache(String key, Bitmap bitmap) {
-
-        String key_md5 = Utils.md5(key);
-
-        if (null != mMemoryCache) {
-            if (getBitmapFromMemCache(key_md5) == null) {
-                mMemoryCache.put(key_md5, bitmap);
-            }
-        }
-    }
-
-
-
-    public static Bitmap getBitmapFromMemCache(String key) {
-
-        String key_md5 = Utils.md5(key);
-
-        return mMemoryCache.get(key_md5);
-    }
-
-    public static void fetchDrawableDetailOnThread(final String urlString,
-                                                   final ImageView imageView) {
-
-
-        init();
-
-        Bitmap cache_bitMap = getBitmapFromMemCache(urlString);
-
-        if (null != cache_bitMap) {
-            imageView.setImageBitmap(cache_bitMap);
-            return;
-        }
-
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message message) {
-                Bitmap bitmap = (Bitmap) message.obj;
-                if (bitmap != null) {
-                    imageView.setImageBitmap(bitmap);
-                    addBitmapToMemoryCache(urlString, bitmap);
-                } else {
-                    Resources resource = SimiManager.getIntance()
-                            .getCurrentActivity().getResources();
-                    bitmap = BitmapFactory.decodeResource(resource, Rconfig
-                            .getInstance().drawable("default_icon"));
-                    bitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, true);
-                    imageView.setImageBitmap(bitmap);
-                }
-            }
-        };
-
-        getBitmap(handler, urlString);
-    }
+    /**
+     * Draw icon on Slide Menu ( icon of CMS)
+     *
+     * @param urlString
+     * @param imageView
+     * @param context
+     * @param color
+     */
 
     public static void fetchDrawableIConOnThread(final String urlString,
                                                  final ImageView imageView, final Context context, final int color) {
@@ -190,10 +145,17 @@ public class DrawableManager {
         getBitmap(handler, urlString);
     }
 
-    public static void fetchDrawableOnThreadForZTheme(final String urlString,
+    /**
+     * Draw full image for Product Detail
+     *
+     * @param urlString
+     * @param imageView
+     */
+    public static void fetchDrawableOnThreadForDetail(final String urlString,
                                                       final ImageView imageView) {
 
         init();
+
 
         Bitmap cache_bitMap = getBitmapFromMemCache(urlString);
 
@@ -242,56 +204,45 @@ public class DrawableManager {
         getBitmap(handler, urlString);
     }
 
+    /**
+     * Draw image for ZTheme
+     *
+     * @param urlImage
+     * @param simiImageView
+     */
+    public static void fetchDrawableOnThread(final String urlImage,
+                                             final SimiImageView simiImageView) {
+        init();
 
+        Bitmap cache_bitMap = getBitmapFromMemCache(urlImage);
 
-    @SuppressWarnings("deprecation")
-    public static void fetchDrawableOnThread(final String urlString,
-                                             final TextView textview) {
+        if (null != cache_bitMap) {
+            simiImageView.setImageBitmap(cache_bitMap);
+            return;
+        }
 
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message message) {
                 Bitmap bitmap = (Bitmap) message.obj;
                 if (bitmap != null) {
-                    Resources resource = SimiManager.getIntance()
+                    simiImageView.setImageBitmap(bitmap);
+                    addBitmapToMemoryCache(urlImage, bitmap);
+                } else {
+                    Resources resources = SimiManager.getIntance()
                             .getCurrentActivity().getResources();
-                    Drawable drawable = new BitmapDrawable(resource, bitmap);
-                    textview.setBackgroundDrawable(drawable);
-                } else {
-                    textview.setBackgroundResource(Rconfig.getInstance()
-                            .drawable("default_icon"));
-                }
-
-            }
-        };
-
-        getBitmap(handler, urlString);
-    }
-
-    public static void fetchItemDrawableOnThread(final String urlString,
-                                                 final ImageView imageView) {
-
-
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message message) {
-                Bitmap bitmap = (Bitmap) message.obj;
-                Resources resource = SimiManager.getIntance()
-                        .getCurrentActivity().getResources();
-                if (bitmap != null) {
-                    Drawable drawable = new BitmapDrawable(resource, bitmap);
-                    imageView.setImageDrawable(drawable);
-                } else {
-                    bitmap = BitmapFactory.decodeResource(resource, Rconfig
+                    bitmap = BitmapFactory.decodeResource(resources, Rconfig
                             .getInstance().drawable("default_icon"));
                     bitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, true);
-                    imageView.setImageBitmap(bitmap);
+                    simiImageView.setImageBitmap(bitmap);
+                    bitmap = null;
                 }
             }
         };
 
-        getBitmap(handler, urlString);
+        getBitmap(handler, urlImage);
     }
+
 
     public static void getBitmap(final Handler handler, final String urlString) {
         Thread thread = new Thread() {
@@ -363,37 +314,22 @@ public class DrawableManager {
 
     }
 
-    public static void fetchDrawableOnThread(final String urlImage,
-                                             final SimiImageView simiImageView) {
-        init();
+    public static void addBitmapToMemoryCache(String key, Bitmap bitmap) {
 
-        Bitmap cache_bitMap = getBitmapFromMemCache(urlImage);
+        String key_md5 = Utils.md5(key);
 
-        if (null != cache_bitMap) {
-            simiImageView.setImageBitmap(cache_bitMap);
-            return;
-        }
-
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message message) {
-                Bitmap bitmap = (Bitmap) message.obj;
-                if (bitmap != null) {
-                    simiImageView.setImageBitmap(bitmap);
-                    addBitmapToMemoryCache(urlImage, bitmap);
-                } else {
-                    Resources resources = SimiManager.getIntance()
-                            .getCurrentActivity().getResources();
-                    bitmap = BitmapFactory.decodeResource(resources, Rconfig
-                            .getInstance().drawable("default_icon"));
-                    bitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, true);
-                    simiImageView.setImageBitmap(bitmap);
-                    bitmap = null;
-                }
+        if (null != mMemoryCache) {
+            if (getBitmapFromMemCache(key_md5) == null) {
+                mMemoryCache.put(key_md5, bitmap);
             }
-        };
-
-        getBitmap(handler, urlImage);
+        }
     }
 
+
+    public static Bitmap getBitmapFromMemCache(String key) {
+
+        String key_md5 = Utils.md5(key);
+
+        return mMemoryCache.get(key_md5);
+    }
 }

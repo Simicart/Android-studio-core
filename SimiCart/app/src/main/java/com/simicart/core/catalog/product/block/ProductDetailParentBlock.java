@@ -352,7 +352,7 @@ public class ProductDetailParentBlock extends SimiBlock implements
     public void startAnimation(String urlImage) {
         if (null != img_animation) {
             img_animation.setVisibility(View.VISIBLE);
-            DrawableManager.fetchDrawableOnThreadForZTheme(urlImage,
+            DrawableManager.fetchDrawableOnThreadForDetail(urlImage,
                     img_animation);
             img_animation.startAnimation(animation);
             img_animation.setVisibility(View.GONE);
