@@ -21,6 +21,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -277,6 +278,20 @@ public class Utils {
         float unit = context.getResources().getDisplayMetrics().density;
         int result = (int) (value / unit + 0.5f);
         return result;
+    }
+
+    public static int toPixel(int value) {
+        DisplayMetrics metrics = SimiManager.getIntance().getCurrentActivity().getResources().getDisplayMetrics();
+        int px = value * ((int)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        return px;
+    }
+
+    public static int getScreenHeight() {
+        return SimiManager.getIntance().getCurrentActivity().getResources().getDisplayMetrics().heightPixels;
+    }
+
+    public static int getScreenWidth() {
+        return SimiManager.getIntance().getCurrentActivity().getResources().getDisplayMetrics().widthPixels;
     }
 
 

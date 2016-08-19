@@ -74,12 +74,9 @@ public class AppColorConfig extends SimiEntity {
         mContext = SimiManager.getIntance().getCurrentActivity();
     }
 
-
-
     @Override
     public void parse() {
         if (mJSON != null) {
-
             if (mJSON.has(key_color)) {
                 mKeyColor = getData(key_color);
             }

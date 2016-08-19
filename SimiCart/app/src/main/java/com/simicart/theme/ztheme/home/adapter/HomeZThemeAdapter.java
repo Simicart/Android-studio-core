@@ -1,24 +1,22 @@
 package com.simicart.theme.ztheme.home.adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
 
 import com.simicart.core.base.drawImage.SimiDrawImage;
 import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.style.imagesimicart.SimiImageView;
 import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
-import com.simicart.theme.ztheme.home.entity.ZThemeSpotEntity;
+
+import java.util.ArrayList;
 
 public class HomeZThemeAdapter extends BaseExpandableListAdapter {
     private final Context mContext;
@@ -38,10 +36,12 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
     public int getChildrenCount(int groupPosition) {
         ZThemeCatalogEntity catalogEntity = mCategories.get(groupPosition);
         if (catalogEntity.getType().equals("cat")) {
-            return catalogEntity.getCategoryZTheme().getListChildCategory().size();
-        } else {
-            return 0;
+            Category category = catalogEntity.getCategoryZTheme();
+            if(category.hasChild() == true) {
+                return catalogEntity.getCategoryZTheme().getListChildCategory().size();
+            }
         }
+        return 0;
     }
 
     @Override
@@ -53,10 +53,12 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
     public Object getChild(int groupPosition, int childPosition) {
         ZThemeCatalogEntity catalogEntity = mCategories.get(groupPosition);
         if (catalogEntity.getType().equals("cat")) {
-            return catalogEntity.getCategoryZTheme();
-        } else {
-            return catalogEntity.getZThemeSpotEntity();
+            Category category = catalogEntity.getCategoryZTheme();
+            if(category.hasChild() == true) {
+                return category.getListChildCategory().get(childPosition);
+            }
         }
+        return null;
     }
 
     @Override
@@ -82,8 +84,9 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ViewHolder holder = new ViewHolder();
+        ViewHolder holder;
         if (convertView == null) {
+            holder = new ViewHolder();
             convertView = inflater.inflate(
                     Rconfig.getInstance().layout("theme_z_adapter_home_item"), null);
             holder.img_category = (ImageView) convertView.findViewById(Rconfig
@@ -114,29 +117,8 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
             image = catalogEntity.getZThemeSpotEntity().getImage();
         }
         if(Utils.validateString(image)) {
-            new SimiDrawImage().drawImage(holder.img_category, image);
+            new SimiDrawImage().drawImage(holder.img_category, image, Utils.getScreenWidth(), Utils.toPixel(230));
         }
-
-//        String url = "";
-//        if (mCategories.get(groupPosition).getType() == ZThemeCatalogEntity.TYPE_CAT) {
-//            final Category object = mCategories.get(groupPosition);
-//            url = object.getCategoryImage();
-//        } else {
-//            ZThemeSpotEntity object = mCategories.get(groupPosition)
-//                    .getZThemeSpotEntity();
-//            url = object.getImage();
-//        }
-//        if (Utils.validateString(url)) {
-//            try {
-//                if (holder.img_category != null) {
-//                    DrawableManager.fetchDrawableOnThread(url,
-//                            holder.img_category);
-//                    notifyDataSetChanged();
-//                }
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
 
         return convertView;
     }
@@ -144,13 +126,13 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        // if (convertView == null) {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(
                 Rconfig.getInstance().layout("theme_z_adapter_item_child"), null);
         TextView txt_category = (TextView) convertView.findViewById(Rconfig
-                .getInstance().id("tv_catename"));
+                .getInstance().id("tv_name"));
+        txt_category.setTextColor(Color.parseColor("#000000"));
         ZThemeCatalogEntity catalogEntity = mCategories.get(groupPosition);
         if(catalogEntity.getType().equals("cat")) {
             Category category = catalogEntity.getCategoryZTheme();
@@ -162,11 +144,10 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
                 }
             }
         }
-        // }
         return convertView;
     }
 
-    static class ViewHolder {
+    public class ViewHolder {
         TextView tv_catename;
         ImageView img_category;
     }

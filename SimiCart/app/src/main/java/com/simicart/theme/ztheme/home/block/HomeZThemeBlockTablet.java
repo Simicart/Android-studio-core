@@ -79,30 +79,6 @@ public class HomeZThemeBlockTablet extends HomeZThemeBlock implements
         lv_category.setAdapter(adapter);
     }
 
-    @Override
-    public void showCatSub(ZThemeCatalogEntity category) {
-//        if (category.hasChild()) {
-//            CategoryFragment fragment = CategoryFragment.newInstance(
-//                    category.getCategoryId(), category.getCategoryName());
-//            CateSlideMenuFragment.getIntance().openMenu();
-//            CateSlideMenuFragment.getIntance().replaceFragmentCategoryMenu(
-//                    fragment);
-//        } else {
-//            ProductListFragment fragment = ProductListFragment.newInstance(category.getCategoryId(), category.getCategoryName(), null, null, null);
-//            SimiManager.getIntance().replaceFragment(fragment);
-//        }
-    }
-
-    @Override
-    public void setCategoryTree(ArrayList<ZThemeCatalogEntity> categoriesTree) {
-        this.categoriesTree = categoriesTree;
-    }
-
-    @Override
-    public void setSelection(int position) {
-        lv_category.setSelection(position);
-    }
-
     float down_x = 0;
     float down_y = 0;
     float up_x = 0;

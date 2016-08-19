@@ -432,8 +432,8 @@ public class CategoryHomeTheme1Block extends SimiBlock implements
     private void viewCategory(final Theme1Category category) {
         SimiFragment fragment = null;
         if (category.isHasChild()) {
-            fragment = CategoryFragment.newInstance(category.getCategoryID(),
-                    category.getCategoryName());
+//            fragment = CategoryFragment.newInstance(category.getCategoryID(),
+//                    category.getCategoryName());
             if (DataLocal.isTablet) {
                 CateSlideMenuFragment.getIntance().replaceFragmentCategoryMenu(
                         fragment);
@@ -451,17 +451,17 @@ public class CategoryHomeTheme1Block extends SimiBlock implements
     }
 
     private void viewAllCategory() {
-        if (DataLocal.isTablet) {
-            CategoryFragment fr_Category = CategoryFragment.newInstance("-1",
-                    SimiTranslator.getInstance().translate("all categories"));
-            CateSlideMenuFragment.getIntance().replaceFragmentCategoryMenu(
-                    fr_Category);
-            CateSlideMenuFragment.getIntance().openMenu();
-        } else {
-            CategoryFragment fr_Category = CategoryFragment.newInstance("-1",
-                    SimiTranslator.getInstance().translate("all categories"));
-            SimiManager.getIntance().replacePopupFragment(fr_Category);
-        }
+//        if (DataLocal.isTablet) {
+//            CategoryFragment fr_Category = CategoryFragment.newInstance("-1",
+//                    SimiTranslator.getInstance().translate("all categories"));
+//            CateSlideMenuFragment.getIntance().replaceFragmentCategoryMenu(
+//                    fr_Category);
+//            CateSlideMenuFragment.getIntance().openMenu();
+//        } else {
+//            CategoryFragment fr_Category = CategoryFragment.newInstance("-1",
+//                    SimiTranslator.getInstance().translate("all categories"));
+//            SimiManager.getIntance().replacePopupFragment(fr_Category);
+//        }
     }
 
     @Override

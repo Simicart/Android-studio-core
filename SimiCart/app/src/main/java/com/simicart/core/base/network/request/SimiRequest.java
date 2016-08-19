@@ -221,15 +221,15 @@ public class SimiRequest implements Comparable<SimiRequest> {
             prepareRequest();
         }
 
-        JSONObject json = new JSONObject();
+//        JSONObject json = new JSONObject();
 
-        try {
-            json.put("data", mJsonBody);
-        } catch (JSONException e) {
+//        try {
+//            json.put("data", mJsonBody);
+//        } catch (JSONException e) {
+//
+//        }
 
-        }
-
-        return json;
+        return mJsonBody;
     }
 
     public void setBody(JSONObject jsBody) {

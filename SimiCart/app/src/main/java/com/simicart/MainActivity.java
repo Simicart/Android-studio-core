@@ -1,30 +1,22 @@
 package com.simicart;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.multidex.MultiDex;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
 import com.magestore.simicart.R;
 import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.common.DataPreferences;
@@ -35,18 +27,12 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.controller.AutoSignInController;
 import com.simicart.core.menutop.fragment.MenuTopFragment;
-import com.simicart.core.notification.NotificationActivity;
-import com.simicart.core.notification.common.CommonUtilities;
-import com.simicart.core.notification.controller.NotificationController;
 import com.simicart.core.shortcutbadger.ShortcutBadgeException;
 import com.simicart.core.shortcutbadger.ShortcutBadger;
 import com.simicart.core.slidemenu.fragment.SlideMenuFragment;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @SuppressLint("DefaultLocale")
 public class MainActivity extends FragmentActivity {

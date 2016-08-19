@@ -28,7 +28,10 @@ public class AppConfigModel extends SimiModel {
                 JSONArray array = mJSON.getJSONArray("app-configs");
                 if (null != array && array.length() > 0) {
                     JSONObject js_app = array.getJSONObject(0);
-                    AppColorConfig.getInstance().parse(js_app);
+                    if(js_app.has("theme")) {
+                        JSONObject themeObj = js_app.getJSONObject("theme");
+                        AppColorConfig.getInstance().parse(themeObj);
+                    }
                 }
             }
         } catch (Exception e) {

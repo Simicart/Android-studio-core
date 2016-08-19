@@ -7,10 +7,6 @@ import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
 
 public interface HomeZThemeDelegate extends SimiDelegate {
 
-	void showCatSub(ZThemeCatalogEntity category);
-
-	void setSelection(int position);
-
-	void setCategoryTree(ArrayList<ZThemeCatalogEntity> categoriesTree);
+	public ArrayList<ZThemeCatalogEntity> getListCatalog();
 
 }
