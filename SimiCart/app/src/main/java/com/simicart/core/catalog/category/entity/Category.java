@@ -15,7 +15,8 @@ public class Category extends SimiEntity {
     protected String mName;
     protected String mImage;
     protected String hasChild;
-	protected ArrayList<Category> listChildCategory;
+    protected ArrayList<String> mListImage;
+    protected ArrayList<Category> listChildCategory;
 
     @Override
     public void parse() {
@@ -24,21 +25,48 @@ public class Category extends SimiEntity {
         mName = getData(Constants.CATEGORY_NAME);
         mID = getData(Constants.CATEGORY_ID);
 
-		if(hasKey("child_cat")) {
-			listChildCategory = new ArrayList<>();
-			try {
-				JSONArray childCatArr = mJSON.getJSONArray("child_cat");
-				for(int i=0;i<childCatArr.length();i++) {
-					JSONObject childCatObj = childCatArr.getJSONObject(i);
-					Category childCat = new Category();
-					childCat.setJSONObject(childCatObj);
-					childCat.parse();
-					listChildCategory.add(childCat);
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
+        if (hasKey("child_cat")) {
+            listChildCategory = new ArrayList<>();
+            try {
+                JSONArray childCatArr = mJSON.getJSONArray("child_cat");
+                for (int i = 0; i < childCatArr.length(); i++) {
+                    JSONObject childCatObj = childCatArr.getJSONObject(i);
+                    Category childCat = new Category();
+                    childCat.setJSONObject(childCatObj);
+                    childCat.parse();
+                    listChildCategory.add(childCat);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (hasKey("images")) {
+            JSONArray array = getJSONArrayWithKey(mJSON, "images");
+            try {
+                parseListImage(array);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    protected void parseListImage(JSONArray array) throws JSONException {
+        if (null != array && array.length() > 0) {
+            mListImage = new ArrayList<>();
+            for (int i = 0; i < array.length(); i++) {
+                String image = array.getString(i);
+                mListImage.add(image);
+            }
+        }
+    }
+
+    public ArrayList<String> getListImage() {
+        return mListImage;
+    }
+
+    public void setListImage(ArrayList<String> images) {
+        mListImage = images;
     }
 
     public boolean hasChild() {
@@ -75,11 +103,11 @@ public class Category extends SimiEntity {
         this.mID = category_id;
     }
 
-	public ArrayList<Category> getListChildCategory() {
-		return listChildCategory;
-	}
+    public ArrayList<Category> getListChildCategory() {
+        return listChildCategory;
+    }
 
-	public void setListChildCategory(ArrayList<Category> listChildCategory) {
-		this.listChildCategory = listChildCategory;
-	}
+    public void setListChildCategory(ArrayList<Category> listChildCategory) {
+        this.listChildCategory = listChildCategory;
+    }
 }

@@ -22,7 +22,6 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
 
     public HomeCategoryAdapter(ArrayList<Category> categorys) {
         this.mListCate = categorys;
-        Log.e("HomeCategoryAdapter ","CONTRUCTOR");
     }
 
     @Override
@@ -47,7 +46,6 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
         Category category = mListCate.get(position);
 
         String name = category.getCategoryName();
-        Log.e("HomeCategoryAdapter"," NAME " + name);
 
         if (Utils.validateString(name)) {
             holder.tvName.setText(name);

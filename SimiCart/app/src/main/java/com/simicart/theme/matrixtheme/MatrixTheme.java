@@ -10,8 +10,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.simicart.core.base.event.fragment.SimiEventFragmentEntity;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Constants;
-import com.simicart.theme.matrixtheme.home.fragment.HomeTheme1Fragment;
-import com.simicart.theme.ztheme.home.fragment.HomeZThemeFragment;
+import com.simicart.theme.matrixtheme.home.fragment.HomeThemeOneFragment;
 
 public class MatrixTheme {
 
@@ -24,7 +23,7 @@ public class MatrixTheme {
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 SimiEventFragmentEntity entity = (SimiEventFragmentEntity) bundle.getSerializable(Constants.ENTITY);
-                HomeTheme1Fragment fragment = HomeTheme1Fragment.newInstance();
+                HomeThemeOneFragment fragment = HomeThemeOneFragment.newInstance();
                 entity.setmFragment(fragment);
             }
         };
