@@ -1,6 +1,5 @@
 package com.simicart.core.base.network.response;
 
-import android.util.Log;
 
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.config.Config;
@@ -24,16 +23,12 @@ public class SimiResponse {
     }
 
     public boolean parse() {
-        Log.e("SimiResponse ","parse 001");
         if (null == mData) {
             return false;
         }
-        Log.e("SimiResponse ","parse 002");
         mJSON = null;
         try {
-            Log.e("SimiResponse ","parse 003");
             mJSON = new JSONObject(mData);
-            Log.e("SimiResponse ","parse 004");
             return parse(mJSON);
         } catch (JSONException e) {
             return false;

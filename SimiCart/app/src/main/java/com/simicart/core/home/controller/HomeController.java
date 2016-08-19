@@ -152,7 +152,7 @@ public class HomeController extends SimiController {
     }
 
     protected void showCate() {
-        if (mListCate.size() == 0) {
+        if (null != mListCate && mListCate.size() == 0) {
             mDelegate.showCateHome(null);
         } else {
             CateHomeComponent cateHomeComponent = new CateHomeComponent(mListCate);

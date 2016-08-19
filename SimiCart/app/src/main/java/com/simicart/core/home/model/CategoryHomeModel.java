@@ -17,7 +17,7 @@ public class CategoryHomeModel extends SimiModel {
 			collection = new SimiCollection();
 			for (int i = 0; i < list.length(); i++) {
 				Category category = new Category();
-				category.setJSONObject(list.getJSONObject(i));
+				category.parse(list.getJSONObject(i));
 				collection.addEntity(category);
 			}
 		} catch (JSONException e) {

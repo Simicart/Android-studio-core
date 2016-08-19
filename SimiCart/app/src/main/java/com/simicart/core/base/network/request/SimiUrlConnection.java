@@ -13,11 +13,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -162,6 +164,8 @@ public class SimiUrlConnection {
         request.cancel(true);
         return null;
     }
+
+
 
 
     protected byte[] dataToBytes(HttpURLConnection urlConnection) throws IOException {

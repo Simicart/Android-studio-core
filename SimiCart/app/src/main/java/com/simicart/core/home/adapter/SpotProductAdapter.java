@@ -35,7 +35,7 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mProducts.size();
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.entity.Category;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.home.adapter.HomeCategoryAdapter;
 import com.simicart.core.home.delegate.CateHomeCallBack;
 
@@ -43,6 +44,7 @@ public class CateHomeComponent extends SimiComponent {
 
     protected void showTitle() {
         String title = SimiTranslator.getInstance().translate("Category").toUpperCase();
+        tvTitle.setTextColor(AppColorConfig.getInstance().getContentColor());
         tvTitle.setText(title);
     }
 

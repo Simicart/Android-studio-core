@@ -59,6 +59,11 @@ public class SimiManager {
         return instance;
     }
 
+    public void openHomePage(){
+        HomeFragment fragment  = HomeFragment.newInstance();
+        replaceFragment(fragment);
+    }
+
     public Activity getCurrentActivity() {
         return mCurrentActivity;
     }

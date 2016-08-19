@@ -22,6 +22,7 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
 
     public HomeCategoryAdapter(ArrayList<Category> categorys) {
         this.mListCate = categorys;
+        Log.e("HomeCategoryAdapter ","CONTRUCTOR");
     }
 
     @Override

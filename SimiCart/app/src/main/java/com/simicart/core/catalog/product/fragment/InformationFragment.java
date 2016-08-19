@@ -32,7 +32,7 @@ public class InformationFragment extends SimiFragment {
 	public static InformationFragment newInstance(Product product) {
 		InformationFragment fragment = new InformationFragment();
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(Constants.KeyData.PRODUCT, product);
+		//bundle.putSerializable(Constants.KeyData.PRODUCT, product);
 		fragment.setArguments(bundle);
 		return fragment;
 	}

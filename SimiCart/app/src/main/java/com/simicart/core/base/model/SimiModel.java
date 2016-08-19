@@ -1,6 +1,5 @@
 package com.simicart.core.base.model;
 
-import android.util.Log;
 
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
@@ -111,17 +110,13 @@ public class SimiModel {
 
             @Override
             public void callBack(SimiResponse simiResponse, boolean isSuccess) {
-                Log.e("SimiMOdel  ","REQUEST CALL BACK 001");
                 if (isSuccess) {
-                    Log.e("SimiMOdel  ","REQUEST CALL BACK 002");
                     mJSON = simiResponse.getDataJSON();
-                    Log.e("SimiMOdel  ","REQUEST CALL BACK 003");
                     parseData();
                     if (null != mModelSuccessCallBack) {
                         mModelSuccessCallBack.onSuccess(collection);
                     }
                 } else {
-                    Log.e("SimiMOdel  ","REQUEST CALL BACK 004");
                     if (null != mModelFailCallBack) {
                         SimiError error = null;
                         if (null != simiResponse) {
@@ -205,7 +200,6 @@ public class SimiModel {
 
     protected void parseData() {
         try {
-            Log.e("SimiModel ","DATA " + mJSON.toString());
             JSONArray list = this.mJSON.getJSONArray("data");
             collection = new SimiCollection();
             for (int i = 0; i < list.length(); i++) {
