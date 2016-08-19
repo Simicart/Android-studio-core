@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
@@ -200,7 +201,6 @@ public class PhoneSlideMenuController {
         int index = checkElement(ORDER_HISTORY);
         ArrayList<ItemNavigation> mItemsAccount = new ArrayList<>();
         if (index == -1) {
-            Log.e("PhoneSlideMenuController ", "addItemRelatedPersonal ");
             ItemNavigation item = new ItemNavigation();
             item.setType(TypeItem.NORMAL);
             item.setName(ORDER_HISTORY);
@@ -234,8 +234,6 @@ public class PhoneSlideMenuController {
             if (DataLocal.isTablet) {
                 index_category = checkElement(HOME);
             }
-            Log.e("PhoneSlideMenuController ",
-                    "addItemRelatedPersonal  index CATEGORY " + index_category);
             insertItemAfter(index_category, mItemsAccount);
 
         }
@@ -388,7 +386,7 @@ public class PhoneSlideMenuController {
 //                            SimiManager.getIntance().replacePopupFragment(
 //                                    fragment);
 //                        } else {
-                            SimiManager.getIntance().replaceFragment(fragment);
+                        SimiManager.getIntance().replaceFragment(fragment);
 //                        }
                     }
 
@@ -506,9 +504,7 @@ public class PhoneSlideMenuController {
 
     public boolean insertItemAfter(int index,
                                    ArrayList<ItemNavigation> mItemsAccount) {
-        Log.e("PhoneSlideMenuController ", "insertItemAfter 001");
         if (index != -1 && mItemsAccount.size() > 0) {
-            Log.e("PhoneSlideMenuController ", "insertItemAfter 002");
             ArrayList<ItemNavigation> list1 = new ArrayList<ItemNavigation>();
             ArrayList<ItemNavigation> list2 = new ArrayList<ItemNavigation>();
 

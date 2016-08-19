@@ -304,9 +304,8 @@ public class SignInController extends SimiController {
                     SimiManager.getIntance().replacePopupFragment(fragment);
 
                 } else {
-                    Log.d("quangduy", "HomeFragment");
-                    SimiFragment fragment = null;
-                    fragment = HomeFragment.newInstance();
+//                    SimiFragment fragment = null;
+//                    fragment = HomeFragment.newInstance();
 
 //						 event for wish list
 //						CacheFragment cache = new CacheFragment();
@@ -317,7 +316,7 @@ public class SignInController extends SimiController {
 //								cache);
 //						fragment = cache.getFragment();
 
-                    SimiManager.getIntance().replaceFragment(fragment);
+//                    SimiManager.getIntance().replaceFragment(fragment);
 
                 }
 

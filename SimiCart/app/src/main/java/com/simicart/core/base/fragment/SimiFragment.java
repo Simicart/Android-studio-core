@@ -1,7 +1,9 @@
 package com.simicart.core.base.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 import com.simicart.core.base.model.entity.SimiData;
@@ -25,10 +27,18 @@ public class SimiFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getDataFromBundle();
+    }
+
     protected void getDataFromBundle() {
         Bundle bundle = getArguments();
-        mData = bundle.getParcelable("data");
-        mHashMapData = mData.getData();
+        if(null != bundle) {
+            mData = bundle.getParcelable("data");
+            mHashMapData = mData.getData();
+        }
     }
 
     public void setScreenName(String screenName) {

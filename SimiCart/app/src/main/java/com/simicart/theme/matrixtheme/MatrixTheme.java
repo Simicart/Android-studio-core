@@ -1,13 +1,34 @@
 package com.simicart.theme.matrixtheme;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+
+import com.simicart.core.base.event.fragment.SimiEventFragmentEntity;
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.config.Constants;
+import com.simicart.theme.matrixtheme.home.fragment.HomeTheme1Fragment;
+import com.simicart.theme.ztheme.home.fragment.HomeZThemeFragment;
+
 public class MatrixTheme {
-//	CacheFragment mCacheFragment;
-//
-//	public MatrixTheme(String method, CacheFragment caheFragment) {
-//		this.mCacheFragment = caheFragment;
-//		if (method.equals("changeHome")) {
-//			HomeTheme1Fragment fragment = HomeTheme1Fragment.newInstance();
-//			this.mCacheFragment.setFragment(fragment);
-//		}
-//	}
+
+
+    public MatrixTheme() {
+        Context context = SimiManager.getIntance().getCurrentActivity();
+        IntentFilter intentFilter = new IntentFilter("com.simicart.core.home.fragment.HomeFragment");
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle bundle = intent.getBundleExtra(Constants.DATA);
+                SimiEventFragmentEntity entity = (SimiEventFragmentEntity) bundle.getSerializable(Constants.ENTITY);
+                HomeTheme1Fragment fragment = HomeTheme1Fragment.newInstance();
+                entity.setmFragment(fragment);
+            }
+        };
+
+        LocalBroadcastManager.getInstance(context).registerReceiver(receiver, intentFilter);
+    }
 }

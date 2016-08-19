@@ -65,8 +65,8 @@ public class SignOutController extends SimiController {
                 ConfigCheckout.getInstance().setAddressBookFirstRequest(
                         true);
 
-                HomeFragment fragment = HomeFragment.newInstance();
-                SimiManager.getIntance().replaceFragment(fragment);
+//                HomeFragment fragment = HomeFragment.newInstance();
+//                SimiManager.getIntance().replaceFragment(fragment);
             }
         });
 
