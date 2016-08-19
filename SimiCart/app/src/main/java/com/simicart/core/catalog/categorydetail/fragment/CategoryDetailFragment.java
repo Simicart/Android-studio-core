@@ -14,10 +14,10 @@ import com.simicart.core.config.Rconfig;
  */
 public class CategoryDetailFragment extends SimiFragment {
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(Rconfig.getInstance().layout("core_product_list_layout"), container, false);
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+        int idView = Rconfig.getInstance().layout("core_fragment_category_detail");
+        rootView = inflater.inflate(idView, null, false);
         return rootView;
     }
 }
