@@ -23,6 +23,7 @@ import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+import com.simicart.core.slidemenu.fragment.CategorySlideMenuFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +53,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(CategoryHolder holder, int position) {
 
-        Category category = listCategories.get(position);
+        final Category category = listCategories.get(position);
 
         String cateName = category.getCategoryName();
         if(Utils.validateString(cateName)) {
@@ -86,7 +87,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.rl_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(category.hasChild()) {
+                    if (DataLocal.isTablet) {
+                        SimiManager.getIntance().openSubCategory(category.getCategoryId(), category.getCategoryName());
+                    } else {
+                        HashMap<String, Object> hmData = new HashMap<String, Object>();
+                        hmData.put("category_id", category.getCategoryId());
+                        hmData.put("category_name", category.getCategoryName());
+                        SimiData data = new SimiData(hmData);
+                        CategoryFragment categoryFragment = CategoryFragment.newInstance(data);
+                        SimiManager.getIntance().replaceFragment(categoryFragment);
+                    }
+                }
             }
         });
 

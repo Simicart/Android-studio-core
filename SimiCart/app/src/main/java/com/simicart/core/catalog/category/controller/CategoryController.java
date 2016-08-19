@@ -28,8 +28,10 @@ import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 import java.util.ArrayList;
 
 public class CategoryController extends SimiController {
+
     protected CategoryDelegate mDelegate;
     protected String mID;
+    protected CategoryComponent categoryComponent;
 
     @Override
     public void onStart() {
@@ -39,7 +41,7 @@ public class CategoryController extends SimiController {
         }
     }
 
-    private void requestListCategories() {
+    public void requestListCategories() {
         mDelegate.showLoading();
         mModel = new CategoryModel();
         mModel.setSuccessListener(new ModelSuccessCallBack() {
@@ -59,7 +61,7 @@ public class CategoryController extends SimiController {
 
     }
 
-    private void requestListProducts() {
+    public void requestListProducts() {
         final ListProductModel model = new ListProductModel();
         model.setCategoryID(mID);
         model.addBody("category_id", mID);
@@ -77,17 +79,20 @@ public class CategoryController extends SimiController {
 
     }
 
-    protected void drawListCategory(ArrayList<Category> listCategories) {
-        CategoryComponent categoryComponent = new CategoryComponent(listCategories);
+    public void drawListCategory(ArrayList<Category> listCategories) {
+        categoryComponent = new CategoryComponent(listCategories);
         View categoryView = categoryComponent.createView();
         mDelegate.showListCategory(categoryView);
     }
 
-    protected void drawListProducts(ArrayList<Product> listProducts) {
-        ProductList productList = new ProductList();
-        productList.setSpotProduct(listProducts);
-        SpotProductComponent listProductComponent = new SpotProductComponent(productList);
-        View listProductView = listProductComponent.createView();
+    public void drawListProducts(ArrayList<Product> listProducts) {
+        View listProductView = null;
+        if(listProducts.size() > 0) {
+            ProductList productList = new ProductList();
+            productList.setSpotProduct(listProducts);
+            SpotProductComponent listProductComponent = new SpotProductComponent(productList);
+            listProductView = listProductComponent.createView();
+        }
         mDelegate.showListProducts(listProductView);
     }
 

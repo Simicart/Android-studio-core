@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.config.AppColorConfig;
@@ -130,8 +131,14 @@ public class SlideMenuFragment extends SimiFragment implements
 //		CateSlideMenuFragment categoryFragment = CateSlideMenuFragment
 //				.getIntance();
 //		categoryFragment.setSlideMenu(this);
-		CategoryFragment categoryFragment = CategoryFragment.newInstance(new SimiData(new HashMap<String, Object>()));
-		simiFragments.add(categoryFragment);
+		HashMap<String, Object> hmData = new HashMap<>();
+		hmData.put("category_id", "-1");
+		hmData.put("category_name", "all categories");
+		SimiData data = new SimiData(hmData);
+		CategorySlideMenuFragment fragment = CategorySlideMenuFragment.newInstance(data);
+		simiFragments.add(fragment);
+
+		SimiManager.getIntance().setSlideMenu(this);
 
 		TabSlideMenuAdapter adapter = new TabSlideMenuAdapter(
 				getChildFragmentManager(), simiFragments);

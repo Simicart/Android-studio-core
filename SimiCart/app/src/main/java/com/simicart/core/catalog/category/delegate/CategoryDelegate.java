@@ -17,4 +17,8 @@ public interface CategoryDelegate extends SimiDelegate {
 
     public void showListProducts(View view);
 
+    public void showBack(boolean show);
+
+    public void updateCategoryParent(String name);
+
 }

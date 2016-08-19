@@ -6,85 +6,86 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:id="@+id/ll_categoryParent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp" >
 
                 <RelativeLayout
                     android:id="@+id/rl_categoryParentLable"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:paddingBottom="10dp"
-                    android:paddingTop="10dp">
+                    android:paddingTop="10dp" >
 
-                    <TextView
-                        android:id="@+id/tv_category"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:id="@+id/iv_back"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:layout_toLeftOf="@+id/layout_showmore"
-                        android:ellipsize="end"
-                        android:lines="1"
-                        android:textSize="16sp" />
+                        android:padding="5dp"
+                        android:src="@drawable/ic_back"
+                        android:visibility="gone"/>
 
                     <RelativeLayout
                         android:id="@+id/layout_showmore"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_alignParentRight="true">
+                        android:layout_alignParentRight="true" >
 
                         <TextView
                             android:id="@+id/tv_viewmore"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/iv_showmore"
-                            android:textSize="12sp"
-                            android:visibility="gone" />
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
 
                         <ImageView
                             android:id="@+id/iv_showmore"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginTop="5dp"
                             android:src="@drawable/ic_view_all"
-                            android:visibility="gone" />
-                    </RelativeLayout>
-                </RelativeLayout>
+                            android:layout_toRightOf="@+id/tv_viewmore" />
 
-                <LinearLayout
-                    android:id="@+id/ll_listProduct"
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:orientation="vertical"
-                    android:visibility="gone"></LinearLayout>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_toRightOf="@+id/iv_back"
+                        android:layout_toLeftOf="@+id/layout_showmore"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp" />
+                </RelativeLayout>
 
                 <View
                     android:id="@+id/v_line"
                     android:layout_width="match_parent"
                     android:layout_height="0.1dp" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/size_5">
+                android:orientation="vertical" >
 
                 <LinearLayout
                     android:id="@+id/ll_categories"
@@ -92,7 +93,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+                </LinearLayout>
 
                 <View
                     android:id="@+id/v_line2"

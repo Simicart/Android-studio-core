@@ -24,8 +24,6 @@ public class CategoryFragment extends SimiFragment {
     protected String mCategoryName;
     protected CategoryController mCategoryController;
     protected CategoryBlock mCategoryBlock;
-//    protected CategoryDetailController mCategoryDetailController;
-//    protected CategoryDetailBlock mCategoryDetailBlock;
 
     public static CategoryFragment newInstance(SimiData data) {
         CategoryFragment fragment = new CategoryFragment();
@@ -44,31 +42,9 @@ public class CategoryFragment extends SimiFragment {
                 container, false);
         Context context = getActivity();
         if (mData != null) {
-//            mCategoryID = (String) mData.getData();
-//            mCategoryName = (String) getData();
+            mCategoryID = (String) getValueWithKey("category_id");
+            mCategoryName = (String) getValueWithKey("category_name");
         }
-        mCategoryID = "4";
-        mCategoryName = "Salwar Kameez";
-
-//        mCategoryDetailBlock = new CategoryDetailBlock(view, context);
-//        mCategoryDetailBlock.setCategoryName(mCategoryID, mCategoryName);
-//        mCategoryDetailBlock.initView();
-//        if (null == mCategoryDetailController) {
-//            // Controller request ListProduct
-//            mCategoryDetailController = new CategoryDetailController();
-//            mCategoryDetailController.setDelegate(mCategoryDetailBlock);
-//            mCategoryDetailController.setCategoryID(mCategoryID);
-//            mCategoryDetailController.setCatename(mCategoryName);
-//            mCategoryDetailController.onStart();
-//        } else {
-//            mCategoryDetailController.setDelegate(mCategoryDetailBlock);
-//            mCategoryDetailController.onResume();
-//        }
-//        mCategoryDetailBlock.setClickViewMore(mCategoryDetailController
-//                .getClicker());
-//        mCategoryDetailBlock
-//                .setClickCategoryNameViewMore(mCategoryDetailController
-//                        .getClicker());
 
         // list categories
         mCategoryBlock = new CategoryBlock(rootView, context);

@@ -51,7 +51,6 @@ public class SpotProductComponent extends SimiComponent {
 
     protected void showCate() {
         ArrayList<Product> products = mProductList.getSpotProduct();
-        Log.e("abc", "--" + products);
         SpotProductAdapter adapter = new SpotProductAdapter(products);
         rcvCate.setAdapter(adapter);
     }

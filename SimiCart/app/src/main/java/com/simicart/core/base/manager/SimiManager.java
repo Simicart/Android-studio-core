@@ -26,7 +26,9 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.fragment.HomeFragment;
 import com.simicart.core.menutop.controller.MenuTopController;
+import com.simicart.core.slidemenu.controller.CategorySlideMenuController;
 import com.simicart.core.slidemenu.controller.PhoneSlideMenuController;
+import com.simicart.core.slidemenu.fragment.SlideMenuFragment;
 import com.simicart.core.splashscreen.SplashActivity;
 import com.simicart.core.style.FragmentDialogHandle;
 
@@ -40,6 +42,8 @@ public class SimiManager {
     private PhoneSlideMenuController mSlideMenuController;
     private MenuTopController mMenuTopController;
     private FragmentManager mChildFragmentManager;
+    private CategorySlideMenuController mCategorySlideMenuController;
+    private SlideMenuFragment mSlideMenu;
 
     protected SimiRequestQueue mRequestQueue;
     protected boolean isRefreshCart = true;
@@ -485,4 +489,20 @@ public class SimiManager {
         return mRequestQueue;
     }
 
+    public void setCategorySlideMenuController(CategorySlideMenuController categorySlideMenuController) {
+        this.mCategorySlideMenuController = categorySlideMenuController;
+    }
+
+    public void backToPreviousSlideCategory() {
+        mCategorySlideMenuController.backToPreviousCat();
+    }
+
+    public void openSubCategory(String id, String name) {
+        mCategorySlideMenuController.openSubCategory(id, name);
+        mSlideMenu.openCategoryMenu();
+    }
+
+    public void setSlideMenu(SlideMenuFragment slideMenu) {
+        this.mSlideMenu = slideMenu;
+    }
 }

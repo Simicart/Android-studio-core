@@ -64,7 +64,7 @@ public class HomeZThemeController extends SimiController {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 ZThemeCatalogEntity catalogEntity = mDelegate.getListCatalog().get(groupPosition);
-                if(catalogEntity.getType().equals("category") && catalogEntity.getCategoryZTheme().hasChild() == true) {
+                if (catalogEntity.getType().equals("cat") && catalogEntity.getCategoryZTheme().hasChild() == true) {
                     Category childCategory = catalogEntity.getCategoryZTheme().getListChildCategory().get(childPosition);
                     openCate(childCategory);
                 }
@@ -77,10 +77,15 @@ public class HomeZThemeController extends SimiController {
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 ZThemeCatalogEntity catalogEntity = mDelegate.getListCatalog().get(groupPosition);
 
-                if(catalogEntity.getType().equals("category")) {
+                if (catalogEntity.getType().equals("cat")) {
                     Category categoryEntity = catalogEntity.getCategoryZTheme();
-                    if(categoryEntity.hasChild() == false) {
-                        openCate(categoryEntity);
+                    if (categoryEntity.hasChild() == true) {
+                        if(DataLocal.isTablet) {
+                            SimiManager.getIntance().openSubCategory(categoryEntity.getCategoryId(), categoryEntity.getCategoryName());
+                            return true;
+                        }
+                    } else {
+
                     }
                 } else {
                     ZThemeSpotEntity spot = catalogEntity.getZThemeSpotEntity();
@@ -93,25 +98,15 @@ public class HomeZThemeController extends SimiController {
     }
 
     protected void openCate(Category cate) {
-//        String id = cate.getID();
-//        if (cate.hasChild()) {
-//            SimiData data = new SimiData();
-//            data.setData(id);
-//            CategoryFragment categoryFragment = CategoryFragment.newInstance(data);
-//            SimiManager.getIntance().replaceFragment(categoryFragment);
-//        } else {
-//            HashMap<String, Object> hs = new HashMap<>();
-//            hs.put("cat_id", id);
-//            SimiData data = new SimiData();
-//            data.setHsData(hs);
-//            CategoryDetailFragment fragment = CategoryDetailFragment.newInstance(data);
-//            SimiManager.getIntance().replaceFragment(fragment);
-//        }
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put("category_id", cate.getCategoryId());
+        hmData.put("category_name", cate.getCategoryName());
+        SimiData data = new SimiData(hmData);
+        CategoryFragment categoryFragment = CategoryFragment.newInstance(data);
+        SimiManager.getIntance().replaceFragment(categoryFragment);
     }
 
     protected void openListProduct(ZThemeSpotEntity spot) {
-        CategoryFragment fragment = CategoryFragment.newInstance(new SimiData(new HashMap<String, Object>()));
-        SimiManager.getIntance().replaceFragment(fragment);
 //        SimiData data = new SimiData();
 //        data.addData("list_id", product.getmId());
 //        CategoryDetailFragment fragment = CategoryDetailFragment.newInstance(data);
