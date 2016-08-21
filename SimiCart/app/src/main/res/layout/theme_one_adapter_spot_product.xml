@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlt_spot_product"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/theme1_background_cat">
+
+    <ViewFlipper
+        android:id="@+id/vfp_category"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ViewFlipper>
+
+
+    <TextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:background="#88000000"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lines="1"
+        android:padding="10dp"
+        android:text="NO CATEGORY"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

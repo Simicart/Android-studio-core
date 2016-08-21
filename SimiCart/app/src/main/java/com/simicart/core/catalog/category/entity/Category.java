@@ -1,5 +1,7 @@
 package com.simicart.core.catalog.category.entity;
 
+import android.util.Log;
+
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
@@ -44,9 +46,10 @@ public class Category extends SimiEntity {
         if (hasKey("images")) {
             JSONArray array = getJSONArrayWithKey(mJSON, "images");
             try {
+                Log.e("Category","DATA " + array.toString());
                 parseListImage(array);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e("Category ","Exception " + e.getMessage());
             }
         }
     }
@@ -56,6 +59,7 @@ public class Category extends SimiEntity {
             mListImage = new ArrayList<>();
             for (int i = 0; i < array.length(); i++) {
                 String image = array.getString(i);
+                Log.e("Category","IMAGE " + image);
                 mListImage.add(image);
             }
         }

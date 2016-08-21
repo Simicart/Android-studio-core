@@ -1,14 +1,14 @@
 package com.simicart.theme.matrixtheme.home.model;
 
+import com.simicart.core.base.model.SimiModel;
+import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.theme.matrixtheme.home.entity.OrderProduct;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.simicart.core.base.model.SimiModel;
-import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.theme.matrixtheme.home.entity.Theme1Category;
-
-public class CategoryHomeTheme1Model extends SimiModel {
+public class SpotProductHomeThemeOneModel extends SimiModel {
 
 	@Override
 	protected void parseData() {
@@ -20,8 +20,8 @@ public class CategoryHomeTheme1Model extends SimiModel {
 			}
 			for (int i = 0; i < list.length(); i++) {
 				JSONObject data = list.getJSONObject(i);
-				Theme1Category theme1Category = new Theme1Category(data);
-				collection.addEntity(theme1Category);
+				OrderProduct spotProduct = new OrderProduct(data);
+				collection.addEntity(spotProduct);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -30,7 +30,7 @@ public class CategoryHomeTheme1Model extends SimiModel {
 
 	@Override
 	protected void setUrlAction() {
-		mUrlAction = "themeone/api/get_order_categories";
+		mUrlAction = "themeone/api/get_order_spots";
 	}
 
 	@Override
