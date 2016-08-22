@@ -2,31 +2,23 @@ package com.simicart.theme.ztheme.home.controller;
 
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
 
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
-import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
-import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
-import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 import com.simicart.theme.ztheme.home.delegate.HomeZThemeDelegate;
 import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
 import com.simicart.theme.ztheme.home.entity.ZThemeSpotEntity;
-import com.simicart.theme.ztheme.home.fragment.SpotProductListZthemeFragment;
 import com.simicart.theme.ztheme.home.model.HomeZThemeModel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HomeZThemeController extends SimiController {

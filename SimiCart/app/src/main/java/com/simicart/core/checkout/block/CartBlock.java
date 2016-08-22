@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -37,8 +38,8 @@ import java.util.ArrayList;
 
 public class CartBlock extends SimiBlock implements CartDelegate {
 
+    protected LinearLayout llCart;
     protected ButtonRectangle btn_Checkout;
-    protected ListView lv_product;
     protected TableLayout layoutPrice;
     protected CartListAdapter mAdapter;
     protected CartListenerController mListenerController;
@@ -76,9 +77,8 @@ public class CartBlock extends SimiBlock implements CartDelegate {
                 .getCheckoutClicker());
 
         // list product
-        lv_product = (ListView) mView.findViewById(Rconfig.getInstance().id(
-                "cart_item_list"));
-        lv_product.setDivider(null);
+        llCart = (LinearLayout) mView.findViewById(Rconfig.getInstance().id(
+                "ll_carts"));
 
         // price
         layoutPrice = (TableLayout) mView.findViewById(Rconfig.getInstance()
@@ -98,39 +98,39 @@ public class CartBlock extends SimiBlock implements CartDelegate {
 
     @Override
     public void drawView(SimiCollection collection) {
-        ArrayList<SimiEntity> entity = collection.getCollection();
-
-        if (null != entity && entity.size() > 0) {
-            ArrayList<Cart> carts = new ArrayList<Cart>();
-            if (isShown()) {
-                DataLocal.listCarts.clear();
-            }
-            for (int i = 0; i < entity.size(); i++) {
-                SimiEntity simiEntity = entity.get(i);
-                Cart cart = (Cart) simiEntity;
-                carts.add(cart);
-                if (isShown()) {
-                    DataLocal.listCarts.add(cart);
-                }
-            }
-            if (carts.size() > 0) {
-                mListenerController.setListCart(carts);
-                if (null == mAdapter) {
-                    mAdapter = new CartListAdapter(mContext, carts);
-                    lv_product.setAdapter(mAdapter);
-                    mAdapter.setDelegate(mListenerController);
-                } else {
-                    mAdapter.setListCart(carts);
-                    mAdapter.notifyDataSetChanged();
-                }
-            } else {
-                visiableView();
-                return;
-            }
-        } else {
-            visiableView();
-            return;
-        }
+//        ArrayList<SimiEntity> entity = collection.getCollection();
+//
+//        if (null != entity && entity.size() > 0) {
+//            ArrayList<Cart> carts = new ArrayList<Cart>();
+//            if (isShown()) {
+//                DataLocal.listCarts.clear();
+//            }
+//            for (int i = 0; i < entity.size(); i++) {
+//                SimiEntity simiEntity = entity.get(i);
+//                Cart cart = (Cart) simiEntity;
+//                carts.add(cart);
+//                if (isShown()) {
+//                    DataLocal.listCarts.add(cart);
+//                }
+//            }
+//            if (carts.size() > 0) {
+//                mListenerController.setListCart(carts);
+//                if (null == mAdapter) {
+//                    mAdapter = new CartListAdapter(mContext, carts);
+//                    lv_product.setAdapter(mAdapter);
+//                    mAdapter.setDelegate(mListenerController);
+//                } else {
+//                    mAdapter.setListCart(carts);
+//                    mAdapter.notifyDataSetChanged();
+//                }
+//            } else {
+//                visiableView();
+//                return;
+//            }
+//        } else {
+//            visiableView();
+//            return;
+//        }
 
         mListenerController.setmMessage(message);
     }
@@ -243,6 +243,14 @@ public class CartBlock extends SimiBlock implements CartDelegate {
     @Override
     public void setCheckoutWebView(String url) {
         mListenerController.setWebviewUrl(url);
+    }
+
+    @Override
+    public void showListProductsView(View view) {
+        if (null != view) {
+            llCart.removeAllViews();
+            llCart.addView(view);
+        }
     }
 
     @Override

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF" >
 
-    <com.simicart.core.style.CustomScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/llCheckout" >
@@ -16,15 +16,15 @@
             android:paddingBottom="5dp"
             android:paddingTop="5dp" >
 
-            <com.simicart.core.style.NoScrollListView
-                android:id="@+id/cart_item_list"
+            <LinearLayout
+                android:id="@+id/ll_carts"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:listSelector="#FFFFFF"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="0dp"
-                android:paddingTop="5dp" />
+                android:paddingTop="5dp"
+                android:orientation="vertical"/>
 
             <RelativeLayout
                 android:id="@+id/rlt_reward_card"
@@ -45,7 +45,7 @@
                 android:layout_marginRight="10dp" >
             </TableLayout>
         </RelativeLayout>
-    </com.simicart.core.style.CustomScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/llCheckout"
