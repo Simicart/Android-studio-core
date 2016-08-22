@@ -419,7 +419,7 @@ public class PhoneSlideMenuController {
                // fragment = SettingAppFragment.newInstance();
                 HashMap<String,Object> hm = new HashMap<>();
                 hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
-                hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,"10");
+                hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,"3");
                 SimiManager.getIntance().openCategoryDetail(hm);
                 fragment = null;
 //                fragment.setShowPopup(true);

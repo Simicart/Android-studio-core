@@ -1,5 +1,11 @@
 package com.simicart.core.catalog.categorydetail.controller;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
@@ -8,6 +14,7 @@ import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.categorydetail.model.CategoryDetailModel;
+import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.common.KeyData;
 
 import org.json.JSONObject;
@@ -25,8 +32,20 @@ public class CategoryDetailController extends SimiController {
     protected CategoryDetailDelegate mDelegate;
     protected String mTypeCate;
     protected int mOffset = 0;
-    protected int mLimit = 6;
+    protected int mLimit = 8;
+    protected int mResultNumber = 0;
+    protected boolean isOnscroll = true;
 
+    protected View.OnClickListener onChangeViewClick;
+    protected RecyclerView.OnScrollListener onListScroll;
+
+    public View.OnClickListener getOnChangeViewClick() {
+        return onChangeViewClick;
+    }
+
+    public RecyclerView.OnScrollListener getOnListScroll() {
+        return onListScroll;
+    }
 
     @Override
     public void onStart() {
@@ -61,9 +80,56 @@ public class CategoryDetailController extends SimiController {
 
     protected void initListener() {
 
+        onChangeViewClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDelegate.changeView();
+            }
+        };
+
+        onListScroll = new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy <= 0) {
+                    // Scrolling up
+                    mDelegate.showBottomMenu(true);
+                } else {
+                    // Scrolling down
+                    mDelegate.showBottomMenu(false);
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int count = recyclerView.getChildCount();
+                int lastPosition;
+                if(mDelegate.getTagView().equals(TagSearch.TAG_LISTVIEW)) {
+                    lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                } else {
+                    lastPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                }
+                Log.e("abc", "last==" + lastPosition);
+                Log.e("abc", "count==" + count);
+                if (lastPosition == mOffset + mLimit - 1
+                        && mResultNumber > count) {
+                    if (isOnscroll) {
+                        mOffset += mLimit;
+                        isOnscroll = false;
+                        mDelegate.showLoadMore(true);
+                        requestCategoryDetail();
+                    }
+                }
+            }
+        };
+
     }
 
     protected void requestCategoryDetail() {
+        if(mOffset == 0) {
+            mDelegate.showLoading();
+        }
         if (null == mModel) {
             mModel = new CategoryDetailModel(mTypeCate);
             if (mTypeCate.equals(CategoryDetailFragment.CUSTOM)) {
@@ -78,7 +144,12 @@ public class CategoryDetailController extends SimiController {
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-                mDelegate.updateView(collection);
+                mDelegate.dismissLoading();
+                mResultNumber = ((CategoryDetailModel)mModel).getResultNumber();
+                mDelegate.showLoadMore(false);
+                mDelegate.updateView(mModel.getCollection());
+                if ((mOffset + mLimit) <= mResultNumber)
+                    isOnscroll = true;
             }
         });
 
@@ -117,7 +188,7 @@ public class CategoryDetailController extends SimiController {
 
     @Override
     public void onResume() {
-
+        mDelegate.updateView(mModel.getCollection());
     }
 
     public void setData(HashMap<String, Object> data) {

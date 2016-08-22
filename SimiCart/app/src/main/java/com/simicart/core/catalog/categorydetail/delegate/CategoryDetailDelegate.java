@@ -9,6 +9,10 @@ public interface CategoryDetailDelegate extends SimiDelegate {
 
     public void showLoadMore(boolean isShow);
 
+    public void changeView();
 
+    public void showBottomMenu(boolean show);
+
+    public String getTagView();
 
 }

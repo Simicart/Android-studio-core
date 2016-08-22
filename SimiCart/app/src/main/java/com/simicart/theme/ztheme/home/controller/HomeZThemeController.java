@@ -14,7 +14,9 @@ import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
+import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
@@ -66,7 +68,11 @@ public class HomeZThemeController extends SimiController {
                 ZThemeCatalogEntity catalogEntity = mDelegate.getListCatalog().get(groupPosition);
                 if (catalogEntity.getType().equals("cat") && catalogEntity.getCategoryZTheme().hasChild() == true) {
                     Category childCategory = catalogEntity.getCategoryZTheme().getListChildCategory().get(childPosition);
-                    openCate(childCategory);
+                    if(childCategory.hasChild() == true) {
+                        openCate(childCategory);
+                    } else {
+                        openListProduct(childCategory);
+                    }
                 }
                 return true;
             }
@@ -85,7 +91,7 @@ public class HomeZThemeController extends SimiController {
                             return true;
                         }
                     } else {
-
+                        openListProduct(categoryEntity);
                     }
                 } else {
                     ZThemeSpotEntity spot = catalogEntity.getZThemeSpotEntity();
@@ -107,10 +113,20 @@ public class HomeZThemeController extends SimiController {
     }
 
     protected void openListProduct(ZThemeSpotEntity spot) {
-//        SimiData data = new SimiData();
-//        data.addData("list_id", product.getmId());
-//        CategoryDetailFragment fragment = CategoryDetailFragment.newInstance(data);
-//        SimiManager.getIntance().replaceFragment(fragment);
+        HashMap<String,Object> hm = new HashMap<>();
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CUSTOM);
+        hm.put("key", spot.getKey());
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, spot.getName());
+        hm.put(KeyData.CATEGORY_DETAIL.CUSTOM_URL, "ztheme/api/get_spot_products");
+        SimiManager.getIntance().openCategoryDetail(hm);
+    }
+
+    protected void openListProduct(Category category) {
+        HashMap<String,Object> hm = new HashMap<>();
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, category.getCategoryId());
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, category.getCategoryName());
+        SimiManager.getIntance().openCategoryDetail(hm);
     }
 
     @Override

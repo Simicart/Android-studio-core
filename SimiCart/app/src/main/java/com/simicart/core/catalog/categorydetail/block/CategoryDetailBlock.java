@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -33,11 +34,19 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     protected RecyclerView rvListProducts;
     protected CategoryDetailAdapter mAdapter;
     protected ArrayList<Product> listProducts;
-    protected String tagView = "";
+    protected String tagView;
     protected int numCollums = 2;
 
     public CategoryDetailBlock(View view, Context context) {
         super(view, context);
+    }
+
+    public void onChangeViewClick(View.OnClickListener listener) {
+        rlChangeView.setOnClickListener(listener);
+    }
+
+    public void onListScroll(RecyclerView.OnScrollListener listener) {
+        rvListProducts.setOnScrollListener(listener);
     }
 
     @Override
@@ -52,8 +61,12 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
         rlBottom.setVisibility(View.VISIBLE);
 
         ivChangeView = (ImageView) mView.findViewById(Rconfig.getInstance().id("iv_change_view"));
-        if(DataLocal.isTablet) {
-            ivChangeView.setVisibility(View.INVISIBLE);
+        if(tagView == TagSearch.TAG_GRIDVIEW) {
+            ivChangeView.setBackgroundResource(Rconfig.getInstance()
+                    .drawable("ic_to_listview"));
+        } else {
+            ivChangeView.setBackgroundResource(Rconfig.getInstance()
+                    .drawable("ic_to_gridview"));
         }
 
         pbLoadMore = (ProgressBar) mView.findViewById(Rconfig.getInstance().id("pb_load_more"));
@@ -70,8 +83,10 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
         ArrayList<SimiEntity> entities = collection.getCollection();
         if(entities != null) {
             ArrayList<Product> products = new ArrayList<>();
-            for(int i=0;i<entities.size();i++) {
-                Product product = (Product) entities.get(i);
+            Log.e("abc", "//" + entities.size());
+            for(SimiEntity simiEntity : entities) {
+                Product product = new Product();
+                product.parse(simiEntity.getJSONObject());
                 products.add(product);
             }
             listProducts.clear();
@@ -89,10 +104,10 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
             mAdapter.setListProducts(listProducts);
             mAdapter.notifyDataSetChanged();
         } else {
-            if(tagView.equals(TagSearch.TAG_LISTVIEW)) {
-                rvListProducts.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-            } else {
+            if(tagView.equals(TagSearch.TAG_GRIDVIEW)) {
                 rvListProducts.setLayoutManager(new GridLayoutManager(mContext, numCollums));
+            } else {
+                rvListProducts.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
             }
             mAdapter = new CategoryDetailAdapter(listProducts);
             mAdapter.setTagView(tagView);
@@ -100,8 +115,48 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
         }
     }
 
+    public void setTagView(String tagView) {
+        this.tagView = tagView;
+    }
+
     @Override
     public void showLoadMore(boolean isShow) {
+        if(isShow == true) {
+            pbLoadMore.setVisibility(View.VISIBLE);
+        } else {
+            pbLoadMore.setVisibility(View.GONE);
+        }
+    }
 
+    @Override
+    public void changeView() {
+        if(tagView == TagSearch.TAG_LISTVIEW) {
+            tagView = TagSearch.TAG_GRIDVIEW;
+            ivChangeView.setBackgroundResource(Rconfig.getInstance()
+                    .drawable("ic_to_listview"));
+            rvListProducts.setLayoutManager(new GridLayoutManager(mContext, numCollums));
+        } else {
+            tagView = TagSearch.TAG_LISTVIEW;
+            ivChangeView.setBackgroundResource(Rconfig.getInstance()
+                    .drawable("ic_to_gridview"));
+            rvListProducts.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        }
+        mAdapter = new CategoryDetailAdapter(listProducts);
+        mAdapter.setTagView(tagView);
+        rvListProducts.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void showBottomMenu(boolean show) {
+        if(show == true) {
+            rlBottom.setVisibility(View.VISIBLE);
+        } else {
+            rlBottom.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public String getTagView() {
+        return tagView;
     }
 }

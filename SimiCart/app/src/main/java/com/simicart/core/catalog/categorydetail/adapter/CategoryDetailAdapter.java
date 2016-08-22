@@ -54,12 +54,12 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View itemView = null;
         RecyclerView.ViewHolder holder = null;
-        if(tagView.equals(TagSearch.TAG_LISTVIEW)) {
-            itemView = inflater.inflate(Rconfig.getInstance().layout("core_item_list_search"), null, false);
-            holder = new ListProductHolder(itemView);
-        } else {
+        if(tagView.equals(TagSearch.TAG_GRIDVIEW)) {
             itemView = inflater.inflate(Rconfig.getInstance().layout("core_item_gridview_productcategory"), null, false);
             holder = new GridProductHolder(itemView);
+        } else {
+            itemView = inflater.inflate(Rconfig.getInstance().layout("core_item_list_search"), null, false);
+            holder = new ListProductHolder(itemView);
         }
         return holder;
     }
@@ -67,10 +67,10 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Product product = listProducts.get(position);
-        if(tagView.equals(TagSearch.TAG_LISTVIEW)) {
-            createItemListView((ListProductHolder) holder, product);
-        } else {
+        if(tagView.equals(TagSearch.TAG_GRIDVIEW)) {
             createItemGridView((GridProductHolder) holder, product);
+        } else {
+            createItemListView((ListProductHolder) holder, product);
         }
     }
 
@@ -400,6 +400,21 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .getOutStockTextColor());
             rl_product_list = (RelativeLayout) v
                     .findViewById(Rconfig.getInstance().id("rel_product_list"));
+
+            rl_product_list = (RelativeLayout) v
+                    .findViewById(Rconfig.getInstance().id("rel_product_list"));
+            int withScreen = Utils.getScreenWidth();
+            LinearLayout.LayoutParams params2Collums = new LinearLayout.LayoutParams(
+                    ((withScreen - 22) / 2),
+                    (withScreen - 22) / 2);
+            LinearLayout.LayoutParams params4Collums = new LinearLayout.LayoutParams(
+                    Utils.getValueDp((int) ((withScreen - 20) / 4)),
+                    Utils.getValueDp((int) ((withScreen - 20) / 4)));
+            if(DataLocal.isTablet) {
+                rl_product_list.setLayoutParams(params4Collums);
+            } else {
+                rl_product_list.setLayoutParams(params2Collums);
+            }
         }
     }
 
