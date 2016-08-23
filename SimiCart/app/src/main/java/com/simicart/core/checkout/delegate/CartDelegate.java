@@ -1,5 +1,7 @@
 package com.simicart.core.checkout.delegate;
 
+import android.view.View;
+
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.checkout.entity.TotalPrice;
 
@@ -16,4 +18,7 @@ public interface CartDelegate extends SimiDelegate {
 	public void visibleAllView();
 
 	void setCheckoutWebView(String url);
+
+	public void showListProductsView(View view);
+
 }

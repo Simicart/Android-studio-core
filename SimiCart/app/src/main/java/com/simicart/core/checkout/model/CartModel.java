@@ -10,10 +10,13 @@ import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.config.Constants;
 
+import java.util.ArrayList;
+
 public class CartModel extends SimiModel {
 
 	protected int mQty;
 	protected TotalPrice mTotalPrice;
+	protected ArrayList<Cart> listCarts;
 
 	public int getQty() {
 		return mQty;
@@ -26,11 +29,13 @@ public class CartModel extends SimiModel {
 			collection = new SimiCollection();
 			collection.setJSON(mJSON);
 			mQty = 0;
+			listCarts = new ArrayList<>();
 			for (int i = 0; i < list.length(); i++) {
 				Cart cart = new Cart();
 				cart.setJSONObject(list.getJSONObject(i));
 				mQty += cart.getQty();
 				collection.addEntity(cart);
+				listCarts.add(cart);
 			}
 
 			try {
@@ -58,6 +63,10 @@ public class CartModel extends SimiModel {
 
 	public TotalPrice getTotalPrice() {
 		return mTotalPrice;
+	}
+
+	public ArrayList<Cart> getListCarts() {
+		return listCarts;
 	}
 
 	@Override

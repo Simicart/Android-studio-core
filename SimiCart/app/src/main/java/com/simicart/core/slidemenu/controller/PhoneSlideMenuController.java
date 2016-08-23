@@ -16,11 +16,13 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
+import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.cms.fragment.CMSFragment;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.fragment.MyAccountFragment;
@@ -414,7 +416,12 @@ public class PhoneSlideMenuController {
                 fragment = OrderHistoryFragment.newInstance();
                 break;
             case "Setting":
-                fragment = SettingAppFragment.newInstance();
+               // fragment = SettingAppFragment.newInstance();
+                HashMap<String,Object> hm = new HashMap<>();
+                hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+                hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,"3");
+                SimiManager.getIntance().openCategoryDetail(hm);
+                fragment = null;
 //                fragment.setShowPopup(true);
                 break;
             default:

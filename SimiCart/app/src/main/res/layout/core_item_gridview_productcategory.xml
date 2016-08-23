@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="10dp"
-    android:paddingTop="10dp">
+    android:paddingTop="10dp"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp">
 
     <RelativeLayout
         android:id="@+id/rel_product_list"
@@ -18,7 +20,8 @@
             android:layout_height="fill_parent"
             android:layout_centerInParent="true"
             android:padding="1dp"
-            android:src="@drawable/default_logo" />
+            android:src="@drawable/default_logo"
+            android:scaleType="fitCenter"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -70,7 +73,6 @@
             android:gravity="left"
             android:lines="1"
             android:paddingBottom="2dp"
-            android:paddingLeft="0dp"
             android:textSize="13sp" />
 
         <LinearLayout

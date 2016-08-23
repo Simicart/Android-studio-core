@@ -2,29 +2,23 @@ package com.simicart.theme.ztheme.home.controller;
 
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
 
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
-import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
-import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
+import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
-import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 import com.simicart.theme.ztheme.home.delegate.HomeZThemeDelegate;
 import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
 import com.simicart.theme.ztheme.home.entity.ZThemeSpotEntity;
-import com.simicart.theme.ztheme.home.fragment.SpotProductListZthemeFragment;
 import com.simicart.theme.ztheme.home.model.HomeZThemeModel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HomeZThemeController extends SimiController {
@@ -64,9 +58,13 @@ public class HomeZThemeController extends SimiController {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 ZThemeCatalogEntity catalogEntity = mDelegate.getListCatalog().get(groupPosition);
-                if(catalogEntity.getType().equals("category") && catalogEntity.getCategoryZTheme().hasChild() == true) {
+                if (catalogEntity.getType().equals("cat") && catalogEntity.getCategoryZTheme().hasChild() == true) {
                     Category childCategory = catalogEntity.getCategoryZTheme().getListChildCategory().get(childPosition);
-                    openCate(childCategory);
+                    if(childCategory.hasChild() == true) {
+                        openCate(childCategory);
+                    } else {
+                        openListProduct(childCategory);
+                    }
                 }
                 return true;
             }
@@ -77,10 +75,15 @@ public class HomeZThemeController extends SimiController {
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 ZThemeCatalogEntity catalogEntity = mDelegate.getListCatalog().get(groupPosition);
 
-                if(catalogEntity.getType().equals("category")) {
+                if (catalogEntity.getType().equals("cat")) {
                     Category categoryEntity = catalogEntity.getCategoryZTheme();
-                    if(categoryEntity.hasChild() == false) {
-                        openCate(categoryEntity);
+                    if (categoryEntity.hasChild() == true) {
+                        if(DataLocal.isTablet) {
+                            SimiManager.getIntance().openSubCategory(categoryEntity.getCategoryId(), categoryEntity.getCategoryName());
+                            return true;
+                        }
+                    } else {
+                        openListProduct(categoryEntity);
                     }
                 } else {
                     ZThemeSpotEntity spot = catalogEntity.getZThemeSpotEntity();
@@ -93,29 +96,29 @@ public class HomeZThemeController extends SimiController {
     }
 
     protected void openCate(Category cate) {
-//        String id = cate.getID();
-//        if (cate.hasChild()) {
-//            SimiData data = new SimiData();
-//            data.setData(id);
-//            CategoryFragment categoryFragment = CategoryFragment.newInstance(data);
-//            SimiManager.getIntance().replaceFragment(categoryFragment);
-//        } else {
-//            HashMap<String, Object> hs = new HashMap<>();
-//            hs.put("cat_id", id);
-//            SimiData data = new SimiData();
-//            data.setHsData(hs);
-//            CategoryDetailFragment fragment = CategoryDetailFragment.newInstance(data);
-//            SimiManager.getIntance().replaceFragment(fragment);
-//        }
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put("category_id", cate.getCategoryId());
+        hmData.put("category_name", cate.getCategoryName());
+        SimiData data = new SimiData(hmData);
+        CategoryFragment categoryFragment = CategoryFragment.newInstance(data);
+        SimiManager.getIntance().replaceFragment(categoryFragment);
     }
 
     protected void openListProduct(ZThemeSpotEntity spot) {
-        CategoryFragment fragment = CategoryFragment.newInstance(new SimiData(new HashMap<String, Object>()));
-        SimiManager.getIntance().replaceFragment(fragment);
-//        SimiData data = new SimiData();
-//        data.addData("list_id", product.getmId());
-//        CategoryDetailFragment fragment = CategoryDetailFragment.newInstance(data);
-//        SimiManager.getIntance().replaceFragment(fragment);
+        HashMap<String,Object> hm = new HashMap<>();
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CUSTOM);
+        hm.put("key", spot.getKey());
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, spot.getName());
+        hm.put(KeyData.CATEGORY_DETAIL.CUSTOM_URL, "ztheme/api/get_spot_products");
+        SimiManager.getIntance().openCategoryDetail(hm);
+    }
+
+    protected void openListProduct(Category category) {
+        HashMap<String,Object> hm = new HashMap<>();
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, category.getCategoryId());
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, category.getCategoryName());
+        SimiManager.getIntance().openCategoryDetail(hm);
     }
 
     @Override

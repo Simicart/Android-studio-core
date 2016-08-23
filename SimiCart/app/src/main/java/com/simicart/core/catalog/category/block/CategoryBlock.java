@@ -63,20 +63,12 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
         Drawable icon = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("ic_view_all"));
 
-        ll_listProducts = (LinearLayout) mView.findViewById(Rconfig.getInstance()
-                .id("ll_listProduct"));
-
         llCategory = (LinearLayout) mView.findViewById(Rconfig
                 .getInstance().id("ll_categories"));
         View v_line = (View) mView.findViewById(Rconfig.getInstance().id(
                 "v_line2"));
+
         if (DataLocal.isTablet) {
-            ImageView iv_back = (ImageView) mView.findViewById(Rconfig.getInstance().id("iv_back"));
-            Drawable iconBack = mContext.getResources().getDrawable(
-                    Rconfig.getInstance().drawable("ic_back"));
-            iconBack.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
-                    PorterDuff.Mode.SRC_ATOP);
-            iv_back.setImageDrawable(iconBack);
 
             icon.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
                     PorterDuff.Mode.SRC_ATOP);
@@ -89,6 +81,9 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
             mView.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
             v_line.setBackgroundColor(AppColorConfig.getInstance().getMenuLineColor());
         } else {
+            ll_listProducts = (LinearLayout) mView.findViewById(Rconfig.getInstance()
+                    .id("ll_listProduct"));
+
             tv_viewmore.setTextColor(AppColorConfig.getInstance().getContentColor());
 
             icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
@@ -125,7 +120,26 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
 
     @Override
     public void showListProducts(View view) {
-        ll_listProducts.removeAllViews();
-        ll_listProducts.addView(view);
+        if(view != null) {
+            tv_viewmore.setVisibility(View.VISIBLE);
+            iv_showmore.setVisibility(View.VISIBLE);
+            ll_listProducts.setVisibility(View.VISIBLE);
+            ll_listProducts.removeAllViews();
+            ll_listProducts.addView(view);
+        } else {
+            tv_viewmore.setVisibility(View.GONE);
+            iv_showmore.setVisibility(View.GONE);
+            ll_listProducts.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void showBack(boolean show) {
+
+    }
+
+    @Override
+    public void updateCategoryParent(String name) {
+
     }
 }

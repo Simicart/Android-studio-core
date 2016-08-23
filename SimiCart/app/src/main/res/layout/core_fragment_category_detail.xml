@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- search component -->
+    <LinearLayout
+        android:id="@+id/ll_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_2"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"></LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list_products"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="40dp"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:layout_below="@+id/ll_search"></android.support.v7.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/pb_load_more"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:indeterminateDrawable="@drawable/progressbar_indeterminate"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rl_menu_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="#E6f2f2f2"
+        android:clickable="false"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_change_view_data"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/iv_change_view"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_to_filter"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:padding="5dp"></RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_to_sort"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/iv_sort"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_sort" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

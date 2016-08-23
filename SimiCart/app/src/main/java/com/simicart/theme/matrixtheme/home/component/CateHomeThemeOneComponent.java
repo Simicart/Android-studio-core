@@ -89,6 +89,7 @@ public class CateHomeThemeOneComponent extends SimiComponent {
         imgCate.setImageResource(idLogo);
         imgCate.setScaleType(ImageView.ScaleType.FIT_XY);
         DrawableManager.fetchDrawableOnThread(urlImage, imgCate);
+        vfpCate.addView(imgCate);
     }
 
 

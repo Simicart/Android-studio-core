@@ -5,6 +5,7 @@ import android.util.Log;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.config.Constants;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,19 +17,14 @@ public class OrderProduct extends SimiEntity {
     private String mSpotId;
     private String mSpotKey;
     private String mSpotName;
-    private JSONObject mJsonData;
 
-    public JSONObject getJsonData() {
-        return mJsonData;
-    }
 
     public OrderProduct(JSONObject json) {
-        mJsonData = json;
-        mUrlImage = new ArrayList<String>();
         parse(json);
     }
 
     public void parse(JSONObject json) {
+        mJSON = json;
         try {
             if (json.has(Constants.SPOT_ID)) {
                 mSpotId = json.getString(Constants.SPOT_ID);
@@ -40,21 +36,27 @@ public class OrderProduct extends SimiEntity {
                 mSpotName = json.getString(Constants.SPOT_NAME);
             }
             if (json.has(Constants.IMAGES)) {
-                String data = json.getString(Constants.IMAGES);
-                data = data.replace("[", "");
-                data = data.replace("]", "");
-                String[] arr = data.split(",");
-                for (String string : arr) {
-                    string = string.replace("\"", "");
-                    string = string.replace("\\/", "/");
-                    Log.w("==================>", string);
-                    mUrlImage.add(string);
+
+                JSONArray array = getJSONArrayWithKey(json, "images");
+                if (null != array && array.length() > 0) {
+                    Log.e("OrderProduct","ARRAY IMAGE " + array.toString());
+                    mUrlImage = new ArrayList<>();
+                    parseListImage(array);
                 }
+
             }
         } catch (Exception e) {
 
         }
 
+    }
+
+    protected void parseListImage(JSONArray array) throws JSONException {
+        for (int i = 0; i < array.length(); i++) {
+            String image = array.getString(i);
+            Log.e("OrderProduct","IMAGES " + image);
+            mUrlImage.add(image);
+        }
     }
 
     public ArrayList<String> getUrlImage() {
