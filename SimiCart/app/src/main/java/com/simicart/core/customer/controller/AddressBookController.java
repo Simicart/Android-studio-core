@@ -30,18 +30,18 @@ public class AddressBookController extends SimiController {
 
     protected SimiDelegate mDelegate;
     protected OnTouchListener mListener;
-    protected OnItemClickListener mClicker;
+    protected int addressBookFor = -1;
 
     public OnTouchListener getListener() {
         return mListener;
     }
 
-    public OnItemClickListener getItemClicker() {
-        return mClicker;
-    }
-
     public void setDelegate(SimiDelegate delegate) {
         mDelegate = delegate;
+    }
+
+    public void setAddressBookFor(int addressBookFor) {
+        this.addressBookFor = addressBookFor;
     }
 
     @Override
@@ -52,10 +52,17 @@ public class AddressBookController extends SimiController {
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
                 mDelegate.updateView(mModel.getCollection());
             }
         });
-        mModel.addBody("is_get_order_address", "NO");
+        if(addressBookFor == Constants.KeyAddressBook.CUSTOMER_ADDRESS) {
+            mModel.addBody("is_get_order_address", "NO");
+        } else {
+            mModel.addBody("is_get_order_address", "YES");
+        }
+        mModel.addBody("user_email", "v@simi.com");
+        mModel.addBody("user_password", "123456");
         mModel.request();
 
         mListener = new OnTouchListener() {
@@ -77,49 +84,16 @@ public class AddressBookController extends SimiController {
             }
         };
 
-        mClicker = new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                selectItem(position);
-            }
-
-        };
-
-    }
-
-    protected void selectItem(int position) {
-        SimiEntity entity = mModel.getCollection().getCollection()
-                .get(position);
-        JSONObject jsonObject = entity.getJSONObject();
-        MyAddress addressbook = new MyAddress();
-        addressbook.setJSONObject(jsonObject);
-        AddressBookDetailFragment fragment = AddressBookDetailFragment
-                .newInstance();
-        Bundle bundleAddress = new Bundle();
-        bundleAddress.putSerializable(Constants.KeyData.BOOK_ADDRESS,
-                addressbook);
-        bundleAddress.putInt(Constants.KeyData.ADDRESS_FOR,
-                Constants.KeyAddress.ALL_ADDRESS);
-        fragment.setArguments(bundleAddress);
-        if (DataLocal.isTablet) {
-            SimiManager.getIntance().replacePopupFragment(fragment);
-        } else {
-            SimiManager.getIntance().replaceFragment(fragment);
-        }
     }
 
     @Override
     public void onResume() {
-        if (ConfigCheckout.getInstance().getStatusAddressBook() == true) {
-            if (mModel != null)
+//        if (ConfigCheckout.getInstance().getStatusAddressBook() == true) {
+//            if (mModel != null)
                 mDelegate.updateView(mModel.getCollection());
-        } else {
-            mDelegate.updateView(ConfigCheckout.getInstance()
-                    .getCollectionAddressBook());
-        }
+//        } else {
+//            mDelegate.updateView(ConfigCheckout.getInstance()
+//                    .getCollectionAddressBook());
+//        }
     }
-
 }

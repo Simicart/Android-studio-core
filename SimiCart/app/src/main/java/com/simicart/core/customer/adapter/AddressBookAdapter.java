@@ -1,173 +1,165 @@
 package com.simicart.core.customer.adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.DataLocal;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.entity.MyAddress;
 
-public class AddressBookAdapter extends BaseAdapter {
+import java.util.ArrayList;
 
-    Context mContext = null;
-    ArrayList<MyAddress> myAddresses = null;
-    boolean is_order = false;
+/**
+ * Created by Martial on 8/23/2016.
+ */
+public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.AddressBookHolder> {
 
-    public void isOrder(boolean is_order) {
-        this.is_order = is_order;
+    protected ArrayList<MyAddress> listAddress;
+    protected int addressBookFor = -1;
+
+    public AddressBookAdapter(ArrayList<MyAddress> listAddress, int addressBookFor) {
+        this.listAddress = listAddress;
+        this.addressBookFor = addressBookFor;
     }
 
-    public void setAddress(ArrayList<MyAddress> addresses) {
-        myAddresses = addresses;
+    @Override
+    public AddressBookHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View itemView = inflater.inflate(Rconfig.getInstance().layout("core_adapter_item_address_book"), null, false);
+        AddressBookHolder holder = new AddressBookHolder(itemView);
+
+        return holder;
     }
 
-    public AddressBookAdapter(Context context, ArrayList<MyAddress> myAddresses) {
-        this.mContext = context;
-        this.myAddresses = myAddresses;
-    }
-
-    public View getView(int position, View convertView, ViewGroup parent) {
-        MyAddress myAddress = myAddresses.get(position);
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-
-        ViewHolder holder = null;
-        if (null == convertView) {
-            holder = new ViewHolder();
-
-            if (DataLocal.isLanguageRTL) {
-                convertView = inflater
-                        .inflate(
-                                Rconfig.getInstance().layout(
-                                        "rtl_item_address_layout"), null);
-            } else {
-                convertView = inflater.inflate(
-                        Rconfig.getInstance()
-                                .layout("core_item_address_layout"), null);
-            }
-
-            holder.tv_name = (TextView) convertView.findViewById(Rconfig
-                    .getInstance().id("name"));
-
-            holder.tv_street = (TextView) convertView.findViewById(Rconfig
-                    .getInstance().id("street"));
-
-            holder.tv_city = (TextView) convertView.findViewById(Rconfig
-                    .getInstance().id("city"));
-
-            holder.tv_country = (TextView) convertView.findViewById(Rconfig
-                    .getInstance().id("country"));
-            holder.tv_phone = (TextView) convertView.findViewById(Rconfig
-                    .getInstance().id("phone"));
-
-            holder.tv_email = (TextView) convertView.findViewById(Rconfig
-                    .getInstance().id("email"));
-
-            holder.img_extend = (ImageView) convertView.findViewById(Rconfig
-                    .getInstance().id("image_expand"));
-
-            convertView.setTag(holder);
-
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        convertView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
-//        Utils.changeColorTextView(holder.tv_name);
-//        Utils.changeColorTextView(holder.tv_street);
-//        Utils.changeColorTextView(holder.tv_city);
-//        Utils.changeColorTextView(holder.tv_country);
-//        Utils.changeColorTextView(holder.tv_phone);
-//        Utils.changeColorTextView(holder.tv_email);
-//        Utils.changeColorImageview(mContext, holder.img_extend, "ic_extend");
+    @Override
+    public void onBindViewHolder(AddressBookHolder holder, int position) {
+        final MyAddress addressEntity = listAddress.get(position);
 
         // name
-        String name = myAddress.getName();
-        String prefix = myAddress.getPrefix();
-        String suffix = myAddress.getSuffix();
+        String name = addressEntity.getName();
+        String prefix = addressEntity.getPrefix();
+        String suffix = addressEntity.getSuffix();
 
         if (!Utils.validateString(prefix)) {
-            holder.tv_name.setText(name + " " + suffix);
+            holder.tvName.setText(name + " " + suffix);
         } else {
-            holder.tv_name.setText(prefix + " " + name + " " + suffix);
+            holder.tvName.setText(prefix + " " + name + " " + suffix);
         }
 
         // Street
-        String street = myAddress.getStreet();
+        String street = addressEntity.getStreet();
         if (Utils.validateString(street)) {
-            holder.tv_street.setText(myAddress.getStreet());
+            holder.tvStreet.setText(street);
         }
 
         // city
-        String state = myAddress.getStateName();
-        String city = myAddress.getCity();
-        String zip_code = myAddress.getZipCode();
+        String state = addressEntity.getStateName();
+        String city = addressEntity.getCity();
+        String zip_code = addressEntity.getZipCode();
         if (!Utils.validateString(state)) {
-            holder.tv_city.setText(city + ", " + zip_code);
+            holder.tvCity.setText(city + ", " + zip_code);
         } else {
-            holder.tv_city.setText(city + ", " + state + ", " + zip_code);
+            holder.tvCity.setText(city + ", " + state + ", " + zip_code);
         }
 
         // country
-        String country = myAddress.getCountryName();
+        String country = addressEntity.getCountryName();
         if (Utils.validateString(country)) {
-            holder.tv_country.setText(country);
+            holder.tvCountry.setText(country);
         }
 
         // phone
-        String phone = myAddress.getPhone();
+        String phone = addressEntity.getPhone();
         if (Utils.validateString(phone)) {
-            holder.tv_phone.setText(phone);
+            holder.tvPhone.setText(phone);
         }
 
         // email
-        String email = myAddress.getEmail();
+        String email = addressEntity.getEmail();
         if (Utils.validateString(email)) {
-            holder.tv_email.setText(email);
+            holder.tvEmail.setText(email);
         }
 
-        if (is_order) {
-            ImageView img = (ImageView) convertView.findViewById(Rconfig
-                    .getInstance().id("image_expand"));
-            img.setVisibility(View.GONE);
+        if (addressBookFor == Constants.KeyAddressBook.CHECKOUT_ADDRESS) {
+            holder.ivExtend.setVisibility(View.GONE);
         }
-        return convertView;
+
+        holder.vAddress.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
+
+        holder.rlItemAddressBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addressBookFor == Constants.KeyAddressBook.CUSTOMER_ADDRESS) {
+                    onChooseAddressEdit(addressEntity);
+                } else if(addressBookFor == Constants.KeyAddressBook.CHECKOUT_ADDRESS) {
+                    onChooseAddressCheckout(addressEntity);
+                }
+            }
+        });
     }
 
     @Override
-    public int getCount() {
-        // TODO Auto-generated method stub
-        return myAddresses.size();
+    public int getItemCount() {
+        return listAddress.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        // TODO Auto-generated method stub
-        return null;
+    public static class AddressBookHolder extends RecyclerView.ViewHolder {
+        private RelativeLayout rlItemAddressBook;
+        private TextView tvName, tvStreet, tvCity, tvCountry, tvPhone, tvEmail;
+        private ImageView ivExtend;
+        private View vAddress;
+
+        public AddressBookHolder(View itemView) {
+            super(itemView);
+            rlItemAddressBook = (RelativeLayout) itemView.findViewById(Rconfig.getInstance().id("rl_item_address_book"));
+
+            tvName = (TextView) itemView.findViewById(Rconfig.getInstance().id("tv_name"));
+            tvName.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+            tvStreet = (TextView) itemView.findViewById(Rconfig.getInstance().id("tv_street"));
+            tvStreet.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+            tvCity = (TextView) itemView.findViewById(Rconfig.getInstance().id("tv_city"));
+            tvCity.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+            tvCountry = (TextView) itemView.findViewById(Rconfig.getInstance().id("tv_country"));
+            tvCountry.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+            tvPhone = (TextView) itemView.findViewById(Rconfig.getInstance().id("tv_phone"));
+            tvPhone.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+            tvEmail = (TextView) itemView.findViewById(Rconfig.getInstance().id("tv_email"));
+            tvEmail.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+            ivExtend = (ImageView) itemView.findViewById(Rconfig.getInstance().id("image_expand"));
+            vAddress = (View) itemView.findViewById(Rconfig.getInstance().id("v_address"));
+
+        }
     }
 
-    @Override
-    public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return 0;
+    protected void onChooseAddressEdit(MyAddress addressEntity) {
+//        SimiData data = new SimiData();
+//        data.addData("address_for", Constants.KeyAddress.EDIT_ADDRESS);
+//        data.addData("address_entity", addressEntity);
+//        AddressFragment fragment = AddressFragment.newInstance(data);
+//        SimiManager.getIntance().replaceFragment(fragment);
     }
 
-    class ViewHolder {
-        TextView tv_name;
-        TextView tv_street;
-        TextView tv_country;
-        TextView tv_phone;
-        TextView tv_email;
-        TextView tv_city;
-        ImageView img_extend;
+    protected void onChooseAddressCheckout(MyAddress addressEntity) {
+//        ReviewOrderFragment fragment = new ReviewOrderFragment();
+//        fragment.setTypeCheckout(ReviewOrderFragment.CHECKOUTTYPE.AS_LOGGED);
+//        fragment.setShippingAddress(addressEntity);
+//        fragment.setBillingAddress(addressEntity);
+//        SimiManager.getIntance().replaceFragment(fragment);
     }
 
 }

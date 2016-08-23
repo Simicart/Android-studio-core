@@ -1,14 +1,5 @@
 package com.simicart.core.checkout.controller;
 
-import java.util.ArrayList;
-
-import kankan.wheel.widget.WheelView;
-import kankan.wheel.widget.adapters.NumericWheelAdapter;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -25,7 +16,6 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.magestore.simicart.R;
-import com.simicart.MainActivity;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
@@ -36,14 +26,19 @@ import com.simicart.core.checkout.checkoutwebview.fragment.CheckoutWebviewFragme
 import com.simicart.core.checkout.delegate.CartAdapterDelegate;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.checkout.entity.Cart;
-import com.simicart.core.checkout.fragment.AddressBookCheckoutFragment;
 import com.simicart.core.checkout.model.EditCartItemModel;
-import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import kankan.wheel.widget.WheelView;
+import kankan.wheel.widget.adapters.NumericWheelAdapter;
 
 @SuppressLint("ClickableViewAccessibility")
 public class CartListenerController implements CartAdapterDelegate {
@@ -74,18 +69,18 @@ public class CartListenerController implements CartAdapterDelegate {
                         .newInstanse(mWebviewUrl, true);
                 SimiManager.getIntance().replaceFragment(fragment);
             } else {
-                if (DataPreferences.isSignInComplete()) {
-                    AddressBookCheckoutFragment fragment = AddressBookCheckoutFragment
-                            .newInstance(0, Constants.KeyAddress.ALL_ADDRESS,
-                                    null, null);
-                    if (DataLocal.isTablet) {
-                        SimiManager.getIntance().replacePopupFragment(fragment);
-                    } else {
-                        SimiManager.getIntance().replaceFragment(fragment);
-                    }
-                } else {
-                    mBlockDelegate.showPopupCheckout();
-                }
+//                if (DataPreferences.isSignInComplete()) {
+//                    AddressBookCheckoutFragment fragment = AddressBookCheckoutFragment
+//                            .newInstance(0, Constants.KeyAddress.ALL_ADDRESS,
+//                                    null, null);
+//                    if (DataLocal.isTablet) {
+//                        SimiManager.getIntance().replacePopupFragment(fragment);
+//                    } else {
+//                        SimiManager.getIntance().replaceFragment(fragment);
+//                    }
+//                } else {
+//                    mBlockDelegate.showPopupCheckout();
+//                }
             }
         } else {
             SimiNotify.getInstance().showNotify(null, mMessage, "Ok");

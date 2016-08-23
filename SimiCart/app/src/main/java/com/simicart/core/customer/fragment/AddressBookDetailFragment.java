@@ -19,7 +19,7 @@ public class AddressBookDetailFragment extends SimiFragment {
     protected AddressBookDetailBlock mBlock;
     protected AddressBookDetailController mController;
 
-    protected int editAddressFor = Constants.KeyAddress.ALL_ADDRESS;
+    protected int editAddressFor = 1;
     protected MyAddress mBillingAddress;
     protected MyAddress mShippingAddress;
 
@@ -52,12 +52,12 @@ public class AddressBookDetailFragment extends SimiFragment {
                     Constants.KeyData.BOOK_ADDRESS);
             editAddressFor = getArguments().getInt(
                     Constants.KeyData.ADDRESS_FOR);
-            if (editAddressFor != Constants.KeyAddress.ALL_ADDRESS) {
-                mShippingAddress = (MyAddress) getArguments().getSerializable(
-                        Constants.KeyData.SHIPPING_ADDRESS);
-                mBillingAddress = (MyAddress) getArguments().getSerializable(
-                        Constants.KeyData.BILLING_ADDRESS);
-            }
+//            if (editAddressFor != Constants.KeyAddress.ALL_ADDRESS) {
+//                mShippingAddress = (MyAddress) getArguments().getSerializable(
+//                        Constants.KeyData.SHIPPING_ADDRESS);
+//                mBillingAddress = (MyAddress) getArguments().getSerializable(
+//                        Constants.KeyData.BILLING_ADDRESS);
+//            }
         }
         mBlock = new AddressBookDetailBlock(view, context);
         mBlock.setAddressBookDetail(addressbook);

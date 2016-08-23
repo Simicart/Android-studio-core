@@ -21,11 +21,11 @@ public class AddressBookModel extends SimiModel {
 			collection = new SimiCollection();
 			for (int i = 0; i < list.length(); i++) {
 				MyAddress address = new MyAddress();
-				address.setJSONObject(list.getJSONObject(i));
+				address.parse(list.getJSONObject(i));
 				collection.addEntity(address);
 			}
 			Collections.reverse(collection.getCollection());
-			ConfigCheckout.getInstance().setCollectionAddressBook(collection);
+//			ConfigCheckout.getInstance().setCollectionAddressBook(collection);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

@@ -1,7 +1,6 @@
 package com.simicart.core.checkout.controller;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -13,7 +12,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.simicart.MainActivity;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
@@ -29,7 +27,6 @@ import com.simicart.core.checkout.entity.Condition;
 import com.simicart.core.checkout.entity.PaymentMethod;
 import com.simicart.core.checkout.entity.ShippingMethod;
 import com.simicart.core.checkout.entity.TotalPrice;
-import com.simicart.core.checkout.fragment.AddressBookCheckoutFragment;
 import com.simicart.core.checkout.model.CouponCodeModel;
 import com.simicart.core.checkout.model.PaymentMethodModel;
 import com.simicart.core.checkout.model.ReviewOrderModel;
@@ -42,7 +39,6 @@ import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.entity.MyAddress;
 import com.simicart.core.customer.fragment.AddressBookDetailFragment;
-import com.simicart.core.notification.NotificationActivity;
 import com.simicart.core.notification.entity.NotificationEntity;
 
 import java.util.ArrayList;
@@ -194,11 +190,11 @@ public class ReviewOrderController extends SimiController implements
             @Override
             public void onClick(View v) {
                 if (DataPreferences.isSignInComplete()) {
-                    AddressBookCheckoutFragment fragment = AddressBookCheckoutFragment
-                            .newInstance(mAfterControll,
-                                    Constants.KeyAddress.SHIPPING_ADDRESS,
-                                    mBillingAddress, mShippingAddress);
-                    SimiManager.getIntance().replacePopupFragment(fragment);
+//                    AddressBookCheckoutFragment fragment = AddressBookCheckoutFragment
+//                            .newInstance(mAfterControll,
+//                                    Constants.KeyAddress.SHIPPING_ADDRESS,
+//                                    mBillingAddress, mShippingAddress);
+//                    SimiManager.getIntance().replacePopupFragment(fragment);
                 } else {
                     AddressBookDetailFragment fragment = AddressBookDetailFragment
                             .newInstance();
@@ -232,11 +228,11 @@ public class ReviewOrderController extends SimiController implements
             @Override
             public void onClick(View v) {
                 if (DataPreferences.isSignInComplete()) {
-                    AddressBookCheckoutFragment fragment = AddressBookCheckoutFragment
-                            .newInstance(mAfterControll,
-                                    Constants.KeyAddress.BILLING_ADDRESS,
-                                    mBillingAddress, mShippingAddress);
-                    SimiManager.getIntance().replacePopupFragment(fragment);
+//                    AddressBookCheckoutFragment fragment = AddressBookCheckoutFragment
+//                            .newInstance(mAfterControll,
+//                                    Constants.KeyAddress.BILLING_ADDRESS,
+//                                    mBillingAddress, mShippingAddress);
+//                    SimiManager.getIntance().replacePopupFragment(fragment);
                 } else {
                     AddressBookDetailFragment fragment = AddressBookDetailFragment
                             .newInstance();

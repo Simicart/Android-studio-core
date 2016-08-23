@@ -66,11 +66,11 @@
             android:textSize="15sp" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv_listAddress"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/core_line_border_white" >
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

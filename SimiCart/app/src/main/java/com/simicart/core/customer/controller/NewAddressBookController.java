@@ -310,8 +310,8 @@ public class NewAddressBookController extends SimiController implements
             @Override
             public void onSuccess(SimiCollection collection) {
                 if (mAfterController == Constants.NEW_ADDRESS) {
-                    AddressBookFragment fragment = AddressBookFragment
-                            .newInstance();
+//                    AddressBookFragment fragment = AddressBookFragment
+//                            .newInstance();
 //						SimiManager.getIntance().replacePopupFragment(fragment);
                 } else {
                     MyAddress newAddress = (MyAddress) mModel
@@ -338,10 +338,10 @@ public class NewAddressBookController extends SimiController implements
                         MyAddress shippingAdd = null, billingAdd = null;
                         if (mAfterController == Constants.NEW_ADDRESS_CHECKOUT) {
                             switch (addressFor) {
-                                case Constants.KeyAddress.ALL_ADDRESS:
-                                    billingAdd = newAddress;
-                                    shippingAdd = newAddress;
-                                    break;
+//                                case Constants.KeyAddress.ALL_ADDRESS:
+//                                    billingAdd = newAddress;
+//                                    shippingAdd = newAddress;
+//                                    break;
                                 case Constants.KeyAddress.BILLING_ADDRESS:
                                     billingAdd = newAddress;
                                     shippingAdd = mShippingAddress;
