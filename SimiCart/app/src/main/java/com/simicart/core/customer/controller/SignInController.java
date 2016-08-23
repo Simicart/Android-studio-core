@@ -25,7 +25,6 @@ import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.entity.Cart;
-import com.simicart.core.checkout.fragment.AddressBookCheckoutFragment;
 import com.simicart.core.checkout.model.CartModel;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
@@ -37,7 +36,6 @@ import com.simicart.core.customer.delegate.SignInDelegate;
 import com.simicart.core.customer.fragment.ForgotPasswordFragment;
 import com.simicart.core.customer.fragment.RegisterCustomerFragment;
 import com.simicart.core.customer.model.SignInModel;
-import com.simicart.core.home.fragment.HomeFragment;
 
 import java.util.ArrayList;
 
@@ -291,7 +289,7 @@ public class SignInController extends SimiController {
                     });
                     mModel.request();
                     SimiFragment fragment = null;
-                    fragment = AddressBookCheckoutFragment.newInstance();
+//                    fragment = AddressBookCheckoutFragment.newInstance();
                     // event for wish list
 //						CacheFragment cache = new CacheFragment();
 //						cache.setFragment(fragment);

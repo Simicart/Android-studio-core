@@ -341,12 +341,6 @@ public class Constants {
     // edit address
     public static final int EDIT_ADDRESS = 4;
 
-    public final static class KeyAddress {
-        public final static int ALL_ADDRESS = 0;
-        public final static int BILLING_ADDRESS = 1;
-        public final static int SHIPPING_ADDRESS = 2;
-    }
-
     // truong
     public static final int TARGET_PRODUCTDETAIL = 1234;
     public static String itemName = "";
@@ -524,6 +518,21 @@ public class Constants {
         public static final String TYPE_JSONOBJECT = "json_object";
         public static final String TYPE_BOOLEAN = "type_boolean";
 
+    }
+
+    public final static class KeyAddress {
+        public final static int NEW_ADDRESS = 0;
+        public final static int EDIT_ADDRESS = 1;
+        public final static int CHECKOUT_NEW_ADDRESS = 2;
+        public final static int CHECKOUT_NEW_CUSTOMER = 3;
+        public final static int CHECKOUT_GUEST = 4;
+        public final static int BILLING_ADDRESS = 5;
+        public final static int SHIPPING_ADDRESS = 6;
+    }
+
+    public final static class KeyAddressBook {
+        public final static int CUSTOMER_ADDRESS = 0;
+        public final static int CHECKOUT_ADDRESS = 1;
     }
 
 }

@@ -38,7 +38,7 @@ public class AddressBookDetailController extends SimiController implements
     protected String mCurrentCountry = "";
     protected String mCurrentState = "";
 
-    protected int editAddressFor = Constants.KeyAddress.ALL_ADDRESS;
+    protected int editAddressFor = 1;
     protected MyAddress mBillingAddress;
     protected MyAddress mShippingAddress;
 

@@ -23,8 +23,10 @@ import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.cms.fragment.CMSFragment;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.fragment.AddressBookFragment;
 import com.simicart.core.customer.fragment.MyAccountFragment;
 import com.simicart.core.customer.fragment.OrderHistoryFragment;
 import com.simicart.core.customer.fragment.SignInFragment;
@@ -404,20 +406,25 @@ public class PhoneSlideMenuController {
     public SimiFragment navigateNormal(ItemNavigation item) {
         SimiFragment fragment = null;
         String name = item.getName();
-
+        HashMap<String,Object> hm = null;
         switch (name) {
             case "Home":
                 fragment = HomeFragment.newInstance();
                 break;
             case "Category":
 //                fragment = CategoryFragment.newInstance("-1", "all categories");
+                hm = new HashMap<>();
+                hm.put("address_book_for", Constants.KeyAddressBook.CUSTOMER_ADDRESS);
+                SimiData data = new SimiData(hm);
+                AddressBookFragment addressBookFragment = AddressBookFragment.newInstance(data);
+                SimiManager.getIntance().replaceFragment(addressBookFragment);
                 break;
             case "Order History":
                 fragment = OrderHistoryFragment.newInstance();
                 break;
             case "Setting":
                // fragment = SettingAppFragment.newInstance();
-                HashMap<String,Object> hm = new HashMap<>();
+                hm = new HashMap<>();
                 hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
                 hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,"3");
                 SimiManager.getIntance().openCategoryDetail(hm);
