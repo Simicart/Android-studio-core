@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by Martial on 8/19/2016.
  */
-public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDelegate{
+public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDelegate {
 
     protected RelativeLayout rlBottom, rlChangeView, rlSort, rlFilter;
     protected ImageView ivChangeView;
@@ -41,13 +41,6 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
         super(view, context);
     }
 
-    public void onChangeViewClick(View.OnClickListener listener) {
-        rlChangeView.setOnClickListener(listener);
-    }
-
-    public void onListScroll(RecyclerView.OnScrollListener listener) {
-        rvListProducts.setOnScrollListener(listener);
-    }
 
     @Override
     public void initView() {
@@ -61,7 +54,7 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
         rlBottom.setVisibility(View.VISIBLE);
 
         ivChangeView = (ImageView) mView.findViewById(Rconfig.getInstance().id("iv_change_view"));
-        if(tagView == TagSearch.TAG_GRIDVIEW) {
+        if (tagView == TagSearch.TAG_GRIDVIEW) {
             ivChangeView.setBackgroundResource(Rconfig.getInstance()
                     .drawable("ic_to_listview"));
         } else {
@@ -81,10 +74,9 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     @Override
     public void drawView(SimiCollection collection) {
         ArrayList<SimiEntity> entities = collection.getCollection();
-        if(entities != null) {
+        if (entities != null) {
             ArrayList<Product> products = new ArrayList<>();
-            Log.e("abc", "//" + entities.size());
-            for(SimiEntity simiEntity : entities) {
+            for (SimiEntity simiEntity : entities) {
                 Product product = new Product();
                 product.parse(simiEntity.getJSONObject());
                 products.add(product);
@@ -104,7 +96,7 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
             mAdapter.setListProducts(listProducts);
             mAdapter.notifyDataSetChanged();
         } else {
-            if(tagView.equals(TagSearch.TAG_GRIDVIEW)) {
+            if (tagView.equals(TagSearch.TAG_GRIDVIEW)) {
                 rvListProducts.setLayoutManager(new GridLayoutManager(mContext, numCollums));
             } else {
                 rvListProducts.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
@@ -121,7 +113,7 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
 
     @Override
     public void showLoadMore(boolean isShow) {
-        if(isShow == true) {
+        if (isShow == true) {
             pbLoadMore.setVisibility(View.VISIBLE);
         } else {
             pbLoadMore.setVisibility(View.GONE);
@@ -130,7 +122,7 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
 
     @Override
     public void changeView() {
-        if(tagView == TagSearch.TAG_LISTVIEW) {
+        if (tagView == TagSearch.TAG_LISTVIEW) {
             tagView = TagSearch.TAG_GRIDVIEW;
             ivChangeView.setBackgroundResource(Rconfig.getInstance()
                     .drawable("ic_to_listview"));
@@ -148,7 +140,7 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
 
     @Override
     public void showBottomMenu(boolean show) {
-        if(show == true) {
+        if (show == true) {
             rlBottom.setVisibility(View.VISIBLE);
         } else {
             rlBottom.setVisibility(View.GONE);
@@ -158,5 +150,17 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     @Override
     public String getTagView() {
         return tagView;
+    }
+
+    public void onChangeViewClick(View.OnClickListener listener) {
+        rlChangeView.setOnClickListener(listener);
+    }
+
+    public void onListScroll(RecyclerView.OnScrollListener listener) {
+        rvListProducts.setOnScrollListener(listener);
+    }
+
+    public void setSortListener(View.OnClickListener listener) {
+        rlSort.setOnClickListener(listener);
     }
 }
