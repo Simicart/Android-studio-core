@@ -57,6 +57,8 @@ public class CartController extends SimiController {
                 mDelegate.setCheckoutWebView(url);
             }
         });
+        mModel.addBody("user_email", "v@simi.com");
+        mModel.addBody("user_password", "123456");
         mModel.request();
     }
 
@@ -67,7 +69,7 @@ public class CartController extends SimiController {
 
     protected void createListProducts() {
         ArrayList<Cart> listCarts = ((CartModel) mModel).getListCarts();
-        if(listCarts.size() > 0) {
+        if(listCarts.size() == 0) {
             mDelegate.visibleAllView();
         }
         ListProductCheckoutComponent listProductCheckoutComponent =

@@ -6,13 +6,15 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,11 +28,17 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.component.ListProductCheckoutComponent;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.checkout.entity.Cart;
+import com.simicart.core.checkout.entity.Option;
 import com.simicart.core.checkout.model.EditCartItemModel;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -86,7 +94,28 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             }
         });
 
-        holder.tvItemCartPrice.setText(String.valueOf(cartEntity.getProduct_price()));
+        holder.tvItemCartPrice.setText(AppStoreConfig.getInstance().getPrice(
+                Float.toString(cartEntity.getProduct_price())));
+        holder.tvItemCartPrice.setTextColor(AppColorConfig.getInstance().getPriceColor());
+
+        holder.tvItemCartOption.setTextColor(AppColorConfig.getInstance().getContentColor());
+        ArrayList<Option> options = cartEntity.getOptions();
+        if (options != null) {
+            displayOptions(holder.tvItemCartOption, options);
+        } else {
+            holder.tvItemCartOption.setVisibility(View.GONE);
+        }
+
+        holder.llStock.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
+        holder.tvOutStock.setText(SimiTranslator.getInstance().translate("Quantity"));
+        if (cartEntity.getStock().equals(SimiTranslator.getInstance().translate("Out Stock"))) {
+            holder.llStock.setVisibility(View.VISIBLE);
+        } else {
+            holder.llStock.setVisibility(View.GONE);
+        }
+
+        holder.vCart.setBackgroundColor(AppColorConfig.getInstance()
+                .getLineColor());
 
         holder.rlItemCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +139,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 showQtyPicker(position, quantity, min, max);
             }
         });
+    }
+
+    protected void displayOptions(TextView tv_options, ArrayList<Option> options) {
+        int total = 0;
+        if (options != null) {
+            total = options.size();
+        }
+        if (total > 0) {
+            String html = "<dl>";
+            for (int i = 0; i < total; i++) {
+                Option option = options.get(i);
+                html += "<b>";
+                html += option.getOption_title();
+                html += "</b>";
+                html += "<br/>";
+                html += option.getOption_value();
+                html += "<br/>";
+            }
+            html += "</dl>";
+            tv_options.setText(Html.fromHtml(html));
+        } else {
+            tv_options.setText("");
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, 0);
+            lp.weight = 3;
+            tv_options.setLayoutParams(lp);
+        }
     }
 
     protected void showQtyPicker(final int position, final int qty, int min, int max) {
@@ -180,15 +236,34 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             @Override
             public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissDialogLoading();
-                createListProducts();
+                ArrayList<Cart> listQuotes = ((EditCartItemModel) editModel).getListCarts();
+                if(listQuotes.size() > 0) {
+                    createListProducts(listQuotes);
+                    ((CartDelegate) mDelegate).onUpdateTotalPrice(((EditCartItemModel) editModel)
+                            .getTotalPrice());
+                } else {
+                    ((CartDelegate) mDelegate).visibleAllView();
+                }
             }
         });
-        editModel.addBody(listCarts.get(position).getId(), quantity);
+        JSONObject jsonParam = null;
+        try {
+            jsonParam = new JSONObject();
+            jsonParam.put("cart_item_id", listCarts.get(position).getId());
+            jsonParam.put("product_qty", quantity);
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (null != jsonParam) {
+            JSONArray arrParams = new JSONArray();
+            arrParams.put(jsonParam);
+            editModel.addBody("cart_items", arrParams);
+        }
         editModel.request();
     }
 
-    protected void createListProducts() {
-        ArrayList<Cart> listQuotes = ((EditCartItemModel) editModel).getListCarts();
+    protected void createListProducts(ArrayList<Cart> listQuotes) {
         ListProductCheckoutComponent listProductCheckoutComponent =
                 new ListProductCheckoutComponent(listQuotes, mDelegate, layoutID);
         View view = listProductCheckoutComponent.createView();
@@ -206,6 +281,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 tvItemCartPrice, tvQuantity, tvItemCartQty;
         private ImageView ivItemCartImage, ivItemCartDelete, ivItemCartQty;
         private RelativeLayout rItemCartlQty, rlItemCart;
+        private LinearLayout llStock;
+        private View vCart;
 
         public CartViewHolder(View itemView) {
             super(itemView);
@@ -221,6 +298,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             ivItemCartDelete = (ImageView) itemView.findViewById(Rconfig.getInstance().id("iv_item_cart_del"));
             ivItemCartQty = (ImageView) itemView.findViewById(Rconfig.getInstance().id("iv_quantity"));
             rItemCartlQty = (RelativeLayout) itemView.findViewById(Rconfig.getInstance().id("rl_quantity"));
+            llStock = (LinearLayout) itemView.findViewById(Rconfig.getInstance().id("ll_stock"));
+            vCart = (View) itemView.findViewById(Rconfig.getInstance().id("v_cart"));
         }
     }
 }

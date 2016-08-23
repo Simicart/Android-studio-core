@@ -98,40 +98,6 @@ public class CartBlock extends SimiBlock implements CartDelegate {
 
     @Override
     public void drawView(SimiCollection collection) {
-//        ArrayList<SimiEntity> entity = collection.getCollection();
-//
-//        if (null != entity && entity.size() > 0) {
-//            ArrayList<Cart> carts = new ArrayList<Cart>();
-//            if (isShown()) {
-//                DataLocal.listCarts.clear();
-//            }
-//            for (int i = 0; i < entity.size(); i++) {
-//                SimiEntity simiEntity = entity.get(i);
-//                Cart cart = (Cart) simiEntity;
-//                carts.add(cart);
-//                if (isShown()) {
-//                    DataLocal.listCarts.add(cart);
-//                }
-//            }
-//            if (carts.size() > 0) {
-//                mListenerController.setListCart(carts);
-//                if (null == mAdapter) {
-//                    mAdapter = new CartListAdapter(mContext, carts);
-//                    lv_product.setAdapter(mAdapter);
-//                    mAdapter.setDelegate(mListenerController);
-//                } else {
-//                    mAdapter.setListCart(carts);
-//                    mAdapter.notifyDataSetChanged();
-//                }
-//            } else {
-//                visiableView();
-//                return;
-//            }
-//        } else {
-//            visiableView();
-//            return;
-//        }
-
         mListenerController.setmMessage(message);
     }
 

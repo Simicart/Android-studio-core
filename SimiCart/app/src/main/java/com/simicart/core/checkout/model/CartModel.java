@@ -1,5 +1,7 @@
 package com.simicart.core.checkout.model;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +34,7 @@ public class CartModel extends SimiModel {
 			listCarts = new ArrayList<>();
 			for (int i = 0; i < list.length(); i++) {
 				Cart cart = new Cart();
-				cart.setJSONObject(list.getJSONObject(i));
+				cart.parse(list.getJSONObject(i));
 				mQty += cart.getQty();
 				collection.addEntity(cart);
 				listCarts.add(cart);
