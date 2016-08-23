@@ -44,7 +44,6 @@ public class CategoryDetailModel extends SimiModel {
 
     @Override
     protected void parseData() {
-        Log.e("CategoryDetailModel ","DATA " + mJSON.toString());
         try {
             if(mJSON.has("message")) {
                 JSONArray messArr = mJSON.getJSONArray("message");
@@ -62,8 +61,6 @@ public class CategoryDetailModel extends SimiModel {
 
             //parse listID
 //            boolean hasListIDs = parseListProductId(mJSON);
-            Log.e("abc", "//" + list.length());
-            Log.e("abc", "//" + collection.getCollection().size());
             for (int i = 0; i < list.length(); i++) {
                 Product product = new Product();
                 product.parse(list.getJSONObject(i));
@@ -73,7 +70,6 @@ public class CategoryDetailModel extends SimiModel {
 //                listProduct.add(product);
                 collection.addEntity(product);
             }
-            Log.e("abc", "//" + collection.getCollection().size());
         } catch (JSONException e) {
             Log.e("CategoryDetailModel ", "paserData Exception " + e.getMessage());
         }

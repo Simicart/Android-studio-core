@@ -11,6 +11,7 @@ import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.catalog.categorydetail.component.SortComponent;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.categorydetail.model.CategoryDetailModel;
@@ -37,15 +38,10 @@ public class CategoryDetailController extends SimiController {
     protected boolean isOnscroll = true;
 
     protected View.OnClickListener onChangeViewClick;
+    protected View.OnClickListener mSortListener;
     protected RecyclerView.OnScrollListener onListScroll;
 
-    public View.OnClickListener getOnChangeViewClick() {
-        return onChangeViewClick;
-    }
 
-    public RecyclerView.OnScrollListener getOnListScroll() {
-        return onListScroll;
-    }
 
     @Override
     public void onStart() {
@@ -80,6 +76,14 @@ public class CategoryDetailController extends SimiController {
 
     protected void initListener() {
 
+        mSortListener  = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SortComponent sortComponent = new SortComponent(v   );
+                sortComponent.showPopup();
+            }
+        };
+
         onChangeViewClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,9 +114,8 @@ public class CategoryDetailController extends SimiController {
                 } else {
                     lastPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
                 }
-                Log.e("abc", "last==" + lastPosition);
-                Log.e("abc", "count==" + count);
-                if (lastPosition == mOffset + mLimit - 1
+                int threshold = mOffset + mLimit -1;
+                if (lastPosition == threshold
                         && mResultNumber > count) {
                     if (isOnscroll) {
                         mOffset += mLimit;
@@ -199,4 +202,15 @@ public class CategoryDetailController extends SimiController {
         mDelegate = delegate;
     }
 
+    public View.OnClickListener getOnChangeViewClick() {
+        return onChangeViewClick;
+    }
+
+    public RecyclerView.OnScrollListener getOnListScroll() {
+        return onListScroll;
+    }
+
+    public View.OnClickListener getSortListener(){
+        return mSortListener;
+    }
 }

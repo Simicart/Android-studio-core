@@ -44,7 +44,7 @@ public class CategoryDetailFragment extends SimiFragment {
         rootView = inflater.inflate(idView, null, false);
 
         // initial search
-        if(!DataLocal.isTablet) {
+        if (!DataLocal.isTablet) {
             SearchComponent searchComponent = new SearchComponent();
             View searchView = searchComponent.createView();
             LinearLayout llSearch = (LinearLayout) rootView.findViewById(Rconfig.getInstance().id("ll_search"));
@@ -52,8 +52,8 @@ public class CategoryDetailFragment extends SimiFragment {
         }
 
         mBlock = new CategoryDetailBlock(rootView, getActivity());
-        if(!Utils.validateString(tagView)) {
-            if(!DataLocal.isTablet) {
+        if (!Utils.validateString(tagView)) {
+            if (!DataLocal.isTablet) {
                 tagView = TagSearch.TAG_LISTVIEW;
             } else {
                 tagView = TagSearch.TAG_GRIDVIEW;
@@ -72,10 +72,11 @@ public class CategoryDetailFragment extends SimiFragment {
             mController.setDelegate(mBlock);
             mController.onResume();
         }
-        if(!DataLocal.isTablet) {
+        if (!DataLocal.isTablet) {
             mBlock.onChangeViewClick(mController.getOnChangeViewClick());
         }
         mBlock.onListScroll(mController.getOnListScroll());
+        mBlock.setSortListener(mController.getSortListener());
 
         return rootView;
     }
