@@ -96,7 +96,7 @@
     <dimen name="size_300">300dp</dimen>
     <dimen name="size_600">600dp</dimen>
 
-    <dimen name="height_button">55dp</dimen>
+    <dimen name="height_button">50dp</dimen>
     <dimen name="height_button_tablet">60dp</dimen>
 
     <dimen name="text_8">8sp</dimen>

@@ -5,14 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <View
-        android:id="@+id/vSignInVisible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:visibility="gone" />
-
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -20,11 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="10dp" >
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="40dp" />
+            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/size_40">
 
             <LinearLayout
                 android:id="@+id/ll_form_email"
@@ -142,11 +132,13 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="3dp" >
 
-                <com.simicart.core.material.ButtonRectangle
+                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/bt_signIn"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_button"
-                    android:text="" />
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -167,6 +159,6 @@
                     android:textSize="15sp" />
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

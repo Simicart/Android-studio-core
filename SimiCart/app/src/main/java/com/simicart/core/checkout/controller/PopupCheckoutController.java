@@ -91,7 +91,7 @@ public class PopupCheckoutController extends SimiController {
                     }
                     case MotionEvent.ACTION_UP: {
                         mBlockDelegate.dismissPopupCheckout();
-                        SignInFragment fragment = SignInFragment.newInstance(null, null, true);
+                        SignInFragment fragment = SignInFragment.newInstance(null);
 //					fragment.setCheckout(true);
                         if (DataLocal.isTablet) {
                             SimiManager.getIntance().replacePopupFragment(fragment);

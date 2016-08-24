@@ -18,11 +18,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.model.CartModel;
@@ -33,11 +37,14 @@ import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.delegate.SignInDelegate;
+import com.simicart.core.customer.entity.ProfileEntity;
+import com.simicart.core.customer.fragment.AddressBookFragment;
 import com.simicart.core.customer.fragment.ForgotPasswordFragment;
 import com.simicart.core.customer.fragment.RegisterCustomerFragment;
 import com.simicart.core.customer.model.SignInModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SignInController extends SimiController {
 
@@ -45,17 +52,9 @@ public class SignInController extends SimiController {
     protected OnClickListener mSignInClicker;
     protected OnClickListener mForgotPassClicker;
     protected OnTouchListener mCreateAccClicker;
-    protected OnClickListener mOutSideClicker;
-    private TextWatcher mPassWatcher;
-    private TextWatcher mEmailWatcher;
     protected OnCheckedChangeListener mOnCheckBox;
-
-
-    protected boolean isCheckout = false, isVisibleSignIn = false;// sign in into checkout
-
-    public boolean getIsCheckout() {
-        return isCheckout;
-    }
+    protected boolean isCheckout = false;
+    protected boolean isRememberEmailPass = false;
 
     public SignInDelegate getDelegate() {
         return mDelegate;
@@ -65,69 +64,18 @@ public class SignInController extends SimiController {
     @Override
     public void onStart() {
 
-        mDelegate.updateView(null);
-
-        mPassWatcher = new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-                String email = mDelegate.getEmail();
-                String password = mDelegate.getPassword();
-                if (email.length() != 0 && password.length() != 0) {
-                    changeColorSignIn(AppColorConfig.getInstance().getKeyColor());
-                } else {
-                    changeColorSignIn(Color.GRAY);
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-            }
-        };
-        mEmailWatcher = new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-                String email = mDelegate.getEmail();
-                String password = mDelegate.getPassword();
-                if (email.length() != 0 && password.length() != 0) {
-                    changeColorSignIn(AppColorConfig.getInstance().getKeyColor());
-                } else {
-                    changeColorSignIn(Color.GRAY);
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-
-            }
-        };
         mSignInClicker = new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Utils.hideKeyboard(v);
-                String email = mDelegate.getEmail();
-                String password = mDelegate.getPassword();
-                if (email.length() != 0 && password.length() != 0) {
-                    onSignIn();
-                } else {
-                    mDelegate.getSignIn().setBackgroundColor(Color.GRAY);
+                ProfileEntity signInProfile = mDelegate.getProfileSignIn();
+                if (signInProfile != null) {
+                    onSignIn(signInProfile);
                 }
             }
         };
+
         mCreateAccClicker = new OnTouchListener() {
 
             @Override
@@ -158,14 +106,6 @@ public class SignInController extends SimiController {
             public void onClick(View v) {
                 Utils.hideKeyboard(v);
                 onForgotPasswrod();
-
-            }
-        };
-        mOutSideClicker = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Utils.hideKeyboard(v);
             }
         };
 
@@ -174,154 +114,128 @@ public class SignInController extends SimiController {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
-                if (isChecked == false) {
-                    DataPreferences.saveCheckRemember(false);
-                } else {
-                    DataPreferences.saveCheckRemember(true);
-                }
+                isRememberEmailPass = isChecked;
             }
         };
     }
 
-    @SuppressWarnings("deprecation")
-    protected void changeColorSignIn(int color) {
-        // GradientDrawable gdDefault = new GradientDrawable();
-        // gdDefault.setColor(color);
-        // gdDefault.setCornerRadius(3);
-        mDelegate.getSignIn().setBackgroundColor(color);
-    }
+    protected void onSignIn(ProfileEntity entity) {
 
-    protected void onSignIn() {
-
-        final String email = mDelegate.getEmail();
-        final String password = mDelegate.getPassword();
-        onSingIn(email, password);
-    }
-
-    protected void onSingIn(final String email, final String password) {
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mDelegate.getEmail())
-                .matches()) {
-            mDelegate.showNotify(SimiTranslator.getInstance().translate(
-                    "Invalid email address"));
-            return;
-        }
-        if (null == email || email.equals("")) {
-            mDelegate.showNotify(SimiTranslator.getInstance().translate(
-                    "Email is empty.Please input an email."));
-            return;
-        }
-        if (null == password || password.equals("")) {
-            mDelegate.showNotify(SimiTranslator.getInstance().translate(
-                    "Password is empty.Please input a password."));
-            return;
-        }
+        final String email = entity.getEmail();
+        final String password = entity.getCurrentPass();
 
         mDelegate.showLoading();
-        DataPreferences.saveData(email, password);
-
         mModel = new SignInModel();
-
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-                mDelegate.dismissLoading();
 
                 SimiManager.getIntance().getRequestQueue().clearCacheL1();
-                Log.d("quangduy", "callBack");
-                mDelegate.getViewFull().setVisibility(View.GONE);
-//					isVisibleSignIn = true;
-                mDelegate.getViewFull().setVisibility(View.VISIBLE);
-                showToastSignIn();
-                DataLocal.isNewSignIn = true;
-                DataPreferences.saveTypeSignIn(Constants.NORMAL_SIGN_IN);
 
-                String name = ((SignInModel) mModel).getName();
+                saveDataSignIn(email, password);
+
                 String cartQty = ((SignInModel) mModel).getCartQty();
-                if (null != name) {
-                    DataPreferences.saveData(name, email, password);
-                    DataPreferences.saveEmailPassRemember(email, password);
-                }
-                DataPreferences.saveSignInState(true);
-                showToastSignIn();
                 if (null != cartQty && !cartQty.equals("0")) {
                     SimiManager.getIntance().onUpdateCartQty(cartQty);
                 }
-                if (!isCheckout && DataLocal.isTablet) {
-                    SimiManager.getIntance().clearAllChidFragment();
-                    SimiManager.getIntance().removeDialog();
-                } else {
-                    SimiManager.getIntance().backPreviousFragment();
-                }
+
+                onSignInSuccess();
+
                 // update wishlist_items_qty
 //				EventController event = new EventController();
 //				event.dispatchEvent(
 //						"com.simicart.core.customer.controller.SignInController",
 //						mModel.getJSON().toString());
-//				if (isSuccess) {
 
-                if (isCheckout) {
-
-                    mModel = new CartModel();
-                    mDelegate.showLoading();
-
-                    mModel.setSuccessListener(new ModelSuccessCallBack() {
-                        @Override
-                        public void onSuccess(SimiCollection collection) {
-                            mDelegate.dismissLoading();
-                            int carQty = ((CartModel) mModel).getQty();
-                            SimiManager.getIntance().onUpdateCartQty(
-                                    String.valueOf(carQty));
-
-                            ArrayList<SimiEntity> entity = mModel
-                                    .getCollection().getCollection();
-                            if (null != entity && entity.size() > 0) {
-                                ArrayList<Cart> carts = new ArrayList<Cart>();
-                                DataLocal.listCarts.clear();
-                                for (int i = 0; i < entity.size(); i++) {
-                                    SimiEntity simiEntity = entity
-                                            .get(i);
-                                    Cart cart = (Cart) simiEntity;
-                                    carts.add(cart);
-                                    DataLocal.listCarts.add(cart);
-                                }
-                            }
-                        }
-                    });
-                    mModel.request();
-                    SimiFragment fragment = null;
-//                    fragment = AddressBookCheckoutFragment.newInstance();
-                    // event for wish list
-//						CacheFragment cache = new CacheFragment();
-//						cache.setFragment(fragment);
-//						EventFragment eventFragment = new EventFragment();
-//						eventFragment.dispatchEvent(
-//								"com.simicart.event.wishlist.afterSignIn",
-//								cache);
-//						fragment = cache.getFragment();
-
-                    SimiManager.getIntance().replacePopupFragment(fragment);
-
-                } else {
-//                    SimiFragment fragment = null;
-//                    fragment = HomeFragment.newInstance();
-
-//						 event for wish list
-//						CacheFragment cache = new CacheFragment();
-//						cache.setFragment(fragment);
-//						EventFragment eventFragment = new EventFragment();
-//						eventFragment.dispatchEvent(
-//								"com.simicart.event.wishlist.afterSignIn",
-//								cache);
-//						fragment = cache.getFragment();
-
-//                    SimiManager.getIntance().replaceFragment(fragment);
-
-                }
-
+            }
+        });
+        mModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissLoading();
+                SimiNotify.getInstance().showNotify(error.getMessage());
             }
         });
         mModel.addBody(Constants.USER_EMAIL, email);
         mModel.addBody(Constants.USER_PASSWORD, password);
+        mModel.request();
+
+    }
+
+    private void saveDataSignIn(String email, String password) {
+
+        DataLocal.isNewSignIn = true;
+        DataPreferences.saveTypeSignIn(Constants.NORMAL_SIGN_IN);
+
+        String name = ((SignInModel) mModel).getName();
+        DataPreferences.saveData(name, email, password);
+
+        if (isRememberEmailPass == true) {
+            DataPreferences.saveCheckRemember(true);
+            DataPreferences.saveEmailPassRemember(email, password);
+        } else {
+            DataPreferences.saveCheckRemember(false);
+            DataPreferences.saveEmailPassRemember("", "");
+        }
+
+        DataPreferences.saveSignInState(true);
+
+    }
+
+    private void onSignInSuccess() {
+
+        showToastSignIn();
+
+        if (isCheckout == true) {
+            processCheckout();
+        } else {
+            if(DataLocal.isTablet) {
+                SimiManager.getIntance().clearAllChidFragment();
+                SimiManager.getIntance().removeDialog();
+            } else {
+                SimiManager.getIntance().backToHomeFragment();
+            }
+        }
+    }
+
+    private void processCheckout() {
+        mModel = new CartModel();
+        mDelegate.showLoading();
+
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
+                int carQty = ((CartModel) mModel).getQty();
+                SimiManager.getIntance().onUpdateCartQty(
+                        String.valueOf(carQty));
+
+                ArrayList<SimiEntity> entity = mModel
+                        .getCollection().getCollection();
+                if (null != entity && entity.size() > 0) {
+                    ArrayList<Cart> carts = new ArrayList<Cart>();
+                    DataLocal.listCarts.clear();
+                    for (int i = 0; i < entity.size(); i++) {
+                        SimiEntity simiEntity = entity
+                                .get(i);
+                        Cart cart = (Cart) simiEntity;
+                        carts.add(cart);
+                        DataLocal.listCarts.add(cart);
+                    }
+                }
+
+                HashMap<String, Object> hmData = new HashMap<>();
+                hmData.put("address_book_for", Constants.KeyAddressBook.CHECKOUT_ADDRESS);
+                SimiData data = new SimiData(hmData);
+                AddressBookFragment fragment = AddressBookFragment.newInstance(data);
+                if(DataLocal.isTablet) {
+                    SimiManager.getIntance().replacePopupFragment(fragment );
+                } else {
+                    SimiManager.getIntance().replaceFragment(fragment);
+                }
+
+            }
+        });
         mModel.request();
     }
 
@@ -385,24 +299,8 @@ public class SignInController extends SimiController {
         this.isCheckout = isCheckout;
     }
 
-    public OnClickListener getOutSideClicker() {
-        return mOutSideClicker;
-    }
-
-    public TextWatcher getPassWatcher() {
-        return mPassWatcher;
-    }
-
-    public TextWatcher getEmailWatcher() {
-        return mEmailWatcher;
-    }
-
     public OnCheckedChangeListener getOnCheckBox() {
         return mOnCheckBox;
-    }
-
-    public boolean isVisibleSignIn() {
-        return isVisibleSignIn;
     }
 
 }

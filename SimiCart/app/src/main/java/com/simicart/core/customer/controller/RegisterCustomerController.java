@@ -180,15 +180,15 @@ public class RegisterCustomerController extends SimiController {
         RegisterCustomer register = mDelegate.getRegisterCustomer();
         String email = register.getEmail();
         String pass = register.getPass();
-        SignInFragment fragment = SignInFragment.newInstance(email, pass, false);
+//        SignInFragment fragment = SignInFragment.newInstance(email, pass, false);
 //		String email = register.getEmail();
 //		fragment.setEmail(email);
 //		String pass = register.getPass();
 //		fragment.setPassword(pass);
-        DataPreferences.saveData(email, pass);
-        DataPreferences.saveEmailPassRemember(email, pass);
-        SimiManager.getIntance().backPreviousFragment();
-        SimiManager.getIntance().replacePopupFragment(fragment);
+//        DataPreferences.saveData(email, pass);
+//        DataPreferences.saveEmailPassRemember(email, pass);
+//        SimiManager.getIntance().backPreviousFragment();
+//        SimiManager.getIntance().replacePopupFragment(fragment);
         //fadf
     }
 }

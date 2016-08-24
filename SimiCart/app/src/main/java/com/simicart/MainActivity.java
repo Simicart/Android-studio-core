@@ -52,6 +52,8 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         SimiManager.getIntance().setCurrentActivity(this);
         setContentView(R.layout.core_main_activity);
+
+        DataPreferences.init(this);
         if (DataPreferences.isSignInComplete()) {
             autoSignin();
         }

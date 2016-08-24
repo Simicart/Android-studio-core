@@ -51,6 +51,7 @@ public class SimiResponse {
 
             if ( equal(mStatus, "FAIL")) {
                 mError = new SimiError();
+                mError.setMessage(mMessage);
                 return false;
             }
 

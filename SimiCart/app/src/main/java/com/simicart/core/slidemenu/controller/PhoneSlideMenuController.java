@@ -110,7 +110,10 @@ public class PhoneSlideMenuController {
                     fragment = MyAccountFragment.newInstance();
                 } else {
                     // sign in
-                    fragment = SignInFragment.newInstance();
+                    HashMap<String, Object> hmData = new HashMap<>();
+                    hmData.put("is_checkout", false);
+                    SimiData data = new SimiData(hmData);
+                    fragment = SignInFragment.newInstance(data);
                 }
                 SimiManager.getIntance().replacePopupFragment(fragment);
             }

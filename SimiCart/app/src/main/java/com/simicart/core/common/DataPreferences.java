@@ -170,9 +170,23 @@ public class DataPreferences {
 
     public static void saveData(String name, String email, String pass) {
         SharedPreferences.Editor editor = mSharedPre.edit();
-        editor.putString(EMAIL_KEY, email);
-        editor.putString(PASS_WORD_KEY, pass);
-        editor.putString(USER_NAME_KEY, name);
+        if(Utils.validateString(email)) {
+            editor.putString(EMAIL_KEY, email);
+        }
+        if(Utils.validateString(pass)) {
+            editor.putString(PASS_WORD_KEY, pass);
+        }
+        if(Utils.validateString(name)) {
+            editor.putString(USER_NAME_KEY, name);
+        }
+        saveEmailCreditCart(email);
+        editor.commit();
+    }
+
+    public static void saveEmailPassRemember(String email, String password) {
+        SharedPreferences.Editor editor = mSharedPre.edit();
+        editor.putString(EMAIL_KEY_REMEMBER, email);
+        editor.putString(PASS_WORK_REMEMBER, password);
         editor.commit();
     }
 
@@ -203,13 +217,6 @@ public class DataPreferences {
         editor.putBoolean(NOTIFICATION_KEY, enNotification);
         editor.commit();
 
-    }
-
-    public static void saveEmailPassRemember(String email, String password) {
-        SharedPreferences.Editor editor = mSharedPre.edit();
-        editor.putString(EMAIL_KEY_REMEMBER, email);
-        editor.putString(PASS_WORK_REMEMBER, password);
-        editor.commit();
     }
 
     public static String getEmailRemember() {
