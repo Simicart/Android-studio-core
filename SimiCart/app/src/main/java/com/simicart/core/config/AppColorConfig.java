@@ -174,6 +174,20 @@ public class AppColorConfig extends SimiEntity {
         return icon;
     }
 
+    public Drawable getIcon(String id, String color) {
+        int idIcon = Rconfig.getInstance().drawable(id);
+        Drawable icon = mContext.getResources().getDrawable(idIcon);
+        icon.setColorFilter(parseColor(color), PorterDuff.Mode.SRC_ATOP);
+        return icon;
+    }
+
+    public Drawable getIcon(String id, int color) {
+        int idIcon = Rconfig.getInstance().drawable(id);
+        Drawable icon = mContext.getResources().getDrawable(idIcon);
+        icon.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        return icon;
+    }
+
     public int getAppBackground() {
         return parseColor(mAppBackground);
     }

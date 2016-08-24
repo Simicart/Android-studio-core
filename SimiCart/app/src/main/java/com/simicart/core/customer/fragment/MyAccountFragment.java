@@ -32,11 +32,6 @@ public class MyAccountFragment extends SimiFragment {
 		mController = new MyAccountController();
 		mController.setDelegate(mBlock);
 		mController.onStart();
-
-		mBlock.setProfileClick(mController.getClickProfile());
-		mBlock.setAddressBookClick(mController.getClickAddress());
-		mBlock.setOrderHistory(mController.getClickOrderHistory());
-		mBlock.setSignOutClick(mController.getClickSignOut());
 		return view;
 	}
 }
