@@ -61,15 +61,15 @@ public class MyAccountController extends SimiController {
 
 			@Override
 			public void onClick(View v) {
-				if (DataLocal.isTablet) {
-					AddressBookFragment fragment = AddressBookFragment
-							.newInstance();
-					SimiManager.getIntance().replacePopupFragment(fragment);
-				} else {
-					AddressBookFragment fragment = AddressBookFragment
-							.newInstance();
-					SimiManager.getIntance().replaceFragment(fragment);
-				}
+//				if (DataLocal.isTablet) {
+//					AddressBookFragment fragment = AddressBookFragment
+//							.newInstance();
+//					SimiManager.getIntance().replacePopupFragment(fragment);
+//				} else {
+//					AddressBookFragment fragment = AddressBookFragment
+//							.newInstance();
+//					SimiManager.getIntance().replaceFragment(fragment);
+//				}
 			}
 		};
 
