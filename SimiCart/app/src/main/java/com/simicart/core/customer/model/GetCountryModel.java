@@ -16,7 +16,7 @@ public class GetCountryModel extends SimiModel {
 			collection = new SimiCollection();
 			for (int i = 0; i < list.length(); i++) {
 				CountryAllowed country_allowed = new CountryAllowed();
-				country_allowed.setJSONObject(list.getJSONObject(i));
+				country_allowed.parse(list.getJSONObject(i));
 				collection.addEntity(country_allowed);
 			}
 		} catch (JSONException e) {

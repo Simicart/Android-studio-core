@@ -7,6 +7,7 @@ import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Constants;
 import com.simicart.core.customer.model.AddressBookModel;
 
@@ -36,7 +37,7 @@ public class AddressBookController extends SimiController {
                 mDelegate.updateView(mModel.getCollection());
             }
         });
-        if(addressBookFor == Constants.KeyAddressBook.CUSTOMER_ADDRESS) {
+        if(addressBookFor == ValueData.ADDRESS_BOOK.CUSTOMER_ADDRESS) {
             mModel.addBody("is_get_order_address", "NO");
         } else {
             mModel.addBody("is_get_order_address", "YES");

@@ -22,6 +22,7 @@ public class SimiSpinnerRowComponent extends SimiRowComponent {
     protected ImageView imgExtend;
     protected BaseAdapter mAdapter;
     protected SpinnerRowCallBack mCallBack;
+    protected int mPositionSelected;
     protected int iconExtend = Rconfig.getInstance().drawable("");
 
     @Override
@@ -43,6 +44,7 @@ public class SimiSpinnerRowComponent extends SimiRowComponent {
         imgExtend = (ImageView) findView("img_extend");
         imgExtend.setImageResource(iconExtend);
         mSpinner.setAdapter(mAdapter);
+        mSpinner.setSelection(mPositionSelected);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -69,5 +71,9 @@ public class SimiSpinnerRowComponent extends SimiRowComponent {
 
     public void setIconExtend(int idResource) {
         iconExtend = idResource;
+    }
+
+    public void setPositinSelected(int position) {
+        mPositionSelected = position;
     }
 }

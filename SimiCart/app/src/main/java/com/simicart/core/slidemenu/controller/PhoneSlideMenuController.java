@@ -23,6 +23,7 @@ import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.cms.fragment.CMSFragment;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -414,7 +415,7 @@ public class PhoneSlideMenuController {
             case "Category":
 //                fragment = CategoryFragment.newInstance("-1", "all categories");
                 hm = new HashMap<>();
-                hm.put("address_book_for", Constants.KeyAddressBook.CUSTOMER_ADDRESS);
+                hm.put(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR, ValueData.ADDRESS_BOOK.CUSTOMER_ADDRESS);
                 SimiData data = new SimiData(hm);
                 AddressBookFragment addressBookFragment = AddressBookFragment.newInstance(data);
                 SimiManager.getIntance().replaceFragment(addressBookFragment);

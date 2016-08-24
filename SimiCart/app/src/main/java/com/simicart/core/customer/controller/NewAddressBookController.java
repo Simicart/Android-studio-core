@@ -19,20 +19,20 @@ import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
-import com.simicart.core.customer.delegate.ChooseCountryDelegate;
+import com.simicart.core.customer.delegate.ListOfChoiceDelegate;
 import com.simicart.core.customer.delegate.NewAddressBookDelegate;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
 import com.simicart.core.customer.entity.CountryAllowed;
 import com.simicart.core.customer.entity.ProfileEntity;
 import com.simicart.core.customer.entity.StateOfCountry;
-import com.simicart.core.customer.fragment.CountryFragment;
+import com.simicart.core.customer.fragment.ListOfChoiceFragment;
 import com.simicart.core.customer.model.GetCountryModel;
 import com.simicart.core.customer.model.NewAddressBookModel;
 
 @SuppressLint("DefaultLocale")
-public class NewAddressBookController extends SimiController implements
-        ChooseCountryDelegate {
+public class NewAddressBookController extends SimiController
+         {
 
     /**
      *
@@ -511,9 +511,7 @@ public class NewAddressBookController extends SimiController implements
 
     protected void changeFragmentCountry(int type,
                                          ArrayList<String> list_country) {
-        CountryFragment fragment = CountryFragment.newInstance(type,
-                list_country);
-        fragment.setChooseDelegate(this);
+
 //		SimiManager.getIntance().replacePopupFragment(fragment);
     }
 
@@ -531,36 +529,7 @@ public class NewAddressBookController extends SimiController implements
         return states;
     }
 
-    @Override
-    public void chooseCountry(int type, String country) {
-        if (type == TYPE_SELECT_COUNTRY) {
-            mCurrentCountry = country;
-            mDelegate.updateCountry(country);
-            ArrayList<String> states = getStateFromCountry(country,
-                    mListCountryAllowed);
-            if (null != states && states.size() > 0) {
-                mCurrentState = states.get(0);
-            } else {
-                mCurrentState = "";
-            }
-            mDelegate.updateState(mCurrentState);
 
-        } else if (type == TYPE_SELECT_STATE) {
-            mCurrentState = country;
-            mDelegate.updateState(mCurrentState);
-        }
 
-    }
-
-    @Override
-    public void setCurrentCountry(String country) {
-        mCurrentCountry = country;
-    }
-
-    @Override
-    public void setCurrentState(String state) {
-        mCurrentState = state;
-
-    }
 
 }

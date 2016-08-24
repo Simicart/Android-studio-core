@@ -70,7 +70,6 @@ public class NewAddressBookFragment extends SimiFragment {
             mController.setDelegate(mBlock);
             mController.onResume();
         }
-        mBlock.setControllerDelegate(mController);
         mBlock.setSaveAddress(mController.getClickSave());
         mBlock.setChooseCountry(mController.getChooseCountry());
         mBlock.setChooseStates(mController.getChooseStates());

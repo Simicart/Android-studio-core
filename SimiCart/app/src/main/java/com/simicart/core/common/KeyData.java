@@ -18,10 +18,19 @@ public class KeyData {
         public static String CUSTOM_URL = "custom_url";
     }
 
-    public static class ADDRESS_BOOK_DETAIL{
+    public static class ADDRESS_BOOK_DETAIL {
         public static String OPEN_FOR = "open_for";
         public static String ACTION = "action";
         public static String BILLING_ADDRESS = "billing_address";
         public static String SHIPPING_ADDRESS = "shipping_address";
+    }
+
+    public static class ADDRESS_BOOK {
+        public static String ADDRESS_BOOK_FOR = "address_book_for";
+    }
+
+    public static class LIST_OF_CHOICE {
+        public static String DELEGATE = "delegate";
+        public static String LIST_DATA = "list_data";
     }
 }
