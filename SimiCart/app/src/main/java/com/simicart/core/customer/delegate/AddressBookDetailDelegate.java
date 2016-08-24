@@ -1,17 +1,13 @@
 package com.simicart.core.customer.delegate;
 
-import java.util.ArrayList;
+import android.view.View;
 
 import com.simicart.core.base.delegate.SimiDelegate;
-import com.simicart.core.customer.entity.CountryAllowed;
-import com.simicart.core.customer.entity.MyAddress;
+
+import java.util.ArrayList;
 
 public interface AddressBookDetailDelegate extends SimiDelegate {
-	public MyAddress getAddressBookDetail();
 
-	public void setCountry(int type, String mCountry,
-						   ArrayList<CountryAllowed> listCountry);
-
-	public void setListCountry(ArrayList<CountryAllowed> listCountry);
+    public void showRows(ArrayList<View> rows);
 
 }

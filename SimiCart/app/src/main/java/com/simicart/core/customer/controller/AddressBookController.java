@@ -29,20 +29,15 @@ import org.json.JSONObject;
 public class AddressBookController extends SimiController {
 
     protected SimiDelegate mDelegate;
-    protected OnTouchListener mListener;
+    protected View.OnClickListener mSaveListener;
+
     protected int addressBookFor = -1;
 
-    public OnTouchListener getListener() {
-        return mListener;
-    }
 
     public void setDelegate(SimiDelegate delegate) {
         mDelegate = delegate;
     }
 
-    public void setAddressBookFor(int addressBookFor) {
-        this.addressBookFor = addressBookFor;
-    }
 
     @Override
     public void onStart() {
@@ -65,35 +60,15 @@ public class AddressBookController extends SimiController {
         mModel.addBody("user_password", "123456");
         mModel.request();
 
-        mListener = new OnTouchListener() {
 
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-//                NewAddressBookFragment fragment = NewAddressBookFragment
-//                        .newInstance();
-//                Bundle bundleAfter = new Bundle();
-//                SimiFragment.setData(Constants.KeyData.AFTER_CONTROL,
-//                        Constants.NEW_ADDRESS, Constants.KeyData.TYPE_INT,
-//                        bundleAfter);
-//                if (DataLocal.isTablet) {
-//                    SimiManager.getIntance().replacePopupFragment(fragment);
-//                } else {
-//                    SimiManager.getIntance().replaceFragment(fragment);
-//                }
-                return true;
-            }
-        };
 
     }
 
     @Override
     public void onResume() {
-//        if (ConfigCheckout.getInstance().getStatusAddressBook() == true) {
-//            if (mModel != null)
-                mDelegate.updateView(mModel.getCollection());
-//        } else {
-//            mDelegate.updateView(ConfigCheckout.getInstance()
-//                    .getCollectionAddressBook());
-//        }
+
     }
+
+    
+
 }
