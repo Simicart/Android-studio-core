@@ -6,8 +6,8 @@ package com.simicart.core.common;
 public class ValueData {
 
     public static class ADDRESS_BOOK {
-        public final static int CUSTOMER_ADDRESS = 100;
-        public final static int CHECKOUT_ADDRESS = 111;
+        public final static int OPEN_FOR_CUSTOMER = 100;
+        public final static int OPEN_FOR_CHECKOUT = 111;
     }
 
     public static class ADDRESS_BOOK_DETAIL {

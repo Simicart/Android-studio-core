@@ -3,7 +3,6 @@ package com.simicart.core.customer.block;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.RelativeLayout;
@@ -15,7 +14,6 @@ import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.adapter.AddressBookAdapter;
 import com.simicart.core.customer.entity.AddressEntity;
@@ -28,7 +26,7 @@ public class AddressBookBlock extends SimiBlock {
     protected RecyclerView rvAddress;
     protected AddressBookAdapter mAdapter;
     private RelativeLayout rlt_layout_addadress;
-    protected int addressBookFor = -1;
+    protected int openFor = -1;
     protected ArrayList<AddressEntity> listAddress;
 
     @Override
@@ -38,7 +36,7 @@ public class AddressBookBlock extends SimiBlock {
                 .getInstance().id("tv_chooseAddress"));
         tv_chooseAddress.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
         tv_chooseAddress.setTextColor(AppColorConfig.getInstance().getSectionTextColor());
-        if (addressBookFor == ValueData.ADDRESS_BOOK.CHECKOUT_ADDRESS) {
+        if (openFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT) {
             tv_chooseAddress.setText(SimiTranslator.getInstance().translate(
                     "Or choose an address"));
         } else {
@@ -65,14 +63,13 @@ public class AddressBookBlock extends SimiBlock {
     @Override
     public void drawView(SimiCollection collection) {
         ArrayList<SimiEntity> entities = collection.getCollection();
-        if(entities != null && entities.size() > 0) {
+        if (entities != null && entities.size() > 0) {
             listAddress = new ArrayList<>();
-            for(int i=0;i<entities.size();i++) {
+            for (int i = 0; i < entities.size(); i++) {
                 AddressEntity entity = (AddressEntity) entities.get(i);
                 listAddress.add(entity);
             }
-            Log.e("abc", "++" + listAddress.size());
-            mAdapter = new AddressBookAdapter(listAddress, addressBookFor);
+            mAdapter = new AddressBookAdapter(listAddress, openFor);
             rvAddress.setAdapter(mAdapter);
         }
     }
@@ -81,12 +78,12 @@ public class AddressBookBlock extends SimiBlock {
         super(view, context);
     }
 
-    public void setonTouchListener(OnTouchListener listener) {
-        tv_addAddress.setOnTouchListener(listener);
+    public void setCreateNewListener(View.OnClickListener listener) {
+        tv_addAddress.setOnClickListener(listener);
     }
 
-    public void setAddressBookFor(int addressBookFor) {
-        this.addressBookFor = addressBookFor;
+    public void setOpenFor(int openFor) {
+        this.openFor = openFor;
     }
 
 }
