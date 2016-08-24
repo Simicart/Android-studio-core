@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.config.Constants;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 
 public class NewAddressBookModel extends SimiModel {
 
@@ -20,7 +20,7 @@ public class NewAddressBookModel extends SimiModel {
 			if (null != list && list.length() > 0) {
 				JSONObject json = list.getJSONObject(0);
 				if (null != json) {
-					MyAddress address = new MyAddress();
+					AddressEntity address = new AddressEntity();
 					address.setJSONObject(json);
 					collection.addEntity(address);
 				}

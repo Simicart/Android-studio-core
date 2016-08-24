@@ -6,29 +6,32 @@ import com.simicart.core.config.Constants;
 
 public class CurrencyEntity extends SimiEntity {
 
-	protected String value;
-	protected String title;
+    protected String value;
+    protected String title;
 
-	public String getValue() {
-		if (!Utils.validateString(value)) {
-			value = getData(Constants.VALUE);
-		}
-		return value;
-	}
+    protected String VALUE = "value";
+    protected String TITLE = "title";
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+    public String getValue() {
+        if (!Utils.validateString(value)) {
+            value = getData(VALUE);
+        }
+        return value;
+    }
 
-	public String getTitle() {
-		if (!Utils.validateString(title)) {
-			title = getData(Constants.TITLE);
-		}
-		return title;
-	}
+    public void setValue(String value) {
+        this.value = value;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        if (!Utils.validateString(title)) {
+            title = getData(TITLE);
+        }
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
 }

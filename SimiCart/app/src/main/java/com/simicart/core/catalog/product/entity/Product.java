@@ -40,6 +40,9 @@ public class Product extends SimiEntity {
     protected PriceV2 mPriceV2;
     protected boolean isAddedPriceDependent = false;
 
+    protected String VALUE = "value";
+    protected String TITLE = "title";
+
     public void setAddedPriceDependent(boolean isAddedPriceDependent) {
         this.isAddedPriceDependent = isAddedPriceDependent;
     }
@@ -207,8 +210,8 @@ public class Product extends SimiEntity {
         for (int i = 0; i < n; i++) {
             JSONObject js_option = json.getJSONObject(i);
             Attributes att = new Attributes();
-            att.setTitle(js_option.getString(Constants.TITLE));
-            att.setValue(js_option.getString(Constants.VALUE));
+            att.setTitle(js_option.getString(TITLE));
+            att.setValue(js_option.getString(VALUE));
             atts.add(att);
 
         }
@@ -355,7 +358,7 @@ public class Product extends SimiEntity {
         if (null == mName) {
             mName = getData(Constants.PRODUCT_NAME);
         }
-        Log.e("Product ","getName " + mName);
+        Log.e("Product ", "getName " + mName);
 
         return this.mName;
     }

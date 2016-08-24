@@ -8,11 +8,11 @@ import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.checkout.entity.Condition;
 import com.simicart.core.checkout.entity.ShippingMethod;
 import com.simicart.core.checkout.entity.TotalPrice;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 
 public interface ReviewOrderDelegate extends SimiDelegate {
 
-	public void onUpdateAddress(MyAddress address);
+	public void onUpdateAddress(AddressEntity address);
 
 	public void setShipingMethods(ArrayList<ShippingMethod> shippingMethods);
 
@@ -20,9 +20,9 @@ public interface ReviewOrderDelegate extends SimiDelegate {
 
 	public void setTotalPrice(TotalPrice totalPrice);
 
-	public void setShipingAddress(MyAddress mShippingAddress);
+	public void setShipingAddress(AddressEntity mShippingAddress);
 
-	public void setBillingAddress(MyAddress mBillingAddress);
+	public void setBillingAddress(AddressEntity mBillingAddress);
 	
 	public void goneView();
 	

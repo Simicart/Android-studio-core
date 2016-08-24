@@ -7,67 +7,37 @@ import android.os.Parcel;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.config.Constants;
 
-public class Attributes extends SimiEntity implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String mTitle;
-	private String mValue;
+public class Attributes extends SimiEntity {
+    private String mTitle;
+    private String mValue;
 
-	public String getValue() {
-		if (null == mValue) {
-			mValue = getData(Constants.VALUE);
-		} 
-			return mValue;
-	}
+    public static String TITLE = "title";
+    protected String VALUE = "value";
 
-	public void setValue(String value) {
-		this.mValue = value;
-	}
 
-	public String getTitle() {
-		if(null == mTitle)
-		{
-			mTitle = getData(Constants.TITLE);
-		}
-		return this.mTitle;
-	}
+    @Override
+    public void parse() {
+        mTitle = getData(TITLE);
 
-	public void setTitle(String title) {
-		this.mTitle = title;
-	}
+        mValue = getData(VALUE);
 
-	public Attributes(Parcel in) {
-		mTitle = in.readString();
-		mValue = in.readString();
-	}
-	public Attributes() {
-		// TODO Auto-generated constructor stub
-	}
-//
-//	@Override
-//	public void writeToParcel(Parcel dest, int flags) {
-//		dest.writeString(mTitle);
-//		dest.writeString(mValue);
-//	}
-//
-//	static final Parcelable.Creator<Attributes> CREATOR = new Parcelable.Creator<Attributes>() {
-//
-//		public Attributes createFromParcel(Parcel in) {
-//			return new Attributes(in);
-//		}
-//
-//		public Attributes[] newArray(int size) {
-//			return new Attributes[size];
-//		}
-//	};
-//
-//	@Override
-//	public int describeContents() {
-//		return 0;
-//	}
-//
+    }
+
+    public String getValue() {
+        return mValue;
+    }
+
+    public void setValue(String value) {
+        this.mValue = value;
+    }
+
+    public String getTitle() {
+        return this.mTitle;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
 
 
 }

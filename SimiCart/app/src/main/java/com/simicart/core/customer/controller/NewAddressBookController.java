@@ -21,12 +21,11 @@ import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.delegate.ChooseCountryDelegate;
 import com.simicart.core.customer.delegate.NewAddressBookDelegate;
+import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
 import com.simicart.core.customer.entity.CountryAllowed;
-import com.simicart.core.customer.entity.MyAddress;
 import com.simicart.core.customer.entity.ProfileEntity;
 import com.simicart.core.customer.entity.StateOfCountry;
-import com.simicart.core.customer.fragment.AddressBookFragment;
 import com.simicart.core.customer.fragment.CountryFragment;
 import com.simicart.core.customer.model.GetCountryModel;
 import com.simicart.core.customer.model.NewAddressBookModel;
@@ -50,14 +49,14 @@ public class NewAddressBookController extends SimiController implements
     protected ArrayList<String> mListCountry;
     protected String mCurrentCountry = "";
     protected String mCurrentState = "";
-    protected MyAddress mBillingAddress;
-    protected MyAddress mShippingAddress;
+    protected AddressEntity mBillingAddress;
+    protected AddressEntity mShippingAddress;
 
-    public void setBillingAddress(MyAddress mBillingAddress) {
+    public void setBillingAddress(AddressEntity mBillingAddress) {
         this.mBillingAddress = mBillingAddress;
     }
 
-    public void setShippingAddress(MyAddress mShippingAddress) {
+    public void setShippingAddress(AddressEntity mShippingAddress) {
         this.mShippingAddress = mShippingAddress;
     }
 
@@ -112,7 +111,7 @@ public class NewAddressBookController extends SimiController implements
 
             @Override
             public void onClick(View arg0) {
-                MyAddress address = mDelegate.getNewAddressBook();
+                AddressEntity address = mDelegate.getNewAddressBook();
                 String state = address.getStateName();
                 if (null != state) {
                     mCurrentState = state;
@@ -123,20 +122,20 @@ public class NewAddressBookController extends SimiController implements
                 }
                 CountryAllowed countryAllow = getCurrentCountry(mCurrentCountry);
                 if (null != countryAllow) {
-                    address.setCountryName(mCurrentCountry);
-                    address.setCountryCode(countryAllow.getCountry_code());
-                    if (!mCurrentState.equals("")) {
-                        StateOfCountry stateOfCountry = getCurrentState(
-                                mCurrentState, countryAllow);
-                        if (null != stateOfCountry) {
-                            address.setStateName(mCurrentState);
-                            address.setStateCode(stateOfCountry.getState_code());
-                            address.setStateId(stateOfCountry.getState_id());
-                        }
-
-                    }
+//                    address.setCountryName(mCurrentCountry);
+//                    address.setCountryCode(countryAllow.getCountry_code());
+//                    if (!mCurrentState.equals("")) {
+//                        StateOfCountry stateOfCountry = getCurrentState(
+//                                mCurrentState, countryAllow);
+//                        if (null != stateOfCountry) {
+//                            address.setStateName(mCurrentState);
+//                            address.setStateCode(stateOfCountry.getState_code());
+//                            address.setStateId(stateOfCountry.getState_id());
+//                        }
+//
+//                    }
                 }
-                MyAddress shippingAdd = null, billingAdd = null;
+                AddressEntity shippingAdd = null, billingAdd = null;
                 int afterControll = 0;
                 Utils.hideKeyboard(arg0);
                 if (isCompleteRequired(address)) {
@@ -204,8 +203,8 @@ public class NewAddressBookController extends SimiController implements
         mDelegate.createView(mAfterController);
     }
 
-    private void onEditAddress(MyAddress address) {
-        MyAddress shippingAdd = null, billingAdd = null;
+    private void onEditAddress(AddressEntity address) {
+        AddressEntity shippingAdd = null, billingAdd = null;
         billingAdd = address;
         shippingAdd = address;
 
@@ -224,8 +223,8 @@ public class NewAddressBookController extends SimiController implements
                         billingAdd));
     }
 
-    private void onNewCustomer(MyAddress address) {
-        MyAddress shippingAdd = null, billingAdd = null;
+    private void onNewCustomer(AddressEntity address) {
+        AddressEntity shippingAdd = null, billingAdd = null;
         ProfileEntity profile = mDelegate.getProfileEntity();
         if (null != profile) {
             String name = profile.getName();
@@ -270,32 +269,32 @@ public class NewAddressBookController extends SimiController implements
                 ArrayList<SimiEntity> entity = mModel.getCollection()
                         .getCollection();
                 if (null != entity && entity.size() > 0) {
-                    mListCountryAllowed = new ArrayList<CountryAllowed>();
-                    for (SimiEntity simiEntity : entity) {
-                        CountryAllowed country_add = (CountryAllowed) simiEntity;
-                        mListCountryAllowed.add(country_add);
-                    }
-                    mListCountry = new ArrayList<String>();
-                    for (int i = 0; i < mListCountryAllowed.size(); i++) {
-                        mListCountry.add(mListCountryAllowed.get(i)
-                                .getCountry_name());
-                    }
-                    String name = mListCountryAllowed.get(0)
-                            .getCountry_name();
-
-                    if (null != name) {
-                        mDelegate.updateCountry(name);
-                        mCurrentCountry = name;
-                        ArrayList<String> states = getStateFromCountry(
-                                name, mListCountryAllowed);
-                        if (null != states && states.size() > 0) {
-                            mCurrentState = states.get(0);
-                        } else {
-                            mCurrentState = "";
-                        }
-                        mDelegate.updateState(mCurrentState);
-                        mDelegate.updateView(mModel.getCollection());
-                    }
+//                    mListCountryAllowed = new ArrayList<CountryAllowed>();
+//                    for (SimiEntity simiEntity : entity) {
+//                        CountryAllowed country_add = (CountryAllowed) simiEntity;
+//                        mListCountryAllowed.add(country_add);
+//                    }
+//                    mListCountry = new ArrayList<String>();
+//                    for (int i = 0; i < mListCountryAllowed.size(); i++) {
+//                        mListCountry.add(mListCountryAllowed.get(i)
+//                                .getCountry_name());
+//                    }
+//                    String name = mListCountryAllowed.get(0)
+//                            .getCountry_name();
+//
+//                    if (null != name) {
+//                        mDelegate.updateCountry(name);
+//                        mCurrentCountry = name;
+//                        ArrayList<String> states = getStateFromCountry(
+//                                name, mListCountryAllowed);
+//                        if (null != states && states.size() > 0) {
+//                            mCurrentState = states.get(0);
+//                        } else {
+//                            mCurrentState = "";
+//                        }
+//                        mDelegate.updateState(mCurrentState);
+//                        mDelegate.updateView(mModel.getCollection());
+//                    }
                 }
             }
         });
@@ -303,7 +302,7 @@ public class NewAddressBookController extends SimiController implements
         mModel.request();
     }
 
-    protected void OnRequestChangeAddress(MyAddress address) {
+    protected void OnRequestChangeAddress(AddressEntity address) {
         mDelegate.showLoading();
         mModel = new NewAddressBookModel();
         mModel.setSuccessListener(new ModelSuccessCallBack() {
@@ -314,28 +313,28 @@ public class NewAddressBookController extends SimiController implements
 //                            .newInstance();
 //						SimiManager.getIntance().replacePopupFragment(fragment);
                 } else {
-                    MyAddress newAddress = (MyAddress) mModel
+                    AddressEntity newAddress = (AddressEntity) mModel
                             .getCollection().getCollection().get(0);
 
                     CountryAllowed country = getCurrentCountry(mCurrentCountry);
                     if (null != country) {
-                        newAddress.setCountryName(mCurrentCountry);
-                        newAddress.setCountryCode(country.getCountry_code());
-                        if (!mCurrentState.equals("")) {
-                            StateOfCountry state = getCurrentState(
-                                    mCurrentState, country);
-                            if (null != state) {
-                                newAddress.setStateName(mCurrentState);
-                                newAddress.setStateCode(state
-                                        .getState_code());
-                                newAddress.setStateId(state.getState_id());
-                            }
-                        }
+//                        newAddress.setCountryName(mCurrentCountry);
+//                        newAddress.setCountryCode(country.getCountry_code());
+//                        if (!mCurrentState.equals("")) {
+//                            StateOfCountry state = getCurrentState(
+//                                    mCurrentState, country);
+//                            if (null != state) {
+//                                newAddress.setStateName(mCurrentState);
+//                                newAddress.setStateCode(state
+//                                        .getState_code());
+//                                newAddress.setStateId(state.getState_id());
+//                            }
+//                        }
                     }
 
                     if (null != newAddress) {
 
-                        MyAddress shippingAdd = null, billingAdd = null;
+                        AddressEntity shippingAdd = null, billingAdd = null;
                         if (mAfterController == Constants.NEW_ADDRESS_CHECKOUT) {
                             switch (addressFor) {
 //                                case Constants.KeyAddress.ALL_ADDRESS:
@@ -375,16 +374,16 @@ public class NewAddressBookController extends SimiController implements
 
         CountryAllowed country = getCurrentCountry(mCurrentCountry);
         if (null != country) {
-            address.setCountryName(mCurrentCountry);
-            address.setCountryCode(country.getCountry_code());
-            if (!mCurrentState.equals("")) {
-                StateOfCountry state = getCurrentState(mCurrentState, country);
-                if (null != state) {
-                    address.setStateName(mCurrentState);
-                    address.setStateCode(state.getState_code());
-                    address.setStateId(state.getState_id());
-                }
-            }
+//            address.setCountryName(mCurrentCountry);
+//            address.setCountryCode(country.getCountry_code());
+//            if (!mCurrentState.equals("")) {
+//                StateOfCountry state = getCurrentState(mCurrentState, country);
+//                if (null != state) {
+//                    address.setStateName(mCurrentState);
+//                    address.setStateCode(state.getState_code());
+//                    address.setStateId(state.getState_id());
+//                }
+//            }
         }
 
 //		List<NameValuePair> params = address.toParamsRequest();
@@ -398,12 +397,12 @@ public class NewAddressBookController extends SimiController implements
     }
 
     protected CountryAllowed getCurrentCountry(String name) {
-        if (null != name && null != mListCountryAllowed)
-            for (CountryAllowed ele : mListCountryAllowed) {
-                if (ele.getCountry_name().equals(name)) {
-                    return ele;
-                }
-            }
+//        if (null != name && null != mListCountryAllowed)
+//            for (CountryAllowed ele : mListCountryAllowed) {
+//                if (ele.getCountry_name().equals(name)) {
+//                    return ele;
+//                }
+//            }
 
         return null;
     }
@@ -413,9 +412,9 @@ public class NewAddressBookController extends SimiController implements
             ArrayList<StateOfCountry> states = country.getStateList();
             if (null != states && states.size() > 0) {
                 for (StateOfCountry state : states) {
-                    if (state.getState_name().equals(name)) {
-                        return state;
-                    }
+//                    if (state.getState_name().equals(name)) {
+//                        return state;
+//                    }
                 }
             }
         }
@@ -423,7 +422,7 @@ public class NewAddressBookController extends SimiController implements
         return null;
     }
 
-    private boolean isCompleteRequired(MyAddress add_address) {
+    private boolean isCompleteRequired(AddressEntity add_address) {
         // ConfigCustomerAddress _configCustomer =
         // DataLocal.ConfigCustomerAddress;
         // if (mAfterController == NewAddressBookFragment.NEW_ADDRESS_CHECKOUT
@@ -522,12 +521,12 @@ public class NewAddressBookController extends SimiController implements
                                                  ArrayList<CountryAllowed> listCountry) {
         ArrayList<String> states = new ArrayList<String>();
         for (CountryAllowed countryAllowed : listCountry) {
-            if (countryAllowed.getCountry_name().equals(country)) {
-                for (StateOfCountry state : countryAllowed.getStateList()) {
-                    states.add(state.getState_name());
-                }
-                return states;
-            }
+//            if (countryAllowed.getCountry_name().equals(country)) {
+//                for (StateOfCountry state : countryAllowed.getStateList()) {
+//                    states.add(state.getState_name());
+//                }
+//                return states;
+//            }
         }
         return states;
     }

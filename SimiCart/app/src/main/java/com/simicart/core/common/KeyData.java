@@ -17,4 +17,11 @@ public class KeyData {
         public static String FILTER = "filter";
         public static String CUSTOM_URL = "custom_url";
     }
+
+    public static class ADDRESS_BOOK_DETAIL{
+        public static String OPEN_FOR = "open_for";
+        public static String ACTION = "action";
+        public static String BILLING_ADDRESS = "billing_address";
+        public static String SHIPPING_ADDRESS = "shipping_address";
+    }
 }

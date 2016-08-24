@@ -2,18 +2,16 @@ package com.simicart.core.customer.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.block.NewAddressBookBlock;
 import com.simicart.core.customer.controller.NewAddressBookController;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 
 public class NewAddressBookFragment extends SimiFragment {
 
@@ -22,8 +20,8 @@ public class NewAddressBookFragment extends SimiFragment {
     protected int addressFor = -1;
 
     public int afterControl;// = NEW_ADDRESS;
-    protected MyAddress mBillingAddress;
-    protected MyAddress mShippingAddress;
+    protected AddressEntity mBillingAddress;
+    protected AddressEntity mShippingAddress;
 
     public static NewAddressBookFragment newInstance() {
         NewAddressBookFragment fragment = new NewAddressBookFragment();
@@ -53,8 +51,8 @@ public class NewAddressBookFragment extends SimiFragment {
 //        if (getArguments() != null) {
 //            afterControl = (int) getData(Constants.KeyData.AFTER_CONTROL, Constants.KeyData.TYPE_INT, getArguments());
 //            addressFor = (int) getData(Constants.KeyData.ADDRESS_FOR, Constants.KeyData.TYPE_INT, getArguments());
-//            mBillingAddress = (MyAddress) getArguments().getSerializable(Constants.KeyData.BILLING_ADDRESS);
-//            mShippingAddress = (MyAddress) getArguments().getSerializable(Constants.KeyData.SHIPPING_ADDRESS);
+//            mBillingAddress = (AddressEntity) getArguments().getSerializable(Constants.KeyData.BILLING_ADDRESS);
+//            mShippingAddress = (AddressEntity) getArguments().getSerializable(Constants.KeyData.SHIPPING_ADDRESS);
 //        }
 
         mBlock = new NewAddressBookBlock(view, context);

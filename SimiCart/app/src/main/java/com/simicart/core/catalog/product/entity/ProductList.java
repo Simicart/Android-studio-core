@@ -15,9 +15,11 @@ public class ProductList extends SimiEntity {
 	private ArrayList<Product> mSpotProduct;
 	private String mTitle;
 
+	protected String TITLE = "title";
+
 	@Override
 	public void parse() {
-		mTitle = getData(Constants.TITLE);
+		mTitle = getData(TITLE);
 		parseListSpot();
 	}
 

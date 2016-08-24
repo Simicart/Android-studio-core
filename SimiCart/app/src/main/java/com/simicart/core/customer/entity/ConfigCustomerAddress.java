@@ -5,196 +5,241 @@ import java.util.ArrayList;
 import org.json.JSONException;
 
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.common.Utils;
 
 public class ConfigCustomerAddress extends SimiEntity {
-	public static String OPTION_REQUIRE = "req";
-	public static String OPTION_OPTIONAL = "opt";
-	public static String OPTION_HIDE = "";
+    public static String OPTION_REQUIRE = "req";
+    public static String OPTION_OPTIONAL = "opt";
+    public static String OPTION_HIDE = "";
 
-	private String prefix;
-	private String suffix;
-	private String dob;
-	private String vat_id;
-	private String taxvat;
-	private String gender;
-	private ArrayList<GenderConfig> genderConfigs = new ArrayList<>();
-	private String company;
-	private String street;
-	private String country;
-	private String state;
-	private String city;
-	private String zipcode;
-	private String telephone;
-	private String fax;
-	private String name;
-	private String email;
+    protected String prefix;
+    protected String suffix;
+    protected String dob;
+    protected String vat_id;
+    protected String taxvat;
+    protected String gender;
+    protected ArrayList<GenderConfig> genderConfigs = new ArrayList<>();
+    protected String company;
+    protected String street;
+    protected String country;
+    protected String state;
+    protected String city;
+    protected String zipcode;
+    protected String telephone;
+    protected String fax;
+    protected String name;
+    protected String email;
 
-	public ConfigCustomerAddress() {
-		setPrefix(OPTION_HIDE);
-		setName(OPTION_REQUIRE);
-		setSuffix(OPTION_HIDE);
-		setEmail(OPTION_REQUIRE);
-		setCompany(OPTION_HIDE);
-		setVat_id(OPTION_HIDE);
-		setStreet(OPTION_REQUIRE);
-		setCity(OPTION_REQUIRE);
-		setState(OPTION_OPTIONAL);
-		setCountry(OPTION_REQUIRE);
-		setZipcode(OPTION_REQUIRE);
-		setTelephone(OPTION_REQUIRE);
-		setFax(OPTION_HIDE);
-		setDob(OPTION_HIDE);
-		setGender(OPTION_HIDE);
-		setTaxvat(OPTION_HIDE);
-	}
+    public ConfigCustomerAddress() {
+        setPrefix(OPTION_HIDE);
+        setName(OPTION_REQUIRE);
+        setSuffix(OPTION_HIDE);
+        setEmail(OPTION_REQUIRE);
+        setCompany(OPTION_HIDE);
+        setVat_id(OPTION_HIDE);
+        setStreet(OPTION_REQUIRE);
+        setCity(OPTION_REQUIRE);
+        setState(OPTION_OPTIONAL);
+        setCountry(OPTION_REQUIRE);
+        setZipcode(OPTION_REQUIRE);
+        setTelephone(OPTION_REQUIRE);
+        setFax(OPTION_HIDE);
+        setDob(OPTION_HIDE);
+        setGender(OPTION_HIDE);
+        setTaxvat(OPTION_HIDE);
+    }
 
-	public void setVat_id(String vat_id) {
-		this.vat_id = vat_id;
-	}
+    @Override
+    public void parse() {
 
-	public String getVat_id() {
-		return vat_id;
-	}
+    }
 
-	public String getPrefix() {
-		return prefix;
-	}
+    public void setVat_id(String vat_id) {
+        this.vat_id = vat_id;
+    }
 
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
+    public String getVat_id() {
+        return vat_id;
+    }
 
-	public String getSuffix() {
-		return suffix;
-	}
+    public String getPrefix() {
+        return prefix;
+    }
 
-	public void setSuffix(String suffix) {
-		this.suffix = suffix;
-	}
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 
-	public String getDob() {
-		return dob;
-	}
+    public String getSuffix() {
+        return suffix;
+    }
 
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
 
-	public String getTaxvat() {
-		return taxvat;
-	}
+    public String getDob() {
+        return dob;
+    }
 
-	public void setTaxvat(String taxvat) {
-		this.taxvat = taxvat;
-	}
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
 
-	public String getGender() {
-		return gender;
-	}
+    public String getTaxvat() {
+        return taxvat;
+    }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    public void setTaxvat(String taxvat) {
+        this.taxvat = taxvat;
+    }
 
-	public ArrayList<GenderConfig> getGenderConfigs() {
-		return genderConfigs;
-	}
+    public String getGender() {
+        return gender;
+    }
 
-	public void setGenderConfigs(ArrayList<GenderConfig> genderConfigs) {
-		this.genderConfigs = genderConfigs;
-	}
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public String getCompany() {
-		return company;
-	}
+    public ArrayList<GenderConfig> getGenderConfigs() {
+        return genderConfigs;
+    }
 
-	public void setCompany(String company) {
-		this.company = company;
-	}
+    public void setGenderConfigs(ArrayList<GenderConfig> genderConfigs) {
+        this.genderConfigs = genderConfigs;
+    }
 
-	public String getStreet() {
-		return street;
-	}
+    public String getCompany() {
+        return company;
+    }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public void setCompany(String company) {
+        this.company = company;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getStreet() {
+        return street;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	public String getZipcode() {
-		return zipcode;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public String getTelephone() {
-		return telephone;
-	}
+    public String getZipcode() {
+        return zipcode;
+    }
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
 
-	public String getFax() {
-		return fax;
-	}
+    public String getTelephone() {
+        return telephone;
+    }
 
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getFax() {
+        return fax;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Override
-	public String getData(String key) {
-		if (mJSON != null && mJSON.has(key)) {
-			try {
-				return this.mJSON.getString(key);
-			} catch (JSONException e) {
-				e.printStackTrace();
-				return OPTION_OPTIONAL;
-			}
-		}
-		return OPTION_OPTIONAL;
-	}
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isRequired(String value) {
+        if (null == value) {
+            return false;
+        }
+
+        value = value.toLowerCase();
+
+        if (value.equals("req")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isHidden(String value) {
+        if (null == value) {
+            return false;
+        }
+
+        if (value.equals("")) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    public boolean isOptional(String value) {
+        if (null == value) {
+            return true;
+        }
+
+        value = value.toLowerCase();
+        if (value.equals("opt")) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    @Override
+    public String getData(String key) {
+        if (hasKey(key)) {
+            try {
+                return this.mJSON.getString(key);
+            } catch (JSONException e) {
+                return OPTION_OPTIONAL;
+            }
+        }
+        return OPTION_OPTIONAL;
+    }
 
 }

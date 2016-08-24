@@ -11,14 +11,13 @@ import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.common.DataPreferences;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.setting.entity.CurrencyEntity;
 
 public class ListCurrencyController extends SimiController {
 	protected OnItemClickListener mClicker;
 	protected ArrayList<String> list_currency;
-	protected MyAddress addressBookDetail;
+	protected AddressEntity addressBookDetail;
 	protected SimiDelegate mDelegate;
 
 	public void setDelegate(SimiDelegate delegate) {

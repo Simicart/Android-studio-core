@@ -37,7 +37,7 @@ import com.simicart.core.config.AppCheckoutConfig;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.fragment.AddressBookDetailFragment;
 import com.simicart.core.notification.entity.NotificationEntity;
 
@@ -51,8 +51,8 @@ public class ReviewOrderController extends SimiController implements
     protected PaymentMethodDelegate mPaymentMethodDelegate;
     protected ShippingDelegate mShippingDelegate;
 
-    protected MyAddress mBillingAddress;
-    protected MyAddress mShippingAddress;
+    protected AddressEntity mBillingAddress;
+    protected AddressEntity mShippingAddress;
     protected ArrayList<ShippingMethod> mShippingmethod;
     protected ArrayList<PaymentMethod> mPaymentMethods;
     protected TotalPrice mtotalPrice;
@@ -91,11 +91,11 @@ public class ReviewOrderController extends SimiController implements
             this.mDelegate = delegate;
     }
 
-    public void setBillingAddress(MyAddress address) {
+    public void setBillingAddress(AddressEntity address) {
         mBillingAddress = address;
     }
 
-    public void setShippingAddress(MyAddress address) {
+    public void setShippingAddress(AddressEntity address) {
         mShippingAddress = address;
     }
 
@@ -199,16 +199,16 @@ public class ReviewOrderController extends SimiController implements
                     AddressBookDetailFragment fragment = AddressBookDetailFragment
                             .newInstance();
                     Bundle bundleAddress = new Bundle();
-                    bundleAddress.putSerializable(
-                            Constants.KeyData.BOOK_ADDRESS, mShippingAddress);
-                    bundleAddress.putInt(Constants.KeyData.ADDRESS_FOR,
-                            Constants.KeyAddress.SHIPPING_ADDRESS);
-
-                    bundleAddress.putSerializable(
-                            Constants.KeyData.BILLING_ADDRESS, mBillingAddress);
-                    bundleAddress.putSerializable(
-                            Constants.KeyData.SHIPPING_ADDRESS,
-                            mShippingAddress);
+//                    bundleAddress.putSerializable(
+//                            Constants.KeyData.BOOK_ADDRESS, mShippingAddress);
+//                    bundleAddress.putInt(Constants.KeyData.ADDRESS_FOR,
+//                            Constants.KeyAddress.SHIPPING_ADDRESS);
+//
+//                    bundleAddress.putSerializable(
+//                            Constants.KeyData.BILLING_ADDRESS, mBillingAddress);
+//                    bundleAddress.putSerializable(
+//                            Constants.KeyData.SHIPPING_ADDRESS,
+//                            mShippingAddress);
 
                     fragment.setArguments(bundleAddress);
                     if (DataLocal.isTablet) {
@@ -237,16 +237,16 @@ public class ReviewOrderController extends SimiController implements
                     AddressBookDetailFragment fragment = AddressBookDetailFragment
                             .newInstance();
                     Bundle bundleAddress = new Bundle();
-                    bundleAddress.putSerializable(
-                            Constants.KeyData.BOOK_ADDRESS, mBillingAddress);
-                    bundleAddress.putInt(Constants.KeyData.ADDRESS_FOR,
-                            Constants.KeyAddress.BILLING_ADDRESS);
-
-                    bundleAddress.putSerializable(
-                            Constants.KeyData.BILLING_ADDRESS, mBillingAddress);
-                    bundleAddress.putSerializable(
-                            Constants.KeyData.SHIPPING_ADDRESS,
-                            mShippingAddress);
+//                    bundleAddress.putSerializable(
+//                            Constants.KeyData.BOOK_ADDRESS, mBillingAddress);
+//                    bundleAddress.putInt(Constants.KeyData.ADDRESS_FOR,
+//                            Constants.KeyAddress.BILLING_ADDRESS);
+//
+//                    bundleAddress.putSerializable(
+//                            Constants.KeyData.BILLING_ADDRESS, mBillingAddress);
+//                    bundleAddress.putSerializable(
+//                            Constants.KeyData.SHIPPING_ADDRESS,
+//                            mShippingAddress);
 
                     fragment.setArguments(bundleAddress);
                     if (DataLocal.isTablet) {

@@ -14,12 +14,22 @@ public class ProfileEntity extends SimiEntity {
 	private String mMonth;
 	private String mYear;
 	private String mGender;
-	
+
 	private String mTaxVat;
+
 
 	private String mCurrentPass;
 	private String mNewPass;
 	private String mConfirmPass;
+
+	protected String TAXVAT = "taxvat";
+	protected String PREFIX = "prefix";
+	protected String SUFFIX = "suffix";
+	protected String DAY = "day";
+	protected String MONTH = "month";
+	protected String YEAR = "year";
+	protected String GENDER = "gender";
+
 
 	public String getCurrentPass() {
 		return mCurrentPass;
@@ -47,7 +57,7 @@ public class ProfileEntity extends SimiEntity {
 	
 	public String getTaxVat(){
 		if (null == mTaxVat) {
-			mTaxVat = getData(Constants.TAXVAT);
+			mTaxVat = getData(TAXVAT);
 		}
 		return mTaxVat;
 	}
@@ -80,7 +90,7 @@ public class ProfileEntity extends SimiEntity {
 
 	public String getPrefix() {
 		if (null == mPrefix) {
-			mPrefix = getData(Constants.PREFIX);
+			mPrefix = getData(PREFIX);
 		}
 		return mPrefix;
 	}
@@ -91,7 +101,7 @@ public class ProfileEntity extends SimiEntity {
 
 	public String getSuffix() {
 		if (null == mSuffix) {
-			mSuffix = getData(Constants.SUFFIX);
+			mSuffix = getData(SUFFIX);
 		}
 		return mSuffix;
 	}
@@ -102,7 +112,7 @@ public class ProfileEntity extends SimiEntity {
 
 	public String getDay() {
 		if (null == mDay) {
-			mDay = getData(Constants.DAY);
+			mDay = getData(DAY);
 		}
 		return mDay;
 	}
@@ -113,7 +123,7 @@ public class ProfileEntity extends SimiEntity {
 
 	public String getMonth() {
 		if (null == mMonth) {
-			mMonth = getData(Constants.MONTH);
+			mMonth = getData(MONTH);
 		}
 		return mMonth;
 	}
@@ -124,7 +134,7 @@ public class ProfileEntity extends SimiEntity {
 
 	public String getYear() {
 		if (null == mYear) {
-			mYear = getData(Constants.YEAR);
+			mYear = getData(YEAR);
 		}
 		return mYear;
 	}
@@ -135,7 +145,7 @@ public class ProfileEntity extends SimiEntity {
 
 	public String getGender() {
 		if (null == mGender) {
-			mGender = Utils.getLabelGender(getData(Constants.GENDER));
+			mGender = Utils.getLabelGender(getData(GENDER));
 		}
 		return mGender;
 	}

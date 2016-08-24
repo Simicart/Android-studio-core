@@ -55,10 +55,10 @@ public class PlaceOrderModel extends SimiModel {
 				notificationEntity.setMessage(js_notice
 						.getString(Constants.MESSAGE));
 			}
-			if (js_notice.has(Constants.TITLE)) {
-				notificationEntity.setTitle(js_notice
-						.getString(Constants.TITLE));
-			}
+//			if (js_notice.has(Constants.TITLE)) {
+//				notificationEntity.setTitle(js_notice
+//						.getString(Constants.TITLE));
+//			}
 			if (js_notice.has("url")) {
 				notificationEntity.setUrl(js_notice.getString("url"));
 			}

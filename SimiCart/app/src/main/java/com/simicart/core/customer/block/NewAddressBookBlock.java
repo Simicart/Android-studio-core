@@ -19,20 +19,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DataPreferences;
-import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.adapter.GenderAdapter;
 import com.simicart.core.customer.delegate.ChooseCountryDelegate;
 import com.simicart.core.customer.delegate.NewAddressBookDelegate;
+import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.customer.entity.MyAddress;
 import com.simicart.core.customer.entity.ProfileEntity;
 import com.simicart.core.material.ButtonRectangle;
 
@@ -514,8 +511,8 @@ public class NewAddressBookBlock extends SimiBlock implements
 	}
 
 	@Override
-	public MyAddress getNewAddressBook() {
-		MyAddress address = new MyAddress();
+	public AddressEntity getNewAddressBook() {
+		AddressEntity address = new AddressEntity();
 		// prefix
 		String prefix = edt_prefix.getText().toString();
 		if (null != prefix && !prefix.equals("")) {

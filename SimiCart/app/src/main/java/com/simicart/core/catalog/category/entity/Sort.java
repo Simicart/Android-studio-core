@@ -7,38 +7,40 @@ import com.simicart.core.config.Constants;
 
 
 public class Sort {
-	private int mID;
-	private String mTitle;
+    private int mID;
+    private String mTitle;
 
-	public boolean parse(JSONObject json) {
-		try {
-			if (json.has(Constants.ID)) {
-				mID = json.getInt(Constants.ID);
-			}
-			if (json.has(Constants.TITLE)) {
-				mTitle = json.getString(Constants.TITLE);
-			}
+    protected String TITLE = "title";
 
-			return true;
-		} catch (JSONException e) {
-			return false;
-		}
-	}
+    public boolean parse(JSONObject json) {
+        try {
+            if (json.has(Constants.ID)) {
+                mID = json.getInt(Constants.ID);
+            }
+            if (json.has(TITLE)) {
+                mTitle = json.getString(TITLE);
+            }
 
-	public int getId() {
-		return mID;
-	}
+            return true;
+        } catch (JSONException e) {
+            return false;
+        }
+    }
 
-	public void setId(int id) {
-		this.mID = id;
-	}
+    public int getId() {
+        return mID;
+    }
 
-	public String getTitle() {
-		return mTitle;
-	}
+    public void setId(int id) {
+        this.mID = id;
+    }
 
-	public void setTitle(String title) {
-		this.mTitle = title;
-	}
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
 
 }

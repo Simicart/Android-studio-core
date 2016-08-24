@@ -8,10 +8,12 @@ public class Cms extends SimiEntity {
 	protected String mContent;
 	protected String mIcon;
 
+	protected String TITLE = "title";
+
 	public String getTitle() {
 
 		if (null == mTitle) {
-			mTitle = getData(Constants.TITLE);
+			mTitle = getData(TITLE);
 		}
 		return mTitle;
 	}

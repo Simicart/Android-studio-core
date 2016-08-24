@@ -4,30 +4,36 @@ import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.config.Constants;
 
 public class GenderConfig extends SimiEntity {
-	protected String mLabel;
-	protected String mValue;
+    protected String mLabel;
+    protected String mValue;
 
-	public String getLabel() {
-		if (null == mLabel) {
-			mLabel = getData(Constants.LABEL);
-		}
-		return mLabel;
-	}
+    protected String LABEL = "label";
+    protected String VALUE = "value";
 
-	public void setLabel(String label) {
-		this.mLabel = label;
-	}
 
-	public String getValue() {
-		if (null == mValue) {
-			mValue = getData(Constants.VALUE);
-		}
-		return mValue;
-	}
+    @Override
+    public void parse() {
+        mLabel = getData(LABEL);
 
-	public void setValue(String value) {
-		this.mValue = value;
-	}
+        mValue = getData(VALUE);
+
+    }
+
+    public String getLabel() {
+        return mLabel;
+    }
+
+    public void setLabel(String label) {
+        this.mLabel = label;
+    }
+
+    public String getValue() {
+        return mValue;
+    }
+
+    public void setValue(String value) {
+        this.mValue = value;
+    }
 
 
 }

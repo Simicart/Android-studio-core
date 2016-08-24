@@ -18,7 +18,7 @@ import com.simicart.core.checkout.controller.ReviewOrderController;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 
 public class ReviewOrderFragment extends SimiFragment {
 
@@ -26,19 +26,19 @@ public class ReviewOrderFragment extends SimiFragment {
 	protected PaymentMethodBlock mPaymentMethodBlock;
 	protected ShippingBlock mShippingBlock;
 	protected ReviewOrderController mController;
-	protected MyAddress mBillingAddress;
-	protected MyAddress mShippingAddress;
+	protected AddressEntity mBillingAddress;
+	protected AddressEntity mShippingAddress;
 	protected int mAfterControll;
 
 	public static ReviewOrderFragment newInstance(int afterControll,
-			MyAddress shippingAdd, MyAddress billingAdd) {
+												  AddressEntity shippingAdd, AddressEntity billingAdd) {
 		ReviewOrderFragment fragment = new ReviewOrderFragment();
 		fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_REVIEWORDER);
 		Bundle bundle = new Bundle();
 //		setData(Constants.KeyData.AFTER_CONTROL, afterControll,
 //				Constants.KeyData.TYPE_INT, bundle);
-		bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, shippingAdd);
-		bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, billingAdd);
+//		bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, shippingAdd);
+//		bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, billingAdd);
 		fragment.setArguments(bundle);
 		fragment.mBillingAddress = billingAdd;
 		fragment.mShippingAddress = shippingAdd;
@@ -49,11 +49,11 @@ public class ReviewOrderFragment extends SimiFragment {
 		return mAfterControll;
 	}
 
-	public MyAddress getBillingAddress() {
+	public AddressEntity getBillingAddress() {
 		return mBillingAddress;
 	}
 
-	public MyAddress getShippingAddress() {
+	public AddressEntity getShippingAddress() {
 		return mShippingAddress;
 	}
 
@@ -76,9 +76,9 @@ public class ReviewOrderFragment extends SimiFragment {
 		if (getArguments() != null) {
 //			mAfterControll = (int) getData(Constants.KeyData.AFTER_CONTROL,
 //					Constants.KeyData.TYPE_INT, getArguments());
-			mShippingAddress = (MyAddress) getArguments().getSerializable(
+			mShippingAddress = (AddressEntity) getArguments().getSerializable(
 					Constants.KeyData.SHIPPING_ADDRESS);
-			mBillingAddress = (MyAddress) getArguments().getSerializable(
+			mBillingAddress = (AddressEntity) getArguments().getSerializable(
 					Constants.KeyData.BILLING_ADDRESS);
 		}
 		Log.e("duyquang", "==ReviewOrderFragment3==" + mAfterControll

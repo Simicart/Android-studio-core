@@ -3,7 +3,6 @@ package com.simicart.core.customer.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -11,12 +10,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.customer.delegate.ChooseCountryDelegate;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 
 public class CountryAllowedAController extends SimiController {
 	protected OnItemClickListener mClicker;
 	ArrayList<String> list_country;
-	MyAddress addressBookDetail;
+	AddressEntity addressBookDetail;
 	ChooseCountryDelegate chooseDelegate;
 	protected int type;
 

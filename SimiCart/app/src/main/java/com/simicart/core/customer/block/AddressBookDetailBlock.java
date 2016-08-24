@@ -1,31 +1,14 @@
 package com.simicart.core.customer.block;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.delegate.AddressBookDetailDelegate;
-import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.customer.entity.CountryAllowed;
-import com.simicart.core.customer.entity.MyAddress;
-import com.simicart.core.customer.entity.StateOfCountry;
-import com.simicart.core.material.ButtonRectangle;
 
 import java.util.ArrayList;
 

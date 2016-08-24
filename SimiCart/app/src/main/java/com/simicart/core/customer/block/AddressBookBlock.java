@@ -17,7 +17,7 @@ import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.adapter.AddressBookAdapter;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class AddressBookBlock extends SimiBlock {
     protected AddressBookAdapter mAdapter;
     private RelativeLayout rlt_layout_addadress;
     protected int addressBookFor = -1;
-    protected ArrayList<MyAddress> listAddress;
+    protected ArrayList<AddressEntity> listAddress;
 
     @Override
     public void initView() {
@@ -67,7 +67,7 @@ public class AddressBookBlock extends SimiBlock {
         if(entities != null && entities.size() > 0) {
             listAddress = new ArrayList<>();
             for(int i=0;i<entities.size();i++) {
-                MyAddress entity = (MyAddress) entities.get(i);
+                AddressEntity entity = (AddressEntity) entities.get(i);
                 listAddress.add(entity);
             }
             Log.e("abc", "++" + listAddress.size());

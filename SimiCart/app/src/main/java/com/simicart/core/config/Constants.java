@@ -32,7 +32,7 @@ public class Constants {
     public static String STORE_ID = "store_id";
     public static String STORE_NAME = "store_name";
     public static String STORE_CODE = "store_code";
-    public static String LABEL = "label";
+
 
     // tag json spot product
     public static String PRODUCT_IMAGES = "product_images";
@@ -53,8 +53,8 @@ public class Constants {
     public static String PRODUCT_REGULAR_PRICE = "product_regular_price";
     public static String KEY = "key";
     public static String KEY_WORD = "key_word";
-    public static String TITLE = "title";
-    public static String VALUE = "value";
+
+
     public static String OFFSET = "offset";
     public static String LIMIT = "limit";
     public static String WIDTH = "width";
@@ -128,39 +128,39 @@ public class Constants {
     public static String STAR_5 = "5_star";
 
     // address
-    public static String NAME = "name";
-    public static String STREET = "street";
-    public static String CITY = "city";
+
+
+
     public static String STATE = "state";
-    public static String STATES = "states";
-    public static String STATE_CODE = "state_code";
-    public static String STATE_NAME = "state_name";
-    public static String STATE_ID = "state_id";
+
+
+
+
     public static String COUNTRY_ID = "country_id";
-    public static String COUNTRY_CODE = "country_code";
-    public static String COUNTRY_NAME = "country_name";
+
+
     public static String COUNTRY = "country";
-    public static String ZIP = "zip";
+
     public static String ZIP_CODE = "Zipcode";
     public static String zIP_CODE = "zipcode";
     public static String TELEPHONE = "telephone";
-    public static String PHONE = "phone";
-    public static String EMAIL = "email";
-    public static String FAX = "fax";
-    public static String LATLNG = "latlng";
-    public static String COMPANY = "company";
+
+
+
+
+
     public static String ADDRESS = "address";
-    public static String ADDRESS_ID = "address_id";
-    public static String PREFIX = "prefix";
+
+
     public static String BIRTH_DAY = "birthday";
-    public static String SUFFIX = "suffix";
+
     public static String DOB = "dob";
-    public static String GENDER = "gender";
-    public static String DAY = "day";
-    public static String TAXVAT = "taxvat";
-    public static String TAXVAT_CHECKOUT = "vat_id";
-    public static String MONTH = "month";
-    public static String YEAR = "year";
+
+
+
+
+
+
 
     // shipping method
     public static String METHOD_ID = "s_method_id";

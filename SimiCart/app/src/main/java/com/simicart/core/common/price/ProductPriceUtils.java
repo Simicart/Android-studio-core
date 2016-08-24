@@ -36,6 +36,10 @@ public class ProductPriceUtils {
     public final String EXCL = SimiTranslator.getInstance().translate("Excl.Tax");
     public final String INCL = SimiTranslator.getInstance().translate("Incl.Tax");
 
+
+    protected String LABEL = "label";
+    protected String VALUE = "value";
+
     public ProductPriceUtils() {
         isShowZero = AppStoreConfig.getInstance().isShowZeroPrice();
     }
@@ -1259,26 +1263,26 @@ public class ProductPriceUtils {
                             .getJSONObject(i);
 
                     if (i == 0) {
-                        if (!js_other.getString(Constants.LABEL).equals("")) {
+                        if (!js_other.getString(LABEL).equals("")) {
                             price += "<font color='" + color_Other + "'>"
-                                    + js_other.getString(Constants.LABEL)
+                                    + js_other.getString(LABEL)
                                     + "</font>";
                         }
-                        if (!js_other.getString(Constants.VALUE).equals("")) {
+                        if (!js_other.getString(VALUE).equals("")) {
                             price += "<font color='" + color_Other + "'>"
-                                    + js_other.getString(Constants.VALUE)
+                                    + js_other.getString(VALUE)
                                     + "</font>";
                         }
                     } else {
-                        if (!js_other.getString(Constants.LABEL).equals("")) {
+                        if (!js_other.getString(LABEL).equals("")) {
                             price += "<br><font color='" + color_Other + "'>"
-                                    + js_other.getString(Constants.LABEL)
+                                    + js_other.getString(LABEL)
                                     + "</font>";
                         }
 
-                        if (!js_other.getString(Constants.VALUE).equals("")) {
+                        if (!js_other.getString(VALUE).equals("")) {
                             price += "<br><font color='" + color_Other + "'>"
-                                    + js_other.getString(Constants.VALUE)
+                                    + js_other.getString(VALUE)
                                     + "</font>";
                         }
                     }
@@ -1305,7 +1309,6 @@ public class ProductPriceUtils {
     public void setColorTire(String color_Tire) {
         this.color_Tire = color_Tire;
     }
-
 
 
     public String getColorOther() {

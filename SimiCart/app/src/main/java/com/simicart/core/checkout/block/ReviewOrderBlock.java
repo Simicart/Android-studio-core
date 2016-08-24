@@ -43,11 +43,10 @@ import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.TotalPriceView;
 import com.simicart.core.config.AppCheckoutConfig;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.material.ButtonRectangle;
 import com.simicart.core.style.CustomScrollView;
 
@@ -283,7 +282,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 	}
 
 	@Override
-	public void onUpdateAddress(MyAddress address) {
+	public void onUpdateAddress(AddressEntity address) {
 
 	}
 
@@ -491,7 +490,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 	}
 
 	@Override
-	public void setBillingAddress(MyAddress address) {
+	public void setBillingAddress(AddressEntity address) {
 
 		RelativeLayout rlt_billingAddr = (RelativeLayout) mView
 				.findViewById(Rconfig.getInstance().id("billing_address"));
@@ -558,7 +557,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 	}
 
 	@Override
-	public void setShipingAddress(MyAddress address) {
+	public void setShipingAddress(AddressEntity address) {
 
 		RelativeLayout rlt_shippingAdr = (RelativeLayout) mView
 				.findViewById(Rconfig.getInstance().id("shipping_address"));

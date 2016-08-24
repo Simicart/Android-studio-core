@@ -1,6 +1,5 @@
 package com.simicart.core.checkout.adapter;
 
-import kankan.wheel.widget.adapters.AbstractWheelTextAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +12,7 @@ import android.widget.ImageView;
 import com.simicart.core.checkout.entity.PaymentMethod;
 import com.simicart.core.config.Rconfig;
 
-public class CreditCardAdapter extends AbstractWheelTextAdapter {
+public class CreditCardAdapter  {
 	// Countries names
 	private String cards[];
 	// Countries flags
@@ -23,8 +22,8 @@ public class CreditCardAdapter extends AbstractWheelTextAdapter {
 	 * Constructor
 	 */
 	public CreditCardAdapter(Context context, PaymentMethod mPaymentMethod) {
-		super(context, Rconfig.getInstance().layout("core_item_ccard_layout"),
-				NO_RESOURCE);
+//		super(context, Rconfig.getInstance().layout("core_item_ccard_layout"),
+//				NO_RESOURCE);
 		JSONArray cc_types = null;
 		try {
 			cc_types = new JSONArray(mPaymentMethod.getData("cc_types"));
@@ -44,7 +43,7 @@ public class CreditCardAdapter extends AbstractWheelTextAdapter {
 					e.printStackTrace();
 				}
 			}
-			setItemTextResource(Rconfig.getInstance().id("card_name"));
+//			setItemTextResource(Rconfig.getInstance().id("card_name"));
 		}
 	}
 
@@ -72,30 +71,30 @@ public class CreditCardAdapter extends AbstractWheelTextAdapter {
 		return back;
 	}
 
-	@Override
-	public View getItem(int index, View cachedView, ViewGroup parent) {
-		View view = super.getItem(index, cachedView, parent);
-		ImageView img = (ImageView) view.findViewById(Rconfig.getInstance().id(
-				"flag"));
-		img.setImageResource(flags[index]);
-		return view;
-	}
-
-	@Override
-	public int getItemsCount() {
-		if (cards == null || cards.length == 0) {
-			return 0;
-		} else {
-			return cards.length;
-		}
-	}
-
-	@Override
-	public CharSequence getItemText(int index) {
-		if (cards == null || cards.length == 0) {
-			return "Credit card";
-		} else {
-			return cards[index];
-		}
-	}
+//	@Override
+//	public View getItem(int index, View cachedView, ViewGroup parent) {
+//		View view = super.getItem(index, cachedView, parent);
+//		ImageView img = (ImageView) view.findViewById(Rconfig.getInstance().id(
+//				"flag"));
+//		img.setImageResource(flags[index]);
+//		return view;
+//	}
+//
+//	@Override
+//	public int getItemsCount() {
+//		if (cards == null || cards.length == 0) {
+//			return 0;
+//		} else {
+//			return cards.length;
+//		}
+//	}
+//
+//	@Override
+//	public CharSequence getItemText(int index) {
+//		if (cards == null || cards.length == 0) {
+//			return "Credit card";
+//		} else {
+//			return cards[index];
+//		}
+//	}
 }

@@ -7,10 +7,8 @@ import org.json.JSONException;
 
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.checkout.controller.ConfigCheckout;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 
 public class AddressBookModel extends SimiModel {
 
@@ -20,7 +18,7 @@ public class AddressBookModel extends SimiModel {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			collection = new SimiCollection();
 			for (int i = 0; i < list.length(); i++) {
-				MyAddress address = new MyAddress();
+				AddressEntity address = new AddressEntity();
 				address.parse(list.getJSONObject(i));
 				collection.addEntity(address);
 			}

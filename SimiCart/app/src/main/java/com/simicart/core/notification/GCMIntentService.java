@@ -101,10 +101,10 @@ public class GCMIntentService extends GCMBaseIntentService {
                         notificationTemp.setMessage(json
                                 .getString(Constants.MESSAGE));
                     }
-                    if (json.has(Constants.TITLE)) {
-                        notificationTemp.setTitle(json
-                                .getString(Constants.TITLE));
-                    }
+//                    if (json.has(Constants.TITLE)) {
+//                        notificationTemp.setTitle(json
+//                                .getString(Constants.TITLE));
+//                    }
                     if (json.has("url")) {
                         notificationTemp.setUrl(json.getString("url"));
                     }

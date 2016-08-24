@@ -13,7 +13,7 @@ import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.entity.MyAddress;
+import com.simicart.core.customer.entity.AddressEntity;
 
 import java.util.ArrayList;
 
@@ -22,10 +22,10 @@ import java.util.ArrayList;
  */
 public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.AddressBookHolder> {
 
-    protected ArrayList<MyAddress> listAddress;
+    protected ArrayList<AddressEntity> listAddress;
     protected int addressBookFor = -1;
 
-    public AddressBookAdapter(ArrayList<MyAddress> listAddress, int addressBookFor) {
+    public AddressBookAdapter(ArrayList<AddressEntity> listAddress, int addressBookFor) {
         this.listAddress = listAddress;
         this.addressBookFor = addressBookFor;
     }
@@ -42,7 +42,7 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
 
     @Override
     public void onBindViewHolder(AddressBookHolder holder, int position) {
-        final MyAddress addressEntity = listAddress.get(position);
+        final AddressEntity addressEntity = listAddress.get(position);
 
         // name
         String name = addressEntity.getName();
@@ -146,7 +146,7 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
         }
     }
 
-    protected void onChooseAddressEdit(MyAddress addressEntity) {
+    protected void onChooseAddressEdit(AddressEntity addressEntity) {
 //        SimiData data = new SimiData();
 //        data.addData("address_for", Constants.KeyAddress.EDIT_ADDRESS);
 //        data.addData("address_entity", addressEntity);
@@ -154,7 +154,7 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
 //        SimiManager.getIntance().replaceFragment(fragment);
     }
 
-    protected void onChooseAddressCheckout(MyAddress addressEntity) {
+    protected void onChooseAddressCheckout(AddressEntity addressEntity) {
 //        ReviewOrderFragment fragment = new ReviewOrderFragment();
 //        fragment.setTypeCheckout(ReviewOrderFragment.CHECKOUTTYPE.AS_LOGGED);
 //        fragment.setShippingAddress(addressEntity);

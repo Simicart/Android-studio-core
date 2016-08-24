@@ -44,15 +44,15 @@ public class AddressBookFragment extends SimiFragment {
 
 		if (null == mController) {
 			mController = new AddressBookController();
-			mController.setAddressBookFor(addressBookFor);
+			//mController.setAddressBookFor(addressBookFor);
 			mController.setDelegate(mBlock);
 			mController.onStart();
 		} else {
-			mController.setAddressBookFor(addressBookFor);
+			//mController.setAddressBookFor(addressBookFor);
 			mController.setDelegate(mBlock);
 			mController.onResume();
 		}
-		mBlock.setonTouchListener(mController.getListener());
+	//	mBlock.setonTouchListener(mController.getListener());
 
 		return view;
 

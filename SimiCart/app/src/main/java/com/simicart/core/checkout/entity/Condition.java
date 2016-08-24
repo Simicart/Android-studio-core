@@ -10,6 +10,10 @@ public class Condition extends SimiEntity {
 	private String mID;
 	private boolean isChecked;
 
+	protected String TITLE = "title";
+	protected String NAME = "name";
+
+
 	public boolean isChecked() {
 		return isChecked;
 	}
@@ -20,7 +24,7 @@ public class Condition extends SimiEntity {
 
 	public String getCheckText() {
 		if (null == mCheckText) {
-			mCheckText = getData(Constants.TITLE);
+			mCheckText = getData(TITLE);
 		}
 		return mCheckText;
 	}
@@ -31,7 +35,7 @@ public class Condition extends SimiEntity {
 
 	public String getTitle() {
 		if (null == mTitle) {
-			mTitle = getData(Constants.NAME);
+			mTitle = getData(NAME);
 		}
 		return mTitle;
 	}
