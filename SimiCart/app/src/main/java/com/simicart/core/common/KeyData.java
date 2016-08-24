@@ -26,7 +26,9 @@ public class KeyData {
     }
 
     public static class ADDRESS_BOOK {
-        public static String ADDRESS_BOOK_FOR = "address_book_for";
+        public static String OPEN_FOR = "open_for";
+        public static String BILLING_ADDRESS = "billing_address";
+        public static String SHIPPING_ADDRESS = "shipping_address";
     }
 
     public static class LIST_OF_CHOICE {

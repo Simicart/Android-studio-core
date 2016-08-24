@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.entity.AddressEntity;
 
@@ -90,7 +89,7 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
             holder.tvEmail.setText(email);
         }
 
-        if (addressBookFor == ValueData.ADDRESS_BOOK.CHECKOUT_ADDRESS) {
+        if (addressBookFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT) {
             holder.ivExtend.setVisibility(View.GONE);
         }
 
@@ -99,9 +98,9 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
         holder.rlItemAddressBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (addressBookFor == ValueData.ADDRESS_BOOK.CUSTOMER_ADDRESS) {
+                if (addressBookFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CUSTOMER) {
                     onChooseAddressEdit(addressEntity);
-                } else if (addressBookFor == ValueData.ADDRESS_BOOK.CHECKOUT_ADDRESS) {
+                } else if (addressBookFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT) {
                     onChooseAddressCheckout(addressEntity);
                 }
             }

@@ -111,6 +111,10 @@ public class AddressBookDetailController extends SimiController {
                     for (int i = 0; i < entities.size(); i++) {
                         CountryAllowed country = (CountryAllowed) entities.get(i);
                         mListCountry.add(country);
+
+                    }
+                    if (null != mListCountry && mListCountry.size() > 0) {
+                        setupDefaultValue();
                     }
                 }
                 showView();
@@ -118,6 +122,16 @@ public class AddressBookDetailController extends SimiController {
         });
 
         getCountryModel.request();
+    }
+
+    protected void setupDefaultValue() {
+        if (null == mCountry) {
+            mCountry = mListCountry.get(0);
+            ArrayList<StateOfCountry> states = mCountry.getStateList();
+            if (null != states && states.size() > 0) {
+                mState = states.get(0);
+            }
+        }
     }
 
     protected void showView() {
@@ -256,9 +270,7 @@ public class AddressBookDetailController extends SimiController {
             if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
                 String countryName = mAddressForEdit.getCountryName();
                 mCountryComponent.setValue(countryName);
-            }
-
-            if (null != mCountry) {
+            } else if (null != mCountry) {
                 String countryName = mCountry.getName();
                 mCountryComponent.setValue(countryName);
             }
@@ -272,8 +284,10 @@ public class AddressBookDetailController extends SimiController {
             });
 
             View countryView = mCountryComponent.createView();
-            mListRow.add(countryView);
-            mListRowComponent.add(mCountryComponent);
+            if (null != mCountry) {
+                mListRow.add(countryView);
+                mListRowComponent.add(mCountryComponent);
+            }
         }
     }
 
@@ -284,6 +298,9 @@ public class AddressBookDetailController extends SimiController {
             if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
                 String stateName = mAddressForEdit.getStateName();
                 mStateComponent.setValue(stateName);
+            } else if (null != mState) {
+                String stateName = mState.getName();
+                mStateComponent.setValue(stateName);
             }
             mStateComponent.setKey("state_name");
             mStateComponent.setCallBack(new NavigationRowCallBack() {
@@ -293,8 +310,10 @@ public class AddressBookDetailController extends SimiController {
                 }
             });
             View stateView = mStateComponent.createView();
-            mListRow.add(stateView);
-            mListRowComponent.add(mStateComponent);
+            if (null != mState) {
+                mListRow.add(stateView);
+                mListRowComponent.add(mStateComponent);
+            }
         }
     }
 
@@ -368,7 +387,7 @@ public class AddressBookDetailController extends SimiController {
             @Override
             public void onSuccess(SimiCollection collection) {
                 HashMap<String, Object> hm = new HashMap<>();
-                hm.put(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR, openFor);
+                hm.put(KeyData.ADDRESS_BOOK.OPEN_FOR, openFor);
                 SimiManager.getIntance().openAddressBook(hm);
             }
         });
@@ -394,6 +413,36 @@ public class AddressBookDetailController extends SimiController {
                 }
             }
         }
+
+        if (null != mCountry) {
+            String name = mCountry.getName();
+            if (Utils.validateString(name)) {
+                mModel.addBody("country_name", name);
+            }
+
+            String code = mCountry.getCode();
+            if (Utils.validateString(code)) {
+                mModel.addBody("country_code", code);
+            }
+        }
+
+        if (null != mState) {
+            String name = mState.getName();
+            if (Utils.validateString(name)) {
+                mModel.addBody("state_name", name);
+            }
+
+            String code = mState.getCode();
+            if (Utils.validateString(code)) {
+                mModel.addBody("state_code", code);
+            }
+
+            String id = mState.getID();
+            if (Utils.validateString(id)) {
+                mModel.addBody("state_id", id);
+            }
+        }
+
 
         mModel.request();
     }

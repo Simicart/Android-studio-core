@@ -27,6 +27,7 @@ import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.fragment.AddressBookDetailFragment;
 import com.simicart.core.customer.fragment.AddressBookFragment;
 import com.simicart.core.customer.fragment.ListOfChoiceFragment;
 import com.simicart.core.home.fragment.HomeFragment;
@@ -83,6 +84,12 @@ public class SimiManager {
     public void openAddressBook(HashMap<String, Object> hm) {
         SimiData data = new SimiData(hm);
         AddressBookFragment fragment = AddressBookFragment.newInstance(data);
+        replaceFragment(fragment);
+    }
+
+    public void openAddressBookDetail(HashMap<String, Object> hm) {
+        SimiData data = new SimiData(hm);
+        AddressBookDetailFragment fragment = AddressBookDetailFragment.newInstance(data);
         replaceFragment(fragment);
     }
 

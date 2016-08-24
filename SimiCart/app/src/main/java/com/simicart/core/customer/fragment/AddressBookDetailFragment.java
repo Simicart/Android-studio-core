@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.block.AddressBookDetailBlock;
 import com.simicart.core.customer.controller.AddressBookDetailController;
@@ -13,9 +14,11 @@ import com.simicart.core.customer.controller.AddressBookDetailController;
 public class AddressBookDetailFragment extends SimiFragment {
 
 
-
-    public static AddressBookDetailFragment newInstance() {
+    public static AddressBookDetailFragment newInstance(SimiData data) {
         AddressBookDetailFragment fragment = new AddressBookDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("data", data);
+        fragment.setArguments(bundle);
         return fragment;
     }
 

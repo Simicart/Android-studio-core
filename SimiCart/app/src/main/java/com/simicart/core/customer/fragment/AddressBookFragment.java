@@ -1,6 +1,5 @@
 package com.simicart.core.customer.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,7 @@ import com.simicart.core.customer.controller.AddressBookController;
 
 public class AddressBookFragment extends SimiFragment {
 
-    protected int addressBookFor = -1;
-    protected AddressBookBlock mBlock;
+    protected int openFor = -1;
     protected AddressBookController mController;
 
     public static AddressBookFragment newInstance(SimiData data) {
@@ -36,24 +34,23 @@ public class AddressBookFragment extends SimiFragment {
                 container, false);
 
         if (mData != null) {
-            addressBookFor = (int) getValueWithKey(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR);
+            openFor = (int) getValueWithKey(KeyData.ADDRESS_BOOK.OPEN_FOR);
         }
 
-        mBlock = new AddressBookBlock(view, getActivity());
-        mBlock.setAddressBookFor(addressBookFor);
-        mBlock.initView();
+        AddressBookBlock block = new AddressBookBlock(view, getActivity());
+        block.setOpenFor(openFor);
+        block.initView();
 
         if (null == mController) {
             mController = new AddressBookController();
-            //mController.setAddressBookFor(addressBookFor);
-            mController.setDelegate(mBlock);
+            mController.setData(mHashMapData);
+            mController.setDelegate(block);
             mController.onStart();
         } else {
-            //mController.setAddressBookFor(addressBookFor);
-            mController.setDelegate(mBlock);
+            mController.setDelegate(block);
             mController.onResume();
         }
-        //	mBlock.setonTouchListener(mController.getListener());
+        block.setCreateNewListener(mController.getCreateNewListener());
 
         return view;
 

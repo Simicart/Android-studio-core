@@ -15,7 +15,6 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
@@ -24,7 +23,6 @@ import com.simicart.core.cms.fragment.CMSFragment;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.ValueData;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.fragment.AddressBookFragment;
@@ -32,12 +30,10 @@ import com.simicart.core.customer.fragment.MyAccountFragment;
 import com.simicart.core.customer.fragment.OrderHistoryFragment;
 import com.simicart.core.customer.fragment.SignInFragment;
 import com.simicart.core.home.fragment.HomeFragment;
-import com.simicart.core.setting.fragment.SettingAppFragment;
 import com.simicart.core.slidemenu.delegate.CloseSlideMenuDelegate;
 import com.simicart.core.slidemenu.delegate.SlideMenuDelegate;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
 import com.simicart.core.slidemenu.entity.ItemNavigation.TypeItem;
-import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 import com.simicart.core.splashscreen.entity.DeepLinkEntity;
 
 import java.util.ArrayList;
@@ -418,7 +414,7 @@ public class PhoneSlideMenuController {
             case "Category":
 //                fragment = CategoryFragment.newInstance("-1", "all categories");
                 hm = new HashMap<>();
-                hm.put(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR, ValueData.ADDRESS_BOOK.CUSTOMER_ADDRESS);
+                hm.put(KeyData.ADDRESS_BOOK.OPEN_FOR, ValueData.ADDRESS_BOOK.OPEN_FOR_CUSTOMER);
                 SimiData data = new SimiData(hm);
                 AddressBookFragment addressBookFragment = AddressBookFragment.newInstance(data);
                 SimiManager.getIntance().replaceFragment(addressBookFragment);
