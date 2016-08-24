@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.callback.MenuRowCallBack;
+import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 
@@ -30,15 +31,18 @@ public class SimiMenuRowComponent extends SimiComponent {
         rootView = findLayout("core_component_menu_row");
 
         ivIcon = (ImageView) findView("iv_icon");
-        ivIcon.setImageResource(Rconfig.getInstance().drawable(icon));
+        if(Utils.validateString(icon)) {
+            Drawable icIcon = AppColorConfig.getInstance().getIcon(icon, AppColorConfig.getInstance().getContentColor());
+            ivIcon.setImageDrawable(icIcon);
+        }
 
         tvLabel = (TextView) findView("tv_label");
         tvLabel.setText(label);
         tvLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
 
         ivExtend = (ImageView) findView("iv_extend");
-        Drawable icon = AppColorConfig.getInstance().getIcon("ic_extend", AppColorConfig.getInstance().getContentColor());
-        ivExtend.setImageDrawable(icon);
+        Drawable icExtend = AppColorConfig.getInstance().getIcon("ic_extend", AppColorConfig.getInstance().getContentColor());
+        ivExtend.setImageDrawable(icExtend);
 
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override

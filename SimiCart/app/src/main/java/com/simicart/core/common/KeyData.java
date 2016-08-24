@@ -18,6 +18,11 @@ public class KeyData {
         public static String CUSTOM_URL = "custom_url";
     }
 
+    public static class CATEGORY {
+        public static String CATEGORY_ID = "category_id";
+        public static String CATEGORY_NAME = "category_name";
+    }
+
     public static class ADDRESS_BOOK_DETAIL {
         public static String OPEN_FOR = "open_for";
         public static String ACTION = "action";

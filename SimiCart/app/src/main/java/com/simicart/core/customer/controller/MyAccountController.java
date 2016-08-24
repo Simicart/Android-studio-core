@@ -6,6 +6,8 @@ import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.KeyData;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.delegate.MyAccountDelegate;
@@ -49,7 +51,7 @@ public class MyAccountController extends SimiController {
 			@Override
 			public void onClick() {
 				HashMap<String, Object> hmData = new HashMap<>();
-				hmData.put("address_book_for", Constants.KeyAddressBook.CUSTOMER_ADDRESS);
+				hmData.put(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR, ValueData.ADDRESS_BOOK.CUSTOMER_ADDRESS);
 				SimiData data = new SimiData(hmData);
 				AddressBookFragment fragment = AddressBookFragment.newInstance(data);
 				if (DataLocal.isTablet) {

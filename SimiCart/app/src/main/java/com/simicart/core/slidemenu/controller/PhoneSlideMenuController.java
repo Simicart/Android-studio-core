@@ -416,12 +416,10 @@ public class PhoneSlideMenuController {
                 fragment = HomeFragment.newInstance();
                 break;
             case "Category":
-//                fragment = CategoryFragment.newInstance("-1", "all categories");
                 hm = new HashMap<>();
-                hm.put(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR, ValueData.ADDRESS_BOOK.CUSTOMER_ADDRESS);
-                SimiData data = new SimiData(hm);
-                AddressBookFragment addressBookFragment = AddressBookFragment.newInstance(data);
-                SimiManager.getIntance().replaceFragment(addressBookFragment);
+                hm.put(KeyData.CATEGORY.CATEGORY_ID, "-1");
+                hm.put(KeyData.CATEGORY.CATEGORY_NAME, "all categories");
+                SimiManager.getIntance().openCategory(hm);
                 break;
             case "Order History":
                 fragment = OrderHistoryFragment.newInstance();
@@ -432,7 +430,6 @@ public class PhoneSlideMenuController {
                 hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
                 hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,"3");
                 SimiManager.getIntance().openCategoryDetail(hm);
-                fragment = null;
 //                fragment.setShowPopup(true);
                 break;
             default:

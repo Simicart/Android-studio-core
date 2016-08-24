@@ -31,7 +31,9 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.model.CartModel;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -225,7 +227,7 @@ public class SignInController extends SimiController {
                 }
 
                 HashMap<String, Object> hmData = new HashMap<>();
-                hmData.put("address_book_for", Constants.KeyAddressBook.CHECKOUT_ADDRESS);
+                hmData.put(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR, ValueData.ADDRESS_BOOK.CHECKOUT_ADDRESS);
                 SimiData data = new SimiData(hmData);
                 AddressBookFragment fragment = AddressBookFragment.newInstance(data);
                 if(DataLocal.isTablet) {

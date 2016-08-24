@@ -21,6 +21,7 @@ import com.simicart.core.base.event.fragment.SimiEventFragmentEntity;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.request.SimiRequestQueue;
+import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.Utils;
@@ -71,6 +72,12 @@ public class SimiManager {
 
     public void openHomePage() {
         HomeFragment fragment = HomeFragment.newInstance();
+        replaceFragment(fragment);
+    }
+
+    public void openCategory(HashMap<String, Object> hm) {
+        SimiData data = new SimiData(hm);
+        CategoryFragment fragment = CategoryFragment.newInstance(data);
         replaceFragment(fragment);
     }
 
