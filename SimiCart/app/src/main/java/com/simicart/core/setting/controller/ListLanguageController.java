@@ -8,7 +8,7 @@ import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.DataLocal;
-import com.simicart.core.customer.delegate.ChooseCountryDelegate;
+import com.simicart.core.customer.delegate.ListOfChoiceDelegate;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.store.entity.Stores;
 
@@ -19,7 +19,7 @@ public class ListLanguageController extends SimiController {
 	protected OnItemClickListener mClicker;
 	ArrayList<String> list_lag;
 	AddressEntity addressBookDetail;
-	ChooseCountryDelegate mDelegate;
+	ListOfChoiceDelegate mDelegate;
 
 	public OnItemClickListener getClicker() {
 		return mClicker;

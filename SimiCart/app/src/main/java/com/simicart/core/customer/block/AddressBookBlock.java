@@ -13,6 +13,7 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
@@ -37,7 +38,7 @@ public class AddressBookBlock extends SimiBlock {
                 .getInstance().id("tv_chooseAddress"));
         tv_chooseAddress.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
         tv_chooseAddress.setTextColor(AppColorConfig.getInstance().getSectionTextColor());
-        if (addressBookFor == Constants.KeyAddressBook.CHECKOUT_ADDRESS) {
+        if (addressBookFor == ValueData.ADDRESS_BOOK.CHECKOUT_ADDRESS) {
             tv_chooseAddress.setText(SimiTranslator.getInstance().translate(
                     "Or choose an address"));
         } else {

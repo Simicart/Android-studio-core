@@ -294,28 +294,10 @@ public class Constants {
     public static String FORGET_PASSWORD = "connector/customer/forgot_password";
     public static String ORDER_DETAIL_REORDER = "connector/checkout/re_order";
 
-    // tag customer address config
-    public static String PREFIX_SHOW = "prefix_show";
-    public static String SUFFIX_SHOW = "suffix_show";
-    public static String DOB_SHOW = "dob_show";
-    public static String TAXVAT_SHOW = "taxvat_show";
-    public static String GENDER_SHOW = "gender_show";
-    public static String GENDER_VALUE = "gender_value";
-    public static String CHECKOUT_CONFIG = "checkout_config";
-    public static String ENABLE_GUEST_CHECKOUT = "enable_guest_checkout";
-    public static String ENABLE_AGREEMENTS = "enable_agreements";
-    public static String ANDROID_SENDER = "android_sender";
-
-    public static String SKU = "sku";
 
     // cc_type payment method
     public static String CC_CODE = "cc_code";
     public static String CC_NAME = "cc_name";
-    public static String CC_TYPES = "cc_types";
-    public static String USECVV = "usecvv";
-    public static String CLIENT_ID = "client_id";
-    public static String IS_SANDBOX = "is_sandbox";
-    public static String BNCODE = "bncode";
 
     // order history
     public static String ORDER_ID = "order_id";
@@ -530,9 +512,5 @@ public class Constants {
         public final static int SHIPPING_ADDRESS = 6;
     }
 
-    public final static class KeyAddressBook {
-        public final static int CUSTOMER_ADDRESS = 0;
-        public final static int CHECKOUT_ADDRESS = 1;
-    }
 
 }

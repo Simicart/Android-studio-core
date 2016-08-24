@@ -30,6 +30,16 @@ public class ConfigCustomerAddress extends SimiEntity {
     protected String name;
     protected String email;
 
+    protected static ConfigCustomerAddress instance;
+
+    public static ConfigCustomerAddress getInstance() {
+        if (null == instance) {
+            instance = new ConfigCustomerAddress();
+        }
+
+        return instance;
+    }
+
     public ConfigCustomerAddress() {
         setPrefix(OPTION_HIDE);
         setName(OPTION_REQUIRE);
@@ -52,6 +62,43 @@ public class ConfigCustomerAddress extends SimiEntity {
     @Override
     public void parse() {
 
+    }
+
+    public String getValueWithKey(String key) {
+        switch (key) {
+            case "prefix":
+                return getPrefix();
+            case "name":
+                return getName();
+            case "suffix":
+                return getSuffix();
+            case "email":
+                return getEmail();
+            case "company":
+                return getCompany();
+            case "street":
+                return getStreet();
+            case "taxvat":
+                return getTaxvat();
+            case "city":
+                return getCity();
+            case "state":
+                return getState();
+            case "country":
+                return getCountry();
+            case "zipcode":
+                return getZipcode();
+            case "phone":
+                return getTelephone();
+            case "fax":
+                return getFax();
+            case "datebirth":
+                return getDob();
+            case "gender":
+                return getGender();
+            default:
+                return "";
+        }
     }
 
     public void setVat_id(String vat_id) {

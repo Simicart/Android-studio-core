@@ -1,8 +1,10 @@
 package com.simicart.core.base.component;
 
 import android.support.v7.widget.AppCompatEditText;
+import android.view.View;
 import android.widget.TextView;
 
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 
@@ -31,7 +33,10 @@ public class SimiTextRowComponent extends SimiRowComponent {
     protected void initHeader() {
         tvTitle = (TextView) findView("tv_title");
         if (Utils.validateString(mTitle)) {
-            tvTitle.setText(mTitle);
+            String translateTitle = SimiTranslator.getInstance().translate(mTitle);
+            tvTitle.setText(translateTitle);
+        } else {
+            tvTitle.setVisibility(View.GONE);
         }
     }
 

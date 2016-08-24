@@ -5,16 +5,33 @@ import java.util.HashMap;
 
 
 import android.annotation.SuppressLint;
+import android.text.InputType;
+import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.simicart.core.base.component.SimiNavigationRowComponent;
 import com.simicart.core.base.component.SimiRowComponent;
+import com.simicart.core.base.component.SimiSpinnerRowComponent;
+import com.simicart.core.base.component.SimiTextRowComponent;
+import com.simicart.core.base.component.callback.NavigationRowCallBack;
+import com.simicart.core.base.component.callback.SpinnerRowCallBack;
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.customer.delegate.AddressBookDetailDelegate;
+import com.simicart.core.customer.delegate.ListOfChoiceDelegate;
 import com.simicart.core.customer.entity.AddressEntity;
+import com.simicart.core.customer.entity.ConfigCustomerAddress;
+import com.simicart.core.customer.entity.CountryAllowed;
+import com.simicart.core.customer.entity.StateOfCountry;
+import com.simicart.core.customer.model.AddressBookDetailModel;
 import com.simicart.core.customer.model.GetCountryModel;
 
 @SuppressLint("DefaultLocale")
@@ -22,11 +39,18 @@ public class AddressBookDetailController extends SimiController {
     protected OnClickListener mSaveListener;
     protected AddressBookDetailDelegate mDelegate;
     protected HashMap<String, Object> hmData;
-    protected ArrayList<SimiRowComponent> mListRow;
+    protected ArrayList<SimiRowComponent> mListRowComponent;
+    protected SimiNavigationRowComponent mCountryComponent;
+    protected SimiNavigationRowComponent mStateComponent;
+    protected ArrayList<View> mListRow;
     protected int openFor;
     protected int action;
     protected AddressEntity mShippingAddress;
     protected AddressEntity mBillingAddress;
+    protected AddressEntity mAddressForEdit;
+    protected ArrayList<CountryAllowed> mListCountry;
+    protected CountryAllowed mCountry;
+    protected StateOfCountry mState;
 
 
     @Override
@@ -36,7 +60,6 @@ public class AddressBookDetailController extends SimiController {
         initListener();
 
         onRequestCountryAllowed();
-
 
     }
 
@@ -65,27 +88,386 @@ public class AddressBookDetailController extends SimiController {
     }
 
     protected void initListener() {
+        mSaveListener = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSave();
+            }
+        };
 
     }
 
 
     protected void onRequestCountryAllowed() {
         mDelegate.showLoading();
-        mModel = new GetCountryModel();
+        final GetCountryModel getCountryModel = new GetCountryModel();
+        getCountryModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                ArrayList<SimiEntity> entities = getCountryModel.getCollection()
+                        .getCollection();
+                if (null != entities && entities.size() > 0) {
+                    mListCountry = new ArrayList<>();
+                    for (int i = 0; i < entities.size(); i++) {
+                        CountryAllowed country = (CountryAllowed) entities.get(i);
+                        mListCountry.add(country);
+                    }
+                }
+                showView();
+            }
+        });
+
+        getCountryModel.request();
+    }
+
+    protected void showView() {
+        if (null == mListRowComponent) {
+            mListRowComponent = new ArrayList<>();
+        }
+
+        if (null == mListRow) {
+            mListRow = new ArrayList<>();
+        }
+
+        if (this.openFor == ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CUSTOMER) {
+            showViewForCustomer();
+        } else {
+            if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_GUEST) {
+                showViewForGuest();
+            } else if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW_CUSTOMER) {
+                showViewForNewCustomer();
+            }
+        }
+
+        // dispatch event for plugins
+        mDelegate.showRows(mListRow);
+
+    }
+
+    protected void showViewForCustomer() {
+        // prefix
+        initComponent("prefix", "Prefix", "prefix", "prefix", InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+
+        // name
+        initComponentRequired("Name", "name", "name", InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+
+        // suffix
+        initComponent("suffix", "Suffix", "suffix", "suffix", InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+
+        // email
+        initComponentRequired("Email", "email", "email", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+        // company
+        initComponent("company", "Company", "company", "company", InputType.TYPE_CLASS_TEXT);
+
+        // phone
+        initComponent("phone", "Telephone", "phone", "phone", InputType.TYPE_CLASS_PHONE);
+
+        // fax
+        initComponent("fax", "Fax", "fax", "fax", InputType.TYPE_CLASS_TEXT);
+
+        // country
+        initCountryComponent();
+
+        // state
+        initStateComponent();
+
+        // city
+        initComponent("city", "City", "city", "city", InputType.TYPE_CLASS_TEXT);
+
+        // street
+        initComponent("street", "Street", "street", "street", InputType.TYPE_CLASS_TEXT);
+
+        // ZIP code
+        initComponent("zipcode", "Zip Code", "zip", "zip", InputType.TYPE_CLASS_TEXT);
+
+
+    }
+
+    protected void showViewForGuest() {
+
+        showViewForCustomer();
+
+        // tax/vat number
+        initComponent("taxvat", "Tax/VAT number", "taxvat", "taxvat", InputType.TYPE_CLASS_TEXT);
+
+        // VAT number vat_id
+        initComponent("vat_id", "VAT number", "vat_id", "vat_id", InputType.TYPE_CLASS_TEXT);
+
+        // date of birth
+
+        // gender
+        initGenderComponent();
+    }
+
+    protected void showViewForNewCustomer() {
+
+        showViewForCustomer();
+
+        showViewForGuest();
+
+        // pass
+        initComponentRequired("Password", "user_password", "user_password", InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+
+        // confirm pass
+        initComponentRequired("Confirm Password", "user_password", "user_password", InputType.TYPE_TEXT_VARIATION_PASSWORD);
+    }
+
+
+    protected void initComponent(String keyForConfig, String title, String keyForData, String keyForParam, int inputType) {
+        String configValue = ConfigCustomerAddress.getInstance().getValueWithKey(keyForConfig);
+        if (!ConfigCustomerAddress.getInstance().isHidden(configValue)) {
+            SimiTextRowComponent component = new SimiTextRowComponent();
+            component.setTitle(title);
+            boolean isRequired = ConfigCustomerAddress.getInstance().isRequired(configValue);
+            component.setRequired(isRequired);
+            if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
+                String prefix = mAddressForEdit.getData(keyForData);
+                component.setValue(prefix);
+            }
+            component.setKey(keyForParam);
+            component.setInputType(inputType);
+            View prefixView = component.createView();
+            mListRow.add(prefixView);
+            mListRowComponent.add(component);
+        }
+    }
+
+    protected void initComponentRequired(String title, String keyForData, String keyForParam, int inputType) {
+        SimiTextRowComponent component = new SimiTextRowComponent();
+        component.setTitle(title);
+        component.setRequired(true);
+        if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
+            String name = mAddressForEdit.getData(keyForData);
+            component.setValue(name);
+        }
+        component.setKey(keyForParam);
+        component.setInputType(inputType);
+        View nameView = component.createView();
+        mListRow.add(nameView);
+        mListRowComponent.add(component);
+    }
+
+    protected void initCountryComponent() {
+        String configCountry = ConfigCustomerAddress.getInstance().getCountry();
+        if (!ConfigCustomerAddress.getInstance().isHidden(configCountry)) {
+            mCountryComponent = new SimiNavigationRowComponent();
+            if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
+                String countryName = mAddressForEdit.getCountryName();
+                mCountryComponent.setValue(countryName);
+            }
+
+            if (null != mCountry) {
+                String countryName = mCountry.getName();
+                mCountryComponent.setValue(countryName);
+            }
+
+            mCountryComponent.setKey("country_name");
+            mCountryComponent.setCallBack(new NavigationRowCallBack() {
+                @Override
+                public void onNavigate() {
+                    openCountryPage();
+                }
+            });
+
+            View countryView = mCountryComponent.createView();
+            mListRow.add(countryView);
+            mListRowComponent.add(mCountryComponent);
+        }
+    }
+
+    protected void initStateComponent() {
+        String configState = ConfigCustomerAddress.getInstance().getState();
+        if (!ConfigCustomerAddress.getInstance().isHidden(configState)) {
+            mStateComponent = new SimiNavigationRowComponent();
+            if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
+                String stateName = mAddressForEdit.getStateName();
+                mStateComponent.setValue(stateName);
+            }
+            mStateComponent.setKey("state_name");
+            mStateComponent.setCallBack(new NavigationRowCallBack() {
+                @Override
+                public void onNavigate() {
+                    openStatePage();
+                }
+            });
+            View stateView = mStateComponent.createView();
+            mListRow.add(stateView);
+            mListRowComponent.add(mStateComponent);
+        }
+    }
+
+    protected void initGenderComponent() {
+        String configGender = ConfigCustomerAddress.getInstance().getGender();
+        if (!ConfigCustomerAddress.getInstance().isHidden(configGender)) {
+            SimiSpinnerRowComponent genderComponent = new SimiSpinnerRowComponent();
+            if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
+                String gender = mAddressForEdit.getGender();
+            }
+            boolean isRequired = ConfigCustomerAddress.getInstance().isRequired(configGender);
+            genderComponent.setRequired(isRequired);
+            genderComponent.setKey("gender");
+            genderComponent.setCallBack(new SpinnerRowCallBack() {
+                @Override
+                public void onSelect(int position) {
+
+                }
+            });
+            View genderView = genderComponent.createView();
+            mListRow.add(genderView);
+            mListRowComponent.add(genderComponent);
+        }
+    }
+
+    protected void openCountryPage() {
+        HashMap<String, Object> hm = new HashMap<>();
+        ListOfChoiceDelegate delegate = new ListOfChoiceDelegate() {
+            @Override
+            public void chooseItem(String value) {
+                if (Utils.validateString(value)) {
+                    getCountryWithName(value);
+                }
+            }
+        };
+        ArrayList<String> listNameCountry = getListNameCountry();
+        hm.put(KeyData.LIST_OF_CHOICE.LIST_DATA, listNameCountry);
+        hm.put(KeyData.LIST_OF_CHOICE.DELEGATE, delegate);
+        SimiManager.getIntance().openListOfChoice(hm);
+    }
+
+    protected void openStatePage() {
+        if (null != mCountry) {
+            final ArrayList<StateOfCountry> states = mCountry.getStateList();
+            ArrayList<String> listNameState = getListNameState(states);
+            ListOfChoiceDelegate delegate = new ListOfChoiceDelegate() {
+                @Override
+                public void chooseItem(String value) {
+                    getStateWithName(value, states);
+                }
+            };
+            HashMap<String, Object> hm = new HashMap<>();
+            hm.put(KeyData.LIST_OF_CHOICE.DELEGATE, delegate);
+            hm.put(KeyData.LIST_OF_CHOICE.LIST_DATA, listNameState);
+            SimiManager.getIntance().openListOfChoice(hm);
+        }
+    }
+
+    protected void onSave() {
+        if (this.openFor == ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CUSTOMER) {
+            saveForCustomer();
+        } else if (this.openFor == ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CHECKOUT) {
+            saveForCheckout();
+        }
+    }
+
+    protected void saveForCustomer() {
+        mModel = new AddressBookDetailModel();
+
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-                ArrayList<SimiEntity> entity = mModel.getCollection()
-                        .getCollection();
+                HashMap<String, Object> hm = new HashMap<>();
+                hm.put(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR, openFor);
+                SimiManager.getIntance().openAddressBook(hm);
+            }
+        });
+
+        mModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
 
             }
         });
 
+        if (null != mListRowComponent) {
+            for (int i = 0; i < mListRowComponent.size(); i++) {
+                SimiRowComponent rowComponent = mListRowComponent.get(i);
+                SimiRowComponent.TYPE_ROW type = rowComponent.getType();
+                if (type == SimiRowComponent.TYPE_ROW.TEXT) {
+                    String key = rowComponent.getKey();
+                    String value = (String) rowComponent.getValue();
+                    if (rowComponent.isRequired() && null == value) {
+                        return;
+                    }
+                    mModel.addBody(key, value);
+                }
+            }
+        }
+
         mModel.request();
+    }
+
+    protected void saveForCheckout() {
+
     }
 
     @Override
     public void onResume() {
+        mDelegate.showRows(mListRow);
+        if (null != mCountry) {
+            String countryName = mCountry.getName();
+            mCountryComponent.setValue(countryName);
+            mCountryComponent.updateView();
+        }
+
+        if (null != mState) {
+            String stateName = mState.getName();
+            mStateComponent.setValue(stateName);
+            mStateComponent.updateView();
+        }
+
+    }
+
+    protected ArrayList<String> getListNameCountry() {
+        ArrayList<String> listName = new ArrayList<>();
+
+        if (null != mListCountry && mListCountry.size() > 0) {
+            for (int i = 0; i < mListCountry.size(); i++) {
+                String name = mListCountry.get(i).getName();
+                listName.add(name);
+            }
+        }
+
+        return listName;
+    }
+
+    protected void getCountryWithName(String name) {
+        if (null != mListCountry && mListCountry.size() > 0) {
+            for (int i = 0; i < mListCountry.size(); i++) {
+                CountryAllowed country = mListCountry.get(i);
+                String currentName = country.getName();
+                if (currentName.equals(name)) {
+                    mCountry = country;
+                    return;
+                }
+            }
+        }
+    }
+
+    protected ArrayList<String> getListNameState(ArrayList<StateOfCountry> states) {
+        ArrayList<String> listName = new ArrayList<>();
+        if (null != states && states.size() > 0) {
+            for (int i = 0; i < states.size(); i++) {
+                StateOfCountry state = states.get(i);
+                String name = state.getName();
+                listName.add(name);
+            }
+        }
+        return listName;
+    }
+
+    protected void getStateWithName(String name, ArrayList<StateOfCountry> states) {
+        if (null != states && states.size() > 0) {
+            for (int i = 0; i < states.size(); i++) {
+                StateOfCountry state = states.get(i);
+                String currentName = state.getName();
+                if (name.equals(currentName)) {
+                    mState = state;
+                    return;
+                }
+            }
+        }
     }
 
 

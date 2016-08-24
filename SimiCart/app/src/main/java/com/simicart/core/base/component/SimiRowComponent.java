@@ -53,8 +53,8 @@ public class SimiRowComponent extends SimiComponent {
         return null;
     }
 
-    public void getKey() {
-
+    public String getKey() {
+        return mKey;
     }
 
     public void setKey(String key) {

@@ -51,7 +51,7 @@ public class ListCurrencyFragment extends SimiFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(
-				Rconfig.getInstance().layout("core_choose_country"), container,
+				Rconfig.getInstance().layout("core_fragment_list_choice"), container,
 				false);
 		Context context = getActivity();
 		if(getArguments() != null){
