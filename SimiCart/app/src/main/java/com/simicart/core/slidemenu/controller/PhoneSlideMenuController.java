@@ -1,10 +1,13 @@
 package com.simicart.core.slidemenu.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -305,6 +308,8 @@ public class PhoneSlideMenuController {
         mItems.add(item);
 
         // event for add barcode to slidemenu
+        dispatchEvent("com.simicart.menuleft.additem.more");
+
 //        SlideMenuData slideMenuData = new SlideMenuData();
 //        slideMenuData.setItemNavigations(mItems);
 //        slideMenuData.setPluginFragment(mPluginFragment);
@@ -563,6 +568,23 @@ public class PhoneSlideMenuController {
         }
         mDelegate.setUpdateSignIn(name);
         mDelegate.setAdapter(mItems);
+    }
+
+    protected void dispatchEvent(String event_name) {
+
+        Intent intent = new Intent(event_name);
+        Bundle bundle = new Bundle();
+//        SimiEventLeftMenuEntity leftEntity = new SimiEventLeftMenuEntity();
+//        leftEntity.setMenu(mMenu);
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put(KeyData.SLIDE_MENU.LIST_ITEMS, mItems);
+        hmData.put(KeyData.SLIDE_MENU.LIST_FRAGMENTS, mPluginFragment);
+        SimiData data = new SimiData(hmData);
+        bundle.putParcelable("entity", data);
+        intent.putExtra("data", bundle);
+        LocalBroadcastManager.getInstance(mContext).sendBroadcastSync(intent);
+
+
     }
 
 }
