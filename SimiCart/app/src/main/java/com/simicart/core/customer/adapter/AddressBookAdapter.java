@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
@@ -16,6 +18,7 @@ import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.entity.AddressEntity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Martial on 8/23/2016.
@@ -147,11 +150,11 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
     }
 
     protected void onChooseAddressEdit(AddressEntity addressEntity) {
-//        SimiData data = new SimiData();
-//        data.addData("address_for", Constants.KeyAddress.EDIT_ADDRESS);
-//        data.addData("address_entity", addressEntity);
-//        AddressFragment fragment = AddressFragment.newInstance(data);
-//        SimiManager.getIntance().replaceFragment(fragment);
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CUSTOMER);
+        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION, ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT);
+        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ADDRESS_FOR_EDIT, addressEntity);
+        SimiManager.getIntance().openAddressBookDetail(hm);
     }
 
     protected void onChooseAddressCheckout(AddressEntity addressEntity) {

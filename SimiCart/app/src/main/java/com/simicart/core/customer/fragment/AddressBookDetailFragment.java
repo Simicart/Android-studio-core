@@ -45,6 +45,8 @@ public class AddressBookDetailFragment extends SimiFragment {
             mController.onResume();
         }
 
+        block.setSaveListener(mController.getSaveListener());
+
         return rootView;
     }
 

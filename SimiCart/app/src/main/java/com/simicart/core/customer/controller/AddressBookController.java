@@ -89,7 +89,7 @@ public class AddressBookController extends SimiController {
 
     @Override
     public void onResume() {
-
+        mDelegate.updateView(mModel.getCollection());
     }
 
     public View.OnClickListener getCreateNewListener() {

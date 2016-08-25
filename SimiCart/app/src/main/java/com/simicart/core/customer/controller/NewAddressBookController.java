@@ -19,14 +19,12 @@ import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
-import com.simicart.core.customer.delegate.ListOfChoiceDelegate;
 import com.simicart.core.customer.delegate.NewAddressBookDelegate;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.customer.entity.CountryAllowed;
+import com.simicart.core.customer.entity.CountryEntity;
 import com.simicart.core.customer.entity.ProfileEntity;
-import com.simicart.core.customer.entity.StateOfCountry;
-import com.simicart.core.customer.fragment.ListOfChoiceFragment;
+import com.simicart.core.customer.entity.StateEntity;
 import com.simicart.core.customer.model.GetCountryModel;
 import com.simicart.core.customer.model.NewAddressBookModel;
 
@@ -41,7 +39,7 @@ public class NewAddressBookController extends SimiController
     public static int TYPE_SELECT_STATE = 0;
     public static int TYPE_SELECT_COUNTRY = 1;
 
-    protected ArrayList<CountryAllowed> mListCountryAllowed;
+    protected ArrayList<CountryEntity> mListCountryAllowed;
     protected OnClickListener mChooseCountry;
     protected OnClickListener mChooseStates, mClickShowGender;
     protected NewAddressBookDelegate mDelegate;
@@ -120,12 +118,12 @@ public class NewAddressBookController extends SimiController
                 if (null != country) {
                     mCurrentCountry = country;
                 }
-                CountryAllowed countryAllow = getCurrentCountry(mCurrentCountry);
+                CountryEntity countryAllow = getCurrentCountry(mCurrentCountry);
                 if (null != countryAllow) {
 //                    address.setCountryName(mCurrentCountry);
 //                    address.setCountryCode(countryAllow.getCountry_code());
 //                    if (!mCurrentState.equals("")) {
-//                        StateOfCountry stateOfCountry = getCurrentState(
+//                        StateEntity stateOfCountry = getCurrentState(
 //                                mCurrentState, countryAllow);
 //                        if (null != stateOfCountry) {
 //                            address.setStateName(mCurrentState);
@@ -269,9 +267,9 @@ public class NewAddressBookController extends SimiController
                 ArrayList<SimiEntity> entity = mModel.getCollection()
                         .getCollection();
                 if (null != entity && entity.size() > 0) {
-//                    mListCountryAllowed = new ArrayList<CountryAllowed>();
+//                    mListCountryAllowed = new ArrayList<CountryEntity>();
 //                    for (SimiEntity simiEntity : entity) {
-//                        CountryAllowed country_add = (CountryAllowed) simiEntity;
+//                        CountryEntity country_add = (CountryEntity) simiEntity;
 //                        mListCountryAllowed.add(country_add);
 //                    }
 //                    mListCountry = new ArrayList<String>();
@@ -316,12 +314,12 @@ public class NewAddressBookController extends SimiController
                     AddressEntity newAddress = (AddressEntity) mModel
                             .getCollection().getCollection().get(0);
 
-                    CountryAllowed country = getCurrentCountry(mCurrentCountry);
+                    CountryEntity country = getCurrentCountry(mCurrentCountry);
                     if (null != country) {
 //                        newAddress.setCountryName(mCurrentCountry);
 //                        newAddress.setCountryCode(country.getCountry_code());
 //                        if (!mCurrentState.equals("")) {
-//                            StateOfCountry state = getCurrentState(
+//                            StateEntity state = getCurrentState(
 //                                    mCurrentState, country);
 //                            if (null != state) {
 //                                newAddress.setStateName(mCurrentState);
@@ -372,12 +370,12 @@ public class NewAddressBookController extends SimiController
             }
         });
 
-        CountryAllowed country = getCurrentCountry(mCurrentCountry);
+        CountryEntity country = getCurrentCountry(mCurrentCountry);
         if (null != country) {
 //            address.setCountryName(mCurrentCountry);
 //            address.setCountryCode(country.getCountry_code());
 //            if (!mCurrentState.equals("")) {
-//                StateOfCountry state = getCurrentState(mCurrentState, country);
+//                StateEntity state = getCurrentState(mCurrentState, country);
 //                if (null != state) {
 //                    address.setStateName(mCurrentState);
 //                    address.setStateCode(state.getState_code());
@@ -396,9 +394,9 @@ public class NewAddressBookController extends SimiController
         mModel.request();
     }
 
-    protected CountryAllowed getCurrentCountry(String name) {
+    protected CountryEntity getCurrentCountry(String name) {
 //        if (null != name && null != mListCountryAllowed)
-//            for (CountryAllowed ele : mListCountryAllowed) {
+//            for (CountryEntity ele : mListCountryAllowed) {
 //                if (ele.getCountry_name().equals(name)) {
 //                    return ele;
 //                }
@@ -407,11 +405,11 @@ public class NewAddressBookController extends SimiController
         return null;
     }
 
-    protected StateOfCountry getCurrentState(String name, CountryAllowed country) {
+    protected StateEntity getCurrentState(String name, CountryEntity country) {
         if (null != name && null != country) {
-            ArrayList<StateOfCountry> states = country.getStateList();
+            ArrayList<StateEntity> states = country.getStateList();
             if (null != states && states.size() > 0) {
-                for (StateOfCountry state : states) {
+                for (StateEntity state : states) {
 //                    if (state.getState_name().equals(name)) {
 //                        return state;
 //                    }
@@ -516,11 +514,11 @@ public class NewAddressBookController extends SimiController
     }
 
     public ArrayList<String> getStateFromCountry(String country,
-                                                 ArrayList<CountryAllowed> listCountry) {
+                                                 ArrayList<CountryEntity> listCountry) {
         ArrayList<String> states = new ArrayList<String>();
-        for (CountryAllowed countryAllowed : listCountry) {
+        for (CountryEntity countryAllowed : listCountry) {
 //            if (countryAllowed.getCountry_name().equals(country)) {
-//                for (StateOfCountry state : countryAllowed.getStateList()) {
+//                for (StateEntity state : countryAllowed.getStateList()) {
 //                    states.add(state.getState_name());
 //                }
 //                return states;

@@ -3,10 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_60"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/size_5" />
+
     <ScrollView
         android:id="@+id/rlt_address_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_save">
 
         <LinearLayout
             android:id="@+id/ll_body_address"
@@ -16,11 +24,5 @@
             android:orientation="vertical"></LinearLayout>
     </ScrollView>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_save"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_60"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/size_5" />
 
 </RelativeLayout>

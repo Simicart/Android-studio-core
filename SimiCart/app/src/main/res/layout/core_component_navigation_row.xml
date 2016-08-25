@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/rlt_navigation"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_navigation_row">
 
     <ImageView
+        android:id="@+id/img_extend"
         android:layout_width="@dimen/size_24"
         android:layout_height="@dimen/size_24"
-        android:id="@+id/img_extend"
-        android:layout_margin="@dimen/size_5"
-        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_extend"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/size_5"
         android:scaleType="center"
-        />
+        android:src="@drawable/ic_extend" />
+
+    <EditText
+        android:id="@+id/edt_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/size_5"
+        android:layout_toLeftOf="@id/img_extend"
+        android:background="@null"
+        android:textSize="@dimen/text_16"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_body"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@id/img_extend"
-        android:layout_margin="@dimen/size_5"
         android:layout_width="match_parent"
-        android:textSize="@dimen/text_14"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/size_5"
+        android:layout_toLeftOf="@id/img_extend"
+        android:textSize="@dimen/text_16" />
 
 </RelativeLayout>

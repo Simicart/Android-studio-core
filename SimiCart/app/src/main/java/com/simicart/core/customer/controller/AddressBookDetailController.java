@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-import android.annotation.SuppressLint;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -29,12 +29,11 @@ import com.simicart.core.customer.delegate.AddressBookDetailDelegate;
 import com.simicart.core.customer.delegate.ListOfChoiceDelegate;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.customer.entity.CountryAllowed;
-import com.simicart.core.customer.entity.StateOfCountry;
+import com.simicart.core.customer.entity.CountryEntity;
+import com.simicart.core.customer.entity.StateEntity;
 import com.simicart.core.customer.model.AddressBookDetailModel;
 import com.simicart.core.customer.model.GetCountryModel;
 
-@SuppressLint("DefaultLocale")
 public class AddressBookDetailController extends SimiController {
     protected OnClickListener mSaveListener;
     protected AddressBookDetailDelegate mDelegate;
@@ -48,9 +47,9 @@ public class AddressBookDetailController extends SimiController {
     protected AddressEntity mShippingAddress;
     protected AddressEntity mBillingAddress;
     protected AddressEntity mAddressForEdit;
-    protected ArrayList<CountryAllowed> mListCountry;
-    protected CountryAllowed mCountry;
-    protected StateOfCountry mState;
+    protected ArrayList<CountryEntity> mListCountry;
+    protected CountryEntity mCountry;
+    protected StateEntity mState;
 
 
     @Override
@@ -97,22 +96,24 @@ public class AddressBookDetailController extends SimiController {
                 onSave();
             }
         };
-
     }
 
 
     protected void onRequestCountryAllowed() {
         mDelegate.showLoading();
+
         final GetCountryModel getCountryModel = new GetCountryModel();
+
         getCountryModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
                 ArrayList<SimiEntity> entities = getCountryModel.getCollection()
                         .getCollection();
                 if (null != entities && entities.size() > 0) {
                     mListCountry = new ArrayList<>();
                     for (int i = 0; i < entities.size(); i++) {
-                        CountryAllowed country = (CountryAllowed) entities.get(i);
+                        CountryEntity country = (CountryEntity) entities.get(i);
                         mListCountry.add(country);
 
                     }
@@ -124,13 +125,20 @@ public class AddressBookDetailController extends SimiController {
             }
         });
 
+        getCountryModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissLoading();
+            }
+        });
+
         getCountryModel.request();
     }
 
     protected void setupDefaultValue() {
         if (null == mCountry) {
             mCountry = mListCountry.get(0);
-            ArrayList<StateOfCountry> states = mCountry.getStateList();
+            ArrayList<StateEntity> states = mCountry.getStateList();
             if (null != states && states.size() > 0) {
                 mState = states.get(0);
             }
@@ -306,6 +314,7 @@ public class AddressBookDetailController extends SimiController {
                 mStateComponent.setValue(stateName);
             }
             mStateComponent.setKey("state_name");
+            mStateComponent.setSuggestValue("State");
             mStateComponent.setCallBack(new NavigationRowCallBack() {
                 @Override
                 public void onNavigate() {
@@ -349,6 +358,7 @@ public class AddressBookDetailController extends SimiController {
             public void chooseItem(String value) {
                 if (Utils.validateString(value)) {
                     getCountryWithName(value);
+                    mState = null;
                 }
             }
         };
@@ -360,7 +370,7 @@ public class AddressBookDetailController extends SimiController {
 
     protected void openStatePage() {
         if (null != mCountry) {
-            final ArrayList<StateOfCountry> states = mCountry.getStateList();
+            final ArrayList<StateEntity> states = mCountry.getStateList();
             ArrayList<String> listNameState = getListNameState(states);
             ListOfChoiceDelegate delegate = new ListOfChoiceDelegate() {
                 @Override
@@ -384,11 +394,13 @@ public class AddressBookDetailController extends SimiController {
     }
 
     protected void saveForCustomer() {
+        mDelegate.showLoading();
         mModel = new AddressBookDetailModel();
 
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
                 HashMap<String, Object> hm = new HashMap<>();
                 hm.put(KeyData.ADDRESS_BOOK.OPEN_FOR, openFor);
                 SimiManager.getIntance().openAddressBook(hm);
@@ -398,9 +410,16 @@ public class AddressBookDetailController extends SimiController {
         mModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
-
+                mDelegate.dismissLoading();
             }
         });
+
+        if (null != mAddressForEdit) {
+            String id = mAddressForEdit.getID();
+            if (Utils.validateString(id)) {
+                mModel.addBody("address_id", id);
+            }
+        }
 
         if (null != mListRowComponent) {
             for (int i = 0; i < mListRowComponent.size(); i++) {
@@ -460,7 +479,9 @@ public class AddressBookDetailController extends SimiController {
         if (null != mListRowComponent) {
             for (int i = 0; i < mListRowComponent.size(); i++) {
                 SimiRowComponent component = mListRowComponent.get(i);
-                mListRow.add(component.createView());
+                Object value = component.getValue();
+                View view = component.createView();
+                mListRow.add(view);
             }
         }
         mDelegate.showRows(mListRow);
@@ -470,10 +491,22 @@ public class AddressBookDetailController extends SimiController {
             mCountryComponent.updateView();
         }
 
+
         if (null != mState) {
             String stateName = mState.getName();
             mStateComponent.setValue(stateName);
             mStateComponent.updateView();
+        } else {
+            ArrayList<StateEntity> states = mCountry.getStateList();
+            if (null != states && states.size() > 0) {
+                mState = states.get(0);
+            } else {
+                mState = null;
+                if (null != mStateComponent) {
+                    mStateComponent.enableEdit();
+                }
+            }
+
         }
 
     }
@@ -494,21 +527,22 @@ public class AddressBookDetailController extends SimiController {
     protected void getCountryWithName(String name) {
         if (null != mListCountry && mListCountry.size() > 0) {
             for (int i = 0; i < mListCountry.size(); i++) {
-                CountryAllowed country = mListCountry.get(i);
+                CountryEntity country = mListCountry.get(i);
                 String currentName = country.getName();
                 if (currentName.equals(name)) {
                     mCountry = country;
+
                     return;
                 }
             }
         }
     }
 
-    protected ArrayList<String> getListNameState(ArrayList<StateOfCountry> states) {
+    protected ArrayList<String> getListNameState(ArrayList<StateEntity> states) {
         ArrayList<String> listName = new ArrayList<>();
         if (null != states && states.size() > 0) {
             for (int i = 0; i < states.size(); i++) {
-                StateOfCountry state = states.get(i);
+                StateEntity state = states.get(i);
                 String name = state.getName();
                 listName.add(name);
             }
@@ -516,10 +550,10 @@ public class AddressBookDetailController extends SimiController {
         return listName;
     }
 
-    protected void getStateWithName(String name, ArrayList<StateOfCountry> states) {
+    protected void getStateWithName(String name, ArrayList<StateEntity> states) {
         if (null != states && states.size() > 0) {
             for (int i = 0; i < states.size(); i++) {
-                StateOfCountry state = states.get(i);
+                StateEntity state = states.get(i);
                 String currentName = state.getName();
                 if (name.equals(currentName)) {
                     mState = state;

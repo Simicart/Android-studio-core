@@ -6,7 +6,7 @@ import org.json.JSONException;
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.config.Constants;
-import com.simicart.core.customer.entity.CountryAllowed;
+import com.simicart.core.customer.entity.CountryEntity;
 
 public class GetCountryModel extends SimiModel {
 	@Override
@@ -15,7 +15,7 @@ public class GetCountryModel extends SimiModel {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			collection = new SimiCollection();
 			for (int i = 0; i < list.length(); i++) {
-				CountryAllowed country_allowed = new CountryAllowed();
+				CountryEntity country_allowed = new CountryEntity();
 				country_allowed.parse(list.getJSONObject(i));
 				collection.addEntity(country_allowed);
 			}

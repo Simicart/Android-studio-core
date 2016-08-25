@@ -3,7 +3,7 @@ package com.simicart.core.customer.entity;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.config.Constants;
 
-public class StateOfCountry extends SimiEntity {
+public class StateEntity extends SimiEntity {
 
     private String mID;
     private String mName;

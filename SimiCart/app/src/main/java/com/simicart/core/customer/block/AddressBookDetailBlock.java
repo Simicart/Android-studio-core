@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.customer.delegate.AddressBookDetailDelegate;
 
@@ -38,8 +39,14 @@ public class AddressBookDetailBlock extends SimiBlock implements
         if (null != rows && rows.size() > 0) {
             for (int i = 0; i < rows.size(); i++) {
                 View row = rows.get(i);
-                llBody.addView(row);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.topMargin = Utils.getValueDp(10);
+                llBody.addView(row, params);
             }
         }
+    }
+
+    public void setSaveListener(View.OnClickListener listener) {
+        btnSave.setOnClickListener(listener);
     }
 }
