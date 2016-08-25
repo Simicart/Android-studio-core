@@ -44,7 +44,6 @@ public class OrderHistoryFragment extends SimiFragment {
 			mController.onResume();
 		}
 
-		mBlock.setItemClicker(mController.getItemClicker());
 		mBlock.setScrollListener(mController.getScrollListener());
 
 		return rootView;

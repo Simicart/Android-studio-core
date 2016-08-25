@@ -37,10 +37,11 @@ import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.material.ButtonRectangle;
-import com.simicart.core.style.CirclePageIndicator;
 import com.simicart.core.style.VerticalViewPager2;
 
 import java.util.ArrayList;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class ProductDetailParentBlock extends SimiBlock implements
         ProductDelegate, ProductDetailAdapterDelegate {
@@ -53,7 +54,7 @@ public class ProductDetailParentBlock extends SimiBlock implements
     protected TextView tv_name_product;
     protected LinearLayout ll_price;
     protected Product mProduct;
-    protected CirclePageIndicator mIndicator;
+    protected CircleIndicator mIndicator;
     protected OnClickListener onDoneOption;
     protected ImageView img_animation;
     protected AnimationSet animation;
@@ -136,9 +137,9 @@ public class ProductDetailParentBlock extends SimiBlock implements
                 "layout_price"));
 
         // indicator
-        mIndicator = (CirclePageIndicator) mView.findViewById(Rconfig
+        mIndicator = (CircleIndicator) mView.findViewById(Rconfig
                 .getInstance().id("indicator"));
-        mIndicator.setFillColor(AppColorConfig.getInstance().getKeyColor());
+//        mIndicator.setFillColor(AppColorConfig.getInstance().getKeyColor());
         if (DataLocal.isTablet) {
             mIndicator.setScaleX(1.5f);
             mIndicator.setScaleY(1.5f);
@@ -333,8 +334,8 @@ public class ProductDetailParentBlock extends SimiBlock implements
     public void updateViewPager(VerticalViewPager2 viewpager) {
         if (null != mIndicator && null != viewpager
                 && null != viewpager.getAdapter()) {
-            mIndicator.setViewPager(viewpager);
-            mIndicator.setCurrentItem(0);
+//            mIndicator.setViewPager(viewpager);
+//            mIndicator.setCurrentItem(0);
         }
     }
 

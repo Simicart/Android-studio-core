@@ -17,12 +17,12 @@ import com.simicart.core.catalog.product.adapter.ProductDetailParentAdapterTable
 import com.simicart.core.catalog.product.block.ProductDetailParentBlock;
 import com.simicart.core.catalog.product.controller.ProductDetailParentController;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.style.CirclePageIndicator;
 
 import java.util.ArrayList;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class ProductDetailParentFragment extends SimiFragment {
 
@@ -115,7 +115,7 @@ public class ProductDetailParentFragment extends SimiFragment {
 
                 pager_parent.setOffscreenPageLimit(3);
 
-                CirclePageIndicator mIndicator = (CirclePageIndicator) view
+                CircleIndicator mIndicator = (CircleIndicator) view
                         .findViewById(Rconfig.getInstance().id("indicator"));
                 mIndicator.setScaleX(1.5f);
                 mIndicator.setScaleY(1.5f);

@@ -5,17 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.category.block.CategoryBlock;
-import com.simicart.core.catalog.category.block.CategoryDetailBlock;
 import com.simicart.core.catalog.category.controller.CategoryController;
-import com.simicart.core.catalog.category.controller.CategoryDetailController;
-import com.simicart.core.common.DataPreferences;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 public class CategoryFragment extends SimiFragment {

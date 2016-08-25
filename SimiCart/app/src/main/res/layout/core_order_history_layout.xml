@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/list_order"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/core_line_border" >
-    </ListView>
+        android:paddingBottom="@dimen/size_40"
+        android:clipToPadding="false">
+    </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/pb_load_more"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:indeterminateDrawable="@drawable/progressbar_indeterminate"
+        android:visibility="gone" />
+
+</RelativeLayout>
