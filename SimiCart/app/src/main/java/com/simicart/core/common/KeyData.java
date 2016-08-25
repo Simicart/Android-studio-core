@@ -28,6 +28,7 @@ public class KeyData {
         public static String ACTION = "action";
         public static String BILLING_ADDRESS = "billing_address";
         public static String SHIPPING_ADDRESS = "shipping_address";
+        public static String ADDRESS_FOR_EDIT = "address_for_edit";
     }
 
     public static class ADDRESS_BOOK {

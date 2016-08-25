@@ -14,6 +14,7 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
@@ -35,6 +36,7 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Context context = getApplicationContext();
+        DataPreferences.init(context);
         SimiManager.getIntance().setCurrentActivity(this);
         Utils.getDeviceInfor();
         int idView = Rconfig.getInstance().getId(context,

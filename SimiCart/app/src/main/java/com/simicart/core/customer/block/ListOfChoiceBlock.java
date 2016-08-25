@@ -50,7 +50,7 @@ public class ListOfChoiceBlock extends SimiBlock {
     public void drawView(SimiCollection collection) {
     }
 
-    public void setListContry(ArrayList<String> list_country) {
+    public void setData(ArrayList<String> list_country) {
         this.mListData = list_country;
     }
 }

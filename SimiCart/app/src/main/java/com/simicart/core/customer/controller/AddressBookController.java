@@ -63,8 +63,6 @@ public class AddressBookController extends SimiController {
         } else {
             mModel.addBody("is_get_order_address", "YES");
         }
-        mModel.addBody("user_email", "v@simi.com");
-        mModel.addBody("user_password", "123456");
         mModel.request();
     }
 

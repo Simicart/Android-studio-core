@@ -40,6 +40,13 @@ public class ConfigCustomerAddress extends SimiEntity {
         return instance;
     }
 
+    protected String prefix_show = "prefix_show";
+    protected String suffix_show = "suffix_show";
+    protected String dob_show = "dob_show";
+    protected String taxvat_show = "taxvat_show";
+    protected String gender_show = "gender_show";
+    protected String gender_value = "gender_value";
+
     public ConfigCustomerAddress() {
         setPrefix(OPTION_HIDE);
         setName(OPTION_REQUIRE);
@@ -62,6 +69,12 @@ public class ConfigCustomerAddress extends SimiEntity {
     @Override
     public void parse() {
 
+        prefix = getData(prefix_show);
+        suffix = getData(suffix_show);
+        dob = getData(dob_show);
+        taxvat = getData(taxvat_show);
+        gender = getData(gender_show);
+        
     }
 
     public String getValueWithKey(String key) {

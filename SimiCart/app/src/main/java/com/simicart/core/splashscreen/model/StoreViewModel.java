@@ -35,6 +35,8 @@ public class StoreViewModel extends SimiModel {
 
     private void parseJSONStoreView(JSONObject jsonResult) throws JSONException {
 
+        Log.e("StoreViewModel","parseJSONStoreView " + jsonResult.toString());
+
         // parse store config
         JSONObject jsStoreConfig = jsonResult.getJSONObject(
                 "store_config");
@@ -54,6 +56,11 @@ public class StoreViewModel extends SimiModel {
         if (jsonResult.has("view_products_default")) {
             String type = jsonResult.getString("view_products_default");
             AppStoreConfig.getInstance().setTypeProductList(type);
+        }
+
+        if(jsonResult.has("customer_address_config")){
+            JSONObject jsAddress = jsonResult.getJSONObject("customer_address_config");
+            ConfigCustomerAddress.getInstance().parse(jsAddress);
         }
 
     }

@@ -40,6 +40,7 @@ public class ListOfChoiceFragment extends SimiFragment {
         ArrayList<String> data = (ArrayList<String>) getValueWithKey(KeyData.LIST_OF_CHOICE.LIST_DATA);
 
         ListOfChoiceBlock block = new ListOfChoiceBlock(rootView, context);
+        block.setData(data);
         block.initView();
 
         ListOfChoiceController controller = new ListOfChoiceController();

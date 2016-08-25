@@ -196,8 +196,8 @@ public class ReviewOrderController extends SimiController implements
 //                                    mBillingAddress, mShippingAddress);
 //                    SimiManager.getIntance().replacePopupFragment(fragment);
                 } else {
-                    AddressBookDetailFragment fragment = AddressBookDetailFragment
-                            .newInstance();
+//                    AddressBookDetailFragment fragment = AddressBookDetailFragment
+//                            .newInstance();
                     Bundle bundleAddress = new Bundle();
 //                    bundleAddress.putSerializable(
 //                            Constants.KeyData.BOOK_ADDRESS, mShippingAddress);
@@ -210,12 +210,12 @@ public class ReviewOrderController extends SimiController implements
 //                            Constants.KeyData.SHIPPING_ADDRESS,
 //                            mShippingAddress);
 
-                    fragment.setArguments(bundleAddress);
-                    if (DataLocal.isTablet) {
-                        SimiManager.getIntance().replacePopupFragment(fragment);
-                    } else {
-                        SimiManager.getIntance().replaceFragment(fragment);
-                    }
+                  //  fragment.setArguments(bundleAddress);
+//                    if (DataLocal.isTablet) {
+//                        SimiManager.getIntance().replacePopupFragment(fragment);
+//                    } else {
+//                        SimiManager.getIntance().replaceFragment(fragment);
+//                    }
                 }
             }
         };
@@ -234,8 +234,8 @@ public class ReviewOrderController extends SimiController implements
 //                                    mBillingAddress, mShippingAddress);
 //                    SimiManager.getIntance().replacePopupFragment(fragment);
                 } else {
-                    AddressBookDetailFragment fragment = AddressBookDetailFragment
-                            .newInstance();
+//                    AddressBookDetailFragment fragment = AddressBookDetailFragment
+//                            .newInstance();
                     Bundle bundleAddress = new Bundle();
 //                    bundleAddress.putSerializable(
 //                            Constants.KeyData.BOOK_ADDRESS, mBillingAddress);
@@ -248,12 +248,12 @@ public class ReviewOrderController extends SimiController implements
 //                            Constants.KeyData.SHIPPING_ADDRESS,
 //                            mShippingAddress);
 
-                    fragment.setArguments(bundleAddress);
-                    if (DataLocal.isTablet) {
-                        SimiManager.getIntance().replacePopupFragment(fragment);
-                    } else {
-                        SimiManager.getIntance().replaceFragment(fragment);
-                    }
+//                    fragment.setArguments(bundleAddress);
+//                    if (DataLocal.isTablet) {
+//                        SimiManager.getIntance().replacePopupFragment(fragment);
+//                    } else {
+//                        SimiManager.getIntance().replaceFragment(fragment);
+//                    }
 
                     // NewAddressBookFragment fragment = NewAddressBookFragment
                     // .newInstance();

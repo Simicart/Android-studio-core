@@ -24,6 +24,7 @@ public class SimiRowComponent extends SimiComponent {
 
     @Override
     public View createView() {
+        initView();
         initHeader();
         initBody();
         return rootView;

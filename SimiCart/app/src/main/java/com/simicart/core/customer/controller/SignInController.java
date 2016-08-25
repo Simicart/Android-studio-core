@@ -191,7 +191,7 @@ public class SignInController extends SimiController {
         if (isCheckout == true) {
             processCheckout();
         } else {
-            if(DataLocal.isTablet) {
+            if (DataLocal.isTablet) {
                 SimiManager.getIntance().clearAllChidFragment();
                 SimiManager.getIntance().removeDialog();
             } else {
@@ -227,11 +227,11 @@ public class SignInController extends SimiController {
                 }
 
                 HashMap<String, Object> hmData = new HashMap<>();
-                hmData.put(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR, ValueData.ADDRESS_BOOK.CHECKOUT_ADDRESS);
+                hmData.put(KeyData.ADDRESS_BOOK.OPEN_FOR, ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT);
                 SimiData data = new SimiData(hmData);
                 AddressBookFragment fragment = AddressBookFragment.newInstance(data);
-                if(DataLocal.isTablet) {
-                    SimiManager.getIntance().replacePopupFragment(fragment );
+                if (DataLocal.isTablet) {
+                    SimiManager.getIntance().replacePopupFragment(fragment);
                 } else {
                     SimiManager.getIntance().replaceFragment(fragment);
                 }

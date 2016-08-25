@@ -1,6 +1,7 @@
 package com.simicart.core.base.component;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -26,6 +27,10 @@ public class SimiComponent {
 
     public View findView(String id) {
         int idView = Rconfig.getInstance().id(id);
+        if(null == rootView){
+            Log.e("SimiComponent","findVIew NULL");
+        }
+
         return rootView.findViewById(idView);
     }
 

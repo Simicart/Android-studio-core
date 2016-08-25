@@ -27,7 +27,10 @@ import com.simicart.core.checkout.delegate.CartAdapterDelegate;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.model.EditCartItemModel;
+import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
@@ -36,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 @SuppressLint("ClickableViewAccessibility")
@@ -67,18 +71,14 @@ public class CartListenerController implements CartAdapterDelegate {
                         .newInstanse(mWebviewUrl, true);
                 SimiManager.getIntance().replaceFragment(fragment);
             } else {
-//                if (DataPreferences.isSignInComplete()) {
-//                    AddressBookCheckoutFragment fragment = AddressBookCheckoutFragment
-//                            .newInstance(0, Constants.KeyAddress.ALL_ADDRESS,
-//                                    null, null);
-//                    if (DataLocal.isTablet) {
-//                        SimiManager.getIntance().replacePopupFragment(fragment);
-//                    } else {
-//                        SimiManager.getIntance().replaceFragment(fragment);
-//                    }
-//                } else {
-//                    mBlockDelegate.showPopupCheckout();
-//                }
+                if (DataPreferences.isSignInComplete()) {
+                    HashMap<String, Object> hm = new HashMap<>();
+                    hm.put(KeyData.ADDRESS_BOOK.OPEN_FOR, ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT);
+                    SimiManager.getIntance().openAddressBook(hm);
+
+                } else {
+                    mBlockDelegate.showPopupCheckout();
+                }
             }
         } else {
             SimiNotify.getInstance().showNotify(null, mMessage, "Ok");

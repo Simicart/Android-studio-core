@@ -1,5 +1,6 @@
 package com.simicart.core.base.component;
 
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.TextView;
@@ -15,7 +16,7 @@ public class SimiTextRowComponent extends SimiRowComponent {
 
     protected AppCompatEditText edtBody;
     protected int mInputType = -1;
-    protected TextView tvTitle;
+    protected TextInputLayout tvTitle;
 
     public SimiTextRowComponent() {
         super();
@@ -31,10 +32,10 @@ public class SimiTextRowComponent extends SimiRowComponent {
 
     @Override
     protected void initHeader() {
-        tvTitle = (TextView) findView("tv_title");
+        tvTitle = (TextInputLayout) findView("tv_title");
         if (Utils.validateString(mTitle)) {
             String translateTitle = SimiTranslator.getInstance().translate(mTitle);
-            tvTitle.setText(translateTitle);
+            tvTitle.setHint(translateTitle);
         } else {
             tvTitle.setVisibility(View.GONE);
         }

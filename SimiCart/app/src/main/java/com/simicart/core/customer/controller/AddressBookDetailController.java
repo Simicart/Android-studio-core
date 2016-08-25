@@ -84,6 +84,9 @@ public class AddressBookDetailController extends SimiController {
                 mShippingAddress = (AddressEntity) hmData.get(KeyData.ADDRESS_BOOK_DETAIL.SHIPPING_ADDRESS);
             }
 
+            if (hmData.containsKey(KeyData.ADDRESS_BOOK_DETAIL.ADDRESS_FOR_EDIT)) {
+                mAddressForEdit = (AddressEntity) hmData.get(KeyData.ADDRESS_BOOK_DETAIL.ADDRESS_FOR_EDIT);
+            }
         }
     }
 
@@ -453,6 +456,13 @@ public class AddressBookDetailController extends SimiController {
 
     @Override
     public void onResume() {
+        mListRow = new ArrayList<>();
+        if (null != mListRowComponent) {
+            for (int i = 0; i < mListRowComponent.size(); i++) {
+                SimiRowComponent component = mListRowComponent.get(i);
+                mListRow.add(component.createView());
+            }
+        }
         mDelegate.showRows(mListRow);
         if (null != mCountry) {
             String countryName = mCountry.getName();

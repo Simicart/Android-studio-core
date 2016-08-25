@@ -215,9 +215,6 @@ public class SplashController {
         storeViewModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-                //config customerAddress
-//                DataLocal.ConfigCustomerAddress = model.getConfigCustomerAddress();
-//                DataLocal.ConfigCustomerProfile = model.getConfigCustomerAddress();
 
                 if (Config.getInstance().isUseStore()) {
                     changeBaseUrl();

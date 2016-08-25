@@ -51,7 +51,7 @@ public class MyAccountController extends SimiController {
 			@Override
 			public void onClick() {
 				HashMap<String, Object> hmData = new HashMap<>();
-				hmData.put(KeyData.ADDRESS_BOOK.ADDRESS_BOOK_FOR, ValueData.ADDRESS_BOOK.CUSTOMER_ADDRESS);
+				hmData.put(KeyData.ADDRESS_BOOK.OPEN_FOR, ValueData.ADDRESS_BOOK.OPEN_FOR_CUSTOMER);
 				SimiData data = new SimiData(hmData);
 				AddressBookFragment fragment = AddressBookFragment.newInstance(data);
 				if (DataLocal.isTablet) {
