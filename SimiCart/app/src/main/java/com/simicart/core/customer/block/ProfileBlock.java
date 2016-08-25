@@ -1,26 +1,5 @@
 package com.simicart.core.customer.block;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-
-import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.adapter.GenderAdapter;
-import com.simicart.core.customer.controller.ProfileController;
-import com.simicart.core.customer.delegate.ProfileDelegate;
-import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.customer.entity.GenderConfig;
-import com.simicart.core.customer.entity.ProfileEntity;
-import com.simicart.core.material.ButtonRectangle;
-import com.simicart.core.material.LayoutRipple;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -39,6 +18,26 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.Constants;
+import com.simicart.core.config.DataLocal;
+import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.adapter.GenderAdapter;
+import com.simicart.core.customer.controller.ProfileController;
+import com.simicart.core.customer.delegate.ProfileDelegate;
+import com.simicart.core.customer.entity.ConfigCustomerAddress;
+import com.simicart.core.customer.entity.GenderConfig;
+import com.simicart.core.customer.entity.ProfileEntity;
+import com.simicart.core.material.ButtonRectangle;
+import com.simicart.core.material.LayoutRipple;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 @SuppressLint("DefaultLocale")
 public class ProfileBlock extends SimiBlock implements ProfileDelegate {
@@ -71,7 +70,6 @@ public class ProfileBlock extends SimiBlock implements ProfileDelegate {
 	public ProfileBlock(View view, Context context) {
 		super(view, context);
 
-		mProfile = DataLocal.ConfigCustomerProfile;
 	}
 
 	public void setSaveClicker(OnClickListener clicker) {
@@ -445,13 +443,13 @@ public class ProfileBlock extends SimiBlock implements ProfileDelegate {
 				sp_gender.setSelection(0);
 			} else {
 				int i = 0;
-				for (GenderConfig genderConfig : DataLocal.ConfigCustomerAddress
-						.getGenderConfigs()) {
-					i++;
-					if (genderConfig.getLabel().equals(profile.getGender())) {
-						sp_gender.setSelection(i);
-					}
-				}
+//				for (GenderConfig genderConfig : DataLocal.ConfigCustomerAddress
+//						.getGenderConfigs()) {
+//					i++;
+//					if (genderConfig.getLabel().equals(profile.getGender())) {
+//						sp_gender.setSelection(i);
+//					}
+//				}
 			}
 		}
 	}

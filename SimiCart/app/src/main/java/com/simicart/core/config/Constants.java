@@ -217,12 +217,12 @@ public class Constants {
     public static String SHIPPING_METHOD = "shipping_method";
     public static String BILLING_ADDRESS = "billingAddress";
     public static String CARD_4DIGITS = "card_4digits";
-    public static String SHIPPING_METHOD_LIST = "shipping_method_list";
-    public static String PAYMENT_METHOD_LIST = "payment_method_list";
-    public static String FEE = "fee";
+
+
+
     public static String V2 = "v2";
     public static String TOTAL_V2 = "total_v2";
-    public static String CONDITION = "condition";
+
 
     // scale view pager
     public static int PAGES = 5;
@@ -270,12 +270,9 @@ public class Constants {
     public static String ADD_TO_CART = "connector/checkout/add_to_cart";
     public static String EDIT_CART = "connector/checkout/edit_cart";
     public static String GET_ALLOWED_COUNTRIES = "connector/checkout/get_allowed_countries";
-    public static String GET_COUNTRY_CONFIG = "connector/checkout/get_country_config";
-    public static String GET_ORDER_CONFIG = "connector/checkout/get_order_config";
     public static String SAVE_SHIPPING_METHOD = "connector/checkout/save_shipping_method";
     public static String SAVE_PAYMENT_METHOD = "connector/checkout/save_payment_method";
     public static String PLACE_ORDER = "connector/checkout/place_order";
-    public static String GET_STATES = "connector/checkout/get_states";
     public static String UPDATE_PAYPAL_PAYMENT_STATES = "connector/checkout/update_paypal_payment";
     public static String SET_COUPON = "connector/checkout/set_coupon";
 
@@ -368,8 +365,7 @@ public class Constants {
         public static final String CONTENT = "content";
         public static final String AFTER_CONTROL = "after_control";
         public static final String ADDRESS_FOR = "address_for";
-        public static final String BILLING_ADDRESS = "billing_address";
-        public static final String SHIPPING_ADDRESS = "shipping_address";
+
         public static final String BOOK_ADDRESS = "book_address";
         public static final String MESSAGE = "message";
         public static final String FRAGMENT_TYPE = "fragment_type";

@@ -24,6 +24,7 @@ import com.simicart.core.base.network.request.SimiRequestQueue;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
+import com.simicart.core.checkout.fragment.ReviewOrderFragment;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -103,6 +104,12 @@ public class SimiManager {
     public void openListOfChoice(HashMap<String, Object> hm) {
         SimiData data = new SimiData(hm);
         ListOfChoiceFragment fragment = ListOfChoiceFragment.newInstance(data);
+        replaceFragment(fragment);
+    }
+
+    public void openReviewOrder(HashMap<String, Object> hm) {
+        SimiData data = new SimiData(hm);
+        ReviewOrderFragment fragment = ReviewOrderFragment.newInstance(data);
         replaceFragment(fragment);
     }
 

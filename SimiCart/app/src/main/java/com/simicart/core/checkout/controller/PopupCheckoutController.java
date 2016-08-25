@@ -2,19 +2,14 @@ package com.simicart.core.checkout.controller;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
 import com.simicart.core.base.controller.SimiController;
-import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.delegate.CartDelegate;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
-import com.simicart.core.customer.fragment.NewAddressBookFragment;
 import com.simicart.core.customer.fragment.SignInFragment;
 
 @SuppressLint("ClickableViewAccessibility")
@@ -121,20 +116,20 @@ public class PopupCheckoutController extends SimiController {
                     }
                     case MotionEvent.ACTION_UP: {
                         mBlockDelegate.dismissPopupCheckout();
-                        NewAddressBookFragment fragment = NewAddressBookFragment
-                                .newInstance();
-                        Bundle bundle = new Bundle();
+//                        NewAddressBookFragment fragment = NewAddressBookFragment
+//                                .newInstance();
+//                        Bundle bundle = new Bundle();
 //                        SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_CUSTOMER, Constants.KeyData.TYPE_INT, bundle);
 //                        SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, 0, Constants.KeyData.TYPE_INT, bundle);
-                        bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, null);
-                        bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, null);
-                        fragment.setArguments(bundle);
-                        Log.d("quang123", "=ACTION_UP=afterControl==" + 1);
-                        if (DataLocal.isTablet) {
-                            SimiManager.getIntance().replacePopupFragment(fragment);
-                        } else {
-                            SimiManager.getIntance().replaceFragment(fragment);
-                        }
+//                        bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, null);
+//                        bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, null);
+//                        fragment.setArguments(bundle);
+//                        Log.d("quang123", "=ACTION_UP=afterControl==" + 1);
+//                        if (DataLocal.isTablet) {
+//                            SimiManager.getIntance().replacePopupFragment(fragment);
+//                        } else {
+//                            SimiManager.getIntance().replaceFragment(fragment);
+//                        }
                     }
 
                     case MotionEvent.ACTION_CANCEL: {
@@ -159,19 +154,19 @@ public class PopupCheckoutController extends SimiController {
                     }
                     case MotionEvent.ACTION_UP: {
                         mBlockDelegate.dismissPopupCheckout();
-                        NewAddressBookFragment fragment = NewAddressBookFragment
-                                .newInstance();
-                        Bundle bundle = new Bundle();
+//                        NewAddressBookFragment fragment = NewAddressBookFragment
+//                                .newInstance();
+//                        Bundle bundle = new Bundle();
 //                        SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_AS_GUEST, Constants.KeyData.TYPE_INT, bundle);
 //                        SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, 0, Constants.KeyData.TYPE_INT, bundle);
-                        bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, null);
-                        bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, null);
-                        fragment.setArguments(bundle);
-                        if (DataLocal.isTablet) {
-                            SimiManager.getIntance().replacePopupFragment(fragment);
-                        } else {
-                            SimiManager.getIntance().replaceFragment(fragment);
-                        }
+//                        bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, null);
+//                        bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, null);
+//                        fragment.setArguments(bundle);
+//                        if (DataLocal.isTablet) {
+//                            SimiManager.getIntance().replacePopupFragment(fragment);
+//                        } else {
+//                            SimiManager.getIntance().replaceFragment(fragment);
+//                        }
                     }
 
                     case MotionEvent.ACTION_CANCEL: {

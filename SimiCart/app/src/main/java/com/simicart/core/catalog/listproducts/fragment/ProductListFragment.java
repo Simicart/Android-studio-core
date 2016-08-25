@@ -12,9 +12,6 @@ import com.simicart.core.catalog.listproducts.block.ProductListBlock;
 import com.simicart.core.catalog.listproducts.controller.ProductListController;
 import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.catalog.listproducts.model.ConstantsSearch;
-import com.simicart.core.checkout.controller.ConfigCheckout;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.block.SearchHomeBlock;
@@ -46,7 +43,7 @@ public class ProductListFragment extends SimiFragment {
     public static ProductListFragment newInstance(String catId, String catName, String sortId,
                                                   JSONObject jsonFilter, String tagView) {
         ProductListFragment fragment = new ProductListFragment();
-        fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_LISTPRODUCT);
+       // fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_LISTPRODUCT);
         Bundle bundle = new Bundle();
 //        setData(Constants.KeyData.ID, catId, Constants.KeyData.TYPE_STRING, bundle);
 //        setData(Constants.KeyData.NAME, catName, Constants.KeyData.TYPE_STRING,

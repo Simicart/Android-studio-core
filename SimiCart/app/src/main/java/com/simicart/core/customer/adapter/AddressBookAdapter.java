@@ -158,6 +158,11 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
     }
 
     protected void onChooseAddressCheckout(AddressEntity addressEntity) {
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+        hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+        SimiManager.getIntance().openReviewOrder(hm);
+
 //        ReviewOrderFragment fragment = new ReviewOrderFragment();
 //        fragment.setTypeCheckout(ReviewOrderFragment.CHECKOUTTYPE.AS_LOGGED);
 //        fragment.setShippingAddress(addressEntity);

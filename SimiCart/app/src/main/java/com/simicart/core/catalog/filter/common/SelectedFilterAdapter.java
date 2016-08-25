@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.category.delegate.FilterRequestDelegate;
 import com.simicart.core.catalog.filter.entity.FilterState;
-import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
@@ -86,11 +85,11 @@ public class SelectedFilterAdapter extends BaseAdapter {
 					List<Fragment> list = SimiManager.getIntance()
 							.getManager().getFragments();
 					for (Fragment fragment : list) {
-						if (fragment != null
-								&& fragment.isVisible()
-								&& fragment.getTargetRequestCode() == ConfigCheckout.TARGET_LISTPRODUCT) {
-							fragment.onResume();
-						}
+//						if (fragment != null
+//								&& fragment.isVisible()
+//								&& fragment.getTargetRequestCode() == ConfigCheckout.TARGET_LISTPRODUCT) {
+//							fragment.onResume();
+//						}
 					}
 					
 				} else {

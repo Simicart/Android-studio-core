@@ -4,15 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.checkout.entity.CreditcardEntity;
-import com.simicart.core.checkout.entity.ObjectSerializer;
 import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.setting.entity.CurrencyEntity;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Glenn on 8/15/2016.
@@ -243,34 +238,7 @@ public class DataPreferences {
         return email;
     }
 
-    public static void saveHashMapCreditCart(
-            HashMap<String, HashMap<String, CreditcardEntity>> hashMap) {
-        SharedPreferences.Editor editor = mSharedPre.edit();
-        try {
-            editor.putString(SIMI_CREDIT_CARD,
-                    ObjectSerializer.serialize(hashMap));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        editor.commit();
-    }
 
-    @SuppressWarnings("unchecked")
-    public static HashMap<String, HashMap<String, CreditcardEntity>> getHashMapCreditCart() {
-        HashMap<String, HashMap<String, CreditcardEntity>> creditCard = null;
-        try {
-            creditCard = (HashMap<String, HashMap<String, CreditcardEntity>>) ObjectSerializer
-                    .deserialize(mSharedPre.getString(
-                            SIMI_CREDIT_CARD,
-                            ObjectSerializer
-                                    .serialize(new HashMap<String, HashMap<String, CreditcardEntity>>())));
-        } catch (ClassNotFoundException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return creditCard;
-    }
 
     public static void clearEmailPassowrd() {
         SharedPreferences.Editor editor = mSharedPre.edit();
@@ -283,12 +251,6 @@ public class DataPreferences {
         editor.commit();
     }
 
-    // public static void clearDataLocal() {
-    // SharedPreferences.Editor editor = mSharedPre.edit();
-    // editor.clear();
-    // editor.commit();
-    // listCarts.clear();
-    // }
 
     public static int getRestartCount() {
         int count = 0;

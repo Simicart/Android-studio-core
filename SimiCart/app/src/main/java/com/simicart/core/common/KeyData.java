@@ -41,4 +41,10 @@ public class KeyData {
         public static String DELEGATE = "delegate";
         public static String LIST_DATA = "list_data";
     }
+
+    public static class REVIEW_ORDER{
+        public static String PLACE_FOR = "place_for";
+        public static String SHIPPING_ADDRESS = "shipping_address";
+        public static  String BILLING_ADDRESS = "billing_address";
+    }
 }

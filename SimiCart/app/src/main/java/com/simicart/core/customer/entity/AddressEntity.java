@@ -4,6 +4,9 @@ import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class AddressEntity extends SimiEntity {
     protected String mID;
     protected String mStateID;
@@ -84,6 +87,111 @@ public class AddressEntity extends SimiEntity {
         mTaxVatCheckout = getData(TAXVAT_CHECKOUT);
         mLatlng = getData(LATLNG);
     }
+
+    public JSONObject toParamForPlaceOrder()  {
+        try {
+            JSONObject json = new JSONObject();
+            String addressID = mID;
+            if (!Utils.validateString(mID) || mID.equals("-1")) {
+                addressID = "0";
+            }
+            json.put("address_id", addressID);
+
+            // name
+            if (Utils.validateString(mName)) {
+                json.put("name", mName);
+            }
+
+            // street
+            if (Utils.validateString(mStreet)) {
+                json.put("street", mStreet);
+            }
+            // city
+            if (Utils.validateString(mCity)) {
+                json.put("city", mCity);
+            }
+            // state name
+            if (Utils.validateString(mStateName)) {
+                json.put("state_name", mStateName);
+                json.put("state_id", mStateID);
+                json.put("state_code", mStateCode);
+            }
+            // country name
+            if (Utils.validateString(mCountryName)) {
+                json.put("country_name", mCountryName);
+                json.put("country_code", mCountryCode);
+            }
+            // ZIP code
+            String zipcode = getZipCode();
+            if (Utils.validateString(mZip)) {
+                json.put("zip", mZip);
+                json.put("zip_code", mZip);
+            }
+            // phone
+            String phone = getPhone();
+            if (Utils.validateString(mPhone)) {
+                json.put("phone", mPhone);
+            }
+            // email
+            if (Utils.validateString(mEmail)) {
+                json.put("email", mEmail);
+            }
+            // prefix
+            if (Utils.validateString(mPrefix)) {
+                json.put("prefix", mPrefix);
+            }
+            // suffix
+            if (Utils.validateString(mSuffix)) {
+                json.put("suffix", mSuffix);
+            }
+            // tax vat
+            if (Utils.validateString(mTaxvat)) {
+                json.put("taxvat", mTaxvat);
+            }
+            // tax vat check out
+            if (Utils.validateString(mTaxVatCheckout)) {
+                json.put("vat_id", mTaxVatCheckout);
+            }
+            // gender
+            if (Utils.validateString(mGender)) {
+                json.put("gender", Utils
+                        .getValueGender(mGender));
+            }
+            if (Utils.validateString(mDay)) {
+                String day = "";
+                if (getDay().length() == 1) {
+                    day = "0" + getDay();
+                } else {
+                    day = getDay();
+                }
+                json.put("day", day);
+                String month = "";
+                if (getMonth().length() == 1) {
+                    month = "0" + getMonth();
+                } else {
+                    month = getMonth();
+                }
+                json.put("month", month);
+                json.put("year", mYear);
+                String dob = "" + month + "/" + day
+                        + "/" + getYear() + "";
+                json.put("dob", dob);
+            }
+            // Fax
+            if (Utils.validateString(mFax)) {
+                json.put("fax", mFax);
+            }
+            // company
+            if (Utils.validateString(mCompany)) {
+                json.put("company", mCompany);
+            }
+            return json;
+        } catch (JSONException e) {
+            return null;
+        }
+
+    }
+
 
     public String getLatlng() {
         return mLatlng;

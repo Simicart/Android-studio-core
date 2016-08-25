@@ -8,7 +8,6 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
@@ -48,7 +47,7 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 
 	public static ThankyouFragment newInstance(String message, JSONObject jsonObject) {
 		ThankyouFragment fragment = new ThankyouFragment();
-		fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_REVIEWORDER);
+		//fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_REVIEWORDER);
 		Bundle bundle= new Bundle();
 //		setData(Constants.KeyData.MESSAGE, message, Constants.KeyData.TYPE_STRING, bundle);
 //		if(jsonObject != null){
@@ -143,14 +142,14 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 			
 			@Override
 			public void onClick(View v) {
-				OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment
-						.newInstance(ConfigCheckout.TARGET_REVIEWORDER, invoice_number.trim());
+//				OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment
+//						.newInstance(ConfigCheckout.TARGET_REVIEWORDER, invoice_number.trim());
 //				fragment.setID(invoice_number.trim());
-				if (DataLocal.isTablet) {
-					SimiManager.getIntance().replacePopupFragment(fragment);
-				} else {
-					SimiManager.getIntance().replaceFragment(fragment);
-				}
+//				if (DataLocal.isTablet) {
+//					SimiManager.getIntance().replacePopupFragment(fragment);
+//				} else {
+//					SimiManager.getIntance().replaceFragment(fragment);
+//				}
 			}
 		});
 	}

@@ -39,6 +39,7 @@ import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.entity.ConfigCustomerAddress;
 import com.simicart.core.customer.entity.GenderConfig;
 
 public class Utils {
@@ -148,8 +149,7 @@ public class Utils {
 
 
     public static String getLabelGender(String value) {
-        for (GenderConfig genderConfig : DataLocal.ConfigCustomerAddress
-                .getGenderConfigs()) {
+        for (GenderConfig genderConfig : ConfigCustomerAddress.getInstance().getGenderConfigs()) {
             if (genderConfig.getValue().equals(value)) {
                 return genderConfig.getLabel();
             }
@@ -158,8 +158,7 @@ public class Utils {
     }
 
     public static String getValueGender(String label) {
-        for (GenderConfig genderConfig : DataLocal.ConfigCustomerAddress
-                .getGenderConfigs()) {
+        for (GenderConfig genderConfig : ConfigCustomerAddress.getInstance().getGenderConfigs()) {
             if (genderConfig.getLabel().equals(label)) {
                 return genderConfig.getValue();
             }
@@ -282,7 +281,7 @@ public class Utils {
 
     public static int toPixel(int value) {
         DisplayMetrics metrics = SimiManager.getIntance().getCurrentActivity().getResources().getDisplayMetrics();
-        int px = value * ((int)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+        int px = value * ((int) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
         return px;
     }
 
