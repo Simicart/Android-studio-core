@@ -38,9 +38,12 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //build app over 65k methods
 
+    compile 'com.google.android.gms:play-services:8.3.0'
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
-    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+//    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
     // library for indicator
     compile 'me.relex:circleindicator:1.2.1@aar'

@@ -36,6 +36,7 @@ import java.util.Map;
 public class SplashController {
 
     protected boolean canOpenMain = false;
+    protected boolean isSuccessSku = false;
 
     private String MATRIX_THEME = "matrix";
     private String ZARA_THEME = "zara";
@@ -66,7 +67,7 @@ public class SplashController {
             @Override
             public void onSuccess(SimiCollection collection) {
                 enableTheme();
-                if (canOpenMain) {
+                if (canOpenMain && isSuccessSku) {
                     SimiManager.getIntance().toMainActivity();
                 } else {
                     canOpenMain = true;
@@ -130,9 +131,16 @@ public class SplashController {
         listSKUPluginModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
+                isSuccessSku = true;
                 ArrayList<String> listSKU = listSKUPluginModel.getListSKU();
+                listSKU.add("simi_developer");
                 if (null != listSKU && listSKU.size() > 0) {
                     enablePlugins(listSKU);
+                }
+                if (canOpenMain && isSuccessSku) {
+                    SimiManager.getIntance().toMainActivity();
+                } else {
+                    canOpenMain = true;
                 }
             }
         });
@@ -221,7 +229,7 @@ public class SplashController {
                 }
 
                 createLanguage();
-                if (canOpenMain) {
+                if (canOpenMain && isSuccessSku) {
                     dispatchEvent();
                     SimiManager.getIntance().toMainActivity();
                 } else {

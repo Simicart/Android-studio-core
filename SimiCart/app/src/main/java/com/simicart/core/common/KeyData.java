@@ -48,11 +48,19 @@ public class KeyData {
         public static String TARGET = "target";
     }
 
-
-    public static class REVIEW_ORDER{
+    public static class REVIEW_ORDER {
         public static String PLACE_FOR = "place_for";
         public static String SHIPPING_ADDRESS = "shipping_address";
-        public static  String BILLING_ADDRESS = "billing_address";
+        public static String BILLING_ADDRESS = "billing_address";
+    }
+
+    public static class SLIDE_MENU {
+        public static String LIST_ITEMS = "list_items";
+        public static String LIST_FRAGMENTS = "list_fragments";
+    }
+
+    public static class REQUEST_PERMISSIONS {
+        public static final int LOCATION_REQUEST = 123;
     }
 
 }
