@@ -1,24 +1,11 @@
 package com.simicart.core.home.block;
 
 import android.content.Context;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.devsmart.android.ui.HorizontalListView;
-import com.simicart.MainActivity;
-import com.simicart.core.adapter.ProductBaseAdapter;
 import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductList;
-import com.simicart.core.common.Utils;
-import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.controller.ProductListListenerController;
 import com.simicart.core.home.delegate.ProductListDelegate;
 

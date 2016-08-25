@@ -5,13 +5,30 @@
     android:orientation="horizontal"
     android:weightSum="5" >
 
-    <ListView
-        android:id="@+id/list_order"
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:background="@drawable/core_line_border" >
-    </ListView>
+        android:layout_weight="2">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_list_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/size_40"
+            android:clipToPadding="false">
+        </android.support.v7.widget.RecyclerView>
+
+        <ProgressBar
+            android:id="@+id/pb_load_more"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:indeterminateDrawable="@drawable/progressbar_indeterminate"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
     <View
         android:layout_width="0.5dp"
