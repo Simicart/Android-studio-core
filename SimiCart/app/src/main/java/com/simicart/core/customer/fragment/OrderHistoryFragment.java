@@ -27,7 +27,7 @@ public class OrderHistoryFragment extends SimiFragment {
 			Bundle savedInstanceState) {
 		setScreenName("Order History Screen");
 		rootView = inflater.inflate(
-				Rconfig.getInstance().layout("core_order_history_layout"),
+				Rconfig.getInstance().layout("core_fragment_order_history"),
 				container, false);
 
 		Context context = getActivity();

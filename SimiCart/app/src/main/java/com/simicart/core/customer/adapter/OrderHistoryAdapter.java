@@ -12,13 +12,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.entity.OrderHistory;
 import com.simicart.core.customer.fragment.OrderHistoryDetailFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Crabby PC on 7/4/2016.
@@ -96,6 +100,16 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         holder.rlItemOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HashMap<String, Object> hmData = new HashMap<String, Object>();
+                hmData.put(KeyData.ORDER_HISTORY_DETAIL.ORDER_ID, orderHistoryEntity.getOrder_id());
+                hmData.put(KeyData.ORDER_HISTORY_DETAIL.TARGET, 0);
+                SimiData data = new SimiData(hmData);
+                OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance(data);
+                if (DataLocal.isTablet) {
+                    SimiManager.getIntance().addFragmentSub(fragment);
+                } else {
+                    SimiManager.getIntance().replaceFragment(fragment);
+                }
 //                SimiData data = new SimiData();
 //                data.addData("order_history", orderHistoryEntity);
 //                OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance();

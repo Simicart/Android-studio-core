@@ -17,7 +17,7 @@ public class OrderHistoryDetailModel extends SimiModel {
 			collection = new SimiCollection();
 			for (int i = 0; i < list.length(); i++) {
 				OrderHisDetail orderHis = new OrderHisDetail();
-				orderHis.setJSONObject(list.getJSONObject(i));
+				orderHis.parse(list.getJSONObject(i));
 				collection.addEntity(orderHis);
 			}
 		} catch (JSONException e) {

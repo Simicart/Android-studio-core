@@ -6,10 +6,12 @@ import org.json.JSONObject;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Config;
@@ -31,6 +33,8 @@ import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.HashMap;
 
 public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 
@@ -143,11 +147,13 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 			
 			@Override
 			public void onClick(View v) {
-				OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment
-						.newInstance(ConfigCheckout.TARGET_REVIEWORDER, invoice_number.trim());
-//				fragment.setID(invoice_number.trim());
+				HashMap<String, Object> hmData = new HashMap<String, Object>();
+				hmData.put(KeyData.ORDER_HISTORY_DETAIL.ORDER_ID, invoice_number.trim());
+				hmData.put(KeyData.ORDER_HISTORY_DETAIL.TARGET, ConfigCheckout.TARGET_REVIEWORDER);
+				SimiData data = new SimiData(hmData);
+				OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance(data);
 				if (DataLocal.isTablet) {
-					SimiManager.getIntance().replacePopupFragment(fragment);
+					SimiManager.getIntance().addFragmentSub(fragment);
 				} else {
 					SimiManager.getIntance().replaceFragment(fragment);
 				}

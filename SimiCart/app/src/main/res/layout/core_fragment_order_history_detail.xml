@@ -1,54 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
-            <View
-                android:id="@+id/view_top"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#EBEBEB" />
-
-            <com.simicart.core.material.ButtonRectangle
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/bt_reorder"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_button"
-                android:padding="10dp"
-                android:text="" />
-
-            <View
-                android:id="@+id/view_order_date"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#EBEBEB" />
+                android:layout_marginTop="@dimen/size_20"
+                android:layout_marginRight="@dimen/size_10"
+                android:layout_marginLeft="@dimen/size_10"/>
 
             <TableLayout
                 android:id="@+id/table_history_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/core_line_border"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
+                android:paddingLeft="@dimen/size_10"
+                android:paddingRight="@dimen/size_10"
+                android:layout_marginTop="@dimen/size_20">
 
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
+                    android:paddingTop="@dimen/size_5"
                     android:weightSum="5" >
 
                     <TextView
-                        android:id="@+id/lb_date"
+                        android:id="@+id/tv_date_label"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -70,7 +58,7 @@
                     android:weightSum="5" >
 
                     <TextView
-                        android:id="@+id/lb_orderT"
+                        android:id="@+id/tv_order_number_label"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -78,7 +66,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_orderT"
+                        android:id="@+id/tv_order_number"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3" />
@@ -92,7 +80,7 @@
                     android:weightSum="5" >
 
                     <TextView
-                        android:id="@+id/lb_total"
+                        android:id="@+id/tv_total_label"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -108,14 +96,11 @@
             </TableLayout>
 
             <TextView
-                android:id="@+id/lb_shipto"
+                android:id="@+id/tv_shipto_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#EBEBEB"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
+                android:padding="@dimen/size_10"
                 android:text="SHIP TO"
                 android:textColor="#ACACAC" />
 
@@ -125,102 +110,63 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/core_line_border"
                 android:orientation="vertical"
-                android:padding="10dp" >
+                android:padding="@dimen/size_10" >
 
-                <TextView
-                    android:id="@+id/st_name"
+                <LinearLayout
+                    android:id="@+id/ll_shipping_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp" />
+                    android:orientation="vertical"
+                    android:background="@drawable/bottom_line_border"></LinearLayout>
 
                 <TextView
-                    android:id="@+id/st_street"
+                    android:id="@+id/tv_shipping_method"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/size_5"
                     android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/st_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/st_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/st_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/st_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bottom_line_border"
-                    android:paddingBottom="5dp"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/st_shipingmethod"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:textSize="15sp" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/lb_items"
+                android:id="@+id/tv_items_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#EBEBEB"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
+                android:padding="@dimen/size_10"
                 android:text="ITEMS"
                 android:textColor="#ACACAC" />
 
-            <com.simicart.core.style.NoScrollListView
-                android:id="@+id/list_item"
+            <LinearLayout
+                android:id="@+id/ll_list_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/core_line_border"
-                android:listSelector="@drawable/core_line_border" >
-            </com.simicart.core.style.NoScrollListView>
+                android:orientation="vertical"></LinearLayout>
 
             <TextView
-                android:id="@+id/lb_feeDetail"
+                android:id="@+id/tv_fee_detail_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#EBEBEB"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
-                android:textColor="#ACACAC" />
+                android:padding="@dimen/size_10"
+                android:textColor="#ACACAC"
+                android:text="FEE DETAIL"/>
 
             <LinearLayout
                 android:id="@+id/ll_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/core_line_border"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/size_10">
             </LinearLayout>
 
             <TextView
-                android:id="@+id/lb_payment"
+                android:id="@+id/tv_payment_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#EBEBEB"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
+                android:padding="@dimen/size_10"
                 android:text="PAYMENT"
                 android:textColor="#ACACAC" />
 
@@ -229,69 +175,33 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/core_line_border"
                 android:orientation="vertical"
-                android:padding="10dp" >
+                android:padding="@dimen/size_10" >
 
                 <TextView
-                    android:id="@+id/p_paymentmethod"
+                    android:id="@+id/tv_payment_method"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bottom_line_border"
-                    android:paddingBottom="5dp"
+                    android:paddingBottom="@dimen/size_5"
                     android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/p_name"
+                <LinearLayout
+                    android:id="@+id/ll_billing_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:textSize="15sp" />
+                    android:orientation="vertical"
+                    android:background="@drawable/bottom_line_border"></LinearLayout>
 
                 <TextView
-                    android:id="@+id/p_street"
+                    android:id="@+id/tv_payment_couponCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/p_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/p_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/p_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/p_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bottom_line_border"
-                    android:paddingBottom="5dp"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/p_couponCode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
+                    android:paddingTop="@dimen/size_5"
                     android:textSize="15sp" />
             </LinearLayout>
 
-            <View
-                android:id="@+id/view_bottom"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#EBEBEB" />
         </LinearLayout>
-    </ScrollView>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

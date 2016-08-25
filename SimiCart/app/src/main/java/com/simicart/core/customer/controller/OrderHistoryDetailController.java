@@ -8,11 +8,14 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
@@ -27,10 +30,9 @@ public class OrderHistoryDetailController extends SimiController {
 
     protected SimiDelegate mDelegate;
     protected String mID;
-    protected OnTouchListener mReOrderClicker;
-    protected OrderHistoryReOrderDelegate mReOrderDelegate;
+    protected View.OnClickListener mReOrderClicker;
 
-    public OnTouchListener getReOrderClicker() {
+    public View.OnClickListener getReOrderClicker() {
         return mReOrderClicker;
     }
 
@@ -42,12 +44,24 @@ public class OrderHistoryDetailController extends SimiController {
         mDelegate = delegate;
     }
 
-    public void setReOrderDelegate(OrderHistoryReOrderDelegate mReOrderDelegate) {
-        this.mReOrderDelegate = mReOrderDelegate;
+    @Override
+    public void onStart() {
+        requestGetOrderDetail();
+
+        mReOrderClicker = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestReOrder();
+            }
+        };
     }
 
     @Override
-    public void onStart() {
+    public void onResume() {
+        mDelegate.updateView(mModel.getCollection());
+    }
+
+    protected void requestGetOrderDetail() {
         mDelegate.showLoading();
         mModel = new OrderHistoryDetailModel();
         mModel.setSuccessListener(new ModelSuccessCallBack() {
@@ -55,6 +69,13 @@ public class OrderHistoryDetailController extends SimiController {
             public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissLoading();
                 mDelegate.updateView(mModel.getCollection());
+            }
+        });
+        mModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissDialogLoading();
+                SimiNotify.getInstance().showNotify(error.getMessage());
             }
         });
 
@@ -66,51 +87,15 @@ public class OrderHistoryDetailController extends SimiController {
         mModel.addBody(Constants.ORDER_ID, mID);
 
         mModel.request();
-
-        mReOrderClicker = new OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        Utils.hideKeyboard(v);
-                        changeColorReOrder(Color.GRAY);
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        Utils.hideKeyboard(v);
-                        requestReOrder();
-                    }
-                    case MotionEvent.ACTION_CANCEL: {
-                        changeColorReOrder(AppColorConfig.getInstance().getKeyColor());
-                        break;
-                    }
-                    default:
-                        break;
-                }
-                return true;
-            }
-        };
-    }
-
-    @Override
-    public void onResume() {
-        mDelegate.updateView(mModel.getCollection());
-    }
-
-    protected void changeColorReOrder(int color) {
-        // GradientDrawable gdDefault = new GradientDrawable();
-        // gdDefault.setColor(color);
-        mReOrderDelegate.reOrder().setBackgroundColor(color);
     }
 
     protected void requestReOrder() {
-        mReOrderDelegate.showLoading();
+        mDelegate.showDialogLoading();
         final OrderHistoryReOrderModel mModel = new OrderHistoryReOrderModel();
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-                mReOrderDelegate.dismissLoading();
+                mDelegate.dismissDialogLoading();
                 int numberQty = 0;
                 ArrayList<SimiEntity> entity = mModel.getCollection()
                         .getCollection();
@@ -125,6 +110,13 @@ public class OrderHistoryDetailController extends SimiController {
                 }
                 SimiManager.getIntance().onUpdateCartQty(
                         String.valueOf(numberQty));
+            }
+        });
+        mModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissDialogLoading();
+                SimiNotify.getInstance().showNotify(error.getMessage());
             }
         });
         mModel.addBody(Constants.ORDER_ID, mID);

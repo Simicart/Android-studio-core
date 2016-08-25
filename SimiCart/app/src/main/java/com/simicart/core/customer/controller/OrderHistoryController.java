@@ -9,14 +9,19 @@ import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.delegate.OrderHistoryDelegate;
 import com.simicart.core.customer.entity.OrderHistory;
 import com.simicart.core.customer.fragment.OrderHistoryDetailFragment;
 import com.simicart.core.customer.model.OrderHistoryModel;
+
+import java.util.HashMap;
 
 public class OrderHistoryController extends SimiController {
     protected OrderHistoryDelegate mDelegate;
@@ -111,16 +116,16 @@ public class OrderHistoryController extends SimiController {
         OrderHistory orderHis = (OrderHistory) mModel.getCollection()
                 .getCollection().get(position);
 
-        String id = orderHis.getOrder_id();
-        OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment
-                .newInstance(0, id);
-//		fragment.setID(id);
+        HashMap<String, Object> hmData = new HashMap<String, Object>();
+        hmData.put(KeyData.ORDER_HISTORY_DETAIL.ORDER_ID, orderHis.getOrder_id());
+        hmData.put(KeyData.ORDER_HISTORY_DETAIL.TARGET, 0);
+        SimiData data = new SimiData(hmData);
+        OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance(data);
         if (DataLocal.isTablet) {
             SimiManager.getIntance().addFragmentSub(fragment);
         } else {
             SimiManager.getIntance().replaceFragment(fragment);
         }
-
     }
 
     @Override

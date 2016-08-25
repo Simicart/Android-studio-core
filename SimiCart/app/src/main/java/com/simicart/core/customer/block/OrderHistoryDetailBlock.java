@@ -1,315 +1,176 @@
 package com.simicart.core.customer.block;
 
-import java.util.ArrayList;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.AppCompatButton;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.checkout.adapter.ProductOrderAdapter;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.TotalPriceView;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.delegate.OrderHistoryReOrderDelegate;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.OrderHisDetail;
-import com.simicart.core.material.ButtonRectangle;
+import com.simicart.core.customer.entity.OrderHistory;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
-import android.view.View;
-import android.view.View.OnTouchListener;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.ListView;
-import android.widget.TextView;
+import java.util.ArrayList;
 
 @SuppressLint("DefaultLocale")
-public class OrderHistoryDetailBlock extends SimiBlock implements
-        OrderHistoryReOrderDelegate {
-    protected ButtonRectangle bt_reorder;
-    private View view_top;
-    private View view_bottom;
-    private View view_order_date;
+public class OrderHistoryDetailBlock extends SimiBlock {
+    protected AppCompatButton btReorder;
+    protected TextView tvDateLabel, tvOrderNumberLablel, tvTotalLabel;
+    protected TextView tvDate, tvOrderNumber, tvTotal;
+    protected TextView tvShipToLabel;
+    protected TextView tvShippingMethod;
+    protected LinearLayout llShippingAddress;
+    protected TextView tvItemsLabel;
+    protected LinearLayout llItems;
+    protected TextView tvFeeDetailLabel;
+    protected LinearLayout llPrice;
+    protected TextView tvPaymentLabel;
+    protected TextView tvPaymentMethod, tvPaymentCoupon;
+    protected LinearLayout llBillingAddress;
+
+    protected OrderHisDetail orderHistoryEntity;
 
     public OrderHistoryDetailBlock(View view, Context context) {
         super(view, context);
     }
 
-    public void setOnTouchReOrder(OnTouchListener listener) {
-        bt_reorder.setOnTouchListener(listener);
-    }
-
     @Override
     public void initView() {
-        view_top = mView.findViewById(Rconfig.getInstance()
-                .id("view_top"));
-        view_bottom = mView.findViewById(Rconfig.getInstance()
-                .id("view_bottom"));
-        view_order_date = mView.findViewById(Rconfig.getInstance().id("view_order_date"));
-        view_top.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
-        view_bottom.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
-        view_order_date.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
-        TextView lb_date = (TextView) mView.findViewById(Rconfig.getInstance()
-                .id("lb_date"));
-        lb_date.setText(SimiTranslator.getInstance().translate("Order Date"));
-        lb_date.setTextColor(AppColorConfig.getInstance().getContentColor());
-        TextView lb_orderT = (TextView) mView.findViewById(Rconfig
-                .getInstance().id("lb_orderT"));
-        lb_orderT.setText(SimiTranslator.getInstance().translate("Order Number"));
-        lb_orderT.setTextColor(AppColorConfig.getInstance().getContentColor());
-        TextView lb_total = (TextView) mView.findViewById(Rconfig.getInstance()
-                .id("lb_total"));
-        lb_total.setText(SimiTranslator.getInstance().translate("Order Total"));
-        lb_total.setTextColor(AppColorConfig.getInstance().getContentColor());
 
-        TextView lb_shipto = (TextView) mView.findViewById(Rconfig
-                .getInstance().id("lb_shipto"));
-        lb_shipto
-                .setText(SimiTranslator.getInstance().translate("Ship to").toUpperCase());
-        lb_shipto.setTextColor(AppColorConfig.getInstance().getSectionColor());
-        lb_shipto.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
-        TextView lb_items = (TextView) mView.findViewById(Rconfig.getInstance()
-                .id("lb_items"));
-        lb_items.setText(SimiTranslator.getInstance().translate("Items").toUpperCase());
-        lb_items.setTextColor(AppColorConfig.getInstance().getSectionColor());
-        lb_items.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
-        TextView lb_payment = (TextView) mView.findViewById(Rconfig
-                .getInstance().id("lb_payment"));
-        lb_payment.setText(SimiTranslator.getInstance().translate("Payment")
-                .toUpperCase());
-        lb_payment.setTextColor(AppColorConfig.getInstance().getSectionColor());
-        lb_payment.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
-        bt_reorder = (ButtonRectangle) mView.findViewById(Rconfig.getInstance()
-                .id("bt_reorder"));
-        bt_reorder.setTextColor(Color.WHITE);
-        bt_reorder.setText(SimiTranslator.getInstance().translate("Reorder"));
-        bt_reorder.setTextSize(16);
-        bt_reorder.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
+        btReorder = (AppCompatButton) mView.findViewById(Rconfig.getInstance().id("bt_reorder"));
+        btReorder.setText(SimiTranslator.getInstance().translate("Reorder"));
+        btReorder.setTextColor(Color.WHITE);
+        btReorder.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
+
+    }
+
+    protected void initOrderDetail() {
+        tvDateLabel = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_date_label"));
+        tvDateLabel.setText(SimiTranslator.getInstance().translate("Order Date"));
+        tvDateLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        tvDate = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_date"));
+        tvDate.setText(orderHistoryEntity.getOrder_date());
+        tvDate.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        tvOrderNumberLablel = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_order_number_label"));
+        tvOrderNumberLablel.setText(SimiTranslator.getInstance().translate("Order Number"));
+        tvOrderNumberLablel.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        tvOrderNumber = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_order_number"));
+        tvOrderNumber.setText(orderHistoryEntity.getOrder_code());
+        tvOrderNumber.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        tvTotalLabel = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_total_label"));
+        tvTotalLabel.setText(SimiTranslator.getInstance().translate("Order Total"));
+        tvTotalLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        tvTotal = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_total"));
+        tvTotal.setTextColor(AppColorConfig.getInstance().getPriceColor());
+        String symbol = orderHistoryEntity.getTotal_price().getCurrencySymbol();
+        String price = AppStoreConfig.getInstance().getPrice(
+                orderHistoryEntity.getOrder_total());
+        if (null != symbol) {
+            price = AppStoreConfig.getInstance().getPrice(
+                    orderHistoryEntity.getOrder_total(), symbol);
+        }
+        tvTotal.setText(price);
+
+    }
+
+    protected void initShipping() {
+        tvShipToLabel = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_shipto_label"));
+        tvShipToLabel.setText(SimiTranslator.getInstance().translate("Ship To").toUpperCase());
+        tvShipToLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        llShippingAddress = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_shipping_address"));
+        AddressEntity shippingAddress = orderHistoryEntity.getShipping_address();
+        if(shippingAddress != null) {
+//            AddressCheckoutComponent addressCheckoutComponent = new AddressCheckoutComponent(AddressCheckoutComponent.SHIPPING_TYPE, shippingAddress);
+//            llShippingAddress.addView(addressCheckoutComponent.createView());
+        }
+
+        tvShippingMethod = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_shipping_method"));
+        tvShippingMethod.setText(orderHistoryEntity.getShipping_method());
+        tvShippingMethod.setTextColor(AppColorConfig.getInstance().getContentColor());
+    }
+
+    protected void initListItems() {
+        tvItemsLabel = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_items_label"));
+        tvItemsLabel.setText(SimiTranslator.getInstance().translate("Items").toUpperCase());
+        tvItemsLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        llItems = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_list_item"));
+    }
+
+    protected void initFeeDetail() {
+        tvFeeDetailLabel = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_fee_detail_label"));
+        tvFeeDetailLabel.setText(SimiTranslator.getInstance().translate("Fee Detail").toUpperCase());
+        tvFeeDetailLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        llPrice = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_price"));
+        TotalPrice totalPriceEntity = orderHistoryEntity.getTotal_price();
+        TotalPriceView viewPrice = new TotalPriceView(totalPriceEntity);
+        if(viewPrice != null) {
+            //TotalPriceComponent totalPriceComponent = new TotalPriceComponent(totalPriceEntity);
+            llPrice.addView(viewPrice.getTotalPriceView());
+        }
+    }
+
+    protected void initPayment() {
+        tvPaymentLabel = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_payment_label"));
+        tvPaymentLabel.setText(SimiTranslator.getInstance().translate("Payment").toUpperCase());
+        tvPaymentLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        tvPaymentMethod = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_payment_method"));
+        tvPaymentMethod.setText(orderHistoryEntity.getPayment_method());
+        tvPaymentMethod.setTextColor(AppColorConfig.getInstance().getContentColor());
+
+        llBillingAddress = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_billing_address"));
+        AddressEntity billingAddress = orderHistoryEntity.getBilling_address();
+        if(billingAddress != null) {
+//            AddressCheckoutComponent addressCheckoutComponent = new AddressCheckoutComponent(AddressCheckoutComponent.BILLING_TYPE, billingAddress);
+//            llBillingAddress.addView(addressCheckoutComponent.createView());
+        }
+
+        tvPaymentCoupon = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_payment_couponCode"));
+        String coupon = orderHistoryEntity.getOrder_gift_code();
+        if(!Utils.validateString(coupon)) {
+            coupon = SimiTranslator.getInstance().translate("None");
+        }
+        tvPaymentCoupon.setText(SimiTranslator.getInstance().translate("Coupon Code") + ": " + coupon);
+        tvPaymentCoupon.setTextColor(AppColorConfig.getInstance().getContentColor());
+
     }
 
     @Override
     public void drawView(SimiCollection collection) {
         ArrayList<SimiEntity> entity = collection.getCollection();
         if (null != entity && entity.size() > 0) {
-            OrderHisDetail orderHisDetail = (OrderHisDetail) entity.get(0);
-            TextView tv_date = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("tv_date"));
-            tv_date.setText(orderHisDetail.getOrder_date());
-            tv_date.setTextColor(AppColorConfig.getInstance().getContentColor());
-            TextView tv_orderT = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("tv_orderT"));
-            tv_orderT.setText(orderHisDetail.getOrder_code());
-            tv_orderT.setTextColor(AppColorConfig.getInstance().getContentColor());
-            TextView tv_total = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("tv_total"));
-            tv_total.setTextColor(AppColorConfig.getInstance().getPriceColor());
+            orderHistoryEntity = (OrderHisDetail) entity.get(0);
 
-            String symbol = orderHisDetail.getTotal_price().getCurrencySymbol();
-            String price = AppStoreConfig.getInstance().getPrice(
-                    orderHisDetail.getOrder_total());
-            if (null != symbol) {
-                price = AppStoreConfig.getInstance().getPrice(
-                        orderHisDetail.getOrder_total(), symbol);
-            }
-            tv_total.setText(price);
-
-            AddressEntity shippingAddress = orderHisDetail
-                    .getShipping_address();
-            if (shippingAddress != null) {
-                // name
-                TextView st_name = (TextView) mView.findViewById(Rconfig
-                        .getInstance().id("st_name"));
-                st_name.setTextColor(AppColorConfig.getInstance().getContentColor());
-                String name = shippingAddress.getName();
-                if (Utils.validateString(name)) {
-                    st_name.setText(name);
-                } else {
-                    st_name.setVisibility(View.GONE);
-                }
-                // street
-                TextView st_street = (TextView) mView.findViewById(Rconfig
-                        .getInstance().id("st_street"));
-                st_street.setTextColor(AppColorConfig.getInstance().getContentColor());
-                String street = shippingAddress.getStreet();
-                if (Utils.validateString(street)) {
-                    st_street.setText(street);
-                } else {
-                    st_street.setVisibility(View.GONE);
-                }
-                // city
-                TextView st_city = (TextView) mView.findViewById(Rconfig
-                        .getInstance().id("st_city"));
-                st_city.setTextColor(AppColorConfig.getInstance().getContentColor());
-                String city = shippingAddress.getCity();
-//                if (Utils.validateString(city)) {
-//                    if (shippingAddress.getState_name() == null
-//                            || shippingAddress.getState_name().equals("null")) {
-//                        st_city.setText(city + ", " + shippingAddress.getZip());
-//                    } else {
-//                        st_city.setText(city + ", "
-//                                + shippingAddress.getState_name() + ", "
-//                                + shippingAddress.getZip());
-//                    }
-//                } else {
-//                    st_city.setVisibility(View.GONE);
-//                }
-
-                // country
-                TextView st_country = (TextView) mView.findViewById(Rconfig
-                        .getInstance().id("st_country"));
-                st_country
-                        .setTextColor(AppColorConfig.getInstance().getContentColor());
-//                String country = shippingAddress.getCountry_name();
-//                if (Utils.validateString(country)) {
-//                    st_country.setText(country);
-//                } else {
-//                    st_country.setVisibility(View.GONE);
-//                }
-                // phone
-                TextView st_phone = (TextView) mView.findViewById(Rconfig
-                        .getInstance().id("st_phone"));
-                st_phone.setTextColor(AppColorConfig.getInstance().getContentColor());
-                String phone = shippingAddress.getPhone();
-                if (Utils.validateString(phone)) {
-                    st_phone.setText(phone);
-                } else {
-                    st_phone.setVisibility(View.GONE);
-                }
-                // email
-                TextView st_email = (TextView) mView.findViewById(Rconfig
-                        .getInstance().id("st_email"));
-                st_email.setTextColor(AppColorConfig.getInstance().getContentColor());
-                String email = shippingAddress.getEmail();
-                if (Utils.validateString(email)) {
-                    st_email.setText(email);
-                } else {
-                    st_email.setVisibility(View.GONE);
-                }
-            } else {
-                LinearLayout ll_shipping = (LinearLayout) mView
-                        .findViewById(Rconfig.getInstance().id("ll_shipping"));
-                ll_shipping.setVisibility(View.GONE);
-            }
-
-            TextView st_shipingmethod = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("st_shipingmethod"));
-            st_shipingmethod.setTextColor(AppColorConfig.getInstance().getContentColor());
-
-            String shippingMethod = orderHisDetail.getShipping_method();
-            if (Utils.validateString(shippingMethod)) {
-                st_shipingmethod.setText(shippingMethod);
-            } else {
-                TextView lb_shipto = (TextView) mView.findViewById(Rconfig
-                        .getInstance().id("lb_shipto"));
-                lb_shipto.setVisibility(View.GONE);
-                st_shipingmethod.setVisibility(View.GONE);
-            }
-
-            // Payment
-            TextView p_paymentmethod = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("p_paymentmethod"));
-            p_paymentmethod.setText(orderHisDetail.getPayment_method());
-            p_paymentmethod.setTextColor(AppColorConfig.getInstance().getContentColor());
-
-            AddressEntity billingAddress = orderHisDetail.getBilling_address();
-            TextView p_name = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("p_name"));
-            p_name.setTextColor(AppColorConfig.getInstance().getContentColor());
-            p_name.setText(billingAddress.getName());
-            TextView p_street = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("p_street"));
-            p_street.setTextColor(AppColorConfig.getInstance().getContentColor());
-            p_street.setText(billingAddress.getStreet());
-            TextView p_city = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("p_city"));
-            p_city.setTextColor(AppColorConfig.getInstance().getContentColor());
-//            if (billingAddress.getState_name() == null
-//                    || billingAddress.getState_name().equals("null")) {
-//                p_city.setText(billingAddress.getCity() + ", "
-//                        + billingAddress.getZip());
-//            } else {
-//                p_city.setText(billingAddress.getCity() + ", "
-//                        + billingAddress.getState_name() + ", "
-//                        + billingAddress.getZip());
-//            }
-            TextView p_country = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("p_country"));
-            p_country.setTextColor(AppColorConfig.getInstance().getContentColor());
-           // p_country.setText(billingAddress.getCountry_name());
-            TextView p_phone = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("p_phone"));
-            p_phone.setTextColor(AppColorConfig.getInstance().getContentColor());
-            p_phone.setText(billingAddress.getPhone());
-            TextView p_email = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("p_email"));
-            p_email.setTextColor(AppColorConfig.getInstance().getContentColor());
-            p_email.setText(billingAddress.getEmail());
-
-            TextView p_couponCode = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("p_couponCode"));
-            p_couponCode.setTextColor(AppColorConfig.getInstance().getContentColor());
-            if (orderHisDetail.getOrder_gift_code() == null
-                    || orderHisDetail.getOrder_gift_code().equals("null")) {
-                p_couponCode.setText(SimiTranslator.getInstance().translate("Coupon Code")
-                        + ": "
-                        + SimiTranslator.getInstance().translate("NONE").toUpperCase());
-            } else {
-                p_couponCode.setText(SimiTranslator.getInstance().translate("Coupon Code")
-                        + ": "
-                        + orderHisDetail.getOrder_gift_code());
-            }
-
-            // Fee detail
-            LinearLayout ll_price = (LinearLayout) mView.findViewById(Rconfig
-                    .getInstance().id("ll_price"));
-            TextView tv_label_price = (TextView) mView.findViewById(Rconfig
-                    .getInstance().id("lb_feeDetail"));
-            tv_label_price.setTextColor(AppColorConfig.getInstance().getSectionColor());
-            tv_label_price.setBackgroundColor(AppColorConfig.getInstance().getSectionColor());
-            TotalPrice totalPrice = orderHisDetail.getTotal_price();
-            TotalPriceView viewPrice = new TotalPriceView(totalPrice);
-
-            if (null != symbol) {
-
-                viewPrice.setSymbol(symbol);
-            }
-
-            View view = viewPrice.getTotalPriceView();
-            LayoutParams params = new LayoutParams(
-                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            params.gravity = Gravity.RIGHT;
-            params.setMargins(0, 5, 15, 5);
-            if (null != view) {
-                ll_price.removeAllViews();
-                ll_price.addView(view, params);
-                tv_label_price.setText(SimiTranslator.getInstance().translate("FEE DETAIL").toUpperCase());
-            } else {
-                tv_label_price.setVisibility(View.GONE);
-                ll_price.setVisibility(View.GONE);
-            }
-
-            // list item
-            ListView list_item = (ListView) mView.findViewById(Rconfig
-                    .getInstance().id("list_item"));
-            ProductOrderAdapter orderAdapter = new ProductOrderAdapter(
-                    mContext, orderHisDetail.getOrder_item());
-            if (null != symbol) {
-                orderAdapter.setCurrencySymbol(symbol);
-            }
-            list_item.setAdapter(orderAdapter);
-
+            initOrderDetail();
+            initShipping();
+            initFeeDetail();
+            initListItems();
+            initPayment();
         }
     }
 
-    @Override
-    public ButtonRectangle reOrder() {
-        // TODO Auto-generated method stub
-        return bt_reorder;
+    public void onReorderClick(View.OnClickListener listener) {
+        btReorder.setOnClickListener(listener);
     }
+
 }
