@@ -20,8 +20,8 @@ public class PaymentMethodModel extends SimiModel{
 			JSONArray data = this.mJSON.getJSONArray("data");
 			if (null != data && data.length() > 0) {
 				JSONObject jsData = data.getJSONObject(0);
-				if (jsData.has(Constants.FEE)) {
-					JSONObject jsTotal = jsData.getJSONObject(Constants.FEE);
+				if (jsData.has("fee")) {
+					JSONObject jsTotal = jsData.getJSONObject("fee");
 					mTotalPrice = new TotalPrice();
 					mTotalPrice.setJSONObject(jsTotal);
 				}

@@ -42,9 +42,17 @@ public class KeyData {
         public static String LIST_DATA = "list_data";
     }
 
+
     public static class ORDER_HISTORY_DETAIL {
         public static String ORDER_ID = "order_id";
         public static String TARGET = "target";
+    }
+
+
+    public static class REVIEW_ORDER{
+        public static String PLACE_FOR = "place_for";
+        public static String SHIPPING_ADDRESS = "shipping_address";
+        public static  String BILLING_ADDRESS = "billing_address";
     }
 
 }

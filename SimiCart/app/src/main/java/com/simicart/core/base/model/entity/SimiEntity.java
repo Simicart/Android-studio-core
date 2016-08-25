@@ -54,6 +54,22 @@ public class SimiEntity {
 
 	}
 
+	public JSONArray getArray(String key) {
+		JSONArray array = null;
+
+		if (mJSON != null && mJSON.has(key)) {
+			try {
+				array = mJSON.getJSONArray(key);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		return array;
+
+	}
+
 	public JSONArray getJSONArrayWithKey(JSONObject jsParent, String key) {
 		if (null != jsParent) {
 			if (jsParent.has(key)) {

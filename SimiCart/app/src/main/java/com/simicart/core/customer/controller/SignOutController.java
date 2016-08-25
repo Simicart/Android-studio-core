@@ -13,13 +13,10 @@ import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.checkout.controller.ConfigCheckout;
-import com.simicart.core.checkout.entity.PaymentMethod;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.model.SignOutModel;
-import com.simicart.core.home.fragment.HomeFragment;
 
 public class SignOutController extends SimiController {
 
@@ -58,12 +55,6 @@ public class SignOutController extends SimiController {
                     SimiManager.getIntance().backPreviousFragment();
                 }
 
-                PaymentMethod.getInstance().setPlacePaymentMethod("");
-                PaymentMethod.getInstance().setPlace_cc_number("");
-                PaymentMethod.getInstance().setPlacecc_id("");
-                ConfigCheckout.checkPaymentMethod = false;
-                ConfigCheckout.getInstance().setAddressBookFirstRequest(
-                        true);
 
 //                HomeFragment fragment = HomeFragment.newInstance();
 //                SimiManager.getIntance().replaceFragment(fragment);

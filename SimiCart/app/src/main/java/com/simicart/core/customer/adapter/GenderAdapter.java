@@ -23,7 +23,6 @@ public class GenderAdapter extends BaseAdapter {
 
     public GenderAdapter(Context context) {
         inflater = LayoutInflater.from(context);
-        genderConfigs = DataLocal.ConfigCustomerAddress.getGenderConfigs();
     }
 
     @Override

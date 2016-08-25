@@ -295,7 +295,7 @@ public class ProfileController extends SimiController {
     }
 
     private boolean isCompleteRequired(ProfileEntity profile) {
-        ConfigCustomerAddress _configCustomer = DataLocal.ConfigCustomerProfile;
+        ConfigCustomerAddress _configCustomer = null;
         // Chua check phone
         if (profile.getName().equals("") || profile.getEmail().equals("")) {
             return true;

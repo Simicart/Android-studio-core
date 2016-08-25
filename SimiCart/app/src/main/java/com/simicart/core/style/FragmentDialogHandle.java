@@ -14,7 +14,6 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.config.Rconfig;
 
 public class FragmentDialogHandle extends DialogFragment {
@@ -57,11 +56,11 @@ public class FragmentDialogHandle extends DialogFragment {
 					if(count > 2){
 						Fragment fragment = getChildFragmentManager().getFragments().get(count-2);
 						int tag = fragment.getTargetRequestCode();
-						if(tag == ConfigCheckout.TARGET_REVIEWORDER){
-							SimiManager.getIntance().backToHomeFragment();
-						}else{
-							getChildFragmentManager().popBackStackImmediate();
-						}
+//						if(tag == ConfigCheckout.TARGET_REVIEWORDER){
+//							SimiManager.getIntance().backToHomeFragment();
+//						}else{
+//							getChildFragmentManager().popBackStackImmediate();
+//						}
 					}
 					
 				}

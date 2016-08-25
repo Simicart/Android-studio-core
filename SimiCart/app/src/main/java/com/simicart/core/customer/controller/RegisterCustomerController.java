@@ -87,7 +87,7 @@ public class RegisterCustomerController extends SimiController {
     }
 
     private boolean isCompleteRequired(RegisterCustomer register) {
-        ConfigCustomerAddress _configCustomer = DataLocal.ConfigCustomerProfile;
+        ConfigCustomerAddress _configCustomer =null;
         if (register.getName().equals("") || register.getEmail().equals("")) {
             return false;
         } else {

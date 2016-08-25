@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import com.magestore.simicart.R;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.FontsOverride;
 import com.simicart.core.common.Utils;
@@ -229,13 +228,13 @@ public class MainActivity extends FragmentActivity {
                                     .get(list.size() - 1);
                             if (fragment != null) {
                                 int tag = fragment.getTargetRequestCode();
-                                if (tag == ConfigCheckout.TARGET_REVIEWORDER) {
-                                    SimiManager.getIntance()
-                                            .backToHomeFragment();
-                                } else {
-                                    SimiManager.getIntance().getManager()
-                                            .popBackStack();
-                                }
+//                                if (tag == ConfigCheckout.TARGET_REVIEWORDER) {
+//                                    SimiManager.getIntance()
+//                                            .backToHomeFragment();
+//                                } else {
+//                                    SimiManager.getIntance().getManager()
+//                                            .popBackStack();
+//                                }
                             } else {
                                 SimiManager.getIntance().getManager()
                                         .popBackStack();

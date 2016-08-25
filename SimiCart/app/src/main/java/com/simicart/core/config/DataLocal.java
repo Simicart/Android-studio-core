@@ -19,17 +19,15 @@ public class DataLocal {
 	public static ArrayList<Cms> listCms;
 	public static ArrayList<Stores> listStores;
 	public static ArrayList<Cart> listCarts;
-	public static ConfigCustomerAddress ConfigCustomerAddress;
-	public static ConfigCustomerAddress ConfigCustomerProfile;
 	public static boolean isLanguageRTL = false;
 	public static boolean isNewSignIn = false;
 	public static String qtyCartAuto = "";
 
 
 	public static void init() {
-		listCms = new ArrayList<Cms>();
-		listStores = new ArrayList<Stores>();
-		listCarts = new ArrayList<Cart>();
+		listCms = new ArrayList<>();
+		listStores = new ArrayList<>();
+		listCarts = new ArrayList<>();
 	}
 
 }

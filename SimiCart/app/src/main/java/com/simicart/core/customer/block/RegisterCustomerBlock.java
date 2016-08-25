@@ -61,7 +61,6 @@ public class RegisterCustomerBlock extends SimiBlock implements
 
 	public RegisterCustomerBlock(View view, Context context) {
 		super(view, context);
-		mCustomer = DataLocal.ConfigCustomerProfile;
 	}
 
 	public void setOnClickTextViewGender(OnClickListener listener) {

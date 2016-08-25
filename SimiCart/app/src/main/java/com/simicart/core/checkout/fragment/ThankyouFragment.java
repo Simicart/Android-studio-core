@@ -9,7 +9,6 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
@@ -52,7 +51,7 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 
 	public static ThankyouFragment newInstance(String message, JSONObject jsonObject) {
 		ThankyouFragment fragment = new ThankyouFragment();
-		fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_REVIEWORDER);
+		//fragment.setTargetFragment(fragment, ConfigCheckout.TARGET_REVIEWORDER);
 		Bundle bundle= new Bundle();
 //		setData(Constants.KeyData.MESSAGE, message, Constants.KeyData.TYPE_STRING, bundle);
 //		if(jsonObject != null){

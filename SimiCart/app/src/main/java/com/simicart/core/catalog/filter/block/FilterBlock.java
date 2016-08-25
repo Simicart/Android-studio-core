@@ -29,7 +29,6 @@ import com.simicart.core.catalog.filter.delegate.FilterDelegate;
 import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
 import com.simicart.core.catalog.filter.entity.ValueFilterEntity;
-import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -199,14 +198,14 @@ public class FilterBlock extends SimiBlock implements FilterDelegate {
 										List<Fragment> list = SimiManager
 												.getIntance().getManager()
 												.getFragments();
-										for (Fragment fragment : list) {
-											if (fragment != null
-													&& fragment.isVisible()
-													&& fragment
-															.getTargetRequestCode() == ConfigCheckout.TARGET_LISTPRODUCT) {
-												fragment.onResume();
-											}
-										}
+//										for (Fragment fragment : list) {
+//											if (fragment != null
+//													&& fragment.isVisible()
+//													&& fragment
+//															.getTargetRequestCode() == ConfigCheckout.TARGET_LISTPRODUCT) {
+//												fragment.onResume();
+//											}
+//										}
 									} else {
 										SimiManager.getIntance()
 												.backPreviousFragment();
@@ -254,13 +253,13 @@ public class FilterBlock extends SimiBlock implements FilterDelegate {
 						SimiManager.getIntance().removeDialog();
 						List<Fragment> list = SimiManager.getIntance()
 								.getManager().getFragments();
-						for (Fragment fragment : list) {
-							if (fragment != null
-									&& fragment.isVisible()
-									&& fragment.getTargetRequestCode() == ConfigCheckout.TARGET_LISTPRODUCT) {
-								fragment.onResume();
-							}
-						}
+//						for (Fragment fragment : list) {
+//							if (fragment != null
+//									&& fragment.isVisible()
+//									&& fragment.getTargetRequestCode() == ConfigCheckout.TARGET_LISTPRODUCT) {
+//								fragment.onResume();
+//							}
+//						}
 					} else {
 						SimiManager.getIntance().backPreviousFragment();
 					}
