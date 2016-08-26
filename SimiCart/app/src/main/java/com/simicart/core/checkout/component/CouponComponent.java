@@ -36,9 +36,9 @@ public class CouponComponent extends SimiComponent {
         param.leftMargin = margin;
         param.rightMargin = margin;
         edtCoupon.setLayoutParams(param);
-        Drawable backgroud = mContext.getResources().getDrawable(Rconfig.getInstance().drawable("bg_coupon_code"));
+        Drawable backgroud = mContext.getResources().getDrawable(Rconfig.getInstance().drawable("core_coupon_line_border"));
         edtCoupon.setBackground(backgroud);
-        edtCoupon.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+        edtCoupon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         edtCoupon.setHighlightColor(Color.parseColor("#b2b2b2"));
         String hintText = SimiTranslator.getInstance().translate("Enter a coupon code");
         edtCoupon.setHint(hintText);

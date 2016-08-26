@@ -11,7 +11,6 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.error.SimiError;
-import com.simicart.core.checkout.controller.ConfigCheckout;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.config.Constants;

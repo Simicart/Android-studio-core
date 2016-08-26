@@ -1,6 +1,7 @@
 package com.simicart.core.checkout.controller;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -95,6 +96,7 @@ public class ReviewOrderController extends SimiController {
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
                 mListComponent = new ArrayList<>();
                 if (null != collection) {
                     ArrayList<SimiEntity> entities = collection.getCollection();
@@ -109,6 +111,7 @@ public class ReviewOrderController extends SimiController {
         mModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
+                Log.e("ReviewOrderController", "requestPlaceOrder FAIL");
                 mDelegate.dismissLoading();
             }
         });
@@ -124,12 +127,14 @@ public class ReviewOrderController extends SimiController {
 
         JSONObject jsBillingAddress = mBillingAddress.toParamForPlaceOrder();
         if (null != jsBillingAddress) {
-            mModel.addBody("billing_address", jsBillingAddress);
+            Log.e("ReviewOrderController", "BILING DATA " + jsBillingAddress.toString());
+            mModel.addBody("billingAddress", jsBillingAddress);
         }
 
         JSONObject jsShippingAddress = mShippingAddress.toParamForPlaceOrder();
         if (null != jsShippingAddress) {
-            mModel.addBody("shipping_address", jsShippingAddress);
+            Log.e("ReviewOrderController", "SHIPPING DATA " + jsShippingAddress.toString());
+            mModel.addBody("shippingAddress", jsShippingAddress);
         }
 
         mModel.request();

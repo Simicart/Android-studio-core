@@ -1,5 +1,7 @@
 package com.simicart.core.checkout.model;
 
+import android.util.Log;
+
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.checkout.entity.ReviewOrderEntity;
@@ -14,6 +16,7 @@ public class ReviewOrderModel extends SimiModel {
     @Override
     protected void parseData() {
         try {
+            Log.e("ReviewOrderModel ","DATA" + mJSON.toString());
             JSONArray array = this.mJSON.getJSONArray("data");
             if (null != array && array.length() > 0) {
                 collection = new SimiCollection();
@@ -23,7 +26,7 @@ public class ReviewOrderModel extends SimiModel {
                 collection.addEntity(reviewOrderEntity);
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e("ReviewOrderModel ","parse DATA " + e.getMessage());
         }
     }
 

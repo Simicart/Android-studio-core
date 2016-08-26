@@ -66,9 +66,9 @@ public class ItemPaymentMethodView extends SimiComponent {
         imgIcon = (ImageView) findView("img_icon");
         String idIcon;
         if (mPaymentEntity.isSelected()) {
-            idIcon = "ic_selected";
+            idIcon = "core_icon_option_selected";
         } else {
-            idIcon = "ic_deselected";
+            idIcon = "core_icon_option_single";
         }
         Drawable icon = AppColorConfig.getInstance().getIcon(idIcon);
         imgIcon.setImageDrawable(icon);

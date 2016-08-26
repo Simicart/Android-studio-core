@@ -86,7 +86,7 @@ public class AddressCheckoutComponent extends SimiComponent {
 
     protected void initEditAction() {
         ImageView imgEdit = (ImageView) findView("img_edit");
-        Drawable icEdit = AppColorConfig.getInstance().getIcon("ic_edit");
+        Drawable icEdit = AppColorConfig.getInstance().getIcon("core_icon_edit");
         imgEdit.setBackground(icEdit);
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +115,7 @@ public class AddressCheckoutComponent extends SimiComponent {
 
     protected void initStreet() {
         ImageView imgStreet = (ImageView) findView("img_street");
-        Drawable icLocation = AppColorConfig.getInstance().getIcon("ic_location");
+        Drawable icLocation = AppColorConfig.getInstance().getIcon("core_bg_location");
         imgStreet.setBackground(icLocation);
         TextView tvStreet = (TextView) findView("tv_street");
         String street = mAddress.getStreet();
@@ -129,7 +129,7 @@ public class AddressCheckoutComponent extends SimiComponent {
 
     protected void initPhone() {
         ImageView imgPhone = (ImageView) findView("img_phone");
-        Drawable icPhone = AppColorConfig.getInstance().getIcon("ic_call");
+        Drawable icPhone = AppColorConfig.getInstance().getIcon("core_bg_call");
         imgPhone.setBackground(icPhone);
         TextView tvPhone = (TextView) findView("tv_phone");
         String phone = mAddress.getPhone();
@@ -143,7 +143,7 @@ public class AddressCheckoutComponent extends SimiComponent {
 
     protected void initEmail() {
         ImageView imgEmail = (ImageView) findView("img_email");
-        Drawable icEmail = AppColorConfig.getInstance().getIcon("ic_email");
+        Drawable icEmail = AppColorConfig.getInstance().getIcon("core_icon_email");
         imgEmail.setImageDrawable(icEmail);
         TextView tvEmail = (TextView) findView("tv_email");
         String email = mAddress.getEmail();

@@ -148,7 +148,7 @@ public class ThankyouFragment extends SimiFragment implements OnKeyListener{
 			public void onClick(View v) {
 				HashMap<String, Object> hmData = new HashMap<String, Object>();
 				hmData.put(KeyData.ORDER_HISTORY_DETAIL.ORDER_ID, invoice_number.trim());
-				hmData.put(KeyData.ORDER_HISTORY_DETAIL.TARGET, ConfigCheckout.TARGET_REVIEWORDER);
+//				hmData.put(KeyData.ORDER_HISTORY_DETAIL.TARGET, ConfigCheckout.TARGET_REVIEWORDER);
 				SimiData data = new SimiData(hmData);
 				OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance(data);
 				if (DataLocal.isTablet) {

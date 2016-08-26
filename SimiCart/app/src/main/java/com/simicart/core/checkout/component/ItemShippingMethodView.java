@@ -68,9 +68,9 @@ public class ItemShippingMethodView extends SimiComponent {
         imgIcon = (ImageView) findView("img_icon");
         String idIcon;
         if (mShippingEntity.isSelected()) {
-            idIcon = "ic_selected";
+            idIcon = "core_icon_option_selected";
         } else {
-            idIcon = "ic_deselected";
+            idIcon = "core_icon_option_single";
         }
         Drawable icon = AppColorConfig.getInstance().getIcon(idIcon);
         imgIcon.setImageDrawable(icon);

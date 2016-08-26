@@ -1,6 +1,8 @@
 package com.simicart.core.base.network.response;
 
 
+import android.util.Log;
+
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
@@ -36,6 +38,7 @@ public class SimiResponse {
     }
 
     public boolean parse(JSONObject json) {
+        Log.e("SimiResponse","DATA " + json.toString());
         mJSON = json;
         try {
             if (mJSON.has(Constants.STATUS)) {
