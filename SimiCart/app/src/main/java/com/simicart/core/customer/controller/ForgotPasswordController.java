@@ -11,7 +11,6 @@ import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
 import com.simicart.core.customer.delegate.ForgotPasswordDelegate;
 import com.simicart.core.customer.model.ForgotPasswordModel;
 

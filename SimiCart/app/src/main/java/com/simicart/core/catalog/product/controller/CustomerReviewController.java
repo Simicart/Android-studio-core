@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.product.controller;
 
-import java.util.ArrayList;
-
 import android.util.Log;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -11,6 +9,8 @@ import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.product.delegate.CustomerReviewDelegate;
 import com.simicart.core.catalog.product.model.CustomerReviewModel;
+
+import java.util.ArrayList;
 
 public class CustomerReviewController extends SimiController {
 

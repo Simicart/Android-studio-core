@@ -1,7 +1,5 @@
 package com.simicart.core.customer.adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -12,10 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.entity.GenderConfig;
+
+import java.util.ArrayList;
 
 public class GenderAdapter extends BaseAdapter {
     ArrayList<GenderConfig> genderConfigs;

@@ -1,7 +1,5 @@
 package com.simicart.core.common.options.base;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.View;
 
@@ -11,7 +9,8 @@ import com.simicart.core.common.Utils;
 import com.simicart.core.common.options.delegate.CacheOptionSingleDelegate;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
+
+import java.util.ArrayList;
 
 public class OptionView {
     protected ProductOption mOptions;

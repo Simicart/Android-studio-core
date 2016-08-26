@@ -31,7 +31,6 @@ import com.simicart.core.customer.adapter.GenderAdapter;
 import com.simicart.core.customer.controller.ProfileController;
 import com.simicart.core.customer.delegate.ProfileDelegate;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.customer.entity.GenderConfig;
 import com.simicart.core.customer.entity.ProfileEntity;
 import com.simicart.core.material.ButtonRectangle;
 import com.simicart.core.material.LayoutRipple;

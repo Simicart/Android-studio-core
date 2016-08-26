@@ -3,7 +3,6 @@ package com.simicart.core.base.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
 import com.simicart.core.base.model.entity.SimiData;

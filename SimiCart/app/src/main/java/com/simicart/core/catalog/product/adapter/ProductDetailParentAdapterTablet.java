@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.product.adapter;
 
-import java.util.ArrayList;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.ViewGroup;
@@ -10,6 +8,8 @@ import com.simicart.core.catalog.product.controller.ProductDetailParentControlle
 import com.simicart.core.catalog.product.delegate.ProductDelegate;
 import com.simicart.core.catalog.product.delegate.ProductDetailAdapterDelegate;
 import com.simicart.core.catalog.product.fragment.ProductDetailChildFragment;
+
+import java.util.ArrayList;
 
 public class ProductDetailParentAdapterTablet extends
 		SmartFragmentStatePagerAdapter implements ProductDetailAdapterDelegate {

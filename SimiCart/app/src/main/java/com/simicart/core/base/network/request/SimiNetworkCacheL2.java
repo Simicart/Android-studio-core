@@ -1,5 +1,14 @@
 package com.simicart.core.base.network.request;
 
+import android.content.Context;
+import android.os.Environment;
+
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.common.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -9,15 +18,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.os.Environment;
-
-import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.common.Utils;
 
 /**
  * 

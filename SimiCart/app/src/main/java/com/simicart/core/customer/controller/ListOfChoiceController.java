@@ -1,9 +1,5 @@
 package com.simicart.core.customer.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -11,6 +7,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.customer.delegate.ListOfChoiceDelegate;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ListOfChoiceController extends SimiController {
     protected OnItemClickListener mSelectItemListener;

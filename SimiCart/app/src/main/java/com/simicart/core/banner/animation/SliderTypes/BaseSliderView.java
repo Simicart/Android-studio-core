@@ -1,7 +1,5 @@
 package com.simicart.core.banner.animation.SliderTypes;
 
-import java.io.File;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.ImageView;
 
 import com.magestore.simicart.R;
 import com.simicart.core.common.DrawableManager;
+
+import java.io.File;
 
 public abstract class BaseSliderView {
 

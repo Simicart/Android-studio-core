@@ -8,10 +8,8 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
@@ -69,11 +67,11 @@ public class StoreLocator {
         mItemNavigation.setIcon(AppColorConfig.getInstance().getIcon("plugins_locator", AppColorConfig.getInstance().getMenuIconColor()));
         mItemNavigation.setName("Store Locator");
         if (DataLocal.isTablet) {
-            StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance();
+            StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance(null);
             mFragments.put(mItemNavigation.getName(),
                     fragment.getClass().getName());
         } else {
-            StoreLocatorMainPageFragment fragment = StoreLocatorMainPageFragment.newInstance();
+            StoreLocatorMainPageFragment fragment = StoreLocatorMainPageFragment.newInstance(null);
             mFragments.put(mItemNavigation.getName(),
                     fragment.getClass().getName());
         }

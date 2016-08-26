@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.category.block;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.text.Html;
 import android.view.View;
@@ -15,8 +13,9 @@ import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.delegate.SortDelegate;
 import com.simicart.core.catalog.category.entity.Sort;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 public class SortBlock extends SimiBlock implements SortDelegate {
 

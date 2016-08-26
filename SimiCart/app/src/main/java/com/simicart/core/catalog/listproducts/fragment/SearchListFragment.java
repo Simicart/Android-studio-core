@@ -11,12 +11,10 @@ import com.simicart.core.catalog.listproducts.block.ProductListBlock;
 import com.simicart.core.catalog.listproducts.controller.SearchListController;
 import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.catalog.listproducts.model.ConstantsSearch;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.block.SearchHomeBlock;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**

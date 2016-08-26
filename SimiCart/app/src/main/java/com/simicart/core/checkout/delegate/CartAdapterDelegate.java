@@ -1,9 +1,9 @@
 package com.simicart.core.checkout.delegate;
 
-import java.util.ArrayList;
-
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+
+import java.util.ArrayList;
 
 public interface CartAdapterDelegate {
 	public OnTouchListener getOnTouchListener(final int position);

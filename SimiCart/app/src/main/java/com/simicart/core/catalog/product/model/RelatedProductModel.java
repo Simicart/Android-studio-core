@@ -1,12 +1,12 @@
 package com.simicart.core.catalog.product.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class RelatedProductModel extends SimiModel {
 

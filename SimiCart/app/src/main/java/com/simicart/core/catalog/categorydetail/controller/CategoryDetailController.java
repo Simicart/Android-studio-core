@@ -3,7 +3,6 @@ package com.simicart.core.catalog.categorydetail.controller;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.simicart.core.base.controller.SimiController;
@@ -40,8 +39,6 @@ public class CategoryDetailController extends SimiController {
     protected View.OnClickListener onChangeViewClick;
     protected View.OnClickListener mSortListener;
     protected RecyclerView.OnScrollListener onListScroll;
-
-
 
     @Override
     public void onStart() {

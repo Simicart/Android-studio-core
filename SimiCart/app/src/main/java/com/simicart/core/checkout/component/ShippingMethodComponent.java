@@ -9,7 +9,6 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.delegate.ShippingMethodCallBack;
 import com.simicart.core.checkout.entity.ShippingMethodEntity;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,5 @@
 package com.simicart.core.common.options.datetime;
 
-import java.util.Calendar;
-
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -17,7 +15,8 @@ import com.simicart.core.catalog.product.entity.CacheOption;
 import com.simicart.core.catalog.product.entity.ProductOption;
 import com.simicart.core.common.options.base.CacheOptionView;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
+
+import java.util.Calendar;
 
 public class CacheOptionDateTimeView extends CacheOptionView {
 

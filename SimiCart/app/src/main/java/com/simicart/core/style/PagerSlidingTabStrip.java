@@ -16,8 +16,6 @@
 
 package com.simicart.core.style;
 
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -42,6 +40,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.simicart.core.config.Rconfig;
+
+import java.util.Locale;
 
 public class PagerSlidingTabStrip extends HorizontalScrollView {
 

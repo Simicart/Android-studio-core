@@ -1,5 +1,10 @@
 package com.simicart.core.base.network.request;
 
+import android.os.Handler;
+import android.os.Looper;
+
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -7,12 +12,6 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import org.json.JSONObject;
-
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 
 public class SimiRequestQueue {
 

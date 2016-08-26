@@ -1,10 +1,10 @@
 package com.simicart.core.base.model.collection;
 
-import java.util.ArrayList;
+import com.simicart.core.base.model.entity.SimiEntity;
 
 import org.json.JSONObject;
 
-import com.simicart.core.base.model.entity.SimiEntity;
+import java.util.ArrayList;
 
 public class SimiCollection {
 	protected  ArrayList<SimiEntity> list = new ArrayList<>();

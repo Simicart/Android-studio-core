@@ -1,14 +1,14 @@
 package com.simicart.core.catalog.category.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import android.util.Log;
 
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class ListCategoryModel extends SimiModel {
 

@@ -1,10 +1,7 @@
 package com.simicart.core.setting.controller;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -22,6 +19,8 @@ import com.simicart.core.setting.fragment.ListLanguageFragment;
 import com.simicart.core.splashscreen.model.CurrencyModel;
 import com.simicart.core.splashscreen.model.StoreModel;
 import com.simicart.core.store.entity.Stores;
+
+import java.util.ArrayList;
 
 public class SettingAppController extends SimiController {
 

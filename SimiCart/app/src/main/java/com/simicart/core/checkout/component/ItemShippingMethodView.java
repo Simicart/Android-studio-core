@@ -13,7 +13,6 @@ import com.simicart.core.checkout.entity.ShippingMethodEntity;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Rconfig;
 
 /**
  * Created by frank on 11/05/2016.

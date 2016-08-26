@@ -1,14 +1,13 @@
 package com.simicart.core.checkout.entity;
 
-import java.util.ArrayList;
+import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.config.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
+import java.util.ArrayList;
 
 public class Cart extends SimiEntity {
 	protected String mID;

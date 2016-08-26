@@ -1,5 +1,10 @@
 package com.simicart.plugins.locator.fragment;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.config.Constants;
@@ -7,11 +12,6 @@ import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.locator.block.StoreLocatorSearchStoreBlock;
 import com.simicart.plugins.locator.controller.StoreLocatorSearchStoreController;
 import com.simicart.plugins.locator.entity.SearchObject;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class StoreLocatorSearchStoreFragment extends SimiFragment {
 
@@ -50,7 +50,6 @@ public class StoreLocatorSearchStoreFragment extends SimiFragment {
 			mController.onResume();
 		}
 		mBlock.onClearAllClick(mController.getOnClearSearchClick());
-		mBlock.onSearchByTag(mController.getOnSearchBytag());
 		mBlock.onSearchClick(mController.getOnSearchClick());
 
 		return rootView;

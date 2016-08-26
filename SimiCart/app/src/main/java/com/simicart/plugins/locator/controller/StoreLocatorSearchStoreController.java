@@ -1,13 +1,20 @@
 package com.simicart.plugins.locator.controller;
 
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.plugins.locator.delegate.StoreLocatorSearchStoreDelegate;
 import com.simicart.plugins.locator.entity.SearchObject;
@@ -17,16 +24,12 @@ import com.simicart.plugins.locator.model.GetSearchConfigModel;
 import com.simicart.plugins.locator.model.GetSearchCountryModel;
 import com.simicart.plugins.locator.model.GetTagSearchModel;
 
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import java.util.HashMap;
 
 public class StoreLocatorSearchStoreController extends SimiController {
 	
 	protected OnClickListener onSearchClick;
 	protected OnClickListener onClearSearchClick;
-	protected OnItemClickListener onSearchByTag;
 	protected StoreLocatorSearchStoreDelegate mDelegate;
 	protected GetSearchConfigModel configModel;
 	protected GetSearchCountryModel countryModel;
@@ -44,10 +47,6 @@ public class StoreLocatorSearchStoreController extends SimiController {
 	public OnClickListener getOnClearSearchClick() {
 		return onClearSearchClick;
 	}
-	
-	public OnItemClickListener getOnSearchBytag() {
-		return onSearchByTag;
-	}
 
 	@Override
 	public void onStart() {
@@ -63,16 +62,7 @@ public class StoreLocatorSearchStoreController extends SimiController {
 				// TODO Auto-generated method stub
 				SearchObject search = mDelegate.getSearchObject();
 				if(search != null) {
-					if(DataLocal.isTablet) {
-						StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance();
-						fragment.setSearchObject(search);
-						SimiManager.getIntance().replaceFragment(fragment);
-					} else {
-						StoreLocatorMainPageFragment fragment = StoreLocatorMainPageFragment.newInstance();
-						fragment.setSearchObject(search);
-						SimiManager.getIntance().replaceFragment(fragment);
-					}
-					SimiManager.getIntance().removeDialog();
+					onSearchAction(search);
 					Utils.hideKeyboard(v);
 				}
 			}
@@ -83,38 +73,24 @@ public class StoreLocatorSearchStoreController extends SimiController {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(DataLocal.isTablet) {
-					StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance();
-					SimiManager.getIntance().replaceFragment(fragment);
-				} else {
-					StoreLocatorMainPageFragment fragment = StoreLocatorMainPageFragment.newInstance();
-					SimiManager.getIntance().replaceFragment(fragment);
-				}
-				SimiManager.getIntance().removeDialog();
+				onSearchAction(null);
 				Utils.hideKeyboard(v);
 			}
 		};
 		
-		onSearchByTag = new OnItemClickListener() {
+	}
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
-				SearchObject search = new SearchObject();
-				search.setTag(position);
-				if(DataLocal.isTablet) {
-					StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance();
-					fragment.setSearchObject(search);
-					SimiManager.getIntance().replaceFragment(fragment);
-				} else {
-					StoreLocatorMainPageFragment fragment = StoreLocatorMainPageFragment.newInstance();
-					fragment.setSearchObject(search);
-					SimiManager.getIntance().replaceFragment(fragment);
-				}
-				SimiManager.getIntance().removeDialog();
-			}
-		};
-		
+	protected void onSearchAction(SearchObject searchObject) {
+		HashMap<String, Object> hmData = new HashMap<>();
+		hmData.put(Constants.KeyData.SEARCH_OBJECT, searchObject);
+		if(DataLocal.isTablet) {
+			StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance(new SimiData(hmData));
+			SimiManager.getIntance().replaceFragment(fragment);
+		} else {
+			StoreLocatorMainPageFragment fragment = StoreLocatorMainPageFragment.newInstance(new SimiData(hmData));
+			SimiManager.getIntance().replaceFragment(fragment);
+		}
+		SimiManager.getIntance().removeDialog();
 	}
 
 	@Override

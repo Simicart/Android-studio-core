@@ -1,9 +1,9 @@
 package com.simicart.core.catalog.category.delegate;
 
-import java.util.ArrayList;
-
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.catalog.category.entity.Sort;
+
+import java.util.ArrayList;
 
 public interface SortDelegate extends SimiDelegate {
 

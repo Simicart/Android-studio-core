@@ -1,6 +1,5 @@
 package com.simicart.core.common.price;
 
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.Html;
 import android.util.TypedValue;
@@ -13,7 +12,6 @@ import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
 public class ProductPriceViewProductGridV03 extends ProductPriceView {

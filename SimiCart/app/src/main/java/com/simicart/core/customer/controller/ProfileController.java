@@ -13,7 +13,6 @@ import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.delegate.ProfileDelegate;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
 import com.simicart.core.customer.entity.ProfileEntity;

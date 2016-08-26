@@ -1,7 +1,5 @@
 package com.simicart.core.checkout.entity;
 
-import android.util.Log;
-
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 

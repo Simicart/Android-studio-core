@@ -1,20 +1,5 @@
 package com.simicart.core.customer.block;
 
-import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.notify.SimiNotify;
-import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.common.DataPreferences;
-import com.simicart.core.common.Utils;
-import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.delegate.SignInDelegate;
-import com.simicart.core.customer.entity.ProfileEntity;
-import com.simicart.core.material.ButtonRectangle;
-
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -23,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatButton;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
@@ -31,8 +15,18 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.notify.SimiNotify;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.Constants;
+import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.delegate.SignInDelegate;
+import com.simicart.core.customer.entity.ProfileEntity;
 
 public class SignInBlock extends SimiBlock implements SignInDelegate {
 

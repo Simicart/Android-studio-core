@@ -1,12 +1,11 @@
 package com.simicart.core.home.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.config.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class CategoryHomeModel extends SimiModel {
 

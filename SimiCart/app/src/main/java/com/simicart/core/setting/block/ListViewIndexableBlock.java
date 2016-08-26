@@ -1,8 +1,5 @@
 package com.simicart.core.setting.block;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
@@ -12,9 +9,11 @@ import com.simicart.core.adapter.IndexableListAdapter;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.style.IndexableListView;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ListViewIndexableBlock extends SimiBlock {
 	protected IndexableListView lv_language;

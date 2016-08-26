@@ -1,8 +1,5 @@
 package com.simicart.core.customer.block;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
@@ -14,6 +11,9 @@ import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.style.IndexableListView;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ListOfChoiceBlock extends SimiBlock {
     protected IndexableListView list_country;

@@ -3,20 +3,14 @@ package com.simicart.core.splashscreen.model;
 import android.util.Log;
 
 import com.simicart.core.base.model.SimiModel;
-import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppCheckoutConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.customer.entity.GenderConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class StoreViewModel extends SimiModel {
 

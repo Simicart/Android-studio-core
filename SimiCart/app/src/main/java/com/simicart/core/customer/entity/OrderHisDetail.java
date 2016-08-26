@@ -1,15 +1,15 @@
 package com.simicart.core.customer.entity;
 
-import java.util.ArrayList;
+import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.checkout.entity.Cart;
+import com.simicart.core.checkout.entity.TotalPrice;
+import com.simicart.core.config.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.checkout.entity.Cart;
-import com.simicart.core.checkout.entity.TotalPrice;
-import com.simicart.core.config.Constants;
+import java.util.ArrayList;
 
 public class OrderHisDetail extends SimiEntity {
     private String mID;

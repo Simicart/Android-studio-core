@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.catalog.product.block.RelatedProductBlock;
 import com.simicart.core.catalog.product.controller.RelatedProductController;
-import com.simicart.core.catalog.product.entity.Product;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 
 public class RelatedProductFragment extends SimiFragment {

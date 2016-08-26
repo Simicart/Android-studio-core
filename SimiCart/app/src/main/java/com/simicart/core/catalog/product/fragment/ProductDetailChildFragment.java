@@ -12,7 +12,6 @@ import com.simicart.core.catalog.product.controller.ProductDetailChildController
 import com.simicart.core.catalog.product.controller.ProductDetailParentController;
 import com.simicart.core.catalog.product.delegate.ProductDelegate;
 import com.simicart.core.catalog.product.delegate.ProductDetailAdapterDelegate;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 
 public class ProductDetailChildFragment extends SimiFragment {

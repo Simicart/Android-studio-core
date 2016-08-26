@@ -1,9 +1,9 @@
 package com.simicart.core.catalog.product.entity;
 
-import java.io.Serializable;
-
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.config.Constants;
+
+import java.io.Serializable;
 
 public class CustomerReview extends SimiEntity implements Serializable{
 	/**

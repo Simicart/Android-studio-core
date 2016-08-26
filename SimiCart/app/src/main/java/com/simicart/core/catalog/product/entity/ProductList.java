@@ -1,15 +1,13 @@
 package com.simicart.core.catalog.product.entity;
 
-import java.util.ArrayList;
+import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.config.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
-import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.config.Constants;
+import java.util.ArrayList;
 
 public class ProductList extends SimiEntity {
 	private ArrayList<Product> mSpotProduct;

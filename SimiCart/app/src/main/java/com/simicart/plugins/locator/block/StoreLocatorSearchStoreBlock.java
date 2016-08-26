@@ -1,35 +1,33 @@
 package com.simicart.plugins.locator.block;
 
-import java.util.ArrayList;
+import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.locator.adapter.CountrySearchAdapter;
-import com.simicart.plugins.locator.adapter.TagSearchAdapter;
+import com.simicart.plugins.locator.adapter.SearchTagAdapter;
 import com.simicart.plugins.locator.delegate.StoreLocatorSearchStoreDelegate;
 import com.simicart.plugins.locator.entity.CountryObject;
 import com.simicart.plugins.locator.entity.SearchObject;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
+import java.util.ArrayList;
 
 public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLocatorSearchStoreDelegate {
 
 	private EditText et_city, et_state, et_code;
 	private LinearLayout btn_search, one, two, three, for_, search, clear_all;
-	private GridView list_store_tag;
+	private RecyclerView list_store_tag;
 	private TextView txt_search_Area, txt_search_tag, txt_search, txt_country, txt_city, txt_code, txt_state;
 	private Spinner spCountry;
 	protected SearchObject search_object;
@@ -39,7 +37,7 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
 	protected int countryPosition = 0;
 	protected int tagPosition = 0;
 	protected String country_code;
-	protected TagSearchAdapter tagSearchAdapter;
+	protected SearchTagAdapter tagSearchAdapter;
 
 	public StoreLocatorSearchStoreBlock(View view, Context context) {
 		super(view, context);
@@ -56,10 +54,6 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
 	
 	public void onClearAllClick(OnClickListener listener) {
 		clear_all.setOnClickListener(listener);
-	}
-	
-	public void onSearchByTag(OnItemClickListener listener) {
-		list_store_tag.setOnItemClickListener(listener);
 	}
 
 	@Override
@@ -78,7 +72,9 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
 		// txt_countryName = (TextView) mView.findViewById(Rconfig.getInstance()
 		// .getIdLayout("txt_name_country"));
 		spCountry = (Spinner) mView.findViewById(Rconfig.getInstance().id("sp_country"));
-		list_store_tag = (GridView) mView.findViewById(Rconfig.getInstance().getIdLayout("list_store_tag"));
+		list_store_tag = (RecyclerView) mView.findViewById(Rconfig.getInstance().getIdLayout("list_store_tag"));
+		list_store_tag.setLayoutManager(new GridLayoutManager(mContext, 3));
+		list_store_tag.setNestedScrollingEnabled(false);
 		txt_search_Area = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("txt_Search_by_Area"));
 		txt_search_tag = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("txt_Search_by_Task"));
 		txt_country = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("txt_country"));
@@ -149,7 +145,6 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
 	}
 
 	public void initCountry() {
-		Log.e("abc", "country:" + listCountries.size());
 		if (listCountries.size() > 0) {
 			// txt_countryName.setText(listCountries.get(countryPosition).getCountry_name());
 			country_code = listCountries.get(countryPosition).getCountry_code();
@@ -162,7 +157,7 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
 	}
 
 	public void initTagSearch() {
-		tagSearchAdapter = new TagSearchAdapter(mContext, listTags, tagPosition);
+		tagSearchAdapter = new SearchTagAdapter(listTags, tagPosition);
 		list_store_tag.setAdapter(tagSearchAdapter);
 	}
 
@@ -187,9 +182,8 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
 	@Override
 	public SearchObject getSearchObject() {
 		// TODO Auto-generated method stub
-		if(search_object == null) {
-			search_object = new SearchObject();
-		}
+		search_object = new SearchObject();
+		
 		int country = spCountry.getSelectedItemPosition();
 		search_object.setPosition_country(country);
 		

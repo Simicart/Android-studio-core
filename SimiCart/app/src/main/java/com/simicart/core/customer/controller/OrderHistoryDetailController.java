@@ -1,11 +1,6 @@
 package com.simicart.core.customer.controller;
 
-import java.util.ArrayList;
-
-import android.graphics.Color;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
@@ -17,14 +12,11 @@ import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.common.DataPreferences;
-import com.simicart.core.common.Utils;
-import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.customer.delegate.OrderHistoryReOrderDelegate;
 import com.simicart.core.customer.model.OrderHistoryDetailModel;
 import com.simicart.core.customer.model.OrderHistoryReOrderModel;
+
+import java.util.ArrayList;
 
 public class OrderHistoryDetailController extends SimiController {
 

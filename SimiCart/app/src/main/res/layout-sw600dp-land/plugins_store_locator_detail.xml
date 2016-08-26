@@ -9,7 +9,7 @@
     android:paddingRight="20dp"
     android:paddingTop="10dp" >
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
                             android:gravity="center"
                             android:orientation="vertical" >
 
-                            <ImageView
+                            <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/image_map"
                                 android:layout_width="110dp"
                                 android:layout_height="110dp"
@@ -685,6 +685,6 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

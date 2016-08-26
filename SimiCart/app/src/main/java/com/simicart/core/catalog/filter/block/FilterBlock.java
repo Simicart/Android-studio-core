@@ -29,7 +29,6 @@ import com.simicart.core.catalog.filter.delegate.FilterDelegate;
 import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
 import com.simicart.core.catalog.filter.entity.ValueFilterEntity;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 

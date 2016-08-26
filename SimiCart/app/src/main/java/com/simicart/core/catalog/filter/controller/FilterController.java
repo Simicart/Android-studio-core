@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.filter.controller;
 
-import java.util.ArrayList;
-
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -10,6 +8,8 @@ import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.catalog.filter.delegate.FilterDelegate;
 import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
+
+import java.util.ArrayList;
 
 public class FilterController extends SimiController {
 

@@ -10,7 +10,6 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.block.CategoryBlock;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.slidemenu.delegate.CategorySlideMenuDelegate;
 
 /**
  * Created by Martial on 8/19/2016.

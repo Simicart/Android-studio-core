@@ -1,9 +1,5 @@
 package com.simicart.core.slidemenu.fragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
@@ -22,14 +18,15 @@ import android.view.ViewGroup;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.slidemenu.adapter.TabSlideMenuAdapter;
 import com.simicart.core.slidemenu.delegate.CloseSlideMenuDelegate;
 import com.simicart.core.style.PagerSlidingTabStrip;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SlideMenuFragment extends SimiFragment implements
 		CloseSlideMenuDelegate {

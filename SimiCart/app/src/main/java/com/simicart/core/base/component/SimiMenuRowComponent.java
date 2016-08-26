@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.simicart.core.base.component.callback.MenuRowCallBack;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Rconfig;
 
 /**
  * Created by Martial on 8/24/2016.

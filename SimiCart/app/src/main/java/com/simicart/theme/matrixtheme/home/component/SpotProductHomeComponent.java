@@ -1,10 +1,8 @@
 package com.simicart.theme.matrixtheme.home.component;
 
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.simicart.core.base.component.SimiComponent;
 import com.simicart.theme.matrixtheme.home.adapter.ThemeOneSpotProductAdapter;

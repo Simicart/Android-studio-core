@@ -1,11 +1,6 @@
 package com.simicart.core.catalog.product.entity;
 
-import java.io.Serializable;
-
-import android.os.Parcel;
-
 import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.config.Constants;
 
 public class Attributes extends SimiEntity {
     private String mTitle;

@@ -6,7 +6,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.config.Constants;
 

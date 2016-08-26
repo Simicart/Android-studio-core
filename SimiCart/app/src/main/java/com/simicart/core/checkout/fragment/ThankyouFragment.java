@@ -1,26 +1,5 @@
 package com.simicart.core.checkout.fragment;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.base.notify.SimiNotify;
-import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.common.DataPreferences;
-import com.simicart.core.common.KeyData;
-import com.simicart.core.common.Utils;
-import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.fragment.OrderHistoryDetailFragment;
-import com.simicart.core.material.ButtonRectangle;
-import com.simicart.core.material.LayoutRipple;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +11,23 @@ import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.base.notify.SimiNotify;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.KeyData;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.DataLocal;
+import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.fragment.OrderHistoryDetailFragment;
+import com.simicart.core.material.ButtonRectangle;
+import com.simicart.core.material.LayoutRipple;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 

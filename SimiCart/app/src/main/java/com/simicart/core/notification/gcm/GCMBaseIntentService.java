@@ -16,9 +16,6 @@
 
 package com.simicart.core.notification.gcm;
 
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
@@ -27,6 +24,9 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
+
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Skeleton for application-specific {@link IntentService}s responsible for

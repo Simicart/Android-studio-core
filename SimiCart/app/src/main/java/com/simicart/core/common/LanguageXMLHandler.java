@@ -1,13 +1,13 @@
 package com.simicart.core.common;
 
-import java.util.HashMap;
-import java.util.Map;
+import android.annotation.SuppressLint;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.annotation.SuppressLint;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LanguageXMLHandler extends DefaultHandler {
 

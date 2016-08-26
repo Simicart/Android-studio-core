@@ -1,8 +1,5 @@
 package com.simicart.core.catalog.filter.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -19,6 +16,9 @@ import com.simicart.core.catalog.category.delegate.FilterRequestDelegate;
 import com.simicart.core.catalog.filter.entity.FilterState;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressLint("ViewHolder")
 public class SelectedFilterAdapter extends BaseAdapter {

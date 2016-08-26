@@ -1,7 +1,5 @@
 package com.simicart.core.setting.fragment;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.setting.block.ListViewIndexableBlock;
 import com.simicart.core.setting.controller.ListLanguageController;
 import com.simicart.core.store.entity.Stores;
+
+import java.util.ArrayList;
 
 public class ListLanguageFragment extends SimiFragment {
 	protected ListViewIndexableBlock mBlock;

@@ -2,7 +2,6 @@ package com.simicart.core.setting.entity;
 
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Constants;
 
 public class CurrencyEntity extends SimiEntity {
 

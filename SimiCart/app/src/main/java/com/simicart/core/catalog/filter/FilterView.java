@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.filter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +12,8 @@ import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
 import com.simicart.core.catalog.filter.fragment.FilterFragment;
 import com.simicart.core.common.Utils;
+
+import java.util.ArrayList;
 
 public class FilterView {
 

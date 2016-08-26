@@ -1,12 +1,12 @@
 package com.simicart.core.base.network.request;
 
-import java.util.concurrent.BlockingQueue;
-
 import android.os.Process;
 import android.util.Log;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.network.response.SimiResponse;
+
+import java.util.concurrent.BlockingQueue;
 
 public class SimiNetworkDispatcher extends Thread {
     protected volatile boolean mQuit = false;

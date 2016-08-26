@@ -1,19 +1,25 @@
 package com.simicart.plugins.locator.block;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import android.content.Context;
+import android.location.Location;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -25,371 +31,320 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.common.DrawableManager;
-import com.simicart.core.common.GPSTracker;
-import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.plugins.locator.common.DataLocator;
+import com.simicart.plugins.locator.common.StoreLocatorConfig;
 import com.simicart.plugins.locator.delegate.StoreLocatorMapDelegate;
 import com.simicart.plugins.locator.entity.StoreObject;
 import com.simicart.plugins.locator.fragment.StoreDetailFragment;
-import com.simicart.plugins.locator.style.RoundedImageView;
 
-import android.Manifest;
-import android.content.Context;
-import android.location.Location;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StoreLocatorMapBlock extends SimiBlock implements StoreLocatorMapDelegate {
 
-	protected MapView map;
-	protected TextView tvDistance;
-	protected Bundle bundle;
-	protected ArrayList<StoreObject> listStore;
-	protected GoogleMap googleMap;
-	protected Location currrentLocation = null;
-	protected LatLng end;
+    protected SupportMapFragment map;
+    protected Bundle bundle;
+    protected ArrayList<StoreObject> listStore;
+    protected GoogleMap mGoogleMap;
+    protected Location currrentLocation = null;
+    protected LatLng end;
+    protected FragmentManager childFragmentManager;
+    protected GoogleApiClient mGoogleApiClient;
+    protected boolean isAddMaker = false;
 
-	public StoreLocatorMapBlock(View view, Context context) {
-		super(view, context);
-		// TODO Auto-generated constructor stub
-	}
+    public StoreLocatorMapBlock(View view, Context context) {
+        super(view, context);
+        // TODO Auto-generated constructor stub
+    }
 
-	public void showCurrentLocation() {
-		googleMap.setMyLocationEnabled(true);
-	}
+    @Override
+    public void initView() {
+        // TODO Auto-generated method stub
+        listStore = new ArrayList<>();
 
-	@Override
-	public void initView() {
-		// TODO Auto-generated method stub
-		map = (MapView) mView.findViewById(Rconfig.getInstance().getIdLayout("map"));
-		tvDistance = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("txt_km"));
-		listStore = new ArrayList<>();
+        new InitMapAsync().execute();
 
-		Handler mapSetupHandler = new Handler();
-		Runnable mapSetupRunnable = new Runnable() {
-			public void run() {
-				try {
-					MapsInitializer.initialize(mContext);
-				} catch (Exception e) {
-				}
-				map.onCreate(bundle);
-				map.onResume();
-				googleMap = map.getMap();
-				googleMap.getUiSettings().setMyLocationButtonEnabled(false);
-				if(DataLocal.isAccessLocation() == true) {
-					googleMap.setMyLocationEnabled(true);
-				}
-				// map.getMyLocation().getLatitude();
-				googleMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+    }
 
-					@Override
-					public boolean onMarkerClick(Marker marker) {
-						marker.showInfoWindow();
-						return true;
-					}
-				});
-				googleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+    public class InitMapAsync extends AsyncTask<Void,Void,Void> {
 
-					@Override
-					public void onInfoWindowClick(Marker maker) {
-						for (int i = 0; i < listStore.size(); i++) {
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            getMap();
+        }
 
-							StoreObject store = listStore.get(i);
-							String latitude = store.getLatitude();
-							String longtitude = store.getLongtitude();
-							if (Utils.validateString(latitude) && Utils.validateString(longtitude)) {
-								latitude = latitude.trim();
-								longtitude = longtitude.trim();
+        @Override
+        protected Void doInBackground(Void... params) {
+            map = new SupportMapFragment();
+            childFragmentManager.beginTransaction().replace(Rconfig.getInstance().getIdLayout("frame_map"), map).commit();
 
-								String dLat = latitude;
-								String dLong = longtitude;
+            return null;
+        }
+    }
 
-								String makerLat = String.valueOf(maker.getPosition().latitude);
-								String makerLong = String.valueOf(maker.getPosition().longitude);
+    public void getMap() {
+        map.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mGoogleMap = googleMap;
+                mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
+                if (DataLocal.isAccessLocation() == true) {
+                    mGoogleMap.setMyLocationEnabled(true);
+                    requestGetCurrentLocation();
+                }
+                mGoogleMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
-								// Double roundLat = MathForDummies
-								// .round(dLat, 5);
-								// Double roundLong = MathForDummies
-								// .round(dLong, 5);
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        marker.showInfoWindow();
+                        return true;
+                    }
+                });
+                mGoogleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 
-								if (dLat.equals(makerLat) && dLong.equals(makerLong)) {
-									HashMap<String,Object> hmData = new HashMap<String, Object>();
-									hmData.put(Constants.KeyData.STORE_OBJECT, store);
-									StoreDetailFragment detail = StoreDetailFragment.newInstance(new SimiData(hmData));
-									if (DataLocal.isTablet) {
-										SimiManager.getIntance().addPopupFragment(detail);
-									} else {
-										SimiManager.getIntance().replaceFragment(detail);
-									}
-									return;
-								}
+                    @Override
+                    public void onInfoWindowClick(Marker maker) {
+                        onInfoWindowClick(maker);
+                    }
+                });
+                mGoogleMap.setInfoWindowAdapter(new InfoWindowAdapter() {
 
-							}
+                    @Override
+                    public View getInfoWindow(Marker arg0) {
+                        return null;
+                    }
 
-						}
-					}
-				});
-				googleMap.setInfoWindowAdapter(new InfoWindowAdapter() {
+                    @Override
+                    public View getInfoContents(Marker marker) {
+                        return gotInforContent(marker);
+                    }
+                });
+                if (isAddMaker == false && listStore.size() > 0) {
+                    isAddMaker = true;
+                    mGoogleMap.clear();
+                    addMaker(listStore);
+                }
+            }
+        });
+    }
 
-					@Override
-					public View getInfoWindow(Marker arg0) {
-						return null;
-					}
+    public void onInfoWindowClick(Marker maker) {
+        for (int i = 0; i < listStore.size(); i++) {
 
-					@Override
-					public View getInfoContents(Marker marker) {
-						return gotInforContent(marker);
-					}
-				});
+            StoreObject store = listStore.get(i);
+            String latitude = store.getLatitude();
+            String longtitude = store.getLongtitude();
+            if (Utils.validateString(latitude) && Utils.validateString(longtitude)) {
+                latitude = latitude.trim();
+                longtitude = longtitude.trim();
 
-				if (currrentLocation == null) {
-					currrentLocation = new Location("");
-				}
-				GPSTracker gpsTracker = new GPSTracker(mContext);
-				Location location = gpsTracker.getLocation();
-				if (location != null) {
-					currrentLocation.setLongitude(location.getLongitude());
-					currrentLocation.setLatitude(location.getLatitude());
-				}
-				if (currrentLocation != null) {
-					googleMap.addMarker(new MarkerOptions()
-							.position(new LatLng(currrentLocation.getLatitude(), currrentLocation.getLongitude()))
-							.icon(BitmapDescriptorFactory.fromResource(Rconfig.getInstance().getIdDraw("maker_my"))));
+                String dLat = latitude;
+                String dLong = longtitude;
 
-//					googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-//							new LatLng(currrentLocation.getLatitude(), currrentLocation.getLongitude()), 14));
-				}
+                String makerLat = String.valueOf(maker.getPosition().latitude);
+                String makerLong = String.valueOf(maker.getPosition().longitude);
 
-			}
-		};
-		mapSetupHandler.post(mapSetupRunnable);
+                if (dLat.equals(makerLat) && dLong.equals(makerLong)) {
+                    HashMap<String, Object> hmData = new HashMap<String, Object>();
+                    hmData.put(Constants.KeyData.STORE_OBJECT, store);
+                    StoreDetailFragment detail = StoreDetailFragment.newInstance(new SimiData(hmData));
+                    if (DataLocal.isTablet) {
+                        SimiManager.getIntance().addPopupFragment(detail);
+                    } else {
+                        SimiManager.getIntance().replaceFragment(detail);
+                    }
+                    return;
+                }
+            }
+        }
+    }
 
-	}
+    public void requestGetCurrentLocation() {
+        mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                    @Override
+                    public void onConnected(@Nullable Bundle bundle) {
+                        currrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                        if (currrentLocation != null) {
+                            mGoogleMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(currrentLocation.getLatitude(), currrentLocation.getLongitude()))
+                                    .icon(BitmapDescriptorFactory.fromResource(Rconfig.getInstance().getIdDraw("maker_my"))));
+                        }
+                    }
 
-	@Override
-	public void drawView(SimiCollection collection) {
-		// TODO Auto-generated method stub
-	}
+                    @Override
+                    public void onConnectionSuspended(int i) {
 
-	private void getAllPointFromStoreMarker(List<StoreObject> mStore_maker) {
-		try {
-			if (currrentLocation == null) {
-				currrentLocation = new Location("");
-			}
-			double dLong = 0;
-			double dLat = 0;
-			Log.e("abc", "++" + mStore_maker.size());
-			if (mStore_maker.size() > 0) {
-				for (int i = 0; i < mStore_maker.size(); i++) {
-					StoreObject store = mStore_maker.get(i);
+                    }
+                })
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
 
-					String longtitude = store.getLongtitude();
-					String latitude = store.getLatitude();
-					if (Utils.validateString(longtitude) && Utils.validateString(latitude)) {
-						longtitude = longtitude.trim();
-						latitude = latitude.trim();
+    @Override
+    public void drawView(SimiCollection collection) {
+        // TODO Auto-generated method stub
+    }
 
-						dLong += convertToDouble(longtitude);
-						dLat += convertToDouble(latitude);
+    private void addMaker(ArrayList<StoreObject> listStores) {
+        for (int i = 0; i < listStores.size(); i++) {
 
-					}
-				}
-				dLong = dLong / mStore_maker.size();
-				dLat = dLat / mStore_maker.size();
-				currrentLocation.setLongitude(dLong);
-				currrentLocation.setLatitude(dLat);
-			} else {
-				GPSTracker gpsTracker = new GPSTracker(mContext);
-				Location location = gpsTracker.getLocation();
-				if (location != null) {
-					currrentLocation.setLongitude(location.getLongitude());
-					currrentLocation.setLatitude(location.getLatitude());
-				}
-			}
-		} catch (Exception e) {
+            StoreObject store = listStores.get(i);
+            String latitude = store.getLatitude();
+            String longtitude = store.getLongtitude();
+            if (Utils.validateString(latitude) && Utils.validateString(longtitude)) {
 
-		}
-	}
+                latitude = latitude.trim();
+                longtitude = longtitude.trim();
+                try {
 
-	private void addMaker(ArrayList<StoreObject> listStores) {
-		// if (currrentLocation != null) {
-		// googleMap.addMarker(new MarkerOptions()
-		// .position(new LatLng(currrentLocation.getLatitude(),
-		// currrentLocation.getLongitude()))
-		// .icon(BitmapDescriptorFactory.fromResource(Rconfig.getInstance().getIdDraw("maker_my"))));
-		// }
-		for (int i = 0; i < listStores.size(); i++) {
+                    Double dLat = convertToDouble(latitude);
+                    Double dLong = convertToDouble(longtitude);
 
-			StoreObject store = listStores.get(i);
-			String latitude = store.getLatitude();
-			String longtitude = store.getLongtitude();
-			if (Utils.validateString(latitude) && Utils.validateString(longtitude)) {
+                    LatLng end = new LatLng(dLat, dLong);
+                    MarkerOptions options = new MarkerOptions().position(end).icon(BitmapDescriptorFactory
+                            .fromResource(Rconfig.getInstance().drawable("plugins_locator_maker_default")));
+                    mGoogleMap.addMarker(options);
+                } catch (Exception e) {
+                    Log.e("StoreLocatorFragment ", "=====================> addMaker Exceptin " + e.getMessage());
+                }
+            }
+        }
 
-				latitude = latitude.trim();
-				longtitude = longtitude.trim();
-				try {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        LatLng position;
+        for (int i = 0; i < listStores.size(); i++) {
+            StoreObject store = listStores.get(i);
+            Log.e("abc", "Lat====" + store.getLatitude() + "====Long====" + store.getLongtitude());
+            position = new LatLng(getLatDoubleWithStore(store), getLongDoubleWithStore(store));
+            builder.include(new LatLng(position.latitude, position.longitude));
+        }
+        LatLngBounds bounds = builder.build();
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 5));
 
-					Double dLat = convertToDouble(latitude);
-					Double dLong = convertToDouble(longtitude);
+    }
 
-					LatLng end = new LatLng(dLat, dLong);
-					MarkerOptions options = new MarkerOptions().position(end).icon(BitmapDescriptorFactory
-							.fromResource(Rconfig.getInstance().drawable("plugins_locator_maker_default")));
-					googleMap.addMarker(options);
-				} catch (Exception e) {
-					Log.e("StoreLocatorFragment ", "=====================> addMaker Exceptin " + e.getMessage());
-				}
-			}
+    protected Double convertToDouble(String source) {
+        DecimalFormat df = new DecimalFormat();
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(symbols);
+        Double target = null;
+        try {
+            target = df.parse(source).doubleValue();
+        } catch (ParseException e) {
+            Log.e("MapViewFragment ", "=======================> convertToDouble " + e.getMessage());
+        }
 
-		}
-	}
+        return target;
+    }
 
-	protected Double convertToDouble(String source) {
-		DecimalFormat df = new DecimalFormat();
-		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-		symbols.setDecimalSeparator('.');
-		df.setDecimalFormatSymbols(symbols);
-		Double target = null;
-		try {
-			target = df.parse(source).doubleValue();
-		} catch (ParseException e) {
-			Log.e("MapViewFragment ", "=======================> convertToDouble " + e.getMessage());
-		}
+    protected View gotInforContent(Marker marker) {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        int idView = Rconfig.getInstance().layout("plugins_store_locator_info_window_layout");
+        View v = inflater.inflate(idView, null);
+        v.setMinimumWidth(200);
+        v.setBackgroundColor(mContext.getResources().getColor(android.R.color.white));
+        TextView tvName = (TextView) v.findViewById(Rconfig.getInstance().getIdLayout("tv_name"));
+        TextView tvAddress = (TextView) v.findViewById(Rconfig.getInstance().getIdLayout("tv_address"));
+        CircleImageView img = (CircleImageView) v.findViewById(Rconfig.getInstance().getIdLayout("img_store"));
 
-		return target;
-	}
+        LatLng latLngMarker = marker.getPosition();
+        String latMarker = String.valueOf(latLngMarker.latitude);
+        String longMarker = String.valueOf(latLngMarker.longitude);
+        String latCurrent = "";
+        String longCurrent = "";
 
-	protected View gotInforContent(Marker marker) {
-		LayoutInflater inflater = LayoutInflater.from(mContext);
-		int idView = Rconfig.getInstance().layout("plugins_store_locator_info_window_layout");
-		View v = inflater.inflate(idView, null);
-		v.setMinimumWidth(200);
-		v.setBackgroundColor(mContext.getResources().getColor(android.R.color.white));
-		TextView tvName = (TextView) v.findViewById(Rconfig.getInstance().getIdLayout("tv_name"));
-		TextView tvAddress = (TextView) v.findViewById(Rconfig.getInstance().getIdLayout("tv_address"));
-		RoundedImageView img = (RoundedImageView) v.findViewById(Rconfig.getInstance().getIdLayout("img_store"));
+        if (currrentLocation != null) {
+            latCurrent = String.valueOf(currrentLocation.getLatitude());
+            longCurrent = String.valueOf(currrentLocation.getLongitude());
+        }
 
-		LatLng latLngMarker = marker.getPosition();
-		String latMarker = String.valueOf(latLngMarker.latitude);
-		String longMarker = String.valueOf(latLngMarker.longitude);
-		String latCurrent = String.valueOf(currrentLocation.getLatitude());
-		String longCurrent = String.valueOf(currrentLocation.getLongitude());
+        if (latMarker.equals(latCurrent) && longMarker.equals(longCurrent)) {
+            tvName.setText(SimiTranslator.getInstance().translate("You are here"));
+            tvAddress.setText("");
+        } else if (!latMarker.equals(latCurrent) && !longMarker.equals(longCurrent)) {
 
-		Log.e("latMarker", "" + latMarker);
-		Log.e("longMarker", "" + longMarker);
+            for (StoreObject store : listStore) {
 
-		// Double roundLatMarker = MathForDummies.round(latMarker, 6);
-		// Double roundLongMarker = MathForDummies.round(longMarker, 6);
-		// Double roundLatCurrent = MathForDummies.round(latCurrent, 6);
-		// Double roundLongCurrent = MathForDummies.round(longCurrent, 6);
+                String latStore = store.getLatitude();
+                String longStore = store.getLongtitude();
 
-		if (latMarker.equals(latCurrent) && longMarker.equals(longCurrent)) {
-			tvName.setText(SimiTranslator.getInstance().translate("You are here"));
-			tvAddress.setText("");
-		} else if (!latMarker.equals(latCurrent) && !longMarker.equals(longCurrent)) {
+                if (latMarker.equals(latStore) && longMarker.equals(longStore)) {
+                    tvName.setText(store.getName());
+                    tvAddress.setText(StoreLocatorConfig.convertAddress(store));
 
-			for (StoreObject store : listStore) {
+                    String urlImage = store.getImage_icon();
 
-				// StoreObject store = listStore.get(i);
+                    if (Utils.validateString(urlImage)) {
+                        SimiDrawImage drawImage = new SimiDrawImage();
+                        drawImage.drawImage(img, urlImage);
+                    }
 
-				String latStore = store.getLatitude();
-				String longStore = store.getLongtitude();
+                    return v;
 
-				// Double roundLatStore = MathForDummies.round(latStore, 6);
-				// Double roundLongStore = MathForDummies.round(longStore, 6);
+                } else {
+                    img.setImageDrawable(mContext.getResources()
+                            .getDrawable(Rconfig.getInstance().getIdDraw("plugins_locator_ic_store_android")));
+                }
 
-				if (latMarker.equals(latStore) && longMarker.equals(longStore)) {
-					tvName.setText(store.getName());
-					tvAddress.setText(DataLocator.convertAddress(store));
+            }
+        }
 
-					String urlImage = store.getImage_icon();
+        return v;
+    }
 
-					if (Utils.validateString(urlImage)) {
-						SimiDrawImage drawImage = new SimiDrawImage();
-						drawImage.drawImage(img, urlImage);
-					}
+    protected Double getLatDoubleWithStore(StoreObject store) {
+        String latitude = store.getLatitude();
+        if (Utils.validateString(latitude)) {
+            latitude = latitude.trim();
 
-					return v;
+            Double dLat = convertToDouble(latitude);
+            return dLat;
+        }
 
-				} else {
-					img.setImageDrawable(mContext.getResources()
-							.getDrawable(Rconfig.getInstance().getIdDraw("plugins_locator_ic_store_android")));
-				}
+        return null;
+    }
 
-			}
-		}
+    protected Double getLongDoubleWithStore(StoreObject store) {
+        String longtitude = store.getLongtitude();
+        if (Utils.validateString(longtitude)) {
+            longtitude = longtitude.trim();
+            Double dLong = convertToDouble(longtitude);
+            return dLong;
+        }
 
-		return v;
-	}
+        return null;
+    }
 
-	protected Double getLatDoubleWithStore(StoreObject store) {
-		String latitude = store.getLatitude();
-		if (Utils.validateString(latitude)) {
-			latitude = latitude.trim();
+    @Override
+    public void addMarkerToMap(ArrayList<StoreObject> listStores) {
+        // TODO Auto-generated method stub
+        listStore = listStores;
 
-			Double dLat = convertToDouble(latitude);
-			return dLat;
-		}
+        if (mGoogleMap != null) {
+            isAddMaker = true;
+            mGoogleMap.clear();
+            addMaker(listStores);
+        }
 
-		return null;
-	}
+    }
 
-	protected Double getLongDoubleWithStore(StoreObject store) {
-		String longtitude = store.getLongtitude();
-		if (Utils.validateString(longtitude)) {
-			longtitude = longtitude.trim();
-			Double dLong = convertToDouble(longtitude);
-			return dLong;
-		}
+    public void setBundle(Bundle bundle) {
+        this.bundle = bundle;
+    }
 
-		return null;
-	}
-
-	@Override
-	public void addMarkerToMap(ArrayList<StoreObject> listStores) {
-		// TODO Auto-generated method stub
-		googleMap.clear();
-		listStore = listStores;
-
-		// getAllPointFromStoreMarker(listStore);
-		addMaker(listStores);
-
-		// CameraUpdate zoom = CameraUpdateFactory.zoomTo(5);
-		// googleMap.animateCamera(zoom);
-		// if (currrentLocation != null) {
-		// CameraUpdate center = CameraUpdateFactory
-		// .newLatLng(new LatLng(currrentLocation.getLatitude(),
-		// currrentLocation.getLongitude()));
-		//
-		// googleMap.moveCamera(center);
-		// zoom = CameraUpdateFactory.zoomTo(5);
-		// Log.d("quangdd123", "currrentLocation==" +
-		// currrentLocation.toString());
-		//
-		// }
-
-		LatLngBounds.Builder builder = new LatLngBounds.Builder();
-		LatLng position;
-		for (int i = 0; i < listStores.size(); i++) {
-			StoreObject store = listStores.get(i);
-			Log.e("abc", "Lat====" + store.getLatitude() + "====Long====" + store.getLongtitude());
-			position = new LatLng(getLatDoubleWithStore(store), getLongDoubleWithStore(store));
-			builder.include(new LatLng(position.latitude, position.longitude));
-		}
-		LatLngBounds bounds = builder.build();
-		googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 5));
-
-	}
-
+    public void setChildFragmentManager(FragmentManager childFragmentManager) {
+        this.childFragmentManager = childFragmentManager;
+    }
 }

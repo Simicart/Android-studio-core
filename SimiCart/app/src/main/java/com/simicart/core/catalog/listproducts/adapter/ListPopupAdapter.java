@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.simicart.core.catalog.listproducts.entity.ItemListPopup;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;

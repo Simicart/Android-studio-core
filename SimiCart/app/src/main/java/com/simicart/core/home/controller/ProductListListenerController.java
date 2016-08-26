@@ -1,15 +1,13 @@
 package com.simicart.core.home.controller;
 
-import java.util.ArrayList;
-
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
+
+import java.util.ArrayList;
 
 public class ProductListListenerController {
 	protected ArrayList<Product> mProductList;

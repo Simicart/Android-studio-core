@@ -13,7 +13,6 @@ import com.simicart.core.catalog.category.controller.SortController;
 import com.simicart.core.catalog.category.entity.Sort;
 import com.simicart.core.config.Rconfig;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;

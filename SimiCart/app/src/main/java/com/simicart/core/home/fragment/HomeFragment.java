@@ -3,23 +3,14 @@ package com.simicart.core.home.fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.simicart.core.banner.block.BannerBlock;
-import com.simicart.core.banner.controller.BannerController;
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.home.block.CategoryHomeBlock;
 import com.simicart.core.home.block.HomeBlock;
-import com.simicart.core.home.block.ProductListHomeBlock;
-import com.simicart.core.home.block.SearchHomeBlock;
-import com.simicart.core.home.controller.CategoryHomeController;
 import com.simicart.core.home.controller.HomeController;
-import com.simicart.core.home.controller.ProductListHomeController;
 
 public class HomeFragment extends SimiFragment {
 

@@ -21,7 +21,6 @@ import com.simicart.core.common.Utils;
 import com.simicart.core.common.options.delegate.OptionProductDelegate;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 

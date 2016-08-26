@@ -8,7 +8,6 @@ import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.ValueData;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.delegate.MyAccountDelegate;
 import com.simicart.core.customer.fragment.AddressBookFragment;

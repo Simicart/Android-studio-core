@@ -9,7 +9,6 @@ import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
-import com.simicart.core.config.Config;
 
 public class ProductMorePluginController extends SimiController {
 

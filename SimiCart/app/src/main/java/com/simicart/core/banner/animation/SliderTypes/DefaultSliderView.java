@@ -1,11 +1,11 @@
 package com.simicart.core.banner.animation.SliderTypes;
 
-import com.magestore.simicart.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.magestore.simicart.R;
 
 
 /**

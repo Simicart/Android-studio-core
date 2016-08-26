@@ -2,9 +2,7 @@ package com.simicart.core.notification.common;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
-import com.simicart.MainActivity;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;

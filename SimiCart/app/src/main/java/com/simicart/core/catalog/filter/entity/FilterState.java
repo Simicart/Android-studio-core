@@ -1,9 +1,9 @@
 package com.simicart.core.catalog.filter.entity;
 
-import java.io.Serializable;
-
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.filter.common.FilterConstant;
+
+import java.io.Serializable;
 
 public class FilterState extends SimiEntity implements Serializable{
 

@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.filter.common;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
@@ -14,6 +12,8 @@ import android.widget.TextView;
 
 import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 @SuppressLint("ViewHolder")
 public class FilterAdapter extends BaseAdapter {

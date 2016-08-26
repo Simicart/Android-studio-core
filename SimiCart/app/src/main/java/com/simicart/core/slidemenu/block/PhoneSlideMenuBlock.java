@@ -1,7 +1,5 @@
 package com.simicart.core.slidemenu.block;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -16,12 +14,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.slidemenu.adapter.SlideMenuAdapter;
 import com.simicart.core.slidemenu.delegate.SlideMenuDelegate;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
+
+import java.util.ArrayList;
 
 public class PhoneSlideMenuBlock implements SlideMenuDelegate {
 

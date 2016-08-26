@@ -2,9 +2,9 @@ package com.simicart.core.banner.animation.Transformers;
 
 import android.view.View;
 
+import com.nineoldandroids.view.ViewHelper;
 import com.simicart.core.banner.animation.Animations.BaseAnimationInterface;
 import com.simicart.core.banner.animation.Tricks.ViewPagerEx;
-import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

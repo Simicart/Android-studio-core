@@ -1,22 +1,15 @@
 package com.simicart.plugins.locator.fragment;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.common.KeyData;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.locator.block.StoreLocatorMapBlock;
 import com.simicart.plugins.locator.common.StoreLocatorConfig;
 import com.simicart.plugins.locator.controller.StoreLocatorMapController;
-
-import android.Manifest;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class StoreLocatorMapFragment extends SimiFragment {
 	
@@ -33,6 +26,8 @@ public class StoreLocatorMapFragment extends SimiFragment {
 		rootView = inflater.inflate(Rconfig.getInstance().layout("plugins_store_locator_map"), container, false);
 
 		mBlock = new StoreLocatorMapBlock(rootView, getActivity());
+		mBlock.setChildFragmentManager(getChildFragmentManager());
+		mBlock.setBundle(savedInstanceState);
 		mBlock.initView();
 		if(mController == null) {
 			mController = new StoreLocatorMapController();

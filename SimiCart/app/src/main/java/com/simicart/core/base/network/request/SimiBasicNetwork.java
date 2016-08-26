@@ -1,11 +1,10 @@
 package com.simicart.core.base.network.request;
 
+import android.util.Log;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
-
-import android.util.Log;
 
 public class SimiBasicNetwork {
     private static int DEFAULT_POOL_SIZE = 4096;

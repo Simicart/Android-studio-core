@@ -3,7 +3,6 @@ package com.simicart.core.style;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Rconfig;
 
 public class FragmentDialogHandle extends DialogFragment {

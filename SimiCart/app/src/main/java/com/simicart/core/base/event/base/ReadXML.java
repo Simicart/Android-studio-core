@@ -3,17 +3,18 @@ package com.simicart.core.base.event.base;
 /**
  * Created by frank on 8/15/16.
  */
+
+import android.content.Context;
+import android.content.res.AssetManager;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
-
-import android.content.Context;
-import android.content.res.AssetManager;
 
 public class ReadXML {
 

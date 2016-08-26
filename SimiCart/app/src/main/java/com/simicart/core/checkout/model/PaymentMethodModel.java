@@ -1,11 +1,11 @@
 package com.simicart.core.checkout.model;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.config.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class PaymentMethodModel extends SimiModel{
 	protected TotalPrice mTotalPrice;

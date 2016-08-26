@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.product.block;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -16,6 +14,8 @@ import com.simicart.core.catalog.product.delegate.ProductDetailChildDelegate;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.style.VerticalViewPager2;
+
+import java.util.ArrayList;
 
 public class ProductDetailChildBlock extends SimiBlock implements ProductDetailChildDelegate{
 
