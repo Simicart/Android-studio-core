@@ -35,6 +35,7 @@ public class KeyData {
         public static String OPEN_FOR = "open_for";
         public static String BILLING_ADDRESS = "billing_address";
         public static String SHIPPING_ADDRESS = "shipping_address";
+        public static String ACTION = "action";
     }
 
     public static class LIST_OF_CHOICE {

@@ -38,7 +38,7 @@ public class AddressBookFragment extends SimiFragment {
         }
 
         AddressBookBlock block = new AddressBookBlock(view, getActivity());
-        block.setOpenFor(openFor);
+        block.setData(mHashMapData);
         block.initView();
 
         if (null == mController) {

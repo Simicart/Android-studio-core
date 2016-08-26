@@ -178,7 +178,7 @@ public class ReviewOrderController extends SimiController {
         shippingAddressComponent.setCallBack(new AddressComponentCallback() {
             @Override
             public void onSelect() {
-
+                edtiAddress(true);
             }
         });
         mListComponent.add(shippingAddressComponent);
@@ -189,7 +189,7 @@ public class ReviewOrderController extends SimiController {
         billingAddressComponent.setCallBack(new AddressComponentCallback() {
             @Override
             public void onSelect() {
-
+                edtiAddress(false);
             }
         });
         mListComponent.add(billingAddressComponent);
@@ -228,6 +228,7 @@ public class ReviewOrderController extends SimiController {
         }
     }
 
+
     protected void showShipmentDetail() {
         //  ListProductCheckoutComponent shipmentComponent = new ListProductCheckoutComponent()
     }
@@ -249,6 +250,18 @@ public class ReviewOrderController extends SimiController {
         }
     }
 
+    protected void edtiAddress(boolean isShipping) {
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.ADDRESS_BOOK.OPEN_FOR, ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT);
+        hm.put(KeyData.ADDRESS_BOOK.BILLING_ADDRESS, mBillingAddress);
+        hm.put(KeyData.ADDRESS_BOOK.SHIPPING_ADDRESS, mShippingAddress);
+        if (isShipping) {
+            hm.put(KeyData.ADDRESS_BOOK.ACTION, ValueData.ADDRESS_BOOK.ACTION_EDIT_SHIPPING_ADDRESS);
+        } else {
+            hm.put(KeyData.ADDRESS_BOOK.ACTION, ValueData.ADDRESS_BOOK.ACTION_EDIT_BILLING_ADDRESS);
+        }
+        SimiManager.getIntance().openAddressBook(hm);
+    }
 
     @Override
     public void onResume() {

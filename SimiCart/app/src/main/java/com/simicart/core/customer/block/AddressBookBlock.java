@@ -12,6 +12,7 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
@@ -19,6 +20,7 @@ import com.simicart.core.customer.adapter.AddressBookAdapter;
 import com.simicart.core.customer.entity.AddressEntity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddressBookBlock extends SimiBlock {
 
@@ -28,9 +30,15 @@ public class AddressBookBlock extends SimiBlock {
     private RelativeLayout rlt_layout_addadress;
     protected int openFor = -1;
     protected ArrayList<AddressEntity> listAddress;
+    protected HashMap<String, Object> mData;
 
     @Override
     public void initView() {
+
+        if (mData.containsKey(KeyData.ADDRESS_BOOK.OPEN_FOR)) {
+            openFor = ((Integer) mData.get(KeyData.ADDRESS_BOOK.OPEN_FOR)).intValue();
+        }
+
         // Choose an address for editing
         TextView tv_chooseAddress = (TextView) mView.findViewById(Rconfig
                 .getInstance().id("tv_chooseAddress"));
@@ -69,7 +77,7 @@ public class AddressBookBlock extends SimiBlock {
                 AddressEntity entity = (AddressEntity) entities.get(i);
                 listAddress.add(entity);
             }
-            mAdapter = new AddressBookAdapter(listAddress, openFor);
+            mAdapter = new AddressBookAdapter(listAddress, mData);
             rvAddress.setAdapter(mAdapter);
         }
     }
@@ -82,8 +90,9 @@ public class AddressBookBlock extends SimiBlock {
         tv_addAddress.setOnClickListener(listener);
     }
 
-    public void setOpenFor(int openFor) {
-        this.openFor = openFor;
+    public void setData(HashMap<String, Object> data) {
+        mData = data;
     }
+
 
 }

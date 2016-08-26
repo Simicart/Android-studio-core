@@ -26,11 +26,22 @@ import java.util.HashMap;
 public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.AddressBookHolder> {
 
     protected ArrayList<AddressEntity> listAddress;
-    protected int addressBookFor = -1;
+    protected int openFor = -1;
+    protected int actionEdit = -1;
+    protected HashMap<String, Object> mData;
 
-    public AddressBookAdapter(ArrayList<AddressEntity> listAddress, int addressBookFor) {
+    public AddressBookAdapter(ArrayList<AddressEntity> listAddress, HashMap<String, Object> data) {
         this.listAddress = listAddress;
-        this.addressBookFor = addressBookFor;
+        mData = data;
+
+        if (mData.containsKey(KeyData.ADDRESS_BOOK.OPEN_FOR)) {
+            openFor = ((Integer) mData.get(KeyData.ADDRESS_BOOK.OPEN_FOR)).intValue();
+        }
+
+        if (mData.containsKey(KeyData.ADDRESS_BOOK.ACTION)) {
+            actionEdit = ((Integer) mData.get(KeyData.ADDRESS_BOOK.ACTION)).intValue();
+        }
+
     }
 
     @Override
@@ -92,7 +103,7 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
             holder.tvEmail.setText(email);
         }
 
-        if (addressBookFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT) {
+        if (openFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT) {
             holder.ivExtend.setVisibility(View.GONE);
         }
 
@@ -101,9 +112,9 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
         holder.rlItemAddressBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (addressBookFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CUSTOMER) {
+                if (openFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CUSTOMER) {
                     onChooseAddressEdit(addressEntity);
-                } else if (addressBookFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT) {
+                } else if (openFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT) {
                     onChooseAddressCheckout(addressEntity);
                 }
             }
@@ -159,15 +170,19 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
 
     protected void onChooseAddressCheckout(AddressEntity addressEntity) {
         HashMap<String, Object> hm = new HashMap<>();
-        hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
-        hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+        if (actionEdit == ValueData.ADDRESS_BOOK.ACTION_EDIT_BILLING_ADDRESS) {
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+            AddressEntity oldShippingAddress = (AddressEntity) mData.get(KeyData.ADDRESS_BOOK.SHIPPING_ADDRESS);
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, oldShippingAddress);
+        } else if (actionEdit == ValueData.ADDRESS_BOOK.ACTION_EDIT_SHIPPING_ADDRESS) {
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+            AddressEntity oldBillingAddress = (AddressEntity) mData.get(KeyData.ADDRESS_BOOK.BILLING_ADDRESS);
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, oldBillingAddress);
+        } else {
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+        }
         SimiManager.getIntance().openReviewOrder(hm);
-
-//        ReviewOrderFragment fragment = new ReviewOrderFragment();
-//        fragment.setTypeCheckout(ReviewOrderFragment.CHECKOUTTYPE.AS_LOGGED);
-//        fragment.setShippingAddress(addressEntity);
-//        fragment.setBillingAddress(addressEntity);
-//        SimiManager.getIntance().replaceFragment(fragment);
     }
 
 }
