@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by frank on 6/29/16.
@@ -32,6 +33,7 @@ public class PaymentMethodEntity extends SimiEntity {
      * This variable was used to save card information that user entered.
      */
     protected CreditCard mCurrentCardEntity;
+    protected boolean isSavedLocal;
 
     private String payment_method = "payment_method";
     private String title = "title";
@@ -115,58 +117,49 @@ public class PaymentMethodEntity extends SimiEntity {
         }
     }
 
-    public JSONObject toParamSave() {
-        try {
-            JSONObject json = new JSONObject();
-            JSONObject jsParam = new JSONObject();
-            jsParam.put("method", mPaymentMethod);
+    public HashMap<String, String> toParam() {
+        HashMap<String, String> data = new HashMap<>();
 
+        data.put("payment_method", mPaymentMethod);
 
-            if (mType == PAYMENTMETHODTYPE.CARD) {
-                jsParam = addParamForCard(jsParam);
-            }
-            json.put("p_method", jsParam);
-            return json;
-        } catch (JSONException e) {
-
+        if (mType == PAYMENTMETHODTYPE.CARD) {
+            addParamForCard(data);
         }
 
-        return null;
+        return data;
     }
 
-    protected JSONObject addParamForCard(JSONObject jsParam) throws JSONException {
+
+    protected void addParamForCard(HashMap<String, String> data) {
 
         if (null == mCurrentCardEntity) {
-            return jsParam;
+            return;
         }
 
         String type = mCurrentCardEntity.getType();
         if (Utils.validateString(type)) {
-            jsParam.put("cc_type", type);
+            data.put("cc_type", type);
         }
 
         String cid = mCurrentCardEntity.getCId();
         if (Utils.validateString(cid)) {
-            jsParam.put("cc_cid", cid);
+            data.put("cc_cid", cid);
         }
 
         String expMonth = mCurrentCardEntity.getExpMonth();
         if (Utils.validateString(expMonth)) {
-            jsParam.put("cc_exp_month", expMonth);
+            data.put("cc_exp_month", expMonth);
         }
 
         String number = mCurrentCardEntity.getNumber();
         if (Utils.validateString(number)) {
-            jsParam.put("cc_number", number);
+            data.put("cc_number", number);
         }
 
         String expYear = mCurrentCardEntity.getExpYear();
         if (Utils.validateString(expYear)) {
-            jsParam.put("cc_exp_year", expYear);
+            data.put("cc_exp_year", expYear);
         }
-
-
-        return jsParam;
     }
 
     public CreditCard getCurrentCardEntity() {
@@ -232,4 +225,13 @@ public class PaymentMethodEntity extends SimiEntity {
     public void setListCCType(ArrayList<CreditCard> mListCCType) {
         this.mListCCType = mListCCType;
     }
+
+    public void setSavedLocal(boolean isSaved) {
+        this.isSavedLocal = isSaved;
+    }
+
+    public boolean isSavedLocal() {
+        return this.isSavedLocal;
+    }
+
 }

@@ -57,22 +57,8 @@ public class ShippingMethodEntity extends SimiEntity {
 
     }
 
-    public JSONObject toParamSave() {
 
-        try {
-            JSONObject json = new JSONObject();
-            JSONObject jsCode = new JSONObject();
-            jsCode.put("method", mCode);
-            json.put("s_method", jsCode);
-            return json;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public String getmID() {
+    public String getID() {
         return mID;
     }
 
@@ -80,7 +66,7 @@ public class ShippingMethodEntity extends SimiEntity {
         this.mID = mID;
     }
 
-    public String getmCode() {
+    public String getCode() {
         return mCode;
     }
 

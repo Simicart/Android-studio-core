@@ -13,12 +13,13 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.checkout.component.AddressCheckoutComponent;
 import com.simicart.core.checkout.component.CouponComponent;
-import com.simicart.core.checkout.component.ListProductCheckoutComponent;
 import com.simicart.core.checkout.component.PaymentMethodComponent;
 import com.simicart.core.checkout.component.ShippingMethodComponent;
 import com.simicart.core.checkout.component.TermConditionComponent;
+import com.simicart.core.checkout.component.TotalPriceComponent;
 import com.simicart.core.checkout.delegate.AddressComponentCallback;
 import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.delegate.ReviewOrderDelegate;
@@ -27,19 +28,23 @@ import com.simicart.core.checkout.entity.PaymentMethodEntity;
 import com.simicart.core.checkout.entity.ReviewOrderEntity;
 import com.simicart.core.checkout.entity.ShippingMethodEntity;
 import com.simicart.core.checkout.entity.TotalPrice;
+import com.simicart.core.checkout.model.PaymentMethodModel;
+import com.simicart.core.checkout.model.PlaceOrderModel;
 import com.simicart.core.checkout.model.ReviewOrderModel;
+import com.simicart.core.checkout.model.ShippingMethodModel;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppCheckoutConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Constants;
 import com.simicart.core.customer.entity.AddressEntity;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 @SuppressLint("ClickableViewAccessibility")
 public class ReviewOrderController extends SimiController {
@@ -52,6 +57,9 @@ public class ReviewOrderController extends SimiController {
     protected HashMap<String, Object> mData;
     protected ArrayList<SimiComponent> mListComponent;
     protected OnClickListener mPlaceOrderListener;
+    protected PaymentMethodComponent mPaymentComponent;
+    protected PaymentMethodEntity mCurrentPaymentMethod;
+    protected TotalPriceComponent mTotalPriceComponent;
 
 
     @Override
@@ -61,7 +69,7 @@ public class ReviewOrderController extends SimiController {
 
         initListener();
 
-        requestPlaceOrder();
+        getOrderInfor();
     }
 
     protected void parseParam() {
@@ -86,11 +94,12 @@ public class ReviewOrderController extends SimiController {
             @Override
             public void onClick(View v) {
                 SimiManager.getIntance().hideKeyboard();
+                requestPlaceOrder();
             }
         };
     }
 
-    protected void requestPlaceOrder() {
+    protected void getOrderInfor() {
         mDelegate.showLoading();
         mModel = new ReviewOrderModel();
         mModel.setSuccessListener(new ModelSuccessCallBack() {
@@ -111,7 +120,6 @@ public class ReviewOrderController extends SimiController {
         mModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
-                Log.e("ReviewOrderController", "requestPlaceOrder FAIL");
                 mDelegate.dismissLoading();
             }
         });
@@ -127,13 +135,11 @@ public class ReviewOrderController extends SimiController {
 
         JSONObject jsBillingAddress = mBillingAddress.toParamForPlaceOrder();
         if (null != jsBillingAddress) {
-            Log.e("ReviewOrderController", "BILING DATA " + jsBillingAddress.toString());
             mModel.addBody("billingAddress", jsBillingAddress);
         }
 
         JSONObject jsShippingAddress = mShippingAddress.toParamForPlaceOrder();
         if (null != jsShippingAddress) {
-            Log.e("ReviewOrderController", "SHIPPING DATA " + jsShippingAddress.toString());
             mModel.addBody("shippingAddress", jsShippingAddress);
         }
 
@@ -162,15 +168,7 @@ public class ReviewOrderController extends SimiController {
 
         // dispatch event for plugin
 
-        ArrayList<View> rows = new ArrayList<>();
-        if (null != mListComponent) {
-            for (int i = 0; i < mListComponent.size(); i++) {
-                View row = mListComponent.get(i).createView();
-                rows.add(row);
-            }
-        }
-
-        mDelegate.showView(rows);
+        showView();
     }
 
     protected void showShippingAddress() {
@@ -202,7 +200,7 @@ public class ReviewOrderController extends SimiController {
             shipingComponent.setCallBack(new ShippingMethodCallBack() {
                 @Override
                 public void onSelect(ShippingMethodEntity entity) {
-
+                    selectShippingMethod(entity);
                 }
             });
             mListComponent.add(shipingComponent);
@@ -212,11 +210,11 @@ public class ReviewOrderController extends SimiController {
     protected void showPaymentMethod() {
         ArrayList<PaymentMethodEntity> listPayment = mReviewOrderEntity.getListPaymentMethod();
         if (null != listPayment && listPayment.size() > 0) {
-            PaymentMethodComponent paymentComponent = new PaymentMethodComponent(listPayment);
-            paymentComponent.setCallBack(new PaymentMethodCallBack() {
+            mPaymentComponent = new PaymentMethodComponent(listPayment);
+            mPaymentComponent.setCallBack(new PaymentMethodCallBack() {
                 @Override
                 public void onSelectItem(PaymentMethodEntity payment) {
-
+                    selectPaymentMethod(payment);
                 }
 
                 @Override
@@ -224,7 +222,7 @@ public class ReviewOrderController extends SimiController {
 
                 }
             });
-            mListComponent.add(paymentComponent);
+            mListComponent.add(mPaymentComponent);
         }
     }
 
@@ -240,7 +238,9 @@ public class ReviewOrderController extends SimiController {
     }
 
     protected void showTotalPrice() {
-
+        TotalPrice totalPrice = mReviewOrderEntity.getTotalPrice();
+        mTotalPriceComponent = new TotalPriceComponent(totalPrice);
+        mListComponent.add(mTotalPriceComponent);
     }
 
     protected void showTermCondition() {
@@ -263,8 +263,136 @@ public class ReviewOrderController extends SimiController {
         SimiManager.getIntance().openAddressBook(hm);
     }
 
+    protected void selectShippingMethod(ShippingMethodEntity shippingMethodEntity) {
+        mDelegate.showDialogLoading();
+        final ShippingMethodModel shippingModel = new ShippingMethodModel();
+        shippingModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissDialogLoading();
+                TotalPrice totalPrice = shippingModel.getTotalPrice();
+                mReviewOrderEntity.setTotalPrice(totalPrice);
+
+                ArrayList<PaymentMethodEntity> payments = shippingModel.getListPaymentMehtod();
+                mPaymentComponent.setListPaymentMethod(payments);
+                mReviewOrderEntity.setListPaymentMethod(payments);
+
+                showView();
+            }
+        });
+        shippingModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissDialogLoading();
+                String message = error.getMessage();
+                SimiNotify.getInstance().showNotify(message);
+            }
+        });
+
+        String idShipping = shippingMethodEntity.getID();
+        mModel.addBody("s_method_id", idShipping);
+
+        String codeShipping = shippingMethodEntity.getCode();
+        mModel.addBody("s_method_code", codeShipping);
+
+        shippingModel.request();
+
+    }
+
+    protected void selectPaymentMethod(PaymentMethodEntity paymentMethodEntity) {
+        if (AppStoreConfig.getInstance().isReloadPaymentMethod()) {
+            reloadPayment(paymentMethodEntity);
+        } else {
+            mCurrentPaymentMethod = paymentMethodEntity;
+        }
+
+        PaymentMethodEntity.PAYMENTMETHODTYPE type = paymentMethodEntity.getType();
+        if (type == PaymentMethodEntity.PAYMENTMETHODTYPE.CARD && !paymentMethodEntity.isSavedLocal()) {
+            createNewCreditCard();
+        }
+    }
+
+    protected void reloadPayment(final PaymentMethodEntity paymentMethodEntity) {
+        mDelegate.showDialogLoading();
+
+        final PaymentMethodModel methodModel = new PaymentMethodModel();
+        methodModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissDialogLoading();
+                TotalPrice totalPrice = methodModel.getTotalPrice();
+                mReviewOrderEntity.setTotalPrice(totalPrice);
+                mCurrentPaymentMethod = paymentMethodEntity;
+                showView();
+            }
+        });
+
+        methodModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissDialogLoading();
+            }
+        });
+
+        String paymentMethod = paymentMethodEntity.getPaymentMethod();
+        methodModel.addBody("payment_method", paymentMethod);
+        methodModel.request();
+    }
+
+    protected void createNewCreditCard() {
+
+    }
+
+    protected void requestPlaceOrder() {
+
+        if (isCanPlcaceOrder()) {
+            mDelegate.showLoading();
+            PlaceOrderModel placeOrderModel = new PlaceOrderModel();
+
+            placeOrderModel.setSuccessListener(new ModelSuccessCallBack() {
+                @Override
+                public void onSuccess(SimiCollection collection) {
+                    Log.e("ReviewOrderController", "PLACE ORDER SUCCESS");
+                    SimiManager.getIntance().backToHomeFragment();
+                }
+            });
+
+            placeOrderModel.setFailListener(new ModelFailCallBack() {
+                @Override
+                public void onFail(SimiError error) {
+                    Log.e("ReviewOrderController", "PLACE ORDER FAIL");
+                }
+            });
+
+            HashMap<String, String> data = mCurrentPaymentMethod.toParam();
+            Iterator<String> iterator = data.keySet().iterator();
+            while (iterator.hasNext()) {
+                String key = iterator.next();
+                String value = data.get(key);
+                if (Utils.validateString(key) && Utils.validateString(value)) {
+                    placeOrderModel.addBody(key, value);
+                }
+            }
+
+            placeOrderModel.request();
+        }
+    }
+
+    protected boolean isCanPlcaceOrder() {
+        if (null == mCurrentPaymentMethod) {
+            return false;
+        }
+
+        return true;
+    }
+
+
     @Override
     public void onResume() {
+        showView();
+    }
+
+    protected void showView() {
         ArrayList<View> rows = new ArrayList<>();
         if (null != mListComponent) {
             for (int i = 0; i < mListComponent.size(); i++) {

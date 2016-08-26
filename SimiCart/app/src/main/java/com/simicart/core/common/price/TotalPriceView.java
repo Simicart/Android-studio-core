@@ -146,7 +146,7 @@ public class TotalPriceView {
             mTotalPrice = new TotalPrice();
         }
         String subTotal = mTotalPrice.getSubTotalOrderHis();
-        String subTotalExcl = mTotalPrice.getSubtotal_excl_tax();
+        String subTotalExcl = mTotalPrice.getSubtotalExclTax();
 
         TableRow tbr_subTotal = new TableRow(mContext);
         if (null != subTotalExcl && !subTotalExcl.equals("null")
@@ -196,7 +196,7 @@ public class TotalPriceView {
     }
 
     public View getSubTotalInclView() {
-        String subtotalIncl = mTotalPrice.getSubtotal_incl_tax();
+        String subtotalIncl = mTotalPrice.getSubtotalInclTax();
         if (null != subtotalIncl && !subtotalIncl.equals("")
                 && !subtotalIncl.equals("null")) {
             TableRow tbr_subTotalIncl = new TableRow(mContext);
@@ -229,8 +229,8 @@ public class TotalPriceView {
     }
 
     public View getShippingHandlingView() {
-        String shippingTotal = mTotalPrice.getShipping_handling();
-        String shippingTotalExcl = mTotalPrice.getShipping_handling_excl_tax();
+        String shippingTotal = mTotalPrice.getShippingHandling();
+        String shippingTotalExcl = mTotalPrice.getShippingHandlingExclTax();
         TableRow tbr_shippingTotal = new TableRow(mContext);
         if (null != shippingTotalExcl && !shippingTotalExcl.equals("null")
                 && !shippingTotalExcl.equals("")
@@ -297,7 +297,7 @@ public class TotalPriceView {
 
     public View getShippingHandlingInclView() {
         String shippingHandlingIncl = mTotalPrice
-                .getShipping_handling_incl_tax();
+                .getShippingHandlingInclTax();
         if (null != shippingHandlingIncl && !shippingHandlingIncl.equals("")
                 && !shippingHandlingIncl.equals("null")
                 && !shippingHandlingIncl.equals("0")) {
@@ -333,7 +333,7 @@ public class TotalPriceView {
 
     public View getGrandTotalExclView() {
 
-        String grandTotalExcl = mTotalPrice.getGrand_total_excl_tax();
+        String grandTotalExcl = mTotalPrice.getGrandTotalExclTax();
 
         if (null != grandTotalExcl && !grandTotalExcl.equals("null")
                 && !grandTotalExcl.equals("")) {
@@ -370,7 +370,7 @@ public class TotalPriceView {
     }
 
     public View getGrandTotalView() {
-        String grandTotal = mTotalPrice.getGrand_total();
+        String grandTotal = mTotalPrice.getGrandTotal();
 
         if (null != grandTotal && !grandTotal.equals("")
                 && !grandTotal.equals("null")) {
@@ -403,7 +403,7 @@ public class TotalPriceView {
     }
 
     public View getGrandTotalInclTaxView() {
-        String grandTotalIncl = mTotalPrice.getGrand_total_incl_tax();
+        String grandTotalIncl = mTotalPrice.getGrandTotalInclTax();
         if (null != grandTotalIncl && !grandTotalIncl.equals("")
                 && !grandTotalIncl.equals("null")) {
             TableRow tbr_grandTotalIncl = new TableRow(mContext);

@@ -52,7 +52,7 @@ public class ReviewOrderEntity extends SimiEntity {
 
     protected void parseListShipping(JSONArray array) throws JSONException {
         if (null != array && array.length() > 0) {
-            Log.e("ReviewOrderEntity","parseListShipping "+ array.toString());
+            Log.e("ReviewOrderEntity", "parseListShipping " + array.toString());
             mListShippingMethod = new ArrayList<>();
             for (int i = 0; i < array.length(); i++) {
                 ShippingMethodEntity shippingMethod = new ShippingMethodEntity();
@@ -64,7 +64,6 @@ public class ReviewOrderEntity extends SimiEntity {
 
     protected void parseListPayment(JSONArray array) throws JSONException {
         if (null != array && array.length() > 0) {
-            Log.e("ReviewOrderEntity","parseListBilling "+ array.toString());
             mListPaymentMethod = new ArrayList<>();
             for (int i = 0; i < array.length(); i++) {
                 PaymentMethodEntity paymentMethod = new PaymentMethodEntity();
@@ -76,7 +75,6 @@ public class ReviewOrderEntity extends SimiEntity {
 
 
     protected void parseFee(JSONObject json) throws JSONException {
-        Log.e("ReviewOrderEntity","parseFee "+ json.toString());
         mTotalPrice = new TotalPrice();
         mTotalPrice.parse(json);
         // term & condition
@@ -113,4 +111,20 @@ public class ReviewOrderEntity extends SimiEntity {
         return mListCondition;
     }
 
+
+    public void setTotalPrice(TotalPrice totalPrice) {
+        mTotalPrice = totalPrice;
+    }
+
+    public void setListPaymentMethod(ArrayList<PaymentMethodEntity> listPayment) {
+        mListPaymentMethod = listPayment;
+    }
+
+    public void setListShippingMethod(ArrayList<ShippingMethodEntity> listShipping) {
+        mListShippingMethod = listShipping;
+    }
+
+    protected void setListCondition(ArrayList<Condition> conditions) {
+        mListCondition = conditions;
+    }
 }

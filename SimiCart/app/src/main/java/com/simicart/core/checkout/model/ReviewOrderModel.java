@@ -16,7 +16,6 @@ public class ReviewOrderModel extends SimiModel {
     @Override
     protected void parseData() {
         try {
-            Log.e("ReviewOrderModel ","DATA" + mJSON.toString());
             JSONArray array = this.mJSON.getJSONArray("data");
             if (null != array && array.length() > 0) {
                 collection = new SimiCollection();

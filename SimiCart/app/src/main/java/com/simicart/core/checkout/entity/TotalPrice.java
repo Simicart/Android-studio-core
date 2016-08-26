@@ -63,7 +63,7 @@ public class TotalPrice extends SimiEntity {
 		return mCurrencySymbol;
 	}
 
-	public String getSub_total() {
+	public String getSubTotal() {
 		if (null == mSub_Total) {
 			if (null != getJSONV2()) {
 				mSub_Total = getValueWithJSONV2(Constants.SUB_TOTAL);
@@ -100,7 +100,7 @@ public class TotalPrice extends SimiEntity {
 		mSubTotalOrderHistory = subtotal;
 	}
 
-	public String getSubtotal_excl_tax() {
+	public String getSubtotalExclTax() {
 		if (null == mSubtotalExclTax) {
 			if (null != getJSONV2()) {
 				mSubtotalExclTax = getValueWithJSONV2(Constants.SUBTOTAL_EXCL_TAX);
@@ -112,11 +112,11 @@ public class TotalPrice extends SimiEntity {
 		return mSubtotalExclTax;
 	}
 
-	public void setSubtotal_excl_tax(String subtotal_excl_tax) {
+	public void setSubtotalExclTax(String subtotal_excl_tax) {
 		this.mSubtotalExclTax = subtotal_excl_tax;
 	}
 
-	public String getSubtotal_incl_tax() {
+	public String getSubtotalInclTax() {
 		if (null == mSubtotalInclTax) {
 
 			if (null != getJSONV2()) {
@@ -131,7 +131,7 @@ public class TotalPrice extends SimiEntity {
 		return mSubtotalInclTax;
 	}
 
-	public void setSubtotal_incl_tax(String subtotal_incl_tax) {
+	public void setSubtotalInclTax(String subtotal_incl_tax) {
 		this.mSubtotalInclTax = subtotal_incl_tax;
 	}
 
@@ -151,7 +151,7 @@ public class TotalPrice extends SimiEntity {
 		this.mDiscount = discount;
 	}
 
-	public String getShipping_handling() {
+	public String getShippingHandling() {
 		if (null == mShippingHandling) {
 
 			if (null != getJSONV2()) {
@@ -164,11 +164,11 @@ public class TotalPrice extends SimiEntity {
 		return mShippingHandling;
 	}
 
-	public void setShipping_handling(String shipping_handling) {
+	public void setShippingHandling(String shipping_handling) {
 		this.mShippingHandling = shipping_handling;
 	}
 
-	public String getShipping_handling_incl_tax() {
+	public String getShippingHandlingInclTax() {
 		if (null == mShippingHandlingInclTax) {
 
 			if (null != getJSONV2()) {
@@ -181,11 +181,11 @@ public class TotalPrice extends SimiEntity {
 		return mShippingHandlingInclTax;
 	}
 
-	public void setShipping_handling_incl_tax(String shipping_handling_incl_tax) {
+	public void setShippingHandlingInclTax(String shipping_handling_incl_tax) {
 		this.mShippingHandlingInclTax = shipping_handling_incl_tax;
 	}
 
-	public String getShipping_handling_excl_tax() {
+	public String getShippingHandlingExclTax() {
 		if (null == mShippingHandlingExclTax) {
 			if (null != getJSONV2()) {
 				mShippingHandlingExclTax = getValueWithJSONV2(Constants.SHIPPING_HAND_EXCL_TAX);
@@ -198,7 +198,7 @@ public class TotalPrice extends SimiEntity {
 		return mShippingHandlingExclTax;
 	}
 
-	public void setShipping_handling_excl_tax(String shipping_handling_excl_tax) {
+	public void setShippingHandlingExclTax(String shipping_handling_excl_tax) {
 		this.mShippingHandlingExclTax = shipping_handling_excl_tax;
 	}
 
@@ -218,7 +218,7 @@ public class TotalPrice extends SimiEntity {
 		this.mTax = tax;
 	}
 
-	public String getGrand_total() {
+	public String getGrandTotal() {
 		if (null == mGrandTotal) {
 			if (null != getJSONV2()) {
 				mGrandTotal = getValueWithJSONV2(Constants.GRAND_TOTAL);
@@ -231,11 +231,11 @@ public class TotalPrice extends SimiEntity {
 		return mGrandTotal;
 	}
 
-	public void setGrand_total(String grand_total) {
+	public void setGrandTotal(String grand_total) {
 		this.mGrandTotal = grand_total;
 	}
 
-	public String getGrand_total_incl_tax() {
+	public String getGrandTotalInclTax() {
 		if (null == mGrandTotalInclTax) {
 			if (null != getJSONV2()) {
 				mGrandTotalInclTax = getValueWithJSONV2(Constants.GRAND_TOTAL_INCL_TAX);
@@ -248,11 +248,11 @@ public class TotalPrice extends SimiEntity {
 		return mGrandTotalInclTax;
 	}
 
-	public void setGrand_total_incl_tax(String grand_total_incl_tax) {
+	public void setGrandTotalInclTax(String grand_total_incl_tax) {
 		this.mGrandTotalInclTax = grand_total_incl_tax;
 	}
 
-	public String getGrand_total_excl_tax() {
+	public String getGrandTotalExclTax() {
 		if (null == mGrandTotalExclTax) {
 
 			if (null != getJSONV2()) {
@@ -266,7 +266,7 @@ public class TotalPrice extends SimiEntity {
 		return mGrandTotalExclTax;
 	}
 
-	public void setGrand_total_excl_tax(String grand_total_excl_tax) {
+	public void setGrandTotalExclTax(String grand_total_excl_tax) {
 		this.mGrandTotalExclTax = grand_total_excl_tax;
 	}
 

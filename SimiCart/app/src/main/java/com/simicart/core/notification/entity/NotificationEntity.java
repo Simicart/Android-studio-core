@@ -1,5 +1,7 @@
 package com.simicart.core.notification.entity;
 
+import com.simicart.core.config.Constants;
+
 import java.io.Serializable;
 
 public class NotificationEntity implements Serializable {
@@ -18,6 +20,47 @@ public class NotificationEntity implements Serializable {
 	String categoryID;
 	String categoryName;
 	String hasChild;
+
+//	if (js_notice.has("show_popup")) {
+//		enable = js_notice.getString("show_popup");
+//	}
+//	if (js_notice.has(Constants.MESSAGE)) {
+//		notificationEntity.setMessage(js_notice
+//				.getString(Constants.MESSAGE));
+//	}
+////			if (js_notice.has(Constants.TITLE)) {
+////				notificationEntity.setTitle(js_notice
+////						.getString(Constants.TITLE));
+////			}
+//	if (js_notice.has("url")) {
+//		notificationEntity.setUrl(js_notice.getString("url"));
+//	}
+//	if (js_notice.has("type")) {
+//		notificationEntity.setType(js_notice.getString("type"));
+//	}
+//	if (js_notice.has("categoryID")) {
+//		notificationEntity.setCategoryID(js_notice
+//				.getString("categoryID"));
+//	}
+//	if (js_notice.has("categoryName")) {
+//		notificationEntity.setCategoryName(js_notice
+//				.getString("categoryName"));
+//	}
+//	if (js_notice.has("has_child")) {
+//		notificationEntity
+//				.setHasChild(js_notice.getString("has_child"));
+//	}
+//	if (js_notice.has("imageUrl")) {
+//		notificationEntity.setImage(js_notice.getString("imageUrl"));
+//	}
+//	if (js_notice.has("productID")) {
+//		notificationEntity.setProductID(js_notice
+//				.getString("productID"));
+//	}
+//	if (js_notice.has("show_popup")) {
+//		notificationEntity.setShowPopup(js_notice
+//				.getString("show_popup"));
+//	}
 
 	public String getTitle() {
 		return title;

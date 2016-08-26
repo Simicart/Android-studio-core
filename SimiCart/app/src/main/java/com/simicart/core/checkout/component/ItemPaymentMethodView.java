@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
+import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
 import com.simicart.core.common.Utils;
@@ -56,10 +57,12 @@ public class ItemPaymentMethodView extends SimiComponent {
         rltItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String idIcon = "core_icon_option_selected";
+                Drawable icon = AppColorConfig.getInstance().getIcon(idIcon);
+                imgIcon.setImageDrawable(icon);
                 mCallBack.onSelectItem(mPaymentEntity);
             }
         });
-
     }
 
     protected void initIcon() {
@@ -108,6 +111,7 @@ public class ItemPaymentMethodView extends SimiComponent {
     public void selectItem(boolean isSelect) {
 
     }
+
 
     public void setCallBack(PaymentMethodCallBack callBack) {
         this.mCallBack = callBack;

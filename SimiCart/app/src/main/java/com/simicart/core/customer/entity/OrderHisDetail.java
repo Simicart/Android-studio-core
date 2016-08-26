@@ -73,7 +73,7 @@ public class OrderHisDetail extends SimiEntity {
 
     public String getPayment_method() {
         if (null == mPaymentMethod) {
-            mPaymentMethod = getData(Constants.PAYMENT_METHOD);
+            mPaymentMethod = getData("payment_method");
         }
         return mPaymentMethod;
     }

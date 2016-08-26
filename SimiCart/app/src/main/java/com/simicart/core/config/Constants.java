@@ -172,7 +172,6 @@ public class Constants {
     public static String METHOD_FEE_INCL_TAX = "s_method_fee_incl_tax";
 
     // payment method
-    public static String PAYMENT_METHOD = "payment_method";
     public static String CARD_TYPE = "card_type";
     public static String CARD_NUMBER = "card_number";
     public static String EXPRIRED_MONTH = "expired_month";

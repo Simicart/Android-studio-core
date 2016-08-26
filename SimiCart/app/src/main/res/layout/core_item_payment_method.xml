@@ -10,6 +10,7 @@
         android:layout_height="@dimen/size_24"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/size_5"
+        android:padding="5dp"
         android:src="@drawable/icon_value_selected" />
 
     <TextView
@@ -19,8 +20,7 @@
         android:layout_marginLeft="@dimen/size_10"
         android:layout_marginTop="@dimen/size_10"
         android:layout_toRightOf="@id/img_icon"
-        android:gravity="left|center_vertical"
-        />
+        android:gravity="left|center_vertical" />
 
     <TextView
         android:id="@+id/tv_saved"
@@ -29,8 +29,7 @@
         android:layout_below="@id/tv_name"
         android:layout_marginLeft="@dimen/size_10"
         android:layout_marginTop="@dimen/size_10"
-        android:layout_toRightOf="@id/img_icon"
-        />
+        android:layout_toRightOf="@id/img_icon" />
 
     <ImageView
         android:id="@+id/img_edit"

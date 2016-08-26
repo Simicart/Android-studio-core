@@ -58,6 +58,9 @@ public class ItemShippingMethodView extends SimiComponent {
         rltItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String idIcon = "core_icon_option_selected";
+                Drawable icon = AppColorConfig.getInstance().getIcon(idIcon);
+                imgIcon.setImageDrawable(icon);
                 mCallBack.onSelect(mShippingEntity);
             }
         });

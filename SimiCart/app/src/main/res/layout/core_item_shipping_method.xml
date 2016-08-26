@@ -10,6 +10,7 @@
         android:layout_height="@dimen/size_24"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/size_5"
+        android:padding="5dp"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_value_selected" />
 
@@ -24,25 +25,23 @@
         android:text="Test title" />
 
     <TextView
+        android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_title"
         android:layout_marginLeft="@dimen/size_10"
         android:layout_marginTop="@dimen/size_10"
         android:layout_toRightOf="@id/img_icon"
-        android:text="TEst content"
-        android:id="@+id/tv_content"
-        />
+        android:text="TEst content" />
 
     <TextView
+        android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/size_10"
-        android:id="@+id/tv_price"
-        android:text="price"
         android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/size_10"
         android:gravity="center"
-        />
+        android:text="price" />
 
 </RelativeLayout>

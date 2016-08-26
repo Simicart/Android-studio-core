@@ -6,8 +6,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.delegate.ReviewOrderDelegate;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,11 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
     public void initView() {
         llReviewOrder = (LinearLayout) id("ll_review_order");
         btnPlaceOrder = (AppCompatButton) id("btn_place_order");
+
+        String textPlaceOrder = SimiTranslator.getInstance().translate("Place Order");
+        btnPlaceOrder.setText(textPlaceOrder);
+        btnPlaceOrder.setTextColor(AppColorConfig.getInstance().getContentColor());
+        btnPlaceOrder.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
     }
 
     @Override

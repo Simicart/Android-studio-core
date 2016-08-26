@@ -5,6 +5,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
+import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
@@ -33,6 +34,7 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
     public PaymentMethodComponent(ArrayList<PaymentMethodEntity> mPaymentMethods) {
         super();
         this.mPaymentMethods = mPaymentMethods;
+
     }
 
     @Override
@@ -52,6 +54,11 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
         tv_title.setTextColor(bgText);
 
         ll_core_component = (LinearLayout) findView("ll_body_component");
+        createRows();
+    }
+
+    protected void createRows() {
+        ll_core_component.removeAllViewsInLayout();
         if (null != mPaymentMethods && mPaymentMethods.size() > 0) {
             mItemViews = new ArrayList<>();
             for (int i = 0; i < mPaymentMethods.size(); i++) {
@@ -67,6 +74,10 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
         }
     }
 
+    public View updateView(ArrayList<PaymentMethodEntity> paymentMethods) {
+        mPaymentMethods = paymentMethods;
+        return createView();
+    }
 
     @Override
     public void onSelectItem(PaymentMethodEntity payment) {
@@ -83,6 +94,12 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
             mCallBack.onEditAction(payment);
         }
     }
+
+    public void setListPaymentMethod(ArrayList<PaymentMethodEntity> paymentMethods) {
+        mPaymentMethods = paymentMethods;
+    }
+
+
 
     public void setCallBack(PaymentMethodCallBack callBack) {
         mCallBack = callBack;
