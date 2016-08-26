@@ -1,10 +1,10 @@
 package com.simicart.core.catalog.filter.delegate;
 
-import java.util.ArrayList;
-
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
+
+import java.util.ArrayList;
 
 public interface FilterDelegate extends SimiDelegate {
 

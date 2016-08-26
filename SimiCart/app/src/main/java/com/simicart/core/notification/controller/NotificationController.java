@@ -15,19 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.simicart.MainActivity;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.GPSTracker;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.notification.GCMIntentService;
@@ -36,7 +33,6 @@ import com.simicart.core.notification.entity.NotificationEntity;
 import com.simicart.core.notification.fragment.WebviewFragment;
 import com.simicart.core.notification.gcm.GCMConstants;
 import com.simicart.core.notification.gcm.GCMRegistrar;
-import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 
 public class NotificationController {
 

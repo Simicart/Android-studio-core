@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.slidemenu.block.PhoneSlideMenuBlock;
 import com.simicart.core.slidemenu.controller.PhoneSlideMenuController;

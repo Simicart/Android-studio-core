@@ -1,8 +1,8 @@
 package com.simicart.core.catalog.product.delegate;
 
-import java.util.ArrayList;
-
 import com.simicart.core.base.delegate.SimiDelegate;
+
+import java.util.ArrayList;
 
 public interface CustomerReviewDelegate extends SimiDelegate {
 

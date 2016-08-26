@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.simicart.MainActivity;
 import com.simicart.core.base.manager.SimiManager;
 
 public class ServiceNotification extends Service {

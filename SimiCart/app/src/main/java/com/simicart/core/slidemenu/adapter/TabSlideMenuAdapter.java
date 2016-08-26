@@ -1,13 +1,12 @@
 package com.simicart.core.slidemenu.adapter;
 
-import java.util.ArrayList;
-
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.Config;
+
+import java.util.ArrayList;
 
 public class TabSlideMenuAdapter extends FragmentStatePagerAdapter {
 	protected ArrayList<SimiFragment> mListFragment;

@@ -1,11 +1,10 @@
 package com.simicart.core.customer.entity;
 
-import java.util.ArrayList;
+import com.simicart.core.base.model.entity.SimiEntity;
 
 import org.json.JSONException;
 
-import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.common.Utils;
+import java.util.ArrayList;
 
 public class ConfigCustomerAddress extends SimiEntity {
     public static String OPTION_REQUIRE = "req";

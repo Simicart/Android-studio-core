@@ -1,8 +1,5 @@
 package com.simicart.core.shortcutbadger.util;
 
-import java.io.ByteArrayOutputStream;
-import java.util.List;
-
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
@@ -14,6 +11,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
 import com.simicart.core.shortcutbadger.ShortcutBadgeException;
+
+import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,5 +1,11 @@
 package com.simicart.plugins.locator.controller;
 
+import android.location.Location;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.View.OnClickListener;
+
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
@@ -7,36 +13,23 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.error.SimiError;
-import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
 import com.simicart.plugins.locator.delegate.StoreLocatorStoreListDelegate;
 import com.simicart.plugins.locator.entity.SearchObject;
-import com.simicart.plugins.locator.fragment.StoreDetailFragment;
 import com.simicart.plugins.locator.fragment.StoreLocatorSearchStoreFragment;
 import com.simicart.plugins.locator.model.ModelLocator;
-
-import android.location.Location;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import java.util.HashMap;
 
 public class StoreLocatorStoreListController extends SimiController {
 
-	protected OnItemClickListener onListItemClick;
 	protected OnClickListener onSearchClick;
-	protected OnScrollListener onListScroll;
+	protected RecyclerView.OnScrollListener onListScroll;
 	protected int limit = 10;
 	protected int offset = 0;
+	protected int itemCount = 0;
 	protected String resultNumber;
 	protected boolean isOnscroll = true;
 	protected SearchObject searchObject;
@@ -51,7 +44,7 @@ public class StoreLocatorStoreListController extends SimiController {
 		this.searchObject = searchObject;
 	}
 
-	public OnScrollListener getOnListScroll() {
+	public RecyclerView.OnScrollListener getOnListScroll() {
 		return onListScroll;
 	}
 
@@ -59,75 +52,39 @@ public class StoreLocatorStoreListController extends SimiController {
 		return onSearchClick;
 	}
 
-	public OnItemClickListener getOnListItemClick() {
-		return onListItemClick;
-	}
-
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub
 		requestGetListStore(true);
 
-		onListScroll = new OnScrollListener() {
-
-			int currentFirstVisibleItem;
+		onListScroll = new RecyclerView.OnScrollListener() {
 
 			@Override
-			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				// TODO Auto-generated method stub
-				try {
-					int threshold = 1;
-					int count = view.getCount();
-					Log.e("Count :", count + "");
-					if (scrollState == SCROLL_STATE_IDLE) {
-						if ((view.getLastVisiblePosition() >= count - threshold)
-								&& Integer.parseInt(resultNumber) > count) {
-							Log.e("ResultNumber :", resultNumber);
-							Log.e("IsOnscroll:", isOnscroll + "");
-							mDelegate.showLoadMore(true);
-							if (isOnscroll == true) {
-								isOnscroll = false;
-								offset += limit;
-								requestGetListStore(false);
-							}
-						} else {
-							mDelegate.showLoadMore(false);
-						}
-					}
-
-				} catch (Exception e) {
-					System.err.println(e.getMessage());
-				}
-			}
-
-			@Override
-			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-				// TODO Auto-generated method stub
-				try {
-					if (currentFirstVisibleItem > firstVisibleItem) {
-						mDelegate.visibleSearchLayout(true);
-					} else if (currentFirstVisibleItem < firstVisibleItem) {
-						mDelegate.visibleSearchLayout(false);
-					}
-					currentFirstVisibleItem = firstVisibleItem;
-				} catch (Exception e) {
-					System.err.println(e.getMessage());
-				}
-			}
-		};
-
-		onListItemClick = new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				// TODO Auto-generated method stub
-				HashMap<String,Object> hmData = new HashMap<String, Object>();
-				hmData.put(Constants.KeyData.STORE_OBJECT, mDelegate.getListStore().get(position));
-				StoreDetailFragment detail = StoreDetailFragment.newInstance(new SimiData(hmData));
-				if (DataLocal.isTablet) {
-					SimiManager.getIntance().addPopupFragment(detail);
+			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+				super.onScrolled(recyclerView, dx, dy);
+				if (dy <= 0) {
+					// Scrolling up
+					mDelegate.visibleSearchLayout(true);
 				} else {
-					SimiManager.getIntance().replaceFragment(detail);
+					// Scrolling down
+					mDelegate.visibleSearchLayout(false);
+				}
+			}
+
+			@Override
+			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+				itemCount = recyclerView.getChildCount();
+				int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+				int threshold = offset + limit -1;
+				if (lastPosition == threshold
+						&& offset <= itemCount) {
+					if (isOnscroll) {
+						offset += limit;
+						isOnscroll = false;
+						mDelegate.showLoadMore(true);
+						requestGetListStore(false);
+					}
 				}
 			}
 		};
@@ -167,7 +124,9 @@ public class StoreLocatorStoreListController extends SimiController {
 				mDelegate.showLoadMore(false);
 				resultNumber = ((ModelLocator)mModel).getTotalResult();
 				mDelegate.updateView(mModel.getCollection());
-				isOnscroll = true;
+				if (itemCount >= offset) {
+					isOnscroll = true;
+				}
 			}
 		});
 		mModel.setFailListener(new ModelFailCallBack() {

@@ -1,8 +1,14 @@
 package com.simicart.plugins.locator.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.common.Utils;
+
 import java.io.Serializable;
 
-public class SearchObject implements Serializable{
+public class SearchObject extends SimiEntity implements Parcelable {
 	/**
 	 * 
 	 */
@@ -13,6 +19,13 @@ public class SearchObject implements Serializable{
 	private int tag;
 	private String name_country;
 	private int position_country;
+
+	private String city_key = "city";
+	private String state_key = "state";
+	private String zipcode_key = "zipcode";
+	private String tag_key = "tag";
+	private String name_country_key = "name_country";
+	private String position_country_key = "position_country";
 	
 	public SearchObject() {
 		city = "";
@@ -22,7 +35,30 @@ public class SearchObject implements Serializable{
 		name_country = "";
 		position_country = 0;
 	}
-	
+
+	@Override
+	public void parse() {
+
+		city = getData(city_key);
+
+		state = getData(state_key);
+
+		zipcode = getData(zipcode_key);
+
+		String sTag = getData(tag_key);
+		if(Utils.validateString(sTag)) {
+			tag = Integer.parseInt(sTag);
+		}
+
+		name_country = getData(name_country_key);
+
+		String positionCountry = getData(position_country_key);
+		if(Utils.validateString(positionCountry)) {
+			position_country = Integer.parseInt(positionCountry);
+		}
+
+	}
+
 	public int getPosition_country() {
 		return position_country;
 	}
@@ -78,4 +114,13 @@ public class SearchObject implements Serializable{
 				+ ", position_country=" + position_country + "]";
 	}
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+
+	}
 }

@@ -1,11 +1,10 @@
 package com.simicart.core.base.model.entity;
 
+import android.os.Bundle;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.os.Bundle;
-import android.util.Log;
 
 public class SimiEntity {
 	protected JSONObject mJSON;

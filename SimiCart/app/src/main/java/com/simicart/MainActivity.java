@@ -1,14 +1,11 @@
 package com.simicart;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
@@ -16,7 +13,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -25,7 +21,6 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.FontsOverride;
-import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
@@ -238,8 +233,8 @@ public class MainActivity extends FragmentActivity {
 //                                    SimiManager.getIntance()
 //                                            .backToHomeFragment();
 //                                } else {
-//                                    SimiManager.getIntance().getManager()
-//                                            .popBackStack();
+                                    SimiManager.getIntance().getManager()
+                                            .popBackStack();
 //                                }
                             } else {
                                 SimiManager.getIntance().getManager()
@@ -332,5 +327,16 @@ public class MainActivity extends FragmentActivity {
 //        intent.putExtra("counter", 1);
 //        startActivity(intent);
 //    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments != null) {
+            int size = fragments.size();
+            Fragment fragment = fragments.get(size-1);
+            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 
 }

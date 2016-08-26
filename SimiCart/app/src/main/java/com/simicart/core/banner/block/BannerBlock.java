@@ -2,33 +2,21 @@ package com.simicart.core.banner.block;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
-import android.webkit.URLUtil;
 
-import com.simicart.MainActivity;
 import com.simicart.core.banner.animation.Animations.DescriptionAnimation;
 import com.simicart.core.banner.animation.Indicators.PagerIndicator.IndicatorVisibility;
 import com.simicart.core.banner.animation.SliderLayout;
 import com.simicart.core.banner.animation.SliderTypes.BaseSliderView;
 import com.simicart.core.banner.animation.SliderTypes.BaseSliderView.OnSliderClickListener;
 import com.simicart.core.banner.animation.SliderTypes.DefaultSliderView;
-import com.simicart.core.banner.animation.Transformers.BaseTransformer;
 import com.simicart.core.banner.delegate.BannerDelegate;
 import com.simicart.core.banner.entity.BannerEntity;
 import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.catalog.category.fragment.CategoryFragment;
-import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
-import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 
 import java.util.ArrayList;
 

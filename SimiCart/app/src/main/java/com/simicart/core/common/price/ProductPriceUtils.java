@@ -1,18 +1,14 @@
 package com.simicart.core.common.price;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.util.Log;
-
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductOption;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ProductPriceUtils {
 

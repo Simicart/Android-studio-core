@@ -1,7 +1,5 @@
 package com.simicart.core.slidemenu.fragment;
 
-import java.lang.reflect.Field;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
+
+import java.lang.reflect.Field;
 
 public class CateSlideMenuFragment extends SimiFragment {
 

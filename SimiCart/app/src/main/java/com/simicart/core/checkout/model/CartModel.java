@@ -1,16 +1,14 @@
 package com.simicart.core.checkout.model;
 
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.config.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 

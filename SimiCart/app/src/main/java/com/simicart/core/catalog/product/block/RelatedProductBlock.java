@@ -18,7 +18,6 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.adapter.RelatedProductListAdapter;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.controller.ProductListListenerController;

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.provider.Settings;
 
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.Config;
 
 
 public class ShowMapError {

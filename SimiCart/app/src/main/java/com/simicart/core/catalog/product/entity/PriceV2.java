@@ -1,12 +1,12 @@
 package com.simicart.core.catalog.product.entity;
 
-import java.io.Serializable;
+import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.config.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.config.Constants;
+import java.io.Serializable;
 
 public class PriceV2 extends SimiEntity implements Serializable{
 

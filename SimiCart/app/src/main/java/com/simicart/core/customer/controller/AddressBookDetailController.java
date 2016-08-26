@@ -1,11 +1,6 @@
 package com.simicart.core.customer.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -33,6 +28,9 @@ import com.simicart.core.customer.entity.CountryEntity;
 import com.simicart.core.customer.entity.StateEntity;
 import com.simicart.core.customer.model.AddressBookDetailModel;
 import com.simicart.core.customer.model.GetCountryModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddressBookDetailController extends SimiController {
     protected OnClickListener mSaveListener;

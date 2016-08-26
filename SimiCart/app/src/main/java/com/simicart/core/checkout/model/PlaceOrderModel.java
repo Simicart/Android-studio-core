@@ -1,9 +1,5 @@
 package com.simicart.core.checkout.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.util.Log;
 
 import com.simicart.core.base.model.SimiModel;
@@ -11,6 +7,10 @@ import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.checkout.entity.OrderInforEntity;
 import com.simicart.core.config.Constants;
 import com.simicart.core.notification.entity.NotificationEntity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class PlaceOrderModel extends SimiModel {
 

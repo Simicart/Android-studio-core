@@ -1,10 +1,7 @@
 package com.simicart.core.adapter;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
@@ -24,9 +21,10 @@ import com.simicart.core.checkout.entity.Option;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 @SuppressLint({"DefaultLocale", "ClickableViewAccessibility", "ViewHolder"})
 public class CartListAdapter extends BaseAdapter {

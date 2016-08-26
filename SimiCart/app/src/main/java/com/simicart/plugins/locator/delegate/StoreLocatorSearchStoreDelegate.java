@@ -1,10 +1,10 @@
 package com.simicart.plugins.locator.delegate;
 
-import java.util.ArrayList;
-
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.plugins.locator.entity.CountryObject;
 import com.simicart.plugins.locator.entity.SearchObject;
+
+import java.util.ArrayList;
 
 public interface StoreLocatorSearchStoreDelegate extends SimiDelegate {
 

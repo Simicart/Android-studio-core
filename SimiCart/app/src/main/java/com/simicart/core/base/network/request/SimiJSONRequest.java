@@ -3,10 +3,8 @@ package com.simicart.core.base.network.request;
 import android.util.Log;
 
 import com.simicart.core.base.delegate.RequestCallBack;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.network.response.SimiResponse;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
 
 public class SimiJSONRequest extends SimiRequest {
 

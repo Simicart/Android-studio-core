@@ -15,9 +15,6 @@
  */
 package com.simicart.core.notification;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -34,9 +31,7 @@ import com.magestore.simicart.R;
 import com.simicart.MainActivity;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.notification.common.CommonUtilities;
 import com.simicart.core.notification.common.ServerUtilities;
 import com.simicart.core.notification.entity.NotificationEntity;
@@ -46,6 +41,9 @@ import com.simicart.core.notification.gcm.GCMRegistrar;
 import com.simicart.core.shortcutbadger.ShortcutBadgeException;
 import com.simicart.core.shortcutbadger.ShortcutBadger;
 import com.simicart.core.splashscreen.SplashActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * IntentService responsible for handling GCM messages.

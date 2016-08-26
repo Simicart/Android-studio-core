@@ -1,14 +1,14 @@
 package com.simicart.core.customer.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.util.Log;
 
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.config.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AddressBookDetailModel extends SimiModel{
 	protected String mCountry;

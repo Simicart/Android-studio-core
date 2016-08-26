@@ -1,15 +1,15 @@
 package com.simicart.core.catalog.filter.entity;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.catalog.filter.common.FilterConstant;
+import com.simicart.core.common.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.catalog.filter.common.FilterConstant;
-import com.simicart.core.common.Utils;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class FilterEntity extends SimiEntity implements Serializable {
 

@@ -1,11 +1,18 @@
 package com.simicart.plugins.locator.entity;
 
-import java.io.Serializable;
-import java.util.List;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.simicart.core.base.model.entity.SimiEntity;
 
-public class StoreObject extends SimiEntity implements Serializable{
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class StoreObject extends SimiEntity implements Parcelable {
 	/**
 	 * 
 	 */
@@ -55,11 +62,180 @@ public class StoreObject extends SimiEntity implements Serializable{
 	// haita
 	private String country_name;
 	// end
-	private List<SpecialObject> list_special;
-	private List<SpecialObject> list_holiday;
+	private ArrayList<SpecialObject> list_special;
+	private ArrayList<SpecialObject> list_holiday;
 
-	
-	
+	private String storelocator_id_key = "storelocator_id";
+	private String name_key = "name";
+	private String address_key = "address";
+	private String city_key = "city";
+	private String country_key = "country";
+	private String zipcode_key = "zipcode";
+	private String state_key = "state";
+	private String state_id_key = "state_id";
+	private String email_key = "email";
+	private String phone_key = "phone";
+	private String fax_key = "fax";
+	private String description_key = "description";
+	private String status_key = "status";
+	private String sort_key = "sort";
+	private String link_key = "link";
+	private String latitude_key = "latitude";
+	private String longtitude_key = "longtitude";
+	private String monday_status_key = "monday_status";
+	private String monday_open_key = "monday_open";
+	private String monday_close_key = "monday_close";
+	private String tuesday_status_key = "tuesday_status";
+	private String tuesday_open_key = "tuesday_open";
+	private String tuesday_close_key = "tuesday_close";
+	private String wednesday_status_key = "wednesday_status";
+	private String wednesday_open_key = "wednesday_open";
+	private String wednesday_close_key = "wednesday_close";
+	private String thursday_status_key = "thursday_status";
+	private String thursday_open_key = "thursday_open";
+	private String thursday_close_key = "thursday_close";
+	private String friday_status_key = "friday_status";
+	private String friday_open_key = "friday_open";
+	private String friday_close_key = "friday_close";
+	private String saturday_status_key = "saturday_status";
+	private String saturday_open_key = "saturday_open";
+	private String saturday_close_key = "saturday_close";
+	private String sunday_status_key = "sunday_status";
+	private String sunday_open_key = "sunday_open";
+	private String sunday_close_key = "sunday_close";
+	private String zoom_level_key = "zoom_level";
+	private String image_icon_key = "image_icon";
+	private String distance_key = "distance";
+	private String image_key = "image";
+	private String country_name_key = "country_name";
+	private String list_special_key = "special_days";
+	private String list_holiday_key = "holiday_days";
+
+	@Override
+	public void parse() {
+
+		storelocator_id = getData(storelocator_id_key);
+
+		image = getData(image_key);
+
+		country_name = getData(country_name_key);
+
+		country = getData(country_key);
+
+		name = getData(name_key);
+
+		address = getData(address_key);
+
+		city = getData(city_key);
+
+		zipcode = getData(zipcode_key);
+
+		state = getData(state_key);
+
+		state_id = getData(state_id_key);
+
+		email = getData(email_key);
+
+		phone = getData(phone_key);
+
+		fax = getData(fax_key);
+
+		description = getData(description_key);
+
+		status = getData(status_key);
+
+		sort = getData(sort_key);
+
+		link = getData(link_key);
+
+		latitude = getData(latitude_key);
+
+		longtitude = getData(longtitude_key);
+
+		monday_status = getData(monday_status_key);
+
+		monday_open = getData(monday_open_key);
+
+		monday_close = getData(monday_close_key);
+
+		tuesday_status = getData(tuesday_status_key);
+
+		tuesday_open = getData(tuesday_open_key);
+
+		tuesday_close = getData(tuesday_close_key);
+
+		wednesday_status = getData(wednesday_status_key);
+
+		wednesday_open = getData(wednesday_open_key);
+
+		wednesday_close = getData(wednesday_close_key);
+
+		thursday_status = getData(thursday_status_key);
+
+		thursday_open = getData(thursday_open_key);
+
+		thursday_close = getData(thursday_close_key);
+
+		friday_status = getData(friday_status_key);
+
+		friday_open = getData(friday_open_key);
+
+		friday_close = getData(friday_close_key);
+
+		saturday_status = getData(saturday_status_key);
+
+		saturday_open = getData(saturday_open_key);
+
+		saturday_close = getData(saturday_close_key);
+
+		sunday_status = getData(sunday_status_key);
+
+		sunday_open = getData(sunday_open_key);
+
+		sunday_close = getData(sunday_close_key);
+
+		zoom_level = getData(zoom_level_key);
+
+		image_icon = getData(image_icon_key);
+
+		distance = getData(distance_key);
+
+		if(hasKey(list_holiday_key)) {
+			try {
+				JSONArray holidayArr = mJSON.getJSONArray(list_holiday_key);
+				if(holidayArr != null) {
+					list_holiday = new ArrayList<>();
+					for(int i=0;i<holidayArr.length();i++) {
+						JSONObject holidayObj = holidayArr.getJSONObject(i);
+						SpecialObject specialObject = new SpecialObject();
+						specialObject.parse(holidayObj);
+						list_holiday.add(specialObject);
+					}
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+
+		if(hasKey(list_special_key)) {
+			try {
+				JSONArray specialArr = mJSON.getJSONArray(list_special_key);
+				if(specialArr != null) {
+					list_special = new ArrayList<>();
+					for(int i=0;i<specialArr.length();i++) {
+						JSONObject specialObj = specialArr.getJSONObject(i);
+						SpecialObject specialObject = new SpecialObject();
+						specialObject.parse(specialObj);
+						list_special.add(specialObject);
+					}
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	public String getStorelocator_id() {
 		return storelocator_id;
 	}
@@ -412,21 +588,30 @@ public class StoreObject extends SimiEntity implements Serializable{
 		this.image_icon = image_icon;
 	}
 
-	public List<SpecialObject> getList_special() {
+	public ArrayList<SpecialObject> getList_special() {
 		return list_special;
 	}
 
-	public void setList_special(List<SpecialObject> list_special) {
+	public void setList_special(ArrayList<SpecialObject> list_special) {
 		this.list_special = list_special;
 	}
 
-	public List<SpecialObject> getList_holiday() {
+	public ArrayList<SpecialObject> getList_holiday() {
 		return list_holiday;
 	}
 
-	public void setList_holiday(List<SpecialObject> list_holiday) {
+	public void setList_holiday(ArrayList<SpecialObject> list_holiday) {
 		this.list_holiday = list_holiday;
 	}
 
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+
+	}
 }

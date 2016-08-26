@@ -2,13 +2,13 @@ package com.simicart.core.customer.entity;
 
 import android.util.Log;
 
-import java.util.ArrayList;
+import com.simicart.core.base.model.entity.SimiEntity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.simicart.core.base.model.entity.SimiEntity;
+import java.util.ArrayList;
 
 public class CountryEntity extends SimiEntity {
     protected String mCode;

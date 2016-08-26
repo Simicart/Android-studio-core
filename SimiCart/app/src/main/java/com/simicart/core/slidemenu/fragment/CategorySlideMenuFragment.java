@@ -2,7 +2,6 @@ package com.simicart.core.slidemenu.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.catalog.category.block.CategoryBlock;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.slidemenu.block.CategorySlideMenuBlock;

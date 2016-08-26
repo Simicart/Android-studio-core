@@ -1,19 +1,17 @@
 package com.simicart.plugins.locator.controller;
 
-import java.util.ArrayList;
-
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.Config;
 import com.simicart.plugins.locator.delegate.StoreLocatorMapDelegate;
 import com.simicart.plugins.locator.entity.StoreObject;
 import com.simicart.plugins.locator.model.ModelLocator;
+
+import java.util.ArrayList;
 
 public class StoreLocatorMapController extends SimiController {
 	

@@ -13,7 +13,6 @@ import com.simicart.core.catalog.product.entity.CacheOption;
 import com.simicart.core.catalog.product.entity.ProductOption;
 import com.simicart.core.common.options.base.CacheOptionView;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 
 public class CacheOptionTimeView extends CacheOptionView {
 

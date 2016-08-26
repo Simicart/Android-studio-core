@@ -1,31 +1,25 @@
 package com.simicart.core.catalog.category.block;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.adapter.CategoryBaseAdapter;
 import com.simicart.core.catalog.category.delegate.CategoryDelegate;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.style.NoScrollListView;
+
+import java.util.ArrayList;
 
 public class CategoryBlock extends SimiBlock implements CategoryDelegate {
 

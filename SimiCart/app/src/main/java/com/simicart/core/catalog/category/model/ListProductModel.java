@@ -1,14 +1,12 @@
 package com.simicart.core.catalog.category.model;
 
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 

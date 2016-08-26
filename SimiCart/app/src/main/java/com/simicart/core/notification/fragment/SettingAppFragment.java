@@ -16,8 +16,6 @@ import android.widget.TextView;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DataPreferences;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 public class SettingAppFragment extends SimiFragment {

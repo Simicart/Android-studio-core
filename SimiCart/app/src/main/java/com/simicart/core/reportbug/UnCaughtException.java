@@ -12,7 +12,6 @@ import android.os.StatFs;
 import android.util.Log;
 
 import com.simicart.core.common.DataPreferences;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.splashscreen.SplashActivity;
 
 import java.io.File;

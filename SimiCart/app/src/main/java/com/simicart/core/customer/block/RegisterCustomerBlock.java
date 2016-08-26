@@ -1,21 +1,5 @@
 package com.simicart.core.customer.block;
 
-import java.util.Calendar;
-
-import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
-import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.adapter.GenderAdapter;
-import com.simicart.core.customer.delegate.RegisterCustomerDelegate;
-import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.customer.entity.RegisterCustomer;
-import com.simicart.core.material.ButtonRectangle;
-import com.simicart.core.material.LayoutRipple;
-
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -31,6 +15,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.Constants;
+import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.adapter.GenderAdapter;
+import com.simicart.core.customer.delegate.RegisterCustomerDelegate;
+import com.simicart.core.customer.entity.ConfigCustomerAddress;
+import com.simicart.core.customer.entity.RegisterCustomer;
+import com.simicart.core.material.ButtonRectangle;
+import com.simicart.core.material.LayoutRipple;
+
+import java.util.Calendar;
 
 @SuppressLint("DefaultLocale")
 public class RegisterCustomerBlock extends SimiBlock implements

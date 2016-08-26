@@ -2,7 +2,6 @@ package com.simicart.core.common.price;
 
 import android.graphics.Paint;
 import android.text.Html;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;

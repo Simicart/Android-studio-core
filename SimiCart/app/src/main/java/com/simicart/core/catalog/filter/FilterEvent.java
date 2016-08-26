@@ -1,11 +1,5 @@
 package com.simicart.core.catalog.filter;
 
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +8,12 @@ import com.simicart.core.catalog.category.delegate.FilterRequestDelegate;
 import com.simicart.core.catalog.filter.common.FilterConstant;
 import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class FilterEvent {
 	protected FilterRequestDelegate mDelegate;

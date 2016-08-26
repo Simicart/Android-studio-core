@@ -1,7 +1,5 @@
 package com.simicart.core.config;
 
-import android.util.Log;
-
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 

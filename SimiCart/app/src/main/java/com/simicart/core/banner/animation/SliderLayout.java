@@ -1,9 +1,5 @@
 package com.simicart.core.banner.animation;
 
-import java.lang.reflect.Field;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Message;
@@ -40,6 +36,10 @@ import com.simicart.core.banner.animation.Tricks.FixedSpeedScroller;
 import com.simicart.core.banner.animation.Tricks.InfinitePagerAdapter;
 import com.simicart.core.banner.animation.Tricks.InfiniteViewPager;
 import com.simicart.core.banner.animation.Tricks.ViewPagerEx;
+
+import java.lang.reflect.Field;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * SliderLayout is compound layout. This is combined with {@link com.daimajia.slider.library.Indicators.PagerIndicator}

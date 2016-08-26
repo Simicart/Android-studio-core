@@ -1,27 +1,5 @@
 package com.simicart.plugins.locator.fragment;
 
-import java.util.Locale;
-
-import com.google.android.gms.maps.model.LatLng;
-import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.common.GPSTracker;
-import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.Rconfig;
-import com.simicart.core.style.NoScrollListView;
-import com.simicart.plugins.locator.adapter.HolidayAdapter;
-import com.simicart.plugins.locator.adapter.SpecialAdapter;
-import com.simicart.plugins.locator.common.DataLocator;
-import com.simicart.plugins.locator.common.ShowMapError;
-import com.simicart.plugins.locator.common.StoreLocatorConfig;
-import com.simicart.plugins.locator.entity.StoreObject;
-import com.simicart.plugins.locator.style.CircleTransform;
-import com.squareup.picasso.Picasso;
-
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -29,6 +7,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -36,20 +16,38 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.simicart.core.base.drawImage.SimiDrawImage;
+import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.GPSTracker;
+import com.simicart.core.common.Utils;
+import com.simicart.core.config.Constants;
+import com.simicart.core.config.Rconfig;
+import com.simicart.plugins.locator.adapter.SpecialDayAdapter;
+import com.simicart.plugins.locator.common.ShowMapError;
+import com.simicart.plugins.locator.common.StoreLocatorConfig;
+import com.simicart.plugins.locator.entity.StoreObject;
+
+import java.util.Locale;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StoreDetailFragment extends SimiFragment {
 	private View view;
 	private TextView txt_name, txt_phone, txt_email, txt_web, txt_address, txt_des, txt_direc, txt_openning,
 			txt_special, txt_holiday;
-	private ImageView img_map;
+	private CircleImageView img_map;
 	private TextView txt_mon, txt_tue, txt_wed, txt_thur, txt_fri, txt_sat, txt_sun, read_more;
 	private TextView lb_monday, lb_sunday, lb_tuesday, lb_wednesday, lb_thursday, lb_friday, lb_saturday;
 	private LinearLayout map, special_layout, holiday_layout;
-	private NoScrollListView list_special, list_holiday;
+	private RecyclerView list_special, list_holiday;
 	private boolean readMore = true;
 	private LinearLayout locator, phone, email, home, decrip;
 	private StoreObject storeObject;
@@ -98,7 +96,7 @@ public class StoreDetailFragment extends SimiFragment {
 	protected void initAddress() {
 		locator = (LinearLayout) view.findViewById(Rconfig.getInstance().getIdLayout("location"));
 		txt_address = (TextView) view.findViewById(Rconfig.getInstance().getIdLayout("txt_address"));
-		txt_address.setText(DataLocator.convertAddress(storeObject));
+		txt_address.setText(StoreLocatorConfig.convertAddress(storeObject));
 	}
 
 	protected void initPhone() {
@@ -179,8 +177,10 @@ public class StoreDetailFragment extends SimiFragment {
 				+ storeObject.getLongtitude() + "&markers=icon:"
 				+ getResources().getDrawable(Rconfig.getInstance().getIdDraw("plugins_locator_maker_default")) + "|"
 				+ storeObject.getLatitude() + "," + storeObject.getLongtitude() + "&zoom=20&size=400x400&sensor=false";
-		img_map = (ImageView) view.findViewById(Rconfig.getInstance().getIdLayout("image_map"));
-		Picasso.with(getActivity()).load(url).transform(new CircleTransform()).into(img_map);
+		img_map = (CircleImageView) view.findViewById(Rconfig.getInstance().getIdLayout("image_map"));
+//		Picasso.with(getActivity()).load(url).transform(new CircleTransform()).into(img_map);
+		SimiDrawImage drawImage = new SimiDrawImage();
+		drawImage.drawImage(img_map, url);
 	}
 
 	protected void initOpeningHour() {
@@ -205,8 +205,12 @@ public class StoreDetailFragment extends SimiFragment {
 		lb_friday = (TextView) view.findViewById(Rconfig.getInstance().getIdLayout("lb_friday"));
 		special_layout = (LinearLayout) view.findViewById(Rconfig.getInstance().getIdLayout("special_Layout"));
 		holiday_layout = (LinearLayout) view.findViewById(Rconfig.getInstance().getIdLayout("holiday_layout"));
-		list_special = (NoScrollListView) view.findViewById(Rconfig.getInstance().getIdLayout("list_special"));
-		list_holiday = (NoScrollListView) view.findViewById(Rconfig.getInstance().getIdLayout("list_holyday"));
+		list_special = (RecyclerView) view.findViewById(Rconfig.getInstance().getIdLayout("list_special"));
+		list_special.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+		list_special.setNestedScrollingEnabled(false);
+		list_holiday = (RecyclerView) view.findViewById(Rconfig.getInstance().getIdLayout("list_holyday"));
+		list_holiday.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+		list_holiday.setNestedScrollingEnabled(false);
 
 		lb_monday.setText(SimiTranslator.getInstance().translate("Monday") + ":");
 		lb_saturday.setText(SimiTranslator.getInstance().translate("Saturday") + ":");
@@ -296,13 +300,13 @@ public class StoreDetailFragment extends SimiFragment {
 			txt_sun.setText(SimiTranslator.getInstance().translate("Close"));
 		}
 		if (storeObject.getList_special() != null && storeObject.getList_special().size() > 0) {
-			SpecialAdapter adapter = new SpecialAdapter(getActivity(), storeObject.getList_special());
-			list_special.setAdapter(adapter);
+			SpecialDayAdapter specialDayAdapter = new SpecialDayAdapter(storeObject.getList_special(), false);
+			list_special.setAdapter(specialDayAdapter);
 		} else {
 			special_layout.setVisibility(View.GONE);
 		}
 		if (storeObject.getList_holiday() != null && storeObject.getList_holiday().size() > 0) {
-			HolidayAdapter hoAdapter = new HolidayAdapter(getActivity(), storeObject.getList_holiday());
+			SpecialDayAdapter hoAdapter = new SpecialDayAdapter(storeObject.getList_holiday(), true);
 			list_holiday.setAdapter(hoAdapter);
 		} else {
 			holiday_layout.setVisibility(View.GONE);

@@ -1,7 +1,5 @@
 package com.simicart.core.slidemenu.adapter;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
@@ -20,10 +18,11 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
+
+import java.util.ArrayList;
 
 @SuppressLint("DefaultLocale")
 public class SlideMenuAdapter extends BaseAdapter {

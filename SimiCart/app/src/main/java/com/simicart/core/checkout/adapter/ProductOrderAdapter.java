@@ -1,10 +1,7 @@
 package com.simicart.core.checkout.adapter;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +14,10 @@ import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 public class ProductOrderAdapter extends BaseAdapter {
 	ArrayList<Cart> mListCart;

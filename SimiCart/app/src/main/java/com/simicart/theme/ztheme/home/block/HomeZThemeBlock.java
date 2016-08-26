@@ -1,26 +1,18 @@
 package com.simicart.theme.ztheme.home.block;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.common.Utils;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.theme.ztheme.home.adapter.HomeZThemeAdapter;
 import com.simicart.theme.ztheme.home.delegate.HomeZThemeDelegate;
 import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
+
+import java.util.ArrayList;
 
 public class HomeZThemeBlock extends SimiBlock implements HomeZThemeDelegate {
 

@@ -16,7 +16,6 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.block.SearchHomeBlock;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;

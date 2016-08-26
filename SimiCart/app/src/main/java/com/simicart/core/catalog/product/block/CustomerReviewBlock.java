@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.product.block;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -25,8 +23,9 @@ import com.simicart.core.catalog.product.delegate.CustomerReviewDelegate;
 import com.simicart.core.catalog.product.entity.CustomerReview;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 public class CustomerReviewBlock extends SimiBlock implements
 		CustomerReviewDelegate {

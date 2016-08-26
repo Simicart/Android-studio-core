@@ -1,14 +1,14 @@
 package com.simicart.core.catalog.product.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import android.util.Log;
 
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.product.entity.CustomerReview;
 import com.simicart.core.config.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class CustomerReviewModel extends SimiModel {
 

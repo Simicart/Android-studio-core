@@ -1,14 +1,14 @@
 package com.simicart.core.customer.model;
 
-import java.util.Collections;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.config.Constants;
 import com.simicart.core.customer.entity.AddressEntity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.Collections;
 
 public class AddressBookModel extends SimiModel {
 

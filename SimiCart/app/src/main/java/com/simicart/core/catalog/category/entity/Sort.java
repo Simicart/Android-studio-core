@@ -1,9 +1,9 @@
 package com.simicart.core.catalog.category.entity;
 
+import com.simicart.core.config.Constants;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.simicart.core.config.Constants;
 
 
 public class Sort {

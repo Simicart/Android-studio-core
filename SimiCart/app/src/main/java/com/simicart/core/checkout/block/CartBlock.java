@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -19,12 +18,10 @@ import android.widget.TextView;
 import com.simicart.core.adapter.CartListAdapter;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.controller.CartListenerController;
 import com.simicart.core.checkout.controller.PopupCheckoutController;
 import com.simicart.core.checkout.delegate.CartDelegate;
-import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.common.price.TotalPriceView;
 import com.simicart.core.config.AppCheckoutConfig;
@@ -33,8 +30,6 @@ import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.material.ButtonRectangle;
-
-import java.util.ArrayList;
 
 public class CartBlock extends SimiBlock implements CartDelegate {
 

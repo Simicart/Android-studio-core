@@ -1,15 +1,5 @@
 package com.simicart.core.customer.block;
 
-import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.delegate.ForgotPasswordDelegate;
-import com.simicart.core.material.ButtonRectangle;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
@@ -21,6 +11,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.Constants;
+import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.delegate.ForgotPasswordDelegate;
 
 @SuppressLint("DefaultLocale")
 public class ForgotPasswordBlock extends SimiBlock implements

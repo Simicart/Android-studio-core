@@ -1,10 +1,6 @@
 package com.simicart.core.customer.controller;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,7 +16,6 @@ import android.widget.Toast;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
-import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
@@ -34,7 +29,6 @@ import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
-import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;

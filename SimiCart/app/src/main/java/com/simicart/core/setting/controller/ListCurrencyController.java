@@ -1,8 +1,5 @@
 package com.simicart.core.setting.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -13,6 +10,9 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.setting.entity.CurrencyEntity;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ListCurrencyController extends SimiController {
 	protected OnItemClickListener mClicker;

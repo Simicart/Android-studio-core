@@ -1,10 +1,10 @@
 package com.simicart.core.checkout.entity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.config.Constants;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Option extends SimiEntity {
 	protected String mtitle;

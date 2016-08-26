@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.filter.fragment;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +14,8 @@ import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 public class FilterFragment extends SimiFragment {
 

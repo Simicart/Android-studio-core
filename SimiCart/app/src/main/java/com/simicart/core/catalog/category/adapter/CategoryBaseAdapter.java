@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.category.adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -16,9 +14,10 @@ import android.widget.TextView;
 
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 public class CategoryBaseAdapter extends BaseAdapter {
 

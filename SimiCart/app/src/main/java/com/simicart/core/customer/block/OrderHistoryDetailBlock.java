@@ -20,7 +20,6 @@ import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.OrderHisDetail;
-import com.simicart.core.customer.entity.OrderHistory;
 
 import java.util.ArrayList;
 

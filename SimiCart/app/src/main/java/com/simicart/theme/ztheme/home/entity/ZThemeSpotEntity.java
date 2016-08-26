@@ -1,7 +1,6 @@
 package com.simicart.theme.ztheme.home.entity;
 
 import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.theme.ztheme.home.common.ConstantsZTheme;
 
 public class ZThemeSpotEntity extends SimiEntity {
 

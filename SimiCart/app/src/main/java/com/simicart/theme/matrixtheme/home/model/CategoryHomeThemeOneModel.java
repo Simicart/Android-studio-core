@@ -1,12 +1,12 @@
 package com.simicart.theme.matrixtheme.home.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.category.entity.Category;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class CategoryHomeThemeOneModel extends SimiModel {
 

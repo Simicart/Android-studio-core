@@ -20,7 +20,6 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
-import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.ProductPriceViewProductGridV03;
 import com.simicart.core.config.AppColorConfig;

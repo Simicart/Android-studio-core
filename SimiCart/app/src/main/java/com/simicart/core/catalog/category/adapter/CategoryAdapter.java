@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.slidemenu.fragment.CategorySlideMenuFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;

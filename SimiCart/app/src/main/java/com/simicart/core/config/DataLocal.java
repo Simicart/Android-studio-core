@@ -9,7 +9,6 @@ import android.os.Build;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.cms.entity.Cms;
-import com.simicart.core.customer.entity.ConfigCustomerAddress;
 import com.simicart.core.store.entity.Stores;
 
 import java.util.ArrayList;

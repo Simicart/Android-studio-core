@@ -1,7 +1,5 @@
 package com.simicart.core.catalog.product.fragment;
 
-import java.util.ArrayList;
-
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
@@ -15,12 +13,11 @@ import android.widget.TextView;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.catalog.product.entity.Attributes;
-import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 public class TechSpecsFragment extends SimiFragment {
 

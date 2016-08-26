@@ -1,9 +1,9 @@
 package com.simicart.core.slidemenu.block;
 
-import java.util.ArrayList;
-
 import com.simicart.core.slidemenu.delegate.SlideMenuDelegate;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
+
+import java.util.ArrayList;
 
 public class SlideMenuBlock implements SlideMenuDelegate {
 

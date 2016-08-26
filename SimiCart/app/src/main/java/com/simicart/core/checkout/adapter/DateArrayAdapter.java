@@ -1,11 +1,5 @@
 package com.simicart.core.checkout.adapter;
 
-import android.content.Context;
-import android.graphics.Typeface;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 public class DateArrayAdapter  {
 //	// Index of current item
 //	int currentItem;

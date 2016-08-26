@@ -27,12 +27,11 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.listproducts.fragment.SearchListFragment;
 import com.simicart.core.catalog.listproducts.adapter.ListPopupAdapter;
 import com.simicart.core.catalog.listproducts.entity.ItemListPopup;
+import com.simicart.core.catalog.listproducts.fragment.SearchListFragment;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;

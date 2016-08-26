@@ -1,14 +1,12 @@
 package com.simicart.plugins.locator.model;
 
-import android.util.Log;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.plugins.locator.entity.CountryObject;
-import com.simicart.plugins.locator.parser.CountryParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -25,9 +23,13 @@ public class GetSearchCountryModel extends SimiModel {
 		try {
 			JSONArray list = this.mJSON.getJSONArray("data");
 			collection = new SimiCollection();
-			CountryParser countryParser = new CountryParser();
-			listCountries = new ArrayList<>(countryParser.getResult(mJSON));
-			Log.e("abc", "country:" + listCountries.size());
+			listCountries = new ArrayList<>();
+			for(int i = 0;i<list.length();i++) {
+				JSONObject obj = list.getJSONObject(i);
+				CountryObject countryObject = new CountryObject();
+				countryObject.parse(obj);
+				listCountries.add(countryObject);
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

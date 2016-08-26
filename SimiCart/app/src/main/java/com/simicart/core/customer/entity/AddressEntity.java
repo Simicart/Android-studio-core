@@ -2,7 +2,6 @@ package com.simicart.core.customer.entity;
 
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;

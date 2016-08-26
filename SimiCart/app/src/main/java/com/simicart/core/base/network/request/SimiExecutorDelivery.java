@@ -1,10 +1,10 @@
 package com.simicart.core.base.network.request;
 
-import java.util.concurrent.Executor;
-
 import android.os.Handler;
 
 import com.simicart.core.base.network.response.SimiResponse;
+
+import java.util.concurrent.Executor;
 
 public class SimiExecutorDelivery {
 	/** Used for posting responses, typically to the main thread. */

@@ -4,7 +4,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.Utils;

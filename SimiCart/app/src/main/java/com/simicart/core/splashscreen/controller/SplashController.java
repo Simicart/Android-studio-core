@@ -14,7 +14,6 @@ import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.ReadXMLLanguage;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
@@ -28,7 +27,6 @@ import com.simicart.core.store.entity.Stores;
 import com.simicart.theme.matrixtheme.MatrixTheme;
 import com.simicart.theme.ztheme.ZTheme;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,5 @@
 package com.simicart.core.adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,8 @@ import android.widget.TextView;
 
 import com.simicart.core.catalog.category.entity.Sort;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 public class SortAdapter extends BaseAdapter {
 	ArrayList<Sort> listSort;

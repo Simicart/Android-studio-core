@@ -2,7 +2,6 @@ package com.simicart.core.base.manager;
 
 import android.app.Activity;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +21,6 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.request.SimiRequestQueue;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
-import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.checkout.fragment.ReviewOrderFragment;
 import com.simicart.core.common.Utils;

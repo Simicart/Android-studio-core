@@ -1,7 +1,5 @@
 package com.simicart.core.setting.fragment;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +9,12 @@ import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.common.DataPreferences;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.setting.block.ListViewIndexableBlock;
 import com.simicart.core.setting.controller.ListCurrencyController;
 import com.simicart.core.setting.entity.CurrencyEntity;
+
+import java.util.ArrayList;
 
 public class ListCurrencyFragment extends SimiFragment {
 	protected ListViewIndexableBlock mBlock;

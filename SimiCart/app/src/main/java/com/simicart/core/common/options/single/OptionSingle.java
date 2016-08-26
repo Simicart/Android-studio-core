@@ -14,7 +14,6 @@ import com.simicart.core.catalog.product.entity.ProductOption;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.options.base.OptionView;
 import com.simicart.core.common.options.delegate.CacheOptionSingleDelegate;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 

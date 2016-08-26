@@ -1,12 +1,12 @@
 package com.simicart.core.customer.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.config.Constants;
 import com.simicart.core.customer.entity.RegisterCustomer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class RegisterCustomerModel extends SimiModel{
 	@Override

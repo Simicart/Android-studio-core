@@ -1,8 +1,8 @@
 package com.simicart.core.common.options.delegate;
 
-import java.util.ArrayList;
-
 import com.simicart.core.catalog.product.entity.ProductOption;
+
+import java.util.ArrayList;
 
 public interface CacheOptionSingleDelegate {
 

@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.home.block.SearchHomeBlock;
 import com.simicart.core.home.component.SearchComponent;
 import com.simicart.theme.ztheme.home.block.HomeZThemeBlock;
 import com.simicart.theme.ztheme.home.controller.HomeZThemeController;

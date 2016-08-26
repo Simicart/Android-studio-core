@@ -1,14 +1,14 @@
 package com.simicart.plugins.locator.model;
 
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
+import android.util.Log;
 
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 
-import android.util.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 public class GetTagSearchModel extends SimiModel {
 	

@@ -4,7 +4,6 @@ package com.simicart.core.base.network.response;
 import android.util.Log;
 
 import com.simicart.core.base.network.error.SimiError;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 
 import org.json.JSONArray;

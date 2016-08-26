@@ -3,8 +3,8 @@ package com.simicart.core.banner.animation.Transformers;
 import android.os.Build;
 import android.view.View;
 
-import com.simicart.core.banner.animation.Tricks.ViewPagerEx;
 import com.nineoldandroids.view.ViewHelper;
+import com.simicart.core.banner.animation.Tricks.ViewPagerEx;
 
 public class FlipPageViewTransformer extends BaseTransformer {
 

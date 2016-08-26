@@ -2,10 +2,8 @@ package com.simicart.core.slidemenu.controller;
 
 import android.view.View;
 
-import com.simicart.core.catalog.category.component.CategoryComponent;
 import com.simicart.core.catalog.category.controller.CategoryController;
 import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.slidemenu.delegate.CategorySlideMenuDelegate;
 import com.simicart.core.slidemenu.entity.CategorySlideMenuEntity;
 
 import java.util.ArrayList;

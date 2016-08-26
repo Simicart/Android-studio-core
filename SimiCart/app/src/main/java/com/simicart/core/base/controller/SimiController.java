@@ -1,10 +1,10 @@
 package com.simicart.core.base.controller;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.entity.SimiEntity;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public abstract class SimiController implements Serializable{
 

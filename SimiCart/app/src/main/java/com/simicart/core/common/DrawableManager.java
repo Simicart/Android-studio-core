@@ -15,7 +15,6 @@ import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.view.Display;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.network.request.TLSSocketFactory;

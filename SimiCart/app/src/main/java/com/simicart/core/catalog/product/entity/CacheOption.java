@@ -1,11 +1,11 @@
 package com.simicart.core.catalog.product.entity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class CacheOption implements Serializable{
 	/**

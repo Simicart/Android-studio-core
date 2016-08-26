@@ -1,15 +1,12 @@
 package com.simicart.core.checkout.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.simicart.core.base.model.SimiModel;
-import com.simicart.core.checkout.entity.PaymentMethodEntity;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.config.Constants;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class PaymentMethodModel extends SimiModel {
 
@@ -46,5 +43,4 @@ public class PaymentMethodModel extends SimiModel {
     public TotalPrice getTotalPrice() {
         return mTotalPrice;
     }
-
 }

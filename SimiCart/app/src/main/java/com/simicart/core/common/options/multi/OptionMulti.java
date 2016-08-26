@@ -17,7 +17,6 @@ import com.simicart.core.common.options.base.OptionView;
 import com.simicart.core.common.options.delegate.CacheOptionMultiDelegate;
 import com.simicart.core.common.options.delegate.CacheOptionSingleDelegate;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
 public class OptionMulti extends OptionView {

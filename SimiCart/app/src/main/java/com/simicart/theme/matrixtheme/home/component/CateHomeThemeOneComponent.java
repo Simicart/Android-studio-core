@@ -2,7 +2,6 @@ package com.simicart.theme.matrixtheme.home.component;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;

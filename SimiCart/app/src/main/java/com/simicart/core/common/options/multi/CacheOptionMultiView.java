@@ -1,7 +1,5 @@
 package com.simicart.core.common.options.multi;
 
-import java.util.ArrayList;
-
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -11,6 +9,8 @@ import com.simicart.core.catalog.product.entity.ProductOption;
 import com.simicart.core.common.options.base.CacheOptionView;
 import com.simicart.core.common.options.delegate.CacheOptionMultiDelegate;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
 
 public class CacheOptionMultiView extends CacheOptionView implements
 		CacheOptionMultiDelegate {

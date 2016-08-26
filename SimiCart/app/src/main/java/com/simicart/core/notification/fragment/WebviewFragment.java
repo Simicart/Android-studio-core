@@ -9,7 +9,6 @@ import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 
 public class WebviewFragment extends SimiFragment {

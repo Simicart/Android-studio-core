@@ -1,29 +1,19 @@
 package com.simicart.core.catalog.category.controller;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
-import com.simicart.core.base.delegate.SimiDelegate;
-import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.category.component.CategoryComponent;
 import com.simicart.core.catalog.category.delegate.CategoryDelegate;
 import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.category.model.CategoryModel;
 import com.simicart.core.catalog.category.model.ListProductModel;
-import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductList;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.home.component.SpotProductComponent;
-import com.simicart.core.slidemenu.fragment.CateSlideMenuFragment;
 
 import java.util.ArrayList;
 

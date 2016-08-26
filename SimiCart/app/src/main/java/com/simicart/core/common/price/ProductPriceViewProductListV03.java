@@ -12,7 +12,6 @@ import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
 public class ProductPriceViewProductListV03 extends ProductPriceView {

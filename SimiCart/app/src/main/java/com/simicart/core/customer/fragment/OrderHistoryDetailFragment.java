@@ -1,6 +1,5 @@
 package com.simicart.core.customer.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.common.KeyData;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.block.OrderHistoryDetailBlock;

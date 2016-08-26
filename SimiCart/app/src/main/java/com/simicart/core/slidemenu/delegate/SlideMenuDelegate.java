@@ -1,8 +1,8 @@
 package com.simicart.core.slidemenu.delegate;
 
-import java.util.ArrayList;
-
 import com.simicart.core.slidemenu.entity.ItemNavigation;
+
+import java.util.ArrayList;
 
 public interface SlideMenuDelegate {
 	public void onSelectedItem(int position);
