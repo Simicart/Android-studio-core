@@ -8,6 +8,7 @@ import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
+import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 
@@ -20,6 +21,7 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
 
     protected LinearLayout ll_core_component;
     protected TextView tv_title;
+    protected int topMargin = Utils.getValueDp(5);
     protected PaymentMethodCallBack mCallBack;
     protected ArrayList<PaymentMethodEntity> mPaymentMethods;
     protected ArrayList<ItemPaymentMethodView> mItemViews;
@@ -57,6 +59,8 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
                 ItemPaymentMethodView itemView = new ItemPaymentMethodView(payment);
                 itemView.setCallBack(this);
                 View view = itemView.createView();
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.topMargin = topMargin;
                 ll_core_component.addView(view);
                 mItemViews.add(itemView);
             }

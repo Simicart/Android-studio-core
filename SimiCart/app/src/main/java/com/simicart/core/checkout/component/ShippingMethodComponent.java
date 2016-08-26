@@ -8,6 +8,7 @@ import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.delegate.ShippingMethodCallBack;
 import com.simicart.core.checkout.entity.ShippingMethodEntity;
+import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 
@@ -23,6 +24,7 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
     protected ShippingMethodCallBack mCallBack;
     protected ArrayList<ItemShippingMethodView> mItemViews;
     protected ArrayList<ShippingMethodEntity> mShippingEntities;
+    protected int topMargin = Utils.getValueDp(5);
 
 
     public ShippingMethodComponent(ArrayList<ShippingMethodEntity> mShippingEntities) {
@@ -32,7 +34,7 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
 
     @Override
     public View createView() {
-        rootView =findLayout("core_component_layout");
+        rootView = findLayout("core_component_layout");
         intView();
 
         return rootView;
@@ -56,11 +58,12 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
                 ItemShippingMethodView itemView = new ItemShippingMethodView(entity);
                 itemView.setCallBack(this);
                 View view = itemView.createView();
-                llComponent.addView(view);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.topMargin = topMargin;
+                llComponent.addView(view, params);
                 mItemViews.add(itemView);
             }
         }
-
     }
 
 
