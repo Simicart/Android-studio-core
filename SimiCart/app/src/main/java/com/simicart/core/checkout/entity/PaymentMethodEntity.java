@@ -1,7 +1,5 @@
 package com.simicart.core.checkout.entity;
 
-import android.util.Log;
-
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 
@@ -27,13 +25,13 @@ public class PaymentMethodEntity extends SimiEntity {
     protected String mContent;
     protected String mTitle;
     protected boolean isSelected;
-    protected ArrayList<CreditCardEntity> mListCCType;
+    protected ArrayList<CreditCard> mListCCType;
     protected boolean isUseCVV;
     protected PAYMENTMETHODTYPE mType;
     /**
      * This variable was used to save card information that user entered.
      */
-    protected CreditCardEntity mCurrentCardEntity;
+    protected CreditCard mCurrentCardEntity;
 
     private String payment_method = "payment_method";
     private String title = "title";
@@ -80,7 +78,7 @@ public class PaymentMethodEntity extends SimiEntity {
                 for (int i = 0; i < array.length(); i++) {
                     try {
                         JSONObject json = array.getJSONObject(i);
-                        CreditCardEntity entity = new CreditCardEntity();
+                        CreditCard entity = new CreditCard();
                         entity.parse(json);
                         mListCCType.add(entity);
                     } catch (JSONException e) {
@@ -171,11 +169,11 @@ public class PaymentMethodEntity extends SimiEntity {
         return jsParam;
     }
 
-    public CreditCardEntity getCurrentCardEntity() {
+    public CreditCard getCurrentCardEntity() {
         return mCurrentCardEntity;
     }
 
-    public void setCurrentCardEntity(CreditCardEntity mCurrentCardEntity) {
+    public void setCurrentCardEntity(CreditCard mCurrentCardEntity) {
         this.mCurrentCardEntity = mCurrentCardEntity;
     }
 
@@ -227,11 +225,11 @@ public class PaymentMethodEntity extends SimiEntity {
         isSelected = selected;
     }
 
-    public ArrayList<CreditCardEntity> getListCCType() {
+    public ArrayList<CreditCard> getListCCType() {
         return mListCCType;
     }
 
-    public void setListCCType(ArrayList<CreditCardEntity> mListCCType) {
+    public void setListCCType(ArrayList<CreditCard> mListCCType) {
         this.mListCCType = mListCCType;
     }
 }

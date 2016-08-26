@@ -5,7 +5,7 @@ import com.simicart.core.base.model.entity.SimiEntity;
 /**
  * Created by frank on 7/2/16.
  */
-public class CreditCardEntity extends SimiEntity {
+public class CreditCard extends SimiEntity {
 
     protected String mCode;
     protected String mName;
