@@ -1,0 +1,8 @@
+<events>
+
+    <event>
+        <fullname>com.simicart.plugins.barcode.ScanCode</fullname>
+        <sku>simi_developer</sku>
+    </event>
+
+</events>

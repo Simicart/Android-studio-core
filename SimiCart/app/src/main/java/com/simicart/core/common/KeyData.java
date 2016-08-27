@@ -58,10 +58,17 @@ public class KeyData {
     public static class SLIDE_MENU {
         public static String LIST_ITEMS = "list_items";
         public static String LIST_FRAGMENTS = "list_fragments";
+        public static final String ITEM_NAME = "item_name";
     }
 
     public static class REQUEST_PERMISSIONS {
         public static final int LOCATION_REQUEST = 123;
+    }
+
+    public static class BAR_CODE {
+        public static final String INTENT = "intent";
+        public static final String REQUEST_CODE = "request_code";
+        public static final String RESULT_CODE = "result_code";
     }
 
 }

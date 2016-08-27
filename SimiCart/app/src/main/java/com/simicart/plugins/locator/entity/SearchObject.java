@@ -6,8 +6,6 @@ import android.os.Parcelable;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 
-import java.io.Serializable;
-
 public class SearchObject extends SimiEntity implements Parcelable {
 	/**
 	 * 

@@ -365,7 +365,7 @@ public class PhoneSlideMenuController {
         if (null != item) {
             if (!item.isSparator()) {
                 // event click barcode leftmenu
-                String nameItem = item.getName();
+                dispatchOnClickEvent("com.simicart.menuleft.onnavigate.clickitem", item.getName());
 //                EventBlock block = new EventBlock();
 //                Constants.itemName = nameItem;
 //                block.dispatchEvent("com.simicart.leftmenu.slidemenucontroller.onnavigate.clickitem");
@@ -569,7 +569,6 @@ public class PhoneSlideMenuController {
     }
 
     protected void dispatchEvent(String event_name) {
-
         Intent intent = new Intent(event_name);
         Bundle bundle = new Bundle();
 //        SimiEventLeftMenuEntity leftEntity = new SimiEventLeftMenuEntity();
@@ -581,8 +580,17 @@ public class PhoneSlideMenuController {
         bundle.putParcelable("entity", data);
         intent.putExtra("data", bundle);
         LocalBroadcastManager.getInstance(mContext).sendBroadcastSync(intent);
+    }
 
-
+    protected void dispatchOnClickEvent(String event_name, String item_name) {
+        Intent intent = new Intent(event_name);
+        Bundle bundle = new Bundle();
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put(KeyData.SLIDE_MENU.ITEM_NAME, item_name);
+        SimiData data = new SimiData(hmData);
+        bundle.putParcelable("entity", data);
+        intent.putExtra("data", bundle);
+        LocalBroadcastManager.getInstance(mContext).sendBroadcastSync(intent);
     }
 
 }

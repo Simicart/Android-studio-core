@@ -21,10 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StoreLocator {
-//	SlideMenuData mSlideMenuData;
 
     public StoreLocator() {
-        Log.e("abc", "here");
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -35,25 +33,6 @@ public class StoreLocator {
         IntentFilter filter = new IntentFilter("com.simicart.menuleft.additem.more");
         Context context = SimiManager.getIntance().getCurrentActivity();
         LocalBroadcastManager.getInstance(context).registerReceiver(receiver, filter);
-//		this.mSlideMenuData = slideMenuData;
-//		if (methodName.equals("addItem")) {
-//			mItems = mSlideMenuData.getItemNavigations();
-//			ItemNavigation mItemNavigation = new ItemNavigation();
-//			mItemNavigation.setType(ItemNavigation.TypeItem.PLUGIN);
-//			mItemNavigation.setIcon(AppColorConfig.getInstance().getIcon("plugins_locator", AppColorConfig.getInstance().getMenuIconColor()));
-//			mItemNavigation.setName(SimiTranslator.getInstance().translate("Store Locator"));
-//			mItems.add(mItemNavigation);
-//
-//			if(DataLocal.isTablet) {
-//				StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance();
-//				mSlideMenuData.getPluginFragment().put(mItemNavigation.getName(),
-//						fragment.getClass().getName());
-//			} else {
-//				StoreLocatorMainPageFragment fragment = StoreLocatorMainPageFragment.newInstance();
-//				mSlideMenuData.getPluginFragment().put(mItemNavigation.getName(),
-//						fragment.getClass().getName());
-//			}
-//		}
     }
 
     protected void addStoreLocatorMenuItem(Intent intent) {

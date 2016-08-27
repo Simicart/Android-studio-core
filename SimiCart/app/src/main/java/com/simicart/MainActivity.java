@@ -12,17 +12,21 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.magestore.simicart.R;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.FontsOverride;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.controller.AutoSignInController;
@@ -32,6 +36,7 @@ import com.simicart.core.shortcutbadger.ShortcutBadger;
 import com.simicart.core.slidemenu.fragment.SlideMenuFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @SuppressLint("DefaultLocale")
@@ -278,6 +283,16 @@ public class MainActivity extends FragmentActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Intent intent = new Intent("com.simicart.leftmenu.onactivityresult.resultbarcode");
+        Bundle bundle = new Bundle();
+        HashMap<String,Object> hmData = new HashMap<>();
+        hmData.put(KeyData.BAR_CODE.INTENT, data);
+        hmData.put(KeyData.BAR_CODE.REQUEST_CODE, requestCode);
+        hmData.put(KeyData.BAR_CODE.RESULT_CODE, resultCode);
+        bundle.putParcelable(Constants.ENTITY, new SimiData(hmData));
+        intent.putExtra(Constants.DATA, bundle);
+        LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcastSync(intent);
 
         // event form signin
 //        EventController dispatch = new EventController();
