@@ -10,6 +10,7 @@ import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
@@ -27,6 +28,7 @@ import com.simicart.core.checkout.delegate.CreditCardCallBack;
 import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.delegate.ReviewOrderDelegate;
 import com.simicart.core.checkout.delegate.ShippingMethodCallBack;
+import com.simicart.core.checkout.entity.OrderInforEntity;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
 import com.simicart.core.checkout.entity.ReviewOrderEntity;
 import com.simicart.core.checkout.entity.ShippingMethodEntity;
@@ -37,6 +39,7 @@ import com.simicart.core.checkout.model.ReviewOrderModel;
 import com.simicart.core.checkout.model.ShippingMethodModel;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppCheckoutConfig;
@@ -368,12 +371,25 @@ public class ReviewOrderController extends SimiController {
 
         if (isCanPlcaceOrder()) {
             mDelegate.showLoading();
-            PlaceOrderModel placeOrderModel = new PlaceOrderModel();
+
+            if (dispatchEventBeforePlace()) {
+                return;
+            }
+
+            final PlaceOrderModel placeOrderModel = new PlaceOrderModel();
 
             placeOrderModel.setSuccessListener(new ModelSuccessCallBack() {
                 @Override
                 public void onSuccess(SimiCollection collection) {
                     Log.e("ReviewOrderController", "PLACE ORDER SUCCESS");
+
+
+                    ArrayList<SimiEntity> entities = collection.getCollection();
+                    if (null != entities && entities.size() > 0) {
+                        OrderInforEntity orderInforEntity = (OrderInforEntity) entities.get(0);
+                        dispatchEventAfterPlace(orderInforEntity);
+                    }
+
                     SimiManager.getIntance().backToHomeFragment();
                 }
             });
@@ -399,12 +415,81 @@ public class ReviewOrderController extends SimiController {
         }
     }
 
+
     protected boolean isCanPlcaceOrder() {
         if (null == mCurrentPaymentMethod) {
             return false;
         }
 
         return true;
+    }
+
+    protected void onPlaceOrderSuccess(OrderInforEntity orderInforEntity) {
+
+        //                    if (mAfterControll != Constants.NEW_AS_GUEST) {
+//                        String email = DataLocal.getEmail();
+//                        String password = DataLocal.getPassword();
+//                        DataLocal.saveEmailPassRemember(email, password);
+//                        DataLocal.saveSignInState(true);
+//                        SimiManager.getIntance().onUpdateItemSignIn();
+//                    }
+
+
+        PaymentMethodEntity.PAYMENTMETHODTYPE type = mCurrentPaymentMethod.getType();
+        if (type == PaymentMethodEntity.PAYMENTMETHODTYPE.SDK) {
+            dispatchEventForPaymentSDK(orderInforEntity);
+        } else if (type == PaymentMethodEntity.PAYMENTMETHODTYPE.WEBVIEW) {
+            dispatchEventForPaymentWebview(orderInforEntity);
+        } else {
+            if (orderInforEntity.isShowNotification()) {
+                // show notification
+
+            } else {
+                // go to thank you page
+            }
+        }
+
+        dispatchEventAfterPlace(orderInforEntity);
+
+    }
+
+
+    protected boolean dispatchEventBeforePlace() {
+
+        String paymentMethod = mCurrentPaymentMethod.getPaymentMethod();
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put("payment_method", paymentMethod);
+        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_BEFORE_PLACE, hmData);
+
+        return false;
+    }
+
+    protected void dispatchEventForPaymentSDK(OrderInforEntity orderInforEntity) {
+
+        String paymentMethod = mCurrentPaymentMethod.getPaymentMethod();
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put("payment_method", paymentMethod);
+        hmData.put("review_order_entity", mReviewOrderEntity);
+        hmData.put("order_infor_entity", orderInforEntity);
+        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_SDK, hmData);
+    }
+
+    protected void dispatchEventForPaymentWebview(OrderInforEntity orderInforEntity) {
+        String paymentMethod = mCurrentPaymentMethod.getPaymentMethod();
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put("payment_method", paymentMethod);
+        hmData.put("review_order_entity", mReviewOrderEntity);
+        hmData.put("order_infor_entity", orderInforEntity);
+        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_WEBVIEW, hmData);
+    }
+
+    protected void dispatchEventAfterPlace(OrderInforEntity orderInforEntity) {
+        String paymentMethod = mCurrentPaymentMethod.getPaymentMethod();
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put("payment_method", paymentMethod);
+        hmData.put("review_order_entity", mReviewOrderEntity);
+        hmData.put("order_infor_entity", orderInforEntity);
+        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_AFTER_PLACE, hmData);
     }
 
 

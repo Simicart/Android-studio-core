@@ -12,4 +12,12 @@ public class KeyEvent {
         public static final String REMOVE_ITEM = "com.simicart.menuleft.removeitem";
     }
 
+    public static class REVIEW_ORDER {
+        public static final String FOR_PAYMENT_BEFORE_PLACE = "simicart.before.placeorder";
+        public static final String FOR_PAYMENT_TYPE_SDK = "simicart.placeorder.sdk";
+        public static final String FOR_PAYMENT_TYPE_WEBVIEW = "simciart.placeorder.webview";
+        public static final String FOR_PAYMENT_AFTER_PLACE = "simciart.after.placeorder";
+
+    }
+
 }
