@@ -11,6 +11,7 @@ import android.util.Log;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
@@ -30,7 +31,7 @@ public class StoreLocator {
             }
         };
 
-        IntentFilter filter = new IntentFilter("com.simicart.menuleft.additem.more");
+        IntentFilter filter = new IntentFilter(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE);
         Context context = SimiManager.getIntance().getCurrentActivity();
         LocalBroadcastManager.getInstance(context).registerReceiver(receiver, filter);
     }

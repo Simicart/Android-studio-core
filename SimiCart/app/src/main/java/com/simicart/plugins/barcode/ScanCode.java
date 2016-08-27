@@ -28,6 +28,7 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
@@ -50,7 +51,7 @@ public class ScanCode {
         mContext = SimiManager.getIntance().getCurrentActivity();
 
         // register event: add navigation item to slide menu
-        IntentFilter addItemFilter = new IntentFilter("com.simicart.menuleft.additem.more");
+        IntentFilter addItemFilter = new IntentFilter(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE);
         BroadcastReceiver addItemReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {

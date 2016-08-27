@@ -25,6 +25,7 @@ import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.cms.fragment.CMSFragment;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.fragment.MyAccountFragment;
@@ -217,6 +218,8 @@ public class PhoneSlideMenuController {
             item.setIcon(icon);
             mItemsAccount.add(item);
 
+            dispatchItemEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_RELATED_PERSONAL);
+
             // event for rewards, wish list
 //            SlideMenuData slideMenuData = new SlideMenuData();
 //            slideMenuData.setItemNavigations(mItemsAccount);
@@ -252,6 +255,8 @@ public class PhoneSlideMenuController {
         if (index != -1) {
             mItems.remove(index);
         }
+
+        dispatchItemEvent(KeyEvent.SLIDE_MENU_EVENT.REMOVE_ITEM);
 
         // event my account
 //        SlideMenuData slideMenuData = new SlideMenuData();
@@ -306,7 +311,7 @@ public class PhoneSlideMenuController {
         mItems.add(item);
 
         // event for add barcode to slidemenu
-        dispatchEvent("com.simicart.menuleft.additem.more");
+        dispatchItemEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE);
 
 //        SlideMenuData slideMenuData = new SlideMenuData();
 //        slideMenuData.setItemNavigations(mItems);
@@ -365,7 +370,7 @@ public class PhoneSlideMenuController {
         if (null != item) {
             if (!item.isSparator()) {
                 // event click barcode leftmenu
-                dispatchOnClickEvent("com.simicart.menuleft.onnavigate.clickitem", item.getName());
+                dispatchOnClickEvent(KeyEvent.SLIDE_MENU_EVENT.CLICK_ITEM, item.getName());
 //                EventBlock block = new EventBlock();
 //                Constants.itemName = nameItem;
 //                block.dispatchEvent("com.simicart.leftmenu.slidemenucontroller.onnavigate.clickitem");
@@ -568,7 +573,7 @@ public class PhoneSlideMenuController {
         mDelegate.setAdapter(mItems);
     }
 
-    protected void dispatchEvent(String event_name) {
+    protected void dispatchItemEvent(String event_name) {
         Intent intent = new Intent(event_name);
         Bundle bundle = new Bundle();
 //        SimiEventLeftMenuEntity leftEntity = new SimiEventLeftMenuEntity();

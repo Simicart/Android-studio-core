@@ -12,6 +12,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
@@ -31,7 +32,7 @@ public class ContactUs {
 		mContext = SimiManager.getIntance().getCurrentActivity();
 
 		// register event: add navigation item to slide menu
-		IntentFilter addItemFilter = new IntentFilter("com.simicart.menuleft.additem.more");
+		IntentFilter addItemFilter = new IntentFilter(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE);
 		BroadcastReceiver addItemReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {

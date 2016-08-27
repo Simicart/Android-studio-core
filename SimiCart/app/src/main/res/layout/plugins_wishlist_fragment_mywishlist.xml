@@ -54,26 +54,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <ListView
-            android:id="@+id/lv_mywistlist"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_mywistlist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/fcart_rl" />
+            android:layout_height="match_parent" />
     </LinearLayout>
-
-    <!-- <com.simicart.helper.CustomScrollView -->
-    <!-- android:id="@+id/wishlist_scroll" -->
-    <!-- android:layout_width="match_parent" -->
-    <!-- android:layout_height="wrap_content" -->
-    <!-- android:fillViewport="true" > -->
-
-
-    <!-- <com.simicart.helper.NoScrollListView -->
-    <!-- android:id="@+id/lv_mywistlist" -->
-    <!-- android:layout_width="match_parent" -->
-    <!-- android:layout_height="match_parent" -->
-    <!-- android:layout_below="@+id/fcart_rl" > -->
-    <!-- </com.simicart.helper.NoScrollListView> -->
-    <!-- </com.simicart.helper.CustomScrollView> -->
 
 </LinearLayout>
