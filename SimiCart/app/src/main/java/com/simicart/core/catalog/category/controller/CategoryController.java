@@ -22,6 +22,7 @@ public class CategoryController extends SimiController {
     protected CategoryDelegate mDelegate;
     protected String mID;
     protected CategoryComponent categoryComponent;
+    protected ListProductModel listProductModel;
 
     @Override
     public void onStart() {
@@ -52,20 +53,20 @@ public class CategoryController extends SimiController {
     }
 
     public void requestListProducts() {
-        final ListProductModel model = new ListProductModel();
-        model.setCategoryID(mID);
-        model.addBody("category_id", mID);
-        model.addBody("offset", "0");
-        model.addBody("limit", "10");
-        model.addBody("width", "300");
-        model.addBody("height", "300");
-        model.setSuccessListener(new ModelSuccessCallBack() {
+        listProductModel = new ListProductModel();
+        listProductModel.setCategoryID(mID);
+        listProductModel.addBody("category_id", mID);
+        listProductModel.addBody("offset", "0");
+        listProductModel.addBody("limit", "10");
+        listProductModel.addBody("width", "300");
+        listProductModel.addBody("height", "300");
+        listProductModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-                drawListProducts(model.getListProducts());
+                drawListProducts(listProductModel.getListProducts());
             }
         });
-        model.request();
+        listProductModel.request();
 
     }
 
@@ -88,6 +89,8 @@ public class CategoryController extends SimiController {
 
     @Override
     public void onResume() {
+        drawListCategory(((CategoryModel) mModel).getListCategory());
+        drawListProducts(listProductModel.getListProducts());
         mDelegate.updateView(mModel.getCollection());
     }
 

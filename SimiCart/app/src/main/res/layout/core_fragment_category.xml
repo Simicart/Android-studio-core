@@ -38,7 +38,8 @@
                         android:layout_toLeftOf="@+id/layout_showmore"
                         android:ellipsize="end"
                         android:lines="1"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textAllCaps="true"/>
 
                     <RelativeLayout
                         android:id="@+id/layout_showmore"

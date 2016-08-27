@@ -18,6 +18,8 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
+import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
@@ -96,6 +98,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                         CategoryFragment categoryFragment = CategoryFragment.newInstance(data);
                         SimiManager.getIntance().replaceFragment(categoryFragment);
                     }
+                } else {
+                    HashMap<String,Object> hm = new HashMap<>();
+                    hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+                    hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,category.getCategoryId());
+                    SimiManager.getIntance().openCategoryDetail(hm);
                 }
             }
         });

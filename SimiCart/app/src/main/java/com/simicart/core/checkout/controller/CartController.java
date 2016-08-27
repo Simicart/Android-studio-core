@@ -10,6 +10,7 @@ import com.simicart.core.checkout.component.ListProductCheckoutComponent;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.model.CartModel;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 
@@ -57,8 +58,8 @@ public class CartController extends SimiController {
                 mDelegate.setCheckoutWebView(url);
             }
         });
-        mModel.addBody("user_email", "v@simi.com");
-        mModel.addBody("user_password", "123456");
+        mModel.addBody("user_email", DataPreferences.getEmail());
+        mModel.addBody("user_password", DataPreferences.getPassword());
         mModel.request();
     }
 

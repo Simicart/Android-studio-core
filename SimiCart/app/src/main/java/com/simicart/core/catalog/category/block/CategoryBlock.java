@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.category.adapter.CategoryBaseAdapter;
 import com.simicart.core.catalog.category.delegate.CategoryDelegate;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.config.AppColorConfig;
@@ -29,7 +28,6 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
     protected TextView tv_viewmore;
     protected ImageView iv_showmore;
     protected LinearLayout ll_listProducts;
-    protected CategoryBaseAdapter mAdapter;
 
     public CategoryBlock(View view, Context context) {
         super(view, context);

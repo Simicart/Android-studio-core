@@ -31,12 +31,10 @@ public class HomeZThemeFragment extends SimiFragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(
+		rootView = inflater.inflate(
 				Rconfig.getInstance().layout("theme_z_fragment_home"), null);
 
-		Context context = getActivity();
-
-		mBlock = new HomeZThemeBlock(rootView, context);
+		mBlock = new HomeZThemeBlock(rootView, getActivity());
 		mBlock.initView();
 		if (null == mController) {
 			mController = new HomeZThemeController();

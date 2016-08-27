@@ -32,7 +32,7 @@ public class CategoryFragment extends SimiFragment {
                              Bundle savedInstanceState) {
         setScreenName("Category Screen");
         rootView = inflater.inflate(
-                Rconfig.getInstance().layout("core_category_layout"),
+                Rconfig.getInstance().layout("core_fragment_category"),
                 container, false);
         Context context = getActivity();
         if (mData != null) {

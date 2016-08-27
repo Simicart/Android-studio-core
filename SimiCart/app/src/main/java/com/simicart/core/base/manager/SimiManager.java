@@ -495,8 +495,8 @@ public class SimiManager {
         if (DataLocal.isTablet) {
             removeDialog();
         }
-//        HomeFragment fragment = HomeFragment.newInstance();
-//        replaceFragment(fragment);
+        HomeFragment fragment = HomeFragment.newInstance();
+        replaceFragment(fragment);
     }
 
     public void clearAllFragment() {
