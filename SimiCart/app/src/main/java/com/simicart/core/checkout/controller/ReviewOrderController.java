@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.magestore.simicart.R;
 import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
@@ -16,11 +17,13 @@ import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.checkout.component.AddressCheckoutComponent;
 import com.simicart.core.checkout.component.CouponComponent;
+import com.simicart.core.checkout.component.CreditCardPopup;
 import com.simicart.core.checkout.component.PaymentMethodComponent;
 import com.simicart.core.checkout.component.ShippingMethodComponent;
 import com.simicart.core.checkout.component.TermConditionComponent;
 import com.simicart.core.checkout.component.TotalPriceComponent;
 import com.simicart.core.checkout.delegate.AddressComponentCallback;
+import com.simicart.core.checkout.delegate.CreditCardCallBack;
 import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.delegate.ReviewOrderDelegate;
 import com.simicart.core.checkout.delegate.ShippingMethodCallBack;
@@ -300,15 +303,16 @@ public class ReviewOrderController extends SimiController {
     }
 
     protected void selectPaymentMethod(PaymentMethodEntity paymentMethodEntity) {
-        if (AppStoreConfig.getInstance().isReloadPaymentMethod()) {
-            reloadPayment(paymentMethodEntity);
-        } else {
-            mCurrentPaymentMethod = paymentMethodEntity;
-        }
-
         PaymentMethodEntity.PAYMENTMETHODTYPE type = paymentMethodEntity.getType();
         if (type == PaymentMethodEntity.PAYMENTMETHODTYPE.CARD && !paymentMethodEntity.isSavedLocal()) {
+            mCurrentPaymentMethod = paymentMethodEntity;
             createNewCreditCard();
+        } else {
+            if (AppStoreConfig.getInstance().isReloadPaymentMethod()) {
+                reloadPayment(paymentMethodEntity);
+            } else {
+                mCurrentPaymentMethod = paymentMethodEntity;
+            }
         }
     }
 
@@ -334,13 +338,30 @@ public class ReviewOrderController extends SimiController {
             }
         });
 
-        String paymentMethod = paymentMethodEntity.getPaymentMethod();
-        methodModel.addBody("payment_method", paymentMethod);
+        HashMap<String, String> data = paymentMethodEntity.toParam();
+        Iterator<String> iterator = data.keySet().iterator();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            String value = data.get(key);
+            if (Utils.validateString(key) && Utils.validateString(value)) {
+                methodModel.addBody(key, value);
+            }
+        }
         methodModel.request();
     }
 
     protected void createNewCreditCard() {
-
+        CreditCardPopup creditCardPopup = new CreditCardPopup(mCurrentPaymentMethod);
+        creditCardPopup.setCallBack(new CreditCardCallBack() {
+            @Override
+            public void onSaveCreditCard(PaymentMethodEntity paymentMethodEntity) {
+                mCurrentPaymentMethod = paymentMethodEntity;
+                if (AppStoreConfig.getInstance().isReloadPaymentMethod()) {
+                    reloadPayment(paymentMethodEntity);
+                }
+            }
+        });
+        creditCardPopup.show();
     }
 
     protected void requestPlaceOrder() {

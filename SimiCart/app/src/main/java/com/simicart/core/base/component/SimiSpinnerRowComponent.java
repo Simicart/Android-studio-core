@@ -76,4 +76,8 @@ public class SimiSpinnerRowComponent extends SimiRowComponent {
     public void setPositinSelected(int position) {
         mPositionSelected = position;
     }
+
+    public void setAdapter(BaseAdapter adapter) {
+        mAdapter = adapter;
+    }
 }
