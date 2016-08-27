@@ -11,7 +11,8 @@ public class SimiRowComponent extends SimiComponent {
         TEXT,
         NAVIGATION,
         ADAPTER,
-        SELECT
+        SELECT,
+        PARENT
     }
 
     protected String mKey;

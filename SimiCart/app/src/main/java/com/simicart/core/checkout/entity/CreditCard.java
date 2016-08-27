@@ -1,6 +1,9 @@
 package com.simicart.core.checkout.entity;
 
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.common.Utils;
+
+import org.json.JSONObject;
 
 /**
  * Created by frank on 7/2/16.
@@ -40,8 +43,36 @@ public class CreditCard extends SimiEntity {
         mNumber = getData(cc_number);
 
         mExpYear = getData(cc_exp_year);
+    }
 
+    public JSONObject toData() {
+        try {
+            JSONObject json = new JSONObject();
 
+            if (Utils.validateString(mType)) {
+                json.put("cc_type", mType);
+            }
+
+            if (Utils.validateString(mCId)) {
+                json.put("cc_cid", mCId);
+            }
+
+            if (Utils.validateString(mExpMonth)) {
+                json.put("cc_exp_month", mExpMonth);
+            }
+
+            if (Utils.validateString(mNumber)) {
+                json.put("cc_number", mNumber);
+            }
+
+            if (Utils.validateString(mExpYear)) {
+                json.put("cc_exp_year", mExpYear);
+            }
+            return json;
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 
     public String getCode() {

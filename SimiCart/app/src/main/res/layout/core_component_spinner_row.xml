@@ -15,7 +15,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_35"
-        android:layout_marginLeft="@dimen/size_5">
+        android:layout_marginLeft="@dimen/size_5"
+        android:background="@drawable/background_spinner">
 
         <ImageView
             android:id="@+id/img_extend"

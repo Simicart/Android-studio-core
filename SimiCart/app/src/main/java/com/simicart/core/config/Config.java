@@ -17,7 +17,7 @@ public class Config {
     private String mColorSplashScreen = "#FFFFFF";
     private String mFontCustom = "fonts/ProximaNovaLight.ttf";
     private String mUseStore;
-    private String isFullSplash;
+    private String isFullSplash = ""; //FULL_SPLASH
 
     private String mCookie = "";
 

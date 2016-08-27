@@ -59,7 +59,17 @@ public class SimiTextRowComponent extends SimiRowComponent {
 
     @Override
     public Object getValue() {
-        return edtBody.getText().toString();
+        String value = edtBody.getText().toString();
+        if (value.equals("")) {
+            String warmingText = "This field";
+            if (Utils.validateString(mTitle)) {
+                warmingText = mTitle;
+            }
+            tvTitle.setError(warmingText + " is required.");
+            tvTitle.setErrorEnabled(true);
+        }
+
+        return value;
     }
 
     public void setInputType(int inputType) {

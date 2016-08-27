@@ -7,6 +7,8 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Constants;
 import com.simicart.core.setting.entity.CurrencyEntity;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -20,22 +22,22 @@ public class DataPreferences {
     public static ArrayList<CurrencyEntity> listCurrency;
 
     public static final String NAME_REFERENCE = "simicart";
-    private static final  String RESTART_COUNT = "RestartCount";
-    private static final  String CATEGORY_ID = "CategoryKey";
-    private static final  String CATEGORY_NAME = "CategoryNameKey";
-    private static final  String EMAIL_KEY = "EmailKey";
-    private static final  String USER_NAME_KEY = "UsernameKey";
-    private static final  String PASS_WORD_KEY = "PasswordKey";
-    private static final  String EMAIL_KEY_REMEMBER = "EmailKeyRemember";
-    private static final  String PASS_WORK_REMEMBER = "PasswordRemember";
-    private static final  String SIGNIN_KEY = "SignInKey";
-    private static final  String NOTIFICATION_KEY = "NotificationKey";
-    private static final  String STORE_KEY = "StoreKey";
-    private static final  String CURRENCY_KEY = "CurrencyKey";
-    private static final  String TYPE_SIGNIN = "TypeSignIn";
-    private static final  String CHECK_REMEMBER_PASSWORD = "check_remember_password";
-    private static final  String EMAIL_CARD_CREDIT_CARD = "EmailCardCreditCard";
-    private static final  String SIMI_CREDIT_CARD = "SimiCreditCard";
+    private static final String RESTART_COUNT = "RestartCount";
+    private static final String CATEGORY_ID = "CategoryKey";
+    private static final String CATEGORY_NAME = "CategoryNameKey";
+    private static final String EMAIL_KEY = "EmailKey";
+    private static final String USER_NAME_KEY = "UsernameKey";
+    private static final String PASS_WORD_KEY = "PasswordKey";
+    private static final String EMAIL_KEY_REMEMBER = "EmailKeyRemember";
+    private static final String PASS_WORK_REMEMBER = "PasswordRemember";
+    private static final String SIGNIN_KEY = "SignInKey";
+    private static final String NOTIFICATION_KEY = "NotificationKey";
+    private static final String STORE_KEY = "StoreKey";
+    private static final String CURRENCY_KEY = "CurrencyKey";
+    private static final String TYPE_SIGNIN = "TypeSignIn";
+    private static final String CHECK_REMEMBER_PASSWORD = "check_remember_password";
+    private static final String EMAIL_CARD_CREDIT_CARD = "EmailCardCreditCard";
+    private static final String SIMI_CREDIT_CARD = "SimiCreditCard";
 
     public static void init(Context context) {
         mContext = context;
@@ -165,13 +167,13 @@ public class DataPreferences {
 
     public static void saveData(String name, String email, String pass) {
         SharedPreferences.Editor editor = mSharedPre.edit();
-        if(Utils.validateString(email)) {
+        if (Utils.validateString(email)) {
             editor.putString(EMAIL_KEY, email);
         }
-        if(Utils.validateString(pass)) {
+        if (Utils.validateString(pass)) {
             editor.putString(PASS_WORD_KEY, pass);
         }
-        if(Utils.validateString(name)) {
+        if (Utils.validateString(name)) {
             editor.putString(USER_NAME_KEY, name);
         }
         saveEmailCreditCart(email);
@@ -238,6 +240,13 @@ public class DataPreferences {
         return email;
     }
 
+    public static void saveCreditCard(JSONObject jsonSave) {
+        String emailCreditCard = getEmailCreditCart();
+        String key = SIMI_CREDIT_CARD + emailCreditCard;
+        SharedPreferences.Editor editor = mSharedPre.edit();
+        editor.putString(key, jsonSave.toString());
+        editor.commit();
+    }
 
 
     public static void clearEmailPassowrd() {
