@@ -40,7 +40,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     public OrderHistoryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(Rconfig.getInstance().layout("core_adapter_order_history"), null, false);
+        View itemView = inflater.inflate(Rconfig.getInstance().layout("core_adapter_order_history"), parent, false);
         OrderHistoryHolder holder = new OrderHistoryHolder(itemView);
 
         return holder;
