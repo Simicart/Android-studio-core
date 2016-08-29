@@ -19,8 +19,6 @@ import android.widget.TextView;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.listproducts.entity.TagSearch;
-import com.simicart.core.catalog.listproducts.fragment.SearchListFragment;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
@@ -152,9 +150,9 @@ public class MenuTopBlock extends SimiBlock implements MenuTopDelegate {
     }
 
     protected void showSearchScreen(String query) {
-        SearchListFragment fragment = SearchListFragment.newInstance(
-                query, null, null, null, null, TagSearch.TAG_GRIDVIEW);
-        SimiManager.getIntance().replaceFragment(fragment);
+//        SearchListFragment fragment = SearchListFragment.newInstance(
+//                query, null, null, null, null, TagSearch.TAG_GRIDVIEW);
+//        SimiManager.getIntance().replaceFragment(fragment);
     }
 
     private void initButtonMenu() {

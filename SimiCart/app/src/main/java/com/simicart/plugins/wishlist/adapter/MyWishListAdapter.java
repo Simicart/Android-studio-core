@@ -249,12 +249,12 @@ public class MyWishListAdapter extends RecyclerView.Adapter<MyWishListAdapter.My
                 for (int i = 0; i < mWishLists.size(); i++) {
                     listID.add(mWishLists.get(i).getProduct_id());
                 }
-                ProductDetailParentFragment fragment = ProductDetailParentFragment
-                        .newInstance(itemWishList.getProduct_id(), listID);
+//                ProductDetailParentFragment fragment = ProductDetailParentFragment
+//                        .newInstance(itemWishList.getProduct_id(), listID);
 //				fragment.setProductID(itemWishList.getProduct_id());
 //				fragment.setListIDProduct(listID);
-                SimiManager.getIntance().removeDialog();
-                SimiManager.getIntance().replaceFragment(fragment);
+//                SimiManager.getIntance().removeDialog();
+//                SimiManager.getIntance().replaceFragment(fragment);
             }
         });
         // truong 07-09-2015

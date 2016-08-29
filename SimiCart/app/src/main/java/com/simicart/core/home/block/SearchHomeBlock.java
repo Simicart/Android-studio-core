@@ -27,9 +27,6 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.listproducts.adapter.ListPopupAdapter;
-import com.simicart.core.catalog.listproducts.entity.ItemListPopup;
-import com.simicart.core.catalog.listproducts.fragment.SearchListFragment;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
@@ -171,38 +168,38 @@ public class SearchHomeBlock extends SimiBlock {
         PopupWindow popupWindow = new PopupWindow(mContext);
         popupWindow.setFocusable(false);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        ArrayList<ItemListPopup> listItem = new ArrayList<ItemListPopup>();
-        ItemListPopup item1 = new ItemListPopup();
-        item1.setName(mCatName);
-        item1.setCheckSearch(false);
-        listItem.add(item1);
-        ItemListPopup item2 = new ItemListPopup();
-        item2.setName(SimiTranslator.getInstance().translate("all categories"));
-        item2.setCheckSearch(true);
-        listItem.add(item2);
-        ListPopupAdapter adapter = new ListPopupAdapter(mContext, listItem);
-        // the drop down list is a list view
-        ListView listViewSort = new ListView(mContext);
-        // listViewSort.setBackgroundColor(Color.parseColor("#E6ffffff"));
-        listViewSort.setAdapter(adapter);
-        listViewSort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ItemListPopup item = (ItemListPopup) parent.getItemAtPosition(position);
-                if (item.getName().equals("all categories")) {
-                    showSearchScreen(et_search.getText().toString(), null, null, tag);
-                } else {
-                    showSearchScreen(et_search.getText().toString(), mCatID, mCatName, tag);
-                }
-                hidePopupListView();
-                SimiManager.getIntance().hideKeyboard();
-            }
-        });
-        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
-        popupWindow.setHeight(WindowManager.LayoutParams.MATCH_PARENT);
-        popupWindow.setContentView(listViewSort);
+//        ArrayList<ItemListPopup> listItem = new ArrayList<ItemListPopup>();
+//        ItemListPopup item1 = new ItemListPopup();
+//        item1.setName(mCatName);
+//        item1.setCheckSearch(false);
+//        listItem.add(item1);
+//        ItemListPopup item2 = new ItemListPopup();
+//        item2.setName(SimiTranslator.getInstance().translate("all categories"));
+//        item2.setCheckSearch(true);
+//        listItem.add(item2);
+//        ListPopupAdapter adapter = new ListPopupAdapter(mContext, listItem);
+//        // the drop down list is a list view
+//        ListView listViewSort = new ListView(mContext);
+//        // listViewSort.setBackgroundColor(Color.parseColor("#E6ffffff"));
+//        listViewSort.setAdapter(adapter);
+//        listViewSort.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                ItemListPopup item = (ItemListPopup) parent.getItemAtPosition(position);
+//                if (item.getName().equals("all categories")) {
+//                    showSearchScreen(et_search.getText().toString(), null, null, tag);
+//                } else {
+//                    showSearchScreen(et_search.getText().toString(), mCatID, mCatName, tag);
+//                }
+//                hidePopupListView();
+//                SimiManager.getIntance().hideKeyboard();
+//            }
+//        });
+//        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+//        popupWindow.setOutsideTouchable(true);
+//        popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+//        popupWindow.setHeight(WindowManager.LayoutParams.MATCH_PARENT);
+//        popupWindow.setContentView(listViewSort);
         return popupWindow;
     }
 
@@ -218,8 +215,8 @@ public class SearchHomeBlock extends SimiBlock {
     public void showSearchScreen(String key, String mCatID, String mCatName, String tag) {
         //Neu ko có cateID thi la search all; ko thi search cate
         if (key != null && !key.equals("")) {
-            SearchListFragment fragment = SearchListFragment.newInstance(key, mCatID, mCatName, sortID, null, tag);
-            SimiManager.getIntance().addFragment(fragment);
+//            SearchListFragment fragment = SearchListFragment.newInstance(key, mCatID, mCatName, sortID, null, tag);
+//            SimiManager.getIntance().addFragment(fragment);
         }
     }
 

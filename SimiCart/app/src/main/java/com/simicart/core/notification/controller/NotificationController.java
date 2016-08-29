@@ -19,8 +19,6 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
-import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.GPSTracker;
@@ -211,8 +209,8 @@ public class NotificationController {
                     && !notificationData.getProductID().equals("")
                     && !notificationData.getProductID().toLowerCase()
                     .equals("null")) {
-                fragment = ProductDetailParentFragment.newInstance(
-                        notificationData.getProductID(), null);
+//                fragment = ProductDetailParentFragment.newInstance(
+//                        notificationData.getProductID(), null);
                 // ((ProductDetailParentFragment) fragment)
                 // .setProductID(notificationData.getProductID());
             }
@@ -235,9 +233,9 @@ public class NotificationController {
 //                                notificationData.getCategoryName());
                     }
                 } else {
-                    fragment = ProductListFragment.newInstance(
-                            notificationData.getCategoryID(),
-                            notificationData.getCategoryName(), null, null, null);
+//                    fragment = ProductListFragment.newInstance(
+//                            notificationData.getCategoryID(),
+//                            notificationData.getCategoryName(), null, null, null);
                     // ((ListProductFragment)
                     // fragment).setCategoryId(notificationData
                     // .getCategoryID());

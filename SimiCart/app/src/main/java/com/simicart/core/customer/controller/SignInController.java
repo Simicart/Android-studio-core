@@ -60,6 +60,8 @@ public class SignInController extends SimiController {
     @Override
     public void onStart() {
 
+        mDelegate.updateView(null);
+
         mSignInClicker = new OnClickListener() {
 
             @Override

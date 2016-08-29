@@ -9,8 +9,6 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.category.delegate.SortDelegate;
 import com.simicart.core.catalog.category.entity.Sort;
-import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
-import com.simicart.core.catalog.listproducts.fragment.SearchListFragment;
 import com.simicart.core.common.Utils;
 
 import org.json.JSONObject;
@@ -63,13 +61,13 @@ public class SortController extends SimiController {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 SimiFragment fragment = null;
-                if (Utils.validateString(mQuery)) {
-                    fragment = SearchListFragment
-                            .newInstance(mQuery, mCategoryID, mCategoryName, mListSort.get(position).getId() + "", jsonFilter, tag_sort);
-                } else {
-                    fragment = ProductListFragment
-                            .newInstance(mCategoryID, mCategoryName, mListSort.get(position).getId() + "", jsonFilter, tag_sort);
-                }
+//                if (Utils.validateString(mQuery)) {
+//                    fragment = SearchListFragment
+//                            .newInstance(mQuery, mCategoryID, mCategoryName, mListSort.get(position).getId() + "", jsonFilter, tag_sort);
+//                } else {
+//                    fragment = ProductListFragment
+//                            .newInstance(mCategoryID, mCategoryName, mListSort.get(position).getId() + "", jsonFilter, tag_sort);
+//                }
                 SimiManager.getIntance().removeDialog();
                 SimiManager.getIntance().replaceFragment(fragment);
                 mDelegate.setSort_option(mListSort.get(position).getTitle());

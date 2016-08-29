@@ -14,8 +14,8 @@ import com.simicart.core.catalog.categorydetail.component.SortComponent;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.categorydetail.model.CategoryDetailModel;
-import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.config.Constants;
 
 import org.json.JSONObject;
 
@@ -106,7 +106,7 @@ public class CategoryDetailController extends SimiController {
                 super.onScrollStateChanged(recyclerView, newState);
                 int count = recyclerView.getChildCount();
                 int lastPosition;
-                if(mDelegate.getTagView().equals(TagSearch.TAG_LISTVIEW)) {
+                if(mDelegate.getTagView().equals(Constants.TAG_LISTVIEW)) {
                     lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
                 } else {
                     lastPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();

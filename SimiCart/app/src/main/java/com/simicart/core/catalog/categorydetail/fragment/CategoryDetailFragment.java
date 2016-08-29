@@ -10,8 +10,8 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.categorydetail.block.CategoryDetailBlock;
 import com.simicart.core.catalog.categorydetail.controller.CategoryDetailController;
-import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.home.component.SearchComponent;
@@ -54,9 +54,9 @@ public class CategoryDetailFragment extends SimiFragment {
         mBlock = new CategoryDetailBlock(rootView, getActivity());
         if (!Utils.validateString(tagView)) {
             if (!DataLocal.isTablet) {
-                tagView = TagSearch.TAG_LISTVIEW;
+                tagView = Constants.TAG_LISTVIEW;
             } else {
-                tagView = TagSearch.TAG_GRIDVIEW;
+                tagView = Constants.TAG_GRIDVIEW;
             }
         }
         mBlock.setTagView(tagView);

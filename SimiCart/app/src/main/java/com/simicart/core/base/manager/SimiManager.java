@@ -25,6 +25,7 @@ import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.checkout.fragment.ReviewOrderFragment;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -246,12 +247,14 @@ public class SimiManager {
         Intent intent = new Intent(nameFragment);
         SimiEventFragmentEntity entity = new SimiEventFragmentEntity();
         entity.setmFragment(fragment);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("entity", entity);
         if (!Utils.validateString(method)) {
             method = "";
         }
-        bundle.putString("method", method);
+        Bundle bundle = new Bundle();
+        HashMap<String,Object> hmData = new HashMap<>();
+        hmData.put(KeyData.SIMI_FRAGMENT.FRAGMENT, entity);
+        hmData.put(KeyData.SIMI_FRAGMENT.METHOD, method);
+        bundle.putParcelable(Constants.ENTITY, new SimiData(hmData));
         intent.putExtra(Constants.DATA, bundle);
         LocalBroadcastManager.getInstance(mCurrentActivity).sendBroadcastSync(intent);
         fragment = entity.getFragment();

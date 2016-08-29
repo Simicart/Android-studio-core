@@ -9,6 +9,8 @@ import android.support.v4.content.LocalBroadcastManager;
 
 import com.simicart.core.base.event.fragment.SimiEventFragmentEntity;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.config.Constants;
 import com.simicart.theme.ztheme.home.fragment.HomeZThemeFragment;
 
@@ -21,7 +23,8 @@ public class ZTheme {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
-                SimiEventFragmentEntity entity = (SimiEventFragmentEntity) bundle.getSerializable(Constants.ENTITY);
+                SimiData data = bundle.getParcelable(Constants.ENTITY);
+                SimiEventFragmentEntity entity = (SimiEventFragmentEntity) data.getData().get(KeyData.SIMI_FRAGMENT.FRAGMENT);
                 HomeZThemeFragment fragment = HomeZThemeFragment.newInstance();
                 entity.setmFragment(fragment);
             }

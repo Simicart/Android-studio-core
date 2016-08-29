@@ -19,8 +19,6 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
-import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
-import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.cms.fragment.CMSFragment;
 import com.simicart.core.common.DataPreferences;
@@ -143,9 +141,9 @@ public class PhoneSlideMenuController {
                 Log.e("Open deep link", "1");
                 ArrayList<String> listID = new ArrayList<String>();
                 listID.add(DeepLinkEntity.getInstance().getID());
-                fragment = ProductDetailParentFragment.newInstance(
-                        DeepLinkEntity.getInstance().getID(), listID);
-                SimiManager.getIntance().replaceFragment(fragment);
+//                fragment = ProductDetailParentFragment.newInstance(
+//                        DeepLinkEntity.getInstance().getID(), listID);
+//                SimiManager.getIntance().replaceFragment(fragment);
             } else if (DeepLinkEntity.getInstance().getType() == 2) {
                 Log.e("Open deep link", "2");
                 if (DeepLinkEntity.getInstance().isHasChild() == true) {
@@ -163,9 +161,9 @@ public class PhoneSlideMenuController {
 //                        SimiManager.getIntance().replaceFragment(fragment);
                     }
                 } else {
-                    fragment = ProductListFragment.newInstance(
-                            DeepLinkEntity.getInstance().getID(), DeepLinkEntity.getInstance().getName(), null, null, null);
-                    SimiManager.getIntance().replaceFragment(fragment);
+//                    fragment = ProductListFragment.newInstance(
+//                            DeepLinkEntity.getInstance().getID(), DeepLinkEntity.getInstance().getName(), null, null, null);
+//                    SimiManager.getIntance().replaceFragment(fragment);
                 }
             }
         }

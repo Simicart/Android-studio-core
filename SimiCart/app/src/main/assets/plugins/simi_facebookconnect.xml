@@ -1,0 +1,7 @@
+ <events>
+    <event>
+        <fullname>com.simicart.plugins.facebookconnect.FacebookConnect</fullname>
+	    <sku>simi_developer</sku>    
+    </event>
+</events>
+ 

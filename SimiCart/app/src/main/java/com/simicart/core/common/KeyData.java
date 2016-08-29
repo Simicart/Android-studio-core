@@ -4,6 +4,18 @@ package com.simicart.core.common;
  * Created by frank on 8/19/16.
  */
 public class KeyData {
+
+    public static class SIMI_BLOCK {
+        public static String BLOCK = "block";
+        public static String COLLECTION = "collection";
+        public static String VIEW = "view";
+    }
+
+    public static class SIMI_FRAGMENT {
+        public static String FRAGMENT = "fragment";
+        public static String METHOD = "method";
+    }
+
     public static class CATEGORY_DETAIL {
         public static String TYPE = "type";
         public static String KEY_WORD = "key_word";
@@ -86,7 +98,13 @@ public class KeyData {
     public static class PRODUCT_DETAIL{
         public static final String PRODUCT_ID = "id";
         public static final String LIST_PRODUCT_ID = "list_id";
+    }
 
+    public static class FACEBOOK {
+        public static final String VIEW = "view";
+        public static final String REQUEST_CODE = "request_code";
+        public static final String RESULT_CODE = "result_code";
+        public static final String INTENT = "intent";
     }
 
 }

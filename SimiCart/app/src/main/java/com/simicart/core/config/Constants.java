@@ -8,6 +8,7 @@ public class Constants {
     // type sign in
     public static String NORMAL_SIGN_IN = "normal_sign_in";
     public static String OTHER_SIGN_IN = "other_sign_in";
+    public static String FACEBOOK_SIGN_IN = "facebook";
 
     public static String RESPONSE_STATUS_FAIL = "FAIL";
     public static String RESPONSE_STATUS_SUCCESS = "SUCCESS";
@@ -507,5 +508,7 @@ public class Constants {
         public final static int SHIPPING_ADDRESS = 6;
     }
 
+    public static String TAG_LISTVIEW = "listview";
+    public static String TAG_GRIDVIEW = "gridview";
 
 }

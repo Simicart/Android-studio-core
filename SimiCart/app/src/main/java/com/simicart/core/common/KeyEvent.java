@@ -17,7 +17,12 @@ public class KeyEvent {
         public static final String FOR_PAYMENT_TYPE_SDK = "simicart.placeorder.sdk";
         public static final String FOR_PAYMENT_TYPE_WEBVIEW = "simciart.placeorder.webview";
         public static final String FOR_PAYMENT_AFTER_PLACE = "simciart.after.placeorder";
+    }
 
+    public static class FACEBOOK_EVENT {
+        public static final String FACEBOOK_LOGIN_BLOCK = "com.simicart.core.customer.block.SignInBlock";
+        public static final String FACEBOOK_LOGIN_FRAGMENT = "com.simicart.core.customer.fragment.SignInFragment";
+        public static final String FACEBOOK_LOGIN_AUTO = "simicart.facebook.autologin";
     }
 
 }

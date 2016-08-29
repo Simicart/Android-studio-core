@@ -17,13 +17,13 @@ import android.widget.TextView;
 
 import com.simicart.core.base.drawImage.SimiDrawImage;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.listproducts.entity.TagSearch;
 import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.ProductPriceViewProductGridV03;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
@@ -53,7 +53,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View itemView = null;
         RecyclerView.ViewHolder holder = null;
-        if(tagView.equals(TagSearch.TAG_GRIDVIEW)) {
+        if(tagView.equals(Constants.TAG_GRIDVIEW)) {
             itemView = inflater.inflate(Rconfig.getInstance().layout("core_item_gridview_productcategory"), null, false);
             holder = new GridProductHolder(itemView);
         } else {
@@ -66,7 +66,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Product product = listProducts.get(position);
-        if(tagView.equals(TagSearch.TAG_GRIDVIEW)) {
+        if(tagView.equals(Constants.TAG_GRIDVIEW)) {
             createItemGridView((GridProductHolder) holder, product);
         } else {
             createItemListView((ListProductHolder) holder, product);

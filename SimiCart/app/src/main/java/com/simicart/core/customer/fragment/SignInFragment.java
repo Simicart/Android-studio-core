@@ -3,17 +3,24 @@ package com.simicart.core.customer.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.block.SignInBlock;
 import com.simicart.core.customer.controller.SignInController;
+
+import java.util.HashMap;
 
 public class SignInFragment extends SimiFragment {
 
@@ -91,26 +98,19 @@ public class SignInFragment extends SimiFragment {
 		return mController;
 	}
 
-	public int getRequestCode() {
-		return requestCode;
+	public boolean isCheckout() {
+		return isCheckout;
 	}
-
-	public int getResultCode() {
-		return resultCode;
-	}
-
-//	public Intent getData() {
-//		return data;
-//	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		this.requestCode = requestCode;
-		this.resultCode = resultCode;
-		this.data = data;
-
-		SimiManager.getIntance().eventFragment(this);
+		HashMap<String, Object> hmData = new HashMap<>();
+		hmData.put(KeyData.FACEBOOK.REQUEST_CODE, requestCode);
+		hmData.put(KeyData.FACEBOOK.RESULT_CODE, resultCode);
+		hmData.put(KeyData.FACEBOOK.INTENT, data);
+		hmData.put(Constants.METHOD, "onActivityResult");
+		SimiEvent.dispatchEvent(KeyEvent.FACEBOOK_EVENT.FACEBOOK_LOGIN_FRAGMENT, hmData);
 	}
 }

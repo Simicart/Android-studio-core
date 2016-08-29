@@ -2,12 +2,16 @@ package com.simicart.core.customer.controller;
 
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.model.SignInModel;
+
+import java.util.HashMap;
 
 public class AutoSignInController extends SimiController {
 
@@ -47,6 +51,7 @@ public class AutoSignInController extends SimiController {
 			model.request();
 		} else {
 			// event for face book
+			SimiEvent.dispatchEvent(KeyEvent.FACEBOOK_EVENT.FACEBOOK_LOGIN_AUTO, new HashMap<String, Object>());
 //			EventController event = new EventController();
 //			event.dispatchEvent("com.simicart.autoSignIn", typeSignIn);
 		}

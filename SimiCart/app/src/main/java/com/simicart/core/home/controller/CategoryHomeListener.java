@@ -6,7 +6,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.catalog.listproducts.fragment.ProductListFragment;
 import com.simicart.core.config.Constants;
 
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class CategoryHomeListener {
                     }
 //					ListProductFragment fragment = ListProductFragment
 //							.newInstance(urlSearch, idCat, null, null, name, null, null, null);
-                    ProductListFragment fragment = ProductListFragment.newInstance(idCat, name, null, null, null);
+//                    ProductListFragment fragment = ProductListFragment.newInstance(idCat, name, null, null, null);
 //					fragment.setCategoryId(idCat);
 //					fragment.setCategoryName(name);
 //					if (idCat.equals("-1")) {
@@ -53,7 +52,7 @@ public class CategoryHomeListener {
 //					} else {
 //						fragment.setUrlSearch(Constants.GET_CATEGORY_PRODUCTS);
 //					}
-                    SimiManager.getIntance().replaceFragment(fragment);
+//                    SimiManager.getIntance().replaceFragment(fragment);
                     SimiManager.getIntance().hideKeyboard();
                 }
             }

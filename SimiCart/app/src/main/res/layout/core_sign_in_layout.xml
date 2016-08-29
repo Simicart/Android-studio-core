@@ -118,12 +118,13 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp" />
 
-            <RelativeLayout
-                android:id="@+id/rel_other_signin"
+            <LinearLayout
+                android:id="@+id/ll_signin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
-                android:paddingRight="3dp" >
+                android:paddingRight="3dp"
+                android:orientation="vertical">
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/bt_signIn"
@@ -132,7 +133,8 @@
                     android:textAllCaps="false"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"/>
-            </RelativeLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
