@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.controller.ProductDetailParentController;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
@@ -23,68 +24,67 @@ import com.simicart.core.style.TouchImageViewTwo;
 
 @SuppressLint("ClickableViewAccessibility")
 public class ProductDetailImageFragment extends SimiFragment {
-	private String mURL;
-	protected ProductDetailParentController mParentController;
+    private String mURL;
+    protected ProductDetailParentController mParentController;
 
-	public void setDelegate(ProductDetailParentController delegate) {
-		mParentController = delegate;
-	}
+    public void setDelegate(ProductDetailParentController delegate) {
+        mParentController = delegate;
+    }
 
-	public static ProductDetailImageFragment newInstance(String url) {
-			ProductDetailImageFragment fragment = new ProductDetailImageFragment();
-			Bundle bundle = new Bundle();
-//			setData(Constants.KeyData.URL, url, Constants.KeyData.TYPE_STRING, bundle);
-			fragment.setArguments(bundle);
-			return fragment;
-	}
+    public static ProductDetailImageFragment newInstance(SimiData data) {
+        ProductDetailImageFragment fragment = new ProductDetailImageFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("data", data);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(
-				Rconfig.getInstance().layout("core_product_detail_image"),
-				container, false);
-		if(getArguments() != null){
-//		mURL = (String) getData(Constants.KeyData.URL, Constants.KeyData.TYPE_STRING, getArguments());
-		}
-		try {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(
+                Rconfig.getInstance().layout("core_product_detail_image"),
+                container, false);
+        if (getArguments() != null) {
+            mURL = (String) getValueWithKey("url");
+        }
+        try {
 
-			// ImageView
-			final TouchImageViewTwo imv_image = (TouchImageViewTwo) rootView
-					.findViewById(Rconfig.getInstance().id(
-							"core_image_zoom_product_img"));
+            // ImageView
+            final TouchImageViewTwo imv_image = (TouchImageViewTwo) rootView
+                    .findViewById(Rconfig.getInstance().id(
+                            "core_image_zoom_product_img"));
 
-			imv_image.setDelegate(mParentController);
+            imv_image.setDelegate(mParentController);
 
-			if (DataLocal.isTablet) {
-				WindowManager wm = (WindowManager) getActivity()
-						.getSystemService(Context.WINDOW_SERVICE);
-				Display display = wm.getDefaultDisplay();
-				Point size = new Point();
-				display.getSize(size);
-				int width = size.x;
-				int height = size.y;
+            if (DataLocal.isTablet) {
+                WindowManager wm = (WindowManager) getActivity()
+                        .getSystemService(Context.WINDOW_SERVICE);
+                Display display = wm.getDefaultDisplay();
+                Point size = new Point();
+                display.getSize(size);
+                int width = size.x;
+                int height = size.y;
 
-				int p_widht = Utils.getValueDp((height * 2) / 3);
-				int p_height = Utils.getValueDp(width);
-				LayoutParams params = new LayoutParams(p_widht, p_height);
-				params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-				imv_image.setLayoutParams(params);
-			}
+                int p_widht = Utils.getValueDp((height * 2) / 3);
+                int p_height = Utils.getValueDp(width);
+                LayoutParams params = new LayoutParams(p_widht, p_height);
+                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                imv_image.setLayoutParams(params);
+            }
 
-			if (null != mURL) {
-				Log.e("ProductDetailImageFragment - newInstance:", "drawImage");
-				DrawableManager.fetchDrawableOnThreadForDetail(mURL, imv_image);
-			}
+            if (null != mURL) {
+                DrawableManager.fetchDrawableOnThreadForDetail(mURL, imv_image);
+            }
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 //			Log.e("ProductDetailImageFragment - OncreateView:", e.getMessage());
-		}
-		return rootView;
-	}
+        }
+        return rootView;
+    }
 }

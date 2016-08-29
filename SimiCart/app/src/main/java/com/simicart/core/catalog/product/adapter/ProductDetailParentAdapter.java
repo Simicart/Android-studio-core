@@ -5,12 +5,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.controller.ProductDetailParentController;
 import com.simicart.core.catalog.product.delegate.ProductDetailAdapterDelegate;
 import com.simicart.core.catalog.product.fragment.ProductDetailChildFragment;
 import com.simicart.core.common.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProductDetailParentAdapter extends FragmentPagerAdapter implements
         ProductDetailAdapterDelegate {
@@ -46,11 +48,14 @@ public class ProductDetailParentAdapter extends FragmentPagerAdapter implements
     public Fragment getItem(int position) {
 
         String id = mListID.get(position);
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put("id", id);
+        SimiData data = new SimiData(hm);
+
         ProductDetailChildFragment fragment = ProductDetailChildFragment
-                .newInstance(id);
+                .newInstance(data);
         fragment.setAdapterDelegate(this);
         fragment.setController(mController);
-//		fragment.setProductID(id);
         return fragment;
     }
 

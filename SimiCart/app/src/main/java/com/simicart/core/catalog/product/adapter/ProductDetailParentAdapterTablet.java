@@ -67,14 +67,14 @@ public class ProductDetailParentAdapterTablet extends
 
 	@Override
 	public Fragment getItem(int position) {
-		String id = mListID.get(position);
-		ProductDetailChildFragment fragment = ProductDetailChildFragment
-				.newInstance(id);
-		fragment.setAdapterDelegate(this);
-		fragment.setProductDelegate(productDelegate);
-		fragment.setController(mController);
+//		String id = mListID.get(position);
+//		ProductDetailChildFragment fragment = ProductDetailChildFragment
+//				.newInstance(id);
+//		fragment.setAdapterDelegate(this);
+//		fragment.setProductDelegate(productDelegate);
+//		fragment.setController(mController);
 //		fragment.setProductID(id);
-		return fragment;
+		return null;
 	}
 
 	@Override

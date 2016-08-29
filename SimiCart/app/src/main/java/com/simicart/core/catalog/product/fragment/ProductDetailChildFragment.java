@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.block.ProductDetailChildBlock;
 import com.simicart.core.catalog.product.controller.ProductDetailChildController;
 import com.simicart.core.catalog.product.controller.ProductDetailParentController;
@@ -15,87 +16,87 @@ import com.simicart.core.catalog.product.delegate.ProductDetailAdapterDelegate;
 import com.simicart.core.config.Rconfig;
 
 public class ProductDetailChildFragment extends SimiFragment {
-	protected ProductDetailChildBlock mBlock;
-	protected ProductDetailChildController mController;
-	protected String mID;
-	protected ProductDetailAdapterDelegate mAdapterDelegate;
-	protected ProductDetailParentController mParentController;
+    protected ProductDetailChildBlock mBlock;
+    protected ProductDetailChildController mController;
+    protected String mID;
+    protected ProductDetailAdapterDelegate mAdapterDelegate;
+    protected ProductDetailParentController mParentController;
 
-	private ProductDelegate productDelegate;
+    private ProductDelegate productDelegate;
 
-	public void setProductDelegate(ProductDelegate productDelegate) {
-		this.productDelegate = productDelegate;
-	}
+    public void setProductDelegate(ProductDelegate productDelegate) {
+        this.productDelegate = productDelegate;
+    }
 
-	// variable for tablet
-	float mScale = 1.0f;
-	boolean isBlured = false;
+    // variable for tablet
+    float mScale = 1.0f;
+    boolean isBlured = false;
 
-	public void setScalse(float scale) {
-		mScale = scale;
-	}
+    public void setScalse(float scale) {
+        mScale = scale;
+    }
 
-	public void setBlured(boolean blured) {
-		isBlured = blured;
-	}
+    public void setBlured(boolean blured) {
+        isBlured = blured;
+    }
 
-	public static ProductDetailChildFragment newInstance(String id) {
-		ProductDetailChildFragment fragment = new ProductDetailChildFragment();
-		
-		Bundle bundle= new Bundle();
-//		  setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, bundle);
-		    fragment.setArguments(bundle);
-		return fragment;
-	}
+    public static ProductDetailChildFragment newInstance(SimiData data) {
+        ProductDetailChildFragment fragment = new ProductDetailChildFragment();
 
-	public void setAdapterDelegate(ProductDetailAdapterDelegate delegate) {
-		mAdapterDelegate = delegate;
-	}
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("data", data);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
-	public void setController(ProductDetailParentController controller) {
-		mParentController = controller;
-	}
+    public void setAdapterDelegate(ProductDetailAdapterDelegate delegate) {
+        mAdapterDelegate = delegate;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(
-				Rconfig.getInstance().layout("core_product_detail_child"),
-				null, false);
-		SimiManager.getIntance().setChildFragment(getChildFragmentManager());
-		if(getArguments() != null){
-//		mID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
-		}
+    public void setController(ProductDetailParentController controller) {
+        mParentController = controller;
+    }
 
-		mBlock = new ProductDetailChildBlock(view, getActivity(),
-				getChildFragmentManager());
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(
+                Rconfig.getInstance().layout("core_product_detail_child"),
+                null, false);
+        SimiManager.getIntance().setChildFragment(getChildFragmentManager());
+        if (getArguments() != null) {
+            mID = (String) getValueWithKey("id");
+        }
 
-		mBlock.initView();
-		mBlock.setDelegate(mParentController);
+        mBlock = new ProductDetailChildBlock(view, getActivity(),
+                getChildFragmentManager());
 
-		if (null == mController) {
-			mController = new ProductDetailChildController();
-			mController.setAdapterDelegate(mAdapterDelegate);
-			mController.setProductID(mID);
-			mController.setDelegate(mBlock);
-			mController.setProductDelegate(productDelegate);
-			mController.setParentController(mParentController);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
+        mBlock.initView();
+        mBlock.setDelegate(mParentController);
 
-		return view;
-	}
+        if (null == mController) {
+            mController = new ProductDetailChildController();
+            mController.setAdapterDelegate(mAdapterDelegate);
+            mController.setProductID(mID);
+            mController.setDelegate(mBlock);
+            mController.setProductDelegate(productDelegate);
+            mController.setParentController(mParentController);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.onResume();
+        }
 
-	public void onUpdateTopBottom() {
-		if (null != mController) {
-			mController.onUpdateTopBottom();
-		}
-		if (null != mBlock) {
-			mBlock.updateIndicator();
-		}
-	}
+        return view;
+    }
+
+    public void onUpdateTopBottom() {
+        if (null != mController) {
+            mController.onUpdateTopBottom();
+        }
+        if (null != mBlock) {
+            mBlock.updateIndicator();
+        }
+    }
 
 }
