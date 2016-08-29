@@ -71,4 +71,14 @@ public class KeyData {
         public static final String RESULT_CODE = "result_code";
     }
 
+    public static class WEBVIEW_PAYMENT_COMPONENT {
+        public static final String URL = "url";
+        public static final String KEY_SUCCESS = "success";
+        public static final String KEY_FAIL = "fail";
+        public static final String KEY_ERROR = "error";
+        public static final String MESSAGE_SUCCESS = "message_success";
+        public static final String MESSAGE_FAIL = "message_fail";
+        public static final String MESSAGE_ERROR = "message_error";
+    }
+
 }

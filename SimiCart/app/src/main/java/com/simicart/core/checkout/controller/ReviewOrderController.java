@@ -459,7 +459,8 @@ public class ReviewOrderController extends SimiController {
         String paymentMethod = mCurrentPaymentMethod.getPaymentMethod();
         HashMap<String, Object> hmData = new HashMap<>();
         hmData.put("payment_method", paymentMethod);
-        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_BEFORE_PLACE, hmData);
+        paymentMethod = paymentMethod.toUpperCase();
+        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_BEFORE_PLACE + paymentMethod, hmData);
 
         return false;
     }
@@ -471,7 +472,8 @@ public class ReviewOrderController extends SimiController {
         hmData.put("payment_method", paymentMethod);
         hmData.put("review_order_entity", mReviewOrderEntity);
         hmData.put("order_infor_entity", orderInforEntity);
-        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_SDK, hmData);
+        paymentMethod = paymentMethod.toUpperCase();
+        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_SDK + paymentMethod, hmData);
     }
 
     protected void dispatchEventForPaymentWebview(OrderInforEntity orderInforEntity) {
@@ -480,7 +482,8 @@ public class ReviewOrderController extends SimiController {
         hmData.put("payment_method", paymentMethod);
         hmData.put("review_order_entity", mReviewOrderEntity);
         hmData.put("order_infor_entity", orderInforEntity);
-        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_WEBVIEW, hmData);
+        paymentMethod = paymentMethod.toUpperCase();
+        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_WEBVIEW + paymentMethod, hmData);
     }
 
     protected void dispatchEventAfterPlace(OrderInforEntity orderInforEntity) {
@@ -489,7 +492,8 @@ public class ReviewOrderController extends SimiController {
         hmData.put("payment_method", paymentMethod);
         hmData.put("review_order_entity", mReviewOrderEntity);
         hmData.put("order_infor_entity", orderInforEntity);
-        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_AFTER_PLACE, hmData);
+        paymentMethod = paymentMethod.toUpperCase();
+        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_AFTER_PLACE + paymentMethod, hmData);
     }
 
 

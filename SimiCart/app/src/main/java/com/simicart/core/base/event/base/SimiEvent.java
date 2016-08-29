@@ -1,7 +1,9 @@
 package com.simicart.core.base.event.base;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 
@@ -23,4 +25,11 @@ public class SimiEvent {
         intent.putExtra("data", bundle);
         LocalBroadcastManager.getInstance(context).sendBroadcastSync(intent);
     }
+
+    public static void registerEvent(String eventName, BroadcastReceiver receiver) {
+        IntentFilter intentFilter = new IntentFilter(eventName);
+        Context context = SimiManager.getIntance().getCurrentActivity();
+        LocalBroadcastManager.getInstance(context).registerReceiver(receiver, intentFilter);
+    }
+
 }
