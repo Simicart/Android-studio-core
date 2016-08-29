@@ -8,6 +8,7 @@ import android.view.View;
 import com.simicart.core.base.model.entity.SimiData;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class SimiFragment extends Fragment {
 
@@ -34,7 +35,7 @@ public class SimiFragment extends Fragment {
 
     protected void getDataFromBundle() {
         Bundle bundle = getArguments();
-        if(null != bundle) {
+        if (null != bundle) {
             mData = bundle.getParcelable("data");
             mHashMapData = mData.getData();
         }

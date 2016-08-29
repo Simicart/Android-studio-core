@@ -236,7 +236,9 @@ public class FacebookConnect {
                         SimiManager.getIntance().onUpdateCartQty(cartQty);
                     }
 
-                    onSignInSuccess(checkOut);
+                    if(mDelegate != null) {
+                        onSignInSuccess(checkOut);
+                    }
 
                 }
             }

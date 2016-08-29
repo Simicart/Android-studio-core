@@ -92,8 +92,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                         SimiManager.getIntance().openSubCategory(category.getCategoryId(), category.getCategoryName());
                     } else {
                         HashMap<String, Object> hmData = new HashMap<String, Object>();
-                        hmData.put("category_id", category.getCategoryId());
-                        hmData.put("category_name", category.getCategoryName());
+                        hmData.put(KeyData.CATEGORY.CATEGORY_ID, category.getCategoryId());
+                        hmData.put(KeyData.CATEGORY.CATEGORY_NAME, category.getCategoryName());
                         SimiData data = new SimiData(hmData);
                         CategoryFragment categoryFragment = CategoryFragment.newInstance(data);
                         SimiManager.getIntance().replaceFragment(categoryFragment);
@@ -101,6 +101,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 } else {
                     HashMap<String,Object> hm = new HashMap<>();
                     hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+                    hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME,category.getCategoryName());
                     hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,category.getCategoryId());
                     SimiManager.getIntance().openCategoryDetail(hm);
                 }

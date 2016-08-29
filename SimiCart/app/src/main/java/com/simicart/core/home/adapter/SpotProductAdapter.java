@@ -10,8 +10,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.common.DrawableManager;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.ProductPriceView;
 import com.simicart.core.common.price.ProductPriceViewProductGridV03;
@@ -20,6 +24,7 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by frank on 17/08/2016.
@@ -50,7 +55,7 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Product product = mProducts.get(position);
+        final Product product = mProducts.get(position);
 
         if (isHomePage) {
             if (DataLocal.isLanguageRTL) {
@@ -104,13 +109,28 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
             }
         }
 
+        holder.llItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = product.getId();
+                ArrayList<String> listID = new ArrayList<String>();
+                for (int i = 0; i < mProducts.size(); i++) {
+                    listID.add(mProducts.get(i).getId());
+                }
+                HashMap<String,Object> hmData = new HashMap<>();
+                hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, id);
+                hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
+
+                SimiManager.getIntance().openProductDetail(hmData);
+            }
+        });
 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img_avartar;
         TextView tv_name;
-        LinearLayout ll_price;
+        LinearLayout ll_price, llItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -120,6 +140,7 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
                     .getInstance().id("layout_price"));
             img_avartar = (ImageView) itemView.findViewById(Rconfig
                     .getInstance().id("product_list_image"));
+            llItem = (LinearLayout) itemView.findViewById(Rconfig.getInstance().id("product_list_details"));
         }
     }
 

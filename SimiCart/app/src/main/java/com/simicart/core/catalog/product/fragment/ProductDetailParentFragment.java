@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,15 +35,9 @@ public class ProductDetailParentFragment extends SimiFragment {
     public static ProductDetailParentFragment newInstance(SimiData data) {
         ProductDetailParentFragment fragment = new ProductDetailParentFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("data", data);
+        bundle.putParcelable(KEY_DATA, data);
         fragment.setArguments(bundle);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        super.setScreenName("Product Detail Screen - ProductID: " + mID);
     }
 
     @Override
@@ -61,12 +54,9 @@ public class ProductDetailParentFragment extends SimiFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (mHashMapData.containsKey(KeyData.PRODUCT_DETAIL.PRODUCT_ID)) {
-            mID = String.valueOf(mHashMapData.get(KeyData.PRODUCT_DETAIL.PRODUCT_ID));
-        }
-
-        if (mHashMapData.containsKey(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID)) {
-            mListID = (ArrayList<String>) mHashMapData.get(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID);
+        if(mData != null) {
+            mID = (String) getValueWithKey(KeyData.PRODUCT_DETAIL.PRODUCT_ID);
+            mListID = (ArrayList<String>) getValueWithKey(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID);
         }
 
         mBlock = new ProductDetailParentBlock(view, getActivity());

@@ -4,25 +4,31 @@ import android.view.View;
 
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.category.component.CategoryComponent;
 import com.simicart.core.catalog.category.delegate.CategoryDelegate;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.model.CategoryModel;
 import com.simicart.core.catalog.category.model.ListProductModel;
+import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductList;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.home.component.SpotProductComponent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CategoryController extends SimiController {
 
     protected CategoryDelegate mDelegate;
     protected String mID;
+    protected String mName;
     protected CategoryComponent categoryComponent;
     protected ListProductModel listProductModel;
+    protected View.OnClickListener onViewMoreClick;
 
     @Override
     public void onStart() {
@@ -30,6 +36,18 @@ public class CategoryController extends SimiController {
         if (!DataLocal.isTablet) {
             requestListProducts();
         }
+
+        onViewMoreClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String,Object> hmData = new HashMap<>();
+                hmData.put(KeyData.CATEGORY_DETAIL.CATE_ID, mID);
+                hmData.put(KeyData.CATEGORY_DETAIL.CATE_NAME, mName);
+                hmData.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+                SimiManager.getIntance().openCategoryDetail(hmData);
+            }
+        };
+
     }
 
     public void requestListCategories() {
@@ -100,6 +118,14 @@ public class CategoryController extends SimiController {
 
     public void setCategoryID(String id) {
         mID = id;
+    }
+
+    public void setCategoryName(String name) {
+        mName = name;
+    }
+
+    public View.OnClickListener getOnViewMoreClick() {
+        return onViewMoreClick;
     }
 
 }

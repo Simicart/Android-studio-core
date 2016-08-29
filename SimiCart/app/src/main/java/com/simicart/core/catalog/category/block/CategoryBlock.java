@@ -33,10 +33,6 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
         super(view, context);
     }
 
-    public void setCategoryName(String name) {
-        mName = name;
-    }
-
     @Override
     public void initView() {
 
@@ -134,4 +130,13 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
     public void updateCategoryParent(String name) {
 
     }
+
+    public void setCategoryName(String name) {
+        mName = name;
+    }
+
+    public void onViewMoreClick(View.OnClickListener listener) {
+        tv_viewmore.setOnClickListener(listener);
+    }
+
 }

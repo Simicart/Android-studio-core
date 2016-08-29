@@ -49,12 +49,13 @@ public class CategoryFragment extends SimiFragment {
             mCategoryController = new CategoryController();
             mCategoryController.setDelegate(mCategoryBlock);
             mCategoryController.setCategoryID(mCategoryID);
+            mCategoryController.setCategoryName(mCategoryName);
             mCategoryController.onStart();
         } else {
             mCategoryController.setDelegate(mCategoryBlock);
             mCategoryController.onResume();
         }
-
+        mCategoryBlock.onViewMoreClick(mCategoryController.getOnViewMoreClick());
         // save
         //DataPreferences.saveCateID(mCategoryID, mCategoryName);
 
