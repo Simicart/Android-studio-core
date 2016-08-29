@@ -8,6 +8,8 @@ import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 
 import com.simicart.core.base.component.SimiComponent;
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Rconfig;
@@ -30,6 +32,8 @@ public class WebviewPaymentComponent extends SimiComponent {
     protected String mMesssageSuccess;
     protected String mMessageFail;
     protected String mMessageError;
+    protected String mKeyReview;
+    protected String mMessageReview;
 
 
     public WebviewPaymentComponent(HashMap<String, Object> data, WebviewPaymentCallBack callBack) {
@@ -68,6 +72,14 @@ public class WebviewPaymentComponent extends SimiComponent {
             mMessageError = (String) mData.get(KeyData.WEBVIEW_PAYMENT_COMPONENT.MESSAGE_ERROR);
         }
 
+        if (mData.containsKey(KeyData.WEBVIEW_PAYMENT_COMPONENT.KEY_REVIEW)) {
+            mKeyReview = (String) mData.get(KeyData.WEBVIEW_PAYMENT_COMPONENT.KEY_REVIEW);
+        }
+
+        if (mData.containsKey(KeyData.WEBVIEW_PAYMENT_COMPONENT.MESSAGE_REVIEW)) {
+            mMessageReview = (String) mData.get(KeyData.WEBVIEW_PAYMENT_COMPONENT.MESSAGE_REVIEW);
+        }
+
     }
 
     @Override
@@ -97,6 +109,7 @@ public class WebviewPaymentComponent extends SimiComponent {
                 WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         wvPayment.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         if (Utils.validateString(mUrl)) {
+            showLoading();
             wvPayment.loadUrl(mUrl);
             wvPayment.setWebViewClient(new WebViewClient() {
                 @Override
@@ -137,18 +150,41 @@ public class WebviewPaymentComponent extends SimiComponent {
             }
         }
 
+        if (Utils.validateString(mKeyReview)) {
+            if (null != mCallBack && !mCallBack.onReview(url)) {
+                processReview();
+            }
+        }
+
     }
 
     protected void processSuccess() {
-
+        if (Utils.validateString(mMesssageSuccess)) {
+            SimiNotify.getInstance().showToast(mMesssageSuccess);
+        }
+        SimiManager.getIntance().backToHomeFragment();
     }
 
     protected void processFail() {
+        if (Utils.validateString(mMessageFail)) {
+            SimiNotify.getInstance().showToast(mMessageFail);
+        }
+        SimiManager.getIntance().backToHomeFragment();
 
     }
 
     protected void processError() {
+        if (Utils.validateString(mMessageError)) {
+            SimiNotify.getInstance().showToast(mMessageError);
+        }
+        SimiManager.getIntance().backToHomeFragment();
+    }
 
+    protected void processReview() {
+        if (Utils.validateString(mMessageReview)) {
+            SimiNotify.getInstance().showError(mMessageReview);
+        }
+        SimiManager.getIntance().backToHomeFragment();
     }
 
     public void showLoading() {

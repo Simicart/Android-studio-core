@@ -79,6 +79,8 @@ public class KeyData {
         public static final String MESSAGE_SUCCESS = "message_success";
         public static final String MESSAGE_FAIL = "message_fail";
         public static final String MESSAGE_ERROR = "message_error";
+        public static final String KEY_REVIEW = "review";
+        public static final String MESSAGE_REVIEW = "message_review";
     }
 
 }
