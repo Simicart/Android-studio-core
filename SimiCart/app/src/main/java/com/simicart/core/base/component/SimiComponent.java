@@ -27,10 +27,6 @@ public class SimiComponent {
 
     public View findView(String id) {
         int idView = Rconfig.getInstance().id(id);
-        if(null == rootView){
-            Log.e("SimiComponent","findVIew NULL");
-        }
-
         return rootView.findViewById(idView);
     }
 
