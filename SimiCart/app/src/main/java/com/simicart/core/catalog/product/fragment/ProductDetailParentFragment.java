@@ -12,10 +12,12 @@ import android.widget.RelativeLayout.LayoutParams;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.adapter.ProductDetailParentAdapter;
 import com.simicart.core.catalog.product.adapter.ProductDetailParentAdapterTablet;
 import com.simicart.core.catalog.product.block.ProductDetailParentBlock;
 import com.simicart.core.catalog.product.controller.ProductDetailParentController;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -31,14 +33,11 @@ public class ProductDetailParentFragment extends SimiFragment {
     protected ProductDetailParentBlock mBlock;
     protected ProductDetailParentController mController;
 
-    public static ProductDetailParentFragment newInstance(String id,
-                                                          ArrayList<String> ids) {
+    public static ProductDetailParentFragment newInstance(SimiData data) {
         ProductDetailParentFragment fragment = new ProductDetailParentFragment();
-
-        Bundle args = new Bundle();
-//        setData(Constants.KeyData.ID, id, Constants.KeyData.TYPE_STRING, args);
-//        setData(Constants.KeyData.LIST_ID, ids, Constants.KeyData.TYPE_LIST_STRING, args);
-        fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("data", data);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -62,11 +61,14 @@ public class ProductDetailParentFragment extends SimiFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (getArguments() != null) {
-//            mID = (String) getData(Constants.KeyData.ID, Constants.KeyData.TYPE_STRING, getArguments());
-//            mListID = (ArrayList<String>) getData(Constants.KeyData.LIST_ID, Constants.KeyData.TYPE_LIST_STRING, getArguments());
+        if (mHashMapData.containsKey(KeyData.PRODUCT_DETAIL.PRODUCT_ID)) {
+            mID = String.valueOf(mHashMapData.get(KeyData.PRODUCT_DETAIL.PRODUCT_ID));
         }
-        Log.d("quangdd", "==" + mID + "===" + mListID);
+
+        if (mHashMapData.containsKey(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID)) {
+            mListID = (ArrayList<String>) mHashMapData.get(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID);
+        }
+
         mBlock = new ProductDetailParentBlock(view, getActivity());
         mBlock.initView();
         if (null == mController) {
@@ -179,8 +181,6 @@ public class ProductDetailParentFragment extends SimiFragment {
             for (int i = 0; i < mListID.size(); i++) {
                 String id = mListID.get(i);
                 if (id.equals(mID)) {
-                    Log.e("ProductDetailParentFragment ", "POSITION " + i
-                            + "ID " + id);
                     return i;
                 }
             }

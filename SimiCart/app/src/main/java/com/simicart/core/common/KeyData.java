@@ -83,4 +83,10 @@ public class KeyData {
         public static final String MESSAGE_REVIEW = "message_review";
     }
 
+    public static class PRODUCT_DETAIL{
+        public static final String PRODUCT_ID = "id";
+        public static final String LIST_PRODUCT_ID = "list_id";
+
+    }
+
 }

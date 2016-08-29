@@ -22,6 +22,8 @@ import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.request.SimiRequestQueue;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
+import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.checkout.fragment.ReviewOrderFragment;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
@@ -110,6 +112,14 @@ public class SimiManager {
         ReviewOrderFragment fragment = ReviewOrderFragment.newInstance(data);
         replaceFragment(fragment);
     }
+
+
+    public void openProductDetail(HashMap<String, Object> hm) {
+        SimiData data = new SimiData(hm);
+        ProductDetailParentFragment fragment = ProductDetailParentFragment.newInstance(data);
+        replaceFragment(fragment);
+    }
+
 
     public Activity getCurrentActivity() {
         return mCurrentActivity;
