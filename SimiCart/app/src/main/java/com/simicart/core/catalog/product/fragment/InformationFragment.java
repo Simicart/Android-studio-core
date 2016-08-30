@@ -3,12 +3,14 @@ package com.simicart.core.catalog.product.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.adapter.TabAdapterFragment;
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.block.ProductMorePluginBlock;
 import com.simicart.core.catalog.product.controller.ProductMorePluginController;
 import com.simicart.core.catalog.product.entity.Product;
@@ -29,9 +31,10 @@ public class InformationFragment extends SimiFragment {
 		super.onCreate(savedInstanceState);
 	}
 
-	public static InformationFragment newInstance(Product product) {
+	public static InformationFragment newInstance(SimiData data) {
 		InformationFragment fragment = new InformationFragment();
 		Bundle bundle = new Bundle();
+		bundle.putParcelable(KEY_DATA, data);
 		//bundle.putSerializable(Constants.KeyData.PRODUCT, product);
 		fragment.setArguments(bundle);
 		return fragment;
@@ -49,8 +52,8 @@ public class InformationFragment extends SimiFragment {
 				container, false);
 		Context context = getActivity();
 		
-		if(getArguments() != null){
-			mProduct = (Product) getArguments().getSerializable(Constants.KeyData.PRODUCT);
+		if(mData != null){
+			mProduct = (Product) getValueWithKey(Constants.KeyData.PRODUCT);
 		}
 		if (null != mProduct) {
 			initView();
@@ -61,15 +64,16 @@ public class InformationFragment extends SimiFragment {
 			mPluginBlock.initView();
 			if (mPluginController == null) {
 				mPluginController = new ProductMorePluginController();
+				mPluginController.setDelegate(mPluginBlock);
 				mPluginController.setProduct(mProduct);
 				mPluginController.onStart();
 			} else {
-				mPluginController.onResume();
 				mPluginController.setProduct(mProduct);
+				mPluginController.setDelegate(mPluginBlock);
+				mPluginController.onResume();
 			}
 			mPluginBlock.setListenerMoreShare(mPluginController
 					.getClickerShare());
-
 		}
 		return mRootView;
 	}

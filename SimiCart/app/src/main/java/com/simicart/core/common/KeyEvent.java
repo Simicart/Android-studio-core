@@ -30,4 +30,8 @@ public class KeyEvent {
         public static final String REWARD_ADD_ITEM_REVIEW_ORDER = "com.simicart.core.checkout.block.ReviewOrderBlock";
     }
 
+    public static class WISH_LIST {
+        public static final String WISH_LIST_ADD_BUTTON_MORE = "com.simicart.core.catalog.product.block.ProductMorePluginBlock";
+    }
+
 }

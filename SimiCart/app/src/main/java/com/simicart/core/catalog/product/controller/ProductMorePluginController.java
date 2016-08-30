@@ -30,6 +30,9 @@ public class ProductMorePluginController extends SimiController {
 
 	@Override
 	public void onStart() {
+
+		mDelegate.updateView(null);
+
 		mClickerShare = new OnClickListener() {
 
 			@Override

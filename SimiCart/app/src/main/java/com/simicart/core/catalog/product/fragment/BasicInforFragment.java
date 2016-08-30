@@ -12,24 +12,24 @@ import android.widget.TextView;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.price.ProductPriceViewDetail;
 import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 public class BasicInforFragment extends SimiFragment {
 	protected Product mProduct;
 
-	public static BasicInforFragment newInstance() {
+	public static BasicInforFragment newInstance(SimiData data) {
 		BasicInforFragment fragment = new BasicInforFragment();
-		
+		Bundle bundle = new Bundle();
+		bundle.putParcelable(KEY_DATA, data);
+		fragment.setArguments(bundle);
 		return fragment;
-	}
-
-	public Product getProduct() {
-		return mProduct;
 	}
 
 	@Override
@@ -38,6 +38,10 @@ public class BasicInforFragment extends SimiFragment {
 		rootView = inflater.inflate(
 				Rconfig.getInstance().layout(
 						"core_information_basic_inf_layout"), container, false);
+
+		if(mData != null) {
+			mProduct = (Product) getValueWithKey(Constants.KeyData.PRODUCT);
+		}
 		
 		TextView tv_Name = (TextView) rootView.findViewById(Rconfig
 				.getInstance().id("tv_Name"));

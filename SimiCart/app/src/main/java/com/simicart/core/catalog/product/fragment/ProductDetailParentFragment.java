@@ -59,33 +59,6 @@ public class ProductDetailParentFragment extends SimiFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        if(mData != null) {
-//            mID = (String) getValueWithKey(KeyData.PRODUCT_DETAIL.PRODUCT_ID);
-//            mListID = (ArrayList<String>) getValueWithKey(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID);
-//        }
-
-        mBlock = new ProductDetailParentBlock(view, getActivity());
-        mBlock.initView();
-        if (null == mController) {
-            mController = new ProductDetailParentController();
-            mController.setDelegate(mBlock);
-            mController.setProductDelegate(mBlock);
-            mController.setProductId(mID);
-            mController.setAdapterDelegate(mBlock);
-            mController.onStart();
-        } else {
-            mController.setDelegate(mBlock);
-            mController.setProductDelegate(mBlock);
-            mController.onResume();
-        }
-
-        mBlock.setAddToCartListener(mController.getTouchAddToCart());
-        mBlock.setOnDoneOption(mController.getOnDoneClick());
-        mBlock.setDetailListener(mController.getTouchDetails());
-        mBlock.setOptionListener(mController.getTouchOptions());
-
-        SimiManager.getIntance().setChildFragment(getChildFragmentManager());
-
         mBlock = new ProductDetailParentBlock(rootView, getActivity());
         mBlock.initView();
         if (null == mController) {

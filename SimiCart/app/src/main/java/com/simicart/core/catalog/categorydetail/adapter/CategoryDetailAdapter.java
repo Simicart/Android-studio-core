@@ -16,9 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.drawImage.SimiDrawImage;
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.ProductPriceViewProductGridV03;
 import com.simicart.core.config.AppColorConfig;
@@ -28,6 +30,7 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Martial on 8/19/2016.
@@ -139,9 +142,16 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String id = product.getId();
+                ArrayList<String> listID = new ArrayList<String>();
+                for (int i = 0; i < listProducts.size(); i++) {
+                    listID.add(listProducts.get(i).getId());
+                }
+                HashMap<String,Object> hmData = new HashMap<>();
+                hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, id);
+                hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
+                SimiManager.getIntance().openProductDetail(hmData);
             }
-
         });
     }
 

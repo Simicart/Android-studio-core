@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.block.CustomerReviewBlock;
 import com.simicart.core.catalog.product.controller.CustomerReviewController;
 import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
@@ -22,9 +24,11 @@ public class CustomerReviewFragment extends SimiFragment {
 	protected CustomerReviewController mController = null;
 	protected Product mProduct;
 
-	public static CustomerReviewFragment newInstance() {
+	public static CustomerReviewFragment newInstance(SimiData data) {
 		CustomerReviewFragment fragment = new CustomerReviewFragment();
-		
+		Bundle bundle = new Bundle();
+		bundle.putParcelable(KEY_DATA, data);
+		fragment.setArguments(bundle);
 		return fragment;
 	}
 
@@ -36,6 +40,14 @@ public class CustomerReviewFragment extends SimiFragment {
 				Rconfig.getInstance().layout("core_information_customer_review_layout"),
 				container, false);
 		Context context = getActivity();
+
+		if(mData != null) {
+			mProduct = (Product) getValueWithKey(Constants.KeyData.PRODUCT);
+			if(mProduct != null) {
+				mID = mProduct.getId();
+				mRatingStar = mProduct.getStar();
+			}
+		}
 		
 		mBlock = new CustomerReviewBlock(view, context);
 		mBlock.setProduct(mProduct);

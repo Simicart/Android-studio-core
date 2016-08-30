@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.BasicInforFragment;
@@ -13,8 +14,10 @@ import com.simicart.core.catalog.product.fragment.DescriptionFragment;
 import com.simicart.core.catalog.product.fragment.RelatedProductFragment;
 import com.simicart.core.catalog.product.fragment.TechSpecsFragment;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.Constants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TabAdapterFragment extends FragmentStatePagerAdapter {
 	protected Product mProduct;
@@ -47,33 +50,35 @@ public class TabAdapterFragment extends FragmentStatePagerAdapter {
 	}
 
 	private void addFragment() {
-		BasicInforFragment fragment_basic = BasicInforFragment.newInstance();
+		HashMap<String,Object> hmData = new HashMap<>();
+		hmData.put(Constants.KeyData.PRODUCT, mProduct);
+		BasicInforFragment fragment_basic = BasicInforFragment.newInstance(new SimiData(hmData));
 //		fragment_basic.setProduct(mProduct);
-		
+
 		mListFragment.add(fragment_basic);
 
 		if (Utils.validateString(mProduct.getDecripition())) {
 			DescriptionFragment fragment_description = DescriptionFragment
-					.newInstance();
+					.newInstance(new SimiData(hmData));
 //			fragment_description.setDescription(mProduct.getDecripition());
 			mListFragment.add(fragment_description);
 		}
 
 		if (!mProduct.getAttributes().isEmpty()) {
 			
-			TechSpecsFragment fragment_tech = TechSpecsFragment.newInstance();
+			TechSpecsFragment fragment_tech = TechSpecsFragment.newInstance(new SimiData(hmData));
 //			fragment_tech.setAttributes(mProduct.getAttributes());
 			mListFragment.add(fragment_tech);
 		}
 
 		if (mProduct.getRate() > 0 && mProduct.getReviewNumber() > 0) {
 			CustomerReviewFragment fragment_review = CustomerReviewFragment
-					.newInstance();
+					.newInstance(new SimiData(hmData));
 			mListFragment.add(fragment_review);
 		}
 
 		RelatedProductFragment fragment_related = RelatedProductFragment
-				.newInstance();
+				.newInstance(new SimiData(hmData));
 //		fragment_related.setID(mProduct.getId());
 		mListFragment.add(fragment_related);
 

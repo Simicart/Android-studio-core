@@ -2,12 +2,12 @@ package com.simicart.core.catalog.product.block;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,19 +15,18 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.product.adapter.RelatedProductListAdapter;
+import com.simicart.core.catalog.categorydetail.adapter.CategoryDetailAdapter;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.home.controller.ProductListListenerController;
 
 import java.util.ArrayList;
 
 public class RelatedProductBlock extends SimiBlock {
 
-    protected ListView lv_relatedProduct;
-    protected RelatedProductListAdapter mAdapter;
+    protected RecyclerView rv_relatedProduct;
+    protected CategoryDetailAdapter mAdapter;
 
     public RelatedProductBlock(View view, Context context) {
         super(view, context);
@@ -35,13 +34,9 @@ public class RelatedProductBlock extends SimiBlock {
 
     @Override
     public void initView() {
-        lv_relatedProduct = (ListView) mView.findViewById(Rconfig.getInstance()
-                .id("lv_relatedProduct"));
-        ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance()
-                .getLineColor());
-        lv_relatedProduct.setDivider(sage);
-        lv_relatedProduct.setDividerHeight(1);
-
+        rv_relatedProduct = (RecyclerView) mView.findViewById(Rconfig.getInstance()
+                .id("rv_relatedProduct"));
+        rv_relatedProduct.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
     }
 
     @Override
@@ -69,18 +64,13 @@ public class RelatedProductBlock extends SimiBlock {
     public void showRelatedProduct(ArrayList<Product> products) {
 
         if (null == mAdapter) {
-            mAdapter = new RelatedProductListAdapter(mContext, products);
-            lv_relatedProduct.setAdapter(mAdapter);
+            mAdapter = new CategoryDetailAdapter(products);
+            rv_relatedProduct.setAdapter(mAdapter);
         } else {
-            mAdapter.setProductList(products);
+            mAdapter.setListProducts(products);
             mAdapter.notifyDataSetChanged();
         }
 
-        ProductListListenerController listner = new ProductListListenerController();
-        listner.setProductList(products);
-
-        lv_relatedProduct.setOnItemClickListener(listner
-                .createTouchProductList());
     }
 
     public void visiableView() {
