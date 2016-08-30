@@ -130,6 +130,9 @@ public class WebviewPaymentComponent extends SimiComponent {
             if (url.contains(mKeySuccess)) {
                 if (null != mCallBack && !mCallBack.onSuccess(url)) {
                     processSuccess();
+                } else {
+                    dimissLoading();
+                    wvPayment.stopLoading();
                 }
             }
         }
@@ -138,6 +141,9 @@ public class WebviewPaymentComponent extends SimiComponent {
             if (url.contains(mKeyFail)) {
                 if (null != mCallBack && !mCallBack.onFail(url)) {
                     processFail();
+                } else {
+                    dimissLoading();
+                    wvPayment.stopLoading();
                 }
             }
         }
@@ -146,6 +152,9 @@ public class WebviewPaymentComponent extends SimiComponent {
             if (url.contains(mKeyError)) {
                 if (null != mCallBack && !mCallBack.onError(url)) {
                     processError();
+                } else {
+                    dimissLoading();
+                    wvPayment.stopLoading();
                 }
             }
         }
@@ -153,6 +162,9 @@ public class WebviewPaymentComponent extends SimiComponent {
         if (Utils.validateString(mKeyReview)) {
             if (null != mCallBack && !mCallBack.onReview(url)) {
                 processReview();
+            } else {
+                dimissLoading();
+                wvPayment.stopLoading();
             }
         }
 
@@ -162,6 +174,8 @@ public class WebviewPaymentComponent extends SimiComponent {
         if (Utils.validateString(mMesssageSuccess)) {
             SimiNotify.getInstance().showToast(mMesssageSuccess);
         }
+        dimissLoading();
+        wvPayment.stopLoading();
         SimiManager.getIntance().backToHomeFragment();
     }
 
@@ -169,6 +183,8 @@ public class WebviewPaymentComponent extends SimiComponent {
         if (Utils.validateString(mMessageFail)) {
             SimiNotify.getInstance().showToast(mMessageFail);
         }
+        dimissLoading();
+        wvPayment.stopLoading();
         SimiManager.getIntance().backToHomeFragment();
 
     }
@@ -177,6 +193,8 @@ public class WebviewPaymentComponent extends SimiComponent {
         if (Utils.validateString(mMessageError)) {
             SimiNotify.getInstance().showToast(mMessageError);
         }
+        dimissLoading();
+        wvPayment.stopLoading();
         SimiManager.getIntance().backToHomeFragment();
     }
 
@@ -184,6 +202,8 @@ public class WebviewPaymentComponent extends SimiComponent {
         if (Utils.validateString(mMessageReview)) {
             SimiNotify.getInstance().showError(mMessageReview);
         }
+        dimissLoading();
+        wvPayment.stopLoading();
         SimiManager.getIntance().backToHomeFragment();
     }
 
