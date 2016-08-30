@@ -253,4 +253,7 @@ public class TotalPriceComponent extends SimiComponent {
         mTotalEntity = totalPrice;
     }
 
+    public TotalPrice getTotalPrice() {
+        return mTotalEntity;
+    }
 }

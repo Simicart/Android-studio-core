@@ -387,7 +387,7 @@ public class ReviewOrderController extends SimiController {
                     ArrayList<SimiEntity> entities = collection.getCollection();
                     if (null != entities && entities.size() > 0) {
                         OrderInforEntity orderInforEntity = (OrderInforEntity) entities.get(0);
-                        dispatchEventAfterPlace(orderInforEntity);
+                        onPlaceOrderSuccess(orderInforEntity);
                     }
 
                     SimiManager.getIntance().backToHomeFragment();
@@ -457,8 +457,10 @@ public class ReviewOrderController extends SimiController {
     protected boolean dispatchEventBeforePlace() {
 
         String paymentMethod = mCurrentPaymentMethod.getPaymentMethod();
+
         HashMap<String, Object> hmData = new HashMap<>();
         hmData.put("payment_method", paymentMethod);
+
         paymentMethod = paymentMethod.toUpperCase();
         SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_BEFORE_PLACE + paymentMethod, hmData);
 
@@ -468,30 +470,36 @@ public class ReviewOrderController extends SimiController {
     protected void dispatchEventForPaymentSDK(OrderInforEntity orderInforEntity) {
 
         String paymentMethod = mCurrentPaymentMethod.getPaymentMethod();
+        TotalPrice totalPrice = mTotalPriceComponent.getTotalPrice();
         HashMap<String, Object> hmData = new HashMap<>();
         hmData.put("payment_method", paymentMethod);
         hmData.put("review_order_entity", mReviewOrderEntity);
         hmData.put("order_infor_entity", orderInforEntity);
+        hmData.put("total_price", totalPrice);
         paymentMethod = paymentMethod.toUpperCase();
         SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_SDK + paymentMethod, hmData);
     }
 
     protected void dispatchEventForPaymentWebview(OrderInforEntity orderInforEntity) {
         String paymentMethod = mCurrentPaymentMethod.getPaymentMethod();
+        TotalPrice totalPrice = mTotalPriceComponent.getTotalPrice();
         HashMap<String, Object> hmData = new HashMap<>();
         hmData.put("payment_method", paymentMethod);
         hmData.put("review_order_entity", mReviewOrderEntity);
         hmData.put("order_infor_entity", orderInforEntity);
+        hmData.put("total_price", totalPrice);
         paymentMethod = paymentMethod.toUpperCase();
         SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_WEBVIEW + paymentMethod, hmData);
     }
 
     protected void dispatchEventAfterPlace(OrderInforEntity orderInforEntity) {
         String paymentMethod = mCurrentPaymentMethod.getPaymentMethod();
+        TotalPrice totalPrice = mTotalPriceComponent.getTotalPrice();
         HashMap<String, Object> hmData = new HashMap<>();
         hmData.put("payment_method", paymentMethod);
         hmData.put("review_order_entity", mReviewOrderEntity);
         hmData.put("order_infor_entity", orderInforEntity);
+        hmData.put("total_price", totalPrice);
         paymentMethod = paymentMethod.toUpperCase();
         SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_AFTER_PLACE + paymentMethod, hmData);
     }
