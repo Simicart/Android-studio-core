@@ -34,9 +34,9 @@ public class ProductDetailParentFragment extends SimiFragment {
 
     public static ProductDetailParentFragment newInstance(SimiData data) {
         ProductDetailParentFragment fragment = new ProductDetailParentFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_DATA, data);
-        fragment.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable(KEY_DATA, data);
+//        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -54,10 +54,10 @@ public class ProductDetailParentFragment extends SimiFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(mData != null) {
-            mID = (String) getValueWithKey(KeyData.PRODUCT_DETAIL.PRODUCT_ID);
-            mListID = (ArrayList<String>) getValueWithKey(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID);
-        }
+//        if(mData != null) {
+//            mID = (String) getValueWithKey(KeyData.PRODUCT_DETAIL.PRODUCT_ID);
+//            mListID = (ArrayList<String>) getValueWithKey(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID);
+//        }
 
         mBlock = new ProductDetailParentBlock(view, getActivity());
         mBlock.initView();
@@ -179,4 +179,11 @@ public class ProductDetailParentFragment extends SimiFragment {
         return -1;
     }
 
+    public void setID(String mID) {
+        this.mID = mID;
+    }
+
+    public void setListID(ArrayList<String> mListID) {
+        this.mListID = mListID;
+    }
 }

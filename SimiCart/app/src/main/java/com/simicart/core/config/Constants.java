@@ -476,14 +476,6 @@ public class Constants {
         public static final String NAMEAPP = "nameapp";
         public static final String PASSBOOKLOGO = "passBookLogo";
         public static final String I_CLOSESLIDEMENUDELEGATE = "CloseSlideMenuDelegate";
-        public static final String PASSBOOK_LOGO = "passbook_logo";
-        public static final String LOYALTY_REDEEM = "loyalty_redeem";
-        public static final String PASSBOOK_TEXT = "passbook_text";
-        public static final String PASSBOOK_BACKGROUND = "passbook_background";
-        public static final String PASSBOOK_FOREGROUND = "passbook_foreground";
-        public static final String PASSBOOK_BARCODE = "passbook_barcode";
-        public static final String EXPIRE_NOTIFICATION = "expire_notification";
-        public static final String IS_NOTIFICATION = "is_notification";
 
         public static final String TYPE_STRING = "type_string";
         public static final String TYPE_INT = "type_int";

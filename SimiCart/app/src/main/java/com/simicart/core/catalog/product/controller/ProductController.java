@@ -13,10 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.delegate.ProductDelegate;
@@ -94,6 +96,13 @@ public class ProductController extends SimiController implements
 							// showInforDetail();
 						}
 					}
+			}
+		});
+		mModel.setFailListener(new ModelFailCallBack() {
+			@Override
+			public void onFail(SimiError error) {
+				mDelegate.dismissLoading();
+				SimiNotify.getInstance().showNotify(error.getMessage());
 			}
 		});
 		mModel = new ProductModel();

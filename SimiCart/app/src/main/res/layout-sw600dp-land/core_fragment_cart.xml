@@ -32,21 +32,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <RelativeLayout
-                android:id="@+id/rlt_reward_card"
+            <LinearLayout
+                android:id="@+id/ll_reward_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:visibility="gone" >
-            </RelativeLayout>
+                android:visibility="gone"
+                android:orientation="horizontal">
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/rl_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rlt_reward_card"
+                android:layout_below="@+id/ll_reward_card"
                 android:layout_marginRight="20dp" >
 
                 <TableLayout
@@ -79,7 +80,7 @@
                 android:layout_alignParentBottom="true"
                 android:orientation="vertical" >
 
-                <com.simicart.core.material.ButtonRectangle
+                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/checkout"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_button"

@@ -10,10 +10,6 @@ import org.json.JSONException;
 
 public class ProductModel extends SimiModel {
 
-	public ProductModel() {
-		super();
-	}
-
 	@Override
 	protected void setUrlAction() {
 		this.mUrlAction = Constants.GET_PRODUCT_DETAIL;
@@ -38,6 +34,6 @@ public class ProductModel extends SimiModel {
 
 	@Override
 	protected void setEnableCache() {
-		this.enableCache = true;
+		this.enableCache = false;
 	}
 }
