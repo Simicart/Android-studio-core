@@ -54,6 +54,7 @@ public class ProductMorePluginController extends SimiController {
 
 	@Override
 	public void onResume() {
+		mDelegate.updateView(null);
 	}
 
 }

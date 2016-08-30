@@ -15,10 +15,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.component.SimiMenuRowComponent;
+import com.simicart.core.base.component.callback.MenuRowCallBack;
 import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.block.ProductMorePluginBlock;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.KeyData;
@@ -27,6 +30,7 @@ import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.delegate.MyAccountDelegate;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
 import com.simicart.core.style.material.floatingactionbutton.FloatingActionButton;
 import com.simicart.core.style.material.floatingactionbutton.FloatingActionsMenu;
@@ -101,6 +105,18 @@ public class WishList {
         };
         SimiEvent.registerEvent(KeyEvent.WISH_LIST.WISH_LIST_ADD_BUTTON_MORE, addButtonReceiver);
 
+        // register event: add item to myaccount
+        BroadcastReceiver addItemMyAccountReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle bundle = intent.getBundleExtra(Constants.DATA);
+                SimiData data = bundle.getParcelable(Constants.ENTITY);
+                MyAccountDelegate mDelegate = (MyAccountDelegate) data.getData().get(KeyData.SIMI_CONTROLLER.DELEGATE);
+                addItemMyAccount(mDelegate);
+            }
+        };
+        SimiEvent.registerEvent(KeyEvent.MY_ACCOUNT_EVENT.MY_ACCOUNT_ADD_ITEM, addItemMyAccountReceiver);
+
     }
 
     protected void addItemToSlideMenu() {
@@ -136,8 +152,6 @@ public class WishList {
 
         ProductWishList productWishList = new ProductWishList(product);
 
-        Log.e("WishList ", "addButtonMyWishList " + product.getId());
-
         if (!productWishList.getWishlist_item_id().equals("0")) {
             bt_addWish.setEnable(true);
         }
@@ -146,6 +160,24 @@ public class WishList {
         MyWistListBlock mDelegate = new MyWistListBlock(view, mContext);
         controllerAddWishList.setDelegate(mDelegate);
         controllerAddWishList.onAddToWishList();
+    }
+
+    protected void addItemMyAccount(MyAccountDelegate mDelegate) {
+        SimiMenuRowComponent wishlistRowComponent = new SimiMenuRowComponent();
+        wishlistRowComponent.setIcon("plugins_wishlist_iconadd2");
+        wishlistRowComponent.setLabel(SimiTranslator.getInstance().translate(MY_WISH_LIST));
+        wishlistRowComponent.setmCallBack(new MenuRowCallBack() {
+            @Override
+            public void onClick() {
+                MyWishListFragment fragment = MyWishListFragment.newInstance();
+                if (DataLocal.isTablet) {
+                    SimiManager.getIntance().replacePopupFragment(fragment);
+                } else {
+                    SimiManager.getIntance().replaceFragment(fragment);
+                }
+            }
+        });
+        mDelegate.addItemRow(wishlistRowComponent.createView());
     }
 
 }

@@ -3,10 +3,12 @@ package com.simicart.core.customer.controller;
 import com.simicart.core.base.component.SimiMenuRowComponent;
 import com.simicart.core.base.component.callback.MenuRowCallBack;
 import com.simicart.core.base.controller.SimiController;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.delegate.MyAccountDelegate;
@@ -77,6 +79,11 @@ public class MyAccountController extends SimiController {
 			}
 		});
 		mDelegate.addItemRow(orderHistoryRowComponent.createView());
+
+		// Register event for plugins
+		HashMap<String,Object> hmData = new HashMap<>();
+		hmData.put(KeyData.SIMI_CONTROLLER.DELEGATE, mDelegate);
+		SimiEvent.dispatchEvent(KeyEvent.MY_ACCOUNT_EVENT.MY_ACCOUNT_ADD_ITEM, hmData);
 
 		SimiMenuRowComponent signOutRowComponent = new SimiMenuRowComponent();
 		signOutRowComponent.setIcon("ic_acc_logout");

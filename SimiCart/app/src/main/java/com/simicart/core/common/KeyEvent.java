@@ -12,6 +12,10 @@ public class KeyEvent {
         public static final String REMOVE_ITEM = "com.simicart.menuleft.removeitem";
     }
 
+    public static class MY_ACCOUNT_EVENT {
+        public static final String MY_ACCOUNT_ADD_ITEM = "simicart.myaccount.additem";
+    }
+
     public static class REVIEW_ORDER {
         public static final String FOR_PAYMENT_BEFORE_PLACE = "simicart.before.placeorder";
         public static final String FOR_PAYMENT_TYPE_SDK = "simicart.placeorder.sdk";

@@ -16,6 +16,10 @@ public class KeyData {
         public static String METHOD = "method";
     }
 
+    public static class SIMI_CONTROLLER {
+        public static String DELEGATE = "delegate";
+    }
+
     public static class CATEGORY_DETAIL {
         public static String TYPE = "type";
         public static String KEY_WORD = "key_word";
