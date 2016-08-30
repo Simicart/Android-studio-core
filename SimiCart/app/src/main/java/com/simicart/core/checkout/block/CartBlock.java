@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.widget.AppCompatButton;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -34,7 +35,7 @@ import com.simicart.core.material.ButtonRectangle;
 public class CartBlock extends SimiBlock implements CartDelegate {
 
     protected LinearLayout llCart;
-    protected ButtonRectangle btn_Checkout;
+    protected AppCompatButton btn_Checkout;
     protected TableLayout layoutPrice;
     protected CartListAdapter mAdapter;
     protected CartListenerController mListenerController;
@@ -63,10 +64,11 @@ public class CartBlock extends SimiBlock implements CartDelegate {
     @Override
     public void initView() {
         // check out button
-        btn_Checkout = (ButtonRectangle) mView.findViewById(Rconfig
+        btn_Checkout = (AppCompatButton) mView.findViewById(Rconfig
                 .getInstance().id("checkout"));
         btn_Checkout.setText(SimiTranslator.getInstance().translate("Checkout"));
-        btn_Checkout.setTextColor(Color.parseColor("#FFFFFF"));
+        btn_Checkout.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
+        btn_Checkout.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
         btn_Checkout.setTextSize(Constants.SIZE_TEXT_BUTTON);
         btn_Checkout.setOnClickListener(mListenerController
                 .getCheckoutClicker());

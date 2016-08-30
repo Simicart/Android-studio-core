@@ -3,28 +3,20 @@ package com.simicart.core.catalog.product.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout.LayoutParams;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.adapter.ProductDetailParentAdapter;
-import com.simicart.core.catalog.product.adapter.ProductDetailParentAdapterTablet;
 import com.simicart.core.catalog.product.block.ProductDetailParentBlock;
 import com.simicart.core.catalog.product.controller.ProductDetailParentController;
 import com.simicart.core.common.KeyData;
-import com.simicart.core.common.Utils;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
-
-import me.relex.circleindicator.CircleIndicator;
 
 public class ProductDetailParentFragment extends SimiFragment {
 
@@ -38,6 +30,9 @@ public class ProductDetailParentFragment extends SimiFragment {
         Bundle bundle = new Bundle();
         bundle.putParcelable("data", data);
         fragment.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable(KEY_DATA, data);
+//        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -55,50 +50,80 @@ public class ProductDetailParentFragment extends SimiFragment {
         if (mData != null) {
             mID = (String) getValueWithKey(KeyData.PRODUCT_DETAIL.PRODUCT_ID);
             mListID = (ArrayList<String>) getValueWithKey(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID);
+        }
+        return rootView;
+    }
 
 
-            mBlock = new ProductDetailParentBlock(rootView, getActivity());
-            mBlock.initView();
-            if (null == mController) {
-                mController = new ProductDetailParentController();
-                mController.setDelegate(mBlock);
-                mController.setProductDelegate(mBlock);
-                mController.setProductId(mID);
-                mController.setAdapterDelegate(mBlock);
-                mController.onStart();
-            } else {
-                mController.setDelegate(mBlock);
-                mController.setProductDelegate(mBlock);
-                mController.onResume();
-            }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-            mBlock.setAddToCartListener(mController.getTouchAddToCart());
-            mBlock.setOnDoneOption(mController.getOnDoneClick());
-            mBlock.setDetailListener(mController.getTouchDetails());
-            mBlock.setOptionListener(mController.getTouchOptions());
-            SimiManager.getIntance().setChildFragment(getChildFragmentManager());
+//        if(mData != null) {
+//            mID = (String) getValueWithKey(KeyData.PRODUCT_DETAIL.PRODUCT_ID);
+//            mListID = (ArrayList<String>) getValueWithKey(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID);
+//        }
 
-            int position = getPosition();
-            if (position < 0) {
-                mListID = new ArrayList<String>();
-                mListID.add(mID);
-                position = getPosition();
-            }
-            final ViewPager pager_parent = (ViewPager) rootView.findViewById(Rconfig
-                    .getInstance().id("pager_parent"));
-            ProductDetailParentAdapter adapter = new ProductDetailParentAdapter(
-                    SimiManager.getIntance().getChilFragmentManager());
-            adapter.setController(mController);
-            adapter.setListID(mListID);
-            adapter.notifyDataSetChanged();
-            pager_parent.setOffscreenPageLimit(3);
-            pager_parent.setAdapter(adapter);
-            pager_parent.setCurrentItem(position);
-            mController.setAdapterDelegate(adapter);
+        mBlock = new ProductDetailParentBlock(view, getActivity());
+        mBlock.initView();
+        if (null == mController) {
+            mController = new ProductDetailParentController();
+            mController.setDelegate(mBlock);
+            mController.setProductDelegate(mBlock);
+            mController.setProductId(mID);
+            mController.setAdapterDelegate(mBlock);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.setProductDelegate(mBlock);
+            mController.onResume();
         }
 
+        mBlock.setAddToCartListener(mController.getTouchAddToCart());
+        mBlock.setOnDoneOption(mController.getOnDoneClick());
+        mBlock.setDetailListener(mController.getTouchDetails());
+        mBlock.setOptionListener(mController.getTouchOptions());
 
-        return rootView;
+        SimiManager.getIntance().setChildFragment(getChildFragmentManager());
+
+        mBlock = new ProductDetailParentBlock(rootView, getActivity());
+        mBlock.initView();
+        if (null == mController) {
+            mController = new ProductDetailParentController();
+            mController.setDelegate(mBlock);
+            mController.setProductDelegate(mBlock);
+            mController.setProductId(mID);
+            mController.setAdapterDelegate(mBlock);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.setProductDelegate(mBlock);
+            mController.onResume();
+        }
+
+        mBlock.setAddToCartListener(mController.getTouchAddToCart());
+        mBlock.setOnDoneOption(mController.getOnDoneClick());
+        mBlock.setDetailListener(mController.getTouchDetails());
+        mBlock.setOptionListener(mController.getTouchOptions());
+        SimiManager.getIntance().setChildFragment(getChildFragmentManager());
+
+        int position = getPosition();
+        if (position < 0) {
+            mListID = new ArrayList<String>();
+            mListID.add(mID);
+            position = getPosition();
+        }
+        final ViewPager pager_parent = (ViewPager) rootView.findViewById(Rconfig
+                .getInstance().id("pager_parent"));
+        ProductDetailParentAdapter adapter = new ProductDetailParentAdapter(
+                SimiManager.getIntance().getChilFragmentManager());
+        adapter.setController(mController);
+        adapter.setListID(mListID);
+        adapter.notifyDataSetChanged();
+        pager_parent.setOffscreenPageLimit(3);
+        pager_parent.setAdapter(adapter);
+        pager_parent.setCurrentItem(position);
+        mController.setAdapterDelegate(adapter);
     }
 
 
@@ -187,4 +212,11 @@ public class ProductDetailParentFragment extends SimiFragment {
         return -1;
     }
 
+    public void setID(String mID) {
+        this.mID = mID;
+    }
+
+    public void setListID(ArrayList<String> mListID) {
+        this.mListID = mListID;
+    }
 }

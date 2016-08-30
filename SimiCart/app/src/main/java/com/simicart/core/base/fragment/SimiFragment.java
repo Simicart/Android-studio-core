@@ -37,7 +37,9 @@ public class SimiFragment extends Fragment {
         Bundle bundle = getArguments();
         if (null != bundle) {
             mData = bundle.getParcelable("data");
-            mHashMapData = mData.getData();
+            if(mData != null) {
+                mHashMapData = mData.getData();
+            }
         }
     }
 

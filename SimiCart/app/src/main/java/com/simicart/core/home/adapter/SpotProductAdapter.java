@@ -124,8 +124,10 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
                 HashMap<String,Object> hmData = new HashMap<>();
                 hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, id);
                 hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
-
-                SimiManager.getIntance().openProductDetail(hmData);
+                ProductDetailParentFragment fragment = new ProductDetailParentFragment();
+                fragment.setID(id);
+                fragment.setListID(listID);
+                SimiManager.getIntance().replaceFragment(fragment);
             }
         });
 

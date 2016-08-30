@@ -40,7 +40,7 @@ public class CartFragment extends SimiFragment {
 		setScreenName("Cart Screen");
 		SimiManager.getIntance().showCartLayout(false);
 		View view = inflater.inflate(
-				Rconfig.getInstance().layout("core_cart_layout"), container,
+				Rconfig.getInstance().layout("core_fragment_cart"), container,
 				false);
 		Context context = getActivity();
 		mBlock = new CartBlock(view, context);

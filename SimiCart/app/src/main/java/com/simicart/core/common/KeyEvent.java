@@ -25,4 +25,9 @@ public class KeyEvent {
         public static final String FACEBOOK_LOGIN_AUTO = "simicart.facebook.autologin";
     }
 
+    public static class REWARD_POINT_EVENT {
+        public static final String REWARD_ADD_ITEM_CART = "com.simicart.core.checkout.block.CartBlock";
+        public static final String REWARD_ADD_ITEM_REVIEW_ORDER = "com.simicart.core.checkout.block.ReviewOrderBlock";
+    }
+
 }
