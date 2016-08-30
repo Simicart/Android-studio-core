@@ -13,4 +13,6 @@ public interface WebviewPaymentCallBack {
 
     public boolean onReview(String url);
 
+    public boolean onOther(String url);
+
 }

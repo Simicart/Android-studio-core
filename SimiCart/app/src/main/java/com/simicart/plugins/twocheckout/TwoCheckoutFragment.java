@@ -84,6 +84,11 @@ public class TwoCheckoutFragment extends PaymentFragment {
             public boolean onReview(String url) {
                 return false;
             }
+
+            @Override
+            public boolean onOther(String url) {
+                return false;
+            }
         });
 
         View paymentView = paymentComponent.createView();

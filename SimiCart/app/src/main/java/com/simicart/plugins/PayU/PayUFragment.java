@@ -1,4 +1,4 @@
-package com.simicart.plugins.payu;
+package com.simicart.plugins.PayU;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -73,6 +73,11 @@ public class PayUFragment extends PaymentFragment {
 
                 @Override
                 public boolean onReview(String url) {
+                    return false;
+                }
+
+                @Override
+                public boolean onOther(String url) {
                     return false;
                 }
             });

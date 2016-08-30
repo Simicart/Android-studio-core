@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class CustomPayment {
 
     public CustomPayment() {
-
+        requestCustomPayment();
     }
 
     protected void requestCustomPayment() {
