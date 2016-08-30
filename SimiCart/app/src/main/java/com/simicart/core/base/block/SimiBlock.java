@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.event.base.SimiEvent;
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.config.AppColorConfig;
@@ -35,7 +36,7 @@ public class SimiBlock implements SimiDelegate {
                 Rconfig.getInstance().layout("core_base_loading"), viewGroup,
                 false);
 
-        pd_loading = ProgressDialog.show(mContext, null, null, true, false);
+        pd_loading = ProgressDialog.show(SimiManager.getIntance().getCurrentActivity(), null, null, true, false);
         pd_loading.setContentView(Rconfig.getInstance().layout(
                 "core_base_loading"));
         pd_loading.getWindow().setBackgroundDrawable(

@@ -12,9 +12,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.entity.Attributes;
+import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
@@ -23,8 +26,11 @@ public class TechSpecsFragment extends SimiFragment {
 
 	protected ArrayList<Attributes> mAttributes;
 
-	public static TechSpecsFragment newInstance() {
+	public static TechSpecsFragment newInstance(SimiData data) {
 		TechSpecsFragment fragment = new TechSpecsFragment();
+		Bundle bundle = new Bundle();
+		bundle.putParcelable(KEY_DATA, data);
+		fragment.setArguments(bundle);
 		return fragment;
 	}
 
@@ -35,6 +41,13 @@ public class TechSpecsFragment extends SimiFragment {
 				Rconfig.getInstance()
 						.layout("core_information_techspec_layout"), container,
 				false);
+
+		if(mData != null) {
+			Product mProduct = (Product) getValueWithKey(Constants.KeyData.PRODUCT);
+			if(mProduct != null) {
+				mAttributes = mProduct.getAttributes();
+			}
+		}
 
 		LinearLayout ll_techSpecs = (LinearLayout) rootView
 				.findViewById(Rconfig.getInstance().id("l_scrollView"));

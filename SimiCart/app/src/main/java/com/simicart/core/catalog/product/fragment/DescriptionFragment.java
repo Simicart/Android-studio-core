@@ -12,7 +12,10 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -20,9 +23,11 @@ public class DescriptionFragment extends SimiFragment {
 
 	protected String mDescription;
 
-	public static DescriptionFragment newInstance() {
+	public static DescriptionFragment newInstance(SimiData data) {
 		DescriptionFragment fragment = new DescriptionFragment();
-
+		Bundle bundle = new Bundle();
+		bundle.putParcelable(KEY_DATA, data);
+		fragment.setArguments(bundle);
 		return fragment;
 	}
 
@@ -33,6 +38,13 @@ public class DescriptionFragment extends SimiFragment {
 				Rconfig.getInstance().layout(
 						"core_information_description_layout"), container,
 				false);
+
+		if(mData != null) {
+			Product mProduct = (Product) getValueWithKey(Constants.KeyData.PRODUCT);
+			if(mProduct != null) {
+				mDescription = mProduct.getDecripition();
+			}
+		}
 
 		WebView webView = (WebView) rootView.findViewById(Rconfig.getInstance()
 				.id("webview"));

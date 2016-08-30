@@ -28,10 +28,10 @@ public class ButtonAddWishList {
 	}
 
 	public void setEnable(boolean isEnable) {
-		if (isEnable) {
-			getImageAddWishList().setIconDrawable(icon2);
-		} else {
+		if (isEnable = true) {
 			getImageAddWishList().setIconDrawable(icon);
+		} else {
+			getImageAddWishList().setIconDrawable(icon2);
 		}
 		this.isEnable = isEnable;
 	}
@@ -54,7 +54,7 @@ public class ButtonAddWishList {
 		imageAddWishList = new FloatingActionButton(context);
 		imageAddWishList.setColorNormal(Color.parseColor("#FFFFFF"));
 		imageAddWishList.setColorPressed(Color.parseColor("#f4f4f4"));
-		imageAddWishList.setIconDrawable(icon);
+		imageAddWishList.setIconDrawable(icon2);
 		imageAddWishList.setColorFilter(Color.YELLOW);
 	}
 

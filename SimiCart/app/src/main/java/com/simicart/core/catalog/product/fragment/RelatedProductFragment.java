@@ -7,18 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.block.RelatedProductBlock;
 import com.simicart.core.catalog.product.controller.RelatedProductController;
+import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 
 public class RelatedProductFragment extends SimiFragment {
 	protected String mID;
 	protected RelatedProductBlock mBlock;
 	protected RelatedProductController mController;
+	protected Product mProduct;
 
-	public static RelatedProductFragment newInstance() {
-		
+	public static RelatedProductFragment newInstance(SimiData data) {
 		RelatedProductFragment fragment = new RelatedProductFragment();
+		Bundle bundle = new Bundle();
+		bundle.putParcelable(KEY_DATA, data);
+		fragment.setArguments(bundle);
 		return fragment;
 	}
 
@@ -30,6 +36,13 @@ public class RelatedProductFragment extends SimiFragment {
 						"core_information_related_product_layout"), container,
 				false);
 		Context context = getActivity();
+
+		if(mData != null) {
+			mProduct = (Product) getValueWithKey(Constants.KeyData.PRODUCT);
+			if(mProduct != null) {
+				mID = mProduct.getId();
+			}
+		}
 		
 		mBlock = new RelatedProductBlock(view, context);
 		mBlock.initView();

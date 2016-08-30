@@ -22,6 +22,7 @@ public class RelatedProductController extends SimiController {
 	@Override
 	public void onStart() {
 		mDelegate.showLoading();
+		mModel = new RelatedProductModel();
 		mModel.setSuccessListener(new ModelSuccessCallBack() {
 			@Override
 			public void onSuccess(SimiCollection collection) {
@@ -29,7 +30,6 @@ public class RelatedProductController extends SimiController {
 				mDelegate.updateView(mModel.getCollection());
 			}
 		});
-		mModel = new RelatedProductModel();
 		mModel.addBody("product_id", mID);
 		mModel.addBody("limit", "15");
 		mModel.addBody("width", "300");

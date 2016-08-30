@@ -29,6 +29,10 @@ public class ProductMorePluginBlock extends SimiBlock {
 		this.mProduct = mProduct;
 	}
 
+	public Product getProduct() {
+		return mProduct;
+	}
+
 	public ProductMorePluginBlock(View view, Context context) {
 		super(view, context);
 	}

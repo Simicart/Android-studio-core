@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.catalog.product.delegate.ProductDelegate;
 import com.simicart.core.catalog.product.delegate.ProductDetailAdapterDelegate;
@@ -21,10 +22,12 @@ import com.simicart.core.catalog.product.fragment.InformationFragment;
 import com.simicart.core.catalog.product.model.ProductModel;
 import com.simicart.core.common.options.ProductOptionParentView;
 import com.simicart.core.common.price.ProductPriceViewV03;
+import com.simicart.core.config.Constants;
 import com.simicart.core.style.VerticalViewPager2;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @SuppressLint("DefaultLocale")
 public class ProductDetailParentController extends ProductController implements Serializable {
@@ -193,8 +196,9 @@ public class ProductDetailParentController extends ProductController implements 
     }
 
     protected void onShowDetail() {
-
-        InformationFragment fragment = InformationFragment.newInstance(getProductFromCollection());
+        HashMap<String,Object> hmData = new HashMap<>();
+        hmData.put(Constants.KeyData.PRODUCT, getProductFromCollection());
+        InformationFragment fragment = InformationFragment.newInstance(new SimiData(hmData));
 //		fragment.setProduct(getProductFromCollection());
         SimiManager.getIntance().addPopupFragment(fragment);
     }
