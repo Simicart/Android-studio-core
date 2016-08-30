@@ -102,6 +102,7 @@ public class KeyData {
     public static class PRODUCT_DETAIL{
         public static final String PRODUCT_ID = "id";
         public static final String LIST_PRODUCT_ID = "list_id";
+        public static final String IS_FROM_SCAN = "from_scan";
     }
 
     public static class FACEBOOK {

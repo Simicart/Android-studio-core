@@ -24,22 +24,15 @@ public class ProductDetailParentFragment extends SimiFragment {
     protected ArrayList<String> mListID;
     protected ProductDetailParentBlock mBlock;
     protected ProductDetailParentController mController;
+    protected  boolean isFromScan = false;
 
     public static ProductDetailParentFragment newInstance(SimiData data) {
         ProductDetailParentFragment fragment = new ProductDetailParentFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable("data", data);
         fragment.setArguments(bundle);
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelable(KEY_DATA, data);
-//        fragment.setArguments(bundle);
         return fragment;
     }
-
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,6 +60,9 @@ public class ProductDetailParentFragment extends SimiFragment {
             mController.setProductDelegate(mBlock);
             mController.setProductId(mID);
             mController.setAdapterDelegate(mBlock);
+            if(isFromScan == true) {
+                mController.setFromScan(true);
+            }
             mController.onStart();
         } else {
             mController.setDelegate(mBlock);
@@ -185,11 +181,8 @@ public class ProductDetailParentFragment extends SimiFragment {
         return -1;
     }
 
-    public void setID(String mID) {
-        this.mID = mID;
+    public void setIsFromScan(boolean isFromScan) {
+        this.isFromScan = isFromScan;
     }
 
-    public void setListID(ArrayList<String> mListID) {
-        this.mListID = mListID;
-    }
 }

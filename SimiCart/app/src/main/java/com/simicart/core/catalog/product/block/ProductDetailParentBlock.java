@@ -359,4 +359,12 @@ public class ProductDetailParentBlock extends SimiBlock implements
             img_animation.setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void setListenerBack(View.OnKeyListener listenerBack) {
+        mView.setFocusableInTouchMode(true);
+        mView.requestFocus();
+        mView.setOnKeyListener(listenerBack);
+    }
+
 }

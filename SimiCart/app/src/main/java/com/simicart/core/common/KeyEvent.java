@@ -38,4 +38,9 @@ public class KeyEvent {
         public static final String WISH_LIST_ADD_BUTTON_MORE = "com.simicart.core.catalog.product.block.ProductMorePluginBlock";
     }
 
+    public static class BAR_CODE {
+        public static final String BAR_CODE_ON_RESULT = "simicart.menuleft.onactivityresult.resultbarcode";
+        public static final String BAR_CODE_ON_BACK = "simicart.menuleft.mainactivity.backtoscan";
+    }
+
 }
