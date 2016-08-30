@@ -236,7 +236,8 @@
         <!-- Download product plugin -->
         <service android:name="com.simicart.plugins.download.common.DownloadService" />
 
-        <activity android:name="com.simicart.plugins.paypal.PayPalActivity"></activity>
+        <activity android:name="com.simicart.plugins.paypal.PayPalActivity" />
+        <activity android:name="com.simicart.plugins.ipay88.Ipay88Activity"></activity>
     </application>
 
 </manifest>
