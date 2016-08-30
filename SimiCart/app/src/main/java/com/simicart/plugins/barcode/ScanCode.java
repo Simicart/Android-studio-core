@@ -18,6 +18,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.simicart.MainActivity;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
@@ -51,7 +52,6 @@ public class ScanCode {
         mContext = SimiManager.getIntance().getCurrentActivity();
 
         // register event: add navigation item to slide menu
-        IntentFilter addItemFilter = new IntentFilter(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE);
         BroadcastReceiver addItemReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -69,10 +69,9 @@ public class ScanCode {
                 mItems.add(item);
             }
         };
-        LocalBroadcastManager.getInstance(mContext).registerReceiver(addItemReceiver, addItemFilter);
+        SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE, addItemReceiver);
 
         // register event: click item from left menu
-        IntentFilter onClickItemFilter = new IntentFilter("com.simicart.menuleft.onnavigate.clickitem");
         BroadcastReceiver onClickItemReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -83,10 +82,9 @@ public class ScanCode {
                 clickItemLeftMenuCode(item_name);
             }
         };
-        LocalBroadcastManager.getInstance(mContext).registerReceiver(onClickItemReceiver, onClickItemFilter);
+        SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.CLICK_ITEM, onClickItemReceiver);
 
         // register event: on scan result
-        IntentFilter onScanResultFilter = new IntentFilter("com.simicart.leftmenu.onactivityresult.resultbarcode");
         BroadcastReceiver onScanResultReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -106,7 +104,7 @@ public class ScanCode {
                                 break;
                             } else {
                                 if (fragment instanceof ProductDetailParentFragment) {
-//                                    ((ProductDetailParentFragment) fragment).setIsFromScan(false);
+                                    ((ProductDetailParentFragment) fragment).setIsFromScan(false);
                                 }
                             }
                         }
@@ -116,10 +114,9 @@ public class ScanCode {
                 }
             }
         };
-        LocalBroadcastManager.getInstance(mContext).registerReceiver(onScanResultReceiver, onScanResultFilter);
+        SimiEvent.registerEvent(KeyEvent.BAR_CODE.BAR_CODE_ON_RESULT, onScanResultReceiver);
 
         // register event: on back to scan
-        IntentFilter onBackFromDetailFilter = new IntentFilter("com.simicart.leftmenu.mainactivity.onbackpress.backtoscan");
         BroadcastReceiver onBackFromDetailtReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -130,7 +127,7 @@ public class ScanCode {
                 clickItemLeftMenuCode(item_name);
             }
         };
-        LocalBroadcastManager.getInstance(mContext).registerReceiver(onBackFromDetailtReceiver, onBackFromDetailFilter);
+        SimiEvent.registerEvent(KeyEvent.BAR_CODE.BAR_CODE_ON_BACK, onBackFromDetailtReceiver);
     }
 
     private void checkResultBarcode(String code) {
@@ -149,25 +146,19 @@ public class ScanCode {
                 pd_loading.dismiss();
                 ArrayList<String> listID = new ArrayList<String>();
 
-//                Product product = null;
-//                ArrayList<SimiEntity> entity = mModel.getProductID();
-//                if (null != entity && entity.size() > 0) {
-//                    product = (Product) entity.get(0);
-//                }
                 String product_id = mModel.getProductID();
-                Log.e("abc", "++" + product_id);
                 if (!Utils.validateString(product_id)) {
                     SimiNotify.getInstance().showToast(
                             "Result products is empty");
                     return;
                 }
 
-                //listID.add(product_id);
-//                ProductDetailParentFragment fragment = ProductDetailParentFragment.newInstance();
-//                fragment.setListIDProduct(listID);
-//                fragment.setProductID(product_id);
-//                fragment.setIsFromScan(true);
-//                SimiManager.getIntance().replaceFragment(fragment);
+                listID.add(product_id);
+                HashMap<String,Object> hmData = new HashMap<>();
+                hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, product_id);
+                hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
+                hmData.put(KeyData.PRODUCT_DETAIL.IS_FROM_SCAN, true);
+                SimiManager.getIntance().openProductDetail(hmData);
             }
         });
         mModel.setFailListener(new ModelFailCallBack() {

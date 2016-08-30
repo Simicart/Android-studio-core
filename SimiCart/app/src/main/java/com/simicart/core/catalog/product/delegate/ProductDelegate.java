@@ -23,4 +23,6 @@ public interface ProductDelegate extends SimiDelegate {
 	public LinearLayout getLayoutMore();
 	
 	public void startAnimation(String url);
+
+	public void setListenerBack(View.OnKeyListener listenerBack);
 }

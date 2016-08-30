@@ -1,8 +1,10 @@
 package com.simicart.core.catalog.product.controller;
 
 import android.annotation.SuppressLint;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,6 +12,7 @@ import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.model.entity.SimiEntity;
@@ -19,7 +22,10 @@ import com.simicart.core.catalog.product.entity.CacheOption;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductOption;
 import com.simicart.core.catalog.product.fragment.InformationFragment;
+import com.simicart.core.catalog.product.fragment.OptionFragment;
+import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.catalog.product.model.ProductModel;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.options.ProductOptionParentView;
 import com.simicart.core.common.price.ProductPriceViewV03;
 import com.simicart.core.config.Constants;
@@ -28,6 +34,7 @@ import com.simicart.core.style.VerticalViewPager2;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @SuppressLint("DefaultLocale")
 public class ProductDetailParentController extends ProductController implements Serializable {
@@ -36,11 +43,14 @@ public class ProductDetailParentController extends ProductController implements 
     protected OnTouchListener onTouchDetails;
     protected OnClickListener onTouchOptions;
     protected OnClickListener onDoneClick;
+    protected View.OnKeyListener mListenerBack;
+
     protected Product mProduct;
     protected ProductPriceViewV03 mPriceViewZTheme;
     protected boolean statusTopBottom = true;
     protected ProductDetailAdapterDelegate mAdapterDelegate;
     private boolean checkOptionDerect = false;
+    protected boolean fromScan = false;
 
     public void setAdapterDelegate(ProductDetailAdapterDelegate delegate) {
         mAdapterDelegate = delegate;
@@ -66,6 +76,10 @@ public class ProductDetailParentController extends ProductController implements 
         mDelegate = delegate;
     }
 
+    public void setFromScan(boolean fromScan) {
+        this.fromScan = fromScan;
+    }
+
     @Override
     public void onStart() {
         initOnTouchListener();
@@ -76,6 +90,7 @@ public class ProductDetailParentController extends ProductController implements 
     public void onResume() {
         mDelegate.updateView(mModel.getCollection());
         onUpdatePriceView();
+        initBack();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -137,6 +152,52 @@ public class ProductDetailParentController extends ProductController implements 
                 }
             }
         };
+
+        mListenerBack = new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        processBack();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+
+        initBack();
+    }
+
+    public void initBack() {
+        mDelegate.setListenerBack(mListenerBack);
+    }
+
+    protected void processBack() {
+        List<Fragment> list_fragmens = SimiManager.getIntance().getManager().getFragments();
+        Fragment backFragment = list_fragmens.get(list_fragmens.size() - 1);
+//        if(backFragment instanceof ProductDetailParentFragment && fromScan == true) {
+//            HashMap<String,Object> hmData = new HashMap<>();
+//            hmData.put(KeyData.SLIDE_MENU.ITEM_NAME, "Scan Now");
+//            SimiEvent.dispatchEvent(com.simicart.core.common.KeyEvent.BAR_CODE.BAR_CODE_ON_BACK, hmData);
+//            SimiManager.getIntance().getManager().popBackStack();
+//
+//            fromScan = false;
+//        } else {
+//            SimiManager.getIntance().getManager().popBackStack();
+//        }
+        if (backFragment instanceof OptionFragment) {
+            SimiManager.getIntance().getManager().popBackStack();
+        } else if (fromScan == true && backFragment instanceof ProductDetailParentFragment) {
+            HashMap<String,Object> hmData = new HashMap<>();
+            hmData.put(KeyData.SLIDE_MENU.ITEM_NAME, "Scan Now");
+            SimiEvent.dispatchEvent(com.simicart.core.common.KeyEvent.BAR_CODE.BAR_CODE_ON_BACK, hmData);
+            SimiManager.getIntance().getManager().popBackStack();
+
+            fromScan = false;
+        } else {
+            SimiManager.getIntance().backPreviousFragment();
+        }
     }
 
     protected void onShowOption() {
