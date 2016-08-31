@@ -1,4 +1,4 @@
-package com.simicart.plugins.payu;
+package com.simicart.plugins.PayU;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;

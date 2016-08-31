@@ -31,6 +31,7 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.controller.AutoSignInController;
 import com.simicart.core.menutop.fragment.MenuTopFragment;
+import com.simicart.core.notification.SCRegistrationIntentService;
 import com.simicart.core.shortcutbadger.ShortcutBadgeException;
 import com.simicart.core.shortcutbadger.ShortcutBadger;
 import com.simicart.core.slidemenu.fragment.SlideMenuFragment;
@@ -45,7 +46,7 @@ public class MainActivity extends FragmentActivity {
     public final static int RESUME = 1;
 
     private SlideMenuFragment mNavigationDrawerFragment;
-//    private NotificationController notification;
+    //    private NotificationController notification;
     public static int state = 0;
 
     public static boolean mCheckToDetailAfterScan = false;
@@ -58,7 +59,7 @@ public class MainActivity extends FragmentActivity {
         SimiManager.getIntance().setCurrentActivity(this);
         setContentView(R.layout.core_main_activity);
 
-       // DataPreferences.init(this);
+        // DataPreferences.init(this);
         if (DataPreferences.isSignInComplete()) {
             autoSignin();
         }
@@ -84,7 +85,7 @@ public class MainActivity extends FragmentActivity {
             SimiManager.getIntance().onUpdateCartQty(qtyCart);
         }
 
-
+        registerNotification();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         MenuTopFragment fragment = MenuTopFragment
@@ -100,6 +101,10 @@ public class MainActivity extends FragmentActivity {
         controller.onStart();
     }
 
+    protected void registerNotification() {
+        Intent intent = new Intent(this, SCRegistrationIntentService.class);
+        startService(intent);
+    }
 
     @Override
     protected void onPause() {
@@ -238,8 +243,8 @@ public class MainActivity extends FragmentActivity {
 //                                    SimiManager.getIntance()
 //                                            .backToHomeFragment();
 //                                } else {
-                                    SimiManager.getIntance().getManager()
-                                            .popBackStack();
+                                SimiManager.getIntance().getManager()
+                                        .popBackStack();
 //                                }
                             } else {
                                 SimiManager.getIntance().getManager()
@@ -268,7 +273,6 @@ public class MainActivity extends FragmentActivity {
     }
 
 
-
     @Override
     protected void onDestroy() {
 //        notification.destroy();
@@ -286,7 +290,7 @@ public class MainActivity extends FragmentActivity {
 
         Intent intent = new Intent("com.simicart.leftmenu.onactivityresult.resultbarcode");
         Bundle bundle = new Bundle();
-        HashMap<String,Object> hmData = new HashMap<>();
+        HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(KeyData.BAR_CODE.INTENT, data);
         hmData.put(KeyData.BAR_CODE.REQUEST_CODE, requestCode);
         hmData.put(KeyData.BAR_CODE.RESULT_CODE, resultCode);
@@ -349,7 +353,7 @@ public class MainActivity extends FragmentActivity {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         if (fragments != null) {
             int size = fragments.size();
-            Fragment fragment = fragments.get(size-1);
+            Fragment fragment = fragments.get(size - 1);
             fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

@@ -11,9 +11,9 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
-import com.simicart.R;
-import com.simicart.core.MainActivity;
+import com.simicart.MainActivity;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.Rconfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +53,7 @@ public class SCGCMListenerService extends GcmListenerService {
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.default_logo)
+                .setSmallIcon(Rconfig.getInstance().drawable("default_logo"))
                 .setContentTitle("GCM Message")
                 .setContentText(message)
                 .setAutoCancel(true)

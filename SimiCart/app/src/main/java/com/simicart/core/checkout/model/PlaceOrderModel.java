@@ -6,7 +6,6 @@ import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.checkout.entity.OrderInforEntity;
 import com.simicart.core.config.Constants;
-import com.simicart.core.notification.entity.NotificationEntity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

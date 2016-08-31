@@ -10,16 +10,11 @@ public class RegisterDeviceModel extends SimiModel {
 
     @Override
     protected void setUrlAction() {
-        addDataExtendURL("simiconnector/rest/v2/devices");
+        mUrlAction = "connector/config/register_device";
     }
 
     @Override
-    protected void parseData() {
-        super.parseData();
-    }
-
-    @Override
-    protected void setTypeMethod() {
-        mTypeMethod = SimiRequest.Method.POST;
+    protected void setShowNotifi() {
+        isShowNotify = false;
     }
 }

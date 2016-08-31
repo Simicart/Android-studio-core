@@ -3,25 +3,17 @@ package com.simicart.core.notification;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.webkit.JsResult;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
-import com.simicart.R;
-import com.simicart.core.base.delegate.ModelDelegate;
+import com.simicart.core.base.delegate.ModelFailCallBack;
+import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.network.error.SimiError;
-import com.simicart.core.base.network.error.SimiErrorListener;
-import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.DataPreferences;
-import com.simicart.core.splash.entity.StoreViewBaseEntity;
+import com.simicart.core.config.Config;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +22,10 @@ import org.json.JSONObject;
  * Created by frank on 7/12/16.
  */
 public class SCRegistrationIntentService extends IntentService {
+
+
+    protected final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
+    protected final String REGISTRATION_COMPLETE = "registrationComplete";
 
     double longtitude;
     double lattitude;
@@ -59,7 +55,7 @@ public class SCRegistrationIntentService extends IntentService {
             InstanceID instanceID = InstanceID.getInstance(this);
 
             String defaultSenderId = AppStoreConfig.getInstance().getSenderID();
-            Log.e("SCRegistrationIntentService ", "=========> defaultSenderId " + defaultSenderId);
+            Log.e("SCRegistrationIntentService ", " defaultSenderId " + defaultSenderId);
 
             String token = instanceID.getToken(defaultSenderId,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
@@ -74,13 +70,13 @@ public class SCRegistrationIntentService extends IntentService {
             // You should store a boolean that indicates whether the generated token has been
             // sent to your server. If the boolean is false, send the token to your server,
             // otherwise your server should have already received the token.
-            sharedPreferences.edit().putBoolean(Constants.Notification.SENT_TOKEN_TO_SERVER, true).apply();
+            sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, true).apply();
             // [END register_for_gcm]
         } catch (Exception e) {
             Log.d("SCRegistrationIntentService", "Failed to complete token refresh", e);
             // If an exception happens while fetching the new token or updating our registration data
             // on a third-party server, this ensures that we'll attempt the update at a later time.
-            sharedPreferences.edit().putBoolean(Constants.Notification.SENT_TOKEN_TO_SERVER, false).apply();
+            sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, false).apply();
         }
         // Notify UI that registration has completed, so the progress indicator can be hidden.
 //        Intent registrationComplete = new Intent(Constants.Notification.REGISTRATION_COMPLETE);
@@ -92,21 +88,21 @@ public class SCRegistrationIntentService extends IntentService {
             JSONObject jsParam = getDataForRegister(token);
             RegisterDeviceModel model = new RegisterDeviceModel();
 
-            model.setDelegate(new ModelDelegate() {
+            model.setFailListener(new ModelFailCallBack() {
+                @Override
+                public void onFail(SimiError error) {
+
+                }
+            });
+
+            model.setSuccessListener(new ModelSuccessCallBack() {
                 @Override
                 public void onSuccess(SimiCollection collection) {
-                    Log.e("SCRegistrationIntentService ", "------> REGISTER SUCCESS");
+
                 }
             });
 
-            model.setErrorListener(new SimiErrorListener() {
-                @Override
-                public void onErrorListener(SimiError error) {
-                    Log.e("SCRegistrationIntentService ", "------> REGISTER FAIL");
-                }
-            });
-
-            model.setJSONBOdy(jsParam);
+            model.setJSONBodyEntity(jsParam);
 
             model.request();
         } catch (JSONException e) {
@@ -117,27 +113,14 @@ public class SCRegistrationIntentService extends IntentService {
 
     private JSONObject getDataForRegister(String token) throws JSONException {
         JSONObject json = new JSONObject();
-
         json.put("device_token", token);
-        json.put("is_demo", "1");
+        if (Config.getInstance().isDemoVersion()) {
+            json.put("is_demo", "1");
+        } else {
+            json.put("is_demo", "0");
+        }
         json.put("latitude", lattitude);
         json.put("longitude", longtitude);
-        String email = DataPreferences.getCustomerEmail();
-        if (Utils.validateString(email)) {
-            json.put("user_email", email);
-        }
-        json.put("plaform_id", "3");
-        PackageManager manager = this.getPackageManager();
-        try {
-            String packageName = this.getPackageName();
-            PackageInfo info = manager.getPackageInfo(packageName, 0);
-            json.put("build_version", info.versionCode);
-            json.put("app_id", packageName);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
         return json;
 
     }
