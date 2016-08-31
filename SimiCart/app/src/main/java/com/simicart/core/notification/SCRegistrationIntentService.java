@@ -80,7 +80,7 @@ public class SCRegistrationIntentService extends IntentService {
         }
         // Notify UI that registration has completed, so the progress indicator can be hidden.
 //        Intent registrationComplete = new Intent(Constants.Notification.REGISTRATION_COMPLETE);
-//        LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
+//        LocalBroadcastManager.newInstance(this).sendBroadcast(registrationComplete);
     }
 
     private void sendRegistrationToServer(String token) {

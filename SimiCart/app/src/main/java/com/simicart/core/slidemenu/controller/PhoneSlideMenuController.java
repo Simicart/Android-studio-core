@@ -143,27 +143,27 @@ public class PhoneSlideMenuController {
                 ArrayList<String> listID = new ArrayList<String>();
                 listID.add(DeepLinkEntity.getInstance().getID());
 //                fragment = ProductDetailParentFragment.newInstance(
-//                        DeepLinkEntity.getInstance().getID(), listID);
+//                        DeepLinkEntity.newInstance().getID(), listID);
 //                SimiManager.getIntance().replaceFragment(fragment);
             } else if (DeepLinkEntity.getInstance().getType() == 2) {
                 Log.e("Open deep link", "2");
                 if (DeepLinkEntity.getInstance().isHasChild() == true) {
                     if (DataLocal.isTablet) {
 //                        fragment = CategoryFragment.newInstance(
-//                                DeepLinkEntity.getInstance().getID(),
-//                                DeepLinkEntity.getInstance().getName());
+//                                DeepLinkEntity.newInstance().getID(),
+//                                DeepLinkEntity.newInstance().getName());
 //                        CateSlideMenuFragment.getIntance()
 //                                .replaceFragmentCategoryMenu(fragment);
 //                        CateSlideMenuFragment.getIntance().openMenu();
                     } else {
 //                        fragment = CategoryFragment.newInstance(
-//                                DeepLinkEntity.getInstance().getID(),
-//                                DeepLinkEntity.getInstance().getName());
+//                                DeepLinkEntity.newInstance().getID(),
+//                                DeepLinkEntity.newInstance().getName());
 //                        SimiManager.getIntance().replaceFragment(fragment);
                     }
                 } else {
 //                    fragment = ProductListFragment.newInstance(
-//                            DeepLinkEntity.getInstance().getID(), DeepLinkEntity.getInstance().getName(), null, null, null);
+//                            DeepLinkEntity.newInstance().getID(), DeepLinkEntity.newInstance().getName(), null, null, null);
 //                    SimiManager.getIntance().replaceFragment(fragment);
                 }
             }

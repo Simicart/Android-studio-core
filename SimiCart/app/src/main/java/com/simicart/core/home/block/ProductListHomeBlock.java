@@ -40,7 +40,7 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 //										RelativeLayout.LayoutParams.MATCH_PARENT,
 //										RelativeLayout.LayoutParams.WRAP_CONTENT);
 //								LinearLayout ll_listProduct = (LinearLayout) mView
-//										.findViewById(Rconfig.getInstance().id("ll_spotproduct"));
+//										.findViewById(Rconfig.newInstance().id("ll_spotproduct"));
 //								// name
 //								TextView tv_name = new TextView(mContext);
 //								tv_name.setLayoutParams(title_lp);
@@ -54,9 +54,9 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 //								int padd = Utils.getValueDp(4);
 //								tv_name.setPadding(Utils.getValueDp(6), Utils.getValueDp(10),
 //										Utils.getValueDp(7), Utils.getValueDp(10));
-//								tv_name.setText(SimiTranslator.getInstance().translate(
+//								tv_name.setText(SimiTranslator.newInstance().translate(
 //										productList.get(i).getTitle().toUpperCase()));
-//								tv_name.setTextColor(AppColorConfig.getInstance().getContentColor());
+//								tv_name.setTextColor(AppColorConfig.newInstance().getContentColor());
 //								if (DataLocal.isTablet) {
 //									tv_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 21);
 //								} else {
@@ -108,7 +108,7 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 //								ll_listProduct.addView(llspot);
 //								if (i != count - 1) {
 //									View view = new View(mContext);
-//									view.setBackgroundColor(AppColorConfig.getInstance().getLineColor());
+//									view.setBackgroundColor(AppColorConfig.newInstance().getLineColor());
 //									LinearLayout.LayoutParams lp_view = new LinearLayout.LayoutParams(
 //											RelativeLayout.LayoutParams.MATCH_PARENT, 1);
 //									ll_listProduct.addView(view, lp_view);

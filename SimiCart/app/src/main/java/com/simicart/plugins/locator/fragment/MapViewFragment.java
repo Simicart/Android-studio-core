@@ -89,7 +89,7 @@ public class MapViewFragment extends SimiFragment {
 //			MapsInitializer.initialize(getActivity());
 //		} catch (Exception e) {
 //		}
-        //mMapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(Rconfig.getInstance().getIdLayout("map"));
+        //mMapView = (SupportMapFragment) getChildFragmentManager().findFragmentById(Rconfig.newInstance().getIdLayout("map"));
 //		mMapView.onCreate(bundle);
 //		mMapView.onResume();
 

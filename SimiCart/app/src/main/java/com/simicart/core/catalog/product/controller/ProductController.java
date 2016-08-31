@@ -281,11 +281,11 @@ public class ProductController extends SimiController implements
 			public void onSuccess(SimiCollection collection) {
 				mDelegate.dismissDialogLoading();
 					int mQty = getCartQtyFromJsonobject(model.getDataJSON());
-//					ConfigCheckout.getInstance().setmQty(String.valueOf(mQty));
+//					ConfigCheckout.newInstance().setmQty(String.valueOf(mQty));
 					SimiManager.getIntance().onUpdateCartQty(mQty + "");
 					SimiNotify.getInstance().showToast(
 							SimiTranslator.getInstance().translate("Added to Cart"));
-//					ConfigCheckout.getInstance().setCheckStatusCart(true);
+//					ConfigCheckout.newInstance().setCheckStatusCart(true);
 			}
 		});
 

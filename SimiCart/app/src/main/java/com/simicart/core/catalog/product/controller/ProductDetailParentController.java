@@ -120,7 +120,7 @@ public class ProductDetailParentController extends ProductController implements 
                     }
 
                     case MotionEvent.ACTION_CANCEL: {
-                        // v.setBackgroundResource(Rconfig.getInstance().getIdDraw(
+                        // v.setBackgroundResource(Rconfig.newInstance().getIdDraw(
                         // "core_background_left_border"));
                     }
                     default:

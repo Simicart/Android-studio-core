@@ -67,9 +67,9 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
 		et_city = (EditText) mView.findViewById(Rconfig.getInstance().getIdLayout("et_city"));
 		et_state = (EditText) mView.findViewById(Rconfig.getInstance().getIdLayout("et_state"));
 		et_code = (EditText) mView.findViewById(Rconfig.getInstance().getIdLayout("et_code"));
-		// country = (LinearLayout) mView.findViewById(Rconfig.getInstance()
+		// country = (LinearLayout) mView.findViewById(Rconfig.newInstance()
 		// .getIdLayout("layout_country"));
-		// txt_countryName = (TextView) mView.findViewById(Rconfig.getInstance()
+		// txt_countryName = (TextView) mView.findViewById(Rconfig.newInstance()
 		// .getIdLayout("txt_name_country"));
 		spCountry = (Spinner) mView.findViewById(Rconfig.getInstance().id("sp_country"));
 		list_store_tag = (RecyclerView) mView.findViewById(Rconfig.getInstance().getIdLayout("list_store_tag"));

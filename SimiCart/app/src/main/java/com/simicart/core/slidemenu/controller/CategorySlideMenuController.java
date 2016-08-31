@@ -5,6 +5,7 @@ import android.view.View;
 import com.simicart.core.catalog.category.controller.CategoryController;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.slidemenu.entity.CategorySlideMenuEntity;
+import com.simicart.core.slidemenu.fragment.SlideMenuFragment;
 
 import java.util.ArrayList;
 
@@ -63,6 +64,15 @@ public class CategorySlideMenuController extends CategoryController {
         mID = categoryID;
         this.categoryName = categoryName;
         requestListCategories();
+    }
+
+    public void showRootCategory() {
+        while (true) {
+            if(listCategoryComponents.size() == 1) {
+                break;
+            }
+            backToPreviousCat();
+        }
     }
 
     protected void checkShowBackButton() {

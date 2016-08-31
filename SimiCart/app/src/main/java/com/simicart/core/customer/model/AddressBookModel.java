@@ -23,7 +23,7 @@ public class AddressBookModel extends SimiModel {
 				collection.addEntity(address);
 			}
 			Collections.reverse(collection.getCollection());
-//			ConfigCheckout.getInstance().setCollectionAddressBook(collection);
+//			ConfigCheckout.newInstance().setCollectionAddressBook(collection);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

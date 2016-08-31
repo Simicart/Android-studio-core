@@ -173,7 +173,7 @@ public class SlideMenuFragment extends SimiFragment implements
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// if (isDrawerOpen()) {
-		// inflater.inflate(Rconfig.getInstance().getId("global", "menu"),
+		// inflater.inflate(Rconfig.newInstance().getId("global", "menu"),
 		// menu);
 		// // showGlobalContextActionBar();
 		// }

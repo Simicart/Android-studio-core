@@ -249,7 +249,7 @@ public class CartListenerController implements CartAdapterDelegate {
         dialoglayout.show();
 
 //        final WheelView wheel = (WheelView) dialoglayout.findViewById(Rconfig
-//                .getInstance().id("select_quantity"));
+//                .newInstance().id("select_quantity"));
 //
 //        if (!Utils.validateString("" + min)) {
 //            min = 1;

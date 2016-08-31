@@ -118,13 +118,13 @@ public class ProductDetailParentFragment extends SimiFragment {
 //                pager_parent.setOffscreenPageLimit(3);
 //
 //                CircleIndicator mIndicator = (CircleIndicator) view
-//                        .findViewById(Rconfig.getInstance().id("indicator"));
+//                        .findViewById(Rconfig.newInstance().id("indicator"));
 //                mIndicator.setScaleX(1.5f);
 //                mIndicator.setScaleY(1.5f);
 //                LayoutParams params = new LayoutParams(
 //                        LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
 //                String message = getActivity().getString(
-//                        Rconfig.getInstance().string("values"));
+//                        Rconfig.newInstance().string("values"));
 //
 //                if (message.equals("sw800dp")) {
 //                    params.leftMargin = Utils.getValueDp(310);

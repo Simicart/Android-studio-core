@@ -204,7 +204,7 @@ public class RewardCardFragment extends SimiFragment {
 //			HttpClient httpclient = new DefaultHttpClient();
 //			HttpPost httppost = new HttpPost(url);
 //			String userAgent = System.getProperty("http.agent");
-//			String cookie = Config.getInstance().getCookie();
+//			String cookie = Config.newInstance().getCookie();
 //			httppost.setHeader("Cookie", cookie);
 //			// read response
 //			try {
@@ -250,7 +250,7 @@ public class RewardCardFragment extends SimiFragment {
 	// registry.register(new Scheme("http", PlainSocketFactory
 	// .getSocketFactory(), 80));
 	//
-	// KeyStore trustStore = KeyStore.getInstance(KeyStore
+	// KeyStore trustStore = KeyStore.newInstance(KeyStore
 	// .getDefaultType());
 	// trustStore.load(null, null);
 	// SSLSocketFactory sf = new MySSLSocketFactory(trustStore);

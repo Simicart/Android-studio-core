@@ -55,7 +55,7 @@ public class BannerBlock extends SimiBlock implements BannerDelegate {
     @Override
     public void initView() {
         // mBannerFlipper = (ViewFlipper)
-        // mView.findViewById(Rconfig.getInstance()
+        // mView.findViewById(Rconfig.newInstance()
         // .id("banner_slider"));
         mSliderLayout = (SliderLayout) mView.findViewById(Rconfig.getInstance()
                 .id("banner_slider"));

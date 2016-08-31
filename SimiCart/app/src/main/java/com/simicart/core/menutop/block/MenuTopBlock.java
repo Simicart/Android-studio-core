@@ -67,7 +67,7 @@ public class MenuTopBlock extends SimiBlock implements MenuTopDelegate {
         img_search.setImageDrawable(ic_search);
         ll_search = (LinearLayout) mView.findViewById(Rconfig.getInstance().id(
                 "ll_search"));
-        // int idPaddingLogo = Rconfig.getInstance().getDimens("wightDevice");
+        // int idPaddingLogo = Rconfig.newInstance().getDimens("wightDevice");
         // final float paddingLogo =
         // mContext.getResources().getDimension(idPaddingLogo);
 

@@ -10,12 +10,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.catalog.category.entity.Category;
+import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.DrawableManager;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Rconfig;
 import com.simicart.theme.matrixtheme.home.entity.OrderProduct;
+import com.simicart.theme.ztheme.home.entity.ZThemeSpotEntity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by frank on 8/20/16.
@@ -49,7 +55,7 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
         params.rightMargin = Utils.getValueDp(5);
         holder.rltSpotProduct.setLayoutParams(params);
 
-        OrderProduct product = mListProduct.get(position);
+        final OrderProduct product = mListProduct.get(position);
 
         // spot name
         String name = product.getSpotName();
@@ -73,6 +79,18 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
                 holder.vfpImage.addView(imageSpot);
             }
         }
+
+        holder.rltSpotProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String,Object> hm = new HashMap<>();
+                hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CUSTOM);
+                hm.put("key", product.getSpotKey());
+                hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, product.getSpotName());
+                hm.put(KeyData.CATEGORY_DETAIL.CUSTOM_URL, "themeone/api/get_spot_products");
+                SimiManager.getIntance().openCategoryDetail(hm);
+            }
+        });
 
     }
 

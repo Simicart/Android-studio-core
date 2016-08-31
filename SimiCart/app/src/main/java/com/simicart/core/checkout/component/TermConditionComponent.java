@@ -34,7 +34,7 @@ public class TermConditionComponent extends SimiComponent {
 
         imgExtend = (ImageView) findView("img_extend");
         TextView tvContent = (TextView) findView("tv_term");
-       // String title = StoreCheckoutEntity.getInstance().getTitleTerm();
+       // String title = StoreCheckoutEntity.newInstance().getTitleTerm();
         //tvContent.setText(title);
 
         imgExtend.setOnClickListener(new View.OnClickListener() {

@@ -41,7 +41,7 @@ public class FilterView {
 		Button btn_filter = new Button(mContext);
 		btn_filter.setId(
 				Utils.generateViewId());
-		// btn_filter.setText(Config.getInstance().getText("Filter"));
+		// btn_filter.setText(Config.newInstance().getText("Filter"));
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT);

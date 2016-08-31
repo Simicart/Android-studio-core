@@ -2,6 +2,8 @@ package com.simicart.core.slidemenu.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ public class CategorySlideMenuFragment extends SimiFragment {
     protected String mCategoryID;
     protected String mCategoryName;
     protected SlideMenuFragment mNavigationDrawerFragment;
+    protected FragmentManager manager;
 
     public static CategorySlideMenuFragment newInstance(SimiData data) {
         if(instance == null) {
@@ -70,4 +73,20 @@ public class CategorySlideMenuFragment extends SimiFragment {
 
         return rootView;
     }
+
+    public void replaceFragmentCategoryMenu(SimiFragment fragment) {
+        try {
+            if (instance == null) {
+                instance = new CategorySlideMenuFragment();
+            }
+            manager = instance.getChildFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            int container = Rconfig.getInstance().id("contain_cate_slidemenu");
+            transaction.replace(container, fragment).addToBackStack(null);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -58,7 +58,7 @@ public class InformationFragment extends SimiFragment {
 		if (null != mProduct) {
 			initView();
 			// RelativeLayout ll_plugin = (RelativeLayout) mRootView
-			// .findViewById(Rconfig.getInstance().id("more_plugins"));
+			// .findViewById(Rconfig.newInstance().id("more_plugins"));
 			mPluginBlock = new ProductMorePluginBlock(mRootView, context);
 			mPluginBlock.setProduct(mProduct);
 			mPluginBlock.initView();

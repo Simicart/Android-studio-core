@@ -43,7 +43,7 @@ public class SimiJSONRequest extends SimiRequest {
 
 				String message = response.getMessage();
 				if (!Utils.validateString(message) && isShowNotify) {
-//					message = Config.getInstance().getText(
+//					message = Config.newInstance().getText(
 //							"Some errors occurred. Please try again later");
 				}
 

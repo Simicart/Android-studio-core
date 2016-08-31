@@ -139,7 +139,7 @@ public class ProductDetailParentBlock extends SimiBlock implements
         // indicator
         mIndicator = (CircleIndicator) mView.findViewById(Rconfig
                 .getInstance().id("indicator"));
-//        mIndicator.setFillColor(AppColorConfig.getInstance().getKeyColor());
+//        mIndicator.setFillColor(AppColorConfig.newInstance().getKeyColor());
         if (DataLocal.isTablet) {
             mIndicator.setScaleX(1.5f);
             mIndicator.setScaleY(1.5f);
@@ -300,8 +300,8 @@ public class ProductDetailParentBlock extends SimiBlock implements
             FragmentTransaction frt = SimiManager.getIntance().getManager()
                     .beginTransaction();
 //			frt.setCustomAnimations(
-//					Rconfig.getInstance().getId("abc_fade_in", "anim"), Rconfig
-//							.getInstance().getId("abc_fade_out", "anim"));
+//					Rconfig.newInstance().getId("abc_fade_in", "anim"), Rconfig
+//							.newInstance().getId("abc_fade_out", "anim"));
             frt.add(Rconfig.getInstance().id("container"), fragment);
             frt.addToBackStack(null);
             frt.commit();

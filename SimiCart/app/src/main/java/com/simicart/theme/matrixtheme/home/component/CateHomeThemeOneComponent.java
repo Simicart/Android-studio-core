@@ -13,11 +13,17 @@ import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.entity.Category;
+import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.DrawableManager;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+import com.simicart.core.slidemenu.fragment.CategorySlideMenuFragment;
+import com.simicart.theme.ztheme.home.entity.ZThemeSpotEntity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by frank on 19/08/2016.
@@ -52,14 +58,55 @@ public class CateHomeThemeOneComponent extends SimiComponent {
             tvCatName.setTextColor(Color.parseColor("#000000"));
         }
 
-
         // view more
         tvMore = (TextView) findView("tv_viewmore");
         String textViewMore = SimiTranslator.getInstance().translate("View more") + ">>";
         tvMore.setText(textViewMore);
         tvMore.setTextColor(Color.parseColor("#4E4E4E"));
 
+        vfpCate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mCategory.getCategoryId().equals("-1")) {
+                    viewAllCategory();
+                } else {
+                    if (mCategory.hasChild() == true) {
+                        openCate();
+                    } else {
+                        openListProduct();
+                    }
+                }
+            }
+        });
+
         return rootView;
+    }
+
+    protected void openCate() {
+        HashMap<String, Object> hmData = new HashMap<>();
+        String id = mCategory.getCategoryId();
+        hmData.put(KeyData.CATEGORY.CATEGORY_ID, id);
+        hmData.put(KeyData.CATEGORY.CATEGORY_NAME, mCategory.getCategoryName());
+        SimiManager.getIntance().openCategory(hmData);
+    }
+
+    protected void openListProduct() {
+        HashMap<String,Object> hm = new HashMap<>();
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, mCategory.getCategoryName());
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, mCategory.getCategoryId());
+        SimiManager.getIntance().openCategoryDetail(hm);
+    }
+
+    private void viewAllCategory() {
+        if (DataLocal.isTablet) {
+            SimiManager.getIntance().openRootCateogry();
+        } else {
+            HashMap<String, Object> hmData = new HashMap<>();
+            hmData.put(KeyData.CATEGORY.CATEGORY_ID, "-1");
+            hmData.put(KeyData.CATEGORY.CATEGORY_NAME, SimiTranslator.getInstance().translate("all categories"));
+            SimiManager.getIntance().openCategory(hmData);
+        }
     }
 
     protected void showImageCate() {
@@ -86,7 +133,7 @@ public class CateHomeThemeOneComponent extends SimiComponent {
         imgCate.setLayoutParams(params);
         int idLogo = Rconfig.getInstance().drawable("default_logo");
         imgCate.setImageResource(idLogo);
-        imgCate.setScaleType(ImageView.ScaleType.FIT_XY);
+        imgCate.setScaleType(ImageView.ScaleType.FIT_CENTER);
         DrawableManager.fetchDrawableOnThread(urlImage, imgCate);
         vfpCate.addView(imgCate);
     }

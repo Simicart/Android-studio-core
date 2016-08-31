@@ -50,24 +50,24 @@ public class RegisterCustomerController extends SimiController {
 //									.getIntance()
 //									.showNotify(
 //											null,
-//											Config.getInstance()
+//											Config.newInstance()
 //													.getText(
 //															"Password and Confirm password dont't match."),
-//											Config.getInstance().getText("OK"));
+//											Config.newInstance().getText("OK"));
 //						}
 //					} else {
 //						SimiManager.getIntance().showNotify(
 //								null,
-//								Config.getInstance().getText(
+//								Config.newInstance().getText(
 //										"Invalid email address"),
-//								Config.getInstance().getText("OK"));
+//								Config.newInstance().getText("OK"));
 //					}
 //				} else {
 //					SimiManager.getIntance().showNotify(
 //							null,
-//							Config.getInstance().getText(
+//							Config.newInstance().getText(
 //									"Please select all (*) fields"),
-//							Config.getInstance().getText("OK"));
+//							Config.newInstance().getText("OK"));
 //				}
             }
         };
@@ -129,8 +129,8 @@ public class RegisterCustomerController extends SimiController {
 
                 mDelegate.updateView(mModel.getCollection());
 //					SimiManager.getIntance().showNotify(
-//							Config.getInstance().getText("SUCCESS"), message,
-//							Config.getInstance().getText("OK"));
+//							Config.newInstance().getText("SUCCESS"), message,
+//							Config.newInstance().getText("OK"));
                 replaceFragment();
             }
         });

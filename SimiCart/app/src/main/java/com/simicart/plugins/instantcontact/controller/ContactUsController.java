@@ -52,7 +52,7 @@ public class ContactUsController extends SimiController {
 //		if (contact.getPhone().size() > 1) {
 //			AlertDialog.Builder builderSingle = new AlertDialog.Builder(
 //					mContext);
-//			builderSingle.setTitle(Config.getInstance().getText(
+//			builderSingle.setTitle(Config.newInstance().getText(
 //					"Select a phone number"));
 //			final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
 //					mContext, android.R.layout.select_dialog_singlechoice);
@@ -106,17 +106,17 @@ public class ContactUsController extends SimiController {
 //		intentEmail.setData(Uri.parse("mailto:"));
 //		intentEmail.setType("message/rfc822");
 //		intentEmail.putExtra(Intent.EXTRA_EMAIL, TO);
-//		intentEmail.putExtra(Intent.EXTRA_SUBJECT, Config.getInstance()
+//		intentEmail.putExtra(Intent.EXTRA_SUBJECT, Config.newInstance()
 //				.getText("Your subject"));
 //		intentEmail.putExtra(Intent.EXTRA_TEXT,
-//				Config.getInstance().getText("Enter your FeedBack"));
+//				Config.newInstance().getText("Enter your FeedBack"));
 //		try {
 //			mContext.startActivity(Intent.createChooser(intentEmail, Config
-//					.getInstance().getText("Send FeedBack...")));
+//					.newInstance().getText("Send FeedBack...")));
 //		} catch (ActivityNotFoundException e) {
 //			Toast.makeText(
 //					mContext,
-//					Config.getInstance().getText(
+//					Config.newInstance().getText(
 //							"There is no email client installed."),
 //					Toast.LENGTH_SHORT).show();
 //			String urlEmail = "https://mail.google.com";
@@ -147,7 +147,7 @@ public class ContactUsController extends SimiController {
 //		if (contact.getMessage().size() > 1) {
 //			AlertDialog.Builder builderSingle = new AlertDialog.Builder(
 //					mContext);
-//			builderSingle.setTitle(Config.getInstance().getText(
+//			builderSingle.setTitle(Config.newInstance().getText(
 //					"Select a phone number"));
 //			final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
 //					mContext, android.R.layout.select_dialog_singlechoice);
@@ -183,7 +183,7 @@ public class ContactUsController extends SimiController {
 //				PackageManager.FEATURE_TELEPHONY)) {
 //			Toast.makeText(
 //					mContext,
-//					Config.getInstance()
+//					Config.newInstance()
 //							.getText(
 //									"Your device does not support message and phone calling feature."),
 //					Toast.LENGTH_LONG).show();

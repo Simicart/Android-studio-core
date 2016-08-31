@@ -59,7 +59,7 @@ public class ProductWishListController extends ProductController {
 //
 //					if (getProductFromCollection().getStock()) {
 //						GradientDrawable gdDefault = new GradientDrawable();
-//						gdDefault.setColor(Config.getInstance().getColorMain());
+//						gdDefault.setColor(Config.newInstance().getColorMain());
 //						gdDefault.setCornerRadius(15);
 //						v.setBackgroundDrawable(gdDefault);
 //

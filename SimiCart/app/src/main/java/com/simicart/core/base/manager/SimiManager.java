@@ -558,6 +558,11 @@ public class SimiManager {
         mSlideMenu.openCategoryMenu();
     }
 
+    public void openRootCateogry() {
+        mCategorySlideMenuController.showRootCategory();
+        mSlideMenu.openCategoryMenu();
+    }
+
     public void setSlideMenu(SlideMenuFragment slideMenu) {
         this.mSlideMenu = slideMenu;
     }

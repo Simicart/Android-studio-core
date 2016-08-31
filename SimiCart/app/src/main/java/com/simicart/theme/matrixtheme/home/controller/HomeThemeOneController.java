@@ -34,6 +34,10 @@ public class HomeThemeOneController extends SimiController {
     protected ArrayList<BannerEntity> mListBanner;
     protected ArrayList<OrderProduct> mListProduct;
 
+    protected BannerModel bannerModel;
+    protected CategoryHomeThemeOneModel cateModel;
+    protected SpotProductHomeThemeOneModel spotModel;
+
     @Override
     public void onStart() {
         requestBanner();
@@ -44,7 +48,7 @@ public class HomeThemeOneController extends SimiController {
     }
 
     protected void requestBanner() {
-        BannerModel bannerModel = new BannerModel();
+        bannerModel = new BannerModel();
         bannerModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
@@ -69,7 +73,7 @@ public class HomeThemeOneController extends SimiController {
 
     protected void requestHomeCate() {
 
-        CategoryHomeThemeOneModel cateModel = new CategoryHomeThemeOneModel();
+        cateModel = new CategoryHomeThemeOneModel();
         cateModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
@@ -97,7 +101,7 @@ public class HomeThemeOneController extends SimiController {
 
     protected void requestSpotProduct() {
 
-        SpotProductHomeThemeOneModel spotModel = new SpotProductHomeThemeOneModel();
+        spotModel = new SpotProductHomeThemeOneModel();
         spotModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
@@ -159,7 +163,6 @@ public class HomeThemeOneController extends SimiController {
             View cate1View = cate1Component.createView();
             mDelegate.showCate(cate1View, 1);
 
-
             if (size > 1) {
                 Category category2 = mListCate.get(1);
                 CateHomeThemeOneComponent cate2Component = new CateHomeThemeOneComponent(category2);
@@ -204,7 +207,9 @@ public class HomeThemeOneController extends SimiController {
 
     @Override
     public void onResume() {
-
+        showBanner();
+        showCate();
+        showSpotProduct();
     }
 
     public void setDelegate(HomeThemeOneDelegate delegate) {

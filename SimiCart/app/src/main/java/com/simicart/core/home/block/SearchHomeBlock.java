@@ -174,7 +174,7 @@ public class SearchHomeBlock extends SimiBlock {
 //        item1.setCheckSearch(false);
 //        listItem.add(item1);
 //        ItemListPopup item2 = new ItemListPopup();
-//        item2.setName(SimiTranslator.getInstance().translate("all categories"));
+//        item2.setName(SimiTranslator.newInstance().translate("all categories"));
 //        item2.setCheckSearch(true);
 //        listItem.add(item2);
 //        ListPopupAdapter adapter = new ListPopupAdapter(mContext, listItem);

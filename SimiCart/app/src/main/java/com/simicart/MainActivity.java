@@ -124,8 +124,8 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onResume() {
-//        if ((null == Config.getInstance().getCurrencyCode())
-//                || (Config.getInstance().getCurrencyCode().equals("null"))) {
+//        if ((null == Config.newInstance().getCurrencyCode())
+//                || (Config.newInstance().getCurrencyCode().equals("null"))) {
 //            DataLocal.mSharedPre = getApplicationContext()
 //                    .getSharedPreferences(DataLocal.NAME_REFERENCE,
 //                            Context.MODE_PRIVATE);

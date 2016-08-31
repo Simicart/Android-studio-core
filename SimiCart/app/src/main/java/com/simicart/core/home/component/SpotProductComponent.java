@@ -9,6 +9,7 @@ import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductList;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.home.adapter.SpotProductAdapter;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class SpotProductComponent extends SimiComponent {
     public View createView() {
         rootView = findLayout("core_component_cate_home");
         tvTitle = (TextView) findView("tv_title");
+        tvTitle.setTextColor(AppColorConfig.getInstance().getContentColor());
         rcvCate = (RecyclerView) findView("rcv_cate");
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);

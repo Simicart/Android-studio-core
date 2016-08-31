@@ -29,10 +29,10 @@ public class CategoryModel extends SimiModel {
         try {
             JSONArray list = this.mJSON.getJSONArray("data");
             collection = new SimiCollection();
-            // if (Config.getInstance().isShow_link_all_product()) {
+            // if (Config.newInstance().isShow_link_all_product()) {
             // Category shop_category = new Category();
             // shop_category.setCategoryId(mID);
-            // shop_category.setCategoryName(Config.getInstance().getText(
+            // shop_category.setCategoryName(Config.newInstance().getText(
             // "All products"));
             // shop_category.setChild(false);
             // collection.addEntity(shop_category);

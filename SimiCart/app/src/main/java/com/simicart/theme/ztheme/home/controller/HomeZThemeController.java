@@ -97,11 +97,9 @@ public class HomeZThemeController extends SimiController {
 
     protected void openCate(Category cate) {
         HashMap<String, Object> hmData = new HashMap<>();
-        hmData.put("category_id", cate.getCategoryId());
-        hmData.put("category_name", cate.getCategoryName());
-        SimiData data = new SimiData(hmData);
-        CategoryFragment categoryFragment = CategoryFragment.newInstance(data);
-        SimiManager.getIntance().replaceFragment(categoryFragment);
+        hmData.put(KeyData.CATEGORY.CATEGORY_ID, cate.getCategoryId());
+        hmData.put(KeyData.CATEGORY.CATEGORY_NAME, cate.getCategoryName());
+        SimiManager.getIntance().openCategory(hmData);
     }
 
     protected void openListProduct(ZThemeSpotEntity spot) {

@@ -92,10 +92,10 @@ public class DownloadAdapter extends BaseAdapter {
 						 * downloading_button.get(raw[1]).bt_open.setVisibility(View
 						 * .VISIBLE);
 						 * downloading_button.get(raw[1]).bt_open.setText
-						 * (Config. getInstance().getText("Open"));
+						 * (Config. newInstance().getText("Open"));
 						 * downloading_button
 						 * .get(raw[1]).bt_open.setBackgroundColor
-						 * (Config.getInstance().getColorMain());
+						 * (Config.newInstance().getColorMain());
 						 */
 					}
 				} else if (raw[0].equals("Failed")) {
@@ -311,29 +311,29 @@ public class DownloadAdapter extends BaseAdapter {
 			}
 			/*if (isDownloaded(item.getOrderFile(), listFile) == true
 					&& isDownloading(item.getOrderID()) == false) {
-				viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
+				viewHolder.bt_download.setText(SimiTranslator.newInstance().translate(
 						"Re-download"));
-				viewHolder.bt_download.setBackgroundColor(Config.getInstance()
+				viewHolder.bt_download.setBackgroundColor(Config.newInstance()
 						.getColorMain());
 				viewHolder.bt_download.setClickable(true);
 				viewHolder.bt_download.setActivated(true);
 				viewHolder.bt_open.setVisibility(View.VISIBLE);
-				viewHolder.bt_open.setText(SimiTranslator.getInstance().translate(
+				viewHolder.bt_open.setText(SimiTranslator.newInstance().translate(
 						"Open file"));
-				viewHolder.bt_open.setBackgroundColor(Config.getInstance()
+				viewHolder.bt_open.setBackgroundColor(Config.newInstance()
 						.getColorMain());
 			} else if (isDownloaded(item.getOrderFile(), listFile) == true
 					&& isDownloading(item.getOrderID()) == true) {
 				if (viewHolder.bt_open.getVisibility() == View.VISIBLE) {
 					viewHolder.bt_open.setVisibility(View.VISIBLE);
-					viewHolder.bt_open.setText(SimiTranslator.getInstance().translate(
+					viewHolder.bt_open.setText(SimiTranslator.newInstance().translate(
 							"Open file"));
-					viewHolder.bt_open.setBackgroundColor(Config.getInstance()
+					viewHolder.bt_open.setBackgroundColor(Config.newInstance()
 							.getColorMain());
 				} else {
 					viewHolder.bt_open.setVisibility(View.GONE);
 				}
-				viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
+				viewHolder.bt_download.setText(SimiTranslator.newInstance().translate(
 						"Downloading"));
 				viewHolder.bt_download.setBackgroundColor(Color.GRAY);
 				viewHolder.bt_download.setClickable(false);
@@ -346,16 +346,16 @@ public class DownloadAdapter extends BaseAdapter {
 				}
 			} else if (isDownloaded(item.getOrderFile(), listFile) == false
 					&& isDownloading(item.getOrderID()) == true) {
-				viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
+				viewHolder.bt_download.setText(SimiTranslator.newInstance().translate(
 						"Downloading"));
 				viewHolder.bt_download.setBackgroundColor(Color.GRAY);
 				viewHolder.bt_download.setClickable(false);
 				viewHolder.bt_download.setActivated(false);
 				viewHolder.bt_open.setVisibility(View.GONE);
 			} else {
-				viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
+				viewHolder.bt_download.setText(SimiTranslator.newInstance().translate(
 						"Download"));
-				viewHolder.bt_download.setBackgroundColor(Config.getInstance()
+				viewHolder.bt_download.setBackgroundColor(Config.newInstance()
 						.getColorMain());
 				viewHolder.bt_download.setClickable(true);
 				viewHolder.bt_download.setActivated(true);

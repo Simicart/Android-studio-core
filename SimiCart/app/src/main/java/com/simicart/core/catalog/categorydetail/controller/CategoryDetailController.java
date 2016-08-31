@@ -204,7 +204,6 @@ public class CategoryDetailController extends SimiController {
             @Override
             public void onFail(SimiError error) {
                 mDelegate.dismissDialogLoading();
-                mDelegate.updateView(null);
             }
         });
 
