@@ -42,14 +42,6 @@ public class SettingAppFragment extends SimiFragment {
 			settingAppController.setDelegate(settingAppBlock);
 			settingAppController.onResume();
 		}
-		settingAppBlock.setOnClickNotification(settingAppController
-				.getOn_click_notification());
-		settingAppBlock.setOnClickLocation(settingAppController
-				.getOn_click_location());
-		settingAppBlock.setOnClickCurrency(settingAppController
-				.getOn_click_curency());
-		settingAppBlock.setOnClickLanguage(settingAppController
-				.getOn_click_language());
 
 		return rootView;
 	}
