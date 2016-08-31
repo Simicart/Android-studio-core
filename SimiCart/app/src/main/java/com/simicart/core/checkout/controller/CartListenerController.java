@@ -258,7 +258,7 @@ public class CartListenerController implements CartAdapterDelegate {
 //            max = 1;
 //        }
 //        final NumericWheelAdapter minAdapter = new NumericWheelAdapter(
-//                context, min, max);
+//                mContext, min, max);
 //        wheel.setViewAdapter(minAdapter);
 //        if (qty > 0) {
 //            wheel.setCurrentItem((qty - 1));

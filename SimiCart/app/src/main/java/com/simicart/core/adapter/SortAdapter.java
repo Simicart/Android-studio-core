@@ -8,65 +8,67 @@ import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.category.entity.Sort;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
 
 public class SortAdapter extends BaseAdapter {
-	ArrayList<Sort> listSort;
-	Context context;
-	LayoutInflater inflater;
-	String sort_option;
+    protected ArrayList<Sort> mListSort;
+    protected Context mContext;
+    protected LayoutInflater inflater;
+    protected int mCurrentValue = 0;
 
-	public SortAdapter(Context context, ArrayList<Sort> listSort,
-			String sortoption) {
-		this.context = context;
-		this.inflater = LayoutInflater.from(context);
-		this.listSort = listSort;
-		this.sort_option = sortoption;
-		if (sort_option == null || sort_option.equals("")
-				|| sort_option.equals("None")) {
-			this.sort_option = "0";
-		}
-	}
+    public SortAdapter(ArrayList<Sort> listSort) {
+        this.mContext = SimiManager.getIntance().getCurrentActivity();
+        this.inflater = LayoutInflater.from(mContext);
+        this.mListSort = listSort;
 
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return listSort.size();
-	}
+    }
 
-	@Override
-	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public int getCount() {
+        // TODO Auto-generated method stub
+        return mListSort.size();
+    }
 
-	@Override
-	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public Object getItem(int position) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		convertView = this.inflater.inflate(
-				Rconfig.getInstance().layout("core_item_sort"), null);
-		TextView title = (TextView) convertView.findViewById(Rconfig
-				.getInstance().id("sort_text"));
-		title.setText(this.listSort.get(position).getTitle());
-		String op = "" + this.listSort.get(position).getId();
-		if (!op.equals(this.sort_option)) {
-			CheckedTextView check = (CheckedTextView) convertView
-					.findViewById(Rconfig.getInstance().id("sort_check"));
-			check.setBackgroundColor(0);
-		}
-		return convertView;
-	}
+    @Override
+    public long getItemId(int position) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	public void setListSort(ArrayList<Sort> listSort) {
-		this.listSort = listSort;
-	}
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        // TODO Auto-generated method stub
+        convertView = this.inflater.inflate(
+                Rconfig.getInstance().layout("core_item_sort"), null);
+        TextView title = (TextView) convertView.findViewById(Rconfig
+                .getInstance().id("sort_text"));
+        Sort sort = mListSort.get(position);
+
+        title.setText(sort.getTitle());
+        int id = sort.getId();
+        if (id != mCurrentValue) {
+            CheckedTextView check = (CheckedTextView) convertView
+                    .findViewById(Rconfig.getInstance().id("sort_check"));
+            check.setBackgroundColor(0);
+        }
+        return convertView;
+    }
+
+    public void setCurrentValue(int currentValue) {
+        mCurrentValue = currentValue;
+    }
+
+    public void setListSort(ArrayList<Sort> listSort) {
+        this.mListSort = listSort;
+    }
 }

@@ -58,7 +58,7 @@ public class CustomerReviewFragment extends SimiFragment {
 //		EventBlock event = new EventBlock();
 //		event.dispatchEvent(
 //				"com.simicart.core.catalog.product.block.CustomerReviewBlock",
-//				view, context, cacheBlock);
+//				view, mContext, cacheBlock);
 //		mBlock = (CustomerReviewBlock) cacheBlock.getBlock();
 		
 		mBlock.initView();

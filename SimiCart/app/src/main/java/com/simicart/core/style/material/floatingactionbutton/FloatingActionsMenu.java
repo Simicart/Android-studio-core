@@ -72,12 +72,12 @@ public class FloatingActionsMenu extends ViewGroup {
 
   public FloatingActionsMenu(Context context, AttributeSet attrs) {
     super(context, attrs);
-//    init(context, attrs);
+//    init(mContext, attrs);
   }
 
   public FloatingActionsMenu(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
-//    init(context, attrs);
+//    init(mContext, attrs);
   }
   
   public void createButton(Context context, int colorNomal, int colorPressed, int colorIcon){
@@ -99,7 +99,7 @@ public class FloatingActionsMenu extends ViewGroup {
 	  createAddButton(context);
   }
 
-//  private void init(Context context, AttributeSet attributeSet) {
+//  private void init(Context mContext, AttributeSet attributeSet) {
 //    mButtonSpacing = (int) (getResources().getDimension(R.dimen.fab_actions_spacing) - getResources().getDimension(R.dimen.fab_shadow_radius) - getResources().getDimension(R.dimen.fab_shadow_offset));
 //    mLabelsMargin = getResources().getDimensionPixelSize(R.dimen.fab_labels_margin);
 //    mLabelsVerticalOffset = getResources().getDimensionPixelSize(R.dimen.fab_shadow_offset);
@@ -107,7 +107,7 @@ public class FloatingActionsMenu extends ViewGroup {
 //    mTouchDelegateGroup = new TouchDelegateGroup(this);
 //    setTouchDelegate(mTouchDelegateGroup);
 //
-//    TypedArray attr = context.obtainStyledAttributes(attributeSet, R.styleable.FloatingActionsMenu, 0, 0);
+//    TypedArray attr = mContext.obtainStyledAttributes(attributeSet, R.styleable.FloatingActionsMenu, 0, 0);
 //    mAddButtonPlusColor = attr.getColor(R.styleable.FloatingActionsMenu_fab_addButtonPlusIconColor, getColor(android.R.color.white));
 //    mAddButtonColorNormal = attr.getColor(R.styleable.FloatingActionsMenu_fab_addButtonColorNormal, getColor(android.R.color.holo_blue_dark));
 //    mAddButtonColorPressed = attr.getColor(R.styleable.FloatingActionsMenu_fab_addButtonColorPressed, getColor(android.R.color.holo_blue_light));
@@ -122,7 +122,7 @@ public class FloatingActionsMenu extends ViewGroup {
 //      throw new IllegalStateException("Action labels in horizontal expand orientation is not supported.");
 //    }
 //
-////    createAddButton(context);
+////    createAddButton(mContext);
 //  }
 
   public void setOnFloatingActionsMenuUpdateListener(OnFloatingActionsMenuUpdateListener listener) {

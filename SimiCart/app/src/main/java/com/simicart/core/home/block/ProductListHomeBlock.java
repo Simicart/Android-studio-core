@@ -29,7 +29,7 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 //			public void run() {
 //				synchronized (this) {
 //
-//					MainActivity.context.runOnUiThread(new Runnable() {
+//					MainActivity.mContext.runOnUiThread(new Runnable() {
 //
 //						@Override
 //						public void run() {

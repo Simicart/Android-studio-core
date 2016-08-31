@@ -69,7 +69,7 @@ public class MenuTopBlock extends SimiBlock implements MenuTopDelegate {
                 "ll_search"));
         // int idPaddingLogo = Rconfig.getInstance().getDimens("wightDevice");
         // final float paddingLogo =
-        // context.getResources().getDimension(idPaddingLogo);
+        // mContext.getResources().getDimension(idPaddingLogo);
 
         if (DataLocal.isTablet) {
             ll_search_land = (LinearLayout) mView.findViewById(Rconfig

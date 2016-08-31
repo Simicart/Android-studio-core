@@ -123,7 +123,7 @@ public class DownloadBlockTablet extends SimiBlock implements DownloadDelegate{
 		}
 		
 		protected boolean isDownloaded(String filename) {
-			File fileList = new File("/sdcard/" + context.getResources().getString(R.string.app_name));
+			File fileList = new File("/sdcard/" + mContext.getResources().getString(R.string.app_name));
 			if (fileList != null && fileList.listFiles() != null) {
 				File[] filenames = fileList.listFiles();
 				if (filenames.length > 0)

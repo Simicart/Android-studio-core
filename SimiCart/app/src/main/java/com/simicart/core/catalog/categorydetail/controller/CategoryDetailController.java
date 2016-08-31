@@ -10,8 +10,9 @@ import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.network.error.SimiError;
-import com.simicart.core.catalog.categorydetail.component.SortComponent;
+import com.simicart.core.catalog.categorydetail.component.SortPopup;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
+import com.simicart.core.catalog.categorydetail.delegate.SortCallBack;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.categorydetail.model.CategoryDetailModel;
 import com.simicart.core.common.KeyData;
@@ -35,6 +36,7 @@ public class CategoryDetailController extends SimiController {
     protected int mLimit = 8;
     protected int mResultNumber = 0;
     protected boolean isOnscroll = true;
+    protected int mCurrentSort;
 
     protected View.OnClickListener onChangeViewClick;
     protected View.OnClickListener mSortListener;
@@ -56,13 +58,13 @@ public class CategoryDetailController extends SimiController {
             hmData.remove(KeyData.CATEGORY_DETAIL.TYPE);
         }
 
-        if(hmData.containsKey(KeyData.CATEGORY_DETAIL.OFFSET)){
+        if (hmData.containsKey(KeyData.CATEGORY_DETAIL.OFFSET)) {
             String offset = (String) hmData.get(KeyData.CATEGORY_DETAIL.OFFSET);
             mOffset = Integer.parseInt(offset);
             hmData.remove(KeyData.CATEGORY_DETAIL.OFFSET);
         }
 
-        if(hmData.containsKey(KeyData.CATEGORY_DETAIL.LIMIT)){
+        if (hmData.containsKey(KeyData.CATEGORY_DETAIL.LIMIT)) {
             String limit = (String) hmData.get(KeyData.CATEGORY_DETAIL.LIMIT);
             mLimit = Integer.parseInt(limit);
             hmData.remove(KeyData.CATEGORY_DETAIL.LIMIT);
@@ -73,11 +75,19 @@ public class CategoryDetailController extends SimiController {
 
     protected void initListener() {
 
-        mSortListener  = new View.OnClickListener() {
+        mSortListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SortComponent sortComponent = new SortComponent(v   );
-                sortComponent.showPopup();
+                SortPopup sortPopup = new SortPopup();
+                sortPopup.setCurrentValue(mCurrentSort);
+                sortPopup.setCallBack(new SortCallBack() {
+                    @Override
+                    public void onSort(int sortValue) {
+                        mCurrentSort = sortValue;
+                        requestCategoryDetail();
+                    }
+                });
+                sortPopup.createPopup();
             }
         };
 
@@ -106,12 +116,12 @@ public class CategoryDetailController extends SimiController {
                 super.onScrollStateChanged(recyclerView, newState);
                 int count = recyclerView.getChildCount();
                 int lastPosition;
-                if(mDelegate.getTagView().equals(Constants.TAG_LISTVIEW)) {
+                if (mDelegate.getTagView().equals(Constants.TAG_LISTVIEW)) {
                     lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
                 } else {
                     lastPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
                 }
-                int threshold = mOffset + mLimit -1;
+                int threshold = mOffset + mLimit - 1;
                 if (lastPosition == threshold
                         && mResultNumber > count) {
                     if (isOnscroll) {
@@ -127,7 +137,7 @@ public class CategoryDetailController extends SimiController {
     }
 
     protected void requestCategoryDetail() {
-        if(mOffset == 0) {
+        if (mOffset == 0) {
             mDelegate.showLoading();
         }
         if (null == mModel) {
@@ -145,7 +155,8 @@ public class CategoryDetailController extends SimiController {
             @Override
             public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissLoading();
-                mResultNumber = ((CategoryDetailModel)mModel).getResultNumber();
+                mDelegate.dismissDialogLoading();
+                mResultNumber = ((CategoryDetailModel) mModel).getResultNumber();
                 mDelegate.showLoadMore(false);
                 mDelegate.updateView(mModel.getCollection());
                 if ((mOffset + mLimit) <= mResultNumber)
@@ -156,6 +167,7 @@ public class CategoryDetailController extends SimiController {
         mModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
+                mDelegate.dismissDialogLoading();
                 mDelegate.updateView(null);
             }
         });
@@ -181,8 +193,9 @@ public class CategoryDetailController extends SimiController {
                 }
             }
         }
-        mModel.addBody(KeyData.CATEGORY_DETAIL.OFFSET,String.valueOf(mOffset));
-        mModel.addBody(KeyData.CATEGORY_DETAIL.LIMIT,String.valueOf(mLimit));
+        mModel.addBody("sort_option", String.valueOf(mCurrentSort));
+        mModel.addBody(KeyData.CATEGORY_DETAIL.OFFSET, String.valueOf(mOffset));
+        mModel.addBody(KeyData.CATEGORY_DETAIL.LIMIT, String.valueOf(mLimit));
     }
 
 
@@ -207,7 +220,7 @@ public class CategoryDetailController extends SimiController {
         return onListScroll;
     }
 
-    public View.OnClickListener getSortListener(){
+    public View.OnClickListener getSortListener() {
         return mSortListener;
     }
 }

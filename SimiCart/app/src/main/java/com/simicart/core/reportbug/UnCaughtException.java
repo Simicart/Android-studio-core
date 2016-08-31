@@ -108,7 +108,7 @@ public class UnCaughtException implements UncaughtExceptionHandler {
 			} else {
 				DataPreferences.saveRestartCount(0);
 				// android.os.Process.killProcess(android.os.Process.myPid());
-				// ((Activity) context).finish();
+				// ((Activity) mContext).finish();
 			}
 			sendErrorMail(report);
 		} catch (Throwable ignore) {
