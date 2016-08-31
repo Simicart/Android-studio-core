@@ -30,6 +30,7 @@ import com.simicart.core.customer.fragment.MyAccountFragment;
 import com.simicart.core.customer.fragment.OrderHistoryFragment;
 import com.simicart.core.customer.fragment.SignInFragment;
 import com.simicart.core.home.fragment.HomeFragment;
+import com.simicart.core.setting.fragment.SettingAppFragment;
 import com.simicart.core.slidemenu.delegate.CloseSlideMenuDelegate;
 import com.simicart.core.slidemenu.delegate.SlideMenuDelegate;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
@@ -428,11 +429,7 @@ public class PhoneSlideMenuController {
                 fragment = OrderHistoryFragment.newInstance();
                 break;
             case "Setting":
-               // fragment = SettingAppFragment.newInstance();
-                hm = new HashMap<>();
-                hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
-                hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,"3");
-                SimiManager.getIntance().openCategoryDetail(hm);
+                fragment = SettingAppFragment.newInstance();
 //                fragment.setShowPopup(true);
                 break;
             default:
