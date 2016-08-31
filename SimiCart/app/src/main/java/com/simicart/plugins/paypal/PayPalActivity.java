@@ -86,8 +86,7 @@ public class PayPalActivity extends AppCompatActivity {
 
     protected void parseExtras() {
         Bundle extras = getIntent().getExtras();
-        Bundle data = extras.getBundle("bundle");
-        SimiData simiData = data.getParcelable("data");
+        SimiData simiData = extras.getParcelable("data");
         mData = simiData.getData();
 
     }

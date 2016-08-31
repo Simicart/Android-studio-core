@@ -78,6 +78,12 @@ public class DataPreferences {
         return password;
     }
 
+    public static void savePassword(String password) {
+        SharedPreferences.Editor editor = mSharedPre.edit();
+        editor.putString(PASS_WORD_KEY, password);
+        editor.commit();
+    }
+
     public static String getUsername() {
         String username = "";
         if (mSharedPre != null) {

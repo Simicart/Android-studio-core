@@ -94,7 +94,7 @@ public class SettingAppController extends SimiController {
     private void getStore() {
         final StoreModel model = new StoreModel();
         DataLocal.listStores.clear();
-        mModel.setSuccessListener(new ModelSuccessCallBack() {
+        model.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
                 isGetStore = true;

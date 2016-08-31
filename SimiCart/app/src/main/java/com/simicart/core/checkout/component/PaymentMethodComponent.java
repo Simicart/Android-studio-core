@@ -30,6 +30,7 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
      * This is the  payment that user selected.
      */
     protected PaymentMethodEntity mCurrentPayment;
+    protected boolean isCreated = false;
 
     public PaymentMethodComponent(ArrayList<PaymentMethodEntity> mPaymentMethods) {
         super();
@@ -39,6 +40,10 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
 
     @Override
     public View createView() {
+        if (isCreated) {
+            return rootView;
+        }
+        isCreated = true;
         rootView = mInflater.inflate(Rconfig.getInstance().layout("core_component_layout"), null, false);
         intView();
         return rootView;
@@ -68,7 +73,7 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
                 View view = itemView.createView();
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.topMargin = topMargin;
-                ll_core_component.addView(view);
+                ll_core_component.addView(view, params);
                 mItemViews.add(itemView);
             }
         }
@@ -85,6 +90,14 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
             mCurrentPayment = payment;
             mCallBack.onSelectItem(payment);
         }
+        for (int i = 0; i < mItemViews.size(); i++) {
+            ItemPaymentMethodView itemView = mItemViews.get(i);
+            if (!itemView.isEqual(payment)) {
+                itemView.selectItem(false);
+            }
+        }
+
+
     }
 
     @Override
@@ -98,7 +111,6 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
     public void setListPaymentMethod(ArrayList<PaymentMethodEntity> paymentMethods) {
         mPaymentMethods = paymentMethods;
     }
-
 
 
     public void setCallBack(PaymentMethodCallBack callBack) {

@@ -23,6 +23,8 @@ public class ValueData {
 
     public static class REVIEW_ORDER {
         public static int PLACE_FOR_NEW_CUSTOMER = 999;
+        public static int PLACE_FOR_GUEST = 996;
+        public static  int PLACE_FOR_EXISTING_CUSTOMER = 995;
     }
 
 }

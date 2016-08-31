@@ -24,6 +24,7 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
     protected ArrayList<ItemShippingMethodView> mItemViews;
     protected ArrayList<ShippingMethodEntity> mShippingEntities;
     protected int topMargin = Utils.getValueDp(5);
+    protected boolean isCreated = false;
 
 
     public ShippingMethodComponent(ArrayList<ShippingMethodEntity> mShippingEntities) {
@@ -33,6 +34,10 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
 
     @Override
     public View createView() {
+        if (isCreated) {
+            return rootView;
+        }
+        isCreated = true;
         rootView = findLayout("core_component_layout");
         intView();
 
@@ -71,6 +76,15 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
         if (null != mCallBack) {
             mCallBack.onSelect(entity);
         }
+
+        for (int i = 0; i < mItemViews.size(); i++) {
+            ItemShippingMethodView itemView = mItemViews.get(i);
+            if (!itemView.isEqual(entity)) {
+                itemView.selectItem(false);
+            }
+        }
+
+
     }
 
     public void setCallBack(ShippingMethodCallBack callBack) {

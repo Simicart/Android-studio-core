@@ -106,7 +106,31 @@ public class ItemShippingMethodView extends SimiComponent {
     }
 
     public void selectItem(boolean isSelected) {
+        if (!isSelected) {
+            String idIcon = "core_icon_option_single";
+            Drawable icon = AppColorConfig.getInstance().getIcon(idIcon);
+            imgIcon.setImageDrawable(icon);
+        }
+    }
 
+    public boolean isEqual(ShippingMethodEntity shippingEntity) {
+
+        if (null == shippingEntity) {
+            return false;
+        }
+
+        String id = shippingEntity.getID();
+
+        String currentID = mShippingEntity.getID();
+
+        if (Utils.validateString(id) && Utils.validateString(currentID)) {
+            if (id.equals(currentID)) {
+                return true;
+            }
+        }
+
+
+        return false;
     }
 
     public boolean isChecked() {

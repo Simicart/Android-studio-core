@@ -1,6 +1,7 @@
 package com.simicart.core.base.payment;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -108,6 +109,7 @@ public class WebviewPaymentComponent extends SimiComponent {
         wvPayment.getSettings().setLayoutAlgorithm(
                 WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         wvPayment.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        Log.e("WebviewPaymentComponent","-----> URL " + mUrl);
         if (Utils.validateString(mUrl)) {
             showLoading();
             wvPayment.loadUrl(mUrl);

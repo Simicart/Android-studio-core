@@ -68,10 +68,10 @@ public class AddressBookController extends SimiController {
 
     protected void createNewAction() {
         HashMap<String, Object> data = new HashMap<>();
-        data.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CUSTOMER);
-        data.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION, ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW);
-        if (openFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT) {
 
+        if (openFor == ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT) {
+            data.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CHECKOUT);
+            data.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION, ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW);
             if (mData.containsKey(KeyData.ADDRESS_BOOK.BILLING_ADDRESS)) {
                 AddressEntity billingAddress = (AddressEntity) mData.get(KeyData.ADDRESS_BOOK.BILLING_ADDRESS);
                 data.put(KeyData.ADDRESS_BOOK_DETAIL.BILLING_ADDRESS, billingAddress);
@@ -81,6 +81,9 @@ public class AddressBookController extends SimiController {
                 AddressEntity shippingAddress = (AddressEntity) mData.get(KeyData.ADDRESS_BOOK.SHIPPING_ADDRESS);
                 data.put(KeyData.ADDRESS_BOOK_DETAIL.SHIPPING_ADDRESS, shippingAddress);
             }
+        } else {
+            data.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CUSTOMER);
+            data.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION, ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW);
         }
 
         SimiManager.getIntance().openAddressBookDetail(data);

@@ -14,6 +14,7 @@ import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.ReadXMLLanguage;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
@@ -85,7 +86,7 @@ public class SplashController {
     }
 
     protected void enableTheme() {
-        String themeType = "";
+        String themeType = AppColorConfig.getInstance().getThemeType();
         if (Utils.validateString(themeType)) {
             if (themeType.equals(MATRIX_THEME)) {
                 new MatrixTheme();

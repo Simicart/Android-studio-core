@@ -29,7 +29,7 @@ public class Payment {
         };
         String keyEvent = getKeyEvent();
         if (Utils.validateString(keyEvent)) {
-            SimiEvent.registerEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_WEBVIEW + "SIMIAVENUE", receiver);
+            SimiEvent.registerEvent(keyEvent, receiver);
         }
     }
 

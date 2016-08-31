@@ -37,7 +37,7 @@ public class SimiResponse {
     }
 
     public boolean parse(JSONObject json) {
-        Log.e("SimiResponse","DATA " + json.toString());
+        Log.e("SimiResponse", "DATA " + json.toString());
         mJSON = json;
         try {
             if (mJSON.has(Constants.STATUS)) {
@@ -51,11 +51,14 @@ public class SimiResponse {
             }
 
 
-            if ( equal(mStatus, "FAIL")) {
+            if (equal(mStatus, "FAIL")) {
                 mError = new SimiError();
                 mError.setMessage(mMessage);
+                Log.e("SimiResponse ", "==================> RESPONSE FAIL " + mMessage);
                 return false;
             }
+
+            Log.e("SimiResponse ", "--------------> STATUS " + mStatus);
 
 
             return true;
