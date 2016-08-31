@@ -74,6 +74,7 @@ public class CategoryDetailFragment extends SimiFragment {
         }
         mBlock.onListScroll(mController.getOnListScroll());
         mBlock.setSortListener(mController.getSortListener());
+        mBlock.setFilterListener(mController.getFilterListener());
 
         return rootView;
     }

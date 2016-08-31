@@ -12,7 +12,8 @@ public class SimiRowComponent extends SimiComponent {
         NAVIGATION,
         ADAPTER,
         SELECT,
-        PARENT
+        PARENT,
+        ICON_DELETE
     }
 
     protected String mKey;

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.catalog.categorydetail.entity.LayerEntity;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
@@ -21,6 +22,7 @@ public class CategoryDetailModel extends SimiModel {
 
     private ArrayList<String> listProductIds = new ArrayList<>();
     private ArrayList<Product> listProduct = new ArrayList<>();
+    protected LayerEntity mLayerEntity;
     protected String mType;
     protected String mCustomUrl;
     protected int resultNumber;
@@ -45,10 +47,10 @@ public class CategoryDetailModel extends SimiModel {
     @Override
     protected void parseData() {
         try {
-            if(mJSON.has("message")) {
+            if (mJSON.has("message")) {
                 JSONArray messArr = mJSON.getJSONArray("message");
                 String total = messArr.getString(0);
-                if(Utils.validateString(total)) {
+                if (Utils.validateString(total)) {
                     resultNumber = Integer.parseInt(total);
                 }
             }
@@ -57,19 +59,19 @@ public class CategoryDetailModel extends SimiModel {
             if (null == collection) {
                 collection = new SimiCollection();
             }
-            //collection.setJSON(mJSON);
-
-            //parse listID
-//            boolean hasListIDs = parseListProductId(mJSON);
             for (int i = 0; i < list.length(); i++) {
                 Product product = new Product();
                 product.parse(list.getJSONObject(i));
-//                if (!hasListIDs) {
-//                    listProductIds.add(product.getId());
-//                }
-//                listProduct.add(product);
                 collection.addEntity(product);
             }
+
+            if (mJSON.has("layerednavigation")) {
+                JSONObject jsLayer = mJSON.getJSONObject("layerednavigation");
+                Log.e("CategoryDetailModel", "LAYTER " + jsLayer.toString());
+                mLayerEntity = new LayerEntity();
+                mLayerEntity.parse(jsLayer);
+            }
+
         } catch (JSONException e) {
             Log.e("CategoryDetailModel ", "paserData Exception " + e.getMessage());
         }
@@ -103,6 +105,11 @@ public class CategoryDetailModel extends SimiModel {
         }
         return false;
     }
+
+    public LayerEntity getLayerEntity() {
+        return mLayerEntity;
+    }
+
 
     public void setCustomUrl(String customUrl) {
         mCustomUrl = customUrl;

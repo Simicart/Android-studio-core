@@ -5,60 +5,52 @@ import com.simicart.core.catalog.filter.common.FilterConstant;
 
 import java.io.Serializable;
 
-public class FilterState extends SimiEntity implements Serializable{
+public class FilterState extends SimiEntity {
+    protected String mAttribute;
+    protected String mTitle;
+    protected String mLabel;
+    protected String mValue;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	protected String mAttribute;
-	protected String mTitle;
-	protected String mLabel;
-	protected String mValue;
 
-	public String getAttribute() {
-		if (null == mAttribute) {
-			mAttribute = getData(FilterConstant.ATTRIBUTE);
-		}
-		return mAttribute;
-	}
+    @Override
+    public void parse() {
+        mAttribute = getData(FilterConstant.ATTRIBUTE);
+        mTitle = getData(FilterConstant.TITLE);
+        mLabel = getData(FilterConstant.LABEL);
+        mValue = getData(FilterConstant.VALUE);
+    }
 
-	public void setAttribute(String mAttribute) {
-		this.mAttribute = mAttribute;
-	}
+    public String getAttribute() {
+        return mAttribute;
+    }
 
-	public String getTitle() {
-		if (null == mTitle) {
-			mTitle = getData(FilterConstant.TITLE);
-		}
-		return mTitle;
-	}
+    public void setAttribute(String mAttribute) {
+        this.mAttribute = mAttribute;
+    }
 
-	public void setTitle(String mTitle) {
-		this.mTitle = mTitle;
-	}
+    public String getTitle() {
+        return mTitle;
+    }
 
-	public String getLabel() {
-		if (null == mLabel) {
-			mLabel = getData(FilterConstant.LABEL);
-		}
-		return mLabel;
-	}
+    public void setTitle(String mTitle) {
+        this.mTitle = mTitle;
+    }
 
-	public void setLabel(String mLabel) {
-		this.mLabel = mLabel;
-	}
+    public String getLabel() {
+        return mLabel;
+    }
 
-	public String getValue() {
-		if (null == mValue) {
-			mValue = getData(FilterConstant.VALUE);
-		}
-		return mValue;
-	}
+    public void setLabel(String mLabel) {
+        this.mLabel = mLabel;
+    }
 
-	public void setValue(String mValue) {
-		this.mValue = mValue;
-	}
+    public String getValue() {
+        return mValue;
+    }
+
+    public void setValue(String mValue) {
+        this.mValue = mValue;
+    }
 
 
 }
