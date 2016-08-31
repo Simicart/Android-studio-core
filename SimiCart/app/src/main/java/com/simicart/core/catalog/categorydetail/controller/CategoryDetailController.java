@@ -5,21 +5,28 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.paypal.android.sdk.fi;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.catalog.categorydetail.component.FilterPopup;
 import com.simicart.core.catalog.categorydetail.component.SortPopup;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
+import com.simicart.core.catalog.categorydetail.delegate.FilterCallBack;
 import com.simicart.core.catalog.categorydetail.delegate.SortCallBack;
+import com.simicart.core.catalog.categorydetail.entity.LayerEntity;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.categorydetail.model.CategoryDetailModel;
+import com.simicart.core.catalog.filter.entity.FilterEntity;
+import com.simicart.core.catalog.filter.entity.FilterState;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.config.Constants;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -37,9 +44,12 @@ public class CategoryDetailController extends SimiController {
     protected int mResultNumber = 0;
     protected boolean isOnscroll = true;
     protected int mCurrentSort;
+    protected LayerEntity mLayerEntity;
+    protected JSONObject mJSONFilter;
 
     protected View.OnClickListener onChangeViewClick;
     protected View.OnClickListener mSortListener;
+    protected View.OnClickListener mFilterListener;
     protected RecyclerView.OnScrollListener onListScroll;
 
     @Override
@@ -134,6 +144,31 @@ public class CategoryDetailController extends SimiController {
             }
         };
 
+        mFilterListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != mLayerEntity) {
+                    ArrayList<FilterState> states = mLayerEntity.getListState();
+                    ArrayList<FilterEntity> filters = mLayerEntity.getListFilter();
+
+                    FilterPopup filterPopup = new FilterPopup();
+                    filterPopup.setListFilter(filters);
+                    filterPopup.setStates(states);
+                    //filterPopup.setNameCate(m);
+                    filterPopup.setJSONFilter(mJSONFilter);
+                    filterPopup.setCallBack(new FilterCallBack() {
+                        @Override
+                        public void requestFilter(JSONObject jsFilter) {
+                            mJSONFilter = jsFilter;
+                            requestCategoryDetail();
+                        }
+                    });
+                    filterPopup.createPopup();
+
+                }
+            }
+        };
+
     }
 
     protected void requestCategoryDetail() {
@@ -157,6 +192,7 @@ public class CategoryDetailController extends SimiController {
                 mDelegate.dismissLoading();
                 mDelegate.dismissDialogLoading();
                 mResultNumber = ((CategoryDetailModel) mModel).getResultNumber();
+                mLayerEntity = ((CategoryDetailModel) mModel).getLayerEntity();
                 mDelegate.showLoadMore(false);
                 mDelegate.updateView(mModel.getCollection());
                 if ((mOffset + mLimit) <= mResultNumber)
@@ -194,6 +230,9 @@ public class CategoryDetailController extends SimiController {
             }
         }
         mModel.addBody("sort_option", String.valueOf(mCurrentSort));
+        if (null != mJSONFilter) {
+            mModel.addBody("filter", mJSONFilter);
+        }
         mModel.addBody(KeyData.CATEGORY_DETAIL.OFFSET, String.valueOf(mOffset));
         mModel.addBody(KeyData.CATEGORY_DETAIL.LIMIT, String.valueOf(mLimit));
     }
@@ -222,5 +261,9 @@ public class CategoryDetailController extends SimiController {
 
     public View.OnClickListener getSortListener() {
         return mSortListener;
+    }
+
+    public View.OnClickListener getFilterListener() {
+        return mFilterListener;
     }
 }

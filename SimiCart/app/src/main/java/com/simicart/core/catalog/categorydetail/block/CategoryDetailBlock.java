@@ -161,4 +161,9 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     public void setSortListener(View.OnClickListener listener) {
         rlSort.setOnClickListener(listener);
     }
+
+    public void setFilterListener(View.OnClickListener listener) {
+        rlFilter.setOnClickListener(listener);
+    }
+
 }
