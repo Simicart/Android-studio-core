@@ -81,7 +81,7 @@ public class ZopimChat {
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 SimiData data = bundle.getParcelable(Constants.ENTITY);
                 View view = (View) data.getData().get(KeyData.SIMI_BLOCK.VIEW);
-                if (ConstantZopim.ZOPIM_ENABLE.equals("1") {
+                if (ConstantZopim.ZOPIM_ENABLE.equals("1")) {
                     addIconMenutop(view);
                 }
             }
