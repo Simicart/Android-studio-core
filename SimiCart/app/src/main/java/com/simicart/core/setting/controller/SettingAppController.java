@@ -5,11 +5,17 @@ import android.provider.Settings;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.simicart.core.base.component.SimiMenuRowComponent;
+import com.simicart.core.base.component.SimiMultiMenuRowComponent;
+import com.simicart.core.base.component.SimiSwitchMenuRowComponent;
+import com.simicart.core.base.component.callback.MenuRowCallBack;
+import com.simicart.core.base.component.callback.SwitchMenuCallBack;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.setting.delegate.SettingAppDelegate;
@@ -28,67 +34,12 @@ public class SettingAppController extends SimiController {
     // String language;
     protected SettingAppDelegate mDelegate;
     private boolean isGetStore, isGetCurrency;
-    protected OnClickListener on_click_notification;
-    protected OnClickListener on_click_location;
-    protected OnClickListener on_click_curency;
-    protected OnClickListener on_click_language;
 
     @Override
     public void onStart() {
         mDelegate.showLoading();
         getStore();
         getCurrency();
-
-        on_click_notification = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDelegate.updateSettingNotification();
-            }
-
-        };
-
-        on_click_location = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent viewIntent = new Intent(
-                        Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                SimiManager.getIntance().getCurrentActivity()
-                        .startActivity(viewIntent);
-            }
-        };
-
-        on_click_curency = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                changeCurrency();
-            }
-        };
-
-        on_click_language = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                changeLanguage();
-            }
-        };
-    }
-
-    public OnClickListener getOn_click_curency() {
-        return on_click_curency;
-    }
-
-    public OnClickListener getOn_click_location() {
-        return on_click_location;
-    }
-
-    public OnClickListener getOn_click_language() {
-        return on_click_language;
-    }
-
-    public OnClickListener getOn_click_notification() {
-        return on_click_notification;
     }
 
     private void getStore() {
@@ -106,8 +57,8 @@ public class SettingAppController extends SimiController {
                         store.setJSONObject(simiEntity.getJSONObject());
                         DataLocal.listStores.add(store);
                     }
+                    afterRequestComplete();
                 }
-                afterStore();
             }
         });
         model.request();
@@ -128,27 +79,103 @@ public class SettingAppController extends SimiController {
                         currency.setJSONObject(simiEntity.getJSONObject());
                         DataPreferences.listCurrency.add(currency);
                     }
-
+                    afterRequestComplete();
                 }
-                afterCurrency();
             }
         });
         model.request();
     }
 
+    protected void afterRequestComplete() {
+        mDelegate.dismissLoading();
+        if(isGetCurrency == true && isGetStore == true) {
+            drawView();
+        }
+    }
+
+    protected void drawView() {
+
+        if (DataLocal.listStores.size() > 1) {
+            SimiMultiMenuRowComponent languageRowComponent = new SimiMultiMenuRowComponent();
+            languageRowComponent.setIcon("ic_lang");
+            languageRowComponent.setLabel(SimiTranslator.getInstance().translate("Language"));
+            languageRowComponent.setCurrent(getCurrentLanguage());
+            languageRowComponent.setmCallBack(new MenuRowCallBack() {
+                @Override
+                public void onClick() {
+                    changeLanguage();
+                }
+            });
+            mDelegate.addItemRow(languageRowComponent.createView());
+        }
+
+        if (DataPreferences.listCurrency.size() > 1) {
+            SimiMultiMenuRowComponent currencyRowComponent = new SimiMultiMenuRowComponent();
+            currencyRowComponent.setIcon("ic_currency");
+            currencyRowComponent.setLabel(SimiTranslator.getInstance().translate("Currency"));
+            currencyRowComponent.setCurrent(getCurrentCurrency());
+            currencyRowComponent.setmCallBack(new MenuRowCallBack() {
+                @Override
+                public void onClick() {
+                    changeCurrency();
+                }
+            });
+            mDelegate.addItemRow(currencyRowComponent.createView());
+        }
+
+        SimiSwitchMenuRowComponent notificationRowComponent = new SimiSwitchMenuRowComponent();
+        notificationRowComponent.setIcon("ic_notification");
+        notificationRowComponent.setLabel(SimiTranslator.getInstance().translate("Show Notification"));
+        notificationRowComponent.setmCallBack(new SwitchMenuCallBack() {
+            @Override
+            public void onClick(boolean enable) {
+                DataPreferences.saveNotificationSet(enable);
+            }
+        });
+        mDelegate.addItemRow(notificationRowComponent.createView());
+
+        SimiMenuRowComponent locationRowComponent = new SimiMenuRowComponent();
+        locationRowComponent.setIcon("ic_acc_profile");
+        locationRowComponent.setLabel(SimiTranslator.getInstance().translate("Profile"));
+        locationRowComponent.setmCallBack(new MenuRowCallBack() {
+            @Override
+            public void onClick() {
+                Intent viewIntent = new Intent(
+                        Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                SimiManager.getIntance().getCurrentActivity()
+                        .startActivity(viewIntent);
+            }
+        });
+        mDelegate.addItemRow(locationRowComponent.createView());
+
+    }
+
     protected void changeCurrency() {
         ListCurrencyFragment fragment = ListCurrencyFragment
-                .newInstance(mDelegate.getCurrency());
+                .newInstance(getCurrentCurrency());
         if (DataLocal.isTablet) {
             SimiManager.getIntance().replacePopupFragment(fragment);
         } else {
             SimiManager.getIntance().replaceFragment(fragment);
         }
+    }
+
+    protected String getCurrentCurrency() {
+        String currentCurrency = "";
+        if (DataPreferences.listCurrency != null && DataPreferences.listCurrency.size() > 0) {
+            for (CurrencyEntity entity : DataPreferences.listCurrency) {
+                if (entity.getValue().equals(DataPreferences.getCurrencyID())) {
+                    currentCurrency = entity.getTitle();
+                    return currentCurrency;
+                }
+            }
+        }
+        return currentCurrency;
     }
 
     protected void changeLanguage() {
         ListLanguageFragment fragment = ListLanguageFragment
-                .newInstance(mDelegate.getLanguage());
+                .newInstance(getCurrentLanguage());
         if (DataLocal.isTablet) {
             SimiManager.getIntance().replacePopupFragment(fragment);
         } else {
@@ -156,25 +183,22 @@ public class SettingAppController extends SimiController {
         }
     }
 
-    void afterCurrency() {
-        mDelegate.setCurrency();
-        if (isGetStore == true && isGetCurrency == true) {
-            mDelegate.successData();
+    protected String getCurrentLanguage() {
+        String currentLanguage = "";
+        if (DataLocal.listStores != null && DataLocal.listStores.size() > 0) {
+            for (Stores stores : DataLocal.listStores) {
+                if (stores.getStoreID().equals(DataPreferences.getStoreID())) {
+                    currentLanguage = stores.getStoreName();
+                    return currentLanguage;
+                }
+            }
         }
-    }
-
-    void afterStore() {
-        mDelegate.setLanguage();
-        if (isGetStore == true && isGetCurrency == true) {
-            mDelegate.successData();
-        }
+        return currentLanguage;
     }
 
     @Override
     public void onResume() {
-        mDelegate.setCurrency();
-        mDelegate.setLanguage();
-        mDelegate.successData();
+        drawView();
     }
 
     public void setDelegate(SettingAppDelegate settingAppDelegate) {
