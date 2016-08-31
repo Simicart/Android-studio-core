@@ -3,7 +3,9 @@ package com.simicart.plugins.facebookconnect;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.event.base.SimiEvent;
@@ -34,6 +37,8 @@ import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.catalog.product.block.ProductMorePluginBlock;
+import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.model.CartModel;
 import com.simicart.core.common.DataPreferences;
@@ -48,6 +53,9 @@ import com.simicart.core.customer.delegate.SignInDelegate;
 import com.simicart.core.customer.fragment.AddressBookFragment;
 import com.simicart.core.customer.fragment.SignInFragment;
 import com.simicart.core.customer.model.SignInModel;
+import com.simicart.core.style.material.floatingactionbutton.FloatingActionButton;
+import com.simicart.core.style.material.floatingactionbutton.FloatingActionsMenu;
+import com.simicart.plugins.facebookconnect.fragment.FacebookConnectFragment;
 import com.simicart.plugins.facebookconnect.model.FacebookLoginModel;
 
 import org.json.JSONObject;
@@ -116,6 +124,21 @@ public class FacebookConnect {
             }
         };
         SimiEvent.registerEvent(KeyEvent.FACEBOOK_EVENT.FACEBOOK_LOGIN_AUTO, autoSignInReceiver);
+
+        // register event: add button to more
+        BroadcastReceiver addButtonReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle bundle = intent.getBundleExtra(Constants.DATA);
+                SimiData data = bundle.getParcelable(Constants.ENTITY);
+                View view = (View) data.getData().get(KeyData.SIMI_BLOCK.VIEW);
+                SimiBlock mBlock = (SimiBlock) data.getData().get(KeyData.SIMI_BLOCK.BLOCK);
+                Product product = (Product) ((ProductMorePluginBlock) mBlock).getProduct();
+                ArrayList<FloatingActionButton> mListButtons = ((ProductMorePluginBlock) mBlock).getListButton();
+                addButtonFacebook(product, view, mListButtons);
+            }
+        };
+        SimiEvent.registerEvent(KeyEvent.WISH_LIST.WISH_LIST_ADD_BUTTON_MORE, addButtonReceiver);
 
     }
 
@@ -213,9 +236,9 @@ public class FacebookConnect {
     }
 
     protected void requestFaceBookSignIn(final String facebook_email, final String facebook_name,
-                                       final boolean checkOut) {
+                                         final boolean checkOut) {
 
-        if(mDelegate != null) {
+        if (mDelegate != null) {
             mDelegate.showLoading();
         }
         //DataLocal.saveData(facebook_name, facebook_email, "");
@@ -224,7 +247,7 @@ public class FacebookConnect {
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-                if(mDelegate != null) {
+                if (mDelegate != null) {
                     mDelegate.dismissLoading();
                 }
                 if (collection != null && collection.getCollection().size() > 0) {
@@ -236,7 +259,7 @@ public class FacebookConnect {
                         SimiManager.getIntance().onUpdateCartQty(cartQty);
                     }
 
-                    if(mDelegate != null) {
+                    if (mDelegate != null) {
                         onSignInSuccess(checkOut);
                     }
 
@@ -246,7 +269,7 @@ public class FacebookConnect {
         mModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
-                if(mDelegate != null) {
+                if (mDelegate != null) {
                     mDelegate.dismissLoading();
                 }
                 if (error != null) {
@@ -364,6 +387,42 @@ public class FacebookConnect {
             }
         });
         mModel.request();
+    }
+
+    protected void addButtonFacebook(Product product, View view, ArrayList<FloatingActionButton> mListButtons) {
+        final String url_product = product.getData("product_url");
+        FloatingActionsMenu mMultipleActions = (FloatingActionsMenu) view.findViewById(Rconfig.getInstance().id("more_plugins_action"));
+        FloatingActionButton bt_facebook = new FloatingActionButton(mContext);
+        bt_facebook.setStrokeVisible(false);
+        bt_facebook.setColorNormal(Color.WHITE);
+        bt_facebook.setColorNormal(Color.parseColor("#FFFFFF"));
+        bt_facebook.setColorPressed(Color.parseColor("#f4f4f4"));
+        bt_facebook.setIcon(Rconfig.getInstance().drawable("ic_facebook"));
+        for (int i = 0; i < mListButtons.size(); i++) {
+            mMultipleActions.removeButton(mListButtons.get(i));
+        }
+        mListButtons.add((mListButtons.size() - 1), bt_facebook);
+        for (int i = 0; i < mListButtons.size(); i++) {
+            mMultipleActions.addButton(mListButtons.get(i));
+        }
+
+        bt_facebook.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                SimiManager.getIntance().removeDialog();
+                HashMap<String, Object> hmData = new HashMap<String, Object>();
+                hmData.put(Constants.KeyData.URL, url_product);
+                FacebookConnectFragment fragment = FacebookConnectFragment
+                        .newInstance(new SimiData(hmData));
+                fragment.setContext(mContext);
+                FragmentTransaction ft = SimiManager.getIntance().getManager()
+                        .beginTransaction();
+                ft.add(Rconfig.getInstance().id("container"), fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
     }
 
 }

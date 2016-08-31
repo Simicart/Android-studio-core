@@ -1,5 +1,7 @@
 package com.simicart.core.catalog.product.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.simicart.core.base.model.entity.SimiEntity;
@@ -13,7 +15,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Product extends SimiEntity {
+public class Product extends SimiEntity implements Parcelable {
     protected String mStock;
     protected String mID;
     protected int mMaxQty;
@@ -616,4 +618,13 @@ public class Product extends SimiEntity {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+    }
 }
