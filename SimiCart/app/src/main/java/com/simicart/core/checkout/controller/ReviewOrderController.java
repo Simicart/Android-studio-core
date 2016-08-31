@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.magestore.simicart.R;
 import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
@@ -173,6 +172,7 @@ public class ReviewOrderController extends SimiController {
         showTermCondition();
 
         // dispatch event for plugin
+        showPluginsComponent();
 
         showView();
     }
@@ -256,6 +256,14 @@ public class ReviewOrderController extends SimiController {
         }
     }
 
+    protected void showPluginsComponent() {
+        HashMap<String,Object> hmData = new HashMap<>();
+        hmData.put(KeyData.REVIEW_ORDER.LIST_COMPONENTS, mListComponent);
+        hmData.put(KeyData.REVIEW_ORDER.JSON_DATA, mModel.getCollection().getJSON());
+        Log.e("abc", "++" + mModel.getCollection().getJSON().toString());
+        SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_ADD_PLUGIN_COMPONENT, hmData);
+    }
+
     protected void edtiAddress(boolean isShipping) {
         HashMap<String, Object> hm = new HashMap<>();
         hm.put(KeyData.ADDRESS_BOOK.OPEN_FOR, ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT);
@@ -279,7 +287,7 @@ public class ReviewOrderController extends SimiController {
                 TotalPrice totalPrice = shippingModel.getTotalPrice();
                 mReviewOrderEntity.setTotalPrice(totalPrice);
 
-                ArrayList<PaymentMethodEntity> payments = shippingModel.getListPaymentMehtod();
+                ArrayList<PaymentMethodEntity> payments = shippingModel.getListPaymentMethod();
                 mPaymentComponent.setListPaymentMethod(payments);
                 mReviewOrderEntity.setListPaymentMethod(payments);
 
@@ -528,6 +536,18 @@ public class ReviewOrderController extends SimiController {
 
     public void setDelegate(ReviewOrderDelegate delegate) {
         this.mDelegate = delegate;
+    }
+
+    public ReviewOrderDelegate getDelegate() {
+        return mDelegate;
+    }
+
+    public ArrayList<SimiComponent> getListComponent() {
+        return mListComponent;
+    }
+
+    public JSONObject getJSONData() {
+        return mModel.getCollection().getJSON();
     }
 
     public OnClickListener getPlaceOrderListener() {

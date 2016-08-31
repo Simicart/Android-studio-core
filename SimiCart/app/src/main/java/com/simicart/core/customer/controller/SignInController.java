@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
@@ -27,6 +28,7 @@ import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.model.CartModel;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Constants;
@@ -140,10 +142,9 @@ public class SignInController extends SimiController {
                 onSignInSuccess();
 
                 // update wishlist_items_qty
-//				EventController event = new EventController();
-//				event.dispatchEvent(
-//						"com.simicart.core.customer.controller.SignInController",
-//						mModel.getJSON().toString());
+                HashMap<String,Object> hmData = new HashMap<>();
+                hmData.put(KeyData.SIMI_CONTROLLER.JSON_DATA, mModel.getDataJSON());
+                SimiEvent.dispatchEvent(KeyEvent.SIGN_IN_EVENT.SIGN_IN_COMPLETE, hmData);
 
             }
         });

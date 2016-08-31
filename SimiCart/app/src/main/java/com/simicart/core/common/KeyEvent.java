@@ -16,11 +16,20 @@ public class KeyEvent {
         public static final String MY_ACCOUNT_ADD_ITEM = "simicart.myaccount.additem";
     }
 
+    public static class SIGN_IN_EVENT {
+        public static final String SIGN_IN_COMPLETE = "simicart.signin.complete";
+    }
+
+    public static class TOTAL_PRICE_EVENT {
+        public static final String TOTAL_PRICE_ADD_ROW = "simicart.totalprice.addrow";
+    }
+
     public static class REVIEW_ORDER {
         public static final String FOR_PAYMENT_BEFORE_PLACE = "simicart.before.placeorder";
         public static final String FOR_PAYMENT_TYPE_SDK = "simicart.placeorder.sdk";
-        public static final String FOR_PAYMENT_TYPE_WEBVIEW = "simciart.placeorder.webview";
-        public static final String FOR_PAYMENT_AFTER_PLACE = "simciart.after.placeorder";
+        public static final String FOR_PAYMENT_TYPE_WEBVIEW = "simicart.placeorder.webview";
+        public static final String FOR_PAYMENT_AFTER_PLACE = "simicart.after.placeorder";
+        public static final String FOR_ADD_PLUGIN_COMPONENT = "simicart.plugin.component";
     }
 
     public static class FACEBOOK_EVENT {
@@ -31,7 +40,7 @@ public class KeyEvent {
 
     public static class REWARD_POINT_EVENT {
         public static final String REWARD_ADD_ITEM_CART = "com.simicart.core.checkout.block.CartBlock";
-        public static final String REWARD_ADD_ITEM_REVIEW_ORDER = "com.simicart.core.checkout.block.ReviewOrderBlock";
+        public static final String REWARD_ADD_ITEM_BASIC_INFO = "simicart.additem.basic.info";
     }
 
     public static class WISH_LIST {

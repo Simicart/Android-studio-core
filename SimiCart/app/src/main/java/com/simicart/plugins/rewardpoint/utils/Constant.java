@@ -2,15 +2,15 @@ package com.simicart.plugins.rewardpoint.utils;
 
 public class Constant {
 
-	public static final String REWARDPOINT_MENU = "REWARD POINTS";
+//	public static final String REWARDPOINT_MENU = "REWARD POINTS";
 	public static String REWARDPOINT_REDEEM = "";
 	// public static int POINT = 0;
-	public static final int ID_TEXTVIEW_CONTENT = 1234;
-	public static final int ID_SEERBAR = 4321;
-	public static final int ID_TABLELAYOUT = 6789;
-	public static final int ID_TEXT_PROCESS = 9876;
-	public static final int ID_TEXT_MIN = 1111;
-	public static final int ID_TEXT_MAX = 2222;
+//	public static final int ID_TEXTVIEW_CONTENT = 1234;
+//	public static final int ID_SEERBAR = 4321;
+//	public static final int ID_TABLELAYOUT = 6789;
+//	public static final int ID_TEXT_PROCESS = 9876;
+//	public static final int ID_TEXT_MIN = 1111;
+//	public static final int ID_TEXT_MAX = 2222;
 	
 	public static final String CHANGE_SEERBAR = "loyalty/point/spend/";
 	public static final String GET_CART = "loyalty/passes/index";

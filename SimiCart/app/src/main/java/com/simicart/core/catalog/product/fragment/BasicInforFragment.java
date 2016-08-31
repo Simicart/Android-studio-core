@@ -10,16 +10,21 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.price.ProductPriceViewDetail;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+
+import java.util.HashMap;
 
 public class BasicInforFragment extends SimiFragment {
 	protected Product mProduct;
@@ -83,18 +88,25 @@ public class BasicInforFragment extends SimiFragment {
 					+ mProduct.getShortDecripition() + "</font>"));
 		}
 
-		SimiCollection simiCollection = new SimiCollection();
-		simiCollection.setJSON(mProduct.getJSONObject());
+//		SimiCollection simiCollection = new SimiCollection();
+//		simiCollection.setJSON(mProduct.getJSONObject());
 //		CacheBlock cache = new CacheBlock();
 //		cache.setSimiCollection(simiCollection);
 //		cache.setView(rootView);
 //		EventBlock event = new EventBlock();
 //		event.dispatchEvent(
 //				"com.simicart.core.catalog.fragment.BasicInforFragment", cache);
+		HashMap<String,Object> hmData = new HashMap<>();
+		hmData.put(KeyData.REWARD_POINT.VIEW, rootView);
+		hmData.put(KeyData.REWARD_POINT.ENTITY_JSON, mProduct.getJSONObject());
+		SimiEvent.dispatchEvent(KeyEvent.REWARD_POINT_EVENT.REWARD_ADD_ITEM_BASIC_INFO, hmData);
 
 		rootView.setBackgroundColor(AppColorConfig.getInstance().getAppBackground());
 
 		return rootView;
 	}
-	
+
+	public Product getProduct() {
+		return mProduct;
+	}
 }

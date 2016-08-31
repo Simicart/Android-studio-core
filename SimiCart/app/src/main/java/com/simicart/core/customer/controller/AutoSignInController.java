@@ -6,6 +6,7 @@ import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -36,6 +37,9 @@ public class AutoSignInController extends SimiController {
 					}
 
 					// update wishlist_items_qty
+					HashMap<String,Object> hmData = new HashMap<>();
+					hmData.put(KeyData.SIMI_CONTROLLER.JSON_DATA, model.getDataJSON());
+					SimiEvent.dispatchEvent(KeyEvent.SIGN_IN_EVENT.SIGN_IN_COMPLETE, hmData);
 //					EventController event = new EventController();
 //					event.dispatchEvent(
 //							"com.simicart.core.customer.controller.SignInController",

@@ -69,7 +69,7 @@ public class ShippingMethodModel extends SimiModel {
         return mTotalPrice;
     }
 
-    public ArrayList<PaymentMethodEntity> getListPaymentMehtod() {
+    public ArrayList<PaymentMethodEntity> getListPaymentMethod() {
         return mListPaymentMethod;
     }
 
