@@ -172,9 +172,9 @@ public class CategoryDetailController extends SimiController {
     }
 
     protected void requestCategoryDetail() {
-        if (mOffset == 0) {
+        //if (mOffset == 0) {
             mDelegate.showLoading();
-        }
+        //}
         if (null == mModel) {
             mModel = new CategoryDetailModel(mTypeCate);
             if (mTypeCate.equals(CategoryDetailFragment.CUSTOM)) {

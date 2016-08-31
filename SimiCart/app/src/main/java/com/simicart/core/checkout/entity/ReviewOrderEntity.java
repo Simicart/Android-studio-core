@@ -19,11 +19,13 @@ public class ReviewOrderEntity extends SimiEntity {
     protected ArrayList<PaymentMethodEntity> mListPaymentMethod;
     protected ArrayList<Condition> mListCondition;
     protected TotalPrice mTotalPrice;
+    protected String mCouponCode;
 
     protected String SHIPPING_METHOD_LIST = "shipping_method_list";
     protected String PAYMENT_METHOD_LIST = "payment_method_list";
     protected String FEE = "fee";
     protected String CONDITION = "condition";
+    protected String COUPON_CODE = "coupon_code";
 
     @Override
     public void parse() {
@@ -45,6 +47,8 @@ public class ReviewOrderEntity extends SimiEntity {
                 JSONObject json = getJSONObjectWithKey(mJSON, FEE);
                 parseFee(json);
             }
+
+
         } catch (JSONException e) {
             Log.e("ReviewOrderEntity ", "Exception " + e.getMessage());
         }
@@ -82,6 +86,11 @@ public class ReviewOrderEntity extends SimiEntity {
             JSONArray array = json.getJSONArray(CONDITION);
             parseListCondition(array);
         }
+
+        if (json.has(COUPON_CODE)) {
+            mCouponCode = json.getString(COUPON_CODE);
+        }
+
     }
 
     protected void parseListCondition(JSONArray array) throws JSONException {
@@ -127,4 +136,9 @@ public class ReviewOrderEntity extends SimiEntity {
     protected void setListCondition(ArrayList<Condition> conditions) {
         mListCondition = conditions;
     }
+
+    public String getCouponCode() {
+        return mCouponCode;
+    }
+
 }

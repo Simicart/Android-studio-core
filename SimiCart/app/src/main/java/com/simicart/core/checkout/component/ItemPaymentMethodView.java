@@ -109,12 +109,34 @@ public class ItemPaymentMethodView extends SimiComponent {
     }
 
     public void selectItem(boolean isSelect) {
-
+        if (!isSelect) {
+            String idIcon = "core_icon_option_single";
+            Drawable icon = AppColorConfig.getInstance().getIcon(idIcon);
+            imgIcon.setImageDrawable(icon);
+        }
     }
 
 
     public void setCallBack(PaymentMethodCallBack callBack) {
         this.mCallBack = callBack;
+    }
+
+    public boolean isEqual(PaymentMethodEntity paymentEntity) {
+        String currentMethod = mPaymentEntity.getPaymentMethod();
+
+        if (null == paymentEntity) {
+            return false;
+        }
+
+        String method = paymentEntity.getPaymentMethod();
+
+        if (Utils.validateString(currentMethod) && Utils.validateString(method)) {
+            if (currentMethod.equals(method)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

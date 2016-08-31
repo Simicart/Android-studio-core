@@ -27,6 +27,7 @@ import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductOption;
 import com.simicart.core.catalog.product.model.AddToCartModel;
 import com.simicart.core.catalog.product.model.ProductModel;
+import com.simicart.core.common.Utils;
 import com.simicart.core.common.options.ProductOptionParentView;
 import com.simicart.core.common.options.base.CacheOptionView;
 import com.simicart.core.common.options.delegate.OptionProductDelegate;
@@ -40,362 +41,370 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-@SuppressLint({ "DefaultLocale", "ClickableViewAccessibility" })
+@SuppressLint({"DefaultLocale", "ClickableViewAccessibility"})
 public class ProductController extends SimiController implements
-		OptionProductDelegate {
-	protected ProductDelegate mDelegate;
-	protected String mID;
-	protected ArrayList<CacheOptionView> mOptionView;
-	protected ProductPriceViewDetail mPriceView;
-	protected OnTouchListener mListenerAddToCart;
-	protected OnClickListener mClickerRating;
-	protected OnClickListener mClickerImage;
-	protected OnTouchListener mListenerInfor;
+        OptionProductDelegate {
+    protected ProductDelegate mDelegate;
+    protected String mID;
+    protected ArrayList<CacheOptionView> mOptionView;
+    protected ProductPriceViewDetail mPriceView;
+    protected OnTouchListener mListenerAddToCart;
+    protected OnClickListener mClickerRating;
+    protected OnClickListener mClickerImage;
+    protected OnTouchListener mListenerInfor;
 
-	public ProductController() {
-		mOptionView = new ArrayList<CacheOptionView>();
-	}
+    public ProductController() {
+        mOptionView = new ArrayList<CacheOptionView>();
+    }
 
-	public void setDelegate(ProductDelegate delegate) {
-		mDelegate = delegate;
-	}
+    public void setDelegate(ProductDelegate delegate) {
+        mDelegate = delegate;
+    }
 
-	public void setProductId(String id) {
-		mID = id;
-	}
+    public void setProductId(String id) {
+        mID = id;
+    }
 
-	public OnTouchListener getListenerAddToCart() {
-		return mListenerAddToCart;
-	}
+    public OnTouchListener getListenerAddToCart() {
+        return mListenerAddToCart;
+    }
 
-	public OnTouchListener getListenerInfor() {
-		return mListenerInfor;
-	}
+    public OnTouchListener getListenerInfor() {
+        return mListenerInfor;
+    }
 
-	public OnClickListener getClickerRating() {
-		return mClickerRating;
-	}
+    public OnClickListener getClickerRating() {
+        return mClickerRating;
+    }
 
-	public OnClickListener getClickerImage() {
-		return mClickerImage;
-	}
+    public OnClickListener getClickerImage() {
+        return mClickerImage;
+    }
 
-	@Override
-	public void onStart() {
-		mDelegate.showLoading();
-		mModel.setSuccessListener(new ModelSuccessCallBack() {
-			@Override
-			public void onSuccess(SimiCollection collection) {
-				mDelegate.dismissLoading();
-					mDelegate.updateView(mModel.getCollection());
-					onUpdatePriceView();
-					onUpdateOptionView();
-					if (DataLocal.isTablet) {
-						boolean isFocus = mDelegate.isShown();
-						if (isFocus) {
-							// showInforDetail();
-						}
-					}
-			}
-		});
-		mModel.setFailListener(new ModelFailCallBack() {
-			@Override
-			public void onFail(SimiError error) {
-				mDelegate.dismissLoading();
-				SimiNotify.getInstance().showNotify(error.getMessage());
-			}
-		});
-		mModel = new ProductModel();
-		mModel.addBody("product_id", mID);
-		mModel.request();
+    @Override
+    public void onStart() {
+        mDelegate.showLoading();
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
+                mDelegate.updateView(mModel.getCollection());
+                onUpdatePriceView();
+                onUpdateOptionView();
+                if (DataLocal.isTablet) {
+                    boolean isFocus = mDelegate.isShown();
+                    if (isFocus) {
+                        // showInforDetail();
+                    }
+                }
+            }
+        });
+        mModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissLoading();
+                SimiNotify.getInstance().showNotify(error.getMessage());
+            }
+        });
+        mModel = new ProductModel();
+        mModel.addBody("product_id", mID);
+        mModel.request();
 
-		mListenerAddToCart = new OnTouchListener() {
+        mListenerAddToCart = new OnTouchListener() {
 
-			@SuppressWarnings("deprecation")
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN: {
+            @SuppressWarnings("deprecation")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
 
-					if (getProductFromCollection().getStock()) {
-						GradientDrawable gdDefault = new GradientDrawable();
-						gdDefault.setColor(Color.GRAY);
-						gdDefault.setCornerRadius(15);
-						v.setBackgroundDrawable(gdDefault);
-					}
-					break;
-				}
-				case MotionEvent.ACTION_UP: {
-					addtoCart("");
-				}
-				case MotionEvent.ACTION_CANCEL: {
+                        if (getProductFromCollection().getStock()) {
+                            GradientDrawable gdDefault = new GradientDrawable();
+                            gdDefault.setColor(Color.GRAY);
+                            gdDefault.setCornerRadius(15);
+                            v.setBackgroundDrawable(gdDefault);
+                        }
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        addtoCart("");
+                    }
+                    case MotionEvent.ACTION_CANCEL: {
 
-					if (getProductFromCollection().getStock()) {
-						GradientDrawable gdDefault = new GradientDrawable();
-						gdDefault.setColor(AppColorConfig.getInstance().getKeyColor());
-						gdDefault.setCornerRadius(15);
-						v.setBackgroundDrawable(gdDefault);
+                        if (getProductFromCollection().getStock()) {
+                            GradientDrawable gdDefault = new GradientDrawable();
+                            gdDefault.setColor(AppColorConfig.getInstance().getKeyColor());
+                            gdDefault.setCornerRadius(15);
+                            v.setBackgroundDrawable(gdDefault);
 
-					}
-					break;
-				}
-				default:
-					break;
-				}
-				return true;
-			}
-		};
+                        }
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                return true;
+            }
+        };
 
-		mListenerInfor = new OnTouchListener() {
+        mListenerInfor = new OnTouchListener() {
 
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN: {
-					break;
-				}
-				case MotionEvent.ACTION_UP: {
-					// showInforDetail();
-				}
-				case MotionEvent.ACTION_CANCEL: {
-					break;
-				}
-				default:
-					break;
-				}
-				return true;
-			}
-		};
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        // showInforDetail();
+                    }
+                    case MotionEvent.ACTION_CANCEL: {
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                return true;
+            }
+        };
 
-		mClickerRating = new OnClickListener() {
+        mClickerRating = new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// showReview();
-			}
-		};
+            @Override
+            public void onClick(View v) {
+                // showReview();
+            }
+        };
 
-		mClickerImage = new OnClickListener() {
+        mClickerImage = new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// showImage();
-			}
-		};
-	}
+            @Override
+            public void onClick(View v) {
+                // showImage();
+            }
+        };
+    }
 
-	@Override
-	public void onResume() {
-		mDelegate.updateView(mModel.getCollection());
-		onUpdatePriceView();
-		onUpdateOptionView();
+    @Override
+    public void onResume() {
+        mDelegate.updateView(mModel.getCollection());
+        onUpdatePriceView();
+        onUpdateOptionView();
 
-		if (DataLocal.isTablet) {
-			// showInforDetail();
-		}
+        if (DataLocal.isTablet) {
+            // showInforDetail();
+        }
 
-	}
+    }
 
-	protected void onUpdateOptionView() {
-		View view = onShowOptionView();
-		if (null != view) {
-			mDelegate.onUpdateOptionView(view);
-		}
-	}
+    protected void onUpdateOptionView() {
+        View view = onShowOptionView();
+        if (null != view) {
+            mDelegate.onUpdateOptionView(view);
+        }
+    }
 
-	protected void onUpdatePriceView() {
-		Product product = getProductFromCollection();
-		if (null != product) {
-			View view = onShowPriceView(product);
-			if (null != view) {
-				mDelegate.onUpdatePriceView(view);
-			}
-		}
-	}
+    protected void onUpdatePriceView() {
+        Product product = getProductFromCollection();
+        if (null != product) {
+            View view = onShowPriceView(product);
+            if (null != view) {
+                mDelegate.onUpdatePriceView(view);
+            }
+        }
+    }
 
-	protected View onShowOptionView() {
-		Product product = getProductFromCollection();
+    protected View onShowOptionView() {
+        Product product = getProductFromCollection();
 
-		if (null == product) {
-			return null;
-		}
+        if (null == product) {
+            return null;
+        }
 
-		ProductOptionParentView parent_view = new ProductOptionParentView(
-				product, this);
+        ProductOptionParentView parent_view = new ProductOptionParentView(
+                product, this);
 
-		View view = parent_view.initOptionView();
+        View view = parent_view.initOptionView();
 
-		mOptionView = parent_view.getOptionView();
+        mOptionView = parent_view.getOptionView();
 
-		return view;
+        return view;
 
-	}
+    }
 
-	protected Product getProductFromCollection() {
-		Product product = null;
-		ArrayList<SimiEntity> entity = mModel.getCollection().getCollection();
-		if (null != entity && entity.size() > 0) {
-			product = (Product) entity.get(0);
-		}
-		return product;
-	}
+    protected Product getProductFromCollection() {
+        Product product = null;
+        ArrayList<SimiEntity> entity = mModel.getCollection().getCollection();
+        if (null != entity && entity.size() > 0) {
+            product = (Product) entity.get(0);
+        }
+        return product;
+    }
 
-	protected View onShowPriceView(Product product) {
-		LinearLayout ll_price = new LinearLayout(SimiManager.getIntance()
-				.getCurrentActivity());
-		LayoutParams params = new LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		mPriceView = new ProductPriceViewDetail(product);
+    protected View onShowPriceView(Product product) {
+        LinearLayout ll_price = new LinearLayout(SimiManager.getIntance()
+                .getCurrentActivity());
+        LayoutParams params = new LayoutParams(
+                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        mPriceView = new ProductPriceViewDetail(product);
 
-		View view = mPriceView.getViewPrice();
-		if (null != view) {
-			ll_price.addView(view, params);
-		}
-		return ll_price;
-	}
+        View view = mPriceView.getViewPrice();
+        if (null != view) {
+            ll_price.addView(view, params);
+        }
+        return ll_price;
+    }
 
-	@Override
-	public void updatePrice(ProductOption cacheOption, boolean isAdd) {
-		if (null != mPriceView) {
-			View view = mPriceView.updatePriceWithOption(cacheOption, isAdd);
-			if (null != view) {
-				mDelegate.onUpdatePriceView(view);
-			}
-		}
-	}
+    @Override
+    public void updatePrice(ProductOption cacheOption, boolean isAdd) {
+        if (null != mPriceView) {
+            View view = mPriceView.updatePriceWithOption(cacheOption, isAdd);
+            if (null != view) {
+                mDelegate.onUpdatePriceView(view);
+            }
+        }
+    }
 
-	protected void addtoCart(String url) {
-		if (!checkSelectedAllOption()) {
-			SimiNotify.getInstance().showToast(
-					SimiTranslator.getInstance().translate("Please select all options"));
-			return;
-		}
-		onShowOptionView();
-		if(url != null)
-		mDelegate.startAnimation(url);
-		ArrayList<CacheOption> options = getCacheOptions();
-		mDelegate.showDialogLoading();
-		final AddToCartModel model = new AddToCartModel();
-		mModel.setSuccessListener(new ModelSuccessCallBack() {
-			@Override
-			public void onSuccess(SimiCollection collection) {
-				mDelegate.dismissDialogLoading();
-					int mQty = getCartQtyFromJsonobject(model.getDataJSON());
-//					ConfigCheckout.newInstance().setmQty(String.valueOf(mQty));
-					SimiManager.getIntance().onUpdateCartQty(mQty + "");
-					SimiNotify.getInstance().showToast(
-							SimiTranslator.getInstance().translate("Added to Cart"));
-//					ConfigCheckout.newInstance().setCheckStatusCart(true);
-			}
-		});
+    protected void addtoCart(String url) {
+        if (!checkSelectedAllOption()) {
+            SimiNotify.getInstance().showToast(
+                    SimiTranslator.getInstance().translate("Please select all options"));
+            return;
+        }
+        onShowOptionView();
+//        if (url != null)
+//            mDelegate.startAnimation(url);
+        ArrayList<CacheOption> options = getCacheOptions();
+        mDelegate.showDialogLoading();
+        final AddToCartModel model = new AddToCartModel();
+        model.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissDialogLoading();
+                Log.e("ProductController", "ADD TO CARD SUCCESS");
+                int mQty = getCartQtyFromJsonobject(model.getDataJSON());
+                SimiManager.getIntance().onUpdateCartQty(mQty + "");
+                SimiNotify.getInstance().showToast(
+                        SimiTranslator.getInstance().translate("Added to Cart"));
+            }
+        });
 
-		model.addBody("product_id", getProductFromCollection().getId());
-		if (getProductFromCollection().getData("variant_id") != null) {
-			model.addBody("variant_id",
-					getProductFromCollection().getData("variant_id"));
-		}
-		if (getProductFromCollection().getData("product_type") != null) {
-			model.addBody("product_type",
-					getProductFromCollection().getData("product_type"));
-		}
-		model.addBody("product_qty",
-				String.valueOf(getProductFromCollection().getQty()));
 
-		if (null != options) {
-			try {
-				JSONArray array = convertCacheOptionToParams(options);
-				if (array != null && array.length() > 0) {
-					model.addBody("options", array);
-				}
-			} catch (JSONException e) {
-				mDelegate.dismissLoading();
-				SimiNotify.getInstance().showNotify("Cannot convert data");
-				e.printStackTrace();
-				return;
-			}
-		}
-		model.request();
-	}
+        model.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                Log.e("ProductController", "ADD TO CARD FAIL");
+                mDelegate.dismissDialogLoading();
+                String msg = error.getMessage();
+                if (Utils.validateString(msg)) {
+                    SimiNotify.getInstance().showToast(msg);
+                }
+            }
+        });
+        model.addBody("product_id", getProductFromCollection().getId());
+        if (getProductFromCollection().getData("product_type") != null) {
+            model.addBody("product_type",
+                    getProductFromCollection().getData("product_type"));
+        }
+        model.addBody("product_qty",
+                String.valueOf(getProductFromCollection().getQty()));
 
-	private int getCartQtyFromJsonobject(JSONObject jsonObject) {
-		int mQty = 0;
-		if (jsonObject != null) {
-			if (jsonObject.has("data")) {
-				try {
-					JSONArray jsonArray = jsonObject.getJSONArray("data");
-					if (jsonArray.length() > 0) {
-						for (int i = 0; i < jsonArray.length(); i++) {
-							JSONObject object = (JSONObject) jsonArray.get(i);
-							if (object.has("product_qty")) {
-								int qty = object.getInt("product_qty");
-								mQty += qty;
-							}
-						}
-					}
-				} catch (Exception e) {
-					Log.e("ProductController - getCartQtyFromJsonobject",
-							e.getMessage());
-				}
-			}
-		}
-		return mQty;
-	}
+        if (null != options) {
+            try {
+                JSONArray array = convertCacheOptionToParams(options);
+                if (array != null && array.length() > 0) {
+                    model.addBody("options", array);
+                }
+            } catch (JSONException e) {
+                mDelegate.dismissLoading();
+                SimiNotify.getInstance().showNotify("Cannot convert data");
+                e.printStackTrace();
+                return;
+            }
+        }
+        model.request();
+    }
 
-	protected boolean checkSelectedAllOption() {
-		if (getProductFromCollection().getStock()) {
-			ArrayList<CacheOption> options = getCacheOptions();
-			if ((null != options) && !checkSelectedCacheOption(options)) {
-				return false;
-			}
-		}
-		return true;
-	}
+    private int getCartQtyFromJsonobject(JSONObject jsonObject) {
+        int mQty = 0;
+        if (jsonObject != null) {
+            if (jsonObject.has("data")) {
+                try {
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    if (jsonArray.length() > 0) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject object = (JSONObject) jsonArray.get(i);
+                            if (object.has("product_qty")) {
+                                int qty = object.getInt("product_qty");
+                                mQty += qty;
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.e("ProductController - getCartQtyFromJsonobject",
+                            e.getMessage());
+                }
+            }
+        }
+        return mQty;
+    }
 
-	protected ArrayList<CacheOption> getCacheOptions() {
-		ArrayList<CacheOption> options = null;
-		if (mOptionView.size() > 0) {
-			options = new ArrayList<CacheOption>();
-			for (CacheOptionView option : mOptionView) {
-				options.add(option.getCacheOption());
-			}
-		}
+    protected boolean checkSelectedAllOption() {
+        if (getProductFromCollection().getStock()) {
+            ArrayList<CacheOption> options = getCacheOptions();
+            if ((null != options) && !checkSelectedCacheOption(options)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-		return options;
-	}
+    protected ArrayList<CacheOption> getCacheOptions() {
+        ArrayList<CacheOption> options = null;
+        if (mOptionView.size() > 0) {
+            options = new ArrayList<CacheOption>();
+            for (CacheOptionView option : mOptionView) {
+                options.add(option.getCacheOption());
+            }
+        }
 
-	protected boolean checkSelectedCacheOption(ArrayList<CacheOption> options) {
-		if(options != null){
-		for (CacheOption cacheOption : options) {
-			if (cacheOption.isRequired() && !cacheOption.isCompleteRequired()) {
-				return false;
-			}
-		}
-		}
-		return true;
-		
-	}
+        return options;
+    }
 
-	protected JSONArray convertCacheOptionToParams(
-			ArrayList<CacheOption> options) throws JSONException {
-		JSONArray array = new JSONArray();
-		for (CacheOption cacheOption : options) {
-			if (cacheOption.toParameter() != null) {
-				array.put(cacheOption.toParameter());
-			}
-		}
-		return array;
-	}
+    protected boolean checkSelectedCacheOption(ArrayList<CacheOption> options) {
+        if (options != null) {
+            for (CacheOption cacheOption : options) {
+                if (cacheOption.isRequired() && !cacheOption.isCompleteRequired()) {
+                    return false;
+                }
+            }
+        }
+        return true;
 
-	public void onClickViewImage(ImageView imv_image, final String[] images) {
-		imv_image.setOnClickListener(new OnClickListener() {
+    }
 
-			@Override
-			public void onClick(View arg0) {
-				// ShowImageFragment fragment = ShowImageFragment.newInstance();
-				// fragment.setImages(images);
-				// SimiManager.getIntance().replaceFragment(fragment);
-			}
-		});
-	}
+    protected JSONArray convertCacheOptionToParams(
+            ArrayList<CacheOption> options) throws JSONException {
+        JSONArray array = new JSONArray();
+        for (CacheOption cacheOption : options) {
+            if (cacheOption.toParameter() != null) {
+                array.put(cacheOption.toParameter());
+            }
+        }
+        return array;
+    }
+
+    public void onClickViewImage(ImageView imv_image, final String[] images) {
+        imv_image.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // ShowImageFragment fragment = ShowImageFragment.newInstance();
+                // fragment.setImages(images);
+                // SimiManager.getIntance().replaceFragment(fragment);
+            }
+        });
+    }
 
 }
+

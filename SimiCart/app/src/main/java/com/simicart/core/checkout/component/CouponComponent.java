@@ -5,12 +5,14 @@ import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.checkout.delegate.CouponCodeCallBack;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Rconfig;
 
@@ -20,6 +22,7 @@ import com.simicart.core.config.Rconfig;
 public class CouponComponent extends SimiComponent {
 
     protected String mCouponCode;
+    protected CouponCodeCallBack mCallBack;
 
     public CouponComponent(String mCouponCode) {
         super();
@@ -28,16 +31,10 @@ public class CouponComponent extends SimiComponent {
 
     @Override
     public View createView() {
-        EditText edtCoupon = new EditText(mContext);
-        int padding = Utils.toDp(10);
-        edtCoupon.setPadding(padding, padding, padding, padding);
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        int margin = Utils.toDp(10);
-        param.leftMargin = margin;
-        param.rightMargin = margin;
-        edtCoupon.setLayoutParams(param);
-        Drawable backgroud = mContext.getResources().getDrawable(Rconfig.getInstance().drawable("core_coupon_line_border"));
-        edtCoupon.setBackground(backgroud);
+
+        rootView = findLayout("core_component_coupon_code");
+
+        EditText edtCoupon = (EditText) findView("edt_coupon_code");
         edtCoupon.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         edtCoupon.setHighlightColor(Color.parseColor("#b2b2b2"));
         String hintText = SimiTranslator.getInstance().translate("Enter a coupon code");
@@ -48,9 +45,24 @@ public class CouponComponent extends SimiComponent {
         edtCoupon.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    String code = v.getText().toString().trim();
+                    if (null != mCallBack) {
+                        mCallBack.applyCouponCode(code);
+                    }
+                    v.setFocusable(false);
+                    v.setFocusableInTouchMode(true);
+                    Utils.hideKeyboard(v);
+                }
                 return false;
             }
         });
-        return edtCoupon;
+        edtCoupon.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        return rootView;
     }
+
+    public void setCallBack(CouponCodeCallBack callBack) {
+        mCallBack = callBack;
+    }
+
 }

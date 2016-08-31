@@ -9,8 +9,12 @@ import android.view.View.OnTouchListener;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.checkout.delegate.CartDelegate;
+import com.simicart.core.common.KeyData;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.fragment.SignInFragment;
+
+import java.util.HashMap;
 
 @SuppressLint("ClickableViewAccessibility")
 public class PopupCheckoutController extends SimiController {
@@ -116,20 +120,11 @@ public class PopupCheckoutController extends SimiController {
                     }
                     case MotionEvent.ACTION_UP: {
                         mBlockDelegate.dismissPopupCheckout();
-//                        NewAddressBookFragment fragment = NewAddressBookFragment
-//                                .newInstance();
-//                        Bundle bundle = new Bundle();
-//                        SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_CUSTOMER, Constants.KeyData.TYPE_INT, bundle);
-//                        SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, 0, Constants.KeyData.TYPE_INT, bundle);
-//                        bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, null);
-//                        bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, null);
-//                        fragment.setArguments(bundle);
-//                        Log.d("quang123", "=ACTION_UP=afterControl==" + 1);
-//                        if (DataLocal.isTablet) {
-//                            SimiManager.getIntance().replacePopupFragment(fragment);
-//                        } else {
-//                            SimiManager.getIntance().replaceFragment(fragment);
-//                        }
+                        HashMap<String,Object> hm = new HashMap<>();
+                        hm.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CHECKOUT);
+                        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION,ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW_CUSTOMER);
+                        SimiManager.getIntance().openAddressBookDetail(hm);
+
                     }
 
                     case MotionEvent.ACTION_CANCEL: {
@@ -154,19 +149,10 @@ public class PopupCheckoutController extends SimiController {
                     }
                     case MotionEvent.ACTION_UP: {
                         mBlockDelegate.dismissPopupCheckout();
-//                        NewAddressBookFragment fragment = NewAddressBookFragment
-//                                .newInstance();
-//                        Bundle bundle = new Bundle();
-//                        SimiFragment.setData(Constants.KeyData.AFTER_CONTROL, Constants.NEW_AS_GUEST, Constants.KeyData.TYPE_INT, bundle);
-//                        SimiFragment.setData(Constants.KeyData.ADDRESS_FOR, 0, Constants.KeyData.TYPE_INT, bundle);
-//                        bundle.putSerializable(Constants.KeyData.BILLING_ADDRESS, null);
-//                        bundle.putSerializable(Constants.KeyData.SHIPPING_ADDRESS, null);
-//                        fragment.setArguments(bundle);
-//                        if (DataLocal.isTablet) {
-//                            SimiManager.getIntance().replacePopupFragment(fragment);
-//                        } else {
-//                            SimiManager.getIntance().replaceFragment(fragment);
-//                        }
+                        HashMap<String,Object> hm = new HashMap<>();
+                        hm.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CHECKOUT);
+                        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION,ValueData.ADDRESS_BOOK_DETAIL.ACTION_GUEST);
+                        SimiManager.getIntance().openAddressBookDetail(hm);
                     }
 
                     case MotionEvent.ACTION_CANCEL: {

@@ -2,6 +2,7 @@ package com.simicart.plugins.ccaveneu;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class CCAveneuFragment extends PaymentFragment {
         if (null != mOrderInforEntity) {
             url = mOrderInforEntity.getData("params");
         }
+        Log.e("CCAveneuFragment","-----> URL " + url);
         if (Utils.validateString(url)) {
 
             HashMap<String, Object> data = new HashMap<>();

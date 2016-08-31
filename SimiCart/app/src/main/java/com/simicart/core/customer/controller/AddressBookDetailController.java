@@ -17,6 +17,7 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
@@ -28,6 +29,9 @@ import com.simicart.core.customer.entity.CountryEntity;
 import com.simicart.core.customer.entity.StateEntity;
 import com.simicart.core.customer.model.AddressBookDetailModel;
 import com.simicart.core.customer.model.GetCountryModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +52,8 @@ public class AddressBookDetailController extends SimiController {
     protected ArrayList<CountryEntity> mListCountry;
     protected CountryEntity mCountry;
     protected StateEntity mState;
+    protected SimiTextRowComponent passwordComponent;
+    protected SimiTextRowComponent confirmPasswordComponent;
 
 
     @Override
@@ -159,6 +165,9 @@ public class AddressBookDetailController extends SimiController {
                 showViewForGuest();
             } else if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW_CUSTOMER) {
                 showViewForNewCustomer();
+            }else{
+                // create a new address for checkout as existing customer
+                showViewForCustomer();
             }
         }
 
@@ -225,16 +234,37 @@ public class AddressBookDetailController extends SimiController {
 
     protected void showViewForNewCustomer() {
 
-        showViewForCustomer();
 
         showViewForGuest();
 
         // pass
-        initComponentRequired("Password", "user_password", "user_password", InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        passwordComponent = new SimiTextRowComponent();
+        passwordComponent.setTitle("Password");
+        passwordComponent.setRequired(true);
+        if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
+            String name = mAddressForEdit.getData("user_password");
+            passwordComponent.setValue(name);
+        }
+        passwordComponent.setKey("user_password");
+        passwordComponent.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        View passwordView = passwordComponent.createView();
+        mListRow.add(passwordView);
+        mListRowComponent.add(passwordComponent);
 
 
         // confirm pass
-        initComponentRequired("Confirm Password", "user_password", "user_password", InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        confirmPasswordComponent = new SimiTextRowComponent();
+        confirmPasswordComponent.setTitle("Confirm Password");
+        confirmPasswordComponent.setRequired(true);
+        if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
+            String name = mAddressForEdit.getData("user_password");
+            confirmPasswordComponent.setValue(name);
+        }
+        confirmPasswordComponent.setKey("user_password");
+        confirmPasswordComponent.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        View confirmPasswordView = confirmPasswordComponent.createView();
+        mListRow.add(confirmPasswordView);
+        mListRowComponent.add(passwordComponent);
     }
 
 
@@ -468,7 +498,110 @@ public class AddressBookDetailController extends SimiController {
     }
 
     protected void saveForCheckout() {
+        try {
+            JSONObject jsonAddress = getJSONAddressForCheckout();
+            if (null != jsonAddress) {
+                AddressEntity addressEntity = new AddressEntity();
+                addressEntity.parse(jsonAddress);
 
+                if (action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW_CUSTOMER) {
+                    saveForNewCustomer(addressEntity);
+                } else if (action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_GUEST) {
+                    HashMap<String, Object> hm = new HashMap<>();
+                    hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+                    hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+                    hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_GUEST);
+                    SimiManager.getIntance().openReviewOrder(hm);
+                }else{
+                    HashMap<String, Object> hm = new HashMap<>();
+                    hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+                    hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+                    hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_EXISTING_CUSTOMER);
+                    SimiManager.getIntance().openReviewOrder(hm);
+                }
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    protected void saveForNewCustomer(AddressEntity addressEntity) {
+        String password = (String) passwordComponent.getValue();
+        if (!Utils.validateString(password)) {
+
+            return;
+        }
+
+        String confirmPassword = (String) confirmPasswordComponent.getValue();
+        if (!Utils.validateString(confirmPassword)) {
+
+            return;
+        }
+
+        if (!password.equals(confirmPassword)) {
+
+            return;
+        }
+
+        DataPreferences.savePassword(password);
+
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+        hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+        hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_NEW_CUSTOMER);
+        SimiManager.getIntance().openReviewOrder(hm);
+
+    }
+
+    protected JSONObject getJSONAddressForCheckout() throws JSONException {
+        JSONObject jsonAddress = new JSONObject();
+
+        if (null != mListRowComponent) {
+            for (int i = 0; i < mListRowComponent.size(); i++) {
+                SimiRowComponent rowComponent = mListRowComponent.get(i);
+                SimiRowComponent.TYPE_ROW type = rowComponent.getType();
+                if (type == SimiRowComponent.TYPE_ROW.TEXT) {
+                    String key = rowComponent.getKey();
+                    String value = (String) rowComponent.getValue();
+                    if (rowComponent.isRequired() && null == value) {
+                        return null;
+                    }
+                    jsonAddress.put(key, value);
+                }
+            }
+        }
+
+        if (null != mCountry) {
+            String name = mCountry.getName();
+            if (Utils.validateString(name)) {
+                jsonAddress.put("country_name", name);
+            }
+
+            String code = mCountry.getCode();
+            if (Utils.validateString(code)) {
+                jsonAddress.put("country_code", code);
+            }
+        }
+
+        if (null != mState) {
+            String name = mState.getName();
+            if (Utils.validateString(name)) {
+                jsonAddress.put("state_name", name);
+            }
+
+            String code = mState.getCode();
+            if (Utils.validateString(code)) {
+                jsonAddress.put("state_code", code);
+            }
+
+            String id = mState.getID();
+            if (Utils.validateString(id)) {
+                jsonAddress.put("state_id", id);
+            }
+        }
+        return jsonAddress;
     }
 
     @Override

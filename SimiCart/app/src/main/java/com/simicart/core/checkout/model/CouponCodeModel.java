@@ -1,8 +1,9 @@
 package com.simicart.core.checkout.model;
 
+import com.simicart.core.checkout.controller.ReviewOrderController;
 import com.simicart.core.config.Constants;
 
-public class CouponCodeModel extends ShippingMethodModel {
+public class CouponCodeModel extends ReviewOrderModel {
 
 	@Override
 	protected void setUrlAction() {

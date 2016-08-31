@@ -31,8 +31,8 @@ public class PaymentFragment extends SimiFragment {
     }
 
     protected void parseData() {
-        if (mHashMapData.containsKey("payment_method")) {
-            mPaymentMethodEntity = (PaymentMethodEntity) mHashMapData.get("payment_method");
+        if (mHashMapData.containsKey("payment_method_entity")) {
+            mPaymentMethodEntity = (PaymentMethodEntity) mHashMapData.get("payment_method_entity");
             mPaymentMethod = mPaymentMethodEntity.getPaymentMethod();
         }
 

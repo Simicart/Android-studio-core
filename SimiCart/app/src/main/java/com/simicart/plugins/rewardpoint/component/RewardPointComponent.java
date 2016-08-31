@@ -13,11 +13,13 @@ import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.component.PaymentMethodComponent;
 import com.simicart.core.checkout.component.TotalPriceComponent;
+import com.simicart.core.checkout.entity.ReviewOrderEntity;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.rewardpoint.model.ModelRewardSeerbar;
@@ -122,13 +124,21 @@ public class RewardPointComponent extends SimiComponent {
             @Override
             public void onSuccess(SimiCollection collection) {
                 dismissDialogLoading();
-                for(SimiComponent component : listComponents) {
-                    if(component instanceof PaymentMethodComponent) {
-                        ((PaymentMethodComponent)component).setListPaymentMethod(model.getListPaymentMethod());
-                        ((PaymentMethodComponent)component).refreshPaymentMethods();
-                    } else if(component instanceof TotalPriceComponent) {
-                        ((TotalPriceComponent)component).setTotalPrice(model.getTotalPrice());
-                        ((TotalPriceComponent)component).refreshTotalPrice();
+
+                ReviewOrderEntity reviewOrderEntity = null;
+                ArrayList<SimiEntity> entities = collection.getCollection();
+                if(null != entities && entities.size() >0){
+                    reviewOrderEntity = (ReviewOrderEntity) entities.get(0);
+                }
+                if(null != reviewOrderEntity) {
+                    for (SimiComponent component : listComponents) {
+                        if (component instanceof PaymentMethodComponent) {
+                            ((PaymentMethodComponent) component).setListPaymentMethod(reviewOrderEntity.getListPaymentMethod());
+                            ((PaymentMethodComponent) component).refreshPaymentMethods();
+                        } else if (component instanceof TotalPriceComponent) {
+                            ((TotalPriceComponent) component).setTotalPrice(reviewOrderEntity.getTotalPrice());
+                            ((TotalPriceComponent) component).refreshTotalPrice();
+                        }
                     }
                 }
             }
