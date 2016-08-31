@@ -30,7 +30,6 @@ import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.fragment.SignInFragment;
 import com.simicart.plugins.wishlist.WishList;
 import com.simicart.plugins.wishlist.common.WishListConstants;
-import com.simicart.plugins.wishlist.common.WishListManager;
 import com.simicart.plugins.wishlist.delegate.MyWishListDelegate;
 import com.simicart.plugins.wishlist.entity.ButtonAddWishList;
 import com.simicart.plugins.wishlist.entity.ItemWishList;
@@ -227,8 +226,6 @@ public class ControllerAddWishList implements OptionProductDelegate {
                             items.add(itemWishList);
                         }
                     }
-                    WishListManager.getInstance().updateQtyWishList(
-                            String.valueOf(model.getWishlist_qty()));
                     if (isUpdateWishList) {
                         mDelegate.updateData(items);
 

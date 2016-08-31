@@ -21,7 +21,6 @@ import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.wishlist.adapter.MyWishListAdapter;
-import com.simicart.plugins.wishlist.common.WishListManager;
 import com.simicart.plugins.wishlist.delegate.MyWishListDelegate;
 import com.simicart.plugins.wishlist.entity.ItemWishList;
 
@@ -112,8 +111,6 @@ public class MyWistListBlock extends SimiBlock implements MyWishListDelegate {
 	public void setWishlist_qty(int wishlist_qty) {
 		TextView tv_qtyItem = (TextView) mView.findViewById(Rconfig
 				.getInstance().id("tv_qtyItem"));
-		WishListManager.getInstance().updateQtyWishList(
-				String.valueOf(wishlist_qty));
 		if (wishlist_qty < 2) {
 			tv_qtyItem.setText(wishlist_qty + " "
 					+ SimiTranslator.getInstance().translate(ITEM));

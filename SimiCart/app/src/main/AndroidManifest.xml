@@ -119,6 +119,10 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
+            android:name="com.simicart.plugins.zopimchat.SimiChatActivity"
+            android:theme="@style/MyMaterialTheme" />
+
+        <activity
             android:name="com.ipay.IpayAcitivity"
             android:configChanges="orientation|screenSize" />
         <activity

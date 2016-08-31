@@ -43,4 +43,8 @@ public class KeyEvent {
         public static final String BAR_CODE_ON_BACK = "simicart.menuleft.mainactivity.backtoscan";
     }
 
+    public static class ZOPIM {
+        public static final String ZOPIM_ADD_ICON_TOP_MENU = "com.simicart.core.menutop.block.MenuTopBlock";
+    }
+
 }

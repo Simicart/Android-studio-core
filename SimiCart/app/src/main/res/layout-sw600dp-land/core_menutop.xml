@@ -23,6 +23,13 @@
             android:src="@drawable/ic_menu" />
 
         <LinearLayout
+            android:id="@+id/layout_plugin"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_toRightOf="@+id/img_menu" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

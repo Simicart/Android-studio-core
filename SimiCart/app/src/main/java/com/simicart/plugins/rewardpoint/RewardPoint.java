@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -161,7 +162,7 @@ public class RewardPoint {
                 ll_reward_card.setVisibility(View.GONE);
             }
         } catch (Exception e) {
-            ll_reward_card.setVisibility(View.GONE);
+            Log.e("REWARD POINT:", "Exception add item to cart ===>" + e.getMessage());
         }
 
         ll_reward_card.removeAllViews();

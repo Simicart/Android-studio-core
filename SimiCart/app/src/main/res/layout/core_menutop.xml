@@ -75,15 +75,30 @@
         </RelativeLayout>
 
 
-        <ImageView
-            android:id="@+id/img_logo"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/layout_cart"
-            android:layout_toRightOf="@+id/img_menu"
-            android:contentDescription="@null"
-            android:src="@drawable/default_logo" />
+            android:layout_toRightOf="@+id/img_menu">
+
+            <LinearLayout
+                android:id="@+id/layout_plugin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:id="@+id/img_logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:layout_toLeftOf="@+id/layout_plugin"
+                android:src="@drawable/default_logo" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

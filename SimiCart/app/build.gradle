@@ -33,6 +33,9 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://zendesk.artifactoryonline.com/zendesk/repo' }
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -56,8 +59,10 @@ dependencies {
     // library for facebook
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
 
+    // library for downloadable
     compile "com.daimajia.swipelayout:library:1.2.0@aar"
 
-
+    // library for zopim
+    compile group: 'com.zopim.android', name: 'sdk', version: '1.2.0.1'
 
 }

@@ -1,0 +1,9 @@
+   <events>
+
+       <event>
+           <fullname>com.simicart.plugins.zopimchat.ZopimChat</fullname>
+           <sku>simi_developer</sku>
+       </event>
+
+</events>
+  

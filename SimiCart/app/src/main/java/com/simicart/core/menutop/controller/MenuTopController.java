@@ -26,6 +26,7 @@ public class MenuTopController extends SimiController {
 
 	@Override
 	public void onStart() {
+		mDelegate.updateView(null);
 		init();
 	}
 
