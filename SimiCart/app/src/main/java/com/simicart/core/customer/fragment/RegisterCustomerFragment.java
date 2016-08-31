@@ -43,7 +43,7 @@ public class RegisterCustomerFragment extends SimiFragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
+
 		mBlock.initView();
 		if (null == mController) {
 			mController = new RegisterCustomerController();
