@@ -20,6 +20,7 @@ public class ReviewOrderModel extends SimiModel {
             if (null != array && array.length() > 0) {
                 collection = new SimiCollection();
                 JSONObject json = array.getJSONObject(0);
+                collection.setJSON(json);
                 ReviewOrderEntity reviewOrderEntity = new ReviewOrderEntity();
                 reviewOrderEntity.parse(json);
                 collection.addEntity(reviewOrderEntity);

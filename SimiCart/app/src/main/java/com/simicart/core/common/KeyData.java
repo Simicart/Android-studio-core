@@ -18,6 +18,7 @@ public class KeyData {
 
     public static class SIMI_CONTROLLER {
         public static String DELEGATE = "delegate";
+        public static String JSON_DATA = "json_data";
     }
 
     public static class CATEGORY_DETAIL {
@@ -69,6 +70,13 @@ public class KeyData {
         public static String PLACE_FOR = "place_for";
         public static String SHIPPING_ADDRESS = "shipping_address";
         public static String BILLING_ADDRESS = "billing_address";
+        public static String LIST_COMPONENTS = "list_components";
+        public static String JSON_DATA = "json_data";
+    }
+
+    public static class TOTAL_PRICE {
+        public static String LIST_ROWS = "list_rows";
+        public static String JSON_DATA = "json_data";
     }
 
     public static class SLIDE_MENU {
@@ -121,6 +129,9 @@ public class KeyData {
         public static final String PASSBOOK_BARCODE = "passbook_barcode";
         public static final String EXPIRE_NOTIFICATION = "expire_notification";
         public static final String IS_NOTIFICATION = "is_notification";
+        public static final String VIEW = "view";
+        public static final String ENTITY_JSON = "json_entity";
     }
+
 
 }

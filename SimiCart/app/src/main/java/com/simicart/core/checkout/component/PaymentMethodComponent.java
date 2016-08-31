@@ -99,7 +99,9 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
         mPaymentMethods = paymentMethods;
     }
 
-
+    public void refreshPaymentMethods() {
+        createRows();
+    }
 
     public void setCallBack(PaymentMethodCallBack callBack) {
         mCallBack = callBack;

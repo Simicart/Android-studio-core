@@ -10,12 +10,18 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.entity.TotalPrice;
+import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by frank on 6/29/16.
@@ -23,6 +29,8 @@ import com.simicart.core.config.Rconfig;
 public class TotalPriceComponent extends SimiComponent {
 
     protected TotalPrice mTotalEntity;
+    protected TableLayout tblPrice;
+    protected ArrayList<TableRow> listRows;
 
     public TotalPriceComponent(TotalPrice mTotalEntity) {
         super();
@@ -40,11 +48,13 @@ public class TotalPriceComponent extends SimiComponent {
     }
 
     protected void initView() {
+        listRows = new ArrayList<>();
 
         LinearLayout ll_core_component = (LinearLayout) findView("ll_body_component");
         ll_core_component.setGravity(Gravity.RIGHT);
+        ll_core_component.removeAllViewsInLayout();
 
-        TableLayout tblPrice = new TableLayout(mContext);
+        tblPrice = new TableLayout(mContext);
         TableLayout.LayoutParams param = new TableLayout.LayoutParams();
         param.bottomMargin = Utils.toDp(5);
         param.topMargin = Utils.toDp(5);
@@ -53,8 +63,23 @@ public class TotalPriceComponent extends SimiComponent {
         tblPrice.setGravity(Gravity.RIGHT);
         ll_core_component.addView(tblPrice);
 
+        initSubTotal();
 
-        // sub total
+        initShippingHandling();
+
+        initDiscount();
+
+        initTax();
+
+        initGrandTotal();
+
+        initCustomRow();
+
+        showTotalPrice();
+
+    }
+
+    protected void initSubTotal() {
         String subTotalExcl = mTotalEntity.getSubtotalExclTax();
         String subTotalIncl = mTotalEntity.getSubtotalInclTax();
         float fSubTotalExcl = convertToFloat(subTotalExcl);
@@ -62,19 +87,20 @@ public class TotalPriceComponent extends SimiComponent {
         if (fSubTotalExcl >= 0 || fSubTotalIncl >= 0) {
             if (fSubTotalExcl >= 0) {
                 TableRow tbrSubTotalExcl = createSubtotalExcl();
-                tblPrice.addView(tbrSubTotalExcl);
+                listRows.add(tbrSubTotalExcl);
             }
 
             if (fSubTotalIncl >= 0) {
                 TableRow tbrSubTotalIncl = createSubtotalIncl();
-                tblPrice.addView(tbrSubTotalIncl);
+                listRows.add(tbrSubTotalIncl);
             }
         } else {
             TableRow tbrSubtotal = createSubtotal();
-            tblPrice.addView(tbrSubtotal);
+            listRows.add(tbrSubtotal);
         }
+    }
 
-        // shipping handling
+    protected void initShippingHandling() {
         String shippingExcl = mTotalEntity.getShippingHandlingExclTax();
         String shippingIncl = mTotalEntity.getShippingHandlingInclTax();
         float fShippingExcl = convertToFloat(shippingExcl);
@@ -83,38 +109,41 @@ public class TotalPriceComponent extends SimiComponent {
 
             if (fShippingExcl >= 0) {
                 TableRow tbrShippingExcl = createShippingHandlingExcl();
-                tblPrice.addView(tbrShippingExcl);
+                listRows.add(tbrShippingExcl);
             }
 
             if (fShippingIncl >= 0) {
                 TableRow tbrShippingIncl = createShippingHandlingIncl();
-                tblPrice.addView(tbrShippingIncl);
+                listRows.add(tbrShippingIncl);
             }
 
         } else {
             TableRow tbrShipping = createShippingHandling();
             if (null != tbrShipping) {
-                tblPrice.addView(tbrShipping);
+                listRows.add(tbrShipping);
             }
         }
+    }
 
-        // discount
+    protected void initDiscount() {
         String discount = mTotalEntity.getDiscount();
         float fDiscount = convertToFloat(discount);
         if (fDiscount > 0) {
             TableRow tbrDiscount = createDiscount();
-            tblPrice.addView(tbrDiscount);
+            listRows.add(tbrDiscount);
         }
+    }
 
-        // tax
+    protected void initTax() {
         String tax = mTotalEntity.getTax();
         float fTax = convertToFloat(tax);
         if (fTax > 0) {
             TableRow tbrTax = createTax();
-            tblPrice.addView(tbrTax);
+            listRows.add(tbrTax);
         }
+    }
 
-        // grand total
+    protected void initGrandTotal() {
         String grandTotalExcl = mTotalEntity.getGrandTotalExclTax();
         String grandTotalIncl = mTotalEntity.getGrandTotalInclTax();
         float fGrandTotalExcl = convertToFloat(grandTotalExcl);
@@ -123,21 +152,33 @@ public class TotalPriceComponent extends SimiComponent {
 
             if (fGrandTotalExcl >= 0) {
                 TableRow tbrGrandTotalExcl = createGrandtotalExcl();
-                tblPrice.addView(tbrGrandTotalExcl);
+                listRows.add(tbrGrandTotalExcl);
             }
 
             if (fGrandTotalIncl >= 0) {
                 TableRow tbrGrandTotalIncl = createGrandtotalIncl();
-                tblPrice.addView(tbrGrandTotalIncl);
+                listRows.add(tbrGrandTotalIncl);
             }
 
         } else {
             TableRow tbrGrandTotal = createGrandTotal();
             if (null != tbrGrandTotal) {
-                tblPrice.addView(tbrGrandTotal);
+                listRows.add(tbrGrandTotal);
             }
         }
+    }
 
+    protected void initCustomRow() {
+        HashMap<String,Object> hmData = new HashMap<>();
+        hmData.put(KeyData.TOTAL_PRICE.LIST_ROWS, listRows);
+        hmData.put(KeyData.TOTAL_PRICE.JSON_DATA, mTotalEntity.getJSONObject());
+        SimiEvent.dispatchEvent(KeyEvent.TOTAL_PRICE_EVENT.TOTAL_PRICE_ADD_ROW, hmData);
+    }
+
+    protected void showTotalPrice() {
+        for(TableRow row : listRows) {
+            tblPrice.addView(row);
+        }
     }
 
     protected TableRow createSubtotalExcl() {
@@ -247,6 +288,10 @@ public class TotalPriceComponent extends SimiComponent {
         } catch (Exception e) {
             return -1;
         }
+    }
+
+    public void refreshTotalPrice() {
+        initView();
     }
 
     public void setTotalPrice(TotalPrice totalPrice) {
