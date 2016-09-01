@@ -12,6 +12,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
 import com.simicart.core.config.AppColorConfig;
@@ -43,7 +44,9 @@ public class DownloadProduct {
 				SimiData data = bundle.getParcelable("entity");
 				mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
 				mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
-				addItemToSlideMenu();
+				if(isExistDownloadable() == false) {
+					addItemToSlideMenu();
+				}
 			}
 		};
 		SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_RELATED_PERSONAL, addItemReceiver);
@@ -66,6 +69,16 @@ public class DownloadProduct {
 		};
 		SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.REMOVE_ITEM, removeItemReceiver);
 
+	}
+
+	protected boolean isExistDownloadable() {
+		for (ItemNavigation item : mItems) {
+			if (item.getName().equals(SimiTranslator.getInstance().translate(
+					MY_DOWNLOAD_LABLE))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected void addItemToSlideMenu() {

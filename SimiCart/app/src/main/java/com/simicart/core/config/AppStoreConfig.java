@@ -10,23 +10,23 @@ import java.text.DecimalFormat;
  */
 public class AppStoreConfig extends SimiEntity {
 
-    private String mCountryName;
-    private String mCountryCode;
-    private String mCurrencySymbol;
-    private String mCurrencyCode;
-    private String mViewProductDefault;
-    private String mStoreID;
-    private String mStoreName;
-    private String mStoreCode;
-    private String mLocaleIdentifier;
+    private String mCountryName = "";
+    private String mCountryCode = "";
+    private String mCurrencySymbol = "";
+    private String mCurrencyCode = "";
+    private String mViewProductDefault = "";
+    private String mStoreID = "";
+    private String mStoreName = "";
+    private String mStoreCode = "";
+    private String mLocaleIdentifier = "";
     private boolean mUseStore;
-    private String mCurrencyPosition;
+    private String mCurrencyPosition = "";
     private boolean isRTL;
     private boolean isShowZeroPrice;
     private boolean isShowLinkAllProduct;
     private boolean isReloadPaymentMethod;
     private String mSenderID = "";
-    private String mTypeProductList;
+    private String mTypeProductList = "";
 
     private String country_code = "country_code";
     private String country_name = "country_name";

@@ -255,7 +255,7 @@ public class SplashController {
     private void changeBaseUrl() {
         String currentStoreID = AppStoreConfig.getInstance().getStoreID();
         String baseUrl = Config.getInstance().getBaseUrl();
-        for (Stores store : DataLocal.listStores) {
+        for (Stores store : DataPreferences.listStores) {
             String id = store.getStoreID();
             if (id.equals(currentStoreID)) {
                 int length = baseUrl.split("/").length;

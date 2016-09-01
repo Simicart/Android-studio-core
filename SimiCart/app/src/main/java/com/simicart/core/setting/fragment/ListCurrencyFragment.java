@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.setting.block.ListViewIndexableBlock;
 import com.simicart.core.setting.controller.ListCurrencyController;
@@ -26,10 +28,11 @@ public class ListCurrencyFragment extends SimiFragment {
 		return current_item;
 	}
 
-	public static ListCurrencyFragment newInstance(String currentItem) {
+	public static ListCurrencyFragment newInstance(SimiData data) {
 		ListCurrencyFragment fragment = new ListCurrencyFragment();
 		Bundle bundle= new Bundle();
 //		setData(Constants.KeyData.CURRENT_ITEM, currentItem, Constants.KeyData.TYPE_STRING, bundle);
+		bundle.putParcelable(KEY_DATA, data);
 		fragment.setArguments(bundle);
 		fragment.setListLanguage(DataPreferences.listCurrency);
 		return fragment;
@@ -52,8 +55,8 @@ public class ListCurrencyFragment extends SimiFragment {
 				Rconfig.getInstance().layout("core_fragment_list_choice"), container,
 				false);
 		Context context = getActivity();
-		if(getArguments() != null){
-//		current_item = (String) getData(Constants.KeyData.CURRENT_ITEM, Constants.KeyData.TYPE_STRING, getArguments());
+		if(mData != null){
+			current_item = (String) getValueWithKey(Constants.KeyData.CURRENT_ITEM);
 		}
 
 		mBlock = new ListViewIndexableBlock(view, context);

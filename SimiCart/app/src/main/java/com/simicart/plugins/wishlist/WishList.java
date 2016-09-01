@@ -67,7 +67,9 @@ public class WishList {
                 SimiData data = bundle.getParcelable("entity");
                 mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
                 mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
-                addItemToSlideMenu();
+                if(isExistWishList() == false) {
+                    addItemToSlideMenu();
+                }
             }
         };
         SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_RELATED_PERSONAL, addItemReceiver);
@@ -117,6 +119,16 @@ public class WishList {
         };
         SimiEvent.registerEvent(KeyEvent.MY_ACCOUNT_EVENT.MY_ACCOUNT_ADD_ITEM, addItemMyAccountReceiver);
 
+    }
+
+    protected boolean isExistWishList() {
+        for (ItemNavigation item : mItems) {
+            if (item.getName().equals(SimiTranslator.getInstance().translate(
+                    MY_WISHLIST))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected void addItemToSlideMenu() {

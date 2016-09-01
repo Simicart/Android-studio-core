@@ -41,7 +41,7 @@ public class ListLanguageController extends SimiController {
 		Collections.sort(list_lag);
 		String language = list_lag.get(position).toString();
 		String id = DataPreferences.getStoreID();
-		for (Stores store : DataLocal.listStores) {
+		for (Stores store : DataPreferences.listStores) {
 			if (language.equals(store.getStoreName())) {
 				if (!id.equals(store.getStoreID())) {
 					DataLocal.listCms.clear();

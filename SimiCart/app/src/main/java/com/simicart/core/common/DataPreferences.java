@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Constants;
 import com.simicart.core.setting.entity.CurrencyEntity;
+import com.simicart.core.store.entity.Stores;
 
 import org.json.JSONObject;
 
@@ -20,6 +21,7 @@ public class DataPreferences {
     public static SharedPreferences mSharedPre;
     public static boolean enNotification = true;
     public static ArrayList<CurrencyEntity> listCurrency;
+    public static ArrayList<Stores> listStores;
 
     public static final String NAME_REFERENCE = "simicart";
     private static final String RESTART_COUNT = "RestartCount";
@@ -44,6 +46,7 @@ public class DataPreferences {
         mSharedPre = mContext.getSharedPreferences(NAME_REFERENCE,
                 Context.MODE_PRIVATE);
         listCurrency = new ArrayList<CurrencyEntity>();
+        listStores = new ArrayList<>();
     }
 
     public static String getCatID() {
@@ -102,8 +105,11 @@ public class DataPreferences {
 
     public static String getStoreID() {
         String id = "";
+        if (listStores != null && listStores.size() > 0) {
+            id = listStores.get(0).getStoreID();
+        }
         if (mSharedPre != null) {
-            id = mSharedPre.getString(STORE_KEY, "");
+            id = mSharedPre.getString(STORE_KEY, id);
         }
         return id;
     }

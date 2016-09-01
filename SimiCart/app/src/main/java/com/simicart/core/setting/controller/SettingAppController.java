@@ -14,9 +14,11 @@ import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.setting.delegate.SettingAppDelegate;
 import com.simicart.core.setting.entity.CurrencyEntity;
@@ -27,6 +29,7 @@ import com.simicart.core.splashscreen.model.StoreModel;
 import com.simicart.core.store.entity.Stores;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SettingAppController extends SimiController {
 
@@ -44,7 +47,7 @@ public class SettingAppController extends SimiController {
 
     private void getStore() {
         final StoreModel model = new StoreModel();
-        DataLocal.listStores.clear();
+        DataPreferences.listStores.clear();
         model.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
@@ -55,7 +58,7 @@ public class SettingAppController extends SimiController {
                     for (SimiEntity simiEntity : entity) {
                         Stores store = new Stores();
                         store.setJSONObject(simiEntity.getJSONObject());
-                        DataLocal.listStores.add(store);
+                        DataPreferences.listStores.add(store);
                     }
                     afterRequestComplete();
                 }
@@ -95,7 +98,7 @@ public class SettingAppController extends SimiController {
 
     protected void drawView() {
 
-        if (DataLocal.listStores.size() > 1) {
+        if (DataPreferences.listStores.size() > 1) {
             SimiMultiMenuRowComponent languageRowComponent = new SimiMultiMenuRowComponent();
             languageRowComponent.setIcon("ic_lang");
             languageRowComponent.setLabel(SimiTranslator.getInstance().translate("Language"));
@@ -135,8 +138,8 @@ public class SettingAppController extends SimiController {
         mDelegate.addItemRow(notificationRowComponent.createView());
 
         SimiMenuRowComponent locationRowComponent = new SimiMenuRowComponent();
-        locationRowComponent.setIcon("ic_acc_profile");
-        locationRowComponent.setLabel(SimiTranslator.getInstance().translate("Profile"));
+        locationRowComponent.setIcon("ic_location_setting");
+        locationRowComponent.setLabel(SimiTranslator.getInstance().translate("Location Setting"));
         locationRowComponent.setmCallBack(new MenuRowCallBack() {
             @Override
             public void onClick() {
@@ -151,8 +154,10 @@ public class SettingAppController extends SimiController {
     }
 
     protected void changeCurrency() {
+        HashMap<String,Object> hmData = new HashMap<>();
+        hmData.put(Constants.KeyData.CURRENT_ITEM, getCurrentCurrency());
         ListCurrencyFragment fragment = ListCurrencyFragment
-                .newInstance(getCurrentCurrency());
+                .newInstance(new SimiData(hmData));
         if (DataLocal.isTablet) {
             SimiManager.getIntance().replacePopupFragment(fragment);
         } else {
@@ -174,8 +179,10 @@ public class SettingAppController extends SimiController {
     }
 
     protected void changeLanguage() {
+        HashMap<String,Object> hmData = new HashMap<>();
+        hmData.put(Constants.KeyData.CURRENT_ITEM, getCurrentLanguage());
         ListLanguageFragment fragment = ListLanguageFragment
-                .newInstance(getCurrentLanguage());
+                .newInstance(new SimiData(hmData));
         if (DataLocal.isTablet) {
             SimiManager.getIntance().replacePopupFragment(fragment);
         } else {
@@ -185,8 +192,8 @@ public class SettingAppController extends SimiController {
 
     protected String getCurrentLanguage() {
         String currentLanguage = "";
-        if (DataLocal.listStores != null && DataLocal.listStores.size() > 0) {
-            for (Stores stores : DataLocal.listStores) {
+        if (DataPreferences.listStores != null && DataPreferences.listStores.size() > 0) {
+            for (Stores stores : DataPreferences.listStores) {
                 if (stores.getStoreID().equals(DataPreferences.getStoreID())) {
                     currentLanguage = stores.getStoreName();
                     return currentLanguage;

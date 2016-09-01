@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
 import com.simicart.core.config.AppColorConfig;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StoreLocator {
+
+    protected ArrayList<ItemNavigation> mItems;
 
     public StoreLocator() {
         BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -39,23 +42,35 @@ public class StoreLocator {
     protected void addStoreLocatorMenuItem(Intent intent) {
         Bundle bundle = intent.getBundleExtra("data");
         SimiData data = bundle.getParcelable("entity");
-        ArrayList<ItemNavigation> mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
+        mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
         HashMap<String, String> mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
 
-        ItemNavigation mItemNavigation = new ItemNavigation();
-        mItemNavigation.setType(ItemNavigation.TypeItem.PLUGIN);
-        mItemNavigation.setIcon(AppColorConfig.getInstance().getIcon("plugins_locator", AppColorConfig.getInstance().getMenuIconColor()));
-        mItemNavigation.setName("Store Locator");
-        if (DataLocal.isTablet) {
-            StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance(null);
-            mFragments.put(mItemNavigation.getName(),
-                    fragment.getClass().getName());
-        } else {
-            StoreLocatorMainPageFragment fragment = StoreLocatorMainPageFragment.newInstance(null);
-            mFragments.put(mItemNavigation.getName(),
-                    fragment.getClass().getName());
+        if(isExistStoreLocator() == false) {
+            ItemNavigation mItemNavigation = new ItemNavigation();
+            mItemNavigation.setType(ItemNavigation.TypeItem.PLUGIN);
+            mItemNavigation.setIcon(AppColorConfig.getInstance().getIcon("plugins_locator", AppColorConfig.getInstance().getMenuIconColor()));
+            mItemNavigation.setName("Store Locator");
+            if (DataLocal.isTablet) {
+                StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance(null);
+                mFragments.put(mItemNavigation.getName(),
+                        fragment.getClass().getName());
+            } else {
+                StoreLocatorMainPageFragment fragment = StoreLocatorMainPageFragment.newInstance(null);
+                mFragments.put(mItemNavigation.getName(),
+                        fragment.getClass().getName());
+            }
+            mItems.add(mItemNavigation);
         }
-        mItems.add(mItemNavigation);
+    }
+
+    protected boolean isExistStoreLocator() {
+        for (ItemNavigation item : mItems) {
+            if (item.getName().equals(SimiTranslator.getInstance().translate(
+                    "Store Locator"))) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -40,21 +40,24 @@ public class ZopimChat {
     Context mContext;
     ArrayList<ItemNavigation> mItems;
     protected HashMap<String, String> mFragments;
+    protected boolean isConfigZopim = false;
 
     public ZopimChat() {
 
         mContext = SimiManager.getIntance().getCurrentActivity();
-        configZopim();
 
         // register event: add navigation item to slide menu
         BroadcastReceiver addItemReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                if(isConfigZopim == false) {
+                    configZopim();
+                }
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 SimiData data = bundle.getParcelable("entity");
                 mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
                 mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
-                if (ConstantZopim.ZOPIM_ENABLE.equals("1") && !DataLocal.isTablet) {
+                if (ConstantZopim.ZOPIM_ENABLE.equals("1") && !DataLocal.isTablet && isExistZopim() == false) {
                     addItemToSlideMenu();
                 }
             }
@@ -78,6 +81,9 @@ public class ZopimChat {
         BroadcastReceiver blockReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                if(isConfigZopim == false) {
+                    configZopim();
+                }
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 SimiData data = bundle.getParcelable(Constants.ENTITY);
                 View view = (View) data.getData().get(KeyData.SIMI_BLOCK.VIEW);
@@ -91,7 +97,6 @@ public class ZopimChat {
     }
 
     protected void addItemToSlideMenu() {
-        removeExistZopim();
         ItemNavigation item = new ItemNavigation();
         item.setType(ItemNavigation.TypeItem.PLUGIN);
         item.setName(ConstantZopim.ZOPIM);
@@ -103,13 +108,14 @@ public class ZopimChat {
         mItems.add(item);
     }
 
-    protected void removeExistZopim() {
+    protected boolean isExistZopim() {
         for (ItemNavigation item : mItems) {
             if (item.getName().equals(SimiTranslator.getInstance().translate(
                     ConstantZopim.ZOPIM))) {
-                mItems.remove(item);
+                return true;
             }
         }
+        return false;
     }
 
     protected void clickItemLeftMenu(String itemName) {
@@ -122,6 +128,7 @@ public class ZopimChat {
     protected void addIconMenutop(View rootView) {
         try {
             LinearLayout layoutSearch = (LinearLayout) rootView.findViewById(Rconfig.getInstance().id("layout_plugin"));
+            layoutSearch.removeAllViewsInLayout();
 
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                     100, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -181,6 +188,7 @@ public class ZopimChat {
             }
         } catch (Exception e) {
         }
+        isConfigZopim = true;
     }
 
 

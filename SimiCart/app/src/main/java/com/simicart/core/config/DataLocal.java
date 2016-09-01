@@ -20,7 +20,7 @@ public class DataLocal {
 	public static boolean isCloud = false;
 
 	public static ArrayList<Cms> listCms;
-	public static ArrayList<Stores> listStores;
+
 	public static ArrayList<Cart> listCarts;
 	public static boolean isLanguageRTL = false;
 	public static boolean isNewSignIn = false;
@@ -29,7 +29,6 @@ public class DataLocal {
 
 	public static void init() {
 		listCms = new ArrayList<>();
-		listStores = new ArrayList<>();
 		listCarts = new ArrayList<>();
 	}
 

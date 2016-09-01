@@ -1,12 +1,11 @@
 package com.simicart.core.base.component;
 
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
-import com.simicart.core.base.component.callback.MenuRowCallBack;
 import com.simicart.core.base.component.callback.SwitchMenuCallBack;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
@@ -17,7 +16,7 @@ import com.simicart.core.config.AppColorConfig;
 public class SimiSwitchMenuRowComponent extends SimiComponent {
 
     protected ImageView ivIcon;
-    protected Switch swExtend;
+    protected SwitchCompat swExtend;
     protected TextView tvLabel;
     protected SwitchMenuCallBack mCallBack;
 
@@ -44,7 +43,7 @@ public class SimiSwitchMenuRowComponent extends SimiComponent {
         tvLabel.setText(label);
         tvLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
 
-        swExtend = (Switch) findView("sw_extend");
+        swExtend = (SwitchCompat) findView("sw_extend");
         swExtend.setChecked(isEnable);
 
         rootView.setOnClickListener(new View.OnClickListener() {

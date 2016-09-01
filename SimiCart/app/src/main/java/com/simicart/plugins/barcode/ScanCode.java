@@ -58,15 +58,17 @@ public class ScanCode {
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 SimiData data = bundle.getParcelable("entity");
                 mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
-                ItemNavigation item = new ItemNavigation();
-                item.setType(TypeItem.NORMAL);
-                item.setName(SimiTranslator.getInstance().translate(QR_BAR_CODE));
-                int id_icon = Rconfig.getInstance().drawable("ic_barcode");
-                Drawable icon = mContext.getResources().getDrawable(id_icon);
-                icon.setColorFilter(Color.parseColor("#ffffff"),
-                        PorterDuff.Mode.SRC_ATOP);
-                item.setIcon(icon);
-                mItems.add(item);
+                if(isExistBarcode() == false) {
+                    ItemNavigation item = new ItemNavigation();
+                    item.setType(TypeItem.NORMAL);
+                    item.setName(SimiTranslator.getInstance().translate(QR_BAR_CODE));
+                    int id_icon = Rconfig.getInstance().drawable("ic_barcode");
+                    Drawable icon = mContext.getResources().getDrawable(id_icon);
+                    icon.setColorFilter(Color.parseColor("#ffffff"),
+                            PorterDuff.Mode.SRC_ATOP);
+                    item.setIcon(icon);
+                    mItems.add(item);
+                }
             }
         };
         SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE, addItemReceiver);
@@ -128,6 +130,16 @@ public class ScanCode {
             }
         };
         SimiEvent.registerEvent(KeyEvent.BAR_CODE.BAR_CODE_ON_BACK, onBackFromDetailtReceiver);
+    }
+
+    protected boolean isExistBarcode() {
+        for (ItemNavigation item : mItems) {
+            if (item.getName().equals(SimiTranslator.getInstance().translate(
+                    QR_BAR_CODE))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void checkResultBarcode(String code) {
