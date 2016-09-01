@@ -16,21 +16,20 @@
             android:paddingBottom="5dp"
             android:paddingTop="5dp" >
 
-            <LinearLayout
-                android:id="@+id/ll_carts"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_carts"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="0dp"
-                android:paddingTop="5dp"
-                android:orientation="vertical"/>
+                android:paddingTop="5dp"/>
 
             <LinearLayout
                 android:id="@+id/ll_reward_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_carts"
+                android:layout_below="@+id/rv_carts"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:orientation="horizontal">

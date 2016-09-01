@@ -20,7 +20,7 @@ public class AddressCheckoutComponent extends SimiComponent {
 
     public static final int BILLING_TYPE = 1;
     public static final int SHIPPING_TYPE = 2;
-
+    public static final int ORDER_DETAIL_TYPE = 2;
 
     protected int mType;
     protected AddressEntity mAddress;
@@ -71,17 +71,19 @@ public class AddressCheckoutComponent extends SimiComponent {
         String title = "";
         if (mType == BILLING_TYPE) {
             title = "Billing Address";
-        } else {
+        } else if(mType == SHIPPING_TYPE) {
             title = "Shipping Address";
         }
 
-        title = SimiTranslator.getInstance().translate(title);
-        TextView tvTitle = (TextView) findView("tv_title");
-        int bgColor = AppColorConfig.getInstance().getSectionColor();
-        tvTitle.setBackgroundColor(bgColor);
-        int textColor = AppColorConfig.getInstance().getContentColor();
-        tvTitle.setTextColor(textColor);
-        tvTitle.setText(title);
+        if(!title.equals("")) {
+            title = SimiTranslator.getInstance().translate(title);
+            TextView tvTitle = (TextView) findView("tv_title");
+            int bgColor = AppColorConfig.getInstance().getSectionColor();
+            tvTitle.setBackgroundColor(bgColor);
+            int textColor = AppColorConfig.getInstance().getContentColor();
+            tvTitle.setTextColor(textColor);
+            tvTitle.setText(title);
+        }
     }
 
     protected void initEditAction() {
@@ -96,6 +98,9 @@ public class AddressCheckoutComponent extends SimiComponent {
                 }
             }
         });
+        if(mType == ORDER_DETAIL_TYPE) {
+            imgEdit.setVisibility(View.GONE);
+        }
     }
 
     protected void initName() {

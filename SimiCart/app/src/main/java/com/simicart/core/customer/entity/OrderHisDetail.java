@@ -39,7 +39,7 @@ public class OrderHisDetail extends SimiEntity {
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject obj = array.getJSONObject(i);
                         Cart order = new Cart();
-                        order.setJSONObject(obj);
+                        order.parse(obj);
                         mItems.add(order);
                     }
                 }
@@ -113,7 +113,7 @@ public class OrderHisDetail extends SimiEntity {
                 String value = getData(Constants.SHIPPING_ADDRESS);
                 if (null != value && !value.equals("") && !value.equals("null")) {
 
-                    mShippingAddress.setJSONObject(new JSONObject(
+                    mShippingAddress.parse(new JSONObject(
                             getData(Constants.SHIPPING_ADDRESS)));
                 }
             } catch (JSONException e) {
@@ -131,7 +131,7 @@ public class OrderHisDetail extends SimiEntity {
         if (null == mBillingAddress) {
             mBillingAddress = new AddressEntity();
             try {
-                mBillingAddress.setJSONObject(new JSONObject(
+                mBillingAddress.parse(new JSONObject(
                         getData(Constants.BILLING_ADDRESS)));
             } catch (JSONException e) {
                 return null;

@@ -30,7 +30,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 
         String textPlaceOrder = SimiTranslator.getInstance().translate("Place Order");
         btnPlaceOrder.setText(textPlaceOrder);
-        btnPlaceOrder.setTextColor(AppColorConfig.getInstance().getContentColor());
+        btnPlaceOrder.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
         btnPlaceOrder.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
     }
 

@@ -19,6 +19,7 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.component.AddressCheckoutComponent;
 import com.simicart.core.checkout.component.CouponComponent;
 import com.simicart.core.checkout.component.CreditCardPopup;
+import com.simicart.core.checkout.component.ListProductCheckoutComponent;
 import com.simicart.core.checkout.component.PaymentMethodComponent;
 import com.simicart.core.checkout.component.ShippingMethodComponent;
 import com.simicart.core.checkout.component.TermConditionComponent;
@@ -30,6 +31,7 @@ import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.delegate.ReviewOrderDelegate;
 import com.simicart.core.checkout.delegate.ShippingMethodCallBack;
 import com.simicart.core.checkout.delegate.TermConditionCallBack;
+import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.Condition;
 import com.simicart.core.checkout.entity.OrderInforEntity;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
@@ -48,6 +50,7 @@ import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppCheckoutConfig;
 import com.simicart.core.config.AppStoreConfig;
+import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.entity.AddressEntity;
 
 import org.json.JSONObject;
@@ -244,7 +247,9 @@ public class ReviewOrderController extends SimiController {
 
 
     protected void showShipmentDetail() {
-        //  ListProductCheckoutComponent shipmentComponent = new ListProductCheckoutComponent()
+        ListProductCheckoutComponent listProductCheckoutComponent = new ListProductCheckoutComponent(DataLocal.listCarts,
+                SimiTranslator.getInstance().translate("Shipment Details"));
+        mListComponent.add(listProductCheckoutComponent);
     }
 
     protected void showCouponCode() {

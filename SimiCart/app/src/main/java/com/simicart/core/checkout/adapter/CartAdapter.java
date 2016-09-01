@@ -28,7 +28,9 @@ import com.simicart.core.checkout.component.ListProductCheckoutComponent;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.Option;
+import com.simicart.core.checkout.model.CartModel;
 import com.simicart.core.checkout.model.EditCartItemModel;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
@@ -40,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Crabby PC on 6/22/2016.
@@ -49,12 +52,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     protected ArrayList<Cart> listCarts;
     protected Context mContext;
     protected SimiDelegate mDelegate;
-    protected int layoutID;
     protected EditCartItemModel editModel;
 
-    public CartAdapter(ArrayList<Cart> listCarts, int layoutID, SimiDelegate delegate) {
+    public CartAdapter(ArrayList<Cart> listCarts, SimiDelegate delegate) {
         this.listCarts = listCarts;
-        this.layoutID = layoutID;
         mDelegate = delegate;
         mContext = SimiManager.getIntance().getCurrentActivity();
     }
@@ -62,7 +63,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public CartViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(layoutID, parent, false);
+        View itemView = inflater.inflate(Rconfig.getInstance().layout("core_adapter_cart_item"), parent, false);
         CartViewHolder holder = new CartViewHolder(itemView);
         return holder;
     }
@@ -119,13 +120,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.rlItemCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                SimiData data = new SimiData();
-//                data.setData(quoteItemEntity.getProductID());
-//                ArrayList<String> listID = new ArrayList<String>();
-//                listID.add(quoteItemEntity.getProductID());
-//                data.setListString(listID);
-//                ProductFragment fragment = ProductFragment.newInstance(data);
-//                SimiManager.getIntance().replaceFragment(fragment);
+                HashMap<String,Object> hmData = new HashMap<String, Object>();
+                hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, cartEntity.getProduct_id());
+                ArrayList<String> listID = new ArrayList<String>();
+                listID.add(cartEntity.getProduct_id());
+                hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
+                SimiManager.getIntance().openProductDetail(hmData);
             }
         });
 
@@ -240,6 +240,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     createListProducts(listQuotes);
                     ((CartDelegate) mDelegate).onUpdateTotalPrice(((EditCartItemModel) editModel)
                             .getTotalPrice());
+                    int carQty = ((CartModel) editModel).getQty();
+                    SimiManager.getIntance().onUpdateCartQty(
+                            String.valueOf(carQty));
                 } else {
                     ((CartDelegate) mDelegate).visibleAllView();
                 }
@@ -263,10 +266,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     protected void createListProducts(ArrayList<Cart> listQuotes) {
-        ListProductCheckoutComponent listProductCheckoutComponent =
-                new ListProductCheckoutComponent(listQuotes, mDelegate, layoutID);
-        View view = listProductCheckoutComponent.createView();
-        ((CartDelegate)mDelegate).showListProductsView(view);
+        ((CartDelegate)mDelegate).showListProductsView(listQuotes);
+    }
+
+    public void setListCarts(ArrayList<Cart> listCarts) {
+        this.listCarts = listCarts;
     }
 
     @Override

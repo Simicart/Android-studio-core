@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -20,9 +22,11 @@ import com.simicart.core.adapter.CartListAdapter;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.checkout.adapter.CartAdapter;
 import com.simicart.core.checkout.controller.CartListenerController;
 import com.simicart.core.checkout.controller.PopupCheckoutController;
 import com.simicart.core.checkout.delegate.CartDelegate;
+import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.common.price.TotalPriceView;
 import com.simicart.core.config.AppCheckoutConfig;
@@ -32,12 +36,14 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.material.ButtonRectangle;
 
+import java.util.ArrayList;
+
 public class CartBlock extends SimiBlock implements CartDelegate {
 
-    protected LinearLayout llCart;
+    protected RecyclerView rvCart;
     protected AppCompatButton btn_Checkout;
     protected TableLayout layoutPrice;
-    protected CartListAdapter mAdapter;
+    protected CartAdapter mAdapter;
     protected CartListenerController mListenerController;
     protected PopupCheckoutController mPCheckoutController;
 
@@ -74,8 +80,10 @@ public class CartBlock extends SimiBlock implements CartDelegate {
                 .getCheckoutClicker());
 
         // list product
-        llCart = (LinearLayout) mView.findViewById(Rconfig.getInstance().id(
-                "ll_carts"));
+        rvCart = (RecyclerView) mView.findViewById(Rconfig.getInstance().id(
+                "rv_carts"));
+        rvCart.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        rvCart.setNestedScrollingEnabled(false);
 
         // price
         layoutPrice = (TableLayout) mView.findViewById(Rconfig.getInstance()
@@ -209,10 +217,15 @@ public class CartBlock extends SimiBlock implements CartDelegate {
     }
 
     @Override
-    public void showListProductsView(View view) {
-        if (null != view) {
-            llCart.removeAllViews();
-            llCart.addView(view);
+    public void showListProductsView(ArrayList<Cart> listCarts) {
+        DataLocal.listCarts.clear();
+        DataLocal.listCarts.addAll(listCarts);
+        if(mAdapter == null) {
+            mAdapter = new CartAdapter(listCarts, this);
+            rvCart.setAdapter(mAdapter);
+        } else {
+            mAdapter.setListCarts(listCarts);
+            mAdapter.notifyDataSetChanged();
         }
     }
 

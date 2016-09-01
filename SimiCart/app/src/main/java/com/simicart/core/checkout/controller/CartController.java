@@ -73,11 +73,7 @@ public class CartController extends SimiController {
         if(listCarts.size() == 0) {
             mDelegate.visibleAllView();
         }
-        ListProductCheckoutComponent listProductCheckoutComponent =
-                new ListProductCheckoutComponent(listCarts, mDelegate
-                        , Rconfig.getInstance().layout("core_adapter_cart_item"));
-        View view = listProductCheckoutComponent.createView();
-        mDelegate.showListProductsView(view);
+        mDelegate.showListProductsView(listCarts);
     }
 
     private String getUrl(JSONObject mJSON) {

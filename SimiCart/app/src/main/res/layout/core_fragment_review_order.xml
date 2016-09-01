@@ -9,7 +9,8 @@
         android:layout_height="@dimen/size_60"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/size_5"
-        android:elevation="@dimen/size_4" />
+        android:elevation="@dimen/size_4"
+        android:textAllCaps="false"/>
 
     <ScrollView
         android:id="@+id/scv_review_order"

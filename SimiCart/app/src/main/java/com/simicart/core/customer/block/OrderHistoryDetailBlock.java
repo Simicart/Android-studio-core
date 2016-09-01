@@ -12,12 +12,16 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.checkout.component.AddressCheckoutComponent;
+import com.simicart.core.checkout.component.ListProductCheckoutComponent;
+import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.price.TotalPriceView;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
+import com.simicart.core.customer.component.AddressOrderComponent;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.OrderHisDetail;
 
@@ -97,8 +101,8 @@ public class OrderHistoryDetailBlock extends SimiBlock {
         llShippingAddress = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_shipping_address"));
         AddressEntity shippingAddress = orderHistoryEntity.getShipping_address();
         if(shippingAddress != null) {
-//            AddressCheckoutComponent addressCheckoutComponent = new AddressCheckoutComponent(AddressCheckoutComponent.SHIPPING_TYPE, shippingAddress);
-//            llShippingAddress.addView(addressCheckoutComponent.createView());
+            AddressOrderComponent addressOrderComponent = new AddressOrderComponent(shippingAddress);
+            llShippingAddress.addView(addressOrderComponent.createView());
         }
 
         tvShippingMethod = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_shipping_method"));
@@ -112,6 +116,11 @@ public class OrderHistoryDetailBlock extends SimiBlock {
         tvItemsLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
 
         llItems = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_list_item"));
+        ArrayList<Cart> listItems = orderHistoryEntity.getOrder_item();
+        if(listItems != null) {
+            ListProductCheckoutComponent listProductCheckoutComponent = new ListProductCheckoutComponent(listItems, null);
+            llItems.addView(listProductCheckoutComponent.createView());
+        }
     }
 
     protected void initFeeDetail() {
@@ -140,8 +149,8 @@ public class OrderHistoryDetailBlock extends SimiBlock {
         llBillingAddress = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_billing_address"));
         AddressEntity billingAddress = orderHistoryEntity.getBilling_address();
         if(billingAddress != null) {
-//            AddressCheckoutComponent addressCheckoutComponent = new AddressCheckoutComponent(AddressCheckoutComponent.BILLING_TYPE, billingAddress);
-//            llBillingAddress.addView(addressCheckoutComponent.createView());
+            AddressOrderComponent addressOrderComponent = new AddressOrderComponent(billingAddress);
+            llBillingAddress.addView(addressOrderComponent.createView());
         }
 
         tvPaymentCoupon = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_payment_couponCode"));

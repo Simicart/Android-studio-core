@@ -67,7 +67,6 @@ public class OrderHistoryDetailController extends SimiController {
             @Override
             public void onFail(SimiError error) {
                 mDelegate.dismissDialogLoading();
-                SimiNotify.getInstance().showNotify(error.getMessage());
             }
         });
 

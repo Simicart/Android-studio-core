@@ -206,31 +206,33 @@ public class RewardPoint {
             Log.e("REWARD POINT:", "Exception add item to cart ===>" + e.getMessage());
         }
 
-        ll_reward_card.removeAllViews();
-        LinearLayout.LayoutParams paramsImageview = new LinearLayout.LayoutParams(
-                Utils.getValueDp(20), Utils.getValueDp(20));
-        paramsImageview.gravity = Gravity.CENTER_VERTICAL;
-        paramsImageview.setMargins(Utils.getValueDp(10), 0,
-                Utils.getValueDp(10), 0);
-        ImageView img_point = new ImageView(mContext);
-        img_point.setLayoutParams(paramsImageview);
-        SimiDrawImage drawImage = new SimiDrawImage();
-        drawImage.drawImage(img_point, image);
-        ll_reward_card.addView(img_point);
+        if(ll_reward_card != null) {
+            ll_reward_card.removeAllViews();
+            LinearLayout.LayoutParams paramsImageview = new LinearLayout.LayoutParams(
+                    Utils.getValueDp(20), Utils.getValueDp(20));
+            paramsImageview.gravity = Gravity.CENTER_VERTICAL;
+            paramsImageview.setMargins(Utils.getValueDp(10), 0,
+                    Utils.getValueDp(10), 0);
+            ImageView img_point = new ImageView(mContext);
+            img_point.setLayoutParams(paramsImageview);
+            SimiDrawImage drawImage = new SimiDrawImage();
+            drawImage.drawImage(img_point, image);
+            ll_reward_card.addView(img_point);
 
-        LinearLayout.LayoutParams paramsTextview = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        paramsTextview.gravity = Gravity.CENTER_VERTICAL;
-        paramsTextview.setMargins(0, Utils.getValueDp(5), 0,
-                Utils.getValueDp(5));
-        TextView textView = new TextView(mContext);
-        textView.setTextColor(Color.parseColor("#ff033e"));
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-        textView.setText(Html.fromHtml(label));
-        textView.setTextColor(Color.parseColor("#ff033e"));
-        textView.setLayoutParams(paramsTextview);
-        ll_reward_card.addView(textView);
+            LinearLayout.LayoutParams paramsTextview = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            paramsTextview.gravity = Gravity.CENTER_VERTICAL;
+            paramsTextview.setMargins(0, Utils.getValueDp(5), 0,
+                    Utils.getValueDp(5));
+            TextView textView = new TextView(mContext);
+            textView.setTextColor(Color.parseColor("#ff033e"));
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            textView.setText(Html.fromHtml(label));
+            textView.setTextColor(Color.parseColor("#ff033e"));
+            textView.setLayoutParams(paramsTextview);
+            ll_reward_card.addView(textView);
+        }
     }
 
     protected void addItemBasicInfo(View rootView, JSONObject jsonObject) {
