@@ -133,5 +133,8 @@ public class KeyData {
         public static final String ENTITY_JSON = "json_entity";
     }
 
+    public static class CUSTOMER_PAGE{
+        public static final  String OPEN_FOR = "openfor";
+    }
 
 }

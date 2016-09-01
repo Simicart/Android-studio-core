@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_navigation_row"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlt_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/size_5"
+        android:paddingTop="@dimen/size_10">
+
+        <ImageView
+            android:id="@+id/img_extend"
+            android:layout_width="@dimen/size_24"
+            android:layout_height="@dimen/size_24"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_down" />
+
+        <TextView
+            android:id="@+id/tv_dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/img_extend"
+            android:gravity="left"
+            android:paddingLeft="@dimen/size_5"
+            android:text="09/98/2190"
+            android:textSize="@dimen/text_16" />
+
+    </RelativeLayout>
+
+    <!--<DatePicker-->
+    <!--android:id="@+id/dp_dob"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="@dimen/size_5"-->
+    <!--android:visibility="gone"></DatePicker>-->
+
+</LinearLayout>

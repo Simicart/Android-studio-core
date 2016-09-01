@@ -142,7 +142,7 @@ public class SignInController extends SimiController {
                 onSignInSuccess();
 
                 // update wishlist_items_qty
-                HashMap<String,Object> hmData = new HashMap<>();
+                HashMap<String, Object> hmData = new HashMap<>();
                 hmData.put(KeyData.SIMI_CONTROLLER.JSON_DATA, mModel.getDataJSON());
                 SimiEvent.dispatchEvent(KeyEvent.SIGN_IN_EVENT.SIGN_IN_COMPLETE, hmData);
 
@@ -262,9 +262,9 @@ public class SignInController extends SimiController {
     }
 
     protected void onCreateAccount() {
-        RegisterCustomerFragment fragment = RegisterCustomerFragment
-                .newInstance();
-        SimiManager.getIntance().replacePopupFragment(fragment);
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.CUSTOMER_PAGE.OPEN_FOR, ValueData.CUSTOMER_PAGE.OPEN_FOR_REGISTER);
+        SimiManager.getIntance().openCustomerPage(hm);
     }
 
     protected void onForgotPasswrod() {

@@ -4,6 +4,7 @@ import android.text.InputType;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.simicart.core.base.component.GenderAdapter;
 import com.simicart.core.base.component.SimiNavigationRowComponent;
 import com.simicart.core.base.component.SimiRowComponent;
 import com.simicart.core.base.component.SimiSpinnerRowComponent;
@@ -26,6 +27,7 @@ import com.simicart.core.customer.delegate.ListOfChoiceDelegate;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
 import com.simicart.core.customer.entity.CountryEntity;
+import com.simicart.core.customer.entity.GenderConfig;
 import com.simicart.core.customer.entity.StateEntity;
 import com.simicart.core.customer.model.AddressBookDetailModel;
 import com.simicart.core.customer.model.GetCountryModel;
@@ -54,6 +56,7 @@ public class AddressBookDetailController extends SimiController {
     protected StateEntity mState;
     protected SimiTextRowComponent passwordComponent;
     protected SimiTextRowComponent confirmPasswordComponent;
+    protected GenderConfig mGender;
 
 
     @Override
@@ -165,7 +168,7 @@ public class AddressBookDetailController extends SimiController {
                 showViewForGuest();
             } else if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW_CUSTOMER) {
                 showViewForNewCustomer();
-            }else{
+            } else {
                 // create a new address for checkout as existing customer
                 showViewForCustomer();
             }
@@ -360,21 +363,23 @@ public class AddressBookDetailController extends SimiController {
     protected void initGenderComponent() {
         String configGender = ConfigCustomerAddress.getInstance().getGender();
         if (!ConfigCustomerAddress.getInstance().isHidden(configGender)) {
-            SimiSpinnerRowComponent genderComponent = new SimiSpinnerRowComponent();
-            if (this.action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT && null != mAddressForEdit) {
+            final SimiSpinnerRowComponent genderComponent = new SimiSpinnerRowComponent();
+            if (null != mAddressForEdit) {
                 String gender = mAddressForEdit.getGender();
+                genderComponent.setValue(gender);
             }
             boolean isRequired = ConfigCustomerAddress.getInstance().isRequired(configGender);
             genderComponent.setRequired(isRequired);
             genderComponent.setKey("gender");
+            final ArrayList<GenderConfig> genderConfigs = ConfigCustomerAddress.getInstance().getGenderConfigs();
+            GenderAdapter adapter = new GenderAdapter(genderConfigs);
+            genderComponent.setAdapter(adapter);
             genderComponent.setCallBack(new SpinnerRowCallBack() {
                 @Override
                 public void onSelect(int position) {
-
+                    mGender = genderConfigs.get(position);
                 }
             });
-            View genderView = genderComponent.createView();
-            mListRow.add(genderView);
             mListRowComponent.add(genderComponent);
         }
     }
@@ -512,7 +517,7 @@ public class AddressBookDetailController extends SimiController {
                     hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
                     hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_GUEST);
                     SimiManager.getIntance().openReviewOrder(hm);
-                }else{
+                } else {
                     HashMap<String, Object> hm = new HashMap<>();
                     hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
                     hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);

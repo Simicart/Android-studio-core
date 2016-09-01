@@ -52,7 +52,6 @@ public class SimiTextRowComponent extends SimiRowComponent {
         }
         edtBody.setTextColor(AppColorConfig.getInstance().getContentColor());
         if (null != mValue && Utils.validateString(String.valueOf(mValue))) {
-            Log.e("SimiTextRowComponent ", mKey + " : " + String.valueOf(mValue));
             edtBody.setText(String.valueOf(mValue));
         }
     }

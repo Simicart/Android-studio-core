@@ -53,7 +53,6 @@ public class CreditCardPopup {
     protected String mYear;
     protected int topMargin = Utils.getValueDp(10);
     protected String mTypeCard;
-    protected InputMethodManager imm;
     protected SimiTextRowComponent nameComponent;
     protected SimiTextRowComponent numberComponent;
     protected SimiTextRowComponent CCIDComponent;

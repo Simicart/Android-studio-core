@@ -32,6 +32,7 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.fragment.AddressBookDetailFragment;
 import com.simicart.core.customer.fragment.AddressBookFragment;
+import com.simicart.core.customer.fragment.CustomerFragment;
 import com.simicart.core.customer.fragment.ListOfChoiceFragment;
 import com.simicart.core.home.fragment.HomeFragment;
 import com.simicart.core.menutop.controller.MenuTopController;
@@ -118,6 +119,12 @@ public class SimiManager {
     public void openProductDetail(HashMap<String, Object> hm) {
         SimiData data = new SimiData(hm);
         ProductDetailParentFragment fragment = ProductDetailParentFragment.newInstance(data);
+        replaceFragment(fragment);
+    }
+
+    public void  openCustomerPage(HashMap<String,Object> hm){
+        SimiData data = new SimiData(hm);
+        CustomerFragment fragment = CustomerFragment.newInstance(data);
         replaceFragment(fragment);
     }
 
