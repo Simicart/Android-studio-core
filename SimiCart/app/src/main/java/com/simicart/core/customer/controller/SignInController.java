@@ -38,7 +38,6 @@ import com.simicart.core.customer.delegate.SignInDelegate;
 import com.simicart.core.customer.entity.ProfileEntity;
 import com.simicart.core.customer.fragment.AddressBookFragment;
 import com.simicart.core.customer.fragment.ForgotPasswordFragment;
-import com.simicart.core.customer.fragment.RegisterCustomerFragment;
 import com.simicart.core.customer.model.SignInModel;
 
 import java.util.ArrayList;

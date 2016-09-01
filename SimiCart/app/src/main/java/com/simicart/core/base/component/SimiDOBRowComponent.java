@@ -18,7 +18,7 @@ public class SimiDOBRowComponent extends SimiRowComponent {
     protected RelativeLayout rltHeader;
     protected TextView tvDOB;
     protected ImageView imgExtend;
-//    protected DatePicker dpDOB;
+    //    protected DatePicker dpDOB;
     protected int mDay;
     protected int mMonth;
     protected int mYear;
@@ -27,6 +27,7 @@ public class SimiDOBRowComponent extends SimiRowComponent {
 
     public SimiDOBRowComponent(int day, int month, int year) {
         super();
+        mType = TYPE_ROW.DOB;
         mDay = day;
         mMonth = month;
         mYear = year;
@@ -49,11 +50,11 @@ public class SimiDOBRowComponent extends SimiRowComponent {
         rltHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(dobDialog.isShowing()){
-                   dobDialog.dismiss();
-               }else{
-                   dobDialog.show();
-               }
+                if (dobDialog.isShowing()) {
+                    dobDialog.dismiss();
+                } else {
+                    dobDialog.show();
+                }
             }
         });
 
@@ -85,7 +86,7 @@ public class SimiDOBRowComponent extends SimiRowComponent {
                 mDay = dayOfMonth;
                 updateDOB();
             }
-        },mYear, mMonth, mDay);
+        }, mYear, mMonth, mDay);
 
 
     }

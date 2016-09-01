@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.block.CustomerBlock;
 import com.simicart.core.customer.controller.CustomerController;
@@ -32,10 +33,17 @@ public class CustomerFragment extends SimiFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        int idView = Rconfig.getInstance().layout("core_fragment_register");
+        int idView = Rconfig.getInstance().layout("core_fragment_customer");
         rootView = inflater.inflate(idView, null, false);
         Context context = getActivity();
+
+        int mOpenFor = -1;
+        if (mHashMapData.containsKey(KeyData.CUSTOMER_PAGE.OPEN_FOR)) {
+            mOpenFor = (int) mHashMapData.get(KeyData.CUSTOMER_PAGE.OPEN_FOR);
+        }
+
         CustomerBlock block = new CustomerBlock(rootView, context);
+        block.setOpenFor(mOpenFor);
         block.initView();
 
         if (null == mController) {
