@@ -34,13 +34,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 @SuppressLint("DefaultLocale")
-public class RegisterCustomerBlock extends SimiBlock implements
+public class CustomerBlock extends SimiBlock implements
         RegisterCustomerDelegate {
 
     protected LinearLayout llRegister;
     protected AppCompatButton btnRegister;
 
-    public RegisterCustomerBlock(View view, Context context) {
+    public CustomerBlock(View view, Context context) {
         super(view, context);
     }
 
