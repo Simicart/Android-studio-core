@@ -27,6 +27,7 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_below="@id/rv_list_products"
         android:background="@null"
         android:indeterminateDrawable="@drawable/progressbar_indeterminate"
         android:visibility="gone" />

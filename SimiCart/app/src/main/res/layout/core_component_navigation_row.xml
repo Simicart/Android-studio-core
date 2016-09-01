@@ -5,11 +5,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_navigation_row">
 
+    <TextView
+        android:id="@+id/tv_title_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="@dimen/text_16" />
+
     <ImageView
         android:id="@+id/img_extend"
         android:layout_width="@dimen/size_24"
         android:layout_height="@dimen/size_24"
         android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_title_navigation"
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/size_5"
         android:scaleType="center"
@@ -20,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_below="@id/tv_title_navigation"
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/size_5"
         android:layout_toLeftOf="@id/img_extend"

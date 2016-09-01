@@ -28,6 +28,8 @@ public class PayPal extends Payment {
 
     @Override
     protected void openPaymentPage() {
+
+
         Log.e("PayPal ", "openPaymentPage");
         SimiData data = new SimiData(mData);
         Context context = SimiManager.getIntance().getCurrentActivity();

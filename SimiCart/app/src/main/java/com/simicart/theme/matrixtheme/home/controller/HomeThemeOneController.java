@@ -13,6 +13,8 @@ import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.home.component.BannerComponent;
+import com.simicart.core.home.component.SearchCallBack;
+import com.simicart.core.home.component.SearchComponent;
 import com.simicart.theme.matrixtheme.home.component.CateHomeThemeOneComponent;
 import com.simicart.theme.matrixtheme.home.component.SpotProductHomeComponent;
 import com.simicart.theme.matrixtheme.home.delegate.HomeThemeOneDelegate;
@@ -40,12 +42,30 @@ public class HomeThemeOneController extends SimiController {
 
     @Override
     public void onStart() {
+
+        if (!DataLocal.isTablet) {
+            showSearchComponent();
+        }
+
         requestBanner();
 
         requestHomeCate();
 
         requestSpotProduct();
     }
+
+    protected void showSearchComponent() {
+        SearchComponent searchComponent = new SearchComponent();
+        searchComponent.setCallBack(new SearchCallBack() {
+            @Override
+            public void performSearch(String query) {
+
+            }
+        });
+        View searchView = searchComponent.createView();
+        mDelegate.showSearch(searchView);
+    }
+
 
     protected void requestBanner() {
         bannerModel = new BannerModel();

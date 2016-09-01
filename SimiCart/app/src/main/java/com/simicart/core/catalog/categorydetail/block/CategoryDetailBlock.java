@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.categorydetail.adapter.CategoryDetailAdapter;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.product.entity.Product;
@@ -72,7 +74,7 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     @Override
     public void drawView(SimiCollection collection) {
         ArrayList<SimiEntity> entities = collection.getCollection();
-        if (entities != null) {
+        if (entities != null && entities.size() > 0) {
             ArrayList<Product> products = new ArrayList<>();
             for (SimiEntity simiEntity : entities) {
                 Product product = new Product();
@@ -86,6 +88,8 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
                 rlBottom.setVisibility(View.VISIBLE);
                 drawListProducts();
             }
+        } else {
+            showWarming();
         }
     }
 
@@ -103,6 +107,21 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
             mAdapter.setTagView(tagView);
             rvListProducts.setAdapter(mAdapter);
         }
+    }
+
+    protected void showWarming() {
+        RelativeLayout rltCate = (RelativeLayout) mView;
+
+        rltCate.removeAllViewsInLayout();
+
+        TextView tvWarming = new TextView(mContext);
+        String warming = SimiTranslator.getInstance().translate("No result");
+        tvWarming.setText(warming);
+        tvWarming.setTextSize(18);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL | RelativeLayout.CENTER_VERTICAL);
+        rltCate.addView(tvWarming, params);
+
     }
 
     public void setTagView(String tagView) {

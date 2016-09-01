@@ -9,6 +9,8 @@ import com.simicart.core.base.delegate.SimiDelegate;
  */
 public interface HomeThemeOneDelegate extends SimiDelegate {
 
+    public void showSearch(View searchView);
+
     public void showBanner(View bannerView);
 
     public void showCate(View cateView, int typeCate);

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.simicart.core.base.component.GenderAdapter;
+import com.simicart.core.base.component.SimiDOBRowComponent;
 import com.simicart.core.base.component.SimiNavigationRowComponent;
 import com.simicart.core.base.component.SimiRowComponent;
 import com.simicart.core.base.component.SimiSpinnerRowComponent;
@@ -45,7 +46,6 @@ public class AddressBookDetailController extends SimiController {
     protected ArrayList<SimiRowComponent> mListRowComponent;
     protected SimiNavigationRowComponent mCountryComponent;
     protected SimiNavigationRowComponent mStateComponent;
-    protected ArrayList<View> mListRow;
     protected int openFor;
     protected int action;
     protected AddressEntity mShippingAddress;
@@ -56,6 +56,7 @@ public class AddressBookDetailController extends SimiController {
     protected StateEntity mState;
     protected SimiTextRowComponent passwordComponent;
     protected SimiTextRowComponent confirmPasswordComponent;
+    protected SimiDOBRowComponent dobRowComponent;
     protected GenderConfig mGender;
 
 
@@ -157,9 +158,6 @@ public class AddressBookDetailController extends SimiController {
             mListRowComponent = new ArrayList<>();
         }
 
-        if (null == mListRow) {
-            mListRow = new ArrayList<>();
-        }
 
         if (this.openFor == ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CUSTOMER) {
             showViewForCustomer();
@@ -175,28 +173,37 @@ public class AddressBookDetailController extends SimiController {
         }
 
         // dispatch event for plugins
-        mDelegate.showRows(mListRow);
+
+        ArrayList<View> listRow = new ArrayList<>();
+        if (null != mListRowComponent) {
+            for (int i = 0; i < mListRowComponent.size(); i++) {
+                SimiRowComponent component = mListRowComponent.get(i);
+                View view = component.createView();
+                listRow.add(view);
+            }
+        }
+        mDelegate.showRows(listRow);
 
     }
 
     protected void showViewForCustomer() {
         // prefix
-        initComponent("prefix", "Prefix", "prefix", "prefix", InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        initComponent("prefix", "Prefix", "prefix", "prefix", (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME));
 
         // name
-        initComponentRequired("Name", "name", "name", InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        initComponentRequired("Name", "name", "name", (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME));
 
         // suffix
-        initComponent("suffix", "Suffix", "suffix", "suffix", InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        initComponent("suffix", "Suffix", "suffix", "suffix", (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME));
 
         // email
-        initComponentRequired("Email", "email", "email", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        initComponentRequired("Email", "email", "email", (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS));
 
         // company
         initComponent("company", "Company", "company", "company", InputType.TYPE_CLASS_TEXT);
 
         // phone
-        initComponent("phone", "Telephone", "phone", "phone", InputType.TYPE_CLASS_PHONE);
+        initComponent("phone", "Telephone", "phone", "phone", (InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_PHONE));
 
         // fax
         initComponent("fax", "Fax", "fax", "fax", InputType.TYPE_CLASS_TEXT);
@@ -230,6 +237,7 @@ public class AddressBookDetailController extends SimiController {
         initComponent("vat_id", "VAT number", "vat_id", "vat_id", InputType.TYPE_CLASS_TEXT);
 
         // date of birth
+        initDOBComponent();
 
         // gender
         initGenderComponent();
@@ -249,9 +257,7 @@ public class AddressBookDetailController extends SimiController {
             passwordComponent.setValue(name);
         }
         passwordComponent.setKey("user_password");
-        passwordComponent.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        View passwordView = passwordComponent.createView();
-        mListRow.add(passwordView);
+        passwordComponent.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         mListRowComponent.add(passwordComponent);
 
 
@@ -264,10 +270,8 @@ public class AddressBookDetailController extends SimiController {
             confirmPasswordComponent.setValue(name);
         }
         confirmPasswordComponent.setKey("user_password");
-        confirmPasswordComponent.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        View confirmPasswordView = confirmPasswordComponent.createView();
-        mListRow.add(confirmPasswordView);
-        mListRowComponent.add(passwordComponent);
+        confirmPasswordComponent.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        mListRowComponent.add(confirmPasswordComponent);
     }
 
 
@@ -284,8 +288,6 @@ public class AddressBookDetailController extends SimiController {
             }
             component.setKey(keyForParam);
             component.setInputType(inputType);
-            View prefixView = component.createView();
-            mListRow.add(prefixView);
             mListRowComponent.add(component);
         }
     }
@@ -300,8 +302,6 @@ public class AddressBookDetailController extends SimiController {
         }
         component.setKey(keyForParam);
         component.setInputType(inputType);
-        View nameView = component.createView();
-        mListRow.add(nameView);
         mListRowComponent.add(component);
     }
 
@@ -325,11 +325,7 @@ public class AddressBookDetailController extends SimiController {
                 }
             });
 
-            View countryView = mCountryComponent.createView();
-            if (null != mCountry) {
-                mListRow.add(countryView);
-                mListRowComponent.add(mCountryComponent);
-            }
+            mListRowComponent.add(mCountryComponent);
         }
     }
 
@@ -352,11 +348,42 @@ public class AddressBookDetailController extends SimiController {
                     openStatePage();
                 }
             });
-            View stateView = mStateComponent.createView();
-            if (null != mState) {
-                mListRow.add(stateView);
-                mListRowComponent.add(mStateComponent);
+            mListRowComponent.add(mStateComponent);
+        }
+    }
+
+    protected void initDOBComponent() {
+        String configDOB = ConfigCustomerAddress.getInstance().getDob();
+        if (!ConfigCustomerAddress.getInstance().isHidden(configDOB)) {
+            int day = 0;
+            int month = 0;
+            int year = 0;
+            if (null != mAddressForEdit) {
+                String sday = mAddressForEdit.getDay();
+                String sMonth = mAddressForEdit.getMonth();
+                String sYear = mAddressForEdit.getYear();
+                try {
+                    if (Utils.validateString(sday)) {
+                        day = Integer.parseInt(sday);
+                    }
+
+                    if (Utils.validateString(sMonth)) {
+                        month = Integer.parseInt(sMonth);
+                    }
+
+                    if (Utils.validateString(sYear)) {
+                        year = Integer.parseInt(sYear);
+                    }
+                } catch (Exception e) {
+
+                }
+
             }
+            dobRowComponent = new SimiDOBRowComponent(day, month, year);
+            boolean isRequired = ConfigCustomerAddress.getInstance().isRequired(configDOB);
+            dobRowComponent.setRequired(isRequired);
+            mListRowComponent.add(dobRowComponent);
+
         }
     }
 
@@ -467,6 +494,21 @@ public class AddressBookDetailController extends SimiController {
                     mModel.addBody(key, value);
                 }
             }
+        }
+
+        if (null != dobRowComponent) {
+            ArrayList<Integer> dob = (ArrayList<Integer>) dobRowComponent.getValue();
+            int day = dob.get(0);
+            int month = dob.get(1);
+            int year = dob.get(2);
+
+            mModel.addBody("day", String.valueOf(day));
+            mModel.addBody("month", String.valueOf(month));
+            mModel.addBody("year", String.valueOf(year));
+        }
+
+        if (null != mGender) {
+            mModel.addBody("gender", mGender.getValue());
         }
 
         if (null != mCountry) {
@@ -611,16 +653,16 @@ public class AddressBookDetailController extends SimiController {
 
     @Override
     public void onResume() {
-        mListRow = new ArrayList<>();
+        ArrayList<View> listRow = new ArrayList<>();
         if (null != mListRowComponent) {
             for (int i = 0; i < mListRowComponent.size(); i++) {
                 SimiRowComponent component = mListRowComponent.get(i);
                 Object value = component.getValue();
                 View view = component.createView();
-                mListRow.add(view);
+                listRow.add(view);
             }
         }
-        mDelegate.showRows(mListRow);
+        mDelegate.showRows(listRow);
         if (null != mCountry) {
             String countryName = mCountry.getName();
             mCountryComponent.setValue(countryName);

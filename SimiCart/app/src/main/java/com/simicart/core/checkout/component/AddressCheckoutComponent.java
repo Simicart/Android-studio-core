@@ -71,11 +71,11 @@ public class AddressCheckoutComponent extends SimiComponent {
         String title = "";
         if (mType == BILLING_TYPE) {
             title = "Billing Address";
-        } else if(mType == SHIPPING_TYPE) {
+        } else if (mType == SHIPPING_TYPE) {
             title = "Shipping Address";
         }
 
-        if(!title.equals("")) {
+        if (!title.equals("")) {
             title = SimiTranslator.getInstance().translate(title);
             TextView tvTitle = (TextView) findView("tv_title");
             int bgColor = AppColorConfig.getInstance().getSectionColor();
@@ -98,9 +98,6 @@ public class AddressCheckoutComponent extends SimiComponent {
                 }
             }
         });
-        if(mType == ORDER_DETAIL_TYPE) {
-            imgEdit.setVisibility(View.GONE);
-        }
     }
 
     protected void initName() {

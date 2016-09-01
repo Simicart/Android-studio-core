@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlt_search"
     android:layout_width="match_parent"
@@ -13,7 +11,7 @@
     <EditText
         android:id="@+id/edt_query"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_30"
+        android:layout_height="@dimen/size_40"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="#CACACA"

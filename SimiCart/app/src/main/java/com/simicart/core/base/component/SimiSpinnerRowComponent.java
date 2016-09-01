@@ -37,7 +37,7 @@ public class SimiSpinnerRowComponent extends SimiRowComponent {
 
     @Override
     protected void initHeader() {
-        tvTitle = (TextView) findView("tv_title");
+        tvTitle = (TextView) findView("tv_title_spinner");
         if (Utils.validateString(mTitle)) {
             tvTitle.setText(mTitle);
         }

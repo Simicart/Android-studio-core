@@ -18,6 +18,7 @@ public class SimiNavigationRowComponent extends SimiRowComponent {
     protected ImageView imgExtend;
     protected EditText edtBody;
     protected TextView tvBody;
+    protected TextView tvTitle;
     protected boolean isEnableEdit = false;
     protected NavigationRowCallBack mCallBack;
     protected int iconExtend = Rconfig.getInstance().drawable("ic_extend");
@@ -42,7 +43,12 @@ public class SimiNavigationRowComponent extends SimiRowComponent {
 
     @Override
     protected void initHeader() {
-        super.initHeader();
+        tvTitle = (TextView) findView("tv_title_navigation");
+        if (Utils.validateString(mTitle)) {
+            tvTitle.setText(mTitle);
+        }
+
+
     }
 
     @Override

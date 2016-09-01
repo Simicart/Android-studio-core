@@ -12,7 +12,7 @@ import com.simicart.core.config.Rconfig;
 import java.util.ArrayList;
 
 /**
- * Created by MSI on 31/08/2016.
+ * Created by frank on 31/08/2016.
  */
 public class SimiExpandRowComponent extends SimiRowComponent {
 
@@ -23,6 +23,7 @@ public class SimiExpandRowComponent extends SimiRowComponent {
     protected int icDown = Rconfig.getInstance().drawable("ic_down");
     protected int margin = Utils.getValueDp(5);
     protected ExpandRowCallBack mCallBack;
+    protected TextView tvTitle;
 
 
     @Override
@@ -34,11 +35,15 @@ public class SimiExpandRowComponent extends SimiRowComponent {
     protected void initBody() {
         rltParent = (RelativeLayout) findView("rlt_parent");
         llChild = (LinearLayout) findView("ll_child");
+        tvTitle = (TextView) findView("tv_title_expand");
+        if (Utils.validateString(mTitle)) {
+            tvTitle.setText(mTitle);
+        }
 
-        // title
-        TextView tvTitle = (TextView) findView("tv_parent");
+        // value
+        TextView tvValue = (TextView) findView("tv_parent");
         if (null != mValue) {
-            tvTitle.setText(String.valueOf(mValue));
+            tvValue.setText(String.valueOf(mValue));
         }
 
         rltParent.setOnClickListener(new View.OnClickListener() {

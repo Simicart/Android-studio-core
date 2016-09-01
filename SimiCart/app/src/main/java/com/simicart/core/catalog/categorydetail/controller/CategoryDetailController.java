@@ -9,6 +9,7 @@ import com.paypal.android.sdk.fi;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.catalog.categorydetail.component.FilterPopup;
@@ -58,6 +59,7 @@ public class CategoryDetailController extends SimiController {
 
         initListener();
 
+        mDelegate.showLoading();
         requestCategoryDetail();
 
     }
@@ -94,6 +96,8 @@ public class CategoryDetailController extends SimiController {
                     @Override
                     public void onSort(int sortValue) {
                         mCurrentSort = sortValue;
+                        mModel = null;
+                        mDelegate.showLoading();
                         requestCategoryDetail();
                     }
                 });
@@ -125,11 +129,16 @@ public class CategoryDetailController extends SimiController {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 int count = recyclerView.getChildCount();
-                int lastPosition;
+                int lastPosition = 0;
+                RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
                 if (mDelegate.getTagView().equals(Constants.TAG_LISTVIEW)) {
-                    lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                    if (manager instanceof LinearLayoutManager) {
+                        lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                    }
                 } else {
-                    lastPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                    if (manager instanceof GridLayoutManager) {
+                        lastPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                    }
                 }
                 int threshold = mOffset + mLimit - 1;
                 if (lastPosition == threshold
@@ -160,6 +169,8 @@ public class CategoryDetailController extends SimiController {
                         @Override
                         public void requestFilter(JSONObject jsFilter) {
                             mJSONFilter = jsFilter;
+                            mModel = null;
+                            mDelegate.showLoading();
                             requestCategoryDetail();
                         }
                     });
@@ -172,9 +183,7 @@ public class CategoryDetailController extends SimiController {
     }
 
     protected void requestCategoryDetail() {
-        //if (mOffset == 0) {
-            mDelegate.showLoading();
-        //}
+
         if (null == mModel) {
             mModel = new CategoryDetailModel(mTypeCate);
             if (mTypeCate.equals(CategoryDetailFragment.CUSTOM)) {
@@ -191,6 +200,7 @@ public class CategoryDetailController extends SimiController {
             public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissLoading();
                 mDelegate.dismissDialogLoading();
+                mDelegate.showLoadMore(false);
                 mResultNumber = ((CategoryDetailModel) mModel).getResultNumber();
                 mLayerEntity = ((CategoryDetailModel) mModel).getLayerEntity();
                 mDelegate.showLoadMore(false);
@@ -203,7 +213,9 @@ public class CategoryDetailController extends SimiController {
         mModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
+                mDelegate.dismissLoading();
                 mDelegate.dismissDialogLoading();
+                mDelegate.showLoadMore(false);
             }
         });
 

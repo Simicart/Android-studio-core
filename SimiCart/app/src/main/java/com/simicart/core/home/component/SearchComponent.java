@@ -16,6 +16,7 @@ import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.Rconfig;
 
 /**
  * Created by frank on 7/14/16.
@@ -68,8 +69,7 @@ public class SearchComponent extends SimiComponent {
         edtQuery.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
-                {
+                if (hasFocus) {
                     enableSearchAction(true);
                 }
             }
@@ -106,32 +106,37 @@ public class SearchComponent extends SimiComponent {
     protected void enableSearchAction(boolean isEnable) {
         if (isEnable) {
 
-            RelativeLayout.LayoutParams paramsIcon = new RelativeLayout.LayoutParams(Utils.toDp(15), Utils.toDp(15));
+            RelativeLayout.LayoutParams paramsIcon = new RelativeLayout.LayoutParams(Utils.getValueDp(15), Utils.getValueDp(15));
             paramsIcon.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             paramsIcon.addRule(RelativeLayout.CENTER_VERTICAL);
             paramsIcon.rightMargin = Utils.toDp(5);
             paramsIcon.leftMargin = Utils.toDp(16);
             imgIconSearch.setLayoutParams(paramsIcon);
 
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.toDp(30));
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.RIGHT_OF, imgIconSearch.getId());
             edtQuery.setLayoutParams(params);
+            edtQuery.setTextSize(16);
+            String searchText = SimiTranslator.getInstance().translate("Search Products");
+            edtQuery.setHint(searchText);
             imgDelete.setVisibility(View.VISIBLE);
 
 
         } else {
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, Utils.toDp(30));
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.CENTER_HORIZONTAL);
             params.addRule(RelativeLayout.CENTER_VERTICAL);
             edtQuery.setLayoutParams(params);
+
             imgDelete.setVisibility(View.GONE);
 
-            RelativeLayout.LayoutParams paramsIcon = new RelativeLayout.LayoutParams(Utils.toDp(15), Utils.toDp(15));
+            RelativeLayout.LayoutParams paramsIcon = new RelativeLayout.LayoutParams(Utils.getValueDp(15), Utils.getValueDp(15));
             paramsIcon.addRule(RelativeLayout.LEFT_OF, edtQuery.getId());
             paramsIcon.addRule(RelativeLayout.CENTER_VERTICAL);
             paramsIcon.rightMargin = Utils.toDp(5);
             paramsIcon.leftMargin = Utils.toDp(5);
             imgIconSearch.setLayoutParams(paramsIcon);
+            imgIconSearch.setImageResource(Rconfig.getInstance().drawable("ic_search"));
 
             edtQuery.clearFocus();
             hiddenKeyboard(edtQuery);

@@ -152,7 +152,7 @@ public class FacebookConnect {
 
         LoginButton btLogin = new LoginButton(mContext);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, 50);
+                LinearLayout.LayoutParams.MATCH_PARENT, Utils.getValueDp(50));
         int dp = Utils.getValueDp(5);
         params.setMargins(dp, dp, dp, dp);
         btLogin.setLayoutParams(params);

@@ -37,6 +37,12 @@ public class HomeThemeOneBlock extends SimiBlock implements HomeThemeOneDelegate
     }
 
     @Override
+    public void showSearch(View searchView) {
+        llSearch.removeAllViewsInLayout();
+        llSearch.addView(searchView);
+    }
+
+    @Override
     public void showBanner(View bannerView) {
         llBanner.removeAllViewsInLayout();
         llBanner.addView(bannerView);

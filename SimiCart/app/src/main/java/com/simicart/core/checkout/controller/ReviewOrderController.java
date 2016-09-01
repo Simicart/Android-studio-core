@@ -38,6 +38,7 @@ import com.simicart.core.checkout.entity.PaymentMethodEntity;
 import com.simicart.core.checkout.entity.ReviewOrderEntity;
 import com.simicart.core.checkout.entity.ShippingMethodEntity;
 import com.simicart.core.checkout.entity.TotalPrice;
+import com.simicart.core.checkout.fragment.ThankyouFragment;
 import com.simicart.core.checkout.model.CouponCodeModel;
 import com.simicart.core.checkout.model.PaymentMethodModel;
 import com.simicart.core.checkout.model.PlaceOrderModel;
@@ -301,10 +302,9 @@ public class ReviewOrderController extends SimiController {
     }
 
     protected void showPluginsComponent() {
-        HashMap<String,Object> hmData = new HashMap<>();
+        HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(KeyData.REVIEW_ORDER.LIST_COMPONENTS, mListComponent);
         hmData.put(KeyData.REVIEW_ORDER.JSON_DATA, mModel.getCollection().getJSON());
-        Log.e("abc", "++" + mModel.getCollection().getJSON().toString());
         SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_ADD_PLUGIN_COMPONENT, hmData);
     }
 
@@ -533,6 +533,7 @@ public class ReviewOrderController extends SimiController {
             } else {
                 // go to thank you page
             }
+            SimiManager.getIntance().backPreviousFragment();
         }
 
         dispatchEventAfterPlace(orderInforEntity);
@@ -562,7 +563,7 @@ public class ReviewOrderController extends SimiController {
         hmData.put("review_order_entity", mReviewOrderEntity);
         hmData.put("order_infor_entity", orderInforEntity);
         if (null != totalPrice) {
-            // hmData.put("total_price", totalPrice);
+            hmData.put("total_price", totalPrice);
         }
         paymentMethod = paymentMethod.toUpperCase();
         SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_SDK + paymentMethod, hmData);

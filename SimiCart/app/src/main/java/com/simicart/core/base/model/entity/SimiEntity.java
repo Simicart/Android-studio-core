@@ -9,11 +9,11 @@ import org.json.JSONObject;
 public class SimiEntity {
 	protected JSONObject mJSON;
 	protected Bundle bundle = new Bundle();
-	
+
 	public void setBundle(Bundle bundle) {
 		this.bundle = bundle;
 	}
-	
+
 	public Bundle getBundle() {
 		return bundle;
 	}

@@ -51,18 +51,25 @@ public class CategoryDetailModel extends SimiModel {
                 JSONArray messArr = mJSON.getJSONArray("message");
                 String total = messArr.getString(0);
                 if (Utils.validateString(total)) {
-                    resultNumber = Integer.parseInt(total);
+                    try {
+                        resultNumber = Integer.parseInt(total);
+                    } catch (Exception e) {
+
+                    }
                 }
             }
 
             JSONArray list = this.mJSON.getJSONArray("data");
+
             if (null == collection) {
                 collection = new SimiCollection();
             }
-            for (int i = 0; i < list.length(); i++) {
-                Product product = new Product();
-                product.parse(list.getJSONObject(i));
-                collection.addEntity(product);
+            if (null != list && list.length() > 0) {
+                for (int i = 0; i < list.length(); i++) {
+                    Product product = new Product();
+                    product.parse(list.getJSONObject(i));
+                    collection.addEntity(product);
+                }
             }
 
             if (mJSON.has("layerednavigation")) {
