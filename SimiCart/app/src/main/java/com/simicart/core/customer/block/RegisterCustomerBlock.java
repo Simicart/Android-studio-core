@@ -40,10 +40,13 @@ public class RegisterCustomerBlock extends SimiBlock implements
     protected LinearLayout llRegister;
     protected AppCompatButton btnRegister;
 
+    public RegisterCustomerBlock(View view, Context context) {
+        super(view, context);
+    }
+
     @Override
     public void initView() {
         llRegister = (LinearLayout) id("ll_register");
-
 
         btnRegister = (AppCompatButton) id("btn_register");
         String tranlateRegister = SimiTranslator.getInstance().translate("Register");
@@ -60,7 +63,6 @@ public class RegisterCustomerBlock extends SimiBlock implements
                 llRegister.addView(rows.get(i));
             }
         }
-
     }
 
     public void setRegisterListener(OnClickListener listener) {

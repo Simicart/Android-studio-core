@@ -14,47 +14,29 @@ import com.simicart.core.customer.block.RegisterCustomerBlock;
 import com.simicart.core.customer.controller.RegisterCustomerController;
 
 public class RegisterCustomerFragment extends SimiFragment {
-	protected RegisterCustomerBlock mBlock;
-	protected RegisterCustomerController mController;
-	protected boolean isCheckout = false;
+    protected RegisterCustomerController mController;
 
-	public static RegisterCustomerFragment newInstance() {
-		RegisterCustomerFragment fragment = new RegisterCustomerFragment();
-		return fragment;
-	}
+    public static RegisterCustomerFragment newInstance() {
+        RegisterCustomerFragment fragment = new RegisterCustomerFragment();
+        return fragment;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view= null;
-		if (DataLocal.isLanguageRTL) {
-			view = inflater.inflate(
-					Rconfig.getInstance().layout("rtl_core_register_customer"),
-					container, false);
-		}else {
-			 view = inflater.inflate(
-						Rconfig.getInstance().layout("core_register_customer"),
-						container, false);
-		}
-		Context context = getActivity();
-		mBlock = new RegisterCustomerBlock(view, context);
-		return view;
-	}
-	@Override
-	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-
-		mBlock.initView();
-		if (null == mController) {
-			mController = new RegisterCustomerController();
-			mController.setDelegate(mBlock);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
-		mBlock.setOnClickRelativeLayout(mController.getOnClickRelative());
-		mBlock.setRegisterClick(mController.getOnclickRegister());
-		mBlock.setOnClickTextViewGender(mController.getOnClickRelative());
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        int idView = Rconfig.getInstance().layout("core_register_customer");
+        rootView = inflater.inflate(idView, null, false);
+        Context context = getActivity();
+        RegisterCustomerBlock block = new RegisterCustomerBlock(rootView, context);
+        block.initView();
+        if (null == mController) {
+            mController = new RegisterCustomerController();
+            mController.setDelegate(block);
+            mController.onStart();
+        } else {
+            mController.setDelegate(block);
+            mController.onResume();
+        }
+        return rootView;
+    }
 }
