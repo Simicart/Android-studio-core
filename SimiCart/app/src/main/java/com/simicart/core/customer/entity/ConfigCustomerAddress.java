@@ -1,8 +1,12 @@
 package com.simicart.core.customer.entity;
 
+import android.util.Log;
+
 import com.simicart.core.base.model.entity.SimiEntity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -17,7 +21,7 @@ public class ConfigCustomerAddress extends SimiEntity {
     protected String vat_id;
     protected String taxvat;
     protected String gender;
-    protected ArrayList<GenderConfig> genderConfigs = new ArrayList<>();
+    protected ArrayList<GenderConfig> genderConfigs;
     protected String company;
     protected String street;
     protected String country;
@@ -68,12 +72,33 @@ public class ConfigCustomerAddress extends SimiEntity {
     @Override
     public void parse() {
 
+        Log.e("CONFIG CUSTOMER ADDRESS ", "=====> JSON  " + mJSON.toString());
+
         prefix = getData(prefix_show);
         suffix = getData(suffix_show);
         dob = getData(dob_show);
         taxvat = getData(taxvat_show);
         gender = getData(gender_show);
-        
+
+        JSONArray array = getArray(gender_value);
+        try {
+            parseGenderConfig(array);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    protected void parseGenderConfig(JSONArray array) throws JSONException {
+        if (null != array && array.length() > 0) {
+            genderConfigs = new ArrayList<>();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject json = array.getJSONObject(i);
+                GenderConfig gender = new GenderConfig();
+                gender.parse(json);
+                genderConfigs.add(gender);
+            }
+        }
     }
 
     public String getValueWithKey(String key) {

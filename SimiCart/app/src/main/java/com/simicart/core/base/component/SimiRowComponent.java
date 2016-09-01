@@ -13,7 +13,8 @@ public class SimiRowComponent extends SimiComponent {
         ADAPTER,
         SELECT,
         PARENT,
-        ICON_DELETE
+        ICON_DELETE,
+        DOB
     }
 
     protected String mKey;

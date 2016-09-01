@@ -1,7 +1,15 @@
 package com.simicart.core.customer.model;
 
+import com.simicart.core.base.model.SimiModel;
+
 /**
- * Created by MSI on 01/09/2016.
+ * Created by frank on 01/09/2016.
  */
-public class CustomerModel {
+public class CustomerModel extends SimiModel {
+
+    public void setUrlAction(String urlAction) {
+        this.mUrlAction = urlAction;
+    }
+
+
 }

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
@@ -39,6 +40,7 @@ public class CustomerBlock extends SimiBlock implements
 
     protected LinearLayout llRegister;
     protected AppCompatButton btnRegister;
+    protected int topMargin = Utils.getValueDp(10);
 
     public CustomerBlock(View view, Context context) {
         super(view, context);
@@ -60,6 +62,8 @@ public class CustomerBlock extends SimiBlock implements
         llRegister.removeAllViewsInLayout();
         if (null != rows && rows.size() > 0) {
             for (int i = 0; i < rows.size(); i++) {
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.topMargin = topMargin;
                 llRegister.addView(rows.get(i));
             }
         }

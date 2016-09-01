@@ -27,4 +27,9 @@ public class ValueData {
         public static  int PLACE_FOR_EXISTING_CUSTOMER = 995;
     }
 
+    public static class CUSTOMER_PAGE{
+        public static int OPEN_FOR_REGISTER = 994;
+        public static int OPEN_FOR_EDIT = 993;
+    }
+
 }
