@@ -9,7 +9,7 @@ import com.simicart.core.customer.entity.RegisterCustomer;
 
 import java.util.ArrayList;
 
-public interface RegisterCustomerDelegate extends SimiDelegate{
+public interface CustomerDelegate extends SimiDelegate{
 
 	public void showView(ArrayList<View> rows);
 

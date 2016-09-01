@@ -232,6 +232,10 @@ public class SimiModel {
 
     }
 
+    public void setUrlAction(String urlAction) {
+        mUrlAction = urlAction;
+    }
+
 
     public JSONObject getDataJSON() {
         return mJSON;
@@ -263,7 +267,7 @@ public class SimiModel {
         mModelFailCallBack = failListener;
     }
 
-    public SimiError getError(){
+    public SimiError getError() {
         return mError;
     }
 

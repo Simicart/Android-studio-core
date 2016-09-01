@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.simicart.core.base.component.GenderAdapter;
 import com.simicart.core.base.component.SimiDOBRowComponent;
-import com.simicart.core.base.component.SimiParentRowComponent;
 import com.simicart.core.base.component.SimiRowComponent;
 import com.simicart.core.base.component.SimiSpinnerRowComponent;
 import com.simicart.core.base.component.SimiTextRowComponent;
@@ -13,30 +12,30 @@ import com.simicart.core.base.component.callback.SpinnerRowCallBack;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
-import com.simicart.core.checkout.adapter.DateAdapter;
+import com.simicart.core.base.notify.SimiNotify;
+import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
-import com.simicart.core.customer.delegate.RegisterCustomerDelegate;
+import com.simicart.core.customer.delegate.CustomerDelegate;
 import com.simicart.core.customer.entity.AddressEntity;
 import com.simicart.core.customer.entity.ConfigCustomerAddress;
 import com.simicart.core.customer.entity.GenderConfig;
-import com.simicart.core.customer.model.CustomerModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class CustomerController extends SimiController {
-    protected RegisterCustomerDelegate mDelegate;
+    protected CustomerDelegate mDelegate;
     protected ArrayList<SimiRowComponent> mListComponent;
     protected View.OnClickListener mRegisterListener;
     protected int mOpenFor;
-    protected String mCurrentMonth;
-    protected String mYear;
     protected AddressEntity mAddressForEdit;
     protected SimiTextRowComponent passwordComponent;
     protected SimiTextRowComponent newPasswordComponent;
@@ -44,9 +43,11 @@ public class CustomerController extends SimiController {
     protected SimiDOBRowComponent dobRowComponent;
     protected HashMap<String, Object> mData;
     protected GenderConfig mGender;
+    protected String mEmail;
+    protected String mName;
 
 
-    public void setDelegate(RegisterCustomerDelegate mDelegate) {
+    public void setDelegate(CustomerDelegate mDelegate) {
         this.mDelegate = mDelegate;
     }
 
@@ -73,6 +74,40 @@ public class CustomerController extends SimiController {
     }
 
     protected void requestData() {
+        mDelegate.showLoading();
+
+        mModel = new SimiModel();
+        mModel.setUrlAction("connector/customer/get_profile");
+
+        mModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissLoading();
+                String msg = error.getMessage();
+                if (Utils.validateString(msg)) {
+                    SimiNotify.getInstance().showToast(msg);
+                    SimiManager.getIntance().backPreviousFragment();
+                }
+
+            }
+        });
+
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
+                ArrayList<SimiEntity> entities = collection.getCollection();
+                if (null != entities && entities.size() > 0) {
+                    SimiEntity entity = entities.get(0);
+                    mAddressForEdit = new AddressEntity();
+                    mAddressForEdit.parse(entity.getJSONObject());
+                    initRows();
+                }
+            }
+        });
+
+        mModel.request();
+
 
     }
 
@@ -80,7 +115,11 @@ public class CustomerController extends SimiController {
         mRegisterListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onRegister();
+                if (mOpenFor == ValueData.CUSTOMER_PAGE.OPEN_FOR_REGISTER) {
+                    onRegister();
+                } else {
+                    onChangeProfile();
+                }
             }
         };
     }
@@ -89,13 +128,13 @@ public class CustomerController extends SimiController {
         mListComponent = new ArrayList<>();
 
         // prefix
-        initComponent("prefix", "Prefix", "prefix", "prefix", InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        initComponent("prefix", "Prefix", "prefix", "prefix", (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME));
 
         // full name
-        initComponentRequired("Full Name", "name", "name", InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        initComponentRequired("Full Name", "user_name", "name", (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME));
 
         // suffix
-        initComponent("suffix", "Suffix", "suffix", "suffix", InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        initComponent("suffix", "Suffix", "suffix", "suffix", (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME));
 
         // date of birth
         initDOBComponent();
@@ -107,23 +146,26 @@ public class CustomerController extends SimiController {
         initComponent("taxvat", "Tax/VAT number", "taxvat", "taxvat", InputType.TYPE_CLASS_TEXT);
 
         // email
-        initComponentRequired("Email", "email", "email", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        initComponentRequired("Email", "user_email", "user_email", (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS));
 
         // pass
         passwordComponent = new SimiTextRowComponent();
         passwordComponent.setTitle("Password");
-        passwordComponent.setRequired(true);
+        if (mOpenFor != ValueData.CUSTOMER_PAGE.OPEN_FOR_EDIT) {
+            passwordComponent.setRequired(true);
+        }
         passwordComponent.setKey("user_password");
-        passwordComponent.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        passwordComponent.setInputType(InputType.TYPE_CLASS_TEXT |
+                InputType.TYPE_TEXT_VARIATION_PASSWORD);
         mListComponent.add(passwordComponent);
 
         if (mOpenFor == ValueData.CUSTOMER_PAGE.OPEN_FOR_EDIT) {
             // new password
             newPasswordComponent = new SimiTextRowComponent();
-            newPasswordComponent.setTitle("Confirm Password");
-            newPasswordComponent.setRequired(true);
-            newPasswordComponent.setKey("user_password");
-            newPasswordComponent.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            newPasswordComponent.setTitle("New Password");
+            newPasswordComponent.setRequired(false);
+            newPasswordComponent.setKey("new_password");
+            newPasswordComponent.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             mListComponent.add(newPasswordComponent);
         }
 
@@ -131,10 +173,12 @@ public class CustomerController extends SimiController {
         // confirm pass
         confirmPasswordComponent = new SimiTextRowComponent();
         confirmPasswordComponent.setTitle("Confirm Password");
-        confirmPasswordComponent.setRequired(true);
+        if (mOpenFor != ValueData.CUSTOMER_PAGE.OPEN_FOR_EDIT) {
+            confirmPasswordComponent.setRequired(true);
+        }
         confirmPasswordComponent.setKey("user_password");
-        confirmPasswordComponent.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        mListComponent.add(passwordComponent);
+        confirmPasswordComponent.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        mListComponent.add(confirmPasswordComponent);
 
         showView();
     }
@@ -238,41 +282,257 @@ public class CustomerController extends SimiController {
 
     }
 
-    protected void onChangeProfile(){
+    protected void onChangeProfile() {
+        final boolean isChangedPass = isChangedPassword();
+        if (isChangedPass && !isValidatePasswordForEdit()) {
+            return;
+        }
 
-    }
+        mModel = new SimiModel();
+        mModel.setUrlAction("connector/customer/change_user");
 
+        if (!addParamForModel()) {
+            return;
+        }
 
-    protected void onRegister() {
+        if (isChangedPass) {
+            String oldPass = (String) passwordComponent.getValue();
+            String newPass = (String) newPasswordComponent.getValue();
+            mModel.addBody("change_password", "1");
+            mModel.addBody("old_password", oldPass);
+            mModel.addBody("new_password", newPass);
+            mModel.addBody("com_password", newPass);
+        } else {
+            mModel.addBody("change_password", "0");
+        }
 
-        mModel = new CustomerModel();
-
+        mDelegate.showDialogLoading();
         mModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
-
+                mDelegate.dismissDialogLoading();
+                String msg = "Can not save your profile";
+                if (null != error) {
+                    msg = error.getMessage();
+                }
+                if (Utils.validateString(msg)) {
+                    SimiNotify.getInstance().showToast(msg);
+                }
             }
         });
 
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissDialogLoading();
+                if (isChangedPass) {
+                    DataPreferences.saveData(mName, mEmail, (String) newPasswordComponent.getValue());
+                } else {
+                    DataPreferences.saveData(mName, mEmail, (String) passwordComponent.getValue());
+                }
+                SimiManager.getIntance().onUpdateItemSignIn();
+                String msg = "";
+                SimiError error = mModel.getError();
+                if (null != error) {
+                    msg = error.getMessage();
+                }
+                if (!Utils.validateString(msg)) {
+                    msg = "SUCCESS";
+                }
+                SimiNotify.getInstance().showToast(msg);
+                SimiManager.getIntance().backToHomeFragment();
 
             }
         });
 
+        mModel.request();
+
+    }
 
 
+    protected void onRegister() {
+
+        if (!isValidatePasswordForRegister()) {
+            return;
+        }
+
+        mModel = new SimiModel();
+        mModel.setUrlAction("connector/customer/register");
+
+        final String password = (String) passwordComponent.getValue();
+        mModel.addBody("user_password", password);
+        if (!addParamForModel()) {
+            return;
+        }
+
+
+        mDelegate.showLoading();
+        mModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissLoading();
+                String msg = error.getMessage();
+                SimiNotify.getInstance().showToast(msg);
+            }
+        });
+
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
+                SimiError error = mModel.getError();
+                if (null != error) {
+                    String msg = error.getMessage();
+                    if (Utils.validateString(msg)) {
+                        SimiNotify.getInstance().showToast(msg);
+                    }
+                    DataPreferences.saveData(mName, mEmail, password);
+                    SimiManager.getIntance().backPreviousFragment();
+                }
+            }
+        });
+
+
+        mModel.request();
 
 
     }
 
-    protected boolean canRegister(){
+    protected boolean addParamForModel() {
 
-        return  true;
+
+        if (null != dobRowComponent) {
+            ArrayList<Integer> dob = (ArrayList<Integer>) dobRowComponent.getValue();
+            int day = dob.get(0);
+            int month = dob.get(1);
+            int year = dob.get(2);
+
+            mModel.addBody("day", String.valueOf(day));
+            mModel.addBody("month", String.valueOf(month));
+            mModel.addBody("year", String.valueOf(year));
+        }
+
+        if (null != mGender) {
+            mModel.addBody("gender", mGender.getValue());
+        }
+
+        for (int i = 0; i < mListComponent.size(); i++) {
+            SimiRowComponent rowComponent = mListComponent.get(i);
+            SimiRowComponent.TYPE_ROW type = rowComponent.getType();
+            if (type == SimiRowComponent.TYPE_ROW.TEXT) {
+                String key = rowComponent.getKey();
+                String value = (String) rowComponent.getValue();
+                if (rowComponent.isRequired() && !Utils.validateString(value)) {
+                    return false;
+                }
+                if (key.equals("name")) {
+                    mName = value;
+                }
+                if (key.equals("user_email")) {
+                    mEmail = value;
+
+                }
+
+                mModel.addBody(key, value);
+            }
+
+        }
+
+        return true;
     }
 
+    protected boolean isValidatePasswordForRegister() {
+        String password = (String) passwordComponent.getValue();
+        if (!Utils.validateString(password)) {
+            return false;
+        }
 
+        String confirmPass = (String) confirmPasswordComponent.getValue();
+        if (!Utils.validateString(confirmPass)) {
+            return false;
+        }
+
+        if (!password.equals(confirmPass)) {
+            String msg = SimiTranslator.getInstance().translate("Password and Confirm password dont't match.");
+            SimiNotify.getInstance().showToast(msg);
+            return false;
+        }
+
+        return true;
+    }
+
+    protected boolean isValidatePasswordForEdit() {
+        newPasswordComponent.showError(null);
+        confirmPasswordComponent.showError(null);
+        passwordComponent.showError(null);
+        String newPassword = (String) newPasswordComponent.getValue();
+        if (Utils.validateString(newPassword)) {
+            String password = (String) passwordComponent.getValue();
+            if (!Utils.validateString(password)) {
+                String warming = "The current password is required.";
+                passwordComponent.showError(warming);
+                return false;
+            }
+
+            String currentPassword = DataPreferences.getPassword();
+            if (!password.equals(currentPassword)) {
+                String warming = SimiTranslator.getInstance().translate("The current password is not corrent.");
+                passwordComponent.showError(warming);
+                return false;
+            }
+
+            String confirmPassword = (String) confirmPasswordComponent.getValue();
+            if (!Utils.validateString(confirmPassword)) {
+                String warming = "The confirm password is required";
+                confirmPasswordComponent.showError(warming);
+                return false;
+            }
+
+            if (!newPassword.equals(confirmPassword)) {
+                String warming = SimiTranslator.getInstance().translate("New password and confirm password don't match.");
+                newPasswordComponent.showError(warming);
+                return false;
+            }
+        } else {
+            String confirmPassword = (String) confirmPasswordComponent.getValue();
+            if (Utils.validateString(confirmPassword)) {
+                String warming = "The new password is required";
+                newPasswordComponent.showError(warming);
+                return false;
+            } else {
+                String password = (String) passwordComponent.getValue();
+                if (Utils.validateString(password)) {
+                    String warming = "The new password is required";
+                    newPasswordComponent.showError(warming);
+                    return false;
+                }
+            }
+        }
+
+
+        return true;
+    }
+
+    protected boolean isChangedPassword() {
+
+        String password = (String) passwordComponent.getValue();
+        if (Utils.validateString(password)) {
+            return true;
+        }
+
+        String newPassword = (String) newPasswordComponent.getValue();
+        if (Utils.validateString(newPassword)) {
+            return true;
+        }
+
+        String confirmPassword = (String) confirmPasswordComponent.getValue();
+        if (Utils.validateString(confirmPassword)) {
+            return true;
+        }
+
+
+        return false;
+    }
 
 
     @Override

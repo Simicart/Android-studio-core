@@ -1,46 +1,29 @@
 package com.simicart.core.customer.block;
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Constants;
-import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.adapter.GenderAdapter;
-import com.simicart.core.customer.delegate.RegisterCustomerDelegate;
-import com.simicart.core.customer.entity.ConfigCustomerAddress;
-import com.simicart.core.customer.entity.RegisterCustomer;
-import com.simicart.core.material.ButtonRectangle;
-import com.simicart.core.material.LayoutRipple;
+import com.simicart.core.customer.delegate.CustomerDelegate;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 @SuppressLint("DefaultLocale")
 public class CustomerBlock extends SimiBlock implements
-        RegisterCustomerDelegate {
+        CustomerDelegate {
 
     protected LinearLayout llRegister;
     protected AppCompatButton btnRegister;
     protected int topMargin = Utils.getValueDp(10);
+    protected int mOpenFor;
 
     public CustomerBlock(View view, Context context) {
         super(view, context);
@@ -52,6 +35,9 @@ public class CustomerBlock extends SimiBlock implements
 
         btnRegister = (AppCompatButton) id("btn_register");
         String tranlateRegister = SimiTranslator.getInstance().translate("Register");
+        if (mOpenFor == ValueData.CUSTOMER_PAGE.OPEN_FOR_REGISTER) {
+            tranlateRegister = SimiTranslator.getInstance().translate("Save");
+        }
         btnRegister.setText(tranlateRegister);
         btnRegister.setTextColor(AppColorConfig.getInstance().getContentColor());
         btnRegister.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
@@ -71,6 +57,10 @@ public class CustomerBlock extends SimiBlock implements
 
     public void setRegisterListener(OnClickListener listener) {
         btnRegister.setOnClickListener(listener);
+    }
+
+    public void setOpenFor(int openFor) {
+        mOpenFor = openFor;
     }
 
 }

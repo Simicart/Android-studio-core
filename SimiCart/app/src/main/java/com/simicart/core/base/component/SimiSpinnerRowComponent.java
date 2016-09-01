@@ -25,6 +25,11 @@ public class SimiSpinnerRowComponent extends SimiRowComponent {
     protected int mPositionSelected;
     protected int iconExtend = Rconfig.getInstance().drawable("");
 
+    public SimiSpinnerRowComponent() {
+        super();
+        mType = TYPE_ROW.ADAPTER;
+    }
+
     @Override
     protected void initView() {
         rootView = findLayout("core_component_spinner_row");
