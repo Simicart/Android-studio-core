@@ -255,6 +255,7 @@ public class TotalPriceComponent extends SimiComponent {
 
         String trslLabel = SimiTranslator.getInstance().translate(label);
         TextView tvLabel = createLabel(trslLabel);
+        tvLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
         tbrPrice.addView(tvLabel);
 
         TextView tvPrice = createPrice(price);

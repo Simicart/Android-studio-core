@@ -20,5 +20,7 @@
         android:id="@+id/ll_body_component"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10"></LinearLayout>
 </LinearLayout>

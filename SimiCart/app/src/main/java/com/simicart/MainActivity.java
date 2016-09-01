@@ -190,80 +190,41 @@ public class MainActivity extends FragmentActivity {
 //        eventBlock
 //                .dispatchEvent("com.simicart.leftmenu.mainactivity.onbackpress.checkentrycount");
 
-
         int count = SimiManager.getIntance().getManager()
                 .getBackStackEntryCount();
-        if (count > 0) {
-            try {
-                if (count == 1) {
-                    if (checkBackScan == true) {
-//                        checkBackScan = false;
-//                        eventBlock
-//                                .dispatchEvent("com.simicart.leftmenu.mainactivity.onbackpress.backtoscan");
-                    } else {
-                        // out app
-                        AlertDialog.Builder alertboxDowload = new AlertDialog.Builder(
-                                this);
-                        alertboxDowload.setTitle(SimiTranslator.getInstance().translate("CLOSE APPLICATION").toUpperCase());
-                        alertboxDowload.setMessage(SimiTranslator.getInstance().translate("Are you sure you want to exit?"));
-                        alertboxDowload.setCancelable(false);
-                        alertboxDowload.setPositiveButton(SimiTranslator.getInstance().translate("OK").toUpperCase(),
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                                        int id) {
-                                        SimiManager.getIntance().getManager()
-                                                .popBackStack();
-                                        android.os.Process
-                                                .killProcess(android.os.Process
-                                                        .myPid());
-                                        finish();
-                                    }
-                                });
-                        alertboxDowload.setNegativeButton(SimiTranslator.getInstance().translate
-                                        ("CANCEL").toUpperCase(),
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                                        int id) {
-                                    }
-                                });
-                        alertboxDowload.show();
-                    }
-
-                } else {
-                    try {
-                        if (count > 2) {
-                            List<Fragment> list = SimiManager.getIntance()
-                                    .getManager().getFragments();
-                            Fragment fragment = SimiManager.getIntance()
-                                    .getManager().getFragments()
-                                    .get(list.size() - 1);
-                            if (fragment != null) {
-                                int tag = fragment.getTargetRequestCode();
-//                                if (tag == ConfigCheckout.TARGET_REVIEWORDER) {
-//                                    SimiManager.getIntance()
-//                                            .backToHomeFragment();
-//                                } else {
-                                SimiManager.getIntance().getManager()
-                                        .popBackStack();
-//                                }
-                            } else {
-                                SimiManager.getIntance().getManager()
-                                        .popBackStack();
-                            }
-                        } else {
-                            SimiManager.getIntance().getManager()
-                                    .popBackStack();
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        if (count == 1) {
+            showConfirmExitApp();
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void showConfirmExitApp() {
+        AlertDialog.Builder alertboxDowload = new AlertDialog.Builder(
+                this);
+        alertboxDowload.setTitle(SimiTranslator.getInstance().translate("CLOSE APPLICATION").toUpperCase());
+        alertboxDowload.setMessage(SimiTranslator.getInstance().translate("Are you sure you want to exit?"));
+        alertboxDowload.setCancelable(false);
+        alertboxDowload.setPositiveButton(SimiTranslator.getInstance().translate("OK").toUpperCase(),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int id) {
+                        SimiManager.getIntance().getManager()
+                                .popBackStack();
+                        android.os.Process
+                                .killProcess(android.os.Process
+                                        .myPid());
+                        finish();
+                    }
+                });
+        alertboxDowload.setNegativeButton(SimiTranslator.getInstance().translate
+                        ("CANCEL").toUpperCase(),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int id) {
+                    }
+                });
+        alertboxDowload.show();
     }
 
     @Override
@@ -279,7 +240,7 @@ public class MainActivity extends FragmentActivity {
 
         System.gc();
         Runtime.getRuntime().freeMemory();
-
+        finish();
         super.onDestroy();
         // ViewServer.get(this).removeWindow(this);
     }

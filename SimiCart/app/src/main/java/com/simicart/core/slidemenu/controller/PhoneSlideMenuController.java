@@ -56,6 +56,7 @@ public class PhoneSlideMenuController {
     protected int DEFAULT_POSITION = 0;
     protected CloseSlideMenuDelegate mCloseDelegate;
     private boolean check_keyboard_first;
+    protected ArrayList<ItemNavigation> mItemsAccount;
 
     public void setCloseDelegate(CloseSlideMenuDelegate delegate) {
         mCloseDelegate = delegate;
@@ -204,7 +205,7 @@ public class PhoneSlideMenuController {
 
         // order history
         int index = checkElement(ORDER_HISTORY);
-        ArrayList<ItemNavigation> mItemsAccount = new ArrayList<>();
+        mItemsAccount = new ArrayList<>();
         if (index == -1) {
             ItemNavigation item = new ItemNavigation();
             item.setType(TypeItem.NORMAL);
@@ -217,25 +218,7 @@ public class PhoneSlideMenuController {
             item.setIcon(icon);
             mItemsAccount.add(item);
 
-            dispatchItemEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_RELATED_PERSONAL);
-
-            // event for rewards, wish list
-//            SlideMenuData slideMenuData = new SlideMenuData();
-//            slideMenuData.setItemNavigations(mItemsAccount);
-//            slideMenuData.setPluginFragment(mPluginFragment);
-//            EventSlideMenu eventSlideMenu = new EventSlideMenu();
-//            eventSlideMenu.dispatchEvent("com.simicart.add.navigation.account",
-//                    slideMenuData);
-//
-//            eventSlideMenu.dispatchEvent(
-//                    "com.simicart.add.navigation.account.downloadable",
-//                    slideMenuData);
-//            eventSlideMenu.dispatchEvent(
-//                    "com.simicart.add.navigation.account.loyalty",
-//                    slideMenuData);
-//            eventSlideMenu.dispatchEvent(
-//                    "com.simicart.add.navigation.account.wishlist",
-//                    slideMenuData);
+            dispatchItemEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_RELATED_PERSONAL, mItemsAccount);
 
             int index_category = checkElement(CATEGORY);
             if (DataLocal.isTablet) {
@@ -249,21 +232,22 @@ public class PhoneSlideMenuController {
 
     public void removeItemRelatedPersonal() {
 
-        // order history
-        int index = checkElement(ORDER_HISTORY);
-        if (index != -1) {
-            mItems.remove(index);
+        if(mItemsAccount != null) {
+            for (ItemNavigation item : mItemsAccount) {
+                int index = checkElement(item.getName());
+                if (index != -1) {
+                    mItems.remove(index);
+                }
+            }
         }
 
-        dispatchItemEvent(KeyEvent.SLIDE_MENU_EVENT.REMOVE_ITEM);
+        // order history
+//        int index = checkElement(ORDER_HISTORY);
+//        if (index != -1) {
+//            mItems.remove(index);
+//        }
 
-        // event my account
-//        SlideMenuData slideMenuData = new SlideMenuData();
-//        slideMenuData.setItemNavigations(mItems);
-//        slideMenuData.setPluginFragment(mPluginFragment);
-//        EventSlideMenu eventSlideMenu = new EventSlideMenu();
-//        eventSlideMenu.dispatchEvent(
-//                "com.simicart.remove.navigation.myaccount", slideMenuData);
+        //dispatchItemEvent(KeyEvent.SLIDE_MENU_EVENT.REMOVE_ITEM);
     }
 
     public void addHome() {
@@ -310,7 +294,7 @@ public class PhoneSlideMenuController {
         mItems.add(item);
 
         // event for add barcode to slidemenu
-        dispatchItemEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE);
+        dispatchItemEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE, mItems);
 
 //        SlideMenuData slideMenuData = new SlideMenuData();
 //        slideMenuData.setItemNavigations(mItems);
@@ -568,13 +552,13 @@ public class PhoneSlideMenuController {
         mDelegate.setAdapter(mItems);
     }
 
-    protected void dispatchItemEvent(String event_name) {
+    protected void dispatchItemEvent(String event_name, ArrayList<ItemNavigation> mItemsAccount) {
         Intent intent = new Intent(event_name);
         Bundle bundle = new Bundle();
 //        SimiEventLeftMenuEntity leftEntity = new SimiEventLeftMenuEntity();
 //        leftEntity.setMenu(mMenu);
         HashMap<String, Object> hmData = new HashMap<>();
-        hmData.put(KeyData.SLIDE_MENU.LIST_ITEMS, mItems);
+        hmData.put(KeyData.SLIDE_MENU.LIST_ITEMS, mItemsAccount);
         hmData.put(KeyData.SLIDE_MENU.LIST_FRAGMENTS, mPluginFragment);
         SimiData data = new SimiData(hmData);
         bundle.putParcelable("entity", data);

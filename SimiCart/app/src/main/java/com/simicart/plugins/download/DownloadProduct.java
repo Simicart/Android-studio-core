@@ -51,24 +51,6 @@ public class DownloadProduct {
 		};
 		SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_RELATED_PERSONAL, addItemReceiver);
 
-		// register event: remove navigation item to slide menu
-		BroadcastReceiver removeItemReceiver = new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				Bundle bundle = intent.getBundleExtra(Constants.DATA);
-				SimiData data = bundle.getParcelable("entity");
-				mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
-				mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
-				for (ItemNavigation mItemNavigation : mItems) {
-					if (mItemNavigation.getName().equals(MY_DOWNLOAD_LABLE)) {
-						mFragments.remove(mItemNavigation.getName());
-						mItems.remove(mItemNavigation);
-					}
-				}
-			}
-		};
-		SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.REMOVE_ITEM, removeItemReceiver);
-
 	}
 
 	protected boolean isExistDownloadable() {

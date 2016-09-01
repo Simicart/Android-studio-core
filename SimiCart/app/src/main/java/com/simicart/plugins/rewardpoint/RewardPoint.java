@@ -75,24 +75,6 @@ public class RewardPoint {
         };
         SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_RELATED_PERSONAL, addItemReceiver);
 
-        // register event: remove navigation item to slide menu
-        BroadcastReceiver removeItemReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Bundle bundle = intent.getBundleExtra(Constants.DATA);
-                SimiData data = bundle.getParcelable("entity");
-                mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
-                mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
-                for (ItemNavigation mItemNavigation : mItems) {
-                    if (mItemNavigation.getName().equals(REWARDPOINT_MENU_ITEM)) {
-                        mFragments.remove(mItemNavigation.getName());
-                        mItems.remove(mItemNavigation);
-                    }
-                }
-            }
-        };
-        SimiEvent.registerEvent(KeyEvent.SLIDE_MENU_EVENT.REMOVE_ITEM, removeItemReceiver);
-
         // register event: add item to cart
         BroadcastReceiver addItemCartReceiver = new BroadcastReceiver() {
             @Override
@@ -319,17 +301,19 @@ public class RewardPoint {
         if (jsonObject.has("fee")) {
             try {
                 feeJson = jsonObject.getJSONObject("fee");
+                if(feeJson.has("loyalty_spend") && feeJson.has("loyalty_rules")) {
+                    rewardPointComponent.setJSONData(feeJson);
+                    rewardPointComponent.setListComponents(listComponents);
+                    for (SimiComponent component : listComponents) {
+                        if (component instanceof PaymentMethodComponent) {
+                            int index = listComponents.indexOf(component);
+                            listComponents.add(index + 1, rewardPointComponent);
+                            break;
+                        }
+                    }
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
-        }
-        rewardPointComponent.setJSONData(feeJson);
-        rewardPointComponent.setListComponents(listComponents);
-        for (SimiComponent component : listComponents) {
-            if (component instanceof PaymentMethodComponent) {
-                int index = listComponents.indexOf(component);
-                listComponents.add(index + 1, rewardPointComponent);
-                break;
             }
         }
     }
