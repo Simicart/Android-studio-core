@@ -66,7 +66,7 @@ public class FacebookConnectFragment extends SimiFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(
-				Rconfig.getInstance().layout("plugin_fbconnect_fragment"),
+				Rconfig.getInstance().layout("plugins_fbconnect_fragment"),
 				container, false);
 		img_share = (ImageView) rootView.findViewById(Rconfig.getInstance().id(
 				"btn_fbShare"));

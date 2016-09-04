@@ -100,8 +100,8 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT);
         imgCate.setLayoutParams(params);
-        int idLogo = Rconfig.getInstance().drawable("default_logo");
-        imgCate.setImageResource(idLogo);
+//        int idLogo = Rconfig.getInstance().drawable("default_logo");
+//        imgCate.setImageResource(idLogo);
         imgCate.setScaleType(ImageView.ScaleType.FIT_XY);
         DrawableManager.fetchDrawableOnThread(urlImage, imgCate);
         return imgCate;

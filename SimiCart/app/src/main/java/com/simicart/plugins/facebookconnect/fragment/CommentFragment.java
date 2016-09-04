@@ -69,10 +69,10 @@ public class CommentFragment extends DialogFragment {
 		View rootView = inflater
 				.inflate(
 						Rconfig.getInstance().layout(
-								"plugin_fbconnect_layout_comment"), null);
+								"plugins_fbconnect_layout_comment"), null);
 
 		// View rootView = inflater.inflate(
-		// Rconfig.layout("plugin_fbconnect_layout_comment"), container, false);
+		// Rconfig.layout("plugins_fbconnect_layout_comment"), container, false);
 		progressBar = (ProgressBar) rootView.findViewById(Rconfig.getInstance()
 				.id("loading_screen"));
 		webview = (WebView) rootView.findViewById(Rconfig.getInstance().id(

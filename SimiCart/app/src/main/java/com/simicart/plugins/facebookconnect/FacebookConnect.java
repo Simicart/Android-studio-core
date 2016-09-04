@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -147,19 +149,26 @@ public class FacebookConnect {
         FacebookSdk.sdkInitialize(mContext);
         callbackManager = CallbackManager.Factory.create();
 
-        LinearLayout llSignIn = (LinearLayout) rootView
+        AppCompatButton bt_signin = (AppCompatButton) rootView
+                .findViewById(Rconfig.getInstance().id("bt_signIn"));
+        RelativeLayout llSignIn = (RelativeLayout) rootView
                 .findViewById(Rconfig.getInstance().id("ll_signin"));
 
-        LoginButton btLogin = new LoginButton(mContext);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, Utils.getValueDp(50));
+        View v = SimiManager.getIntance().getCurrentActivity().getLayoutInflater().inflate(
+                Rconfig.getInstance().layout(
+                        "plugins_fbconnect_layout_login"), null);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         int dp = Utils.getValueDp(5);
         params.setMargins(dp, dp, dp, dp);
-        btLogin.setLayoutParams(params);
-        llSignIn.addView(btLogin);
+        params.addRule(RelativeLayout.BELOW, bt_signin.getId());
+        v.setLayoutParams(params);
+        llSignIn.addView(v);
 
         // check session
         LoginManager.getInstance().logOut();
+        final LoginButton btLogin = (LoginButton) v.findViewById(Rconfig
+                .getInstance().id("authButton"));
         btLogin.setFragment(mSignInFragment);
         btLogin.setReadPermissions(Arrays
                 .asList("email,user_photos,user_birthday"));
