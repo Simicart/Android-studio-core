@@ -82,11 +82,7 @@
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/checkout"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_button"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold" />
+                    style="@style/SimiButtonStyle" />
 
                 <RelativeLayout
                     android:id="@+id/fcart_rl_bottom"

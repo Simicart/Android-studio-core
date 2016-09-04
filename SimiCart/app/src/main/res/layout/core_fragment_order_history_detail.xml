@@ -14,12 +14,10 @@
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/bt_reorder"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_button"
+                style="@style/SimiButtonStyle"
                 android:layout_marginTop="@dimen/size_20"
                 android:layout_marginRight="@dimen/size_10"
-                android:layout_marginLeft="@dimen/size_10"
-                android:textAllCaps="false"/>
+                android:layout_marginLeft="@dimen/size_10"/>
 
             <TableLayout
                 android:id="@+id/table_history_detail"

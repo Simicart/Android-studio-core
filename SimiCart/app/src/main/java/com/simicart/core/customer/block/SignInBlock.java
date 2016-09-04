@@ -152,7 +152,6 @@ public class SignInBlock extends SimiBlock implements SignInDelegate {
                 .id("bt_signIn"));
         btn_SignIn.setText(SimiTranslator.getInstance().translate("Sign In"));
         btn_SignIn.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
-        btn_SignIn.setTextSize(Constants.SIZE_TEXT_BUTTON);
 
         if(Utils.validateString(DataPreferences.getEmailRemember()) && Utils.validateString(DataPreferences.getPasswordRemember())
                 || Utils.validateString(mEmail) && Utils.validateString(mPassword)) {

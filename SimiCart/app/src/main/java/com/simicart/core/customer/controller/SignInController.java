@@ -138,12 +138,12 @@ public class SignInController extends SimiController {
                     SimiManager.getIntance().onUpdateCartQty(cartQty);
                 }
 
-                onSignInSuccess();
-
                 // update wishlist_items_qty
                 HashMap<String, Object> hmData = new HashMap<>();
                 hmData.put(KeyData.SIMI_CONTROLLER.JSON_DATA, mModel.getDataJSON());
                 SimiEvent.dispatchEvent(KeyEvent.SIGN_IN_EVENT.SIGN_IN_COMPLETE, hmData);
+
+                onSignInSuccess();
 
             }
         });
@@ -198,7 +198,7 @@ public class SignInController extends SimiController {
 
     private void processCheckout() {
         mModel = new CartModel();
-        mDelegate.showLoading();
+//        mDelegate.showLoading();
 
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
@@ -222,6 +222,7 @@ public class SignInController extends SimiController {
                     }
                 }
 
+                SimiManager.getIntance().getManager().popBackStack();
                 HashMap<String, Object> hmData = new HashMap<>();
                 hmData.put(KeyData.ADDRESS_BOOK.OPEN_FOR, ValueData.ADDRESS_BOOK.OPEN_FOR_CHECKOUT);
                 SimiData data = new SimiData(hmData);

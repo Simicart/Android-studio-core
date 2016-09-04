@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -49,8 +50,8 @@ public class ProductDetailParentBlock extends SimiBlock implements
     protected RelativeLayout rlt_top;
     protected LinearLayout ll_bottom;
     protected LinearLayout ll_more;
-    protected ButtonRectangle btn_option;
-    protected ButtonRectangle btn_addtocart;
+    protected AppCompatButton btn_option;
+    protected AppCompatButton btn_addtocart;
     protected TextView tv_name_product;
     protected LinearLayout ll_price;
     protected Product mProduct;
@@ -96,7 +97,7 @@ public class ProductDetailParentBlock extends SimiBlock implements
         // details
         ll_more = (LinearLayout) mView.findViewById(Rconfig.getInstance().id(
                 "ll_more"));
-        // ll_more.setVisibility(View.INVISIBLE);
+         ll_more.setVisibility(View.INVISIBLE);
 
         TextView tv_more = (TextView) mView.findViewById(Rconfig.getInstance()
                 .id("tv_more"));
@@ -122,11 +123,11 @@ public class ProductDetailParentBlock extends SimiBlock implements
         /* end Frank: fix bug display "More" length */
 
         // options
-        btn_option = (ButtonRectangle) mView.findViewById(Rconfig.getInstance()
+        btn_option = (AppCompatButton) mView.findViewById(Rconfig.getInstance()
                 .id("btn_option"));
 
         // add to cart
-        btn_addtocart = (ButtonRectangle) mView.findViewById(Rconfig
+        btn_addtocart = (AppCompatButton) mView.findViewById(Rconfig
                 .getInstance().id("btn_addtocart"));
 
         // name product
@@ -211,47 +212,31 @@ public class ProductDetailParentBlock extends SimiBlock implements
 
     protected void showOption() {
         ArrayList<CacheOption> options = mProduct.getOptions();
-        Drawable bg_button = mContext.getResources().getDrawable(
-                Rconfig.getInstance().drawable("core_background_button"));
         if (null == options || options.size() == 0) {
-
-            bg_button.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
             btn_option.setText(SimiTranslator.getInstance().translate("No Option"));
             btn_option.setTextColor(Color.parseColor("#FFFFFF"));
             btn_option.setClickable(false);
             btn_option.setVisibility(View.GONE);
-            btn_option.setTextSize(Constants.SIZE_TEXT_BUTTON);
-            btn_option.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
+            btn_option.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground(Color.GRAY));
         } else {
-            bg_button.setColorFilter(AppColorConfig.getInstance().getKeyColor(),
-                    PorterDuff.Mode.SRC_ATOP);
             btn_option.setVisibility(View.VISIBLE);
             btn_option.setText(SimiTranslator.getInstance().translate("Options"));
-            btn_option.setTextColor(Color.parseColor("#FFFFFF"));
+            btn_option.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
             btn_option.setClickable(true);
-            btn_option.setTextSize(Constants.SIZE_TEXT_BUTTON);
-            btn_option.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
+            btn_option.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
         }
     }
 
     protected void showAddToCart() {
         boolean stock = mProduct.getStock();
-        Drawable bg_button = mContext.getResources().getDrawable(
-                Rconfig.getInstance().drawable("core_background_button"));
-
         if (stock) {
-            bg_button.setColorFilter(AppColorConfig.getInstance().getKeyColor(),
-                    PorterDuff.Mode.SRC_ATOP);
             btn_addtocart.setText(SimiTranslator.getInstance().translate("Add To Cart"));
-            btn_addtocart.setTextColor(Color.parseColor("#FFFFFF"));
-            btn_addtocart.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
-            btn_addtocart.setTextSize(Constants.SIZE_TEXT_BUTTON);
+            btn_addtocart.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
+            btn_addtocart.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
         } else {
-            bg_button.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
             btn_addtocart.setText(SimiTranslator.getInstance().translate("Out Stock"));
             btn_addtocart.setTextColor(Color.parseColor("#FFFFFF"));
-            btn_addtocart.setBackgroundColor(Color.GRAY);
-            btn_addtocart.setTextSize(Constants.SIZE_TEXT_BUTTON);
+            btn_addtocart.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground(Color.GRAY));
             btn_addtocart.setClickable(false);
         }
     }

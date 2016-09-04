@@ -146,21 +146,17 @@
             android:layout_height="60dp"
             android:background="@null" >
 
-            <com.simicart.core.material.ButtonRectangle
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_option"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height_button_tablet"
+                style="@style/SimiButtonStyle"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="" />
+                android:layout_weight="1" />
 
-            <com.simicart.core.material.ButtonRectangle
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_addtocart"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height_button_tablet"
+                style="@style/SimiButtonStyle"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="" />
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout

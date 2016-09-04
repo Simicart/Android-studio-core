@@ -137,4 +137,10 @@ public class KeyData {
         public static final  String OPEN_FOR = "openfor";
     }
 
+    public static class SIGN_IN{
+        public static final  String EMAIL = "email";
+        public static final  String PASSWORD = "pass";
+        public static final  String IS_CHECKOUT = "is_checkout";
+    }
+
 }

@@ -5,12 +5,10 @@
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_place_order"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_60"
+        style="@style/SimiButtonStyle"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/size_5"
-        android:elevation="@dimen/size_4"
-        android:textAllCaps="false"/>
+        android:elevation="@dimen/size_4"/>
 
     <ScrollView
         android:id="@+id/scv_review_order"

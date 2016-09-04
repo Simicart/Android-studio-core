@@ -128,11 +128,9 @@
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/bt_signIn"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_button"
-                    android:textAllCaps="false"
-                    android:paddingLeft="@dimen/size_5"
-                    android:paddingRight="@dimen/size_5"/>
+                    style="@style/SimiButtonStyle"
+                    android:layout_marginLeft="@dimen/size_5"
+                    android:layout_marginRight="@dimen/size_5"/>
 
             </RelativeLayout>
 

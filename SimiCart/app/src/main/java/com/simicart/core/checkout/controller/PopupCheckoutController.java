@@ -8,6 +8,7 @@ import android.view.View.OnTouchListener;
 
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.ValueData;
@@ -90,8 +91,9 @@ public class PopupCheckoutController extends SimiController {
                     }
                     case MotionEvent.ACTION_UP: {
                         mBlockDelegate.dismissPopupCheckout();
-                        SignInFragment fragment = SignInFragment.newInstance(null);
-//					fragment.setCheckout(true);
+                        HashMap<String,Object> hmData = new HashMap<>();
+                        hmData.put(KeyData.SIGN_IN.IS_CHECKOUT, true);
+                        SignInFragment fragment = SignInFragment.newInstance(new SimiData(hmData));
                         if (DataLocal.isTablet) {
                             SimiManager.getIntance().replacePopupFragment(fragment);
                         } else {
