@@ -17,6 +17,7 @@ import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.slidemenu.fragment.CategorySlideMenuFragment;
@@ -92,7 +93,7 @@ public class CateHomeThemeOneComponent extends SimiComponent {
 
     protected void openListProduct() {
         HashMap<String,Object> hm = new HashMap<>();
-        hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
         hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, mCategory.getCategoryName());
         hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, mCategory.getCategoryId());
         SimiManager.getIntance().openCategoryDetail(hm);

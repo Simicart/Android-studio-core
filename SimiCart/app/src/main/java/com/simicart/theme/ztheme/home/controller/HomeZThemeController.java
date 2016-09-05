@@ -12,6 +12,7 @@ import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.theme.ztheme.home.delegate.HomeZThemeDelegate;
@@ -104,7 +105,7 @@ public class HomeZThemeController extends SimiController {
 
     protected void openListProduct(ZThemeSpotEntity spot) {
         HashMap<String,Object> hm = new HashMap<>();
-        hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CUSTOM);
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CUSTOM);
         hm.put("key", spot.getKey());
         hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, spot.getName());
         hm.put(KeyData.CATEGORY_DETAIL.CUSTOM_URL, "ztheme/api/get_spot_products");
@@ -113,7 +114,7 @@ public class HomeZThemeController extends SimiController {
 
     protected void openListProduct(Category category) {
         HashMap<String,Object> hm = new HashMap<>();
-        hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
         hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, category.getCategoryId());
         hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, category.getCategoryName());
         SimiManager.getIntance().openCategoryDetail(hm);

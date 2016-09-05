@@ -16,6 +16,7 @@ import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 
@@ -81,7 +82,7 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
 
     protected void openListProduct(Category cate) {
         HashMap<String,Object> hm = new HashMap<>();
-        hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
         hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, cate.getCategoryName());
         hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, cate.getCategoryId());
         SimiManager.getIntance().openCategoryDetail(hm);

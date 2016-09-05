@@ -10,6 +10,7 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.categorydetail.block.CategoryDetailBlock;
 import com.simicart.core.catalog.categorydetail.controller.CategoryDetailController;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -20,11 +21,6 @@ import com.simicart.core.home.component.SearchComponent;
  * Created by Martial on 8/19/2016.
  */
 public class CategoryDetailFragment extends SimiFragment {
-
-    public static String ALL = "all";
-    public static String SEARCH = "search";
-    public static String CATE = "cate";
-    public static String CUSTOM = "custom";
 
     protected String tagView;
     protected CategoryDetailBlock mBlock;
@@ -66,8 +62,15 @@ public class CategoryDetailFragment extends SimiFragment {
         }
         if (!DataLocal.isTablet) {
             mBlock.onChangeViewClick(mController.getOnChangeViewClick());
-            // initial search
             SearchComponent searchComponent = new SearchComponent();
+            if (mHashMapData.containsKey(KeyData.CATEGORY_DETAIL.CATE_ID)) {
+                String cateID = (String) mHashMapData.get(KeyData.CATEGORY_DETAIL.CATE_ID);
+                searchComponent.setCateID(cateID);
+            }
+            if (mHashMapData.containsKey(KeyData.CATEGORY_DETAIL.CATE_NAME)) {
+                String cateName = (String) mHashMapData.get(KeyData.CATEGORY_DETAIL.CATE_NAME);
+                searchComponent.setCateName(cateName);
+            }
             View searchView = searchComponent.createView();
             LinearLayout llSearch = (LinearLayout) rootView.findViewById(Rconfig.getInstance().id("ll_search"));
             llSearch.addView(searchView);

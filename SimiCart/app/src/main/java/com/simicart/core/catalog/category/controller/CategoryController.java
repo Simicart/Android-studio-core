@@ -15,6 +15,7 @@ import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductList;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.home.component.SpotProductComponent;
 
@@ -43,7 +44,7 @@ public class CategoryController extends SimiController {
                 HashMap<String,Object> hmData = new HashMap<>();
                 hmData.put(KeyData.CATEGORY_DETAIL.CATE_ID, mID);
                 hmData.put(KeyData.CATEGORY_DETAIL.CATE_NAME, mName);
-                hmData.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+                hmData.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
                 SimiManager.getIntance().openCategoryDetail(hmData);
             }
         };

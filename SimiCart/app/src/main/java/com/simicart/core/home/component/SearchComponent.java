@@ -2,21 +2,29 @@ package com.simicart.core.home.component;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
+
+import java.util.HashMap;
 
 /**
  * Created by frank on 7/14/16.
@@ -26,6 +34,8 @@ public class SearchComponent extends SimiComponent {
     protected EditText edtQuery;
     protected ImageView imgDelete;
     protected ImageView imgIconSearch;
+    protected String mCateID;
+    protected String mCateName;
     protected SearchCallBack mCallBack;
 
 
@@ -40,6 +50,9 @@ public class SearchComponent extends SimiComponent {
         edtQuery.setTextColor(AppColorConfig.getInstance().getSearchTextColor());
         edtQuery.setBackgroundColor(AppColorConfig.getInstance().getSearchBoxBackground());
         String searchText = SimiTranslator.getInstance().translate("Search Products");
+        if (Utils.validateString(mCateName)) {
+            searchText = mCateName;
+        }
         edtQuery.setHint(searchText);
 
 
@@ -71,6 +84,8 @@ public class SearchComponent extends SimiComponent {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     enableSearchAction(true);
+                } else {
+                    enableSearchAction(false);
                 }
             }
         });
@@ -96,14 +111,23 @@ public class SearchComponent extends SimiComponent {
                     }
                     return true;
                 }
+
                 return false;
             }
         });
+
 
         return rootView;
     }
 
     protected void enableSearchAction(boolean isEnable) {
+
+        LinearLayout.LayoutParams paramsParent = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout rltSearch = (RelativeLayout) findView("rlt_search");
+        rltSearch.setLayoutParams(paramsParent);
+        rltSearch.requestLayout();
+
+
         if (isEnable) {
 
             RelativeLayout.LayoutParams paramsIcon = new RelativeLayout.LayoutParams(Utils.getValueDp(15), Utils.getValueDp(15));
@@ -112,8 +136,9 @@ public class SearchComponent extends SimiComponent {
             paramsIcon.rightMargin = Utils.toDp(5);
             paramsIcon.leftMargin = Utils.toDp(16);
             imgIconSearch.setLayoutParams(paramsIcon);
+            imgIconSearch.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, Utils.getValueDp(40));
             params.addRule(RelativeLayout.RIGHT_OF, imgIconSearch.getId());
             edtQuery.setLayoutParams(params);
             edtQuery.setTextSize(16);
@@ -123,7 +148,7 @@ public class SearchComponent extends SimiComponent {
 
 
         } else {
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, Utils.getValueDp(40));
             params.addRule(RelativeLayout.CENTER_HORIZONTAL);
             params.addRule(RelativeLayout.CENTER_VERTICAL);
             edtQuery.setLayoutParams(params);
@@ -151,12 +176,16 @@ public class SearchComponent extends SimiComponent {
     }
 
     protected void performSearch(String query) {
-//        SimiData data = new SimiData();
-//        HashMap<String, Object> hs = new HashMap<>();
-//        hs.put("q", query);
-//        data.setHsData(hs);
-//        CategoryDetailFragment fragment = CategoryDetailFragment.newInstance(data);
-//        SimiManager.getIntance().replaceFragment(fragment);
+        HashMap<String, Object> hs = new HashMap<>();
+        hs.put(KeyData.CATEGORY_DETAIL.KEY_WORD, query);
+        hs.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.SEARCH);
+        if (Utils.validateString(mCateID)) {
+            hs.put(KeyData.CATEGORY_DETAIL.CATE_ID, mCateID);
+        }
+        if (Utils.validateString(mCateName)) {
+            hs.put(KeyData.CATEGORY_DETAIL.CATE_NAME, mCateName);
+        }
+        SimiManager.getIntance().openCategoryDetail(hs);
     }
 
     protected void hiddenKeyboard(View v) {
@@ -165,4 +194,19 @@ public class SearchComponent extends SimiComponent {
         imm.hideSoftInputFromWindow(v.getRootView().getWindowToken(), 0);
     }
 
+    public String getCateID() {
+        return mCateID;
+    }
+
+    public void setCateID(String mCateID) {
+        this.mCateID = mCateID;
+    }
+
+    public String getCateName() {
+        return mCateName;
+    }
+
+    public void setCateName(String mCateName) {
+        this.mCateName = mCateName;
+    }
 }

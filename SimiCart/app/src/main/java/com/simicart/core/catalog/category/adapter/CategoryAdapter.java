@@ -21,6 +21,7 @@ import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -100,7 +101,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     }
                 } else {
                     HashMap<String,Object> hm = new HashMap<>();
-                    hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CATE);
+                    hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
                     hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME,category.getCategoryName());
                     hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,category.getCategoryId());
                     SimiManager.getIntance().openCategoryDetail(hm);

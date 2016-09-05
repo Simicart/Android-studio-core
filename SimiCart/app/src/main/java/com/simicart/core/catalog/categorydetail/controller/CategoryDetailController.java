@@ -23,6 +23,7 @@ import com.simicart.core.catalog.categorydetail.model.CategoryDetailModel;
 import com.simicart.core.catalog.filter.entity.FilterEntity;
 import com.simicart.core.catalog.filter.entity.FilterState;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Constants;
 
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ public class CategoryDetailController extends SimiController {
 
     protected HashMap<String, Object> hmData;
     protected CategoryDetailDelegate mDelegate;
-    protected String mTypeCate;
+    protected String mTypeCate ;
     protected int mOffset = 0;
     protected int mLimit = 8;
     protected int mResultNumber = 0;
@@ -186,7 +187,7 @@ public class CategoryDetailController extends SimiController {
 
         if (null == mModel) {
             mModel = new CategoryDetailModel(mTypeCate);
-            if (mTypeCate.equals(CategoryDetailFragment.CUSTOM)) {
+            if (mTypeCate.equals(ValueData.CATEGORY_DETAIL.CUSTOM)) {
                 if (hmData.containsKey(KeyData.CATEGORY_DETAIL.CUSTOM_URL)) {
                     String customUrl = (String) hmData.get(KeyData.CATEGORY_DETAIL.CUSTOM_URL);
                     ((CategoryDetailModel) mModel).setCustomUrl(customUrl);

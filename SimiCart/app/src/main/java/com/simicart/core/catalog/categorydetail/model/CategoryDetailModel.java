@@ -8,6 +8,7 @@ import com.simicart.core.catalog.categorydetail.entity.LayerEntity;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,11 +34,11 @@ public class CategoryDetailModel extends SimiModel {
 
     @Override
     protected void setUrlAction() {
-        if (mType.equals(CategoryDetailFragment.CATE)) {
+        if (mType.equals(ValueData.CATEGORY_DETAIL.CATE)) {
             mUrlAction = "connector/catalog/get_category_products";
-        } else if (mType.equals(CategoryDetailFragment.SEARCH)) {
+        } else if (mType.equals(ValueData.CATEGORY_DETAIL.SEARCH)) {
             mUrlAction = "connector/catalog/search_products";
-        } else if (mType.equals(CategoryDetailFragment.ALL)) {
+        } else if (mType.equals(ValueData.CATEGORY_DETAIL.ALL)) {
             mUrlAction = "connector/catalog/get_all_products";
         } else {
             mUrlAction = mCustomUrl;

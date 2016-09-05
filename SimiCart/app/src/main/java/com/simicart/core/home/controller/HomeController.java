@@ -12,8 +12,10 @@ import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.product.entity.ProductList;
+import com.simicart.core.config.DataLocal;
 import com.simicart.core.home.component.BannerComponent;
 import com.simicart.core.home.component.CateHomeComponent;
+import com.simicart.core.home.component.SearchComponent;
 import com.simicart.core.home.component.SpotProductComponent;
 import com.simicart.core.home.delegate.HomeDelegate;
 import com.simicart.core.home.model.CategoryHomeModel;
@@ -38,6 +40,8 @@ public class HomeController extends SimiController {
     public void onStart() {
         initListener();
 
+        initSearch();
+
         requestBanner();
 
         requestCateHome();
@@ -47,6 +51,14 @@ public class HomeController extends SimiController {
 
     protected void initListener() {
 
+    }
+
+    protected void initSearch() {
+        if (!DataLocal.isTablet) {
+            SearchComponent searchComponent = new SearchComponent();
+            View searchView = searchComponent.createView();
+            mDelegate.showSearch(searchView);
+        }
     }
 
     protected void requestBanner() {

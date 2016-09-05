@@ -16,6 +16,7 @@ import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Rconfig;
 import com.simicart.theme.matrixtheme.home.entity.OrderProduct;
 import com.simicart.theme.ztheme.home.entity.ZThemeSpotEntity;
@@ -84,7 +85,7 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
             @Override
             public void onClick(View v) {
                 HashMap<String,Object> hm = new HashMap<>();
-                hm.put(KeyData.CATEGORY_DETAIL.TYPE, CategoryDetailFragment.CUSTOM);
+                hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CUSTOM);
                 hm.put("key", product.getSpotKey());
                 hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, product.getSpotName());
                 hm.put(KeyData.CATEGORY_DETAIL.CUSTOM_URL, "themeone/api/get_spot_products");

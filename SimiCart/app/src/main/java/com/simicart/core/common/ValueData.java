@@ -32,4 +32,11 @@ public class ValueData {
         public static int OPEN_FOR_EDIT = 993;
     }
 
+    public static class CATEGORY_DETAIL{
+        public static String ALL = "all";
+        public static String SEARCH = "search";
+        public static String CATE = "cate";
+        public static String CUSTOM = "custom";
+    }
+
 }

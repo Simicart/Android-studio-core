@@ -5,14 +5,11 @@
     // layout for search component
 
     <LinearLayout
-        android:id="@+id/rlt_search"
+        android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
-        android:background="@drawable/core_background_search"
-        android:orientation="vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"></LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
     // layout for home
 

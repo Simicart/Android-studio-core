@@ -17,6 +17,7 @@ public class HomeBlock extends SimiBlock implements HomeDelegate {
 
     protected LinearLayout llBanner;
     protected LinearLayout llCategory;
+    protected LinearLayout llSearch;
     protected LinearLayout llSportProduct;
 
     public HomeBlock(View view, Context context) {
@@ -27,22 +28,27 @@ public class HomeBlock extends SimiBlock implements HomeDelegate {
     public void initView() {
         llBanner = (LinearLayout) id("ll_banner");
         llCategory = (LinearLayout) id("ll_category");
+        llSearch = (LinearLayout) id("ll_search");
         llSportProduct = (LinearLayout) id("ll_spotproduct");
     }
 
 
     @Override
     public void showBanner(View bannerView) {
-        Log.e("HomeBlock", "showBanner");
         llBanner.removeAllViewsInLayout();
         llBanner.addView(bannerView);
     }
 
     @Override
     public void showCateHome(View cateView) {
-        Log.e("HomeBlock", "showCateHome");
         llCategory.removeAllViewsInLayout();
         llCategory.addView(cateView);
+    }
+
+    @Override
+    public void showSearch(View searchView) {
+        llSearch.removeAllViewsInLayout();
+        llSearch.addView(searchView);
     }
 
     @Override

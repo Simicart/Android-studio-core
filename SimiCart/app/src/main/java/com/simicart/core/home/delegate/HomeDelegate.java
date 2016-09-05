@@ -15,6 +15,8 @@ public interface HomeDelegate extends SimiDelegate{
 
     public void showCateHome(View cateView);
 
+    public void showSearch(View searchView);
+
     public void showSpotProduct(ArrayList<View> views);
 
 }

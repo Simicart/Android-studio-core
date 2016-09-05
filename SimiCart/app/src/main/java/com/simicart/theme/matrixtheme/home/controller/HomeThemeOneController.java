@@ -56,12 +56,6 @@ public class HomeThemeOneController extends SimiController {
 
     protected void showSearchComponent() {
         SearchComponent searchComponent = new SearchComponent();
-        searchComponent.setCallBack(new SearchCallBack() {
-            @Override
-            public void performSearch(String query) {
-
-            }
-        });
         View searchView = searchComponent.createView();
         mDelegate.showSearch(searchView);
     }
