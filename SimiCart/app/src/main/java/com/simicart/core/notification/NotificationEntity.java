@@ -24,7 +24,7 @@ public class NotificationEntity extends SimiEntity {
     private String type = "type";
     private String category_id = "categoryID";
     private String product_id = "productID";
-    private String image_url = "url";
+    private String image_url = "imageUrl";
     private String show_popup = "show_popup";
     private String has_child = "has_child";
     private String message = "message";

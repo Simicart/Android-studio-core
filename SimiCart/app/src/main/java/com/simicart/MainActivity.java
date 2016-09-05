@@ -2,8 +2,11 @@ package com.simicart;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.magestore.simicart.R;
 import com.simicart.core.base.manager.SimiManager;
@@ -31,6 +35,8 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.controller.AutoSignInController;
 import com.simicart.core.menutop.fragment.MenuTopFragment;
+import com.simicart.core.notification.NotificationEntity;
+import com.simicart.core.notification.NotificationPopup;
 import com.simicart.core.notification.SCRegistrationIntentService;
 import com.simicart.core.shortcutbadger.ShortcutBadgeException;
 import com.simicart.core.shortcutbadger.ShortcutBadger;
@@ -42,16 +48,8 @@ import java.util.List;
 
 @SuppressLint("DefaultLocale")
 public class MainActivity extends FragmentActivity {
-    public final static int PAUSE = 2;
-    public final static int RESUME = 1;
 
     private SlideMenuFragment mNavigationDrawerFragment;
-    //    private NotificationController notification;
-    public static int state = 0;
-
-    public static boolean mCheckToDetailAfterScan = false;
-    public static int mBackEntryCountDetail = 0;
-    public static boolean checkBackScan = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +90,7 @@ public class MainActivity extends FragmentActivity {
                 .newInstance(mNavigationDrawerFragment);
         ft.replace(Rconfig.getInstance().id("menu_top"), fragment);
         ft.commit();
-        // ViewServer.get(this).addWindow(this);
+
     }
 
 
@@ -104,34 +102,42 @@ public class MainActivity extends FragmentActivity {
     protected void registerNotification() {
         Intent intent = new Intent(this, SCRegistrationIntentService.class);
         startService(intent);
+
+        // local notification
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                SimiData simiData = intent.getParcelableExtra("data");
+                NotificationEntity notificationEntity = (NotificationEntity) simiData.getData().get("notification_entity");
+                showNotification(notificationEntity);
+            }
+        };
+
+        IntentFilter notificationFilter = new IntentFilter("com.simicart.localnotification");
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, notificationFilter);
     }
 
-    @Override
-    protected void onPause() {
-        state = PAUSE;
-        super.onPause();
+
+
+    protected void showNotification(final NotificationEntity notificationEntity) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                NotificationPopup notificationPopup = new NotificationPopup(notificationEntity);
+                View contentView = notificationPopup.createView();
+
+                AlertDialog.Builder alertBox = new AlertDialog.Builder(
+                        SimiManager.getIntance().getCurrentActivity());
+                alertBox.setView(contentView);
+                alertBox.show();
+            }
+        });
+
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 
     @Override
     protected void onResume() {
-//        if ((null == Config.newInstance().getCurrencyCode())
-//                || (Config.newInstance().getCurrencyCode().equals("null"))) {
-//            DataLocal.mSharedPre = getApplicationContext()
-//                    .getSharedPreferences(DataLocal.NAME_REFERENCE,
-//                            Context.MODE_PRIVATE);
-//            SimiManager.getIntance().changeStoreView();
-//        }
-        state = RESUME;
         SimiManager.getIntance().setCurrentActivity(this);
         SimiManager.getIntance().setManager(getSupportFragmentManager());
         // Update badge
@@ -140,14 +146,8 @@ public class MainActivity extends FragmentActivity {
         } catch (ShortcutBadgeException e) {
         }
         super.onResume();
-        // ViewServer.get(this).setFocusedWindow(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -186,10 +186,6 @@ public class MainActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
 
-//        EventBlock eventBlock = new EventBlock();
-//        eventBlock
-//                .dispatchEvent("com.simicart.leftmenu.mainactivity.onbackpress.checkentrycount");
-
         int count = SimiManager.getIntance().getManager()
                 .getBackStackEntryCount();
         if (count == 1) {
@@ -227,22 +223,13 @@ public class MainActivity extends FragmentActivity {
         alertboxDowload.show();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
-
 
     @Override
     protected void onDestroy() {
-//        notification.destroy();
-
         System.gc();
         Runtime.getRuntime().freeMemory();
         finish();
         super.onDestroy();
-        // ViewServer.get(this).removeWindow(this);
     }
 
     @Override
@@ -259,54 +246,8 @@ public class MainActivity extends FragmentActivity {
         intent.putExtra(Constants.DATA, bundle);
         LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcastSync(intent);
 
-        // event form signin
-//        EventController dispatch = new EventController();
-//        dispatch.dispatchEvent("com.simicart.MainActivity.onActivityResult",
-//                this);
-
-//        EventBlock block = new EventBlock();
-//        if (requestCode == 64209) {
-//            block = new EventBlock();
-//            block.dispatchEvent("com.simicart.core.catalog.product.block.ProductBlock.resultfacebook.checkresultcode");
-//        }
-
-        if (requestCode == 100) {
-            if (resultCode == RESULT_OK && data != null) {
-                ArrayList<String> result = data
-                        .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                String text = result.get(0);
-                if (Utils.validateString(text)) {
-                    try {
-//                        SimiEntity entity = new SimiEntity();
-//                        JSONObject object = new JSONObject();
-//                        object.put("textvoice", text);
-//                        entity.setJSONObject(object);
-//                        CacheBlock cacheBlock = new CacheBlock();
-//                        cacheBlock.setSimiEntity(entity);
-//                        block.dispatchEvent(
-//                                "com.simicart.mainactivity.onactivityresult",
-//                                cacheBlock);
-                    } catch (Exception e) {
-                    }
-                }
-            }
-        }
-
-//        EventActivity eventActivity = new EventActivity();
-//        CacheActivity cacheActivity = new CacheActivity();
-//        cacheActivity.setData(data);
-//        cacheActivity.setRequestCode(requestCode);
-//        cacheActivity.setResultCode(resultCode);
-//        eventActivity.dispatchEvent("com.simicart.leftmenu.mainactivity.onactivityresult.resultbarcode", cacheActivity);
-
-
     }
 
-//    public void nextActivity(View v) {
-//        Intent intent = new Intent(this, getClass());
-//        intent.putExtra("counter", 1);
-//        startActivity(intent);
-//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
