@@ -17,11 +17,25 @@
         android:layout_above="@id/btn_save">
 
         <LinearLayout
-            android:id="@+id/ll_body_address"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/size_10"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_body_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"
+                android:orientation="vertical"></LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/map_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_10"></FrameLayout>
+
+        </LinearLayout>
+
     </ScrollView>
 
 

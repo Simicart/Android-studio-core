@@ -91,10 +91,14 @@ public class SimiTextRowComponent extends SimiRowComponent {
         mInputType = inputType;
     }
 
-
     public int getInputType() {
         return mInputType;
     }
 
+    public void changeValue(Object value) {
+        if (null != value && Utils.validateString(String.valueOf(value))) {
+            edtBody.setText(String.valueOf(value));
+        }
+    }
 
 }

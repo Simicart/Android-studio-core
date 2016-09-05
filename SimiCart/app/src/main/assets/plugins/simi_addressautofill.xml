@@ -1,0 +1,6 @@
+<events>
+    <event>
+        <fullname>com.simicart.plugins.addressautofill.AddressAutoFill</fullname>
+	    <sku>simi_developer</sku>    
+    </event>
+</events>
