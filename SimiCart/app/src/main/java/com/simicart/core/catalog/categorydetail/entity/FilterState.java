@@ -1,9 +1,6 @@
-package com.simicart.core.catalog.filter.entity;
+package com.simicart.core.catalog.categorydetail.entity;
 
 import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.catalog.filter.common.FilterConstant;
-
-import java.io.Serializable;
 
 public class FilterState extends SimiEntity {
     protected String mAttribute;
@@ -11,13 +8,17 @@ public class FilterState extends SimiEntity {
     protected String mLabel;
     protected String mValue;
 
+    public String ATTRIBUTE = "attribute";
+    public String TITLE = "title";
+    public String VALUE = "value";
+    public String LABEL = "label";
 
     @Override
     public void parse() {
-        mAttribute = getData(FilterConstant.ATTRIBUTE);
-        mTitle = getData(FilterConstant.TITLE);
-        mLabel = getData(FilterConstant.LABEL);
-        mValue = getData(FilterConstant.VALUE);
+        mAttribute = getData(ATTRIBUTE);
+        mTitle = getData(TITLE);
+        mLabel = getData(LABEL);
+        mValue = getData(VALUE);
     }
 
     public String getAttribute() {

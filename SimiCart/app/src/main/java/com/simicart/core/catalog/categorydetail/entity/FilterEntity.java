@@ -1,22 +1,19 @@
-package com.simicart.core.catalog.filter.entity;
+package com.simicart.core.catalog.categorydetail.entity;
 
 import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.catalog.filter.common.FilterConstant;
 import com.simicart.core.common.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FilterEntity extends SimiEntity implements Serializable {
+public class FilterEntity extends SimiEntity   {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	public  String ATTRIBUTE = "attribute";
+	public  String FILTER = "filter";
+	public  String TITLE = "title";
 
 	protected String mAttribute;
 
@@ -27,7 +24,7 @@ public class FilterEntity extends SimiEntity implements Serializable {
 	public String getmAttribute() {
 
 		if (!Utils.validateString(mAttribute)) {
-			mAttribute = getData(FilterConstant.ATTRIBUTE);
+			mAttribute = getData(ATTRIBUTE);
 		}
 
 		return mAttribute;
@@ -40,7 +37,7 @@ public class FilterEntity extends SimiEntity implements Serializable {
 	public String getmTitle() {
 
 		if (!Utils.validateString(mTitle)) {
-			mTitle = getData(FilterConstant.TITLE);
+			mTitle = getData(TITLE);
 		}
 
 		return mTitle;
@@ -54,7 +51,7 @@ public class FilterEntity extends SimiEntity implements Serializable {
 
 		if (null == mValueFilters) {
 			try {
-				JSONArray array = new JSONArray(getData(FilterConstant.FILTER));
+				JSONArray array = new JSONArray(getData(FILTER));
 
 				if (null != array && array.length() > 0) {
 					mValueFilters = new ArrayList<ValueFilterEntity>();

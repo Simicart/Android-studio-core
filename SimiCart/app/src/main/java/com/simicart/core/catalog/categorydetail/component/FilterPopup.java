@@ -13,15 +13,14 @@ import com.simicart.core.base.component.callback.ExpandRowCallBack;
 import com.simicart.core.base.component.callback.IconDeleteRowCallBack;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.categorydetail.delegate.FilterCallBack;
-import com.simicart.core.catalog.filter.entity.FilterEntity;
-import com.simicart.core.catalog.filter.entity.FilterState;
-import com.simicart.core.catalog.filter.entity.ValueFilterEntity;
+import com.simicart.core.catalog.categorydetail.entity.FilterEntity;
+import com.simicart.core.catalog.categorydetail.entity.FilterState;
+import com.simicart.core.catalog.categorydetail.entity.ValueFilterEntity;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

@@ -1,9 +1,6 @@
 package com.simicart.core.catalog.categorydetail.entity;
 
 import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.catalog.filter.common.FilterConstant;
-import com.simicart.core.catalog.filter.entity.FilterEntity;
-import com.simicart.core.catalog.filter.entity.FilterState;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,8 +16,8 @@ public class LayerEntity extends SimiEntity {
     protected ArrayList<FilterEntity> mListFilter;
     protected ArrayList<FilterState> mListState;
 
-    protected String layer_filter = "layer_filter";
-    protected String layer_state = "layer_state";
+    protected String LAYER_FILTER = "layer_filter";
+    protected String LAYER_STATE = "layer_state";
 
     @Override
     public void parse() {
@@ -34,9 +31,9 @@ public class LayerEntity extends SimiEntity {
 
     protected void parseState() throws JSONException {
         mListState = new ArrayList<>();
-        if (hasKey(FilterConstant.LAYER_STATE)) {
+        if (hasKey(LAYER_STATE)) {
             JSONArray array_state = mJSON
-                    .getJSONArray(FilterConstant.LAYER_STATE);
+                    .getJSONArray(LAYER_STATE);
             if (null != array_state && array_state.length() > 0) {
                 for (int i = 0; i < array_state.length(); i++) {
                     JSONObject object = array_state
@@ -51,9 +48,9 @@ public class LayerEntity extends SimiEntity {
 
     protected void parseFilter() throws JSONException {
         mListFilter = new ArrayList<>();
-        if (hasKey(FilterConstant.LAYER_FILTER)) {
+        if (hasKey(LAYER_FILTER)) {
             JSONArray array_filter = mJSON
-                    .getJSONArray(FilterConstant.LAYER_FILTER);
+                    .getJSONArray(LAYER_FILTER);
             if (null != array_filter && array_filter.length() > 0) {
                 for (int i = 0; i < array_filter.length(); i++) {
                     JSONObject object = array_filter

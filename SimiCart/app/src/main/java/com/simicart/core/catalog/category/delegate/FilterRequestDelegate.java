@@ -1,7 +1,7 @@
 package com.simicart.core.catalog.category.delegate;
 
-import com.simicart.core.catalog.filter.entity.FilterEntity;
-import com.simicart.core.catalog.filter.entity.FilterState;
+import com.simicart.core.catalog.categorydetail.entity.FilterEntity;
+import com.simicart.core.catalog.categorydetail.entity.FilterState;
 
 
 public interface FilterRequestDelegate {
