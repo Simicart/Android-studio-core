@@ -143,4 +143,9 @@ public class KeyData {
         public static final  String IS_CHECKOUT = "is_checkout";
     }
 
+    public static class ADDRESS_AUTO_FILL {
+        public static final String LIST_COMPONENTS = "list_components";
+        public static final String LIST_COUNTRIES = "list_countries";
+    }
+
 }

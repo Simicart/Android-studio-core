@@ -1,15 +1,21 @@
 package com.simicart.core.customer.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.block.AddressBookDetailBlock;
 import com.simicart.core.customer.controller.AddressBookDetailController;
+
+import java.util.HashMap;
 
 public class AddressBookDetailFragment extends SimiFragment {
 
@@ -50,5 +56,8 @@ public class AddressBookDetailFragment extends SimiFragment {
         return rootView;
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        SimiEvent.dispatchEvent(KeyEvent.ADDRESS_AUTO_FILL.ADDRESS_AUTO_FILL_ON_REQUEST_PERMISSION_RESULT, null);
+    }
 }

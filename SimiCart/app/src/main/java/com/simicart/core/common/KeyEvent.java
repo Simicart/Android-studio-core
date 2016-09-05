@@ -56,4 +56,9 @@ public class KeyEvent {
         public static final String ZOPIM_ADD_ICON_TOP_MENU = "com.simicart.core.menutop.block.MenuTopBlock";
     }
 
+    public static class ADDRESS_AUTO_FILL {
+        public static final String ADDRESS_AUTO_FILL_ADD_MAP = "simicart.addressauto.add.map";
+        public static final String ADDRESS_AUTO_FILL_ON_REQUEST_PERMISSION_RESULT = "simicart.addressauto.on.result";
+    }
+
 }

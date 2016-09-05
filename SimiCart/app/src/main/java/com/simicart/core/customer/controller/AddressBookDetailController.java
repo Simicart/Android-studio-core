@@ -15,12 +15,14 @@ import com.simicart.core.base.component.callback.SpinnerRowCallBack;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.customer.delegate.AddressBookDetailDelegate;
@@ -59,9 +61,9 @@ public class AddressBookDetailController extends SimiController {
     protected SimiDOBRowComponent dobRowComponent;
     protected GenderConfig mGender;
 
-
     @Override
     public void onStart() {
+
         parseParam();
 
         initListener();
@@ -116,6 +118,7 @@ public class AddressBookDetailController extends SimiController {
             @Override
             public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissLoading();
+                mDelegate.updateView(null);
                 ArrayList<SimiEntity> entities = getCountryModel.getCollection()
                         .getCollection();
                 if (null != entities && entities.size() > 0) {
@@ -173,6 +176,11 @@ public class AddressBookDetailController extends SimiController {
         }
 
         // dispatch event for plugins
+        // event for address auto fill
+        HashMap<String,Object> hmData = new HashMap<>();
+        hmData.put(KeyData.ADDRESS_AUTO_FILL.LIST_COMPONENTS, mListRowComponent);
+        hmData.put(KeyData.ADDRESS_AUTO_FILL.LIST_COUNTRIES, mListCountry);
+        SimiEvent.dispatchEvent(KeyEvent.ADDRESS_AUTO_FILL.ADDRESS_AUTO_FILL_ADD_MAP, hmData);
 
         ArrayList<View> listRow = new ArrayList<>();
         if (null != mListRowComponent) {
@@ -686,6 +694,12 @@ public class AddressBookDetailController extends SimiController {
             }
 
         }
+
+        // event for address auto fill
+        HashMap<String,Object> hmData = new HashMap<>();
+        hmData.put(KeyData.ADDRESS_AUTO_FILL.LIST_COMPONENTS, mListRowComponent);
+        hmData.put(KeyData.ADDRESS_AUTO_FILL.LIST_COUNTRIES, mListCountry);
+        SimiEvent.dispatchEvent(KeyEvent.ADDRESS_AUTO_FILL.ADDRESS_AUTO_FILL_ADD_MAP, hmData);
 
     }
 

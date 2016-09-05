@@ -111,7 +111,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
