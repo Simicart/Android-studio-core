@@ -1,0 +1,7 @@
+<events>
+      <event>
+        <fullname>com.simicart.plugins.braintree.BraintreePayment</fullname>
+	    <sku>simi_developer</sku>    
+    </event> 
+</events>
+ 

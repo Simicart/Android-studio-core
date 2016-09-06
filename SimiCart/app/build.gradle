@@ -69,4 +69,7 @@ dependencies {
     // library for zopim
     compile group: 'com.zopim.android', name: 'sdk', version: '1.2.0.1'
 
+    // library for braintree payment
+    compile project(':braintreelibrary')
+
 }
