@@ -1,0 +1,6 @@
+<events>
+      <event>
+        <fullname>com.simicart.plugins.hideaddress.HiddenAddress</fullname>
+	    <sku>simi_developer</sku>    
+    </event>            
+</events>

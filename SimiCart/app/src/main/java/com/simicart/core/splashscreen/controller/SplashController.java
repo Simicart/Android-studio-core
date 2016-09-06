@@ -13,6 +13,7 @@ import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.cms.entity.Cms;
 import com.simicart.core.common.DataPreferences;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.ReadXMLLanguage;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
@@ -194,7 +195,7 @@ public class SplashController {
     }
 
     protected void dispatchEvent() {
-//        "com.simicart.splashscreen.controller.SplashController"
+        SimiEvent.dispatchEvent(KeyEvent.HIDDEN_ADDRESS.HIDDEN_ADDRESS_GET_CONFIG_ADDRESS, null);
     }
 
 

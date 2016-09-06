@@ -14,8 +14,6 @@ import org.json.JSONObject;
 
 public class StoreViewModel extends SimiModel {
 
-    ConfigCustomerAddress configCustomerAddress = new ConfigCustomerAddress();
-
     @Override
     protected void parseData() {
         try {

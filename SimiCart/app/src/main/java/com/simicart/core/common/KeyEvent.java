@@ -61,4 +61,8 @@ public class KeyEvent {
         public static final String ADDRESS_AUTO_FILL_ON_REQUEST_PERMISSION_RESULT = "simicart.addressauto.on.result";
     }
 
+    public static class HIDDEN_ADDRESS {
+        public static final String HIDDEN_ADDRESS_GET_CONFIG_ADDRESS = "simicart.hiddenaddress.get.config";
+    }
+
 }
