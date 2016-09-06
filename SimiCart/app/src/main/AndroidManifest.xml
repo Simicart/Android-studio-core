@@ -89,7 +89,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.simicart.core.base.SCApplication"
+
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/default_icon"

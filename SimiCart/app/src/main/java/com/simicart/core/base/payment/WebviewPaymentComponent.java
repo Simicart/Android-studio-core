@@ -41,6 +41,7 @@ public class WebviewPaymentComponent extends SimiComponent {
         super();
         mData = data;
         mCallBack = callBack;
+        parseData();
     }
 
     protected void parseData() {

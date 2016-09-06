@@ -36,6 +36,7 @@ import com.simicart.core.customer.fragment.CustomerFragment;
 import com.simicart.core.customer.fragment.ListOfChoiceFragment;
 import com.simicart.core.home.fragment.HomeFragment;
 import com.simicart.core.menutop.controller.MenuTopController;
+import com.simicart.core.notification.WebviewFragment;
 import com.simicart.core.slidemenu.controller.CategorySlideMenuController;
 import com.simicart.core.slidemenu.controller.PhoneSlideMenuController;
 import com.simicart.core.slidemenu.fragment.SlideMenuFragment;
@@ -122,9 +123,15 @@ public class SimiManager {
         replaceFragment(fragment);
     }
 
-    public void  openCustomerPage(HashMap<String,Object> hm){
+    public void openCustomerPage(HashMap<String, Object> hm) {
         SimiData data = new SimiData(hm);
         CustomerFragment fragment = CustomerFragment.newInstance(data);
+        replaceFragment(fragment);
+    }
+
+    public void openWebviewPage(HashMap<String, Object> hm) {
+        SimiData data = new SimiData(hm);
+        WebviewFragment fragment = WebviewFragment.newInstance(data);
         replaceFragment(fragment);
     }
 
@@ -258,7 +265,7 @@ public class SimiManager {
             method = "";
         }
         Bundle bundle = new Bundle();
-        HashMap<String,Object> hmData = new HashMap<>();
+        HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(KeyData.SIMI_FRAGMENT.FRAGMENT, entity);
         hmData.put(KeyData.SIMI_FRAGMENT.METHOD, method);
         bundle.putParcelable(Constants.ENTITY, new SimiData(hmData));

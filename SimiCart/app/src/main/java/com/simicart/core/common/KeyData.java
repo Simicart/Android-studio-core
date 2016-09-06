@@ -148,4 +148,8 @@ public class KeyData {
         public static final String LIST_COUNTRIES = "list_countries";
     }
 
+    public static class WEBVIEW_PAGE{
+        public static final String URL = "url";
+    }
+
 }

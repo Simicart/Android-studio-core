@@ -1,6 +1,7 @@
 package com.simicart.core.base.model.entity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +32,7 @@ public class SimiEntity {
 			try {
 				return this.mJSON.getString(key);
 			} catch (JSONException e) {
-				e.printStackTrace();
+				Log.e("SimiEntity ","GET DATA Exception " + e.getMessage());
 			}
 		}
 		return null;

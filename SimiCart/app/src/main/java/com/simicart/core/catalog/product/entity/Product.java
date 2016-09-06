@@ -360,7 +360,6 @@ public class Product extends SimiEntity implements Parcelable {
         if (null == mName) {
             mName = getData(Constants.PRODUCT_NAME);
         }
-        Log.e("Product ", "getName " + mName);
 
         return this.mName;
     }

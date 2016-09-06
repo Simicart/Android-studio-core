@@ -1,16 +1,20 @@
 package com.simicart.core.notification;
 
+import android.util.Log;
+
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
+
+import java.io.Serializable;
 
 /**
  * Created by frank on 7/19/16.
  */
-public class NotificationEntity extends SimiEntity {
+public class NotificationEntity extends SimiEntity implements Serializable {
 
     protected String mTitle;
     protected String mUrl;
-    protected String mType;
+    protected TYPE_OPEN mType;
     protected String mCategoryID;
     protected String mProductID;
     protected String mImageUrl;
@@ -20,7 +24,7 @@ public class NotificationEntity extends SimiEntity {
     protected boolean hasChild;
 
     private String notice_title = "title";
-    private String notice_url = "notice_url";
+    private String url = "url";
     private String type = "type";
     private String category_id = "categoryID";
     private String product_id = "productID";
@@ -30,6 +34,11 @@ public class NotificationEntity extends SimiEntity {
     private String message = "message";
     private String categoryName = "categoryName";
 
+    public enum TYPE_OPEN {
+        PRODUCT_DETAIL,
+        CATEGORY,
+        WEBVIEW
+    }
 
     @Override
     public void parse() {
@@ -59,14 +68,24 @@ public class NotificationEntity extends SimiEntity {
         }
 
         // url
-        if (hasKey(notice_url)) {
-            mUrl = getData(notice_url);
+        if (hasKey(url)) {
+            mUrl = getData(url);
+            Log.e("NotificationEntity ","-----> URL " + mUrl);
         }
 
 
         // type
         if (hasKey(type)) {
-            mType = getData(type);
+            String typeOpen = getData(type);
+            if (Utils.validateString(typeOpen)) {
+                if (typeOpen.equals("1")) {
+                    mType = TYPE_OPEN.PRODUCT_DETAIL;
+                } else if (typeOpen.equals("2")) {
+                    mType = TYPE_OPEN.CATEGORY;
+                } else {
+                    mType = TYPE_OPEN.WEBVIEW;
+                }
+            }
         }
 
         // category id
@@ -113,11 +132,11 @@ public class NotificationEntity extends SimiEntity {
     }
 
 
-    public String getType() {
+    public TYPE_OPEN getType() {
         return mType;
     }
 
-    public void setType(String mType) {
+    public void setType(TYPE_OPEN mType) {
         this.mType = mType;
     }
 
@@ -161,7 +180,7 @@ public class NotificationEntity extends SimiEntity {
         this.mCategoryName = mCategoryName;
     }
 
-    public boolean isHasChild() {
+    public boolean hasChild() {
         return hasChild;
     }
 

@@ -8,17 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.magestore.simicart.R;
@@ -35,6 +31,7 @@ import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.controller.AutoSignInController;
 import com.simicart.core.menutop.fragment.MenuTopFragment;
+import com.simicart.core.notification.NotificationCallBack;
 import com.simicart.core.notification.NotificationEntity;
 import com.simicart.core.notification.NotificationPopup;
 import com.simicart.core.notification.SCRegistrationIntentService;
@@ -42,14 +39,14 @@ import com.simicart.core.shortcutbadger.ShortcutBadgeException;
 import com.simicart.core.shortcutbadger.ShortcutBadger;
 import com.simicart.core.slidemenu.fragment.SlideMenuFragment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 @SuppressLint("DefaultLocale")
 public class MainActivity extends FragmentActivity {
 
-    private SlideMenuFragment mNavigationDrawerFragment;
+    public static boolean isActive;
+    protected AlertDialog alertDialogNotification = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +68,10 @@ public class MainActivity extends FragmentActivity {
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-        mNavigationDrawerFragment = (SlideMenuFragment) getSupportFragmentManager()
+        SlideMenuFragment slideMenuFragment = (SlideMenuFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.navigation_drawer);
 
-        mNavigationDrawerFragment.setup(R.id.navigation_drawer,
+        slideMenuFragment.setup(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         changeFont();
 
@@ -83,13 +80,23 @@ public class MainActivity extends FragmentActivity {
             SimiManager.getIntance().onUpdateCartQty(qtyCart);
         }
 
+        // check whether have any notifications
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            NotificationEntity notificationData = (NotificationEntity) extras
+                    .getSerializable("NOTIFICATION_DATA");
+            showNotification(notificationData);
+        }
+
         registerNotification();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         MenuTopFragment fragment = MenuTopFragment
-                .newInstance(mNavigationDrawerFragment);
+                .newInstance(slideMenuFragment);
         ft.replace(Rconfig.getInstance().id("menu_top"), fragment);
         ft.commit();
+
+        isActive = true;
 
     }
 
@@ -118,18 +125,36 @@ public class MainActivity extends FragmentActivity {
     }
 
 
-
     protected void showNotification(final NotificationEntity notificationEntity) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
+                final AlertDialog.Builder alertBox = new AlertDialog.Builder(
+                        SimiManager.getIntance().getCurrentActivity());
+
+                String title = notificationEntity.getTitle();
+                alertBox.setTitle(title);
+
                 NotificationPopup notificationPopup = new NotificationPopup(notificationEntity);
+                notificationPopup.setCallBack(new NotificationCallBack() {
+                    @Override
+                    public boolean close() {
+                        alertDialogNotification.dismiss();
+                        return true;
+                    }
+
+                    @Override
+                    public boolean show() {
+                        alertDialogNotification.dismiss();
+                        return false;
+                    }
+                });
                 View contentView = notificationPopup.createView();
 
-                AlertDialog.Builder alertBox = new AlertDialog.Builder(
-                        SimiManager.getIntance().getCurrentActivity());
+
                 alertBox.setView(contentView);
-                alertBox.show();
+                alertDialogNotification = alertBox.show();
             }
         });
 
@@ -138,6 +163,7 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onResume() {
+        isActive = true;
         SimiManager.getIntance().setCurrentActivity(this);
         SimiManager.getIntance().setManager(getSupportFragmentManager());
         // Update badge
@@ -149,16 +175,6 @@ public class MainActivity extends FragmentActivity {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void changeFont() {
         FontsOverride.setDefaultFont(this, "DEFAULT", Config.getInstance()
                 .getFontCustom());
@@ -168,18 +184,6 @@ public class MainActivity extends FragmentActivity {
                 .getFontCustom());
         FontsOverride.setDefaultFont(this, "SERIF", Config.getInstance()
                 .getFontCustom());
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        }
     }
 
 
@@ -223,9 +227,15 @@ public class MainActivity extends FragmentActivity {
         alertboxDowload.show();
     }
 
+    @Override
+    protected void onPause() {
+        isActive = false;
+        super.onPause();
+    }
 
     @Override
     protected void onDestroy() {
+        isActive = false;
         System.gc();
         Runtime.getRuntime().freeMemory();
         finish();

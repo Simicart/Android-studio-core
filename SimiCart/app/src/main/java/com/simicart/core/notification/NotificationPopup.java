@@ -1,10 +1,7 @@
 package com.simicart.core.notification;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.os.Looper;
-import android.text.TextUtils;
-import android.util.TypedValue;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,20 +10,25 @@ import android.widget.TextView;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DrawableManager;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Rconfig;
 
-import static com.simicart.core.config.Rconfig.*;
+import java.util.HashMap;
+
+import static com.simicart.core.config.Rconfig.getInstance;
 
 /**
- * Created by MSI on 05/09/2016.
+ * Created by frank on 05/09/2016.
  */
 public class NotificationPopup {
 
     protected NotificationEntity mNotificationEntity;
+    protected NotificationCallBack mCallBack;
     protected View rootView;
     protected Context mContext;
+
 
     public NotificationPopup(NotificationEntity notificationEntity) {
         mNotificationEntity = notificationEntity;
@@ -34,25 +36,6 @@ public class NotificationPopup {
     }
 
     public View createView() {
-
-    return    initBody();
-
-//        TextView tv = (TextView) alertboxDowload
-//                .findViewById(android.R.id.title);
-//        tv.setMaxLines(2);
-//        tv.setEllipsize(TextUtils.TruncateAt.END);
-//        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-
-
-//        String title = mNotificationEntity.getTitle();
-//        mAlert.setTitle(SimiTranslator.getInstance().translate(
-//                title));
-//        mAlert.setCancelable(false);
-//
-//        mAlert.show();
-    }
-
-    protected View initBody() {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         rootView = inflater.inflate(
                 getInstance().layout("core_notification_layout"), null);
@@ -66,8 +49,8 @@ public class NotificationPopup {
         createShow();
 
         return rootView;
-
     }
+
 
     protected void createImageNotification() {
         ImageView im_notification = (ImageView) findView("im_notification");
@@ -108,7 +91,9 @@ public class NotificationPopup {
 
             @Override
             public void onClick(View v) {
-//                mAlert.dismiss();
+                if (null != mCallBack) {
+                    mCallBack.close();
+                }
             }
         });
     }
@@ -120,19 +105,90 @@ public class NotificationPopup {
 
             @Override
             public void onClick(View v) {
-//                mAlert.dismiss();
-                openNotification();
+                if (null != mCallBack && mCallBack.show()) {
+
+                } else {
+                    openNotification();
+                }
             }
         });
     }
 
     protected void openNotification() {
+        NotificationEntity.TYPE_OPEN type = mNotificationEntity.getType();
+        if (type == NotificationEntity.TYPE_OPEN.PRODUCT_DETAIL) {
+            openProductDetail();
+        } else if (type == NotificationEntity.TYPE_OPEN.CATEGORY) {
+            openCategory();
+        } else {
+            // web view
+            openWebview();
+        }
+    }
 
+    protected void openProductDetail() {
+        String productId = mNotificationEntity.getProductID();
+        if (Utils.validateString(productId)) {
+            HashMap<String, Object> hm = new HashMap<>();
+            hm.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, productId);
+            SimiManager.getIntance().openProductDetail(hm);
+        }
+
+    }
+
+    protected void openCategory() {
+        if (mNotificationEntity.hasChild()) {
+            // open category
+            String cateId = mNotificationEntity.getCategoryID();
+            String cateName = mNotificationEntity.getmCategoryName();
+            HashMap<String, Object> hm = new HashMap<>();
+            if (Utils.validateString(cateId)) {
+                hm.put(KeyData.CATEGORY.CATEGORY_ID, cateId);
+            }
+            if (Utils.validateString(cateName)) {
+                hm.put(KeyData.CATEGORY.CATEGORY_NAME, cateName);
+            }
+            SimiManager.getIntance().openCategory(hm);
+
+        } else {
+            // open category detail
+            String cateId = mNotificationEntity.getCategoryID();
+            String cateName = mNotificationEntity.getmCategoryName();
+            HashMap<String, Object> hm = new HashMap<>();
+            if (Utils.validateString(cateId)) {
+                hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, cateId);
+            }
+            if (Utils.validateString(cateName)) {
+                hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, cateName);
+            }
+            hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
+            SimiManager.getIntance().openCategoryDetail(hm);
+        }
+
+    }
+
+    protected void openWebview() {
+        Log.e("NotificationPopup ","-----------------> OPEN WEB VIEW ");
+        String url = mNotificationEntity.getUrl();
+        Log.e("NotificationPopup ","-----------------> OPEN WEB VIEW URL " + url);
+        if (Utils.validateString(url)) {
+            if (!url.contains("http")) {
+                url = "http://" + url;
+            }
+            Log.e("NotificationPopup ","-----------------> URL " + url);
+            HashMap<String, Object> hm = new HashMap<>();
+            hm.put(KeyData.WEBVIEW_PAGE.URL, url);
+            SimiManager.getIntance().openWebviewPage(hm);
+        }
     }
 
     protected View findView(String id) {
         int idView = Rconfig.getInstance().id(id);
         return rootView.findViewById(idView);
+    }
+
+    public void setCallBack(NotificationCallBack callBack) {
+        mCallBack = callBack;
     }
 
 }
