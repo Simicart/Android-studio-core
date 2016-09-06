@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -34,6 +35,7 @@ import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.entity.CountryEntity;
@@ -48,6 +50,7 @@ import java.util.List;
  */
 public class AddressAutoFillFragment extends SimiFragment {
 
+    protected TextView tvLabel;
     protected GoogleApiClient mGoogleApiClient;
     protected Location currrentLocation;
     protected GoogleMap mGoogleMap;
@@ -58,13 +61,8 @@ public class AddressAutoFillFragment extends SimiFragment {
 
     protected String mStreet, mCity, mPostalCode, mCountryID;
 
-    public static AddressAutoFillFragment instance;
-
     public static AddressAutoFillFragment newInstance() {
-        if(instance == null) {
-            instance = new AddressAutoFillFragment();
-        }
-        return instance;
+        return new AddressAutoFillFragment();
     }
 
     public void setListRowComponent(ArrayList<SimiRowComponent> mListRowComponent) {
@@ -79,6 +77,10 @@ public class AddressAutoFillFragment extends SimiFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(Rconfig.getInstance().layout("plugins_addressautofill_map"), container, false);
+
+        tvLabel = (TextView) rootView.findViewById(Rconfig.getInstance().id("tv_label"));
+        tvLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
+        tvLabel.setText(SimiTranslator.getInstance().translate("Touch the map until you get your desired address"));
 
         new InitMapAsync().execute();
 

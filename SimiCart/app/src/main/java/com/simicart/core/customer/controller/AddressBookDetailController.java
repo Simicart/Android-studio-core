@@ -1,6 +1,7 @@
 package com.simicart.core.customer.controller;
 
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -666,7 +667,9 @@ public class AddressBookDetailController extends SimiController {
             for (int i = 0; i < mListRowComponent.size(); i++) {
                 SimiRowComponent component = mListRowComponent.get(i);
                 Object value = component.getValue();
+                Log.e("before", String.valueOf(value));
                 View view = component.createView();
+                Log.e("after", String.valueOf(component.getValue()));
                 listRow.add(view);
             }
         }
@@ -695,11 +698,9 @@ public class AddressBookDetailController extends SimiController {
 
         }
 
-        // event for address auto fill
-        HashMap<String,Object> hmData = new HashMap<>();
-        hmData.put(KeyData.ADDRESS_AUTO_FILL.LIST_COMPONENTS, mListRowComponent);
-        hmData.put(KeyData.ADDRESS_AUTO_FILL.LIST_COUNTRIES, mListCountry);
-        SimiEvent.dispatchEvent(KeyEvent.ADDRESS_AUTO_FILL.ADDRESS_AUTO_FILL_ADD_MAP, hmData);
+        for (SimiRowComponent component : mListRowComponent) {
+            Log.e("after", String.valueOf(component.getValue()));
+        }
 
     }
 
