@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 23
     buildToolsVersion '23.0.3'
@@ -45,6 +46,9 @@ dependencies {
     compile 'com.android.support:design:24.2.0'
     compile 'com.paypal.sdk:paypal-android-sdk:2.13.3'
     compile 'com.google.android.gms:play-services-gcm:9.4.0'
+
+    // for mobile analytic plugin
+    compile 'com.google.android.gms:play-services-analytics:9.4.0'
 
     // library for indicator
     compile 'me.relex:circleindicator:1.2.1@aar'

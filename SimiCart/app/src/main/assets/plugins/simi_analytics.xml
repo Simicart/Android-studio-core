@@ -1,0 +1,6 @@
+<events>
+      <event>
+        <fullname>com.simicart.plugins.mobileanalytics.Analytic</fullname>
+	    <sku>simi_developer</sku>
+    </event>
+</events>

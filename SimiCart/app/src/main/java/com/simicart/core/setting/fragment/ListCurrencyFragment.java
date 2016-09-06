@@ -42,7 +42,6 @@ public class ListCurrencyFragment extends SimiFragment {
 		ArrayList<String> _list = new ArrayList<>();
 		for (CurrencyEntity currency : listCurrency) {
 			String title = currency.getTitle();
-			Log.e("ListCurrencyFragment ", "setListLanguage " + title);
 			_list.add(title);
 		}
 		this.mList = _list;
@@ -51,6 +50,7 @@ public class ListCurrencyFragment extends SimiFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		setScreenName("List Currency Screen");
 		View view = inflater.inflate(
 				Rconfig.getInstance().layout("core_fragment_list_choice"), container,
 				false);

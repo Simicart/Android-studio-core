@@ -39,4 +39,10 @@ public class ValueData {
         public static String CUSTOM = "custom";
     }
 
+    public static class ANALYTICS{
+        public static String SCREEN_TYPE = "screen_type";
+        public static String BANNER_TYPE = "banner_type";
+        public static String ORDER_TYPE = "order_type";
+    }
+
 }

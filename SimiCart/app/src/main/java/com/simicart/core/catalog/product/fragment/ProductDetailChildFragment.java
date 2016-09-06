@@ -1,6 +1,7 @@
 package com.simicart.core.catalog.product.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class ProductDetailChildFragment extends SimiFragment {
         mParentController = controller;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class ProductDetailChildFragment extends SimiFragment {
         SimiManager.getIntance().setChildFragment(getChildFragmentManager());
         if (getArguments() != null) {
             mID = (String) getValueWithKey("id");
+            super.setScreenName("Product Detail " + mID);
         }
 
         mBlock = new ProductDetailChildBlock(view, getActivity(),

@@ -5,7 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.common.KeyData;
+import com.simicart.core.common.ValueData;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -37,14 +40,15 @@ public class SimiFragment extends Fragment {
         Bundle bundle = getArguments();
         if (null != bundle) {
             mData = bundle.getParcelable("data");
-            if(mData != null) {
+            if (mData != null) {
                 mHashMapData = mData.getData();
             }
         }
     }
 
     public void setScreenName(String screenName) {
-
+        this.screenName = screenName;
+        dispatchEventAnalytics(screenName);
     }
 
     public String getScreenName() {
@@ -66,6 +70,13 @@ public class SimiFragment extends Fragment {
             return null;
         }
         return mHashMapData.get(key);
+    }
+
+    protected void dispatchEventAnalytics(String screenName) {
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.ANALYTICS.SEND_TYPE, ValueData.ANALYTICS.SCREEN_TYPE);
+        hm.put(KeyData.ANALYTICS.NAME_SCREEN, screenName);
+        SimiEvent.dispatchEvent("com.simicart.analytics.sendaction", hm);
     }
 
 }

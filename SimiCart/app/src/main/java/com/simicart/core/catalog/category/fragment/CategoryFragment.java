@@ -27,10 +27,11 @@ public class CategoryFragment extends SimiFragment {
         return fragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setScreenName("Category Screen");
+
         rootView = inflater.inflate(
                 Rconfig.getInstance().layout("core_fragment_category"),
                 container, false);
@@ -38,6 +39,8 @@ public class CategoryFragment extends SimiFragment {
         if (mData != null) {
             mCategoryID = (String) getValueWithKey("category_id");
             mCategoryName = (String) getValueWithKey("category_name");
+
+            super.setScreenName("Category Screen " + mCategoryID);
         }
 
         // list categories

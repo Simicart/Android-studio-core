@@ -15,11 +15,16 @@ import com.simicart.core.banner.animation.SliderTypes.DefaultSliderView;
 import com.simicart.core.banner.animation.Transformers.BaseTransformer;
 import com.simicart.core.banner.entity.BannerEntity;
 import com.simicart.core.base.component.SimiComponent;
+import com.simicart.core.base.event.base.SimiEvent;
+import com.simicart.core.base.manager.SimiManager;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.home.delegate.BannerCallBack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by frank on 17/08/2016.
@@ -44,7 +49,6 @@ public class BannerComponent extends SimiComponent {
         rootView = findLayout("core_component_banner");
         mSliderLayout = (SliderLayout) findView("sld_banner");
         if (null != mListBanner && mListBanner.size() > 0) {
-            Log.e("BannerComponent ", "SIZE " + mListBanner.size());
 
             for (int i = 0; i < mListBanner.size(); i++) {
                 BannerEntity banner = mListBanner.get(i);
@@ -122,6 +126,12 @@ public class BannerComponent extends SimiComponent {
             } else if (type.equals(TYPE_WEB)) {
                 String url = banner.getUrl();
                 if (Utils.validateString(url)) {
+                    // dispatch event for Analytics
+                    HashMap<String, Object> hm = new HashMap<>();
+                    hm.put(KeyData.ANALYTICS.SEND_TYPE, ValueData.ANALYTICS.BANNER_TYPE);
+                    hm.put(KeyData.ANALYTICS.URL_BANNER, url);
+                    SimiEvent.dispatchEvent("com.simicart.analytics.sendaction", hm);
+
                     openWebPage(url);
                 }
             }
@@ -130,15 +140,25 @@ public class BannerComponent extends SimiComponent {
     }
 
     protected void openProductDetail(String productId) {
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, productId);
+        SimiManager.getIntance().openProductDetail(hm);
 
     }
 
     protected void openCategory(String cateID, String cateName) {
-
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.CATEGORY.CATEGORY_ID, cateID);
+        hm.put(KeyData.CATEGORY.CATEGORY_NAME, cateName);
+        SimiManager.getIntance().openCategory(hm);
     }
 
     protected void openCategoryDetail(String cateID, String cateName) {
-
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, cateID);
+        hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, cateName);
+        SimiManager.getIntance().openProductDetail(hm);
     }
 
     protected void openWebPage(String url) {

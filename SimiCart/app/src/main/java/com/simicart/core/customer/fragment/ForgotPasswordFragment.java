@@ -24,6 +24,7 @@ public class ForgotPasswordFragment extends SimiFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		setScreenName("Forgot Password Screen");
 		View view = inflater.inflate(
 				Rconfig.getInstance().layout("core_forgotpassword_layout"),
 				container, false);

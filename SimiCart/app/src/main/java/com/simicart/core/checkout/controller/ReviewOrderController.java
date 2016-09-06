@@ -448,6 +448,7 @@ public class ReviewOrderController extends SimiController {
                 @Override
                 public void onSuccess(SimiCollection collection) {
                     Log.e("ReviewOrderController", "PLACE ORDER SUCCESS");
+
                     SimiManager.getIntance().onUpdateCartQty("");
                     if (mPlaceFor == ValueData.REVIEW_ORDER.PLACE_FOR_NEW_CUSTOMER) {
                         String email = mBillingAddress.getEmail();
@@ -459,6 +460,8 @@ public class ReviewOrderController extends SimiController {
                     ArrayList<SimiEntity> entities = collection.getCollection();
                     if (null != entities && entities.size() > 0) {
                         OrderInforEntity orderInforEntity = (OrderInforEntity) entities.get(0);
+                        // dispatch event for Analytics
+                        dispatchEventAnalytics(orderInforEntity);
                         onPlaceOrderSuccess(orderInforEntity);
                     } else {
                         SimiManager.getIntance().backToHomeFragment();
@@ -635,6 +638,18 @@ public class ReviewOrderController extends SimiController {
             couponCodeModel.addBody("coupon_code", code);
             couponCodeModel.request();
         }
+    }
+
+    protected void dispatchEventAnalytics(OrderInforEntity orderInforEntity){
+        TotalPrice totalPrice = mTotalPriceComponent.getTotalPrice();
+
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.ANALYTICS.SEND_TYPE,ValueData.ANALYTICS.ORDER_TYPE);
+        hm.put("total_price",totalPrice);
+        hm.put("order_infor_entity",orderInforEntity);
+
+        SimiEvent.dispatchEvent("com.simicart.analytics.sendaction",hm);
+
     }
 
     @Override

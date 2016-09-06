@@ -120,6 +120,13 @@ public class KeyData {
         public static final String INTENT = "intent";
     }
 
+    public static class ANALYTICS{
+        public static final String SEND_TYPE = "send_type";
+        public static final String NAME_SCREEN = "name_screen";
+        public static final String DATA_ORDER = "data_order";
+        public static final String URL_BANNER = "url_banner";
+    }
+
     public static class REWARD_POINT {
         public static final String PASSBOOK_LOGO = "passbook_logo";
         public static final String LOYALTY_REDEEM = "loyalty_redeem";
@@ -151,5 +158,7 @@ public class KeyData {
     public static class WEBVIEW_PAGE{
         public static final String URL = "url";
     }
+
+
 
 }

@@ -33,6 +33,7 @@ public class CustomerFragment extends SimiFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setScreenName("Customer Screen");
         int idView = Rconfig.getInstance().layout("core_fragment_customer");
         rootView = inflater.inflate(idView, null, false);
         Context context = getActivity();

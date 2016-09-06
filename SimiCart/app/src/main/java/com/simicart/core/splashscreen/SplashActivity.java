@@ -117,5 +117,9 @@ public class SplashActivity extends Activity {
         model.request();
     }
 
+    private void dispatchEvent(){
+
+    }
+
 
 }

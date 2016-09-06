@@ -34,8 +34,15 @@ public class CategoryDetailFragment extends SimiFragment {
         return fragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        if (mHashMapData.containsKey(KeyData.CATEGORY_DETAIL.CATE_ID)) {
+            String cateID = (String) mHashMapData.get(KeyData.CATEGORY_DETAIL.CATE_ID);
+            super.setScreenName("Category Detail " + cateID);
+        }
+
         int idView = Rconfig.getInstance().layout("core_fragment_category_detail");
         rootView = inflater.inflate(idView, null, false);
 

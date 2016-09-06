@@ -23,6 +23,7 @@ public class MyAccountFragment extends SimiFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		setScreenName("My Account Screen");
 		View view = inflater.inflate(
 				Rconfig.getInstance().layout("core_my_account_layout"),
 				container, false);

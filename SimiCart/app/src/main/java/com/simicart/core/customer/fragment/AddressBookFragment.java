@@ -28,7 +28,7 @@ public class AddressBookFragment extends SimiFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        setScreenName("Address Book Screen");
         View view = inflater.inflate(
                 Rconfig.getInstance().layout("core_fragment_address_book"),
                 container, false);

@@ -49,6 +49,7 @@ public class ListLanguageFragment extends SimiFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		setScreenName("List Language Screen");
 		View view = inflater.inflate(
 				Rconfig.getInstance().layout("core_fragment_list_choice"), container,
 				false);

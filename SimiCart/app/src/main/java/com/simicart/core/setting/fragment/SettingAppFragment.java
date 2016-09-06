@@ -27,6 +27,7 @@ public class SettingAppFragment extends SimiFragment {
 	@Override
 	public View onCreateView(final LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
+		setScreenName("Setting Screen");
 		rootView = inflater.inflate(
 				Rconfig.getInstance().layout("core_setting_layout"), container,
 				false);

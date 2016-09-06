@@ -5,6 +5,7 @@ import android.content.Context;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.event.base.ReadXML;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
@@ -161,6 +162,13 @@ public class SplashController {
         Context context = SimiManager.getIntance().getCurrentActivity();
         ReadXML readXml = new ReadXML(context, listSKU);
         readXml.read();
+
+        // dispatch event for Mobile Analytic
+        dispatchEventAnalytic();
+    }
+
+    protected void dispatchEventAnalytic() {
+        SimiEvent.dispatchEvent("com.simicart.analytics.register", new HashMap<String, Object>());
     }
 
 
