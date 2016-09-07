@@ -164,6 +164,9 @@ public class KeyData {
         public static String PLACE_FOR = "place_for";
     }
 
+    public static class CMS_PAGE{
+        public static final String CONTENT = "content";
+    }
 
 
 }
