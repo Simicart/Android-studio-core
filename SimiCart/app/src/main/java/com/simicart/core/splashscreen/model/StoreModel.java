@@ -15,9 +15,4 @@ public class StoreModel extends SimiModel {
     protected void setUrlAction() {
         mUrlAction = Constants.GET_STORES;
     }
-
-    @Override
-    protected void setEnableCache() {
-        this.enableCache = true;
-    }
 }

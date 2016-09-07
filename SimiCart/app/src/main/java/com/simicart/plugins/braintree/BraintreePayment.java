@@ -10,6 +10,7 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.payment.Payment;
+import com.simicart.core.checkout.entity.OrderInforEntity;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.common.KeyEvent;
@@ -33,6 +34,8 @@ public class BraintreePayment extends Payment {
 
         Intent intent = new Intent(context, BrainTreeActivity.class);
 
+        OrderInforEntity orderInfo = (OrderInforEntity) data.getData().get("order_infor_entity");
+        String invoice_number = orderInfo.getInvoiceNumber();
         PaymentMethodEntity paymentMethod = (PaymentMethodEntity) data.getData().get("payment_method_entity");
         TotalPrice totalPriceEntity = (TotalPrice) data.getData().get("total_price");
         String total_price = totalPriceEntity.getGrandTotal();
@@ -79,14 +82,14 @@ public class BraintreePayment extends Payment {
 //                return;
 //            }
 
-        /*intent.putExtra("EXTRA_INVOICE_NUMBER", invoice_number);
+        intent.putExtra("EXTRA_INVOICE_NUMBER", invoice_number);
         Log.e("BrainTree INVOICE NUMBER ", invoice_number);
         if (!Utils.validateString(invoice_number)) {
             SimiNotify.getInstance().showNotify(
                     "The requested Payment Method is not available.");
             SimiManager.getIntance().backToHomeFragment();
             return;
-        }*/
+        }
         context.startActivity(intent);
     }
 

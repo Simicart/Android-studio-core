@@ -8,9 +8,17 @@ import org.json.JSONException;
 
 public class BrainTreeModel extends SimiModel {
 
+	protected String message;
+
 	@Override
 	protected void parseData() {
 		try {
+			if(mJSON.has("message")) {
+				JSONArray messArr = mJSON.getJSONArray("message");
+				if(messArr.length() > 0) {
+					message = messArr.getString(0);
+				}
+			}
 			JSONArray js_data = this.mJSON.getJSONArray("data");
 			if (null == collection) {
 				collection = new SimiCollection();
@@ -23,5 +31,13 @@ public class BrainTreeModel extends SimiModel {
 	@Override
 	protected void setUrlAction() {
 		mUrlAction = "simibraintree/index/update_payment";
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

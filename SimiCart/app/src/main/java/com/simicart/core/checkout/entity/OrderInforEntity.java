@@ -13,9 +13,12 @@ public class OrderInforEntity extends SimiEntity {
     protected boolean isShowNotification;
     protected String mMessage;
     protected NotificationEntity mNotificationEntity;
+    protected String invoiceNumber;
 
     @Override
     public void parse() {
+
+        invoiceNumber = getData("invoice_number");
 
         if (hasKey("notification")) {
             JSONObject jsNotification = getJSONObjectWithKey(mJSON, "notification");
@@ -25,7 +28,6 @@ public class OrderInforEntity extends SimiEntity {
                 mNotificationEntity.parse(jsNotification);
             }
         }
-
     }
 
     public boolean isShowNotification() {
@@ -50,5 +52,13 @@ public class OrderInforEntity extends SimiEntity {
 
     public void setMessage(String mMessage) {
         this.mMessage = mMessage;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 }

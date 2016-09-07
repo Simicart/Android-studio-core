@@ -1,12 +1,15 @@
 package com.simicart.core.customer.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class AddressEntity extends SimiEntity {
+public class AddressEntity extends SimiEntity implements Parcelable {
     protected String mID;
     protected String mStateID;
     protected String mPrefix;
@@ -378,4 +381,13 @@ public class AddressEntity extends SimiEntity {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+    }
 }
