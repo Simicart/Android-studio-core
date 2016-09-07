@@ -574,7 +574,7 @@ public class ReviewOrderController extends SimiController {
         paymentMethod = paymentMethod.toUpperCase();
         SimiEvent.dispatchEvent(KeyEvent.REVIEW_ORDER.FOR_PAYMENT_BEFORE_PLACE + paymentMethod, hmData);
 
-        return false;
+        return SimiEvent.isRegistered;
     }
 
     protected void dispatchEventForPaymentSDK(OrderInforEntity orderInforEntity) {

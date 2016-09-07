@@ -16,6 +16,9 @@ import java.util.HashMap;
  * Created by frank on 27/08/2016.
  */
 public class SimiEvent {
+
+    public static boolean isRegistered = false;
+
     public static void dispatchEvent(String eventName, HashMap<String, Object> hmData) {
         Context context = SimiManager.getIntance().getCurrentActivity();
         Intent intent = new Intent(eventName);

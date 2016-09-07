@@ -1,6 +1,6 @@
 <events>   
     <event>
-       <fullname>com.simicart.plugins.paypal.PayPal</fullname>
+       <fullname>com.simicart.plugins.paypalexpress.PaypalExpress</fullname>
 	    <sku>simi_developer</sku>	    	    
 
     </event>
