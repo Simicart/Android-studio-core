@@ -72,4 +72,7 @@ dependencies {
     // library for braintree payment
     compile project(':braintreelibrary')
 
+    // support 4.x
+    compile 'com.android.support:multidex:1.0.1'
+
 }
