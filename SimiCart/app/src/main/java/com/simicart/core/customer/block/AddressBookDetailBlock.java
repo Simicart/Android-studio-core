@@ -31,6 +31,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
         String textSave = SimiTranslator.getInstance().translate("Save");
         btnSave.setText(textSave);
         btnSave.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
+        btnSave.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
     }
 
 
