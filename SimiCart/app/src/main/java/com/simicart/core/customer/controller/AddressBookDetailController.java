@@ -1,7 +1,6 @@
 package com.simicart.core.customer.controller;
 
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -667,9 +666,7 @@ public class AddressBookDetailController extends SimiController {
             for (int i = 0; i < mListRowComponent.size(); i++) {
                 SimiRowComponent component = mListRowComponent.get(i);
                 Object value = component.getValue();
-                Log.e("before", String.valueOf(value));
                 View view = component.createView();
-                Log.e("after", String.valueOf(component.getValue()));
                 listRow.add(view);
             }
         }
@@ -696,10 +693,6 @@ public class AddressBookDetailController extends SimiController {
                 }
             }
 
-        }
-
-        for (SimiRowComponent component : mListRowComponent) {
-            Log.e("after", String.valueOf(component.getValue()));
         }
 
     }

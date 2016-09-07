@@ -82,7 +82,9 @@ public class AddressAutoFillFragment extends SimiFragment {
         tvLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
         tvLabel.setText(SimiTranslator.getInstance().translate("Touch the map until you get your desired address"));
 
-        new InitMapAsync().execute();
+        if(mGoogleMap == null) {
+            new InitMapAsync().execute();
+        }
 
         ImageView ivCurrentLocation = (ImageView) rootView.findViewById(Rconfig.getInstance().id("bt_detect_location"));
         ivCurrentLocation.setOnClickListener(new View.OnClickListener() {

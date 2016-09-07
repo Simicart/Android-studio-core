@@ -45,4 +45,10 @@ public class ValueData {
         public static String ORDER_TYPE = "order_type";
     }
 
+    public static class PRODUCT_LABEL {
+        public static final String HORIZONTAL = "horizontal";
+        public static final String LIST = "list";
+        public static final String GRID = "grid";
+    }
+
 }

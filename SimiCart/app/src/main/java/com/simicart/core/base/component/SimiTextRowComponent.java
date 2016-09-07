@@ -70,7 +70,7 @@ public class SimiTextRowComponent extends SimiRowComponent {
             showError(warming);
             return null;
         }
-
+        mValue = value;
         return value;
     }
 

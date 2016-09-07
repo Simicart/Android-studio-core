@@ -168,5 +168,10 @@ public class KeyData {
         public static final String CONTENT = "content";
     }
 
+    public static class PRODUCT_LABEL {
+        public static final String PRODUCT_LABEL_VIEW = "view";
+        public static final String PRODUCT_LABEL_JSON = "json";
+        public static final String PRODUCT_LABEL_METHOD = "method";
+    }
 
 }

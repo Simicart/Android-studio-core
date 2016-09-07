@@ -15,6 +15,7 @@ import android.support.v4.util.LruCache;
 import android.util.Log;
 import android.view.Display;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.network.request.TLSSocketFactory;
@@ -102,6 +103,30 @@ public class DrawableManager {
                 }
                 if (null != drawable) {
                     imageView.setImageDrawable(drawable);
+                }
+
+            }
+        };
+
+        getBitmap(handler, urlString);
+    }
+
+    @SuppressWarnings("deprecation")
+    public static void fetchDrawableOnThread(final String urlString,
+                                             final TextView textview) {
+
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message message) {
+                Bitmap bitmap = (Bitmap) message.obj;
+                if (bitmap != null) {
+                    Resources resource = SimiManager.getIntance()
+                            .getCurrentActivity().getResources();
+                    Drawable drawable = new BitmapDrawable(resource, bitmap);
+                    textview.setBackgroundDrawable(drawable);
+                } else {
+                    textview.setBackgroundResource(Rconfig.getInstance()
+                            .drawable("default_icon"));
                 }
 
             }

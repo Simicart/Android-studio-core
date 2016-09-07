@@ -67,7 +67,7 @@ public class ProductBaseAdapter extends BaseAdapter {
 		if (convertView == null) {
 			LayoutInflater inflater = LayoutInflater.from(mContext);
 			convertView = inflater.inflate(
-					Rconfig.getInstance().layout("core_product_list_details"),
+					Rconfig.getInstance().layout("core_adapter_horizontal_products"),
 					null);
 			holder = new ViewHolder();
 			holder.tv_name = (TextView) convertView.findViewById(Rconfig

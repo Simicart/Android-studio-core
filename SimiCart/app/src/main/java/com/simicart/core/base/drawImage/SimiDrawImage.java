@@ -3,10 +3,13 @@ package com.simicart.core.base.drawImage;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.network.request.TLSSocketFactory;

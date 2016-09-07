@@ -537,7 +537,15 @@ public class CustomerController extends SimiController {
 
     @Override
     public void onResume() {
-        mDelegate.updateView(mModel.getCollection());
+        if (mOpenFor == ValueData.CUSTOMER_PAGE.OPEN_FOR_EDIT) {
+            mDelegate.updateView(mModel.getCollection());
+        }
+        ArrayList<View> views = new ArrayList<>();
+        for (int i = 0; i < mListComponent.size(); i++) {
+            views.add(mListComponent.get(i).createView());
+        }
+
+        mDelegate.showView(views);
     }
 
     public void setData(HashMap<String, Object> data) {

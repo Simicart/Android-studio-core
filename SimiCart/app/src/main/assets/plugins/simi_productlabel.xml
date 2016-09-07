@@ -1,0 +1,7 @@
+<events>
+    <event>
+        <fullname>com.simicart.plugins.productlabel.ProductLabel</fullname>
+	    <sku>simi_developer</sku>
+    </event>
+    
+</events>

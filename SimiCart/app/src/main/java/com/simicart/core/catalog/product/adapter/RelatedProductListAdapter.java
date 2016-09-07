@@ -56,7 +56,7 @@ public class RelatedProductListAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(mContext)
                     .inflate(
                             Rconfig.getInstance().layout(
-                                    "core_item_list_search"), null);
+                                    "core_adapter_list_products"), null);
             holder = new ViewHolder();
             holder.txtName = (TextView) convertView.findViewById(Rconfig
                     .getInstance().id("tv_productItemName"));

@@ -65,4 +65,8 @@ public class KeyEvent {
         public static final String HIDDEN_ADDRESS_GET_CONFIG_ADDRESS = "simicart.hiddenaddress.get.config";
     }
 
+    public static class PRODUCT_LABEL {
+        public static final String PRODUCT_LABEL_ADD_ITEM = "simicart.productlabel.additem";
+    }
+
 }

@@ -16,18 +16,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.drawImage.SimiDrawImage;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
+import com.simicart.core.common.ValueData;
 import com.simicart.core.common.price.ProductPriceViewProductGridV03;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,10 +63,10 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         View itemView = null;
         RecyclerView.ViewHolder holder = null;
         if(tagView.equals(Constants.TAG_GRIDVIEW)) {
-            itemView = inflater.inflate(Rconfig.getInstance().layout("core_item_gridview_productcategory"), null, false);
+            itemView = inflater.inflate(Rconfig.getInstance().layout("core_adapter_grid_products"), null, false);
             holder = new GridProductHolder(itemView);
         } else {
-            itemView = inflater.inflate(Rconfig.getInstance().layout("core_item_list_search"), null, false);
+            itemView = inflater.inflate(Rconfig.getInstance().layout("core_adapter_list_products"), null, false);
             holder = new ListProductHolder(itemView);
         }
         return holder;
@@ -71,9 +77,21 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         Product product = listProducts.get(position);
         if(tagView.equals(Constants.TAG_GRIDVIEW)) {
             createItemGridView((GridProductHolder) holder, product);
+            dispatchEventForProductLabel(((GridProductHolder) holder).rl_product_list, product, ValueData.PRODUCT_LABEL.GRID);
         } else {
             createItemListView((ListProductHolder) holder, product);
+            dispatchEventForProductLabel(((ListProductHolder) holder).rl_product_list, product, ValueData.PRODUCT_LABEL.LIST);
         }
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
@@ -184,6 +202,21 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if (product.getImage() != null) {
             SimiDrawImage drawImage = new SimiDrawImage();
             drawImage.drawImage(holder.img_avartar, product.getImage());
+        }
+    }
+
+    protected void dispatchEventForProductLabel(View view, Product product, String method) {
+        if(product.getJSONObject().has("product_label")) {
+            try {
+                JSONArray array = product.getJSONObject().getJSONArray("product_label");
+                HashMap<String,Object> hmData = new HashMap<>();
+                hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_VIEW, view);
+                hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_JSON, array);
+                hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_METHOD, method);
+                SimiEvent.dispatchEvent(KeyEvent.PRODUCT_LABEL.PRODUCT_LABEL_ADD_ITEM, hmData);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -407,8 +440,6 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .getInstance().id("txt_out_stock"));
             txt_outstock.setTextColor(AppColorConfig.getInstance()
                     .getOutStockTextColor());
-            rl_product_list = (RelativeLayout) v
-                    .findViewById(Rconfig.getInstance().id("rel_product_list"));
 
             rl_product_list = (RelativeLayout) v
                     .findViewById(Rconfig.getInstance().id("rel_product_list"));

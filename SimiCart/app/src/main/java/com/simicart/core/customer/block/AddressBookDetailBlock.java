@@ -37,7 +37,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
 
     @Override
     public void showRows(ArrayList<View> rows) {
-//        llBody.removeAllViewsInLayout();
+        llBody.removeAllViewsInLayout();
         if (null != rows && rows.size() > 0) {
             for (int i = 0; i < rows.size(); i++) {
                 View row = rows.get(i);
