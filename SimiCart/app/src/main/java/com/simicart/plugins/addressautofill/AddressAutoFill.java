@@ -81,13 +81,20 @@ public class AddressAutoFill {
 	}
 
 	protected void initChildFragmentManager() {
-		for (Fragment fragment : SimiManager.getIntance()
-				.getManager().getFragments()) {
-			if (fragment == null) {
-				break;
-			} else {
-				if (fragment instanceof AddressBookDetailFragment) {
-					childFragmentManager = ((AddressBookDetailFragment) fragment).getChildFragmentManager();
+		if(DataLocal.isTablet) {
+			Fragment prev = SimiManager.getIntance().getManager().findFragmentByTag("dialog");
+			if(prev != null) {
+				childFragmentManager = prev.getChildFragmentManager();
+			}
+		} else {
+			for (Fragment fragment : SimiManager.getIntance()
+					.getManager().getFragments()) {
+				if (fragment == null) {
+					break;
+				} else {
+					if (fragment instanceof AddressBookDetailFragment) {
+						childFragmentManager = ((AddressBookDetailFragment) fragment).getChildFragmentManager();
+					}
 				}
 			}
 		}

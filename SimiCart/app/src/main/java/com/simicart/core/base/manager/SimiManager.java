@@ -104,13 +104,13 @@ public class SimiManager {
     public void openAddressBookDetail(HashMap<String, Object> hm) {
         SimiData data = new SimiData(hm);
         AddressBookDetailFragment fragment = AddressBookDetailFragment.newInstance(data);
-        replaceFragment(fragment);
+        replacePopupFragment(fragment);
     }
 
     public void openListOfChoice(HashMap<String, Object> hm) {
         SimiData data = new SimiData(hm);
         ListOfChoiceFragment fragment = ListOfChoiceFragment.newInstance(data);
-        replaceFragment(fragment);
+        replacePopupFragment(fragment);
     }
 
     public void openReviewOrder(HashMap<String, Object> hm) {

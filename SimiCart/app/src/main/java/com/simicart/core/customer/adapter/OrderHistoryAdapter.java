@@ -88,7 +88,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                 holder.tvItem1.setText(orderItems.get(0));
                 holder.tvItem2.setText(orderItems.get(1));
                 holder.tvItem3.setVisibility(View.GONE);
-            } else if(orderItems.size() == 3) {
+            } else if(orderItems.size() >= 3) {
                 holder.tvItem1.setText(orderItems.get(0));
                 holder.tvItem2.setText(orderItems.get(1));
                 holder.tvItem3.setText(orderItems.get(2));
@@ -110,13 +110,19 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
                 } else {
                     SimiManager.getIntance().replaceFragment(fragment);
                 }
-//                SimiData data = new SimiData();
-//                data.addData("order_history", orderHistoryEntity);
-//                OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance();
-//                SimiManager.getIntance().replaceFragment(fragment);
             }
         });
 
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override
