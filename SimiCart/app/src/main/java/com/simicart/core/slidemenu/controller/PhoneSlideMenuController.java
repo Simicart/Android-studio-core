@@ -354,9 +354,6 @@ public class PhoneSlideMenuController {
             if (!item.isSparator()) {
                 // event click barcode leftmenu
                 dispatchOnClickEvent(KeyEvent.SLIDE_MENU_EVENT.CLICK_ITEM, item.getName());
-//                EventBlock block = new EventBlock();
-//                Constants.itemName = nameItem;
-//                block.dispatchEvent("com.simicart.leftmenu.slidemenucontroller.onnavigate.clickitem");
                 TypeItem type = item.getType();
                 SimiFragment fragment = null;
                 if (type == TypeItem.NORMAL) {
@@ -371,7 +368,7 @@ public class PhoneSlideMenuController {
                     if (!DataLocal.isTablet) {
                         // replace fragment for phone
                         SimiManager.getIntance().replaceFragment(fragment);
-                        if (check_keyboard_first == true) {
+                        if (check_keyboard_first) {
                             SimiManager.getIntance().hideKeyboard();
                         }
                         check_keyboard_first = true;
@@ -445,8 +442,9 @@ public class PhoneSlideMenuController {
         for (Cms cms : DataLocal.listCms) {
             if (name.equals(cms.getTitle())) {
                 String content = cms.getContent();
-                fragment = CMSFragment.newInstance(content);
-                // ((CMSFragment) fragment).setContent(content);
+                HashMap<String,Object> hm = new HashMap<>();
+                hm.put(KeyData.CMS_PAGE.CONTENT, content);
+                SimiManager.getIntance().openCMSPage(hm);
             }
         }
         // initial CMSFragment by using content field.

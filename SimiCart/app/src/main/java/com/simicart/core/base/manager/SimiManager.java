@@ -26,6 +26,7 @@ import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.checkout.fragment.ReviewOrderFragment;
 import com.simicart.core.checkout.fragment.ThankyouFragment;
+import com.simicart.core.cms.fragment.CMSFragment;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
@@ -150,6 +151,12 @@ public class SimiManager {
     public void openThankyouPage(HashMap<String, Object> hm) {
         SimiData data = new SimiData(hm);
         ThankyouFragment fragment = ThankyouFragment.newInstance(data);
+        replaceFragment(fragment);
+    }
+
+    public void openCMSPage(HashMap<String, Object> hm) {
+        SimiData data = new SimiData(hm);
+        CMSFragment fragment = CMSFragment.newInstance(data);
         replaceFragment(fragment);
     }
 
