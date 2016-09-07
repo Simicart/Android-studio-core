@@ -54,11 +54,9 @@ public class SimiResponse {
             if (equal(mStatus, "FAIL")) {
                 mError = new SimiError();
                 mError.setMessage(mMessage);
-                Log.e("SimiResponse ", "==================> RESPONSE FAIL " + mMessage);
                 return false;
             }
 
-            Log.e("SimiResponse ", "--------------> STATUS " + mStatus);
 
 
             return true;

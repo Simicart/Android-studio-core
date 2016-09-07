@@ -1,6 +1,8 @@
 package com.simicart.core.checkout.controller;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,6 +14,7 @@ import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
@@ -460,6 +463,15 @@ public class ReviewOrderController extends SimiController {
                     ArrayList<SimiEntity> entities = collection.getCollection();
                     if (null != entities && entities.size() > 0) {
                         OrderInforEntity orderInforEntity = (OrderInforEntity) entities.get(0);
+
+                        SimiError error = placeOrderModel.getError();
+                        if (null != error) {
+                            String message = error.getMessage();
+                            if (Utils.validateString(message)) {
+                                orderInforEntity.setMessage(message);
+                            }
+                        }
+
                         // dispatch event for Analytics
                         dispatchEventAnalytics(orderInforEntity);
                         onPlaceOrderSuccess(orderInforEntity);
@@ -532,11 +544,19 @@ public class ReviewOrderController extends SimiController {
         } else {
             if (orderInforEntity.isShowNotification()) {
                 // show notification
+                HashMap<String, Object> data = new HashMap<>();
+                data.put("notification_entity", orderInforEntity.getNotificationEntity());
+                SimiEvent.dispatchEvent("com.simicart.localnotification", data);
 
+                SimiManager.getIntance().backToHomeFragment();
             } else {
                 // go to thank you page
+                HashMap<String, Object> hm = new HashMap<>();
+                hm.put(KeyData.THANKYOU_PAGE.ORDER_INFO_ENTITY, orderInforEntity);
+                hm.put(KeyData.THANKYOU_PAGE.PLACE_FOR, mPlaceFor);
+                SimiManager.getIntance().openThankyouPage(hm);
             }
-            SimiManager.getIntance().backPreviousFragment();
+
         }
 
         dispatchEventAfterPlace(orderInforEntity);
@@ -640,15 +660,15 @@ public class ReviewOrderController extends SimiController {
         }
     }
 
-    protected void dispatchEventAnalytics(OrderInforEntity orderInforEntity){
+    protected void dispatchEventAnalytics(OrderInforEntity orderInforEntity) {
         TotalPrice totalPrice = mTotalPriceComponent.getTotalPrice();
 
         HashMap<String, Object> hm = new HashMap<>();
-        hm.put(KeyData.ANALYTICS.SEND_TYPE,ValueData.ANALYTICS.ORDER_TYPE);
-        hm.put("total_price",totalPrice);
-        hm.put("order_infor_entity",orderInforEntity);
+        hm.put(KeyData.ANALYTICS.SEND_TYPE, ValueData.ANALYTICS.ORDER_TYPE);
+        hm.put("total_price", totalPrice);
+        hm.put("order_infor_entity", orderInforEntity);
 
-        SimiEvent.dispatchEvent("com.simicart.analytics.sendaction",hm);
+        SimiEvent.dispatchEvent("com.simicart.analytics.sendaction", hm);
 
     }
 

@@ -72,7 +72,7 @@ public class OrderHistoryController extends SimiController {
         if (mOffset == 0) {
             mDelegate.showLoading();
         }
-        if(mModel == null) {
+        if (mModel == null) {
             mModel = new OrderHistoryModel();
         }
         mModel.setSuccessListener(new ModelSuccessCallBack() {
@@ -117,13 +117,7 @@ public class OrderHistoryController extends SimiController {
         HashMap<String, Object> hmData = new HashMap<String, Object>();
         hmData.put(KeyData.ORDER_HISTORY_DETAIL.ORDER_ID, orderHis.getOrder_id());
         hmData.put(KeyData.ORDER_HISTORY_DETAIL.TARGET, 0);
-        SimiData data = new SimiData(hmData);
-        OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance(data);
-        if (DataLocal.isTablet) {
-            SimiManager.getIntance().addFragmentSub(fragment);
-        } else {
-            SimiManager.getIntance().replaceFragment(fragment);
-        }
+        SimiManager.getIntance().openOrderHistoryDetail(hmData);
     }
 
     @Override
