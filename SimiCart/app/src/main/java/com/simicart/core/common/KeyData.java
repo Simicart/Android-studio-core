@@ -159,6 +159,11 @@ public class KeyData {
         public static final String URL = "url";
     }
 
+    public static class THANKYOU_PAGE{
+        public static final String ORDER_INFO_ENTITY = "order_info_entity";
+        public static String PLACE_FOR = "place_for";
+    }
+
 
 
 }

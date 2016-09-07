@@ -79,7 +79,7 @@ public class Analytic {
             public void onSuccess(SimiCollection collection) {
                 TRACKER_ID = model.getTrackerID();
                 if (Utils.validateString(TRACKER_ID)) {
-                    Log.e("Analytic","-----> TRACKER_ID " + TRACKER_ID);
+                    Log.e("Analytic", "-----> TRACKER_ID " + TRACKER_ID);
                     createTracker();
                 }
 
@@ -115,7 +115,7 @@ public class Analytic {
     protected void sendScreenName(HashMap<String, Object> hm) {
         if (hm.containsKey(KeyData.ANALYTICS.NAME_SCREEN)) {
             String screenName = (String) hm.get(KeyData.ANALYTICS.NAME_SCREEN);
-            Log.e("Analytic","-----> send screen name " + screenName);
+            Log.e("Analytic", "-----> send screen name " + screenName);
             if (Utils.validateString(screenName)) {
                 mTracker.setScreenName(screenName);
                 mTracker.send(new HitBuilders.ScreenViewBuilder().build());
@@ -126,7 +126,7 @@ public class Analytic {
     protected void sendBanerAction(HashMap<String, Object> hm) {
         if (hm.containsKey(KeyData.ANALYTICS.URL_BANNER)) {
             String url = (String) hm.get(KeyData.ANALYTICS.URL_BANNER);
-            Log.e("Analytic","-----> send banner action " + url);
+            Log.e("Analytic", "-----> send banner action " + url);
             mTracker.send(new HitBuilders.EventBuilder().setCategory("ui_action").setAction("banner_press").setLabel(url).build());
         }
 
@@ -136,7 +136,7 @@ public class Analytic {
         OrderInforEntity orderInforEntity = (OrderInforEntity) hm.get("order_infor_entity");
         String invoiceNumber = orderInforEntity.getData("invoice_number");
 
-        Log.e("Analytic","-----> send order action " + invoiceNumber);
+        Log.e("Analytic", "-----> send order action " + invoiceNumber);
 
         TotalPrice totalPrice = (TotalPrice) hm.get("total_price");
         Double shippingFee = getShippingFee(totalPrice);
@@ -152,9 +152,15 @@ public class Analytic {
         ProductAction productAction = new ProductAction(ProductAction.ACTION_PURCHASE);
         productAction.setTransactionId(invoiceNumber);
         productAction.setTransactionAffiliation("In-app Store");
-        productAction.setTransactionShipping(shippingFee);
-        productAction.setTransactionTax(taxFee);
-        productAction.setTransactionRevenue(totalPriceFee);
+        if (null != shippingFee) {
+            productAction.setTransactionShipping(shippingFee);
+        }
+        if (null != taxFee) {
+            productAction.setTransactionTax(taxFee);
+        }
+        if (null != totalPrice) {
+            productAction.setTransactionRevenue(totalPriceFee);
+        }
 
         builder.setProductAction(productAction);
 

@@ -25,6 +25,7 @@ import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.checkout.fragment.ReviewOrderFragment;
+import com.simicart.core.checkout.fragment.ThankyouFragment;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
@@ -34,6 +35,7 @@ import com.simicart.core.customer.fragment.AddressBookDetailFragment;
 import com.simicart.core.customer.fragment.AddressBookFragment;
 import com.simicart.core.customer.fragment.CustomerFragment;
 import com.simicart.core.customer.fragment.ListOfChoiceFragment;
+import com.simicart.core.customer.fragment.OrderHistoryDetailFragment;
 import com.simicart.core.home.fragment.HomeFragment;
 import com.simicart.core.menutop.controller.MenuTopController;
 import com.simicart.core.notification.WebviewFragment;
@@ -135,6 +137,21 @@ public class SimiManager {
         replaceFragment(fragment);
     }
 
+    public void openOrderHistoryDetail(HashMap<String, Object> hm) {
+        SimiData data = new SimiData(hm);
+        OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance(data);
+        if (DataLocal.isTablet) {
+            addFragmentSub(fragment);
+        } else {
+            replaceFragment(fragment);
+        }
+    }
+
+    public void openThankyouPage(HashMap<String, Object> hm) {
+        SimiData data = new SimiData(hm);
+        ThankyouFragment fragment = ThankyouFragment.newInstance(data);
+        replaceFragment(fragment);
+    }
 
     public Activity getCurrentActivity() {
         return mCurrentActivity;
