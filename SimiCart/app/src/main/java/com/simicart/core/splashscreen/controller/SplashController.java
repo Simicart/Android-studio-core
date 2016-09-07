@@ -69,6 +69,7 @@ public class SplashController {
             public void onSuccess(SimiCollection collection) {
                 enableTheme();
                 if (canOpenMain && isSuccessSku) {
+                    dispatchEvent();
                     SimiManager.getIntance().toMainActivity();
                 } else {
                     canOpenMain = true;
@@ -139,6 +140,7 @@ public class SplashController {
                     enablePlugins(listSKU);
                 }
                 if (canOpenMain && isSuccessSku) {
+                    dispatchEvent();
                     SimiManager.getIntance().toMainActivity();
                 } else {
                     canOpenMain = true;
