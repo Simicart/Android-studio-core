@@ -8,7 +8,12 @@ import com.simicart.core.base.model.entity.SimiEntity;
 public class OrderInforEntity extends SimiEntity {
 
     protected boolean isShowNotification;
+    protected String invoiceNumber;
 
+    @Override
+    public void parse() {
+        invoiceNumber = getData("invoice_number");
+    }
 
     public boolean isShowNotification() {
         return isShowNotification;
@@ -16,5 +21,13 @@ public class OrderInforEntity extends SimiEntity {
 
     public void setShowNotification(boolean showNotification) {
         isShowNotification = showNotification;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 }

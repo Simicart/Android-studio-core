@@ -21,6 +21,7 @@ import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.config.AppStoreConfig;
+import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.braintree.model.BrainTreeModel;
 import com.trueplus.simicart.braintreelibrary.BraintreeFragment;
 import com.trueplus.simicart.braintreelibrary.BraintreePaymentActivity;
@@ -34,7 +35,6 @@ public class BrainTreeActivity extends Activity {
     public String total = "0.0";
     public String orderID = "";
     public String token = "";
-    private BraintreeFragment mBraintreeFragment;
 
     SimiDelegate mDelegate;
 
@@ -46,9 +46,11 @@ public class BrainTreeActivity extends Activity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
 
+        SimiManager.getIntance().setCurrentActivity(this);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            total = extras.getString("EXTRA_TOTAL_PRICE");
+            total = extras.getString("EXTRA_PRICE");
             orderID = extras.getString("EXTRA_INVOICE_NUMBER");
             token = extras.getString("EXTRA_TOKEN");
         }
@@ -116,11 +118,11 @@ public class BrainTreeActivity extends Activity {
                                        String amount, String orderID) throws JSONException {
         mDelegate = new SimiBlock(rootView, SimiManager.getIntance().getCurrentActivity());
         mDelegate.showLoading();
-        BrainTreeModel mModel = new BrainTreeModel();
+        final BrainTreeModel mModel = new BrainTreeModel();
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-                //SimiNotify.getInstance().showNotify(null, message, "Ok");
+                SimiNotify.getInstance().showToast(mModel.getMessage());
                 backToHome();
             }
         });
@@ -195,10 +197,8 @@ public class BrainTreeActivity extends Activity {
 
     public void backToHome() {
         Intent i = new Intent(BrainTreeActivity.this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
-        finish();
     }
 
     @Override
