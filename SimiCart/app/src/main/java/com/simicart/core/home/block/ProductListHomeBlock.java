@@ -51,9 +51,9 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 //								} else {
 //									tv_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
 //								}
-//								int padd = Utils.getValueDp(4);
-//								tv_name.setPadding(Utils.getValueDp(6), Utils.getValueDp(10),
-//										Utils.getValueDp(7), Utils.getValueDp(10));
+//								int padd = Utils.toDp(4);
+//								tv_name.setPadding(Utils.toDp(6), Utils.toDp(10),
+//										Utils.toDp(7), Utils.toDp(10));
 //								tv_name.setText(SimiTranslator.newInstance().translate(
 //										productList.get(i).getTitle().toUpperCase()));
 //								tv_name.setTextColor(AppColorConfig.newInstance().getContentColor());
@@ -72,19 +72,19 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 //								// product list
 //								LinearLayout llspot = new LinearLayout(mContext);
 //								if (DataLocal.isTablet) {
-//									height = Utils.getValueDp(250);
+//									height = Utils.toDp(250);
 //									LinearLayout.LayoutParams spot_ll = new LinearLayout.LayoutParams(
 //											LinearLayout.LayoutParams.MATCH_PARENT, height);
 //									llspot.setPadding(0, padd, 0, 0);
 //									llspot.setLayoutParams(spot_ll);
 //								} else {
-//									height = Utils.getValueDp(165);
+//									height = Utils.toDp(165);
 //									LinearLayout.LayoutParams spot_ll = new LinearLayout.LayoutParams(
 //											LinearLayout.LayoutParams.MATCH_PARENT, height);
 //									llspot.setPadding(0, padd, 0, 0);
 //									// before top is padd
-//									// spot_ll.setMargins(0, 0, Utils.getValueDp(7),
-//									// Utils.getValueDp(10));
+//									// spot_ll.setMargins(0, 0, Utils.toDp(7),
+//									// Utils.toDp(10));
 //									llspot.setLayoutParams(spot_ll);
 //								}
 //								HorizontalListView listview_spotproduct = new HorizontalListView(

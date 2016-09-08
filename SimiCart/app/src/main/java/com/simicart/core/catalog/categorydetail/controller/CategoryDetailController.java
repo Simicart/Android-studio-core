@@ -22,6 +22,7 @@ import com.simicart.core.catalog.categorydetail.entity.FilterState;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Constants;
+import com.simicart.core.config.DataLocal;
 
 import org.json.JSONObject;
 
@@ -114,12 +115,14 @@ public class CategoryDetailController extends SimiController {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy <= 0) {
-                    // Scrolling up
-                    mDelegate.showBottomMenu(true);
-                } else {
-                    // Scrolling down
-                    mDelegate.showBottomMenu(false);
+                if(!DataLocal.isTablet) {
+                    if (dy <= 0) {
+                        // Scrolling up
+                        mDelegate.showBottomMenu(true);
+                    } else {
+                        // Scrolling down
+                        mDelegate.showBottomMenu(false);
+                    }
                 }
             }
 
@@ -200,6 +203,9 @@ public class CategoryDetailController extends SimiController {
                 mDelegate.dismissDialogLoading();
                 mDelegate.showLoadMore(false);
                 mResultNumber = ((CategoryDetailModel) mModel).getResultNumber();
+                if(mOffset == 0) {
+                    mDelegate.showTotalQuantity(String.valueOf(mResultNumber));
+                }
                 mLayerEntity = ((CategoryDetailModel) mModel).getLayerEntity();
                 mDelegate.showLoadMore(false);
                 mDelegate.updateView(mModel.getCollection());

@@ -141,9 +141,9 @@ public class PaypalExpress {
         btnExpress.setBackgroundResource(Rconfig.getInstance().drawable(
                 "plugin_paypal_express_product"));
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, Utils.getValueDp(55));
+                RelativeLayout.LayoutParams.MATCH_PARENT, Utils.toDp(55));
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        params.setMargins(0, Utils.getValueDp(5), 0, 0);
+        params.setMargins(0, Utils.toDp(5), 0, 0);
         btnExpress.setLayoutParams(params);
         rltPlugin.removeAllViewsInLayout();
         rltPlugin.addView(btnExpress);
@@ -165,16 +165,16 @@ public class PaypalExpress {
         b_express.setBackgroundDrawable(gdDefault);
         b_express.setBackgroundResource(Rconfig.getInstance().drawable(
                 "plugin_paypal_express_product"));
-        int size = Utils.getValueDp(40);
+        int size = Utils.toDp(40);
         LinearLayout.LayoutParams lp_express = new LinearLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, size);
-        lp_express.setMargins(0, 0, 0, Utils.getValueDp(5));
+        lp_express.setMargins(0, 0, 0, Utils.toDp(5));
         if (DataLocal.isTablet) {
-            size = Utils.getValueDp(49);
+            size = Utils.toDp(49);
             lp_express = new LinearLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT, size);
             lp_express.gravity = Gravity.CENTER_VERTICAL;
-            lp_express.setMargins(0, 0, 0, Utils.getValueDp(10));
+            lp_express.setMargins(0, 0, 0, Utils.toDp(10));
         }
         lp_express.gravity = Gravity.CENTER_HORIZONTAL;
 

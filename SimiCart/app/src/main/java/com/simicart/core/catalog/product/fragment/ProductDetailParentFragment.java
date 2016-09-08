@@ -129,9 +129,9 @@ public class ProductDetailParentFragment extends SimiFragment {
 //                        Rconfig.newInstance().string("values"));
 //
 //                if (message.equals("sw800dp")) {
-//                    params.leftMargin = Utils.getValueDp(310);
+//                    params.leftMargin = Utils.toDp(310);
 //                } else {
-//                    params.leftMargin = Utils.getValueDp(260);
+//                    params.leftMargin = Utils.toDp(260);
 //                }
 //                mIndicator.setLayoutParams(params);
 //                mController.setAdapterDelegate(adapter_tablet);
@@ -142,12 +142,12 @@ public class ProductDetailParentFragment extends SimiFragment {
 //                            public void onPageSelected(int position) {
 //                                if (position == mListID.size() - 1) {
 //                                    pager_parent.setPadding(
-//                                            Utils.getValueDp(50), 0,
-//                                            Utils.getValueDp(200), 0);
+//                                            Utils.toDp(50), 0,
+//                                            Utils.toDp(200), 0);
 //                                } else {
 //                                    pager_parent.setPadding(
-//                                            Utils.getValueDp(200), 0,
-//                                            Utils.getValueDp(50), 0);
+//                                            Utils.toDp(200), 0,
+//                                            Utils.toDp(50), 0);
 //                                }
 //                            }
 //

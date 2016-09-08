@@ -142,7 +142,7 @@ public class ZopimChat {
             ImageView imageView = new ImageView(SimiManager.getIntance()
                     .getCurrentActivity());
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    Utils.getValueDp(25), Utils.getValueDp(25));
+                    Utils.toDp(25), Utils.toDp(25));
             params.setMargins(0, 0, 5, 0);
             params.addRule(RelativeLayout.CENTER_IN_PARENT);
             imageView.setLayoutParams(params);

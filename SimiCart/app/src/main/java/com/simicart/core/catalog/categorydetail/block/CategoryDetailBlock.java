@@ -4,19 +4,24 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.simicart.core.base.block.SimiBlock;
+import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.categorydetail.adapter.CategoryDetailAdapter;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
@@ -29,6 +34,7 @@ import java.util.ArrayList;
 public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDelegate {
 
     protected RelativeLayout rlBottom, rlChangeView, rlSort, rlFilter;
+    protected TextView tvToTalItem;
     protected ImageView ivChangeView;
     protected ProgressBar pbLoadMore;
     protected RecyclerView rvListProducts;
@@ -53,20 +59,21 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
         rlFilter = (RelativeLayout) mView.findViewById(Rconfig.getInstance().id("rl_to_filter"));
         rlBottom.setVisibility(View.VISIBLE);
 
-        ivChangeView = (ImageView) mView.findViewById(Rconfig.getInstance().id("iv_change_view"));
-        if (tagView == Constants.TAG_GRIDVIEW) {
-            ivChangeView.setBackgroundResource(Rconfig.getInstance()
-                    .drawable("ic_to_listview"));
-        } else {
-            ivChangeView.setBackgroundResource(Rconfig.getInstance()
-                    .drawable("ic_to_gridview"));
-        }
-
         pbLoadMore = (ProgressBar) mView.findViewById(Rconfig.getInstance().id("pb_load_more"));
         pbLoadMore.setVisibility(View.GONE);
 
         if (DataLocal.isTablet) {
+            tvToTalItem = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_total_item"));
             numCollums = 4;
+        } else {
+            ivChangeView = (ImageView) mView.findViewById(Rconfig.getInstance().id("iv_change_view"));
+            if (tagView == Constants.TAG_GRIDVIEW) {
+                ivChangeView.setBackgroundResource(Rconfig.getInstance()
+                        .drawable("ic_to_listview"));
+            } else {
+                ivChangeView.setBackgroundResource(Rconfig.getInstance()
+                        .drawable("ic_to_gridview"));
+            }
         }
 
     }
@@ -89,7 +96,7 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
                 drawListProducts();
             }
         } else {
-            showWarming();
+            showWarning();
         }
     }
 
@@ -98,18 +105,19 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
             mAdapter.setListProducts(listProducts);
             mAdapter.notifyDataSetChanged();
         } else {
+            mAdapter = new CategoryDetailAdapter(listProducts);
             if (tagView.equals(Constants.TAG_GRIDVIEW)) {
+                mAdapter.setNumCollums(numCollums);
                 rvListProducts.setLayoutManager(new GridLayoutManager(mContext, numCollums));
             } else {
                 rvListProducts.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
             }
-            mAdapter = new CategoryDetailAdapter(listProducts);
             mAdapter.setTagView(tagView);
             rvListProducts.setAdapter(mAdapter);
         }
     }
 
-    protected void showWarming() {
+    protected void showWarning() {
         RelativeLayout rltCate = (RelativeLayout) mView;
 
         rltCate.removeAllViewsInLayout();
@@ -139,18 +147,19 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
 
     @Override
     public void changeView() {
+        mAdapter = new CategoryDetailAdapter(listProducts);
         if (tagView == Constants.TAG_LISTVIEW) {
             tagView = Constants.TAG_GRIDVIEW;
             ivChangeView.setBackgroundResource(Rconfig.getInstance()
                     .drawable("ic_to_listview"));
             rvListProducts.setLayoutManager(new GridLayoutManager(mContext, numCollums));
+            mAdapter.setNumCollums(numCollums);
         } else {
             tagView = Constants.TAG_LISTVIEW;
             ivChangeView.setBackgroundResource(Rconfig.getInstance()
                     .drawable("ic_to_gridview"));
             rvListProducts.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         }
-        mAdapter = new CategoryDetailAdapter(listProducts);
         mAdapter.setTagView(tagView);
         rvListProducts.setAdapter(mAdapter);
     }
@@ -167,6 +176,38 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     @Override
     public String getTagView() {
         return tagView;
+    }
+
+    @Override
+    public void showTotalQuantity(String quantity) {
+        if(checkQtyIsInteger(quantity)) {
+            int qty = Integer.parseInt(quantity);
+            if(qty > 1) {
+                quantity = quantity + " " + SimiTranslator.getInstance().translate("Items");
+            } else {
+                quantity = quantity + " " + SimiTranslator.getInstance().translate("Item");
+            }
+            if(DataLocal.isTablet) {
+                tvToTalItem.setText(quantity);
+            } else {
+                SimiNotify.getInstance().showToast(quantity);
+            }
+        }
+    }
+
+    private boolean checkQtyIsInteger(String qty) {
+        if (!Utils.validateString(qty)) {
+            return false;
+        }
+        try {
+            int result = Integer.parseInt(qty);
+            if (result <= 0) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void onChangeViewClick(View.OnClickListener listener) {

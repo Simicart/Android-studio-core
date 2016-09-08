@@ -44,7 +44,7 @@ public class CategorySlideMenuFragment extends SimiFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(Rconfig.getInstance().layout("core_fragment_cat_slide_menu"), container, false);
+        rootView = inflater.inflate(Rconfig.getInstance().layout("core_fragment_category"), container, false);
         rootView.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
 
         if(mData != null) {
@@ -67,6 +67,7 @@ public class CategorySlideMenuFragment extends SimiFragment {
             mController.setDelegate(mBlock);
             mController.onResume();
         }
+        mBlock.onViewMoreClick(mController.getOnViewMoreClick());
         mBlock.onBackClick(mController.getOnBackClick());
 
         SimiManager.getIntance().setCategorySlideMenuController(mController);

@@ -30,6 +30,8 @@ public class CategorySlideMenuBlock extends CategoryBlock {
     public void initView() {
         super.initView();
 
+        tv_CategoryName.setText(mName.toUpperCase());
+
         iv_back = (ImageView) mView.findViewById(Rconfig.getInstance().id("iv_back"));
         Drawable iconBack = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("ic_back"));

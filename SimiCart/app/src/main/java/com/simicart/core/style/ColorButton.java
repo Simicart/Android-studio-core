@@ -125,7 +125,7 @@ public class ColorButton extends Button {
 		ShapeDrawable shape = new ShapeDrawable(rect);
 		shape.getPaint().setStrokeWidth(1);
 		shape.getPaint().setColor(Color.parseColor(color));
-		shape.setPadding(1, 0, 0, Utils.getValueDp(3));
+		shape.setPadding(1, 0, 0, Utils.toDp(3));
 		return shape;
 	}
 
@@ -134,7 +134,7 @@ public class ColorButton extends Button {
 		ShapeDrawable shape = new ShapeDrawable(rect);
 		shape.getPaint().setStrokeWidth(1);
 		shape.getPaint().setColor(color);
-		shape.setPadding(1, 0, 0, Utils.getValueDp(3));
+		shape.setPadding(1, 0, 0, Utils.toDp(3));
 		return shape;
 	}
 

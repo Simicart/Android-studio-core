@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,8 +70,8 @@ public class ProductDetailImageFragment extends SimiFragment {
                 int width = size.x;
                 int height = size.y;
 
-                int p_widht = Utils.getValueDp((height * 2) / 3);
-                int p_height = Utils.getValueDp(width);
+                int p_widht = Utils.toDp((height * 2) / 3);
+                int p_height = Utils.toDp(width);
                 LayoutParams params = new LayoutParams(p_widht, p_height);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 imv_image.setLayoutParams(params);

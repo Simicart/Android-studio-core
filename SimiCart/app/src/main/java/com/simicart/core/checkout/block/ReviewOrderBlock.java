@@ -17,7 +17,7 @@ public class ReviewOrderBlock extends SimiBlock implements ReviewOrderDelegate {
 
     protected LinearLayout llReviewOrder;
     protected AppCompatButton btnPlaceOrder;
-    protected int topMargin = Utils.getValueDp(10);
+    protected int topMargin = Utils.toDp(10);
 
     public ReviewOrderBlock(View view, Context context) {
         super(view, context);
