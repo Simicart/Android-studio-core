@@ -35,7 +35,6 @@ public class FilterPopup extends SimiPopup {
     protected LinearLayout llStateSelected;
     protected LinearLayout llFilterValue;
     protected JSONObject mJSONFilter;
-    protected int topMargin = Utils.getValueDp(5);
     protected View rootView;
     protected String mNameCate;
     protected FilterCallBack mCallBack;
@@ -121,9 +120,7 @@ public class FilterPopup extends SimiPopup {
             }
         });
         View stateView = deleteComponent.createView();
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.topMargin = topMargin;
-        llStateSelected.addView(stateView, params);
+        llStateSelected.addView(stateView);
     }
 
 
@@ -173,9 +170,9 @@ public class FilterPopup extends SimiPopup {
                 return true;
             }
         });
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.topMargin = topMargin;
-        llFilterValue.addView(expandRowComponent.createView(), params);
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        params.topMargin = topMargin;
+        llFilterValue.addView(expandRowComponent.createView());
 
     }
 
@@ -184,7 +181,7 @@ public class FilterPopup extends SimiPopup {
 
         } else {
             String attribute = state.getAttribute();
-            if (mJSONFilter.has(attribute)) {
+            if (null != mJSONFilter && mJSONFilter.has(attribute)) {
                 mJSONFilter.remove(attribute);
             }
             if (null != mCallBack) {

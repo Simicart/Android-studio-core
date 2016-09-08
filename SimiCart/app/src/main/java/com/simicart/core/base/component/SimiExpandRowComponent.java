@@ -2,6 +2,7 @@ package com.simicart.core.base.component;
 
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class SimiExpandRowComponent extends SimiRowComponent {
     protected int margin = Utils.getValueDp(5);
     protected ExpandRowCallBack mCallBack;
     protected TextView tvTitle;
+    protected boolean isInitChild;
 
 
     @Override
@@ -35,6 +37,7 @@ public class SimiExpandRowComponent extends SimiRowComponent {
     protected void initBody() {
         rltParent = (RelativeLayout) findView("rlt_parent");
         llChild = (LinearLayout) findView("ll_child");
+        llChild.setVisibility(View.GONE);
         tvTitle = (TextView) findView("tv_title_expand");
         if (Utils.validateString(mTitle)) {
             tvTitle.setText(mTitle);
@@ -50,7 +53,11 @@ public class SimiExpandRowComponent extends SimiRowComponent {
             @Override
             public void onClick(View v) {
                 if (llChild.getVisibility() != View.VISIBLE) {
-                    llChild.setVisibility(View.VISIBLE);
+                    if (!isInitChild) {
+                        llChild.setVisibility(View.VISIBLE);
+                        initListChild();
+                    }
+
                 } else {
                     llChild.setVisibility(View.GONE);
                 }
@@ -58,10 +65,11 @@ public class SimiExpandRowComponent extends SimiRowComponent {
         });
 
         // initial list child
-        initListChild();
+        //initListChild();
     }
 
     protected void initListChild() {
+        isInitChild = true;
         if (null != mListValueChild && mListValueChild.size() > 0) {
             for (int i = 0; i < mListValueChild.size(); i++) {
 
@@ -71,7 +79,7 @@ public class SimiExpandRowComponent extends SimiRowComponent {
     }
 
     protected void initChild(final int position) {
-        TextView tvChild = new TextView(mContext);
+        RadioButton tvChild = new RadioButton(mContext);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.topMargin = margin;
         params.bottomMargin = margin;
