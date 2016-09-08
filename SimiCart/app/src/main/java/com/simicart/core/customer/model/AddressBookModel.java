@@ -33,4 +33,9 @@ public class AddressBookModel extends SimiModel {
 	protected void setUrlAction() {
 		mUrlAction = Constants.GET_USER_ADDRESS;
 	}
+
+	@Override
+	protected void setEnableCache() {
+		enableCache = true;
+	}
 }

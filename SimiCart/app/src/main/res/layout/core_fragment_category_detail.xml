@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/size_2"
+        android:layout_margin="@dimen/size_5"
         android:orientation="vertical"></LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -26,8 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/rv_list_products"
+        android:layout_centerHorizontal="true"
         android:background="@null"
         android:indeterminateDrawable="@drawable/progressbar_indeterminate"
         android:visibility="gone" />

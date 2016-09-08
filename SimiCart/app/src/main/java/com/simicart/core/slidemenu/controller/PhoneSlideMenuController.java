@@ -397,11 +397,11 @@ public class PhoneSlideMenuController {
         HashMap<String,Object> hm = null;
         switch (name) {
             case "Home":
-                fragment = HomeFragment.newInstance();
+                //fragment = HomeFragment.newInstance();
+                SimiManager.getIntance().openHomePage();
                 break;
             case "Category":
                 hm = new HashMap<>();
-                hm.put(KeyData.CATEGORY.CATEGORY_ID, "-1");
                 hm.put(KeyData.CATEGORY.CATEGORY_NAME, "all categories");
                 SimiManager.getIntance().openCategory(hm);
 

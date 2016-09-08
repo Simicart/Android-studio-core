@@ -3,22 +3,23 @@
     android:id="@+id/rlt_search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#CACACA"
+    android:layout_gravity="center_vertical"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:gravity="center">
 
 
     <EditText
         android:id="@+id/edt_query"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_40"
+        android:layout_height="@dimen/size_35"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="#CACACA"
+        android:background="@android:color/transparent"
         android:gravity="left|center_vertical"
         android:imeOptions="actionSearch"
         android:inputType="text"
-        android:padding="@dimen/size_1"
+        android:padding="@dimen/size_5"
         android:textSize="@dimen/text_16"></EditText>
 
     <ImageView

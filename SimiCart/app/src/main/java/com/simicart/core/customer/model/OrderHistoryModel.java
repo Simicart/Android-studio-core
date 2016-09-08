@@ -34,4 +34,8 @@ public class OrderHistoryModel extends SimiModel {
 		mUrlAction = Constants.GET_ORDER_HISTORY;
 	}
 
+	@Override
+	protected void setEnableCache() {
+		enableCache = true;
+	}
 }

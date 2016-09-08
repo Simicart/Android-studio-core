@@ -126,4 +126,9 @@ public class CategoryDetailModel extends SimiModel {
     public int getResultNumber() {
         return resultNumber;
     }
+
+    @Override
+    protected void setEnableCache() {
+        enableCache = true;
+    }
 }

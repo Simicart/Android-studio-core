@@ -48,7 +48,6 @@ public class SearchComponent extends SimiComponent {
 
         edtQuery = (EditText) findView("edt_query");
         edtQuery.setTextColor(AppColorConfig.getInstance().getSearchTextColor());
-        edtQuery.setBackgroundColor(AppColorConfig.getInstance().getSearchBoxBackground());
         String searchText = SimiTranslator.getInstance().translate("Search Products");
         if (Utils.validateString(mCateName)) {
             searchText = mCateName;

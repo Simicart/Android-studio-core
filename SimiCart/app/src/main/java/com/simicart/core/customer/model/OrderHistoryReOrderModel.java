@@ -9,4 +9,9 @@ public class OrderHistoryReOrderModel extends SimiModel{
 	protected void setUrlAction() {
 		mUrlAction = Constants.ORDER_DETAIL_REORDER;
 	}
+
+	@Override
+	protected void setEnableCache() {
+		enableCache = true;
+	}
 }

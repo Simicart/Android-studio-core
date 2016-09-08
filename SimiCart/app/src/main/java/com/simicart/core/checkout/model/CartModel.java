@@ -71,7 +71,7 @@ public class CartModel extends SimiModel {
 
 	@Override
 	protected void setEnableCache() {
-		enableCache = false;
+		enableCache = true;
 	}
 
 }

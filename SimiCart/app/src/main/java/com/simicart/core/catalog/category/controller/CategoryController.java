@@ -15,6 +15,7 @@ import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductList;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.home.component.SpotProductComponent;
@@ -41,8 +42,10 @@ public class CategoryController extends SimiController {
         onViewMoreClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,Object> hmData = new HashMap<>();
-                hmData.put(KeyData.CATEGORY_DETAIL.CATE_ID, mID);
+                HashMap<String, Object> hmData = new HashMap<>();
+                if (Utils.validateString(mID)) {
+                    hmData.put(KeyData.CATEGORY_DETAIL.CATE_ID, mID);
+                }
                 hmData.put(KeyData.CATEGORY_DETAIL.CATE_NAME, mName);
                 hmData.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
                 SimiManager.getIntance().openCategoryDetail(hmData);
@@ -63,7 +66,7 @@ public class CategoryController extends SimiController {
             }
         });
         ((CategoryModel) mModel).setCategoryID(mID);
-        if (!mID.equals("-1")) {
+        if (Utils.validateString(mID) && !mID.equals("-1")) {
             ((CategoryModel) mModel).setCategoryID(mID);
             mModel.addBody("category_id", mID);
         }
@@ -97,7 +100,7 @@ public class CategoryController extends SimiController {
 
     public void drawListProducts(ArrayList<Product> listProducts) {
         View listProductView = null;
-        if(listProducts.size() > 0) {
+        if (listProducts.size() > 0) {
             ProductList productList = new ProductList();
             productList.setSpotProduct(listProducts);
             SpotProductComponent listProductComponent = new SpotProductComponent(productList);

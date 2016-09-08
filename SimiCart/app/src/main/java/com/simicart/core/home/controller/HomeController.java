@@ -198,6 +198,7 @@ public class HomeController extends SimiController {
 
     @Override
     public void onResume() {
+        initSearch();
         showBanner();
         showCate();
         showSportProduct();
