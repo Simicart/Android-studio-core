@@ -141,9 +141,8 @@ public class PaypalExpress {
         btnExpress.setBackgroundResource(Rconfig.getInstance().drawable(
                 "plugin_paypal_express_product"));
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, Utils.toDp(55));
+                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        params.setMargins(0, Utils.toDp(5), 0, 0);
         btnExpress.setLayoutParams(params);
         rltPlugin.removeAllViewsInLayout();
         rltPlugin.addView(btnExpress);

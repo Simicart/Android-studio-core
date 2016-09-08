@@ -46,8 +46,8 @@ public class CartController extends SimiController {
             public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissLoading();
 //					mDelegate.setMessage(message);
-                processResult();
                 mDelegate.updateView(mModel.getCollection());
+                processResult();
                 mDelegate.onUpdateTotalPrice(((CartModel) mModel)
                         .getTotalPrice());
                 int carQty = ((CartModel) mModel).getQty();
