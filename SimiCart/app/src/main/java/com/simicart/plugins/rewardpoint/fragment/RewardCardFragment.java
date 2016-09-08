@@ -1,9 +1,5 @@
 package com.simicart.plugins.rewardpoint.fragment;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -17,7 +13,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +30,6 @@ import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.rewardpoint.utils.Constant;
 
@@ -147,7 +141,7 @@ public class RewardCardFragment extends SimiFragment {
 		} else {
 			bg_passbook.setColor(Color.parseColor("#FF6600"));
 		}
-		bg_passbook.setCornerRadius(Utils.getValueDp(15));
+		bg_passbook.setCornerRadius(Utils.toDp(15));
 		bg_passbook.setStroke(1, Color.parseColor("#FF6600"));
 
 		layout_passbook.setBackgroundDrawable(bg_passbook);

@@ -6,6 +6,8 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +48,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     protected ArrayList<Product> listProducts;
     protected Context mContext;
     protected String tagView = "";
+    protected int numCollums = 0;
 
     public String PRODUCT_PRICE_TYPE_1 = "simple_virtual";
     public String PRODUCT_PRICE_TYPE_2 = "bundle";
@@ -54,6 +57,10 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public CategoryDetailAdapter(ArrayList<Product> listProducts) {
         this.listProducts = listProducts;
+    }
+
+    public void setNumCollums(int numCollums) {
+        this.numCollums = numCollums;
     }
 
     @Override
@@ -150,9 +157,9 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
 
         if (product.getStock() == true) {
-            holder.layoutStock.setVisibility(View.GONE);
+            holder.txt_outstock.setVisibility(View.GONE);
         } else {
-            holder.layoutStock.setVisibility(View.VISIBLE);
+            holder.txt_outstock.setVisibility(View.VISIBLE);
             holder.txt_outstock.setText(SimiTranslator.getInstance().translate(
                     "Out Stock"));
         }
@@ -175,9 +182,9 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     protected void createItemGridView(GridProductHolder holder, Product product) {
         if (product.getStock() == true) {
-            holder.layout_stock.setVisibility(View.GONE);
+            holder.txt_outstock.setVisibility(View.GONE);
         } else {
-            holder.layout_stock.setVisibility(View.VISIBLE);
+            holder.txt_outstock.setVisibility(View.VISIBLE);
             holder.txt_outstock.setText(SimiTranslator.getInstance().translate(
                     "Out Stock"));
         }
@@ -203,6 +210,19 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             SimiDrawImage drawImage = new SimiDrawImage();
             drawImage.drawImage(holder.img_avartar, product.getImage());
         }
+
+        int screenWidthPx = Utils.getScreenWidth();
+        int itemSize;
+        LinearLayout.LayoutParams params = null;
+        if(numCollums == 2) {
+            itemSize = (int) ((screenWidthPx - 22) / 2);
+            params = new LinearLayout.LayoutParams(itemSize, itemSize);
+        } else if(numCollums == 4) {
+            itemSize = (int) ((screenWidthPx - 20) / 4);
+            params = new LinearLayout.LayoutParams(itemSize, itemSize);
+        }
+        holder.rl_product_list.setLayoutParams(params);
+
     }
 
     protected void dispatchEventForProductLabel(View view, Product product, String method) {
@@ -361,12 +381,9 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class ListProductHolder extends RecyclerView.ViewHolder {
 
-        // each data item is just a string in this case
         ImageView imageView;
         TextView txtName;
-        LinearLayout layoutStock;
         TextView txt_outstock;
-        //        LinearLayout ll_price;
         TextView tv_regular_price;
         TextView tv_special_price;
         TextView tv_minimal_price;
@@ -380,10 +397,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .setTextColor(AppColorConfig.getInstance().getContentColor());
             imageView = (ImageView) v.findViewById(Rconfig
                     .getInstance().id("iv_productItemImage"));
-            layoutStock = (LinearLayout) v
-                    .findViewById(Rconfig.getInstance().id("layout_stock"));
-            layoutStock.setBackgroundColor(AppColorConfig.getInstance()
-                    .getOutStockBackgroundColor());
+
             ImageView ic_expand = (ImageView) v.findViewById(Rconfig
                     .getInstance().id("ic_expand"));
             Drawable icon = mContext.getResources().getDrawable(
@@ -402,6 +416,8 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .getInstance().id("txt_out_stock"));
             txt_outstock.setTextColor(AppColorConfig.getInstance()
                     .getOutStockTextColor());
+            txt_outstock.setBackgroundColor(AppColorConfig.getInstance()
+                    .getOutStockBackgroundColor());
 
             rl_product_list = (RelativeLayout) v
                     .findViewById(Rconfig.getInstance().id("rel_product_list"));
@@ -416,7 +432,6 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         // each data item is just a string in this case
         private TextView tv_name;
         private ImageView img_avartar;
-        private LinearLayout layout_stock;
         private LinearLayout ll_price;
         private TextView txt_outstock;
         private RelativeLayout rl_product_list;
@@ -431,15 +446,13 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     .getInstance().id("ll_price"));
             img_avartar = (ImageView) v.findViewById(Rconfig
                     .getInstance().id("img_avartar"));
-            layout_stock = (LinearLayout) v
-                    .findViewById(Rconfig.getInstance().id("layout_stock"));
-            layout_stock.setBackgroundColor(AppColorConfig.getInstance()
-                    .getOutStockBackgroundColor());
 
             txt_outstock = (TextView) v.findViewById(Rconfig
                     .getInstance().id("txt_out_stock"));
             txt_outstock.setTextColor(AppColorConfig.getInstance()
                     .getOutStockTextColor());
+            txt_outstock.setBackgroundColor(AppColorConfig.getInstance()
+                    .getOutStockBackgroundColor());
 
             rl_product_list = (RelativeLayout) v
                     .findViewById(Rconfig.getInstance().id("rel_product_list"));
@@ -448,8 +461,8 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     ((withScreen - 22) / 2),
                     (withScreen - 22) / 2);
             LinearLayout.LayoutParams params4Collums = new LinearLayout.LayoutParams(
-                    Utils.getValueDp((int) ((withScreen - 20) / 4)),
-                    Utils.getValueDp((int) ((withScreen - 20) / 4)));
+                    Utils.toDp((int) ((withScreen - 20) / 4)),
+                    Utils.toDp((int) ((withScreen - 20) / 4)));
             if(DataLocal.isTablet) {
                 rl_product_list.setLayoutParams(params4Collums);
             } else {

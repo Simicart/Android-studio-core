@@ -191,16 +191,6 @@ public class Utils {
         return builder.toString().trim();
     }
 
-    public static int getValueDp(int value) {
-        float unit = SimiManager.getIntance().getCurrentActivity()
-                .getResources().getDisplayMetrics().density;
-        return (int) (value * unit + 0.5f);
-    }
-
-    public static void changeTextview(String color, float size) {
-
-    }
-
     public static boolean isTablet(Context context) {
 
         String type_device = context.getString(Rconfig.getInstance().getId(

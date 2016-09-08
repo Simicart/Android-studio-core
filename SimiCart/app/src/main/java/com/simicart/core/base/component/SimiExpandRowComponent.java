@@ -22,7 +22,7 @@ public class SimiExpandRowComponent extends SimiRowComponent {
     protected LinearLayout llChild;
     protected ArrayList<String> mListValueChild;
     protected int icDown = Rconfig.getInstance().drawable("ic_down");
-    protected int margin = Utils.getValueDp(5);
+    protected int margin = Utils.toDp(5);
     protected ExpandRowCallBack mCallBack;
     protected TextView tvTitle;
     protected boolean isInitChild;

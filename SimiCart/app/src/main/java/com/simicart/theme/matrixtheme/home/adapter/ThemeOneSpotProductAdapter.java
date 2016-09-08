@@ -11,15 +11,12 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Rconfig;
 import com.simicart.theme.matrixtheme.home.entity.OrderProduct;
-import com.simicart.theme.ztheme.home.entity.ZThemeSpotEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +33,7 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
     public ThemeOneSpotProductAdapter(ArrayList<OrderProduct> products) {
         mListProduct = products;
         dimension = Utils.SCREEN_WIDTH / 3;
-       // dimension = Utils.getValueDp(width);
+       // dimension = Utils.toDp(width);
     }
 
     @Override
@@ -53,7 +50,7 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dimension, dimension);
-        params.rightMargin = Utils.getValueDp(5);
+        params.rightMargin = Utils.toDp(5);
         holder.rltSpotProduct.setLayoutParams(params);
 
         final OrderProduct product = mListProduct.get(position);

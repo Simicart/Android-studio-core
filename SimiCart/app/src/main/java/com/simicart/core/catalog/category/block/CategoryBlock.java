@@ -3,10 +3,12 @@ package com.simicart.core.catalog.category.block;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.block.SimiBlock;
@@ -28,6 +30,7 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
     protected TextView tv_viewmore;
     protected ImageView iv_showmore;
     protected LinearLayout ll_listProducts;
+    protected RelativeLayout llShowMore;
 
     public CategoryBlock(View view, Context context) {
         super(view, context);
@@ -38,13 +41,15 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
 
         tv_CategoryName = (TextView) mView.findViewById(Rconfig.getInstance()
                 .id("tv_category"));
-        tv_CategoryName.setText(mName);
+        tv_CategoryName.setText(mName.toUpperCase());
         if (DataLocal.isLanguageRTL) {
             tv_CategoryName.setGravity(Gravity.RIGHT);
         }
         tv_viewmore = (TextView) mView.findViewById(Rconfig.getInstance().id(
                 "tv_viewmore"));
         tv_viewmore.setText(SimiTranslator.getInstance().translate("View more"));
+
+        llShowMore = (RelativeLayout) mView.findViewById(Rconfig.getInstance().id("layout_showmore"));
 
         iv_showmore = (ImageView) mView.findViewById(Rconfig.getInstance().id(
                 "iv_showmore"));
@@ -136,7 +141,7 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
     }
 
     public void onViewMoreClick(View.OnClickListener listener) {
-        tv_viewmore.setOnClickListener(listener);
+        llShowMore.setOnClickListener(listener);
     }
 
 }

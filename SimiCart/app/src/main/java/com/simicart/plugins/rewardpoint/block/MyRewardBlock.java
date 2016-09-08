@@ -250,9 +250,9 @@ public class MyRewardBlock extends SimiBlock implements MyRewardDelegate {
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT);
                         TextView textView = new TextView(mContext);
-                        textView.setPadding(Utils.getValueDp(10),
-                                Utils.getValueDp(10), Utils.getValueDp(10),
-                                Utils.getValueDp(10));
+                        textView.setPadding(Utils.toDp(10),
+                                Utils.toDp(10), Utils.toDp(10),
+                                Utils.toDp(10));
                         textView.setText(array_policies.getString(i));
                         textView.setTextColor(Color.parseColor("#000000"));
                         textView.setLayoutParams(paramsTextview);

@@ -32,8 +32,8 @@ public class CacheOptionTextView extends CacheOptionView {
         final EditText edt_option = new EditText(mContext);
         edt_option.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         edt_option.setLayoutParams(param);
-        edt_option.setPadding(Utils.getValueDp(5), Utils.getValueDp(10),
-                Utils.getValueDp(5), Utils.getValueDp(10));
+        edt_option.setPadding(Utils.toDp(5), Utils.toDp(10),
+                Utils.toDp(5), Utils.toDp(10));
         edt_option.setHint(SimiTranslator.getInstance().translate("Text"));
         edt_option.setHintTextColor(Color.GRAY);
         edt_option.setTextColor(Color.parseColor("#000000"));

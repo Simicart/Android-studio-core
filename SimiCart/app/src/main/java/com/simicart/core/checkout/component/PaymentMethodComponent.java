@@ -5,7 +5,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
-import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
@@ -22,7 +21,7 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
 
     protected LinearLayout ll_core_component;
     protected TextView tv_title;
-    protected int topMargin = Utils.getValueDp(5);
+    protected int topMargin = Utils.toDp(5);
     protected PaymentMethodCallBack mCallBack;
     protected ArrayList<PaymentMethodEntity> mPaymentMethods;
     protected ArrayList<ItemPaymentMethodView> mItemViews;

@@ -2,16 +2,12 @@ package com.simicart.core.checkout.component;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.widget.AppCompatButton;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import com.simicart.core.base.component.SimiParentRowComponent;
 import com.simicart.core.base.component.SimiRowComponent;
@@ -28,7 +24,6 @@ import com.simicart.core.checkout.entity.PaymentMethodEntity;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 import org.json.JSONObject;
@@ -51,7 +46,7 @@ public class CreditCardPopup {
     protected ProgressDialog ppFilter;
     protected String mCurrentMonth;
     protected String mYear;
-    protected int topMargin = Utils.getValueDp(10);
+    protected int topMargin = Utils.toDp(10);
     protected String mTypeCard;
     protected SimiTextRowComponent nameComponent;
     protected SimiTextRowComponent numberComponent;

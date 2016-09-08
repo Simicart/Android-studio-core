@@ -15,4 +15,6 @@ public interface CategoryDetailDelegate extends SimiDelegate {
 
     public String getTagView();
 
+    public void showTotalQuantity(String quantity);
+
 }

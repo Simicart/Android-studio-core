@@ -2,7 +2,6 @@ package com.simicart.core.customer.block;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -42,7 +41,7 @@ public class AddressBookDetailBlock extends SimiBlock implements
             for (int i = 0; i < rows.size(); i++) {
                 View row = rows.get(i);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.topMargin = Utils.getValueDp(10);
+                params.topMargin = Utils.toDp(10);
                 llBody.addView(row, params);
             }
         }

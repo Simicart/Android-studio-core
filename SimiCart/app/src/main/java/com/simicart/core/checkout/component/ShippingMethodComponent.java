@@ -23,7 +23,7 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
     protected ShippingMethodCallBack mCallBack;
     protected ArrayList<ItemShippingMethodView> mItemViews;
     protected ArrayList<ShippingMethodEntity> mShippingEntities;
-    protected int topMargin = Utils.getValueDp(5);
+    protected int topMargin = Utils.toDp(5);
     protected boolean isCreated = false;
 
 

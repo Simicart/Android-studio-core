@@ -2,9 +2,6 @@ package com.simicart.core.home.component;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -129,7 +126,7 @@ public class SearchComponent extends SimiComponent {
 
         if (isEnable) {
 
-            RelativeLayout.LayoutParams paramsIcon = new RelativeLayout.LayoutParams(Utils.getValueDp(15), Utils.getValueDp(15));
+            RelativeLayout.LayoutParams paramsIcon = new RelativeLayout.LayoutParams(Utils.toDp(15), Utils.toDp(15));
             paramsIcon.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
             paramsIcon.addRule(RelativeLayout.CENTER_VERTICAL);
             paramsIcon.rightMargin = Utils.toDp(5);
@@ -137,7 +134,7 @@ public class SearchComponent extends SimiComponent {
             imgIconSearch.setLayoutParams(paramsIcon);
             imgIconSearch.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, Utils.getValueDp(40));
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, Utils.toDp(40));
             params.addRule(RelativeLayout.RIGHT_OF, imgIconSearch.getId());
             edtQuery.setLayoutParams(params);
             edtQuery.setTextSize(16);
@@ -147,14 +144,14 @@ public class SearchComponent extends SimiComponent {
 
 
         } else {
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, Utils.getValueDp(40));
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, Utils.toDp(40));
             params.addRule(RelativeLayout.CENTER_HORIZONTAL);
             params.addRule(RelativeLayout.CENTER_VERTICAL);
             edtQuery.setLayoutParams(params);
 
             imgDelete.setVisibility(View.GONE);
 
-            RelativeLayout.LayoutParams paramsIcon = new RelativeLayout.LayoutParams(Utils.getValueDp(15), Utils.getValueDp(15));
+            RelativeLayout.LayoutParams paramsIcon = new RelativeLayout.LayoutParams(Utils.toDp(15), Utils.toDp(15));
             paramsIcon.addRule(RelativeLayout.LEFT_OF, edtQuery.getId());
             paramsIcon.addRule(RelativeLayout.CENTER_VERTICAL);
             paramsIcon.rightMargin = Utils.toDp(5);

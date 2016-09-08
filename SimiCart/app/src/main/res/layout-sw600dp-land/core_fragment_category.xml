@@ -71,7 +71,8 @@
                         android:layout_toRightOf="@+id/iv_back"
                         android:layout_toLeftOf="@+id/layout_showmore"
                         android:textColor="#FFFFFF"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textAllCaps="true"/>
                 </RelativeLayout>
 
                 <LinearLayout

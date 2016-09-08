@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class SimiParentRowComponent extends SimiRowComponent {
 
     protected ArrayList<SimiRowComponent> mListRow;
-    protected int rightMargin = Utils.getValueDp(5);
+    protected int rightMargin = Utils.toDp(5);
 
     public SimiParentRowComponent(ArrayList<SimiRowComponent> listRow) {
         super();

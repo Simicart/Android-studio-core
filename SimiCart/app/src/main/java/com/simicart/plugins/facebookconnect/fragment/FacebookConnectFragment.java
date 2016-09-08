@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.share.widget.LikeView;
-import com.simicart.MainActivity;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
@@ -78,9 +77,9 @@ public class FacebookConnectFragment extends SimiFragment {
 		}
 		
 		handleEvent();
-		int sizeLike = Utils.getValueDp(30);
-		final int sizeComment_w = Utils.getValueDp(40);
-		final int sizeComment_h = Utils.getValueDp(35);
+		int sizeLike = Utils.toDp(30);
+		final int sizeComment_w = Utils.toDp(40);
+		final int sizeComment_h = Utils.toDp(35);
 		TextView tvCount = (TextView) rootView.findViewById(Rconfig
 				.getInstance().id("fb_like_cloud_text"));
 		ProgressBar progress = (ProgressBar) rootView.findViewById(Rconfig

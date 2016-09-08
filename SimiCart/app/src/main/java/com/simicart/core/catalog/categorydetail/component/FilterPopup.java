@@ -35,6 +35,7 @@ public class FilterPopup extends SimiPopup {
     protected LinearLayout llStateSelected;
     protected LinearLayout llFilterValue;
     protected JSONObject mJSONFilter;
+    protected int topMargin = Utils.toDp(5);
     protected View rootView;
     protected String mNameCate;
     protected FilterCallBack mCallBack;

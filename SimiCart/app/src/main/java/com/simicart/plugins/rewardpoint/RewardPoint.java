@@ -209,10 +209,10 @@ public class RewardPoint {
         if(ll_reward_card != null) {
             ll_reward_card.removeAllViews();
             LinearLayout.LayoutParams paramsImageview = new LinearLayout.LayoutParams(
-                    Utils.getValueDp(20), Utils.getValueDp(20));
+                    Utils.toDp(20), Utils.toDp(20));
             paramsImageview.gravity = Gravity.CENTER_VERTICAL;
-            paramsImageview.setMargins(Utils.getValueDp(10), 0,
-                    Utils.getValueDp(10), 0);
+            paramsImageview.setMargins(Utils.toDp(10), 0,
+                    Utils.toDp(10), 0);
             ImageView img_point = new ImageView(mContext);
             img_point.setLayoutParams(paramsImageview);
             SimiDrawImage drawImage = new SimiDrawImage();
@@ -223,8 +223,8 @@ public class RewardPoint {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
             paramsTextview.gravity = Gravity.CENTER_VERTICAL;
-            paramsTextview.setMargins(0, Utils.getValueDp(5), 0,
-                    Utils.getValueDp(5));
+            paramsTextview.setMargins(0, Utils.toDp(5), 0,
+                    Utils.toDp(5));
             TextView textView = new TextView(mContext);
             textView.setTextColor(Color.parseColor("#ff033e"));
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);

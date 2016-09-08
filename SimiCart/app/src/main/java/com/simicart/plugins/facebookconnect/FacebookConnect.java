@@ -12,7 +12,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -159,7 +158,7 @@ public class FacebookConnect {
                         "plugins_fbconnect_layout_login"), null);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        int dp = Utils.getValueDp(5);
+        int dp = Utils.toDp(5);
         params.setMargins(dp, dp, dp, dp);
         params.addRule(RelativeLayout.BELOW, bt_signin.getId());
         v.setLayoutParams(params);

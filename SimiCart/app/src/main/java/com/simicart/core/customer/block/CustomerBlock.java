@@ -22,7 +22,7 @@ public class CustomerBlock extends SimiBlock implements
 
     protected LinearLayout llRegister;
     protected AppCompatButton btnRegister;
-    protected int topMargin = Utils.getValueDp(10);
+    protected int topMargin = Utils.toDp(10);
     protected int mOpenFor;
 
     public CustomerBlock(View view, Context context) {
