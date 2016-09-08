@@ -39,11 +39,11 @@ public class CartFragment extends SimiFragment {
 			Bundle savedInstanceState) {
 		setScreenName("Cart Screen");
 		SimiManager.getIntance().showCartLayout(false);
-		View view = inflater.inflate(
+		rootView = inflater.inflate(
 				Rconfig.getInstance().layout("core_fragment_cart"), container,
 				false);
 		Context context = getActivity();
-		mBlock = new CartBlock(view, context);
+		mBlock = new CartBlock(rootView, context);
 		mBlock.initView();
 
 		if (null == mController) {
@@ -54,7 +54,7 @@ public class CartFragment extends SimiFragment {
 			mController.setDelegate(mBlock);
 			mController.onResume();
 		}
-		return view;
+		return rootView;
 	}
 
 	@Override

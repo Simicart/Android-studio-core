@@ -5,16 +5,15 @@
     android:background="#FFFFFF"
     android:orientation="horizontal" >
 
-    <LinearLayout
-        android:id="@+id/ll_carts"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="60"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_carts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:paddingLeft="5dp"
         android:paddingRight="0dp"
         android:paddingTop="5dp"
-        android:orientation="vertical"/>
+        android:layout_weight="60"/>
 
     <View
         android:id="@+id/line_vertical"

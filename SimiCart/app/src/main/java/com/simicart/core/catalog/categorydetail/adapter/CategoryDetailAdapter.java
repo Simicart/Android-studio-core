@@ -180,7 +180,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         });
     }
 
-    protected void createItemGridView(GridProductHolder holder, Product product) {
+    protected void createItemGridView(GridProductHolder holder, final Product product) {
         if (product.getStock() == true) {
             holder.txt_outstock.setVisibility(View.GONE);
         } else {
@@ -222,6 +222,21 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             params = new LinearLayout.LayoutParams(itemSize, itemSize);
         }
         holder.rl_product_list.setLayoutParams(params);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = product.getId();
+                ArrayList<String> listID = new ArrayList<String>();
+                for (int i = 0; i < listProducts.size(); i++) {
+                    listID.add(listProducts.get(i).getId());
+                }
+                HashMap<String,Object> hmData = new HashMap<>();
+                hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, id);
+                hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
+                SimiManager.getIntance().openProductDetail(hmData);
+            }
+        });
 
     }
 
