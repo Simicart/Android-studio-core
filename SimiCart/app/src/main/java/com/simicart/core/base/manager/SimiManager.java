@@ -129,7 +129,7 @@ public class SimiManager {
     public void openCustomerPage(HashMap<String, Object> hm) {
         SimiData data = new SimiData(hm);
         CustomerFragment fragment = CustomerFragment.newInstance(data);
-        replaceFragment(fragment);
+        replacePopupFragment(fragment);
     }
 
     public void openWebviewPage(HashMap<String, Object> hm) {

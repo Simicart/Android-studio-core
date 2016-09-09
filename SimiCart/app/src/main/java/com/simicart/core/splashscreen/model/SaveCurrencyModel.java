@@ -15,9 +15,4 @@ public class SaveCurrencyModel extends SimiModel {
 		mUrlAction = Constants.SAVE_CURRENCY;
 	}
 
-	@Override
-	protected void setEnableCache() {
-		this.enableCache = true;
-	}
-
 }
