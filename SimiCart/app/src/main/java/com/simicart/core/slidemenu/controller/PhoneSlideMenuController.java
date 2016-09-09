@@ -342,6 +342,7 @@ public class PhoneSlideMenuController {
         Drawable icon = mContext.getResources().getDrawable(id_icon);
         icon.setColorFilter(Color.parseColor("#ffffff"),
                 PorterDuff.Mode.SRC_ATOP);
+        item.setShowPopup(true);
         item.setIcon(icon);
 
         mItems.add(item);
@@ -374,12 +375,11 @@ public class PhoneSlideMenuController {
                         check_keyboard_first = true;
                     } else {
                         // replace for tablet
-//                        if (fragment.isShowPopup()) {
-//                            SimiManager.getIntance().replacePopupFragment(
-//                                    fragment);
-//                        } else {
-                        SimiManager.getIntance().replaceFragment(fragment);
-//                        }
+                        if(item.isShowPopup()) {
+                            SimiManager.getIntance().replacePopupFragment(fragment);
+                        } else {
+                            SimiManager.getIntance().replaceFragment(fragment);
+                        }
                     }
 
                 }

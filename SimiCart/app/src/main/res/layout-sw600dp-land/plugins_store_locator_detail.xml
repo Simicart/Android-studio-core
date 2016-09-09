@@ -629,13 +629,12 @@
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
-                    <com.simicart.core.style.NoScrollListView
+                    <android.support.v7.widget.RecyclerView
                         android:id="@+id/list_special"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:divider="@android:color/transparent" >
-                    </com.simicart.core.style.NoScrollListView>
+                        android:layout_marginTop="5dp" >
+                    </android.support.v7.widget.RecyclerView>
                 </LinearLayout>
             </LinearLayout>
 
@@ -675,13 +674,12 @@
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
-                    <com.simicart.core.style.NoScrollListView
+                    <android.support.v7.widget.RecyclerView
                         android:id="@+id/list_holyday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:divider="@android:color/transparent" >
-                    </com.simicart.core.style.NoScrollListView>
+                        android:layout_marginTop="5dp" >
+                    </android.support.v7.widget.RecyclerView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

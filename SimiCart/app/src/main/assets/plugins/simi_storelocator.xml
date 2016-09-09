@@ -1,6 +1,6 @@
 <events>
    <event>
-        <fullname>com.simicart.plugins.locator.StoreLocator</fullname>
+        <fullname>com.simicart.plugins.storelocator.StoreLocator</fullname>
 	    <sku>simi_developer</sku>
     </event>
 </events>

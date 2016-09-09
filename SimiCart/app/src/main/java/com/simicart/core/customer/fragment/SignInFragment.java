@@ -56,7 +56,7 @@ public class SignInFragment extends SimiFragment {
 					container, false);
 		}else {
 			view = inflater.inflate(
-					Rconfig.getInstance().layout("core_sign_in_layout"), container,
+					Rconfig.getInstance().layout("core_fragment_signin"), container,
 					false);
 		}
 		Context context = getActivity();
