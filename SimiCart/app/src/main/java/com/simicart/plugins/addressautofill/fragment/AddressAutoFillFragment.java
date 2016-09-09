@@ -229,22 +229,26 @@ public class AddressAutoFillFragment extends SimiFragment {
         for(SimiRowComponent row : mListRowComponent) {
             if(row.getKey().equals("country_name")) {
                 if(Utils.validateString(mCountryID)) {
+                    Log.e("country_name", "++" + mCountryID);
                     String countryName = getCountryName(mCountryID);
                     row.setValue(countryName);
                     row.updateView();
                 }
             } else if(row.getKey().equals("city")) {
                 if(Utils.validateString(mCity)) {
+                    Log.e("city", "++" + mCity);
                     row.setValue(mCity);
                     ((SimiTextRowComponent)row).changeValue(mCity);
                 }
             } else if(row.getKey().equals("street")) {
                 if(Utils.validateString(mStreet)) {
+                    Log.e("street", "++" + mStreet);
                     row.setValue(mStreet);
                     ((SimiTextRowComponent)row).changeValue(mStreet);
                 }
             } else if(row.getKey().equals("zip")) {
                 if(Utils.validateString(mPostalCode)) {
+                    Log.e("zip", "++" + mPostalCode);
                     row.setValue(mPostalCode);
                     ((SimiTextRowComponent)row).changeValue(mPostalCode);
                 }
