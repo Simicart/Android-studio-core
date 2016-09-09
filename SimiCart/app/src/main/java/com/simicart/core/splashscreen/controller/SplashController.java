@@ -80,7 +80,6 @@ public class SplashController {
         appConfigModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
-
             }
         });
 
@@ -110,7 +109,7 @@ public class SplashController {
                 if (Utils.validateString(ids)) {
                     getSKUPlugin(ids);
                 } else {
-
+                    isSuccessSku = true;
                 }
             }
         });
@@ -118,7 +117,6 @@ public class SplashController {
         listIDPluginModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
-
             }
         });
 
@@ -139,7 +137,7 @@ public class SplashController {
                 if (null != listSKU && listSKU.size() > 0) {
                     enablePlugins(listSKU);
                 }
-                if (canOpenMain && isSuccessSku) {
+                if (canOpenMain) {
                     dispatchEvent();
                     SimiManager.getIntance().toMainActivity();
                 } else {
@@ -151,7 +149,6 @@ public class SplashController {
         listSKUPluginModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
-
             }
         });
 
@@ -188,7 +185,6 @@ public class SplashController {
         saveCurrencyModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
-
             }
         });
 
@@ -207,6 +203,7 @@ public class SplashController {
         cmsPageModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
+
                 ArrayList<SimiEntity> entity = collection.getCollection();
                 if (entity.size() > 0) {
                     for (SimiEntity simiEntity : entity) {
@@ -221,7 +218,6 @@ public class SplashController {
         cmsPageModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
-
             }
         });
 
@@ -233,7 +229,6 @@ public class SplashController {
         storeViewModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-
                 if (Config.getInstance().isUseStore()) {
                     changeBaseUrl();
                 }
@@ -251,6 +246,7 @@ public class SplashController {
         storeViewModel.setFailListener(new ModelFailCallBack() {
             @Override
             public void onFail(SimiError error) {
+
 
             }
         });
