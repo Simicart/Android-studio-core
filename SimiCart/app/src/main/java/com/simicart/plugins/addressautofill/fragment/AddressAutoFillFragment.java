@@ -1,6 +1,8 @@
 package com.simicart.plugins.addressautofill.fragment;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -8,10 +10,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,6 +70,7 @@ public class AddressAutoFillFragment extends SimiFragment {
     protected Address returnedAddress;
     protected ArrayList<SimiRowComponent> mListRowComponent;
     protected ArrayList<CountryEntity> mListCountry;
+    protected ProgressDialog pd_loading;
 
     protected String mStreet, mCity, mPostalCode, mCountryID;
 
@@ -84,7 +90,6 @@ public class AddressAutoFillFragment extends SimiFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(Rconfig.getInstance().layout("plugins_addressautofill_map"), container, false);
-
         tvLabel = (TextView) rootView.findViewById(Rconfig.getInstance().id("tv_label"));
         tvLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
         tvLabel.setText(SimiTranslator.getInstance().translate("Touch the map until you get your desired address"));
@@ -112,6 +117,15 @@ public class AddressAutoFillFragment extends SimiFragment {
                 }
             }
         });
+
+        pd_loading = ProgressDialog.show(SimiManager.getIntance().getCurrentActivity(), null, null, true, false);
+        pd_loading.setContentView(Rconfig.getInstance().layout(
+                "core_base_loading"));
+        pd_loading.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        pd_loading.setCanceledOnTouchOutside(false);
+        pd_loading.setCancelable(false);
+        pd_loading.dismiss();
 
         return rootView;
     }
@@ -166,6 +180,7 @@ public class AddressAutoFillFragment extends SimiFragment {
         mGoogleMap.addMarker(new MarkerOptions().position(new LatLng(currrentLocation.getLatitude(), currrentLocation.getLongitude()))
                 .icon(BitmapDescriptorFactory.fromResource(Rconfig
                         .getInstance().getIdDraw("maker_my"))));
+        pd_loading.show();
         new LocationAsync().execute();
     }
 
@@ -207,10 +222,9 @@ public class AddressAutoFillFragment extends SimiFragment {
 
         @Override
         protected void onPostExecute(Void result) {
+            pd_loading.dismiss();
             if (returnedAddress != null) {
                 showPickedAddress();
-            } else {
-                Log.e("abc", "can not get address");
             }
         }
     }
@@ -242,26 +256,22 @@ public class AddressAutoFillFragment extends SimiFragment {
         for (SimiRowComponent row : mListRowComponent) {
             if (row.getKey().equals("country_name")) {
                 if (Utils.validateString(mCountryID)) {
-                    Log.e("country_name", "++" + mCountryID);
                     String countryName = getCountryName(mCountryID);
                     row.setValue(countryName);
                     row.updateView();
                 }
             } else if (row.getKey().equals("city")) {
                 if (Utils.validateString(mCity)) {
-                    Log.e("city", "++" + mCity);
                     row.setValue(mCity);
                     ((SimiTextRowComponent) row).changeValue(mCity);
                 }
             } else if (row.getKey().equals("street")) {
                 if (Utils.validateString(mStreet)) {
-                    Log.e("street", "++" + mStreet);
                     row.setValue(mStreet);
                     ((SimiTextRowComponent) row).changeValue(mStreet);
                 }
             } else if (row.getKey().equals("zip")) {
                 if (Utils.validateString(mPostalCode)) {
-                    Log.e("zip", "++" + mPostalCode);
                     row.setValue(mPostalCode);
                     ((SimiTextRowComponent) row).changeValue(mPostalCode);
                 }

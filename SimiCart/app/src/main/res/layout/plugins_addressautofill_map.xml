@@ -10,11 +10,11 @@
         android:layout_centerHorizontal="true"
         android:textSize="13sp"/>
 
-    <FrameLayout
+    <com.simicart.plugins.addressautofill.container.MyMapFragmentContainer
         android:id="@+id/address_frame_map"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@+id/tv_label"></FrameLayout>
+        android:layout_below="@+id/tv_label"></com.simicart.plugins.addressautofill.container.MyMapFragmentContainer>
 
     <ImageView
         android:id="@+id/bt_detect_location"
