@@ -5,10 +5,12 @@ import com.simicart.core.notification.NotificationEntity;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by frank on 26/08/2016.
  */
-public class OrderInforEntity extends SimiEntity {
+public class OrderInforEntity extends SimiEntity{
 
     protected boolean isShowNotification;
     protected String mMessage;

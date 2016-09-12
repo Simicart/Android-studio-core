@@ -19,14 +19,8 @@ import com.simicart.MainActivity;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.error.SimiError;
-import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.checkout.entity.OrderInforEntity;
-import com.simicart.core.checkout.entity.PaymentMethodEntity;
-import com.simicart.core.checkout.entity.ReviewOrderEntity;
-import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
@@ -35,11 +29,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 
 public class PayPalActivity extends AppCompatActivity {
 
-    protected HashMap<String, Object> mData;
     protected String CONFIG_CLIENT_ID = "AbwLSxDR0lE1ksdFL7YxfJlQ8VVmFCIbvoiO6adhbjb5vw2bWcJNnWXn";
     protected String CONFIG_ENVIROMENT = PayPalConfiguration.ENVIRONMENT_NO_NETWORK;
     protected String mBNCode = "Magestore_SI_MagentoCE";
@@ -47,13 +39,13 @@ public class PayPalActivity extends AppCompatActivity {
     protected String mInvoiceNumber = "";
     protected int REQUEST_CODE_PAYMENT = 1;
     protected ProgressBar prb_loading;
+    protected PaypalEntity mPaypalEntity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         parseExtras();
-        parseData();
         setContentView(Rconfig.getInstance().layout("plugins_paypal_activty"));
         prb_loading = (ProgressBar) findViewById(Rconfig.getInstance().id("prb_loading"));
         prb_loading.setVisibility(View.GONE);
@@ -86,67 +78,30 @@ public class PayPalActivity extends AppCompatActivity {
 
     protected void parseExtras() {
         Bundle extras = getIntent().getExtras();
-        SimiData simiData = extras.getParcelable("data");
-        mData = simiData.getData();
+        mPaypalEntity = (PaypalEntity) extras.getSerializable("data");
 
-    }
+        mTotalPrice = mPaypalEntity.getTotalPrice();
 
-    protected void parseData() {
-        if (mData.containsKey("total_price")) {
-            TotalPrice totalPrice = (TotalPrice) mData.get("total_price");
-            parseTotalPrice(totalPrice);
+        String client_id = mPaypalEntity.getClientID();
+        if (Utils.validateString(client_id)) {
+            CONFIG_CLIENT_ID = client_id;
         }
 
-        if (mData.containsKey("payment_method")) {
-            PaymentMethodEntity paymentMethodEntity = (PaymentMethodEntity) mData.get("payment_method");
-            parsePaymentMethod(paymentMethodEntity);
-        }
-
-        if (mData.containsKey("review_order_entity")) {
-            ReviewOrderEntity reviewOrderEntity = (ReviewOrderEntity) mData.get("review_order_entity");
-        }
-
-        if (mData.containsKey("order_infor_entity")) {
-            OrderInforEntity orderInforEntity = (OrderInforEntity) mData.get("order_infor_entity");
-            parseOrderInfor(orderInforEntity);
-        }
-    }
-
-    protected void parseTotalPrice(TotalPrice totalPrice) {
-        String grandTotal = totalPrice.getGrandTotal();
-        if (Utils.validateString(grandTotal)) {
-            mTotalPrice = grandTotal;
-            return;
-        }
-
-        String grandTotalIncl = totalPrice.getGrandTotalInclTax();
-        if (Utils.validateString(grandTotalIncl)) {
-            mTotalPrice = grandTotalIncl;
-            return;
-        }
-
-        String grandTotalExcl = totalPrice.getGrandTotalExclTax();
-        if (Utils.validateString(grandTotalExcl)) {
-            mTotalPrice = grandTotalExcl;
-            return;
-        }
-    }
-
-    protected void parsePaymentMethod(PaymentMethodEntity paymentMethodEntity) {
-        CONFIG_CLIENT_ID = paymentMethodEntity.getData("client_id");
-
-        String is_sandbox = paymentMethodEntity.getData("is_sandbox");
-        if (Utils.validateString(is_sandbox) && is_sandbox.equals("1")) {
+        if (mPaypalEntity.isSandbox()) {
             CONFIG_ENVIROMENT = PayPalConfiguration.ENVIRONMENT_PRODUCTION;
         } else {
             CONFIG_ENVIROMENT = PayPalConfiguration.ENVIRONMENT_SANDBOX;
         }
-        mBNCode = paymentMethodEntity.getData("bncode");
+
+        String bnCode = mPaypalEntity.getBNCode();
+        if (Utils.validateString(bnCode)) {
+            mBNCode = bnCode;
+        }
+
+        mInvoiceNumber = mPaypalEntity.getInvoiceNumber();
+
     }
 
-    protected void parseOrderInfor(OrderInforEntity orderInforEntity) {
-        mInvoiceNumber = orderInforEntity.getData("invoice_number");
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

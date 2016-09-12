@@ -7,13 +7,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by frank on 6/29/16.
  */
-public class PaymentMethodEntity extends SimiEntity {
+public class PaymentMethodEntity extends SimiEntity  {
 
     public enum PAYMENTMETHODTYPE {
         OFFLINE,
