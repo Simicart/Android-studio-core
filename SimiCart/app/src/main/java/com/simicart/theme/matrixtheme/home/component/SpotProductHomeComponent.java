@@ -28,8 +28,7 @@ public class SpotProductHomeComponent extends SimiComponent {
     public View createView() {
         rootView = findLayout("theme_one_component_spot_product");
         rcvSpotProduct = (RecyclerView) findView("rcv_spot_product");
-        LinearLayoutManager manager = new LinearLayoutManager(mContext);
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
         rcvSpotProduct.setLayoutManager(manager);
         ThemeOneSpotProductAdapter adapter = new ThemeOneSpotProductAdapter(mListProduct);
         rcvSpotProduct.setAdapter(adapter);

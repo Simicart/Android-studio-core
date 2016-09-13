@@ -15,6 +15,7 @@ import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
+import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.theme.matrixtheme.home.entity.OrderProduct;
 
@@ -41,7 +42,7 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
         mContext = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(mContext);
         int idView = Rconfig.getInstance().layout("theme_one_adapter_spot_product");
-        View itemView = inflater.inflate(idView, null);
+        View itemView = inflater.inflate(idView, parent, false);
         ViewHolder holder = new ViewHolder(itemView);
         return holder;
     }
@@ -49,13 +50,21 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dimension, dimension);
+        RelativeLayout.LayoutParams params = null;
+        if(!DataLocal.isTablet) {
+            params = new RelativeLayout.LayoutParams(dimension, dimension);
+        } else {
+            params = new RelativeLayout.LayoutParams(dimension, RelativeLayout.LayoutParams.MATCH_PARENT);
+        }
         params.rightMargin = Utils.toDp(5);
         holder.rltSpotProduct.setLayoutParams(params);
 
         final OrderProduct product = mListProduct.get(position);
 
         // spot name
+        if(DataLocal.isTablet) {
+            holder.tvName.setTextSize(14);
+        }
         String name = product.getSpotName();
         if (Utils.validateString(name)) {
             name = name.toUpperCase();

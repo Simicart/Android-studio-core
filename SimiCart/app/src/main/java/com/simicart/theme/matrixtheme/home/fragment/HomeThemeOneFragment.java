@@ -30,7 +30,7 @@ public class HomeThemeOneFragment extends SimiFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         int idView = Rconfig.getInstance().layout("theme_one_fragment_home");
-        rootView = inflater.inflate(idView, null, false);
+        rootView = inflater.inflate(idView, container, false);
         Context context = getActivity();
         HomeThemeOneBlock block = new HomeThemeOneBlock(rootView,context);
         block.initView();
