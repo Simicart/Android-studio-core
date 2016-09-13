@@ -1,6 +1,7 @@
 package com.simicart.core.splashscreen.controller;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
@@ -89,6 +90,7 @@ public class SplashController {
 
     protected void enableTheme() {
         String themeType = AppColorConfig.getInstance().getThemeType();
+        Log.e("SplashController","=============> THEME TYPE " + themeType);
         if (Utils.validateString(themeType)) {
             if (themeType.equals(MATRIX_THEME)) {
                 new MatrixTheme();

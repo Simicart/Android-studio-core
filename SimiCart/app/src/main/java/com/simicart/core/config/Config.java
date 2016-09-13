@@ -19,7 +19,8 @@ public class Config {
     private String mBaseUrl = "http://demo.magestore.com/simicart/simipos3/index.php/";
     private String mSecretKey = "7da5a4671cae52674c2789e86d4912265f68c98";
     private String mBaseCloudUrl = "https://api.jajahub.com/rest/";
-    private String mSecretCloudKey = "f77132fc93d049cc5e0fd3229c45ac786704ab61";
+    // key demo superior
+    private String mSecretCloudKey = "d2e8cb715ff3597e88ad6aa6a02b6cafac6a533a";
     private String mColorSplashScreen = "#FFFFFF";
     private String mDemoEnable = "DEMO_ENABLE";
 

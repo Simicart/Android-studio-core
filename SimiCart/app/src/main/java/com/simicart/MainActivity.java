@@ -126,6 +126,11 @@ public class MainActivity extends FragmentActivity {
 
 
     protected void showNotification(final NotificationEntity notificationEntity) {
+
+        if(null == notificationEntity){
+            return;
+        }
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -134,7 +139,10 @@ public class MainActivity extends FragmentActivity {
                         SimiManager.getIntance().getCurrentActivity());
 
                 String title = notificationEntity.getTitle();
-                alertBox.setTitle(title);
+                if (Utils.validateString(title)) {
+                    alertBox.setTitle(title);
+                }
+
 
                 NotificationPopup notificationPopup = new NotificationPopup(notificationEntity);
                 notificationPopup.setCallBack(new NotificationCallBack() {

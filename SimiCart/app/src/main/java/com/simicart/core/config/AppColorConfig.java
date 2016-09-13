@@ -372,6 +372,10 @@ public class AppColorConfig extends SimiEntity {
         return mThemeType;
     }
 
+    public void setThemeType(String type){
+        mThemeType = type;
+    }
+
     public int parseColor(String color) {
         try {
             return Color.parseColor(color);

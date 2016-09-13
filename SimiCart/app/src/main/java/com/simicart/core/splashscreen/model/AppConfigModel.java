@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
+import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 
 import org.json.JSONArray;
@@ -17,7 +18,7 @@ public class AppConfigModel extends SimiModel {
 
     @Override
     protected void parseData() {
-        Log.e("AppConfigModel ","DATA " + mJSON.toString());
+        Log.e("AppConfigModel ", "DATA " + mJSON.toString());
         collection = new SimiCollection();
         onParse();
     }
@@ -28,7 +29,13 @@ public class AppConfigModel extends SimiModel {
                 JSONArray array = mJSON.getJSONArray("app-configs");
                 if (null != array && array.length() > 0) {
                     JSONObject js_app = array.getJSONObject(0);
-                    if(js_app.has("theme")) {
+                    if (js_app.has("layout")) {
+                        String layout = js_app.getString("layout");
+                        if (Utils.validateString(layout)) {
+                            AppColorConfig.getInstance().setThemeType(layout);
+                        }
+                    }
+                    if (js_app.has("theme")) {
                         JSONObject themeObj = js_app.getJSONObject("theme");
                         AppColorConfig.getInstance().parse(themeObj);
                     }

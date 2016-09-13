@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -168,6 +169,9 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             @Override
             public void onClick(View v) {
                 String id = product.getId();
+
+                Log.e("CategoryDetailAdapter ","=========> CLICK ON PRODUCT ID " + id);
+
                 ArrayList<String> listID = new ArrayList<String>();
                 for (int i = 0; i < listProducts.size(); i++) {
                     listID.add(listProducts.get(i).getId());
