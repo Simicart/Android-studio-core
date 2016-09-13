@@ -60,6 +60,7 @@ public class CategoryDetailFragment extends SimiFragment {
         if (null == mController) {
             mController = new CategoryDetailController();
             mController.setData(mHashMapData);
+            mController.setTagView(tagView);
             mController.setDelegate(mBlock);
             mController.onStart();
 

@@ -3,7 +3,6 @@
     android:id="@+id/rl_listItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp"
     android:background="@drawable/item_listview_style" >
 
@@ -125,5 +124,13 @@
         android:layout_marginRight="5dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_extend" />
+
+    <View
+        android:id="@+id/v_menu"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#E8E8E8"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/size_10"/>
 
 </RelativeLayout>

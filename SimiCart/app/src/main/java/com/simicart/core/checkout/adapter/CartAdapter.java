@@ -117,7 +117,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.vCart.setBackgroundColor(AppColorConfig.getInstance()
                 .getLineColor());
 
-        holder.rlItemCart.setOnClickListener(new View.OnClickListener() {
+        holder.rlCartImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<String,Object> hmData = new HashMap<String, Object>();
@@ -282,8 +282,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         private TextView tvItemCartId, tvOutStock, tvItemCartName, tvItemCartOption,
                 tvItemCartPrice, tvQuantity, tvItemCartQty;
-        private ImageView ivItemCartImage, ivItemCartDelete, ivItemCartQty;
-        private RelativeLayout rItemCartlQty, rlItemCart;
+        private ImageView ivItemCartImage, ivItemCartDelete;
+        private RelativeLayout rItemCartlQty, rlItemCart, rlCartImage;
         private LinearLayout llStock;
         private View vCart;
 
@@ -299,10 +299,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvItemCartId = (TextView) itemView.findViewById(Rconfig.getInstance().id("tv_item_cart_id"));
             ivItemCartImage = (ImageView) itemView.findViewById(Rconfig.getInstance().id("iv_item_cart_image"));
             ivItemCartDelete = (ImageView) itemView.findViewById(Rconfig.getInstance().id("iv_item_cart_del"));
-            ivItemCartQty = (ImageView) itemView.findViewById(Rconfig.getInstance().id("iv_quantity"));
-            rItemCartlQty = (RelativeLayout) itemView.findViewById(Rconfig.getInstance().id("rl_quantity"));
+            rItemCartlQty = (RelativeLayout) itemView.findViewById(Rconfig.getInstance().id("rl_item_cart_quantity"));
             llStock = (LinearLayout) itemView.findViewById(Rconfig.getInstance().id("ll_stock"));
             vCart = (View) itemView.findViewById(Rconfig.getInstance().id("v_cart"));
+            rlCartImage = (RelativeLayout) itemView.findViewById(Rconfig.getInstance().id("rl_item_cart_image"));
         }
     }
 }

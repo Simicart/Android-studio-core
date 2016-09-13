@@ -16,21 +16,21 @@
         android:id="@+id/rv_list_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ll_search"
+        android:layout_alignParentBottom="true"
         android:clipToPadding="false"
         android:paddingBottom="40dp"
-        android:scrollbars="none"></android.support.v7.widget.RecyclerView>
+        android:scrollbars="none"
+        android:visibility="gone"></android.support.v7.widget.RecyclerView>
 
     <ProgressBar
         android:id="@+id/pb_load_more"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/rv_list_products"
+        android:layout_above="@id/rv_list_products"
         android:layout_centerHorizontal="true"
         android:background="@null"
-        android:indeterminateDrawable="@drawable/progressbar_indeterminate"
-        android:visibility="gone" />
+        android:indeterminateDrawable="@drawable/progressbar_indeterminate" />
 
     <RelativeLayout
         android:id="@+id/rl_menu_bottom"

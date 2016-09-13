@@ -4,16 +4,13 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.notify.SimiNotify;
@@ -46,7 +43,6 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     public CategoryDetailBlock(View view, Context context) {
         super(view, context);
     }
-
 
     @Override
     public void initView() {
@@ -132,6 +128,7 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
 
     }
 
+    @Override
     public void setTagView(String tagView) {
         this.tagView = tagView;
     }
@@ -149,16 +146,14 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     public void changeView() {
         mAdapter = new CategoryDetailAdapter(listProducts);
         if (tagView == Constants.TAG_LISTVIEW) {
-            tagView = Constants.TAG_GRIDVIEW;
+            ivChangeView.setBackgroundResource(Rconfig.getInstance()
+                    .drawable("ic_to_gridview"));
+            rvListProducts.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        } else {
             ivChangeView.setBackgroundResource(Rconfig.getInstance()
                     .drawable("ic_to_listview"));
             rvListProducts.setLayoutManager(new GridLayoutManager(mContext, numCollums));
             mAdapter.setNumCollums(numCollums);
-        } else {
-            tagView = Constants.TAG_LISTVIEW;
-            ivChangeView.setBackgroundResource(Rconfig.getInstance()
-                    .drawable("ic_to_gridview"));
-            rvListProducts.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         }
         mAdapter.setTagView(tagView);
         rvListProducts.setAdapter(mAdapter);

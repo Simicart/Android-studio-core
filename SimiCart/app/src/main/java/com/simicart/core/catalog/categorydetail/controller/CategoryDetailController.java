@@ -3,6 +3,7 @@ package com.simicart.core.catalog.categorydetail.controller;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.simicart.core.base.controller.SimiController;
@@ -46,6 +47,7 @@ public class CategoryDetailController extends SimiController {
     protected int mCurrentSort;
     protected LayerEntity mLayerEntity;
     protected JSONObject mJSONFilter;
+    protected String tagView;
 
     protected View.OnClickListener onChangeViewClick;
     protected View.OnClickListener mSortListener;
@@ -107,6 +109,12 @@ public class CategoryDetailController extends SimiController {
         onChangeViewClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (tagView == Constants.TAG_GRIDVIEW) {
+                    tagView = Constants.TAG_LISTVIEW;
+                } else {
+                    tagView = Constants.TAG_GRIDVIEW;
+                }
+                mDelegate.setTagView(tagView);
                 mDelegate.changeView();
             }
         };
@@ -132,7 +140,7 @@ public class CategoryDetailController extends SimiController {
                 int count = recyclerView.getChildCount();
                 int lastPosition = 0;
                 RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-                if (mDelegate.getTagView().equals(Constants.TAG_LISTVIEW)) {
+                if (tagView.equals(Constants.TAG_LISTVIEW)) {
                     if (manager instanceof LinearLayoutManager) {
                         lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
                     }
@@ -255,7 +263,12 @@ public class CategoryDetailController extends SimiController {
 
     @Override
     public void onResume() {
+        mDelegate.setTagView(tagView);
         mDelegate.updateView(mModel.getCollection());
+    }
+
+    public void setTagView(String tagView) {
+        this.tagView = tagView;
     }
 
     public void setData(HashMap<String, Object> data) {
