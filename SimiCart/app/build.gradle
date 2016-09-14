@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+    compileSdkVersion 23
+    buildToolsVersion '23.0.3'
     defaultConfig {
         applicationId "com.magestore.simicart"
         minSdkVersion 16
@@ -11,14 +11,11 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        jackOptions {
-            enabled true
-        }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 
 
@@ -43,27 +40,39 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
     compile 'com.google.android.gms:play-services:9.4.0'
-    compile 'com.android.support:cardview-v7:24.2.0'
+    compile "com.android.support:cardview-v7:23.3.0"
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
     compile 'com.paypal.sdk:paypal-android-sdk:2.13.3'
     compile 'com.google.android.gms:play-services-gcm:9.4.0'
+
     // for mobile analytic plugin
     compile 'com.google.android.gms:play-services-analytics:9.4.0'
+
+
+
     // library for circle imageview
     compile 'de.hdodenhof:circleimageview:2.1.0'
+
     // library for barcode
     compile 'com.journeyapps:zxing-android-embedded:3.3.0@aar'
     compile 'com.google.zxing:core:3.2.1'
+
     // library for facebook
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
+
     // library for downloadable
-    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+
     // library for zopim
-    compile 'com.zopim.android:sdk:1.2.0.1'
+    compile group: 'com.zopim.android', name: 'sdk', version: '1.2.0.1'
+
     // library for braintree payment
     compile project(':braintreelibrary')
+
     // support 4.x
     compile 'com.android.support:multidex:1.0.1'
+
 }
