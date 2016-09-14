@@ -2,6 +2,7 @@ package com.simicart.core.home.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -129,7 +130,7 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
             @Override
             public void onClick(View v) {
                 String id = product.getId();
-                if(null == mListID || (mListID.size() == 0)){
+                if(null == mListID){
                 mListID = new ArrayList<>();
                 for (int i = 0; i < mProducts.size(); i++) {
                     mListID.add(mProducts.get(i).getId());

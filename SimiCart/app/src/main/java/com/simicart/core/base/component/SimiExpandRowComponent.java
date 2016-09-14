@@ -53,8 +53,8 @@ public class SimiExpandRowComponent extends SimiRowComponent {
             @Override
             public void onClick(View v) {
                 if (llChild.getVisibility() != View.VISIBLE) {
+                    llChild.setVisibility(View.VISIBLE);
                     if (!isInitChild) {
-                        llChild.setVisibility(View.VISIBLE);
                         initListChild();
                     }
 

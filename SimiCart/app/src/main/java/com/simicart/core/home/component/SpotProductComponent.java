@@ -2,6 +2,7 @@ package com.simicart.core.home.component;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class SpotProductComponent extends SimiComponent {
     protected ProductList mProductList;
     protected TextView tvTitle;
     protected RecyclerView rcvCate;
+    protected ArrayList<String> mListID;
 
     public SpotProductComponent(ProductList productList) {
         mProductList = productList;
@@ -53,6 +55,11 @@ public class SpotProductComponent extends SimiComponent {
     protected void showCate() {
         ArrayList<Product> products = mProductList.getSpotProduct();
         SpotProductAdapter adapter = new SpotProductAdapter(products);
+        adapter.setListID(mListID);
         rcvCate.setAdapter(adapter);
+    }
+
+    public void setListID(ArrayList<String> ids){
+        mListID = ids;
     }
 }

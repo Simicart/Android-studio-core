@@ -49,8 +49,6 @@ public class FilterPopup extends SimiPopup {
         if (Utils.validateString(mNameCate)) {
             tvNameCate.setText(mNameCate);
         }
-
-
         initSelected();
 
         initValue();
@@ -78,6 +76,7 @@ public class FilterPopup extends SimiPopup {
                 @Override
                 public void onClick(View v) {
                     mJSONFilter = null;
+                    dismiss();
                     if (null != mCallBack) {
                         mCallBack.requestFilter(mJSONFilter);
                     }
@@ -140,7 +139,6 @@ public class FilterPopup extends SimiPopup {
         SimiExpandRowComponent expandRowComponent = new SimiExpandRowComponent();
         String title = filterEntity.getmTitle();
         expandRowComponent.setValue(title);
-        Log.e("FilterPopup", "TITLE " + title);
         final ArrayList<ValueFilterEntity> values = filterEntity.getmValueFilters();
         if (null != values && values.size() > 0) {
             ArrayList<String> listChild = new ArrayList<>();
