@@ -18,12 +18,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 
 import com.magestore.simicart.R;
+import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.checkout.fragment.ReviewOrderFragment;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.FontsOverride;
 import com.simicart.core.common.KeyData;
+import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
@@ -254,15 +257,11 @@ public class MainActivity extends FragmentActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Intent intent = new Intent("com.simicart.leftmenu.onactivityresult.resultbarcode");
-        Bundle bundle = new Bundle();
         HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(KeyData.BAR_CODE.INTENT, data);
         hmData.put(KeyData.BAR_CODE.REQUEST_CODE, requestCode);
         hmData.put(KeyData.BAR_CODE.RESULT_CODE, resultCode);
-        bundle.putParcelable(Constants.ENTITY, new SimiData(hmData));
-        intent.putExtra(Constants.DATA, bundle);
-        LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcastSync(intent);
+        SimiEvent.dispatchEvent(KeyEvent.BAR_CODE.BAR_CODE_ON_RESULT, hmData);
 
     }
 

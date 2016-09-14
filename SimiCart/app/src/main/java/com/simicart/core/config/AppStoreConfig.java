@@ -1,6 +1,7 @@
 package com.simicart.core.config;
 
 import com.simicart.core.base.model.entity.SimiEntity;
+import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 
 import java.text.DecimalFormat;
@@ -108,6 +109,9 @@ public class AppStoreConfig extends SimiEntity {
         // currency code
         if (hasKey(currency_code)) {
             String code = getData(currency_code);
+            if(!Utils.validateString(DataPreferences.getCurrencyID())) {
+                DataPreferences.saveCurrencyID(code);
+            }
             setCurrencyCode(code);
         }
 

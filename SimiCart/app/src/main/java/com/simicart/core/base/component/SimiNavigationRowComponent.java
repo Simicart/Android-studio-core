@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.simicart.core.base.component.callback.NavigationRowCallBack;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 
 /**
@@ -57,6 +58,7 @@ public class SimiNavigationRowComponent extends SimiRowComponent {
         imgExtend.setImageResource(iconExtend);
         edtBody = (EditText) findView("edt_body");
         tvBody = (TextView) findView("tv_body");
+        tvBody.setTextColor(AppColorConfig.getInstance().getContentColor());
         updateView();
     }
 

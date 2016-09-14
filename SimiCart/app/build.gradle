@@ -58,7 +58,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
 
     // library for barcode
-    compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    compile 'com.journeyapps:zxing-android-embedded:3.3.0@aar'
     compile 'com.google.zxing:core:3.2.1'
 
     // library for facebook

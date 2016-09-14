@@ -31,7 +31,6 @@ public class ListCurrencyFragment extends SimiFragment {
 	public static ListCurrencyFragment newInstance(SimiData data) {
 		ListCurrencyFragment fragment = new ListCurrencyFragment();
 		Bundle bundle= new Bundle();
-//		setData(Constants.KeyData.CURRENT_ITEM, currentItem, Constants.KeyData.TYPE_STRING, bundle);
 		bundle.putParcelable(KEY_DATA, data);
 		fragment.setArguments(bundle);
 		fragment.setListLanguage(DataPreferences.listCurrency);

@@ -36,9 +36,4 @@ public class AddressBookDetailModel extends SimiModel {
     public void setTextCountry(String country) {
         mCountry = country;
     }
-
-    @Override
-    protected void setEnableCache() {
-        enableCache = true;
-    }
 }

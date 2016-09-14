@@ -181,7 +181,12 @@ public class ScanCode {
                         "Result products is empty");
             }
         });
-        mModel.addBody("barcode", code);
+        mModel.addBody("code", code);
+        if(code.contains("QR")) {
+            mModel.addBody("type", "1");
+        } else {
+            mModel.addBody("type", "0");
+        }
         mModel.request();
 
     }

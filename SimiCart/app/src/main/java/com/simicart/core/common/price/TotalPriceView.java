@@ -59,8 +59,8 @@ public class TotalPriceView {
         TableLayout tbl_price = new TableLayout(mContext);
 
         LayoutParams params = new LayoutParams();
-        params.bottomMargin = Utils.toDp(3);
-        params.topMargin = Utils.toDp(3);
+        params.bottomMargin = Utils.toPixel(3);
+        params.topMargin = Utils.toPixel(3);
 
         // event for top price
 //        TotalPriceViewEvent event_reward_point = new TotalPriceViewEvent();

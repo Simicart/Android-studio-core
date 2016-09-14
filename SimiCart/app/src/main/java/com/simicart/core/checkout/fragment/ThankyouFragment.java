@@ -73,7 +73,7 @@ public class ThankyouFragment extends SimiFragment {
         btn_continue_shopping = (AppCompatButton) rootView.findViewById(Rconfig
                 .getInstance().id("btn_continue_shopping"));
         btn_continue_shopping.setText(SimiTranslator.getInstance().translate("Continue Shopping"));
-        btn_continue_shopping.setTextColor(AppColorConfig.getInstance().getContentColor());
+        btn_continue_shopping.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
         btn_continue_shopping.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
         btn_continue_shopping.setOnClickListener(new OnClickListener() {
 

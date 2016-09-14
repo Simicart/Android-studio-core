@@ -209,10 +209,10 @@ public class RewardPoint {
         if(ll_reward_card != null) {
             ll_reward_card.removeAllViews();
             LinearLayout.LayoutParams paramsImageview = new LinearLayout.LayoutParams(
-                    Utils.toDp(20), Utils.toDp(20));
+                    Utils.toPixel(20), Utils.toPixel(20));
             paramsImageview.gravity = Gravity.CENTER_VERTICAL;
-            paramsImageview.setMargins(Utils.toDp(10), 0,
-                    Utils.toDp(10), 0);
+            paramsImageview.setMargins(Utils.toPixel(10), 0,
+                    Utils.toPixel(10), 0);
             ImageView img_point = new ImageView(mContext);
             img_point.setLayoutParams(paramsImageview);
             SimiDrawImage drawImage = new SimiDrawImage();
@@ -223,8 +223,8 @@ public class RewardPoint {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
             paramsTextview.gravity = Gravity.CENTER_VERTICAL;
-            paramsTextview.setMargins(0, Utils.toDp(5), 0,
-                    Utils.toDp(5));
+            paramsTextview.setMargins(0, Utils.toPixel(5), 0,
+                    Utils.toPixel(5));
             TextView textView = new TextView(mContext);
             textView.setTextColor(Color.parseColor("#ff033e"));
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
@@ -309,6 +309,10 @@ public class RewardPoint {
                     for (SimiComponent component : listComponents) {
                         if (component instanceof PaymentMethodComponent) {
                             int index = listComponents.indexOf(component);
+                            SimiComponent checkRewardComponent = listComponents.get(index + 1);
+                            if(checkRewardComponent instanceof RewardPointComponent) {
+                                continue;
+                            }
                             listComponents.add(index + 1, rewardPointComponent);
                             break;
                         }
