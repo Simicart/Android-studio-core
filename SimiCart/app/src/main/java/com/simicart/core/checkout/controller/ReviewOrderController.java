@@ -550,6 +550,7 @@ public class ReviewOrderController extends SimiController {
 
                 SimiManager.getIntance().backToHomeFragment();
             } else {
+                SimiManager.getIntance().backToHomeFragment();
                 // go to thank you page
                 HashMap<String, Object> hm = new HashMap<>();
                 hm.put(KeyData.THANKYOU_PAGE.ORDER_INFO_ENTITY, orderInforEntity);
