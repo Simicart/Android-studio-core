@@ -191,8 +191,8 @@ public class DrawableManager {
         final int h = (size.y * 4) / 5;
 
         if (null != cache_bitMap) {
-            Bitmap bMapRotate = Utils.scaleToFill(cache_bitMap, w, h);
-            imageView.setImageBitmap(bMapRotate);
+//            Bitmap bMapRotate = Utils.scaleToFill(cache_bitMap, w, h);
+            imageView.setImageBitmap(cache_bitMap);
             return;
         }
 
@@ -202,11 +202,11 @@ public class DrawableManager {
                 Bitmap bitmap = (Bitmap) message.obj;
                 if (bitmap != null) {
                     try {
-                        Bitmap bMapRotate = Utils.scaleToFill(bitmap, w, h);
-                        imageView.setImageBitmap(bMapRotate);
+                       // Bitmap bMapRotate = Utils.scaleToFill(bitmap, w, h);
+                        imageView.setImageBitmap(bitmap);
                         addBitmapToMemoryCache(urlString, bitmap);
                         bitmap = null;
-                        bMapRotate = null;
+                     //   bMapRotate = null;
                     } catch (Exception e) {
 
                     }

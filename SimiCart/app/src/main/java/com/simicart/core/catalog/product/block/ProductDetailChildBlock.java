@@ -64,19 +64,19 @@ public class ProductDetailChildBlock extends SimiBlock implements ProductDetailC
 	}
 
 	protected void showImage() {
-		Log.e("ProductDetailChildBlock ", "Show Image");
 		if(mProduct.getImages() != null && mProduct.getImages().length > 0) {
 			String[] Images = mProduct.getImages();
 			mAdapter = new ProductDetailChildeAdapter(
 					mFragmentChild, Images);
 			mAdapter.setDelegate(mParentController);
+
+
 			mPagerChild.setAdapter(mAdapter);
 		}
 	}
 
 	@Override
 	public void updateIndicator() {
-		Log.e("ProductDetailChildBlock ", "updateIndicator");
 		mParentController.updateViewPager(mPagerChild);
 	}
 

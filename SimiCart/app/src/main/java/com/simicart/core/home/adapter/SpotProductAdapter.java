@@ -37,6 +37,7 @@ import java.util.HashMap;
 public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.ViewHolder> {
 
     protected ArrayList<Product> mProducts;
+    protected ArrayList<String> mListID;
     protected boolean isHomePage;
 
     public SpotProductAdapter(ArrayList<Product> products){
@@ -128,13 +129,14 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
             @Override
             public void onClick(View v) {
                 String id = product.getId();
-                ArrayList<String> listID = new ArrayList<String>();
+                if(null == mListID || (mListID.size() == 0)){
+                mListID = new ArrayList<>();
                 for (int i = 0; i < mProducts.size(); i++) {
-                    listID.add(mProducts.get(i).getId());
-                }
+                    mListID.add(mProducts.get(i).getId());
+                }}
                 HashMap<String,Object> hmData = new HashMap<>();
                 hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, id);
-                hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
+                hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID,  mListID);
                 SimiManager.getIntance().openProductDetail(hmData);
             }
         });
@@ -182,4 +184,7 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
         isHomePage = isHome;
     }
 
+    public void setListID(ArrayList<String> ids){
+        mListID = ids;
+    }
 }

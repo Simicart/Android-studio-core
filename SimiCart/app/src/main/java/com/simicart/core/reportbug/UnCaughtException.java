@@ -159,7 +159,7 @@ public class UnCaughtException implements UncaughtExceptionHandler {
 								sendIntent
 										.putExtra(
 												Intent.EXTRA_EMAIL,
-												new String[] { "duclong.bui@trueplus.vn" });
+												new String[] { "androidteam@simicart.com" });
 								sendIntent.putExtra(Intent.EXTRA_TEXT,
 										packageName + body.toString());
 								sendIntent.putExtra(Intent.EXTRA_SUBJECT,

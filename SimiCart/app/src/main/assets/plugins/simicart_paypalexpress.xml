@@ -1,7 +1,7 @@
 <events>   
     <event>
        <fullname>com.simicart.plugins.paypalexpress.PaypalExpress</fullname>
-	    <sku>simi_developer</sku>	    	    
+	    <sku>simi_developer</sku>
 
     </event>
 </events>

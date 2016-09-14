@@ -19,29 +19,7 @@ public class ProductDetailChildController extends SimiController {
     protected ProductDetailChildDelegate mDelegate;
     protected ProductDetailAdapterDelegate mAdapterDelegate;
     protected ProductDetailParentController mController;
-    private ProductDelegate productDelegate;
-
-    public void setProductDelegate(ProductDelegate productDelegate) {
-        this.productDelegate = productDelegate;
-    }
-
-    public void setParentController(ProductDetailParentController controller) {
-        mController = controller;
-    }
-
-    public void setAdapterDelegate(ProductDetailAdapterDelegate delegate) {
-        mAdapterDelegate = delegate;
-    }
-
     protected String mID;
-
-    public void setProductID(String id) {
-        mID = id;
-    }
-
-    public void setDelegate(ProductDetailChildDelegate delegate) {
-        mDelegate = delegate;
-    }
 
     @Override
     public void onStart() {
@@ -62,27 +40,24 @@ public class ProductDetailChildController extends SimiController {
 
     protected void requestData(final String id) {
         mDelegate.showLoading();
-        // if (productDelegate != null) {
-        // productDelegate.getLayoutMore().setVisibility(View.GONE);
-        // }
         mModel = new ProductModel();
         mModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissLoading();
-                    mDelegate.updateView(mModel.getCollection());
+                mDelegate.updateView(mModel.getCollection());
 
-                    if (null != mAdapterDelegate) {
-                        String current_id = mAdapterDelegate.getCurrentID();
-                        String id = getProductFromCollection().getId();
-                        if (current_id != null && current_id.equals(id)) {
-                            mController
-                                    .onUpdateTopBottom((ProductModel) mModel);
-                            Log.e("ProductDetailChildController ",
-                                    "requestData " + id);
-                            mDelegate.updateIndicator();
-                        }
+                if (null != mAdapterDelegate) {
+                    String current_id = mAdapterDelegate.getCurrentID();
+                    String id = getProductFromCollection().getId();
+                    if (current_id != null && current_id.equals(id)) {
+                        mController
+                                .onUpdateTopBottom((ProductModel) mModel);
+                        Log.e("ProductDetailChildController ",
+                                "requestData " + id);
+                        mDelegate.updateIndicator();
                     }
+                }
             }
         });
         mModel.addBody("product_id", id);
@@ -107,6 +82,23 @@ public class ProductDetailChildController extends SimiController {
             product = (Product) entity.get(0);
         }
         return product;
+    }
+
+    public void setParentController(ProductDetailParentController controller) {
+        mController = controller;
+    }
+
+    public void setAdapterDelegate(ProductDetailAdapterDelegate delegate) {
+        mAdapterDelegate = delegate;
+    }
+
+
+    public void setProductID(String id) {
+        mID = id;
+    }
+
+    public void setDelegate(ProductDetailChildDelegate delegate) {
+        mDelegate = delegate;
     }
 
 }
