@@ -267,6 +267,142 @@ public class DrawableManager {
         getBitmap(handler, urlImage);
     }
 
+    public static void fetchDrawableOnThread(final String urlString,
+                                             final ImageView imageView, int reqWidth, int reqHeight) {
+
+        init();
+
+        Bitmap cache_bitMap = getBitmapFromMemCache(urlString);
+
+        if (null != cache_bitMap) {
+            imageView.setImageBitmap(cache_bitMap);
+            return;
+        }
+
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message message) {
+                Bitmap bitmap = (Bitmap) message.obj;
+                if (bitmap != null) {
+                    imageView.setImageBitmap(bitmap);
+                    addBitmapToMemoryCache(urlString, bitmap);
+                } else {
+                    Resources resources = SimiManager.getIntance()
+                            .getCurrentActivity().getResources();
+                    bitmap = BitmapFactory.decodeResource(resources, Rconfig
+                            .getInstance().drawable("default_icon"));
+                    bitmap = Bitmap.createScaledBitmap(bitmap, 80, 80, true);
+                    imageView.setImageBitmap(bitmap);
+                    bitmap = null;
+                }
+            }
+        };
+
+        getBitmap(handler, urlString,reqWidth,reqHeight);
+    }
+
+    public static void getBitmap(final Handler handler, final String urlString, final int reqWidth, final int reqHeight) {
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                Bitmap bitmap = excutePostForBitMap(urlString, reqWidth, reqHeight);
+                if (bitmap != null) {
+                    Message message = handler.obtainMessage(1, bitmap);
+                    handler.sendMessage(message);
+                }
+            }
+        };
+        thread.start();
+    }
+
+    public static Bitmap excutePostForBitMap(String url, int reqWidth,
+                                             int reqHeight) {
+        try {
+            Bitmap bitMap = null;
+            URL url_con = new URL(url);
+            HttpURLConnection conn = null;
+            if (url.contains("https")) {
+                conn = (HttpsURLConnection) url_con.openConnection();
+                try {
+                    ((HttpsURLConnection) conn)
+                            .setSSLSocketFactory(new TLSSocketFactory());
+                } catch (KeyManagementException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                conn = (HttpURLConnection) url_con.openConnection();
+            }
+
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Token", Config.getInstance()
+                    .getSecretKey());
+            conn.setDoInput(true);
+            conn.setDoOutput(false);
+            conn.connect();
+
+            int status = conn.getResponseCode();
+
+            Log.e("DrawableManager ", " URL " + url + " CODE " + status);
+
+            if (status < 300) {
+                InputStream is = conn.getInputStream();
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                BufferedInputStream bs = new BufferedInputStream(is);
+                byte[] buff = new byte[1024];
+                int read = 0;
+                while ((read = bs.read(buff)) > 0) {
+                    bos.write(buff, 0, read);
+                    buff = new byte[1024];
+                }
+                byte[] bytes = bos.toByteArray();
+
+                if (reqWidth <= 0) {
+                    reqWidth = 128;
+                }
+                if (reqHeight <= 0) {
+                    reqHeight = 128;
+                }
+
+                BitmapFactory.Options option = new BitmapFactory.Options();
+                option.inJustDecodeBounds = true;
+                BitmapFactory.decodeByteArray(bytes, 0, bytes.length, option);
+                option.inSampleSize = calculateInSampleSize(option, reqWidth,
+                        reqHeight);
+                option.inJustDecodeBounds = false;
+                bitMap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length,
+                        option);
+                return bitMap;
+            } else {
+                Log.e("Drawable Manager ", "STATUS CODE " + status);
+                return null;
+            }
+        } catch (Exception e) {
+            Log.e("Drawable Manager ", e.toString());
+            return null;
+        }
+
+    }
+
+    public static int calculateInSampleSize(BitmapFactory.Options options,
+                                            int reqWidth, int reqHeight) {
+
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
 
     public static void getBitmap(final Handler handler, final String urlString) {
         Thread thread = new Thread() {

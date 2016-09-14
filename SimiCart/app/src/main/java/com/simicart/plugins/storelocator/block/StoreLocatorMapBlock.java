@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -31,6 +33,7 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
+import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
@@ -105,6 +108,8 @@ public class StoreLocatorMapBlock extends SimiBlock implements StoreLocatorMapDe
                     @Override
                     public boolean onMarkerClick(Marker marker) {
                         marker.showInfoWindow();
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(marker.getPosition(), mGoogleMap.getCameraPosition().zoom);
+                        mGoogleMap.animateCamera(cameraUpdate);
                         return true;
                     }
                 });
@@ -284,21 +289,22 @@ public class StoreLocatorMapBlock extends SimiBlock implements StoreLocatorMapDe
                     tvName.setText(store.getName());
                     tvAddress.setText(StoreLocatorConfig.convertAddress(store));
 
-                    String urlImage = store.getImage_icon();
+                    String urlImage = store.getImage();
 
                     if (Utils.validateString(urlImage)) {
-                        SimiDrawImage drawImage = new SimiDrawImage();
-                        drawImage.drawImage(img, urlImage);
+//                        SimiDrawImage drawImage = new SimiDrawImage();
+//                        drawImage.drawImage(img, urlImage);
+                        DrawableManager.fetchDrawableOnThread(urlImage, img, 80, 80);
+                        break;
+                    } else {
+                        img.setImageDrawable(mContext.getResources()
+                                .getDrawable(Rconfig.getInstance().getIdDraw("plugins_locator_ic_store_android")));
                     }
 
-                    return v;
-
-                } else {
-                    img.setImageDrawable(mContext.getResources()
-                            .getDrawable(Rconfig.getInstance().getIdDraw("plugins_locator_ic_store_android")));
                 }
 
             }
+            return v;
         }
 
         return v;
