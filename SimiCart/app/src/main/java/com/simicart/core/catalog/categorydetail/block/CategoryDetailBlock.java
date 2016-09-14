@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -86,7 +87,6 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
             }
             listProducts.clear();
             listProducts.addAll(products);
-
             if (listProducts.size() > 0) {
                 rlBottom.setVisibility(View.VISIBLE);
                 drawListProducts();
@@ -148,15 +148,28 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
         if (tagView == Constants.TAG_LISTVIEW) {
             ivChangeView.setBackgroundResource(Rconfig.getInstance()
                     .drawable("ic_to_gridview"));
+
             rvListProducts.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         } else {
             ivChangeView.setBackgroundResource(Rconfig.getInstance()
                     .drawable("ic_to_listview"));
             rvListProducts.setLayoutManager(new GridLayoutManager(mContext, numCollums));
+
             mAdapter.setNumCollums(numCollums);
         }
         mAdapter.setTagView(tagView);
         rvListProducts.setAdapter(mAdapter);
+
+        int lastPosition = 0;
+        RecyclerView.LayoutManager manager = rvListProducts.getLayoutManager();
+        if (manager instanceof LinearLayoutManager) {
+            lastPosition = ((LinearLayoutManager) rvListProducts.getLayoutManager()).findLastVisibleItemPosition();
+        }
+        if (manager instanceof GridLayoutManager) {
+            lastPosition = ((GridLayoutManager) rvListProducts.getLayoutManager()).findLastVisibleItemPosition();
+        }
+        rvListProducts.scrollToPosition(lastPosition);
+
     }
 
     @Override
@@ -175,14 +188,14 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
 
     @Override
     public void showTotalQuantity(String quantity) {
-        if(checkQtyIsInteger(quantity)) {
+        if (checkQtyIsInteger(quantity)) {
             int qty = Integer.parseInt(quantity);
-            if(qty > 1) {
+            if (qty > 1) {
                 quantity = quantity + " " + SimiTranslator.getInstance().translate("Items");
             } else {
                 quantity = quantity + " " + SimiTranslator.getInstance().translate("Item");
             }
-            if(DataLocal.isTablet) {
+            if (DataLocal.isTablet) {
                 tvToTalItem.setText(quantity);
             } else {
                 SimiNotify.getInstance().showToast(quantity);

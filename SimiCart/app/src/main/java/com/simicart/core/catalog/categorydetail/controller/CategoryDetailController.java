@@ -97,6 +97,7 @@ public class CategoryDetailController extends SimiController {
                     @Override
                     public void onSort(int sortValue) {
                         mCurrentSort = sortValue;
+                        mOffset = 0;
                         mModel = null;
                         mDelegate.showLoading();
                         requestCategoryDetail();
@@ -263,6 +264,7 @@ public class CategoryDetailController extends SimiController {
 
     @Override
     public void onResume() {
+        Log.e("CategoryDetailController ","---------------> onRESUME ");
         mDelegate.setTagView(tagView);
         mDelegate.updateView(mModel.getCollection());
     }

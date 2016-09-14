@@ -1,5 +1,6 @@
 package com.simicart.core.catalog.category.controller;
 
+import android.util.Log;
 import android.view.View;
 
 import com.simicart.core.base.controller.SimiController;
@@ -85,7 +86,8 @@ public class CategoryController extends SimiController {
         listProductModel.setSuccessListener(new ModelSuccessCallBack() {
             @Override
             public void onSuccess(SimiCollection collection) {
-                drawListProducts(listProductModel.getListProducts());
+                ArrayList<String> listID = listProductModel.getListID();
+                drawListProducts(listProductModel.getListProducts(),listID);
             }
         });
         listProductModel.request();
@@ -98,21 +100,23 @@ public class CategoryController extends SimiController {
         mDelegate.showListCategory(categoryView);
     }
 
-    public void drawListProducts(ArrayList<Product> listProducts) {
+    public void drawListProducts(ArrayList<Product> listProducts,ArrayList<String> listID) {
         View listProductView = null;
         if (listProducts.size() > 0) {
             ProductList productList = new ProductList();
             productList.setSpotProduct(listProducts);
             SpotProductComponent listProductComponent = new SpotProductComponent(productList);
+            listProductComponent.setListID(listID);
             listProductView = listProductComponent.createView();
         }
+
         mDelegate.showListProducts(listProductView);
     }
 
     @Override
     public void onResume() {
         drawListCategory(((CategoryModel) mModel).getListCategory());
-        drawListProducts(listProductModel.getListProducts());
+        drawListProducts(listProductModel.getListProducts(),listProductModel.getListID());
         mDelegate.updateView(mModel.getCollection());
     }
 

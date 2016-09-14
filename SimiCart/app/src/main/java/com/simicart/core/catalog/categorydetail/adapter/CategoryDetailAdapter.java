@@ -152,6 +152,8 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         holder.txtName.setText(product.getName());
 
+        Log.e("CategoryDetailAdapter ","+++++ LIST NAME " + product.getName());
+
         if (holder.imageView != null && product.getImage() != null) {
             SimiDrawImage drawImage = new SimiDrawImage();
             drawImage.drawImage(holder.imageView, product.getImage());
@@ -169,9 +171,6 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             @Override
             public void onClick(View v) {
                 String id = product.getId();
-
-                Log.e("CategoryDetailAdapter ","=========> CLICK ON PRODUCT ID " + id);
-
                 ArrayList<String> listID = new ArrayList<String>();
                 for (int i = 0; i < listProducts.size(); i++) {
                     listID.add(listProducts.get(i).getId());
@@ -209,6 +208,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         } else {
             holder.tv_name.setText("SimiCart");
         }
+
 
         if (product.getImage() != null) {
             SimiDrawImage drawImage = new SimiDrawImage();
