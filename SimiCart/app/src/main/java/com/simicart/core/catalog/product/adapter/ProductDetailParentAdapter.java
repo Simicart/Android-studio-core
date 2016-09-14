@@ -20,13 +20,7 @@ public class ProductDetailParentAdapter extends FragmentPagerAdapter implements
     protected String mCurrentID = "";
     protected ProductDetailParentController mController;
 
-    public void setController(ProductDetailParentController controller) {
-        mController = controller;
-    }
 
-    public void setListID(ArrayList<String> id) {
-        mListID = id;
-    }
 
     public ProductDetailParentAdapter(FragmentManager fm) {
         super(fm);
@@ -67,5 +61,13 @@ public class ProductDetailParentAdapter extends FragmentPagerAdapter implements
     @Override
     public String getCurrentID() {
         return mCurrentID;
+    }
+
+    public void setController(ProductDetailParentController controller) {
+        mController = controller;
+    }
+
+    public void setListID(ArrayList<String> id) {
+        mListID = id;
     }
 }

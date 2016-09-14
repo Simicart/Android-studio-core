@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Rconfig;
@@ -247,7 +248,7 @@ public class Utils {
     public static int toDp(int value) {
         Context context = SimiManager.getIntance().getCurrentActivity();
         float unit = context.getResources().getDisplayMetrics().density;
-        int result = (int) (value / unit + 0.5f);
+        int result = (int) (value * unit + 0.5f);
         return result;
     }
 
@@ -264,6 +265,19 @@ public class Utils {
     public static int getScreenWidth() {
         return SimiManager.getIntance().getCurrentActivity().getResources().getDisplayMetrics().widthPixels;
     }
+
+    public static int calculateHeightTextView(TextView tvAnItem) {
+        tvAnItem.setLines(1);
+        int mWidth = Utils.getScreenWidth();
+        int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(
+                mWidth, View.MeasureSpec.AT_MOST);
+        int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0,
+                View.MeasureSpec.UNSPECIFIED);
+        tvAnItem.measure(widthMeasureSpec, heightMeasureSpec);
+        int height = tvAnItem.getMeasuredHeight();
+        return height;
+    }
+
 
 
 }

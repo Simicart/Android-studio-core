@@ -23,48 +23,19 @@ public class ProductDetailChildFragment extends SimiFragment {
     protected ProductDetailAdapterDelegate mAdapterDelegate;
     protected ProductDetailParentController mParentController;
 
-    private ProductDelegate productDelegate;
-
-    public void setProductDelegate(ProductDelegate productDelegate) {
-        this.productDelegate = productDelegate;
-    }
-
-    // variable for tablet
-    float mScale = 1.0f;
-    boolean isBlured = false;
-
-    public void setScalse(float scale) {
-        mScale = scale;
-    }
-
-    public void setBlured(boolean blured) {
-        isBlured = blured;
-    }
-
     public static ProductDetailChildFragment newInstance(SimiData data) {
         ProductDetailChildFragment fragment = new ProductDetailChildFragment();
-
         Bundle bundle = new Bundle();
         bundle.putParcelable("data", data);
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public void setAdapterDelegate(ProductDetailAdapterDelegate delegate) {
-        mAdapterDelegate = delegate;
-    }
-
-    public void setController(ProductDetailParentController controller) {
-        mParentController = controller;
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(
-                Rconfig.getInstance().layout("core_product_detail_child"),
-                null, false);
+        int idView = Rconfig.getInstance().layout("core_fragment_product_child");
+        View view = inflater.inflate(idView, null, false);
         SimiManager.getIntance().setChildFragment(getChildFragmentManager());
         if (getArguments() != null) {
             mID = (String) getValueWithKey("id");
@@ -82,7 +53,6 @@ public class ProductDetailChildFragment extends SimiFragment {
             mController.setAdapterDelegate(mAdapterDelegate);
             mController.setProductID(mID);
             mController.setDelegate(mBlock);
-            mController.setProductDelegate(productDelegate);
             mController.setParentController(mParentController);
             mController.onStart();
         } else {
@@ -100,6 +70,15 @@ public class ProductDetailChildFragment extends SimiFragment {
         if (null != mBlock) {
             mBlock.updateIndicator();
         }
+    }
+
+
+    public void setAdapterDelegate(ProductDetailAdapterDelegate delegate) {
+        mAdapterDelegate = delegate;
+    }
+
+    public void setController(ProductDetailParentController controller) {
+        mParentController = controller;
     }
 
 }
