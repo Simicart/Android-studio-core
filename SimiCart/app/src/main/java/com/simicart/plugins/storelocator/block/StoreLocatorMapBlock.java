@@ -295,15 +295,12 @@ public class StoreLocatorMapBlock extends SimiBlock implements StoreLocatorMapDe
 //                        SimiDrawImage drawImage = new SimiDrawImage();
 //                        drawImage.drawImage(img, urlImage);
                         DrawableManager.fetchDrawableOnThread(urlImage, img, 80, 80);
-                        break;
-                    } else {
-                        img.setImageDrawable(mContext.getResources()
-                                .getDrawable(Rconfig.getInstance().getIdDraw("plugins_locator_ic_store_android")));
+                        return v;
                     }
-
                 }
-
             }
+            img.setImageDrawable(mContext.getResources()
+                    .getDrawable(Rconfig.getInstance().getIdDraw("plugins_locator_ic_store_android")));
             return v;
         }
 
