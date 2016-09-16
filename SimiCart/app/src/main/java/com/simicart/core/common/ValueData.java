@@ -19,6 +19,8 @@ public class ValueData {
         public static int ACTION_EDIT = 1;
         public static int ACTION_GUEST = 2;
         public static int ACTION_NEW_CUSTOMER = 3;
+        public static int EDIT_FOR_NEW_CUSTOMER = 4;
+        public static  int EDIT_FOR_GUEST = 5;
     }
 
     public static class REVIEW_ORDER {

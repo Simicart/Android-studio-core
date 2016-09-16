@@ -24,6 +24,7 @@ public class ItemPaymentMethodView extends SimiComponent {
     protected PaymentMethodCallBack mCallBack;
     protected ImageView imgIcon;
     protected TextView tvSaved;
+    protected boolean isChecked;
 
 
     public ItemPaymentMethodView(PaymentMethodEntity entity) {
@@ -57,6 +58,7 @@ public class ItemPaymentMethodView extends SimiComponent {
         rltItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isChecked = true;
                 String idIcon = "core_icon_option_selected";
                 Drawable icon = AppColorConfig.getInstance().getIcon(idIcon);
                 imgIcon.setImageDrawable(icon);
@@ -69,6 +71,7 @@ public class ItemPaymentMethodView extends SimiComponent {
         imgIcon = (ImageView) findView("img_icon");
         String idIcon;
         if (mPaymentEntity.isSelected()) {
+            isChecked = true;
             idIcon = "core_icon_option_selected";
         } else {
             idIcon = "core_icon_option_single";
@@ -109,6 +112,7 @@ public class ItemPaymentMethodView extends SimiComponent {
     }
 
     public void selectItem(boolean isSelect) {
+        isChecked = isSelect;
         if (!isSelect) {
             String idIcon = "core_icon_option_single";
             Drawable icon = AppColorConfig.getInstance().getIcon(idIcon);
@@ -116,6 +120,10 @@ public class ItemPaymentMethodView extends SimiComponent {
         }
     }
 
+    @Override
+    public boolean isCompleteRequired() {
+        return isChecked;
+    }
 
     public void setCallBack(PaymentMethodCallBack callBack) {
         this.mCallBack = callBack;

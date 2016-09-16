@@ -46,6 +46,7 @@ public class KeyData {
         public static String BILLING_ADDRESS = "billing_address";
         public static String SHIPPING_ADDRESS = "shipping_address";
         public static String ADDRESS_FOR_EDIT = "address_for_edit";
+        public static String EDIT_FOR = "edit_for";
     }
 
     public static class ADDRESS_BOOK {
@@ -172,6 +173,10 @@ public class KeyData {
         public static final String PRODUCT_LABEL_VIEW = "view";
         public static final String PRODUCT_LABEL_JSON = "json";
         public static final String PRODUCT_LABEL_METHOD = "method";
+    }
+
+    public static class CONDITION_PAGE{
+        public static final String CONTENT = "content";
     }
 
 }

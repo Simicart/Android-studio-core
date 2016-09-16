@@ -13,6 +13,7 @@ import com.simicart.core.config.Rconfig;
  */
 public class SimiComponent {
     protected View rootView;
+    protected String mIDComponent;
     protected Context mContext;
     protected LayoutInflater mInflater;
 
@@ -35,5 +36,15 @@ public class SimiComponent {
         return mInflater.inflate(idView, null);
     }
 
+    public String getIDComponent() {
+        return mIDComponent;
+    }
 
+    public void setIDComponent(String IDComponent) {
+        mIDComponent = IDComponent;
+    }
+
+    public boolean isCompleteRequired(){
+        return  true;
+    }
 }

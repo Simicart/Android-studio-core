@@ -51,8 +51,6 @@ dependencies {
     // for mobile analytic plugin
     compile 'com.google.android.gms:play-services-analytics:9.4.0'
 
-
-
     // library for circle imageview
     compile 'de.hdodenhof:circleimageview:2.1.0'
 

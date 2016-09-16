@@ -21,7 +21,7 @@ public class ItemShippingMethodView extends SimiComponent {
 
     protected ShippingMethodEntity mShippingEntity;
     protected ImageView imgIcon;
-    protected boolean isChecked = true;
+    protected boolean isChecked = false;
     protected ShippingMethodCallBack mCallBack;
 
 
@@ -70,6 +70,7 @@ public class ItemShippingMethodView extends SimiComponent {
         imgIcon = (ImageView) findView("img_icon");
         String idIcon;
         if (mShippingEntity.isSelected()) {
+            isChecked = true;
             idIcon = "core_icon_option_selected";
         } else {
             idIcon = "core_icon_option_single";
@@ -106,7 +107,9 @@ public class ItemShippingMethodView extends SimiComponent {
     }
 
     public void selectItem(boolean isSelected) {
+        isChecked = isSelected;
         if (!isSelected) {
+            isChecked = true;
             String idIcon = "core_icon_option_single";
             Drawable icon = AppColorConfig.getInstance().getIcon(idIcon);
             imgIcon.setImageDrawable(icon);
@@ -133,7 +136,8 @@ public class ItemShippingMethodView extends SimiComponent {
         return false;
     }
 
-    public boolean isChecked() {
+    @Override
+    public boolean isCompleteRequired() {
         return isChecked;
     }
 

@@ -23,13 +23,13 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
     protected TextView tv_title;
     protected int topMargin = Utils.toDp(5);
     protected PaymentMethodCallBack mCallBack;
+    protected String mResumeValue;
     protected ArrayList<PaymentMethodEntity> mPaymentMethods;
     protected ArrayList<ItemPaymentMethodView> mItemViews;
     /**
      * This is the  payment that user selected.
      */
     protected PaymentMethodEntity mCurrentPayment;
-    protected boolean isCreated = false;
 
     public PaymentMethodComponent(ArrayList<PaymentMethodEntity> mPaymentMethods) {
         super();
@@ -39,10 +39,6 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
 
     @Override
     public View createView() {
-        if (isCreated) {
-            return rootView;
-        }
-        isCreated = true;
         rootView = mInflater.inflate(Rconfig.getInstance().layout("core_component_layout"), null, false);
         intView();
         return rootView;
@@ -67,6 +63,14 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
             mItemViews = new ArrayList<>();
             for (int i = 0; i < mPaymentMethods.size(); i++) {
                 PaymentMethodEntity payment = mPaymentMethods.get(i);
+                if (null != mResumeValue) {
+                    String method = payment.getPaymentMethod();
+                    if (method.equals(mResumeValue)) {
+                        payment.setSelected(true);
+                    } else {
+                        payment.setSelected(false);
+                    }
+                }
                 ItemPaymentMethodView itemView = new ItemPaymentMethodView(payment);
                 itemView.setCallBack(this);
                 View view = itemView.createView();
@@ -85,6 +89,9 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
 
     @Override
     public void onSelectItem(PaymentMethodEntity payment) {
+
+        mResumeValue = payment.getPaymentMethod();
+
         if (null != mCallBack) {
             mCurrentPayment = payment;
             mCallBack.onSelectItem(payment);
@@ -105,6 +112,20 @@ public class PaymentMethodComponent extends SimiComponent implements PaymentMeth
             mCurrentPayment = payment;
             mCallBack.onEditAction(payment);
         }
+    }
+
+    @Override
+    public boolean isCompleteRequired() {
+
+        if (null != mItemViews && mItemViews.size() > 0) {
+            for (int i = 0; i < mItemViews.size(); i++) {
+                if (mItemViews.get(i).isCompleteRequired()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void setListPaymentMethod(ArrayList<PaymentMethodEntity> paymentMethods) {

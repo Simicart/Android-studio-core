@@ -23,8 +23,8 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
     protected ShippingMethodCallBack mCallBack;
     protected ArrayList<ItemShippingMethodView> mItemViews;
     protected ArrayList<ShippingMethodEntity> mShippingEntities;
+    protected String mResumeValue;
     protected int topMargin = Utils.toDp(5);
-    protected boolean isCreated = false;
 
 
     public ShippingMethodComponent(ArrayList<ShippingMethodEntity> mShippingEntities) {
@@ -34,13 +34,8 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
 
     @Override
     public View createView() {
-        if (isCreated) {
-            return rootView;
-        }
-        isCreated = true;
         rootView = findLayout("core_component_layout");
         intView();
-
         return rootView;
     }
 
@@ -59,6 +54,14 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
             mItemViews = new ArrayList<>();
             for (int i = 0; i < mShippingEntities.size(); i++) {
                 ShippingMethodEntity entity = mShippingEntities.get(i);
+                if (null != mResumeValue) {
+                    if (mResumeValue.equals(entity.getID())) {
+                        entity.setSelected(true);
+                    }
+                    else{
+                        entity.setSelected(false);
+                    }
+                }
                 ItemShippingMethodView itemView = new ItemShippingMethodView(entity);
                 itemView.setCallBack(this);
                 View view = itemView.createView();
@@ -73,6 +76,9 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
 
     @Override
     public void onSelect(ShippingMethodEntity entity) {
+
+        mResumeValue = entity.getID();
+
         if (null != mCallBack) {
             mCallBack.onSelect(entity);
         }
@@ -90,4 +96,19 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
     public void setCallBack(ShippingMethodCallBack callBack) {
         this.mCallBack = callBack;
     }
+
+
+    @Override
+    public boolean isCompleteRequired() {
+        if (null != mItemViews && mItemViews.size() > 0) {
+            for (int i = 0; i < mItemViews.size(); i++) {
+                if (mItemViews.get(i).isCompleteRequired()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
 }

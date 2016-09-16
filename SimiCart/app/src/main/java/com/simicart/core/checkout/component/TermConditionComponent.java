@@ -30,7 +30,6 @@ public class TermConditionComponent extends SimiComponent {
 
     @Override
     public View createView() {
-
         int idView = Rconfig.getInstance().layout("core_component_term_condition");
         rootView = mInflater.inflate(idView, null, false);
         initView();

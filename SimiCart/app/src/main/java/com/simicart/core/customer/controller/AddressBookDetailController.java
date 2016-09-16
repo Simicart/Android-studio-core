@@ -1,6 +1,7 @@
 package com.simicart.core.customer.controller;
 
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -177,7 +178,7 @@ public class AddressBookDetailController extends SimiController {
 
         // dispatch event for plugins
         // event for address auto fill
-        HashMap<String,Object> hmData = new HashMap<>();
+        HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(KeyData.ADDRESS_AUTO_FILL.LIST_COMPONENTS, mListRowComponent);
         hmData.put(KeyData.ADDRESS_AUTO_FILL.LIST_COUNTRIES, mListCountry);
         SimiEvent.dispatchEvent(KeyEvent.ADDRESS_AUTO_FILL.ADDRESS_AUTO_FILL_ADD_MAP, hmData);
@@ -457,6 +458,7 @@ public class AddressBookDetailController extends SimiController {
         if (this.openFor == ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CUSTOMER) {
             saveForCustomer();
         } else if (this.openFor == ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CHECKOUT) {
+            Log.e("Address Detail Controller ", "-----> OPEN FOR CHECKOUT ");
             saveForCheckout();
         }
     }
@@ -562,24 +564,27 @@ public class AddressBookDetailController extends SimiController {
                 if (action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW_CUSTOMER) {
                     saveForNewCustomer(addressEntity);
                 } else if (action == ValueData.ADDRESS_BOOK_DETAIL.ACTION_GUEST) {
-                    HashMap<String, Object> hm = new HashMap<>();
-                    hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
-                    hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
-                    hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_GUEST);
-                    SimiManager.getIntance().openReviewOrder(hm);
+                    saveForGuest(addressEntity);
+
                 } else {
-                    HashMap<String, Object> hm = new HashMap<>();
-                    hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
-                    hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
-                    hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_EXISTING_CUSTOMER);
-                    SimiManager.getIntance().openReviewOrder(hm);
+                    if (hmData.containsKey(KeyData.ADDRESS_BOOK_DETAIL.EDIT_FOR)) {
+                        int editFor = (Integer) hmData.get(KeyData.ADDRESS_BOOK_DETAIL.EDIT_FOR);
+                        if (editFor == ValueData.ADDRESS_BOOK_DETAIL.EDIT_FOR_NEW_CUSTOMER) {
+                            editForNewCustomer(addressEntity);
+                        } else if (editFor == ValueData.ADDRESS_BOOK_DETAIL.EDIT_FOR_GUEST) {
+                            editForGuest(addressEntity);
+                        } else {
+                            saveForExitCustomer(addressEntity);
+                        }
+                    } else {
+                        saveForExitCustomer(addressEntity);
+                    }
                 }
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     protected void saveForNewCustomer(AddressEntity addressEntity) {
@@ -608,6 +613,74 @@ public class AddressBookDetailController extends SimiController {
         hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_NEW_CUSTOMER);
         SimiManager.getIntance().openReviewOrder(hm);
 
+    }
+
+    protected void editForNewCustomer(AddressEntity addressEntity) {
+        HashMap<String, Object> hm = new HashMap<>();
+
+        if (hmData.containsKey(KeyData.ADDRESS_BOOK_DETAIL.BILLING_ADDRESS)) {
+            AddressEntity billingAddress = (AddressEntity) hmData.get(KeyData.ADDRESS_BOOK_DETAIL.BILLING_ADDRESS);
+
+
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, billingAddress);
+
+
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+
+
+        } else if (hmData.containsKey(KeyData.ADDRESS_BOOK_DETAIL.SHIPPING_ADDRESS)) {
+            AddressEntity shippingAddress = (AddressEntity) hmData.get(KeyData.ADDRESS_BOOK_DETAIL.SHIPPING_ADDRESS);
+            Log.e("Address Detail ", "++++++ SHIPPINg NAME " + shippingAddress.getName());
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, shippingAddress);
+
+            Log.e("Address Detail ", "++++++ BILLING NAME " + addressEntity.getName());
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+        }
+        hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_NEW_CUSTOMER);
+        SimiManager.getIntance().openReviewOrder(hm);
+    }
+
+    protected void saveForGuest(AddressEntity addressEntity) {
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+        hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+        hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_GUEST);
+        SimiManager.getIntance().openReviewOrder(hm);
+    }
+
+    protected void editForGuest(AddressEntity addressEntity) {
+        HashMap<String, Object> hm = new HashMap<>();
+        if (hmData.containsKey(KeyData.ADDRESS_BOOK_DETAIL.BILLING_ADDRESS)) {
+            AddressEntity billingAddress = (AddressEntity) hmData.get(KeyData.ADDRESS_BOOK_DETAIL.BILLING_ADDRESS);
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, billingAddress);
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+        } else if (hmData.containsKey(KeyData.ADDRESS_BOOK_DETAIL.SHIPPING_ADDRESS)) {
+            AddressEntity shippingAddress = (AddressEntity) hmData.get(KeyData.ADDRESS_BOOK_DETAIL.SHIPPING_ADDRESS);
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, shippingAddress);
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+        }
+        hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_GUEST);
+        SimiManager.getIntance().openReviewOrder(hm);
+
+    }
+
+    protected void saveForExitCustomer(AddressEntity addressEntity) {
+        HashMap<String, Object> hm = new HashMap<>();
+        if (hmData.containsKey(KeyData.ADDRESS_BOOK_DETAIL.SHIPPING_ADDRESS)) {
+            AddressEntity shippingAddress = (AddressEntity) hmData.get(KeyData.ADDRESS_BOOK_DETAIL.SHIPPING_ADDRESS);
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, shippingAddress);
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+        } else if (hmData.containsKey(KeyData.ADDRESS_BOOK_DETAIL.BILLING_ADDRESS)) {
+            AddressEntity billingAddress = (AddressEntity) hmData.get(KeyData.ADDRESS_BOOK_DETAIL.BILLING_ADDRESS);
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, billingAddress);
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+        } else {
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+        }
+
+        hm.put(KeyData.REVIEW_ORDER.PLACE_FOR, ValueData.REVIEW_ORDER.PLACE_FOR_EXISTING_CUSTOMER);
+        SimiManager.getIntance().openReviewOrder(hm);
     }
 
     protected JSONObject getJSONAddressForCheckout() throws JSONException {

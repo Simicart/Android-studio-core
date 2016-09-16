@@ -1,6 +1,5 @@
 package com.simicart.core.checkout.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,22 +10,21 @@ import android.webkit.WebSettings.TextSize;
 import android.webkit.WebView;
 
 import com.simicart.core.base.fragment.SimiFragment;
+import com.simicart.core.base.model.entity.SimiData;
+import com.simicart.core.common.KeyData;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 
 public class ConditionFragment extends SimiFragment {
-	protected String mContent;
 
-	public static ConditionFragment newInstance(String content) {
+	public static ConditionFragment newInstance(SimiData data) {
 		ConditionFragment fragment = new ConditionFragment();
 		Bundle bundle = new Bundle();
-//		setData(Constants.KeyData.CONTENT, content,
-//				Constants.KeyData.TYPE_STRING, bundle);
+		bundle.putParcelable("data", data);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
 
-	@SuppressLint("SetJavaScriptEnabled")
 	@Override
 	public View onCreateView(final LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
@@ -35,9 +33,9 @@ public class ConditionFragment extends SimiFragment {
 				Rconfig.getInstance().layout(
 						"core_information_description_layout"), container,
 				false);
-		if (getArguments() != null) {
-//			mContent = (String) getData(Constants.KeyData.CONTENT,
-//					Constants.KeyData.TYPE_STRING, getArguments());
+		String content  = null;
+		if(mHashMapData.containsKey(KeyData.CONDITION_PAGE.CONTENT)){
+			content = (String) mHashMapData.get(KeyData.CONDITION_PAGE.CONTENT);
 		}
 
 		WebView webView = (WebView) rootView.findViewById(Rconfig.getInstance()
@@ -55,7 +53,7 @@ public class ConditionFragment extends SimiFragment {
 		webView.setVerticalScrollBarEnabled(true);
 		webView.setHorizontalScrollBarEnabled(false);
 
-		webView.loadDataWithBaseURL(null, mContent, "text/html", "UTF-8", null);
+		webView.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 
 		return rootView;
 	}
