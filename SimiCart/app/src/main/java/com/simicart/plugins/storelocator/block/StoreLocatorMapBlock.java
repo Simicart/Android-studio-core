@@ -190,20 +190,17 @@ public class StoreLocatorMapBlock extends SimiBlock implements StoreLocatorMapDe
             String latitude = store.getLatitude();
             String longtitude = store.getLongtitude();
             if (Utils.validateString(latitude) && Utils.validateString(longtitude)) {
-
-                latitude = latitude.trim();
-                longtitude = longtitude.trim();
                 try {
 
-                    Double dLat = convertToDouble(latitude);
-                    Double dLong = convertToDouble(longtitude);
+                    Double dLat = getLatDoubleWithStore(store);
+                    Double dLong = getLongDoubleWithStore(store);
 
                     LatLng end = new LatLng(dLat, dLong);
                     MarkerOptions options = new MarkerOptions().position(end).icon(BitmapDescriptorFactory
                             .fromResource(Rconfig.getInstance().drawable("plugins_locator_maker_default")));
                     mGoogleMap.addMarker(options);
                 } catch (Exception e) {
-                    Log.e("StoreLocatorFragment ", "=====================> addMaker Exceptin " + e.getMessage());
+                    Log.e("StoreLocatorFragment ", "=====================> addMaker Exception " + e.getMessage());
                 }
             }
         }
@@ -293,9 +290,15 @@ public class StoreLocatorMapBlock extends SimiBlock implements StoreLocatorMapDe
         String latitude = store.getLatitude();
         if (Utils.validateString(latitude)) {
             latitude = latitude.trim();
-
-            Double dLat = convertToDouble(latitude);
-            return dLat;
+            if(latitude.contains("-")) {
+                latitude = latitude.replace("-", "");
+                Double dLong = convertToDouble(latitude);
+                dLong = dLong * -1;
+                return dLong;
+            } else {
+                Double dLong = convertToDouble(latitude);
+                return dLong;
+            }
         }
 
         return null;
@@ -305,8 +308,16 @@ public class StoreLocatorMapBlock extends SimiBlock implements StoreLocatorMapDe
         String longtitude = store.getLongtitude();
         if (Utils.validateString(longtitude)) {
             longtitude = longtitude.trim();
-            Double dLong = convertToDouble(longtitude);
-            return dLong;
+            if(longtitude.contains("-")) {
+                longtitude = longtitude.replace("-", "");
+                Double dLong = convertToDouble(longtitude);
+                dLong = dLong * -1;
+                return dLong;
+            } else {
+                Double dLong = convertToDouble(longtitude);
+                return dLong;
+            }
+
         }
 
         return null;

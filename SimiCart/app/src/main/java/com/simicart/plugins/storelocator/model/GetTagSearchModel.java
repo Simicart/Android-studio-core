@@ -7,6 +7,7 @@ import com.simicart.core.base.model.collection.SimiCollection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -27,8 +28,11 @@ public class GetTagSearchModel extends SimiModel {
             collection = new SimiCollection();
             listTags = new ArrayList<>();
             for (int i = 0; i < list.length(); i++) {
-                String tag = list.getString(i);
-                listTags.add(tag);
+                JSONObject object = list.getJSONObject(i);
+                if(object.has("value")) {
+                    String tag = object.getString("value");
+                    listTags.add(tag);
+                }
 
             }
         } catch (JSONException e) {

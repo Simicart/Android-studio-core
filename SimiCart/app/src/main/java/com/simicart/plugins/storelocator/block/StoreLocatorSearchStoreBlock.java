@@ -1,6 +1,7 @@
 package com.simicart.plugins.storelocator.block;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.storelocator.adapter.CountrySearchAdapter;
 import com.simicart.plugins.storelocator.adapter.SearchTagAdapter;
@@ -33,10 +35,11 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
     protected int tagPosition = 0;
     protected String country_code;
     protected SearchTagAdapter tagSearchAdapter;
+    protected AppCompatButton btn_search;
     private EditText et_city, et_state, et_code;
-    private LinearLayout btn_search, one, two, three, for_, search, clear_all;
+    private LinearLayout one, two, three, for_, search, clear_all, ll_search_tag;
     private RecyclerView list_store_tag;
-    private TextView txt_search_Area, txt_search_tag, txt_search, txt_country, txt_city, txt_code, txt_state;
+    private TextView txt_search_Area, txt_search_tag, txt_country, txt_city, txt_code, txt_state;
     private Spinner spCountry;
 
     public StoreLocatorSearchStoreBlock(View view, Context context) {
@@ -76,14 +79,17 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
         txt_country = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("txt_country"));
         txt_code = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("txt_code"));
         txt_city = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("txt_city"));
-        txt_search = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("txt_search"));
         txt_state = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("txt_state"));
         one = (LinearLayout) mView.findViewById(Rconfig.getInstance().getIdLayout("one"));
         two = (LinearLayout) mView.findViewById(Rconfig.getInstance().getIdLayout("two"));
         three = (LinearLayout) mView.findViewById(Rconfig.getInstance().getIdLayout("three"));
         for_ = (LinearLayout) mView.findViewById(Rconfig.getInstance().getIdLayout("for_"));
         search = (LinearLayout) mView.findViewById(Rconfig.getInstance().getIdLayout("llSearch"));
-        btn_search = (LinearLayout) mView.findViewById(Rconfig.getInstance().getIdLayout("btn_search"));
+        ll_search_tag = (LinearLayout) mView.findViewById(Rconfig.getInstance().getIdLayout("ll_search_tag"));
+        btn_search = (AppCompatButton) mView.findViewById(Rconfig.getInstance().getIdLayout("btn_search"));
+        btn_search.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
+        btn_search.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
+        btn_search.setText(SimiTranslator.getInstance().translate("Search"));
         clear_all = (LinearLayout) mView.findViewById(Rconfig.getInstance().getIdLayout("clear_all"));
         if (search_object != null) {
             if (Utils.validateString(search_object.getCity())) {
@@ -95,13 +101,15 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
             if (Utils.validateString(search_object.getZipcode())) {
                 et_code.setText(search_object.getZipcode());
             }
+            if(search_object.getTag() != -1) {
+                tagPosition = search_object.getTag();
+            }
         }
         txt_search_Area.setText(SimiTranslator.getInstance().translate("Search By Area"));
         txt_search_tag.setText(SimiTranslator.getInstance().translate("Filter by Tag"));
         txt_country.setText(SimiTranslator.getInstance().translate("Country:"));
         txt_city.setText(SimiTranslator.getInstance().translate("City") + ":");
         txt_code.setText(SimiTranslator.getInstance().translate("Zip Code") + ":");
-        txt_search.setText(SimiTranslator.getInstance().translate("Search"));
         txt_state.setText(SimiTranslator.getInstance().translate("State") + ":");
         TextView txt_clear = (TextView) mView.findViewById(Rconfig.getInstance().getIdLayout("clear_search"));
         txt_clear.setText(SimiTranslator.getInstance().translate("Clear search"));
@@ -153,8 +161,11 @@ public class StoreLocatorSearchStoreBlock extends SimiBlock implements StoreLoca
     }
 
     public void initTagSearch() {
-        tagSearchAdapter = new SearchTagAdapter(listTags, tagPosition);
-        list_store_tag.setAdapter(tagSearchAdapter);
+        if(listTags.size() > 0) {
+            ll_search_tag.setVisibility(View.VISIBLE);
+            tagSearchAdapter = new SearchTagAdapter(listTags, tagPosition, this);
+            list_store_tag.setAdapter(tagSearchAdapter);
+        }
     }
 
     @Override

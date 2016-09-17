@@ -1,11 +1,15 @@
 package com.simicart.plugins.storelocator.controller;
 
 import android.location.Location;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
@@ -33,6 +37,8 @@ public class StoreLocatorStoreListController extends SimiController {
     protected String resultNumber;
     protected boolean isOnscroll = true;
     protected SearchObject searchObject;
+    protected Location currrentLocation = null;
+    protected GoogleApiClient mGoogleApiClient;
 
     protected StoreLocatorStoreListDelegate mDelegate;
 
@@ -55,7 +61,7 @@ public class StoreLocatorStoreListController extends SimiController {
     @Override
     public void onStart() {
         // TODO Auto-generated method stub
-        requestGetListStore(true);
+        requestGetCurrentLocation();
 
         onListScroll = new RecyclerView.OnScrollListener() {
 
@@ -112,6 +118,28 @@ public class StoreLocatorStoreListController extends SimiController {
         requestGetListStore(true);
     }
 
+    public void requestGetCurrentLocation() {
+        mGoogleApiClient = new GoogleApiClient.Builder(SimiManager.getIntance().getCurrentActivity())
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                    @Override
+                    public void onConnected(@Nullable Bundle bundle) {
+                        currrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                        if (currrentLocation != null) {
+                            requestGetListStore(true);
+                        }
+                    }
+
+                    @Override
+                    public void onConnectionSuspended(int i) {
+
+                    }
+                })
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
+
     protected void requestGetListStore(boolean showLoading) {
         if (showLoading == true) {
             mDelegate.showLoading();
@@ -139,10 +167,9 @@ public class StoreLocatorStoreListController extends SimiController {
         });
         mModel.addBody("limit", "" + limit);
         mModel.addBody("offset", "" + offset);
-        Location location = mDelegate.getCurrentLocation();
-        if (location != null) {
-            mModel.addBody("lat", "" + location.getLatitude());
-            mModel.addBody("lng", "" + location.getLongitude());
+        if (currrentLocation != null) {
+            mModel.addBody("lat", "" + currrentLocation.getLatitude());
+            mModel.addBody("lng", "" + currrentLocation.getLongitude());
         }
         if (searchObject != null) {
             String country = searchObject.getName_country();
