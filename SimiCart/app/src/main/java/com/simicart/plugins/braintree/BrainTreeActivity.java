@@ -21,9 +21,7 @@ import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.braintree.model.BrainTreeModel;
-import com.trueplus.simicart.braintreelibrary.BraintreeFragment;
 import com.trueplus.simicart.braintreelibrary.BraintreePaymentActivity;
 import com.trueplus.simicart.braintreelibrary.PaymentRequest;
 
@@ -31,11 +29,10 @@ import org.json.JSONException;
 
 public class BrainTreeActivity extends Activity {
 
-    View rootView;
     public String total = "0.0";
     public String orderID = "";
     public String token = "";
-
+    View rootView;
     SimiDelegate mDelegate;
 
     @Override
@@ -86,7 +83,7 @@ public class BrainTreeActivity extends Activity {
                 case BraintreePaymentActivity.RESULT_OK:
                     String paymentMethodNonce = data.getStringExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
                     Log.e("PaymentMethod", "++" + paymentMethodNonce);
-                    if(paymentMethodNonce != null) {
+                    if (paymentMethodNonce != null) {
                         try {
                             requestUpdateBrainTree(paymentMethodNonce, total, orderID);
                         } catch (JSONException e) {
@@ -203,6 +200,6 @@ public class BrainTreeActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        
+
     }
 }

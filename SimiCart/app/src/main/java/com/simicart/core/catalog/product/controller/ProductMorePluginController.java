@@ -12,49 +12,49 @@ import com.simicart.core.catalog.product.entity.Product;
 
 public class ProductMorePluginController extends SimiController {
 
-	protected OnClickListener mClickerShare;
-	protected Product mProduct;
-	protected SimiDelegate mDelegate;
-	
-	public void setDelegate(SimiDelegate mDelegate) {
-		this.mDelegate = mDelegate;
-	}
+    protected OnClickListener mClickerShare;
+    protected Product mProduct;
+    protected SimiDelegate mDelegate;
 
-	public void setProduct(Product product) {
-		mProduct = product;
-	}
+    public void setDelegate(SimiDelegate mDelegate) {
+        this.mDelegate = mDelegate;
+    }
 
-	public OnClickListener getClickerShare() {
-		return mClickerShare;
-	}
+    public void setProduct(Product product) {
+        mProduct = product;
+    }
 
-	@Override
-	public void onStart() {
+    public OnClickListener getClickerShare() {
+        return mClickerShare;
+    }
 
-		mDelegate.updateView(null);
+    @Override
+    public void onStart() {
 
-		mClickerShare = new OnClickListener() {
+        mDelegate.updateView(null);
 
-			@Override
-			public void onClick(View v) {
-				Intent sharingIntent = new Intent(
-						Intent.ACTION_SEND);
-				sharingIntent.setType("text/plain");
-				sharingIntent.putExtra(Intent.EXTRA_TEXT,
-						mProduct.getData("product_url"));
-				SimiManager
-						.getIntance()
-						.getCurrentActivity()
-						.startActivity(
-								Intent.createChooser(sharingIntent, SimiTranslator
-										.getInstance().translate("Share via")));
-			}
-		};
-	}
+        mClickerShare = new OnClickListener() {
 
-	@Override
-	public void onResume() {
-		mDelegate.updateView(null);
-	}
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(
+                        Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT,
+                        mProduct.getData("product_url"));
+                SimiManager
+                        .getIntance()
+                        .getCurrentActivity()
+                        .startActivity(
+                                Intent.createChooser(sharingIntent, SimiTranslator
+                                        .getInstance().translate("Share via")));
+            }
+        };
+    }
+
+    @Override
+    public void onResume() {
+        mDelegate.updateView(null);
+    }
 
 }

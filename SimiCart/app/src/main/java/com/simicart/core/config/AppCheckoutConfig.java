@@ -8,18 +8,16 @@ import com.simicart.core.common.Utils;
  */
 public class AppCheckoutConfig extends SimiEntity {
 
+    public static AppCheckoutConfig instance;
     private boolean mGuestCheckout;
     private boolean mEnableAgreements;
     private boolean mTaxVatShow;
-
     private String enable_guest_checkout = "enable_guest_checkout";
     private String enable_agreements = "enable_agreements";
     private String taxvat_show = "taxvat_show";
 
-    public static AppCheckoutConfig instance;
-
     public static AppCheckoutConfig getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new AppCheckoutConfig();
         }
         return instance;
@@ -28,23 +26,23 @@ public class AppCheckoutConfig extends SimiEntity {
     @Override
     public void parse() {
 
-        if(hasKey(enable_guest_checkout)) {
+        if (hasKey(enable_guest_checkout)) {
             String guestCheckout = getData(enable_guest_checkout);
-            if(Utils.TRUE(guestCheckout)) {
+            if (Utils.TRUE(guestCheckout)) {
                 setGuestCheckout(true);
             }
         }
 
-        if(hasKey(enable_agreements)) {
+        if (hasKey(enable_agreements)) {
             String agreement = getData(enable_agreements);
-            if(Utils.TRUE(agreement)) {
+            if (Utils.TRUE(agreement)) {
                 setenableAgreements(true);
             }
         }
 
-        if(hasKey(taxvat_show)) {
+        if (hasKey(taxvat_show)) {
             String taxvatShow = getData(taxvat_show);
-            if(Utils.TRUE(taxvatShow)) {
+            if (Utils.TRUE(taxvatShow)) {
                 settaxVatShow(true);
             }
         }

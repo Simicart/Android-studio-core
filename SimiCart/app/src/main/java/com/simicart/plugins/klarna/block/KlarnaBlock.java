@@ -107,6 +107,36 @@ public class KlarnaBlock extends SimiBlock implements KlarnaDelegate {
         SimiManager.getIntance().replaceFragment(fragment);
     }
 
+    public void pushKlarna(String klarna_order) {
+        ((Activity) mContext).runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                showLoading();
+            }
+        });
+
+        KlarnaPushModel pushModel = new KlarnaPushModel();
+        pushModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                ((Activity) mContext).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismissLoading();
+                    }
+                });
+
+                SimiManager.getIntance().backToHomeFragment();
+
+            }
+        });
+
+        pushModel.addBody("klarna_order", klarna_order);
+        pushModel.request();
+
+    }
+
     class MyJavaScriptInterface {
         @JavascriptInterface
         public void processHTML(String html) {
@@ -140,35 +170,5 @@ public class KlarnaBlock extends SimiBlock implements KlarnaDelegate {
             }
 
         }
-    }
-
-    public void pushKlarna(String klarna_order) {
-        ((Activity) mContext).runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-                showLoading();
-            }
-        });
-
-        KlarnaPushModel pushModel = new KlarnaPushModel();
-        pushModel.setSuccessListener(new ModelSuccessCallBack() {
-            @Override
-            public void onSuccess(SimiCollection collection) {
-                ((Activity) mContext).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dismissLoading();
-                    }
-                });
-
-                SimiManager.getIntance().backToHomeFragment();
-
-            }
-        });
-
-        pushModel.addBody("klarna_order", klarna_order);
-        pushModel.request();
-
     }
 }

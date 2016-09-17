@@ -5,35 +5,34 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.simicart.core.catalog.product.entity.Product;
-import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 
 import java.util.ArrayList;
 
 public class ProductListListenerController {
-	protected ArrayList<Product> mProductList;
+    protected ArrayList<Product> mProductList;
 
-	public void setProductList(ArrayList<Product> productList) {
-		this.mProductList = productList;
-	}
+    public void setProductList(ArrayList<Product> productList) {
+        this.mProductList = productList;
+    }
 
-	public OnItemClickListener createTouchProductList() {
-		return new OnItemClickListener() {
+    public OnItemClickListener createTouchProductList() {
+        return new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int position, long arg3) {
-				ArrayList<String> listID = new ArrayList<String>();
-				for (int i = 0; i < mProductList.size(); i++) {
-					listID.add(mProductList.get(i).getId());
-				}
-				String id = mProductList.get(position).getData("product_id");
-				if (id != null) {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1,
+                                    int position, long arg3) {
+                ArrayList<String> listID = new ArrayList<String>();
+                for (int i = 0; i < mProductList.size(); i++) {
+                    listID.add(mProductList.get(i).getId());
+                }
+                String id = mProductList.get(position).getData("product_id");
+                if (id != null) {
 //					ProductDetailParentFragment fragment = ProductDetailParentFragment.newInstance(id,listID);
 //					ProductDetailParentFragment fragment = new ProductDetailParentFragment(id, listID);
 //					SimiManager.getIntance().addFragment(fragment);
 //					SimiManager.getIntance().hideKeyboard();
-				}
-			}
-		};
-	}
+                }
+            }
+        };
+    }
 }

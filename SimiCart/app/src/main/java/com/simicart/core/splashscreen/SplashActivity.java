@@ -41,7 +41,7 @@ public class SplashActivity extends Activity {
         Utils.getDeviceInfor();
         int idView = Rconfig.getInstance().getId(context,
                 "core_activity_splash", "layout");
-        if(Config.getInstance().isFullSplash()){
+        if (Config.getInstance().isFullSplash()) {
             idView = Rconfig.getInstance().getId(context,
                     "core_activity_splash_full", "layout");
         }
@@ -117,7 +117,7 @@ public class SplashActivity extends Activity {
         model.request();
     }
 
-    private void dispatchEvent(){
+    private void dispatchEvent() {
 
     }
 

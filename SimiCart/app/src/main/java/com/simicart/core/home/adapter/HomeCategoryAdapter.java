@@ -2,7 +2,6 @@ package com.simicart.core.home.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
@@ -63,7 +61,7 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
         holder.llItemCate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(category.hasChild() == true) {
+                if (category.hasChild() == true) {
                     openCate(category);
                 } else {
                     openListProduct(category);
@@ -81,7 +79,7 @@ public class HomeCategoryAdapter extends RecyclerView.Adapter<HomeCategoryAdapte
     }
 
     protected void openListProduct(Category cate) {
-        HashMap<String,Object> hm = new HashMap<>();
+        HashMap<String, Object> hm = new HashMap<>();
         hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
         hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, cate.getCategoryName());
         hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, cate.getCategoryId());

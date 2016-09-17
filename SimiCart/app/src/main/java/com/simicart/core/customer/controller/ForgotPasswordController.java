@@ -16,57 +16,57 @@ import com.simicart.core.customer.model.ForgotPasswordModel;
 
 public class ForgotPasswordController extends SimiController {
 
-	protected ForgotPasswordDelegate mDelegate;
-	protected OnClickListener mClicker;
+    protected ForgotPasswordDelegate mDelegate;
+    protected OnClickListener mClicker;
 
-	public void setDelegate(ForgotPasswordDelegate delegate) {
-		mDelegate = delegate;
-	}
+    public void setDelegate(ForgotPasswordDelegate delegate) {
+        mDelegate = delegate;
+    }
 
-	public OnClickListener getClicker() {
-		return mClicker;
-	}
+    public OnClickListener getClicker() {
+        return mClicker;
+    }
 
-	@Override
-	public void onStart() {
-		mClicker = new OnClickListener() {
+    @Override
+    public void onStart() {
+        mClicker = new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
-				onSend(v);
-			}
-		};
+                onSend(v);
+            }
+        };
 
-	}
+    }
 
-	protected void onSend(View v) {
-		Utils.hideKeyboard(v);
-		String email = mDelegate.getEmail();
-		mDelegate.showDialogLoading();
-		mModel = new ForgotPasswordModel();
-		mModel.setSuccessListener(new ModelSuccessCallBack() {
-			@Override
-			public void onSuccess(SimiCollection collection) {
-				mDelegate.dismissDialogLoading();
-				SimiManager.getIntance().backPreviousFragment();
-			}
-		});
-		mModel.setFailListener(new ModelFailCallBack() {
-			@Override
-			public void onFail(SimiError error) {
-				mDelegate.dismissDialogLoading();
-				SimiNotify.getInstance().showNotify(error.getMessage());
-			}
-		});
-		mModel.addBody("user_email", email);
-		mModel.request();
-	}
+    protected void onSend(View v) {
+        Utils.hideKeyboard(v);
+        String email = mDelegate.getEmail();
+        mDelegate.showDialogLoading();
+        mModel = new ForgotPasswordModel();
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissDialogLoading();
+                SimiManager.getIntance().backPreviousFragment();
+            }
+        });
+        mModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissDialogLoading();
+                SimiNotify.getInstance().showNotify(error.getMessage());
+            }
+        });
+        mModel.addBody("user_email", email);
+        mModel.request();
+    }
 
-	@Override
-	public void onResume() {
-		// TODO Auto-generated method stub
+    @Override
+    public void onResume() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

@@ -90,7 +90,7 @@ public class AddressEntity extends SimiEntity implements Parcelable {
         mLatlng = getData(LATLNG);
     }
 
-    public JSONObject toParamForPlaceOrder()  {
+    public JSONObject toParamForPlaceOrder() {
         try {
             JSONObject json = new JSONObject();
             String addressID = mID;
@@ -372,14 +372,13 @@ public class AddressEntity extends SimiEntity implements Parcelable {
         this.mYear = year;
     }
 
-    public void setTaxvatCheckout(String tax) {
-        this.mTaxVatCheckout = tax;
-    }
-
     public String getTaxvatCheckout() {
         return this.mTaxVatCheckout;
     }
 
+    public void setTaxvatCheckout(String tax) {
+        this.mTaxVatCheckout = tax;
+    }
 
     @Override
     public int describeContents() {

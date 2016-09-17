@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.config.Rconfig;
@@ -24,7 +23,7 @@ public class SimiPopup {
         mInflater = LayoutInflater.from(mContext);
     }
 
-    public  void createPopup() {
+    public void createPopup() {
         ppFilter = ProgressDialog.show(mContext, null, null, true, false);
         View contentView = createView();
         ppFilter.setContentView(contentView);

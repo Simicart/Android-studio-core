@@ -22,6 +22,12 @@ import java.util.HashMap;
  */
 public class PayUFragment extends PaymentFragment {
 
+    public static final String SUCCESS = "simipayu/index/success";
+    public static final String FAIL = "simipayu/index/failure";
+    public static final String MES_SUCCESS = "Complete order Successfully. Thank your for purchase";
+    public static final String MES_FAIL = "Failure: Your order has been canceled";
+    protected LinearLayout llPayment;
+
     public static PayUFragment newInstance(SimiData data) {
         PayUFragment fragment = new PayUFragment();
         Bundle bundle = new Bundle();
@@ -29,14 +35,6 @@ public class PayUFragment extends PaymentFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    public static final String SUCCESS = "simipayu/index/success";
-    public static final String FAIL = "simipayu/index/failure";
-
-    public static final String MES_SUCCESS = "Complete order Successfully. Thank your for purchase";
-    public static final String MES_FAIL = "Failure: Your order has been canceled";
-
-    protected LinearLayout llPayment;
 
     @Nullable
     @Override

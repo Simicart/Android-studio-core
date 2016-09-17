@@ -3,12 +3,10 @@ package com.simicart.core.catalog.product.entity;
 import com.simicart.core.base.model.entity.SimiEntity;
 
 public class Attributes extends SimiEntity {
-    private String mTitle;
-    private String mValue;
-
     public static String TITLE = "title";
     protected String VALUE = "value";
-
+    private String mTitle;
+    private String mValue;
 
     @Override
     public void parse() {

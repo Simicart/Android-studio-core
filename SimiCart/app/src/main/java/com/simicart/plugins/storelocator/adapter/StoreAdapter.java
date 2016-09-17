@@ -118,7 +118,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreHolder>
                         // gmail.setClassName("com.google.android.gm",
                         // "com.google.android.gm.ComposeActivityGmail");
                         gmail.putExtra(Intent.EXTRA_EMAIL,
-                                new String[] { mail });
+                                new String[]{mail});
                         gmail.setData(Uri.parse(mail));
                         gmail.putExtra(Intent.EXTRA_SUBJECT, "");
                         gmail.setType("plain/text");
@@ -167,7 +167,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreHolder>
         holder.llItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,Object> hmData = new HashMap<String, Object>();
+                HashMap<String, Object> hmData = new HashMap<String, Object>();
                 hmData.put(Constants.KeyData.STORE_OBJECT, object);
                 StoreDetailFragment detail = StoreDetailFragment.newInstance(new SimiData(hmData));
                 if (DataLocal.isTablet) {

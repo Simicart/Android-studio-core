@@ -53,7 +53,7 @@ public class CateHomeComponent extends SimiComponent {
         rcvCate.setAdapter(adapter);
     }
 
-    public void setCallBack(CateHomeCallBack callBack){
+    public void setCallBack(CateHomeCallBack callBack) {
         mCallBack = callBack;
     }
 

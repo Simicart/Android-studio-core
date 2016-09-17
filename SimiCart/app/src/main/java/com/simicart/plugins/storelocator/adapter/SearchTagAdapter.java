@@ -83,7 +83,7 @@ public class SearchTagAdapter extends RecyclerView.Adapter<SearchTagAdapter.Sear
     protected void onSearchAction(SearchObject searchObject) {
         HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(Constants.KeyData.SEARCH_OBJECT, searchObject);
-        if(DataLocal.isTablet) {
+        if (DataLocal.isTablet) {
             StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance(new SimiData(hmData));
             SimiManager.getIntance().replaceFragment(fragment);
         } else {

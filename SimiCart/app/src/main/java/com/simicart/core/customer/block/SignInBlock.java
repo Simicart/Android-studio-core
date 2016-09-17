@@ -23,7 +23,6 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.delegate.SignInDelegate;
 import com.simicart.core.customer.entity.ProfileEntity;
@@ -80,9 +79,9 @@ public class SignInBlock extends SimiBlock implements SignInDelegate {
         edt_Email.setTextColor(AppColorConfig.getInstance().getContentColor());
         edt_Email.setHintTextColor(AppColorConfig.getInstance().getContentColor());
 
-        if(mEmail != null) {
+        if (mEmail != null) {
             edt_Email.setText(mEmail);
-        } else if(Utils.validateString(DataPreferences.getEmailRemember())) {
+        } else if (Utils.validateString(DataPreferences.getEmailRemember())) {
             edt_Email.setText(DataPreferences.getEmailRemember());
         }
 
@@ -117,9 +116,9 @@ public class SignInBlock extends SimiBlock implements SignInDelegate {
         edt_Password.setTextColor(AppColorConfig.getInstance().getContentColor());
         edt_Password.setHintTextColor(AppColorConfig.getInstance().getContentColor());
 
-        if(mPassword != null) {
+        if (mPassword != null) {
             edt_Password.setText(mPassword);
-        } else if(Utils.validateString(DataPreferences.getPasswordRemember())) {
+        } else if (Utils.validateString(DataPreferences.getPasswordRemember())) {
             edt_Password.setText(DataPreferences.getPasswordRemember());
         }
 
@@ -153,7 +152,7 @@ public class SignInBlock extends SimiBlock implements SignInDelegate {
         btn_SignIn.setText(SimiTranslator.getInstance().translate("Sign In"));
         btn_SignIn.setTextColor(AppColorConfig.getInstance().getButtonTextColor());
 
-        if(Utils.validateString(DataPreferences.getEmailRemember()) && Utils.validateString(DataPreferences.getPasswordRemember())
+        if (Utils.validateString(DataPreferences.getEmailRemember()) && Utils.validateString(DataPreferences.getPasswordRemember())
                 || Utils.validateString(mEmail) && Utils.validateString(mPassword)) {
             btn_SignIn.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
         } else {
@@ -167,7 +166,7 @@ public class SignInBlock extends SimiBlock implements SignInDelegate {
         cb_remember_password.setText(SimiTranslator.getInstance().translate("Remember password"));
         cb_remember_password.setTextColor(AppColorConfig.getInstance().getContentColor());
 
-        if(DataPreferences.getCheckRemember() == true) {
+        if (DataPreferences.getCheckRemember() == true) {
             cb_remember_password.setChecked(true);
         }
     }
@@ -209,7 +208,7 @@ public class SignInBlock extends SimiBlock implements SignInDelegate {
             isValidate = false;
         }
 
-        if(!isValidate) {
+        if (!isValidate) {
             return null;
         }
 

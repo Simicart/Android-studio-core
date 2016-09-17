@@ -16,54 +16,54 @@ import java.util.ArrayList;
 
 public class HomeZThemeBlock extends SimiBlock implements HomeZThemeDelegate {
 
-	protected ExpandableListView lv_category;
-	protected ArrayList<ZThemeCatalogEntity> listCatalogs;
+    protected ExpandableListView lv_category;
+    protected ArrayList<ZThemeCatalogEntity> listCatalogs;
 
-	public HomeZThemeBlock(View view, Context context) {
-		super(view, context);
-	}
+    public HomeZThemeBlock(View view, Context context) {
+        super(view, context);
+    }
 
-	public void setListViewListener(ExpandableListView.OnGroupClickListener groupClickListener,
-									ExpandableListView.OnChildClickListener childClickListener) {
+    public void setListViewListener(ExpandableListView.OnGroupClickListener groupClickListener,
+                                    ExpandableListView.OnChildClickListener childClickListener) {
 
-		lv_category.setOnGroupClickListener(groupClickListener);
+        lv_category.setOnGroupClickListener(groupClickListener);
 
-		lv_category.setOnChildClickListener(childClickListener);
+        lv_category.setOnChildClickListener(childClickListener);
 
-	}
+    }
 
-	@Override
-	public void initView() {
-		lv_category = (ExpandableListView) mView.findViewById(Rconfig
-				.getInstance().id("lv_category"));
-	}
+    @Override
+    public void initView() {
+        lv_category = (ExpandableListView) mView.findViewById(Rconfig
+                .getInstance().id("lv_category"));
+    }
 
-	@Override
-	public void drawView(SimiCollection collection) {
+    @Override
+    public void drawView(SimiCollection collection) {
 
-		ArrayList<SimiEntity> entity = collection.getCollection();
-		listCatalogs = new ArrayList<ZThemeCatalogEntity>();
-		if (null != entity && entity.size() > 0) {
-			for (SimiEntity simiEntity : entity) {
-				ZThemeCatalogEntity ZThemeCatalogEntity = new ZThemeCatalogEntity();
-				ZThemeCatalogEntity.setJSONObject(simiEntity.getJSONObject());
-				ZThemeCatalogEntity.parse();
-				listCatalogs.add(ZThemeCatalogEntity);
-			}
-		}
+        ArrayList<SimiEntity> entity = collection.getCollection();
+        listCatalogs = new ArrayList<ZThemeCatalogEntity>();
+        if (null != entity && entity.size() > 0) {
+            for (SimiEntity simiEntity : entity) {
+                ZThemeCatalogEntity ZThemeCatalogEntity = new ZThemeCatalogEntity();
+                ZThemeCatalogEntity.setJSONObject(simiEntity.getJSONObject());
+                ZThemeCatalogEntity.parse();
+                listCatalogs.add(ZThemeCatalogEntity);
+            }
+        }
 
-		if (listCatalogs.size() > 0) {
-			showCategoriesView(listCatalogs);
-		}
-	}
+        if (listCatalogs.size() > 0) {
+            showCategoriesView(listCatalogs);
+        }
+    }
 
-	protected void showCategoriesView(ArrayList<ZThemeCatalogEntity> categories) {
-		HomeZThemeAdapter adapter = new HomeZThemeAdapter(mContext, categories);
-		lv_category.setAdapter(adapter);
-	}
+    protected void showCategoriesView(ArrayList<ZThemeCatalogEntity> categories) {
+        HomeZThemeAdapter adapter = new HomeZThemeAdapter(mContext, categories);
+        lv_category.setAdapter(adapter);
+    }
 
-	@Override
-	public ArrayList<ZThemeCatalogEntity> getListCatalog() {
-		return listCatalogs;
-	}
+    @Override
+    public ArrayList<ZThemeCatalogEntity> getListCatalog() {
+        return listCatalogs;
+    }
 }

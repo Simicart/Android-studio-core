@@ -46,19 +46,19 @@ public class PaymentFragment extends SimiFragment {
 
     }
 
-    protected void initLoadingView(){
+    protected void initLoadingView() {
         LayoutInflater inflater = (LayoutInflater) getActivity()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-       mLoadingView = inflater.inflate(
+        mLoadingView = inflater.inflate(
                 Rconfig.getInstance().layout("core_base_loading"), null,
                 false);
     }
 
-    protected void showLoading(){
+    protected void showLoading() {
 
     }
 
-    protected void dimissLoading(){
+    protected void dimissLoading() {
 
     }
 

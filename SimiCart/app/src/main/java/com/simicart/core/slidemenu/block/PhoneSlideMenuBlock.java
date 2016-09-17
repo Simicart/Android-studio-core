@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.DataLocal;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.slidemenu.adapter.SlideMenuAdapter;
 import com.simicart.core.slidemenu.delegate.SlideMenuDelegate;
@@ -24,95 +24,95 @@ import java.util.ArrayList;
 
 public class PhoneSlideMenuBlock implements SlideMenuDelegate {
 
-	protected ListView lv_navigation;
-	protected LinearLayout ll_personal;
-	protected TextView tv_acc;
-	protected View mView;
-	protected Context mContext;
-	protected SlideMenuAdapter mAdapter;
+    protected ListView lv_navigation;
+    protected LinearLayout ll_personal;
+    protected TextView tv_acc;
+    protected View mView;
+    protected Context mContext;
+    protected SlideMenuAdapter mAdapter;
 
-	public void setListener(OnItemClickListener listener) {
-		lv_navigation.setOnItemClickListener(listener);
-	}
+    public PhoneSlideMenuBlock(View view, Context context) {
+        mView = view;
+        mContext = context;
+    }
 
-	public PhoneSlideMenuBlock(View view, Context context) {
-		mView = view;
-		mContext = context;
-	}
+    public void setListener(OnItemClickListener listener) {
+        lv_navigation.setOnItemClickListener(listener);
+    }
 
-	public void initView() {
-		lv_navigation = (ListView) mView.findViewById(Rconfig.getInstance().id(
-				"lv_navigation"));
-		ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance()
-				.getMenuLineColor());
-		lv_navigation.setDivider(sage);
-		lv_navigation.setDividerHeight(1);
-		ll_personal = (LinearLayout) mView.findViewById(Rconfig.getInstance()
-				.id("ll_personal"));
-		View v_line = (View) mView.findViewById(Rconfig.getInstance().id(
-				"v_line"));
-		tv_acc = (TextView) mView.findViewById(Rconfig.getInstance().id(
-				"tv_name"));
+    public void initView() {
+        lv_navigation = (ListView) mView.findViewById(Rconfig.getInstance().id(
+                "lv_navigation"));
+        ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance()
+                .getMenuLineColor());
+        lv_navigation.setDivider(sage);
+        lv_navigation.setDividerHeight(1);
+        ll_personal = (LinearLayout) mView.findViewById(Rconfig.getInstance()
+                .id("ll_personal"));
+        View v_line = (View) mView.findViewById(Rconfig.getInstance().id(
+                "v_line"));
+        tv_acc = (TextView) mView.findViewById(Rconfig.getInstance().id(
+                "tv_name"));
 
-		ImageView img_icon = (ImageView) mView.findViewById(Rconfig
-				.getInstance().id("img_icon"));
-		Drawable icon = mContext.getResources().getDrawable(
-				Rconfig.getInstance().drawable("ic_menu_personal"));
-		icon.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
-				PorterDuff.Mode.SRC_ATOP);
-		img_icon.setImageDrawable(icon);
+        ImageView img_icon = (ImageView) mView.findViewById(Rconfig
+                .getInstance().id("img_icon"));
+        Drawable icon = mContext.getResources().getDrawable(
+                Rconfig.getInstance().drawable("ic_menu_personal"));
+        icon.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
+                PorterDuff.Mode.SRC_ATOP);
+        img_icon.setImageDrawable(icon);
 
-		ImageView img_extended = (ImageView) mView.findViewById(Rconfig
-				.getInstance().id("img_extended"));
-		Drawable ic_menu_extended = mContext.getResources().getDrawable(
-				Rconfig.getInstance().drawable("ic_menu_extended"));
-		ic_menu_extended.setColorFilter(AppColorConfig.getInstance()
-				.getMenuIconColor(), PorterDuff.Mode.SRC_ATOP);
-		img_extended.setImageDrawable(ic_menu_extended);
+        ImageView img_extended = (ImageView) mView.findViewById(Rconfig
+                .getInstance().id("img_extended"));
+        Drawable ic_menu_extended = mContext.getResources().getDrawable(
+                Rconfig.getInstance().drawable("ic_menu_extended"));
+        ic_menu_extended.setColorFilter(AppColorConfig.getInstance()
+                .getMenuIconColor(), PorterDuff.Mode.SRC_ATOP);
+        img_extended.setImageDrawable(ic_menu_extended);
 
-		v_line.setBackgroundColor(AppColorConfig.getInstance().getMenuIconColor());
-		tv_acc.setTextColor(AppColorConfig.getInstance().getMenuTextColor());
+        v_line.setBackgroundColor(AppColorConfig.getInstance().getMenuIconColor());
+        tv_acc.setTextColor(AppColorConfig.getInstance().getMenuTextColor());
 
-		if (DataLocal.isLanguageRTL) {
-			tv_acc.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-		}
-	}
+        if (AppStoreConfig.getInstance().isRTL()) {
+            tv_acc.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+        }
+    }
 
-	public void setClicker(OnItemClickListener clicker) {
-		lv_navigation.setOnItemClickListener(clicker);
-	}
+    public void setClicker(OnItemClickListener clicker) {
+        lv_navigation.setOnItemClickListener(clicker);
+    }
 
-	public void setClickerPersonal(OnClickListener clicker) {
-		ll_personal.setOnClickListener(clicker);
-	}
+    public void setClickerPersonal(OnClickListener clicker) {
+        ll_personal.setOnClickListener(clicker);
+    }
 
-	@Override
-	public void onSelectedItem(int position) {
-		lv_navigation.setItemChecked(position, true);
-	}
+    @Override
+    public void onSelectedItem(int position) {
+        lv_navigation.setItemChecked(position, true);
+    }
 
-	@Override
-	public void onRefresh() {
-		// TODO Auto-generated method stub
+    @Override
+    public void onRefresh() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void setAdapter(ArrayList<ItemNavigation> items) {
+    @Override
+    public void setAdapter(ArrayList<ItemNavigation> items) {
 
-		// if (null == mAdapter) {
-		mAdapter = new SlideMenuAdapter(items, mContext);
-		lv_navigation.setAdapter(mAdapter);
-		// } else {
-		// Log.e("PhoneSlideMenuBlock ", "setAdapter 002");
-		// mAdapter.setItems(items);
-		// mAdapter.notifyDataSetChanged();
-		// }
-	}
+        // if (null == mAdapter) {
+        mAdapter = new SlideMenuAdapter(items, mContext);
+        lv_navigation.setAdapter(mAdapter);
+        // } else {
+        // Log.e("PhoneSlideMenuBlock ", "setAdapter 002");
+        // mAdapter.setItems(items);
+        // mAdapter.notifyDataSetChanged();
+        // }
+    }
 
-	@Override
-	public void setUpdateSignIn(String name) {
-		tv_acc.setText(name);
-	}
+    @Override
+    public void setUpdateSignIn(String name) {
+        tv_acc.setText(name);
+    }
 
 }

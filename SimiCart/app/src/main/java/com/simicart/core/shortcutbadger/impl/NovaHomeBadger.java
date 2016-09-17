@@ -9,9 +9,9 @@ import com.simicart.core.shortcutbadger.ShortcutBadger;
 
 /**
  * Shortcut Badger support for Nova Launcher.
- *
+ * <p/>
  * TeslaUnread must be installed.
- *
+ * <p/>
  * User: Gernot Pansy
  * Date: 2014/11/03
  * Time: 7:15

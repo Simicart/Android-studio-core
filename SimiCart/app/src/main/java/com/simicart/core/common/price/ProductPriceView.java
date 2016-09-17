@@ -65,7 +65,7 @@ public class ProductPriceView {
 
 
             TextView tv_price = new TextView(mContext);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tv_price.setGravity(Gravity.RIGHT);
             } else {
                 tv_price.setGravity(Gravity.LEFT);
@@ -264,7 +264,7 @@ public class ProductPriceView {
 
             LayoutParams params = new LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 params.gravity = Gravity.RIGHT;
                 params_1.gravity = Gravity.RIGHT;
                 ll_price.setGravity(Gravity.RIGHT);

@@ -13,7 +13,6 @@ import com.simicart.core.base.drawImage.SimiDrawImage;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
@@ -50,12 +49,12 @@ public class ListProductCheckoutAdapter extends RecyclerView.Adapter<ListProduct
         Cart cart = listProducts.get(position);
 
         holder.name.setTextColor(AppColorConfig.getInstance().getContentColor());
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             holder.name.setGravity(Gravity.RIGHT);
         }
         holder.name.setText(cart.getProduct_name());
 
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             holder.tv_price.setGravity(Gravity.RIGHT);
         }
         holder.tv_price.setTextColor(AppColorConfig.getInstance().getPriceColor());

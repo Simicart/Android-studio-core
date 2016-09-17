@@ -38,7 +38,7 @@ public class CategorySlideMenuBlock extends CategoryBlock {
         iconBack.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
                 PorterDuff.Mode.SRC_ATOP);
         iv_back.setImageDrawable(iconBack);
-        if(!mName.equals("all categories")) {
+        if (!mName.equals("all categories")) {
             iv_back.setVisibility(View.VISIBLE);
         } else {
             iv_back.setVisibility(View.GONE);
@@ -48,7 +48,7 @@ public class CategorySlideMenuBlock extends CategoryBlock {
 
     @Override
     public void showBack(boolean show) {
-        if(show == true) {
+        if (show == true) {
             iv_back.setVisibility(View.VISIBLE);
         } else {
             iv_back.setVisibility(View.GONE);

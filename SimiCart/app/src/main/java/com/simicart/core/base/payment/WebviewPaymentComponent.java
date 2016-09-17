@@ -13,7 +13,6 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Rconfig;
 
 import java.util.HashMap;
 
@@ -110,7 +109,7 @@ public class WebviewPaymentComponent extends SimiComponent {
         wvPayment.getSettings().setLayoutAlgorithm(
                 WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         wvPayment.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-        Log.e("WebviewPaymentComponent","-----> URL " + mUrl);
+        Log.e("WebviewPaymentComponent", "-----> URL " + mUrl);
         if (Utils.validateString(mUrl)) {
             showLoading();
             wvPayment.loadUrl(mUrl);

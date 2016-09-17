@@ -2,7 +2,6 @@ package com.simicart.core.home.component;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -45,7 +44,7 @@ public class SpotProductComponent extends SimiComponent {
 
     protected void showTitle() {
         String title = mProductList.getTitle();
-        if(Utils.validateString(title)) {
+        if (Utils.validateString(title)) {
             tvTitle.setText(title);
         } else {
             tvTitle.setVisibility(View.GONE);
@@ -59,7 +58,7 @@ public class SpotProductComponent extends SimiComponent {
         rcvCate.setAdapter(adapter);
     }
 
-    public void setListID(ArrayList<String> ids){
+    public void setListID(ArrayList<String> ids) {
         mListID = ids;
     }
 }

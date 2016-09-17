@@ -24,7 +24,7 @@ public class MyAccountBlock extends SimiBlock implements MyAccountDelegate {
 
     @Override
     public void addItemRow(View view) {
-        if(view != null) {
+        if (view != null) {
             llMyAccount.addView(view);
         }
     }

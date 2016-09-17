@@ -4,34 +4,27 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.simicart.MainActivity;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
@@ -58,7 +51,7 @@ public class ScanCode {
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 SimiData data = bundle.getParcelable("entity");
                 mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
-                if(isExistBarcode() == false) {
+                if (isExistBarcode() == false) {
                     ItemNavigation item = new ItemNavigation();
                     item.setType(TypeItem.NORMAL);
                     item.setName(SimiTranslator.getInstance().translate(QR_BAR_CODE));
@@ -79,7 +72,7 @@ public class ScanCode {
             public void onReceive(Context context, Intent intent) {
 
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
-                SimiData mData =  bundle.getParcelable(Constants.ENTITY);
+                SimiData mData = bundle.getParcelable(Constants.ENTITY);
                 String item_name = (String) mData.getData().get(KeyData.SLIDE_MENU.ITEM_NAME);
                 clickItemLeftMenuCode(item_name);
             }
@@ -92,7 +85,7 @@ public class ScanCode {
             public void onReceive(Context context, Intent intent) {
 
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
-                SimiData mData =  bundle.getParcelable(Constants.ENTITY);
+                SimiData mData = bundle.getParcelable(Constants.ENTITY);
                 int requestCode = (int) mData.getData().get(KeyData.BAR_CODE.REQUEST_CODE);
                 int resultCode = (int) mData.getData().get(KeyData.BAR_CODE.RESULT_CODE);
                 Intent data = (Intent) mData.getData().get(KeyData.BAR_CODE.INTENT);
@@ -124,7 +117,7 @@ public class ScanCode {
             public void onReceive(Context context, Intent intent) {
 
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
-                SimiData mData =  bundle.getParcelable(Constants.ENTITY);
+                SimiData mData = bundle.getParcelable(Constants.ENTITY);
                 String item_name = (String) mData.getData().get(KeyData.SLIDE_MENU.ITEM_NAME);
                 clickItemLeftMenuCode(item_name);
             }
@@ -166,7 +159,7 @@ public class ScanCode {
                 }
 
                 listID.add(product_id);
-                HashMap<String,Object> hmData = new HashMap<>();
+                HashMap<String, Object> hmData = new HashMap<>();
                 hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, product_id);
                 hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
                 hmData.put(KeyData.PRODUCT_DETAIL.IS_FROM_SCAN, true);
@@ -182,7 +175,7 @@ public class ScanCode {
             }
         });
         mModel.addBody("code", code);
-        if(code.contains("QR")) {
+        if (code.contains("QR")) {
             mModel.addBody("type", "1");
         } else {
             mModel.addBody("type", "0");

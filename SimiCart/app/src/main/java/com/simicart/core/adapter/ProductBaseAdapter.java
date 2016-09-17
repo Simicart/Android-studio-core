@@ -19,7 +19,7 @@ import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.price.ProductPriceView;
 import com.simicart.core.common.price.ProductPriceViewProductGridV03;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.DataLocal;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
@@ -27,132 +27,132 @@ import java.util.ArrayList;
 @SuppressLint("ViewHolder")
 public class ProductBaseAdapter extends BaseAdapter {
 
-	protected ArrayList<Product> mProductList;
-	protected Context mContext;
-	protected boolean isHome;
+    protected ArrayList<Product> mProductList;
+    protected Context mContext;
+    protected boolean isHome;
 
-	public ProductBaseAdapter(Context context, ArrayList<Product> ProductList) {
-		this.mContext = context;
-		this.mProductList = ProductList;
-	}
+    public ProductBaseAdapter(Context context, ArrayList<Product> ProductList) {
+        this.mContext = context;
+        this.mProductList = ProductList;
+    }
 
-	public void setProductList(ArrayList<Product> products) {
-		mProductList = products;
-	}
+    public void setProductList(ArrayList<Product> products) {
+        mProductList = products;
+    }
 
-	public void setIsHome(boolean isHome) {
-		this.isHome = isHome;
-	}
+    public void setIsHome(boolean isHome) {
+        this.isHome = isHome;
+    }
 
-	@Override
-	public int getCount() {
-		return this.mProductList.size();
-	}
+    @Override
+    public int getCount() {
+        return this.mProductList.size();
+    }
 
-	@Override
-	public Product getItem(int position) {
-		return this.mProductList.get(position);
-	}
+    @Override
+    public Product getItem(int position) {
+        return this.mProductList.get(position);
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return 0;
-	}
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
 
-	@SuppressLint("ResourceAsColor")
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder holder;
-		Product product = getItem(position);
-		if (convertView == null) {
-			LayoutInflater inflater = LayoutInflater.from(mContext);
-			convertView = inflater.inflate(
-					Rconfig.getInstance().layout("core_adapter_horizontal_products"),
-					null);
-			holder = new ViewHolder();
-			holder.tv_name = (TextView) convertView.findViewById(Rconfig
-					.getInstance().id("product_list_name"));
-			holder.ll_price = (LinearLayout) convertView.findViewById(Rconfig
-					.getInstance().id("layout_price"));
-			holder.img_avartar = (ImageView) convertView.findViewById(Rconfig
-					.getInstance().id("product_list_image"));
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        Product product = getItem(position);
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            convertView = inflater.inflate(
+                    Rconfig.getInstance().layout("core_adapter_horizontal_products"),
+                    null);
+            holder = new ViewHolder();
+            holder.tv_name = (TextView) convertView.findViewById(Rconfig
+                    .getInstance().id("product_list_name"));
+            holder.ll_price = (LinearLayout) convertView.findViewById(Rconfig
+                    .getInstance().id("layout_price"));
+            holder.img_avartar = (ImageView) convertView.findViewById(Rconfig
+                    .getInstance().id("product_list_image"));
 
-			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
 
-		// name
-		holder.tv_name.setText(product.getName());
-		holder.tv_name.setTextColor(AppColorConfig.getInstance().getContentColor());
-		if (isHome) {
-			if (DataLocal.isLanguageRTL) {
-				holder.tv_name.setGravity(Gravity.RIGHT);
-				holder.ll_price.setGravity(Gravity.RIGHT);
-			} else {
-				holder.tv_name.setGravity(Gravity.LEFT);
-				holder.ll_price.setGravity(Gravity.LEFT);
-			}
-		}
+        // name
+        holder.tv_name.setText(product.getName());
+        holder.tv_name.setTextColor(AppColorConfig.getInstance().getContentColor());
+        if (isHome) {
+            if (AppStoreConfig.getInstance().isRTL()) {
+                holder.tv_name.setGravity(Gravity.RIGHT);
+                holder.ll_price.setGravity(Gravity.RIGHT);
+            } else {
+                holder.tv_name.setGravity(Gravity.LEFT);
+                holder.ll_price.setGravity(Gravity.LEFT);
+            }
+        }
 
-		// image
-		if (product.getId().equals("fake")) {
-			// set anh fake
-			holder.img_avartar.setImageResource(Rconfig.getInstance().drawable(
-					"fake_product"));
-			holder.img_avartar.setScaleType(ScaleType.FIT_XY);
-		} else {
-			String urlImage = product.getImage();
-			if (urlImage != null) {
-				DrawableManager.fetchDrawableOnThread(urlImage,
-						holder.img_avartar);
-			}
-		}
+        // image
+        if (product.getId().equals("fake")) {
+            // set anh fake
+            holder.img_avartar.setImageResource(Rconfig.getInstance().drawable(
+                    "fake_product"));
+            holder.img_avartar.setScaleType(ScaleType.FIT_XY);
+        } else {
+            String urlImage = product.getImage();
+            if (urlImage != null) {
+                DrawableManager.fetchDrawableOnThread(urlImage,
+                        holder.img_avartar);
+            }
+        }
 
-		if (product.getPriceV2() != null) {
-			ProductPriceViewProductGridV03 viewPrice = new ProductPriceViewProductGridV03(
-					product);
-			viewPrice.setShowOnePrice(true);
-			View view = viewPrice.getViewPrice();
-			LayoutParams params = new LayoutParams(
-					LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-			if (null != view) {
-				holder.ll_price.removeAllViewsInLayout();
-				holder.ll_price.addView(view, params);
-			}
-		} else {
-			ProductPriceView viewPrice = new ProductPriceView(product);
-			View view = viewPrice.getViewPriceHome();
-			if (null != view) {
-				LayoutParams params = new LayoutParams(
-						LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-				if (DataLocal.isLanguageRTL) {
-					holder.ll_price.setGravity(Gravity.RIGHT);
-				} else {
-					holder.ll_price.setGravity(Gravity.LEFT);
-				}
-				holder.ll_price.removeAllViewsInLayout();
-				holder.ll_price.addView(view, params);
-			}
-		}
+        if (product.getPriceV2() != null) {
+            ProductPriceViewProductGridV03 viewPrice = new ProductPriceViewProductGridV03(
+                    product);
+            viewPrice.setShowOnePrice(true);
+            View view = viewPrice.getViewPrice();
+            LayoutParams params = new LayoutParams(
+                    LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+            if (null != view) {
+                holder.ll_price.removeAllViewsInLayout();
+                holder.ll_price.addView(view, params);
+            }
+        } else {
+            ProductPriceView viewPrice = new ProductPriceView(product);
+            View view = viewPrice.getViewPriceHome();
+            if (null != view) {
+                LayoutParams params = new LayoutParams(
+                        LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+                if (AppStoreConfig.getInstance().isRTL()) {
+                    holder.ll_price.setGravity(Gravity.RIGHT);
+                } else {
+                    holder.ll_price.setGravity(Gravity.LEFT);
+                }
+                holder.ll_price.removeAllViewsInLayout();
+                holder.ll_price.addView(view, params);
+            }
+        }
 
-		// dispatchevent
-		RelativeLayout rl_product_list = (RelativeLayout) convertView
-				.findViewById(Rconfig.getInstance().id("rel_product_list_spot"));
+        // dispatchevent
+        RelativeLayout rl_product_list = (RelativeLayout) convertView
+                .findViewById(Rconfig.getInstance().id("rel_product_list_spot"));
 
 //		EventBlock eventBlock = new EventBlock();
 //		eventBlock.dispatchEvent("com.simicart.image.product.home",
 //				rl_product_list, product);
 
-		return convertView;
-	}
+        return convertView;
+    }
 
-	static class ViewHolder {
-		ImageView img_avartar;
-		TextView tv_name;
-		LinearLayout ll_price;
-		LinearLayout layoutStock;
+    static class ViewHolder {
+        ImageView img_avartar;
+        TextView tv_name;
+        LinearLayout ll_price;
+        LinearLayout layoutStock;
 
-	}
+    }
 
 }

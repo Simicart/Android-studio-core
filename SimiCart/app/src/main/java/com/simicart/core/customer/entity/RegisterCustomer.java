@@ -3,6 +3,14 @@ package com.simicart.core.customer.entity;
 import com.simicart.core.base.model.entity.SimiEntity;
 
 public class RegisterCustomer extends SimiEntity {
+    protected String EMAIL = "email";
+    protected String PREFIX = "prefix";
+    protected String SUFFIX = "suffix";
+    protected String DAY = "day";
+    protected String MONTH = "month";
+    protected String YEAR = "year";
+    protected String GENDER = "gender";
+    protected String NAME = "name";
     private String mPrefix;
     private String mName;
     private String mSuffix;
@@ -15,20 +23,6 @@ public class RegisterCustomer extends SimiEntity {
     private String mPass;
     private String mConfirmPass;
 
-    protected String EMAIL = "email";
-    protected String PREFIX = "prefix";
-    protected String SUFFIX = "suffix";
-    protected String DAY = "day";
-    protected String MONTH = "month";
-    protected String YEAR = "year";
-    protected String GENDER = "gender";
-    protected String NAME = "name";
-
-
-    public void setPrefix(String mPrefix) {
-        this.mPrefix = mPrefix;
-    }
-
     public String getPrefix() {
         if (mPrefix == null) {
             mPrefix = getData(PREFIX);
@@ -36,8 +30,8 @@ public class RegisterCustomer extends SimiEntity {
         return mPrefix;
     }
 
-    public void setName(String mName) {
-        this.mName = mName;
+    public void setPrefix(String mPrefix) {
+        this.mPrefix = mPrefix;
     }
 
     public String getName() {
@@ -47,8 +41,8 @@ public class RegisterCustomer extends SimiEntity {
         return mName;
     }
 
-    public void setSuffix(String mSuffix) {
-        this.mSuffix = mSuffix;
+    public void setName(String mName) {
+        this.mName = mName;
     }
 
     public String getSuffix() {
@@ -58,8 +52,8 @@ public class RegisterCustomer extends SimiEntity {
         return mSuffix;
     }
 
-    public void setEmail(String mEmail) {
-        this.mEmail = mEmail;
+    public void setSuffix(String mSuffix) {
+        this.mSuffix = mSuffix;
     }
 
     public String getEmail() {
@@ -69,8 +63,8 @@ public class RegisterCustomer extends SimiEntity {
         return mEmail;
     }
 
-    public void setDay(String mDay) {
-        this.mDay = mDay;
+    public void setEmail(String mEmail) {
+        this.mEmail = mEmail;
     }
 
     public String getDay() {
@@ -80,8 +74,8 @@ public class RegisterCustomer extends SimiEntity {
         return mDay;
     }
 
-    public void setMonth(String mMonth) {
-        this.mMonth = mMonth;
+    public void setDay(String mDay) {
+        this.mDay = mDay;
     }
 
     public String getMonth() {
@@ -91,8 +85,8 @@ public class RegisterCustomer extends SimiEntity {
         return mMonth;
     }
 
-    public void setYear(String mYear) {
-        this.mYear = mYear;
+    public void setMonth(String mMonth) {
+        this.mMonth = mMonth;
     }
 
     public String getYear() {
@@ -102,8 +96,8 @@ public class RegisterCustomer extends SimiEntity {
         return mYear;
     }
 
-    public void setGender(String mGender) {
-        this.mGender = mGender;
+    public void setYear(String mYear) {
+        this.mYear = mYear;
     }
 
     public String getGender() {
@@ -113,8 +107,8 @@ public class RegisterCustomer extends SimiEntity {
         return mGender;
     }
 
-    public void setTaxVat(String mTaxVat) {
-        this.mTaxVat = mTaxVat;
+    public void setGender(String mGender) {
+        this.mGender = mGender;
     }
 
     public String getTaxVat() {
@@ -124,19 +118,23 @@ public class RegisterCustomer extends SimiEntity {
         return mTaxVat;
     }
 
-    public void setPass(String mPass) {
-        this.mPass = mPass;
+    public void setTaxVat(String mTaxVat) {
+        this.mTaxVat = mTaxVat;
     }
 
     public String getPass() {
         return mPass;
     }
 
-    public void setConfirmPass(String mConfirmPass) {
-        this.mConfirmPass = mConfirmPass;
+    public void setPass(String mPass) {
+        this.mPass = mPass;
     }
 
     public String getConfirmPass() {
         return mConfirmPass;
+    }
+
+    public void setConfirmPass(String mConfirmPass) {
+        this.mConfirmPass = mConfirmPass;
     }
 }

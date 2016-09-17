@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
 
 import java.util.HashMap;

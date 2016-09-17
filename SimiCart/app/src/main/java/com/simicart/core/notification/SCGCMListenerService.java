@@ -62,8 +62,8 @@ public class SCGCMListenerService extends GcmListenerService {
 
     private void makeNotification(NotificationEntity notificationEntity) {
         Intent intent = new Intent(this, SplashActivity.class);
-        if(notificationEntity.isShowPopup()){
-            intent.putExtra("NOTIFICATION_DATA",notificationEntity);
+        if (notificationEntity.isShowPopup()) {
+            intent.putExtra("NOTIFICATION_DATA", notificationEntity);
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,

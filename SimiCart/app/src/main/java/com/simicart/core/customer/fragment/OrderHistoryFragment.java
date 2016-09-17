@@ -14,39 +14,39 @@ import com.simicart.core.customer.controller.OrderHistoryController;
 
 public class OrderHistoryFragment extends SimiFragment {
 
-	protected OrderHistoryBlock mBlock;
-	protected OrderHistoryController mController;
+    protected OrderHistoryBlock mBlock;
+    protected OrderHistoryController mController;
 
-	public static OrderHistoryFragment newInstance() {
-		OrderHistoryFragment fragment = new OrderHistoryFragment();
-		return fragment;
-	}
+    public static OrderHistoryFragment newInstance() {
+        OrderHistoryFragment fragment = new OrderHistoryFragment();
+        return fragment;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		setScreenName("Order History Screen");
-		rootView = inflater.inflate(
-				Rconfig.getInstance().layout("core_fragment_order_history"),
-				container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        setScreenName("Order History Screen");
+        rootView = inflater.inflate(
+                Rconfig.getInstance().layout("core_fragment_order_history"),
+                container, false);
 
-		Context context = getActivity();
-		SimiManager.getIntance().setChildFragment(getChildFragmentManager());
-		mBlock = new OrderHistoryBlock(rootView, context);
-		mBlock.initView();
+        Context context = getActivity();
+        SimiManager.getIntance().setChildFragment(getChildFragmentManager());
+        mBlock = new OrderHistoryBlock(rootView, context);
+        mBlock.initView();
 
-		if (null == mController) {
-			mController = new OrderHistoryController();
-			mController.setDelegate(mBlock);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
+        if (null == mController) {
+            mController = new OrderHistoryController();
+            mController.setDelegate(mBlock);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.onResume();
+        }
 
-		mBlock.setScrollListener(mController.getScrollListener());
+        mBlock.setScrollListener(mController.getScrollListener());
 
-		return rootView;
-	}
+        return rootView;
+    }
 
 }

@@ -42,16 +42,16 @@ public class ItemWishList extends SimiEntity {
         return share_mes;
     }
 
+    public void setShare_mes(String share_mes) {
+        this.share_mes = share_mes;
+    }
+
     public String getShare_url() {
         return share_url;
     }
 
     public void setShare_url(String share_url) {
         this.share_url = share_url;
-    }
-
-    public void setShare_mes(String share_mes) {
-        this.share_mes = share_mes;
     }
 
     public String getProduct_id() {

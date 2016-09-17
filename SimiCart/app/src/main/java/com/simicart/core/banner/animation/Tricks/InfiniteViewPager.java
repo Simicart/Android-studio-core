@@ -33,7 +33,8 @@ public class InfiniteViewPager extends ViewPagerEx {
         super.setCurrentItem(item);
 
     }
-    public void nextItem(){
+
+    public void nextItem() {
         super.setCurrentItem(getCurrentItem() + 1);
     }
 

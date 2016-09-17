@@ -18,11 +18,11 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
-import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
@@ -57,9 +57,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         final Category category = listCategories.get(position);
 
         String cateName = category.getCategoryName();
-        if(Utils.validateString(cateName)) {
+        if (Utils.validateString(cateName)) {
             holder.tv_name.setText(cateName);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 holder.tv_name.setGravity(Gravity.RIGHT);
             }
         }
@@ -88,7 +88,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.rl_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(category.hasChild()) {
+                if (category.hasChild()) {
                     if (DataLocal.isTablet) {
                         SimiManager.getIntance().openSubCategory(category.getCategoryId(), category.getCategoryName());
                     } else {
@@ -100,10 +100,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                         SimiManager.getIntance().replaceFragment(categoryFragment);
                     }
                 } else {
-                    HashMap<String,Object> hm = new HashMap<>();
+                    HashMap<String, Object> hm = new HashMap<>();
                     hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
-                    hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME,category.getCategoryName());
-                    hm.put(KeyData.CATEGORY_DETAIL.CATE_ID,category.getCategoryId());
+                    hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, category.getCategoryName());
+                    hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, category.getCategoryId());
                     SimiManager.getIntance().openCategoryDetail(hm);
                 }
             }

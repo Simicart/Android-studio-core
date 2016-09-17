@@ -21,91 +21,91 @@ import com.simicart.core.customer.delegate.ForgotPasswordDelegate;
 
 @SuppressLint("DefaultLocale")
 public class ForgotPasswordBlock extends SimiBlock implements
-		ForgotPasswordDelegate {
+        ForgotPasswordDelegate {
 
-	protected AppCompatButton btn_Send;
-	protected EditText edt_Email;
-	private TextView lable_email;
+    protected AppCompatButton btn_Send;
+    protected EditText edt_Email;
+    private TextView lable_email;
 
-	public ForgotPasswordBlock(View view, Context context) {
-		super(view, context);
-		// TODO Auto-generated constructor stub
-	}
+    public ForgotPasswordBlock(View view, Context context) {
+        super(view, context);
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setOnClicker(OnClickListener clicker) {
-		btn_Send.setOnClickListener(clicker);
-	}
+    public void setOnClicker(OnClickListener clicker) {
+        btn_Send.setOnClickListener(clicker);
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public void initView() {
-		lable_email = (TextView) mView.findViewById(Rconfig
-				.getInstance().id("lable_email"));
-		lable_email.setTextColor(Color.GRAY);
-		lable_email.setText(SimiTranslator.getInstance().translate("Enter Your Email")
-				.toUpperCase()
-				+ ":");
+    @SuppressWarnings("deprecation")
+    @Override
+    public void initView() {
+        lable_email = (TextView) mView.findViewById(Rconfig
+                .getInstance().id("lable_email"));
+        lable_email.setTextColor(Color.GRAY);
+        lable_email.setText(SimiTranslator.getInstance().translate("Enter Your Email")
+                .toUpperCase()
+                + ":");
 
-		// button sent
-		btn_Send = (AppCompatButton) mView.findViewById(Rconfig.getInstance().id(
-				"bt_send"));
-		btn_Send.setText(SimiTranslator.getInstance().translate("Reset my password"));
-		btn_Send.setTextColor(Color.WHITE);
-		btn_Send.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground(Color.GRAY));
-		btn_Send.setTextSize(Constants.SIZE_TEXT_BUTTON);
-		btn_Send.setClickable(false);
+        // button sent
+        btn_Send = (AppCompatButton) mView.findViewById(Rconfig.getInstance().id(
+                "bt_send"));
+        btn_Send.setText(SimiTranslator.getInstance().translate("Reset my password"));
+        btn_Send.setTextColor(Color.WHITE);
+        btn_Send.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground(Color.GRAY));
+        btn_Send.setTextSize(Constants.SIZE_TEXT_BUTTON);
+        btn_Send.setClickable(false);
 
-		// Email Field
-		initEmail();
-		
-		lable_email.setTextColor(AppColorConfig.getInstance().getContentColor());
-		edt_Email.setTextColor(AppColorConfig.getInstance().getContentColor());
-	}
+        // Email Field
+        initEmail();
 
-	private void initEmail() {
-		edt_Email = (EditText) mView.findViewById(Rconfig.getInstance().id(
-				"et_email"));
-		edt_Email.setHint(SimiTranslator.getInstance().translate("Email"));
-		edt_Email.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        lable_email.setTextColor(AppColorConfig.getInstance().getContentColor());
+        edt_Email.setTextColor(AppColorConfig.getInstance().getContentColor());
+    }
 
-			}
+    private void initEmail() {
+        edt_Email = (EditText) mView.findViewById(Rconfig.getInstance().id(
+                "et_email"));
+        edt_Email.setHint(SimiTranslator.getInstance().translate("Email"));
+        edt_Email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
-			}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-			@Override
-			public void afterTextChanged(Editable s) {
-				validateEmail();
-			}
-		});
-	}
+            }
 
-	private boolean isValidEmail(String email) {
-		return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-	}
+            @Override
+            public void afterTextChanged(Editable s) {
+                validateEmail();
+            }
+        });
+    }
 
-	private boolean validateEmail() {
-		String email = edt_Email.getText().toString().trim();
+    private boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
-		if (email.isEmpty() || !isValidEmail(email)) {
-			btn_Send.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground(Color.GRAY));
-			btn_Send.setClickable(false);
-			return false;
-		} else {
-			btn_Send.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
-			btn_Send.setClickable(true);
-		}
+    private boolean validateEmail() {
+        String email = edt_Email.getText().toString().trim();
 
-		return true;
-	}
+        if (email.isEmpty() || !isValidEmail(email)) {
+            btn_Send.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground(Color.GRAY));
+            btn_Send.setClickable(false);
+            return false;
+        } else {
+            btn_Send.setSupportBackgroundTintList(AppColorConfig.getInstance().getButtonBackground());
+            btn_Send.setClickable(true);
+        }
 
-	@Override
-	public String getEmail() {
-		return edt_Email.getText().toString();
-	}
+        return true;
+    }
+
+    @Override
+    public String getEmail() {
+        return edt_Email.getText().toString();
+    }
 
 }

@@ -10,13 +10,10 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -130,22 +127,6 @@ public class AddressAutoFillFragment extends SimiFragment {
         return rootView;
     }
 
-    public class InitMapAsync extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            getMap();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            map = new SupportMapFragment();
-            getChildFragmentManager().beginTransaction().replace(Rconfig.getInstance().getIdLayout("address_frame_map"), map).commit();
-
-            return null;
-        }
-    }
-
     public void getMap() {
         map.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -210,23 +191,6 @@ public class AddressAutoFillFragment extends SimiFragment {
                 .addApi(LocationServices.API)
                 .build();
         mGoogleApiClient.connect();
-    }
-
-    public class LocationAsync extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            getAddressFromLocation();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            pd_loading.dismiss();
-            if (returnedAddress != null) {
-                showPickedAddress();
-            }
-        }
     }
 
     public void getAddressFromLocation() {
@@ -373,22 +337,22 @@ public class AddressAutoFillFragment extends SimiFragment {
             if (object.has("types")) {
                 JSONArray typesArr = object.getJSONArray("types");
                 String formattedAddress = null;
-                if(object.has("formatted_address")) {
+                if (object.has("formatted_address")) {
                     formattedAddress = object.getString("formatted_address");
                 }
-                if(typesArr.length() > 0 && formattedAddress != null) {
+                if (typesArr.length() > 0 && formattedAddress != null) {
                     String type = typesArr.getString(0);
-                    if(type.equals("street_address") || type.equals("route")) {
+                    if (type.equals("street_address") || type.equals("route")) {
                         address.setAddressLine(0, formattedAddress);
-                        if(object.has("address_components")) {
+                        if (object.has("address_components")) {
                             JSONArray componentsArr = object.getJSONArray("address_components");
-                            for(int i=0;i<componentsArr.length();i++) {
+                            for (int i = 0; i < componentsArr.length(); i++) {
                                 JSONObject component = componentsArr.getJSONObject(i);
-                                if(component.has("types")) {
+                                if (component.has("types")) {
                                     JSONArray arr = component.getJSONArray("types");
-                                    if(arr.length() > 0) {
+                                    if (arr.length() > 0) {
                                         String componentType = arr.getString(0);
-                                        if(componentType.equals("country")) {
+                                        if (componentType.equals("country")) {
                                             if (component.has("short_name")) {
                                                 address.setCountryCode(component.getString("short_name"));
                                                 break;
@@ -398,9 +362,9 @@ public class AddressAutoFillFragment extends SimiFragment {
                                 }
                             }
                         }
-                    } else if(type.equals("postal_code")) {
+                    } else if (type.equals("postal_code")) {
                         address.setPostalCode(getOnlyNumberics(formattedAddress));
-                    } else if(type.equals("administrative_area_level_1")) {
+                    } else if (type.equals("administrative_area_level_1")) {
                         String[] addressSplited = formattedAddress.split(", ");
                         address.setAdminArea(addressSplited[0]);
                     }
@@ -420,7 +384,7 @@ public class AddressAutoFillFragment extends SimiFragment {
         StringBuffer strBuff = new StringBuffer();
         char c;
 
-        for (int i = 0; i < str.length() ; i++) {
+        for (int i = 0; i < str.length(); i++) {
             c = str.charAt(i);
 
             if (Character.isDigit(c)) {
@@ -428,6 +392,39 @@ public class AddressAutoFillFragment extends SimiFragment {
             }
         }
         return strBuff.toString();
+    }
+
+    public class InitMapAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            getMap();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            map = new SupportMapFragment();
+            getChildFragmentManager().beginTransaction().replace(Rconfig.getInstance().getIdLayout("address_frame_map"), map).commit();
+
+            return null;
+        }
+    }
+
+    public class LocationAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            getAddressFromLocation();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            pd_loading.dismiss();
+            if (returnedAddress != null) {
+                showPickedAddress();
+            }
+        }
     }
 
 }

@@ -19,7 +19,7 @@ import com.simicart.core.shortcutbadger.impl.SonyHomeBadger;
  * Created with IntelliJ IDEA.
  * User: leolin
  * Date: 2013/11/14
- * 
+ * <p/>
  * To change this template use File | Settings | File Templates.
  */
 public abstract class ShortcutBadger {
@@ -38,17 +38,14 @@ public abstract class ShortcutBadger {
 
     private static final int MIN_BADGE_COUNT = 0;
     private static final int MAX_BADGE_COUNT = 99;
+    protected Context mContext;
 
     private ShortcutBadger() {
     }
 
-    protected Context mContext;
-
     protected ShortcutBadger(Context context) {
         this.mContext = context;
     }
-
-    protected abstract void executeBadge(int badgeCount) throws ShortcutBadgeException;
 
     public static void setBadge(Context context, int badgeCount) throws ShortcutBadgeException {
         //badgeCount should between 0 to 99
@@ -97,6 +94,8 @@ public abstract class ShortcutBadger {
         }
 
     }
+
+    protected abstract void executeBadge(int badgeCount) throws ShortcutBadgeException;
 
     protected String getEntryActivityName() {
         ComponentName componentName = mContext.getPackageManager().getLaunchIntentForPackage(mContext.getPackageName()).getComponent();

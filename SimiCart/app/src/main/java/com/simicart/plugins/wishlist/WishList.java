@@ -1,16 +1,12 @@
 package com.simicart.plugins.wishlist;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,7 +15,6 @@ import com.simicart.core.base.component.SimiMenuRowComponent;
 import com.simicart.core.base.component.callback.MenuRowCallBack;
 import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.block.ProductMorePluginBlock;
@@ -30,7 +25,6 @@ import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.delegate.MyAccountDelegate;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
 import com.simicart.core.style.material.floatingactionbutton.FloatingActionButton;
 import com.simicart.core.style.material.floatingactionbutton.FloatingActionsMenu;
@@ -46,10 +40,10 @@ import java.util.HashMap;
 
 public class WishList {
     public static final String MY_WISHLIST = "My WishList";
-    public String MY_WISH_LIST = WishListConstants.MY_WISHLIST;
     public static String MY_WISH_LIST_OLD = WishListConstants.MY_WISHLIST;
     public static ButtonAddWishList bt_addWish;
     public static String product_ID = "";
+    public String MY_WISH_LIST = WishListConstants.MY_WISHLIST;
     protected ArrayList<ItemNavigation> mItems;
     protected TextView tv_qtyWishList;
     protected Context mContext;
@@ -67,7 +61,7 @@ public class WishList {
                 SimiData data = bundle.getParcelable("entity");
                 mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
                 mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
-                if(isExistWishList() == false) {
+                if (isExistWishList() == false) {
                     addItemToSlideMenu();
                 }
             }

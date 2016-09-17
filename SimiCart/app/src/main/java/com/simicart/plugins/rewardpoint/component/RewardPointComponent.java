@@ -37,7 +37,7 @@ public class RewardPointComponent extends SimiComponent {
     protected TextView tvTitle, tvLabel, tvMin, tvSpending, tvMax;
     protected AppCompatSeekBar sbSpending;
     protected String pointStepLabel, pointStepDiscount;
-    protected int maxPoints, minPoint ,loyalty_spend , point_step, loy_spend;
+    protected int maxPoints, minPoint, loyalty_spend, point_step, loy_spend;
     protected ArrayList<SimiComponent> listComponents;
     protected ProgressDialog pd_loading;
 
@@ -127,10 +127,10 @@ public class RewardPointComponent extends SimiComponent {
 
                 ReviewOrderEntity reviewOrderEntity = null;
                 ArrayList<SimiEntity> entities = collection.getCollection();
-                if(null != entities && entities.size() >0){
+                if (null != entities && entities.size() > 0) {
                     reviewOrderEntity = (ReviewOrderEntity) entities.get(0);
                 }
-                if(null != reviewOrderEntity) {
+                if (null != reviewOrderEntity) {
                     for (SimiComponent component : listComponents) {
                         if (component instanceof PaymentMethodComponent) {
                             ((PaymentMethodComponent) component).setListPaymentMethod(reviewOrderEntity.getListPaymentMethod());

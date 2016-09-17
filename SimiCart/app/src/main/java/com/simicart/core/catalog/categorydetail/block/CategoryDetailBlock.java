@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -129,11 +128,6 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     }
 
     @Override
-    public void setTagView(String tagView) {
-        this.tagView = tagView;
-    }
-
-    @Override
     public void showLoadMore(boolean isShow) {
         if (isShow == true) {
             pbLoadMore.setVisibility(View.VISIBLE);
@@ -184,6 +178,11 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     @Override
     public String getTagView() {
         return tagView;
+    }
+
+    @Override
+    public void setTagView(String tagView) {
+        this.tagView = tagView;
     }
 
     @Override

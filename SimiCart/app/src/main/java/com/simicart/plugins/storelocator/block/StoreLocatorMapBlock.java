@@ -22,13 +22,11 @@ import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.simicart.core.base.block.SimiBlock;
-import com.simicart.core.base.drawImage.SimiDrawImage;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
@@ -75,22 +73,6 @@ public class StoreLocatorMapBlock extends SimiBlock implements StoreLocatorMapDe
 
         new InitMapAsync().execute();
 
-    }
-
-    public class InitMapAsync extends AsyncTask<Void,Void,Void> {
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            getMap();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            map = new SupportMapFragment();
-            childFragmentManager.beginTransaction().replace(Rconfig.getInstance().getIdLayout("frame_map"), map).commit();
-
-            return null;
-        }
     }
 
     public void getMap() {
@@ -349,5 +331,21 @@ public class StoreLocatorMapBlock extends SimiBlock implements StoreLocatorMapDe
 
     public void setChildFragmentManager(FragmentManager childFragmentManager) {
         this.childFragmentManager = childFragmentManager;
+    }
+
+    public class InitMapAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            getMap();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            map = new SupportMapFragment();
+            childFragmentManager.beginTransaction().replace(Rconfig.getInstance().getIdLayout("frame_map"), map).commit();
+
+            return null;
+        }
     }
 }

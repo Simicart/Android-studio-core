@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 public interface DependOptionDelegate {
 
-	public void onReceiveDependOption(ArrayList<String> dependence_options);
+    public void onReceiveDependOption(ArrayList<String> dependence_options);
 }

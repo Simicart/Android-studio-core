@@ -7,43 +7,40 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class SimiCollection {
-	protected  ArrayList<SimiEntity> list = new ArrayList<>();
-	protected JSONObject mJSON;
-	protected JSONObject mJSONOther;
-	
-	
-	
-	public JSONObject getJSONOther() {
-		return mJSONOther;
-	}
+    protected ArrayList<SimiEntity> list = new ArrayList<>();
+    protected JSONObject mJSON;
+    protected JSONObject mJSONOther;
 
-	public void setJSONOther(JSONObject mJSONOther) {
-		this.mJSONOther = mJSONOther;
-	}
 
-	public void setJSON(JSONObject json)
-	{
-		mJSON = json;
-	}
-	
-	public JSONObject getJSON()
-	{
-		return mJSON;
-	}
+    public JSONObject getJSONOther() {
+        return mJSONOther;
+    }
 
-	public void addEntity(SimiEntity entity) {
-		this.list.add(entity);
-	}
+    public void setJSONOther(JSONObject mJSONOther) {
+        this.mJSONOther = mJSONOther;
+    }
 
-	public ArrayList<SimiEntity> getCollection() {
-		return this.list;
-	}
-	public void setCollection(ArrayList<SimiEntity> list)
-	{
-		this.list = list;
-	}
+    public JSONObject getJSON() {
+        return mJSON;
+    }
 
-	public SimiEntity loadById(int id) {
-		return this.list.get(id);
-	}
+    public void setJSON(JSONObject json) {
+        mJSON = json;
+    }
+
+    public void addEntity(SimiEntity entity) {
+        this.list.add(entity);
+    }
+
+    public ArrayList<SimiEntity> getCollection() {
+        return this.list;
+    }
+
+    public void setCollection(ArrayList<SimiEntity> list) {
+        this.list = list;
+    }
+
+    public SimiEntity loadById(int id) {
+        return this.list.get(id);
+    }
 }

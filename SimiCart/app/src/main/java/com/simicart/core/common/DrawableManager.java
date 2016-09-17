@@ -202,11 +202,11 @@ public class DrawableManager {
                 Bitmap bitmap = (Bitmap) message.obj;
                 if (bitmap != null) {
                     try {
-                       // Bitmap bMapRotate = Utils.scaleToFill(bitmap, w, h);
+                        // Bitmap bMapRotate = Utils.scaleToFill(bitmap, w, h);
                         imageView.setImageBitmap(bitmap);
                         addBitmapToMemoryCache(urlString, bitmap);
                         bitmap = null;
-                     //   bMapRotate = null;
+                        //   bMapRotate = null;
                     } catch (Exception e) {
 
                     }
@@ -298,7 +298,7 @@ public class DrawableManager {
             }
         };
 
-        getBitmap(handler, urlString,reqWidth,reqHeight);
+        getBitmap(handler, urlString, reqWidth, reqHeight);
     }
 
     public static void getBitmap(final Handler handler, final String urlString, final int reqWidth, final int reqHeight) {

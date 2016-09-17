@@ -36,15 +36,15 @@ public class SimiUrlConnection {
     static boolean isSet = false;
     protected ByteArrayPool mPool = null;
 
-    public void setPool(ByteArrayPool pool) {
-        mPool = pool;
-    }
-
     public SimiUrlConnection() {
         if (!isSet) {
             isSet = true;
             CookieHandler.setDefault(cookieManager);
         }
+    }
+
+    public void setPool(ByteArrayPool pool) {
+        mPool = pool;
     }
 
     public SimiNetworkResponse makeUrlConnection(SimiRequest request) {

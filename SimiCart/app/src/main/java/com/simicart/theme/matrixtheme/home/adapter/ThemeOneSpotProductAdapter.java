@@ -34,7 +34,7 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
     public ThemeOneSpotProductAdapter(ArrayList<OrderProduct> products) {
         mListProduct = products;
         dimension = Utils.SCREEN_WIDTH / 3;
-       // dimension = Utils.toDp(width);
+        // dimension = Utils.toDp(width);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         RelativeLayout.LayoutParams params = null;
-        if(!DataLocal.isTablet) {
+        if (!DataLocal.isTablet) {
             params = new RelativeLayout.LayoutParams(dimension, dimension);
         } else {
             params = new RelativeLayout.LayoutParams(dimension, RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -62,7 +62,7 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
         final OrderProduct product = mListProduct.get(position);
 
         // spot name
-        if(DataLocal.isTablet) {
+        if (DataLocal.isTablet) {
             holder.tvName.setTextSize(14);
         }
         String name = product.getSpotName();
@@ -90,7 +90,7 @@ public class ThemeOneSpotProductAdapter extends RecyclerView.Adapter<ThemeOneSpo
         holder.rltSpotProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,Object> hm = new HashMap<>();
+                HashMap<String, Object> hm = new HashMap<>();
                 hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CUSTOM);
                 hm.put("key", product.getSpotKey());
                 hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, product.getSpotName());

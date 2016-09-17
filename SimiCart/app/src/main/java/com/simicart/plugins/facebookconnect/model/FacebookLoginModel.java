@@ -4,8 +4,8 @@ import com.simicart.core.customer.model.SignInModel;
 
 public class FacebookLoginModel extends SignInModel {
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = "simifblogin/index/login";
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = "simifblogin/index/login";
+    }
 }

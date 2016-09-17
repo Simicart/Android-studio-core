@@ -16,10 +16,10 @@ import com.simicart.core.catalog.categorydetail.component.SortPopup;
 import com.simicart.core.catalog.categorydetail.delegate.CategoryDetailDelegate;
 import com.simicart.core.catalog.categorydetail.delegate.FilterCallBack;
 import com.simicart.core.catalog.categorydetail.delegate.SortCallBack;
-import com.simicart.core.catalog.categorydetail.entity.LayerEntity;
-import com.simicart.core.catalog.categorydetail.model.CategoryDetailModel;
 import com.simicart.core.catalog.categorydetail.entity.FilterEntity;
 import com.simicart.core.catalog.categorydetail.entity.FilterState;
+import com.simicart.core.catalog.categorydetail.entity.LayerEntity;
+import com.simicart.core.catalog.categorydetail.model.CategoryDetailModel;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Constants;
@@ -39,7 +39,7 @@ public class CategoryDetailController extends SimiController {
 
     protected HashMap<String, Object> hmData;
     protected CategoryDetailDelegate mDelegate;
-    protected String mTypeCate ;
+    protected String mTypeCate;
     protected int mOffset = 0;
     protected int mLimit = 8;
     protected int mResultNumber = 0;
@@ -124,7 +124,7 @@ public class CategoryDetailController extends SimiController {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(!DataLocal.isTablet) {
+                if (!DataLocal.isTablet) {
                     if (dy <= 0) {
                         // Scrolling up
                         mDelegate.showBottomMenu(true);
@@ -212,7 +212,7 @@ public class CategoryDetailController extends SimiController {
                 mDelegate.dismissDialogLoading();
                 mDelegate.showLoadMore(false);
                 mResultNumber = ((CategoryDetailModel) mModel).getResultNumber();
-                if(mOffset == 0) {
+                if (mOffset == 0) {
                     mDelegate.showTotalQuantity(String.valueOf(mResultNumber));
                 }
                 mLayerEntity = ((CategoryDetailModel) mModel).getLayerEntity();
@@ -264,7 +264,7 @@ public class CategoryDetailController extends SimiController {
 
     @Override
     public void onResume() {
-        Log.e("CategoryDetailController ","---------------> onRESUME ");
+        Log.e("CategoryDetailController ", "---------------> onRESUME ");
         mDelegate.setTagView(tagView);
         mDelegate.updateView(mModel.getCollection());
     }

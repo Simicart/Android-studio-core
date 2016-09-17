@@ -6,7 +6,6 @@ import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
-import com.simicart.core.catalog.product.delegate.ProductDelegate;
 import com.simicart.core.catalog.product.delegate.ProductDetailAdapterDelegate;
 import com.simicart.core.catalog.product.delegate.ProductDetailChildDelegate;
 import com.simicart.core.catalog.product.entity.Product;

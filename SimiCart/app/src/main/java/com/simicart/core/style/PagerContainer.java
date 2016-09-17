@@ -10,8 +10,10 @@ import android.widget.FrameLayout;
 
 public class PagerContainer extends FrameLayout implements ViewPager.OnPageChangeListener {
 
-    private ViewPager mPager;
     boolean mNeedsRedraw = false;
+    private ViewPager mPager;
+    private Point mCenter = new Point();
+    private Point mInitialTouch = new Point();
 
     public PagerContainer(Context context) {
         super(context);
@@ -52,9 +54,6 @@ public class PagerContainer extends FrameLayout implements ViewPager.OnPageChang
         return mPager;
     }
 
-    private Point mCenter = new Point();
-    private Point mInitialTouch = new Point();
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         mCenter.x = w / 2;
@@ -67,8 +66,8 @@ public class PagerContainer extends FrameLayout implements ViewPager.OnPageChang
         // to implement scrolling from a touch outside the pager bounds.
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                mInitialTouch.x = (int)ev.getX();
-                mInitialTouch.y = (int)ev.getY();
+                mInitialTouch.x = (int) ev.getX();
+                mInitialTouch.y = (int) ev.getY();
             default:
                 ev.offsetLocation(mCenter.x - mInitialTouch.x, mCenter.y - mInitialTouch.y);
                 break;
@@ -85,7 +84,8 @@ public class PagerContainer extends FrameLayout implements ViewPager.OnPageChang
     }
 
     @Override
-    public void onPageSelected(int position) { }
+    public void onPageSelected(int position) {
+    }
 
     @Override
     public void onPageScrollStateChanged(int state) {

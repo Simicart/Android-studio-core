@@ -11,38 +11,38 @@ import com.simicart.plugins.instantcontact.model.ContactUsModel;
 
 public class ContactUsController extends SimiController {
 
-	protected SimiDelegate mDelegate;
+    protected SimiDelegate mDelegate;
 
-	public void setDelegate(SimiDelegate delegate) {
-		mDelegate = delegate;
-	}
+    public void setDelegate(SimiDelegate delegate) {
+        mDelegate = delegate;
+    }
 
-	@Override
-	public void onStart() {
-		mDelegate.showLoading();
-		mModel = new ContactUsModel();
-		mModel.setSuccessListener(new ModelSuccessCallBack() {
-			@Override
-			public void onSuccess(SimiCollection collection) {
-				mDelegate.dismissLoading();
-				mDelegate.updateView(mModel.getCollection());
-			}
-		});
-		mModel.setFailListener(new ModelFailCallBack() {
-			@Override
-			public void onFail(SimiError error) {
-				mDelegate.dismissLoading();
-				SimiNotify.getInstance().showNotify(error.getMessage());
-			}
-		});
-		mModel.request();
+    @Override
+    public void onStart() {
+        mDelegate.showLoading();
+        mModel = new ContactUsModel();
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.dismissLoading();
+                mDelegate.updateView(mModel.getCollection());
+            }
+        });
+        mModel.setFailListener(new ModelFailCallBack() {
+            @Override
+            public void onFail(SimiError error) {
+                mDelegate.dismissLoading();
+                SimiNotify.getInstance().showNotify(error.getMessage());
+            }
+        });
+        mModel.request();
 
-	}
+    }
 
-	@Override
-	public void onResume() {
-		mDelegate.updateView(mModel.getCollection());
-	}
+    @Override
+    public void onResume() {
+        mDelegate.updateView(mModel.getCollection());
+    }
 
 //	protected void makeACall() {
 //		if (!checkTelephonyFeature()) {

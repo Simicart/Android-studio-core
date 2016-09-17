@@ -11,16 +11,14 @@ import com.simicart.core.common.KeyData;
 import com.simicart.core.common.ValueData;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class SimiFragment extends Fragment {
 
+    protected static final String KEY_DATA = "data";
     protected View rootView;
     protected SimiData mData;
     protected HashMap<String, Object> mHashMapData;
     protected String screenName = "";
-
-    protected static final String KEY_DATA = "data";
 
     public static SimiFragment newInstance(SimiData data) {
         SimiFragment fragment = new SimiFragment();
@@ -46,13 +44,13 @@ public class SimiFragment extends Fragment {
         }
     }
 
+    public String getScreenName() {
+        return screenName;
+    }
+
     public void setScreenName(String screenName) {
         this.screenName = screenName;
         dispatchEventAnalytics(screenName);
-    }
-
-    public String getScreenName() {
-        return screenName;
     }
 
     public HashMap<String, Object> getData() {

@@ -18,6 +18,13 @@ public class OptionView {
     protected Context mContext;
     protected CacheOptionSingleDelegate mDelegate;
 
+    public OptionView(ProductOption option, Context context,
+                      CacheOptionSingleDelegate delegate) {
+        mDelegate = delegate;
+        mContext = context;
+        mOptions = option;
+    }
+
     public ProductOption getOptions() {
         return mOptions;
     }
@@ -28,13 +35,6 @@ public class OptionView {
 
     public boolean isCheckedOption() {
         return this.mOptions.isChecked();
-    }
-
-    public OptionView(ProductOption option, Context context,
-                      CacheOptionSingleDelegate delegate) {
-        mDelegate = delegate;
-        mContext = context;
-        mOptions = option;
     }
 
     public View createView() {

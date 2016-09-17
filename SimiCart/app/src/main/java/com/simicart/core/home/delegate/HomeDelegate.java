@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by frank on 17/08/2016.
  */
-public interface HomeDelegate extends SimiDelegate{
+public interface HomeDelegate extends SimiDelegate {
 
     public void showBanner(View bannerView);
 

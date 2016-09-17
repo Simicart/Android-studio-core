@@ -1,20 +1,17 @@
 package com.simicart.core.checkout.component;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.delegate.CouponCodeCallBack;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Rconfig;
 
 /**
  * Created by frank on 6/30/16.

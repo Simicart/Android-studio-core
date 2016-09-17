@@ -10,13 +10,11 @@ import java.io.Serializable;
 public class SimiEventFragmentEntity implements Serializable {
     private SimiFragment mFragment;
 
-    public void setmFragment(SimiFragment fragment)
-    {
+    public void setmFragment(SimiFragment fragment) {
         mFragment = fragment;
     }
 
-    public SimiFragment getFragment()
-    {
+    public SimiFragment getFragment() {
         return mFragment;
     }
 }

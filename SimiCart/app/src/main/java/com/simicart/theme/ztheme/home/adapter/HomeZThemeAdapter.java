@@ -2,6 +2,7 @@ package com.simicart.theme.ztheme.home.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 
-import com.simicart.core.base.drawImage.SimiDrawImage;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
 
@@ -127,6 +128,9 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
         TextView txt_category = (TextView) convertView.findViewById(Rconfig
                 .getInstance().id("tv_name"));
         txt_category.setTextColor(Color.parseColor("#000000"));
+        if (AppStoreConfig.getInstance().isRTL()) {
+            txt_category.setGravity(Gravity.RIGHT);
+        }
         ZThemeCatalogEntity catalogEntity = mCategories.get(groupPosition);
         if (catalogEntity.getType().equals("cat")) {
             Category category = catalogEntity.getCategoryZTheme();
@@ -141,13 +145,13 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    public class ViewHolder {
-        TextView tv_catename;
-        ImageView img_category;
-    }
-
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    public class ViewHolder {
+        TextView tv_catename;
+        ImageView img_category;
     }
 }

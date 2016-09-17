@@ -9,35 +9,35 @@ import org.json.JSONException;
 
 public class CategoryHomeModel extends SimiModel {
 
-	@Override
-	protected void parseData() {
-		try {
-			JSONArray list = this.mJSON.getJSONArray("data");
-			collection = new SimiCollection();
-			for (int i = 0; i < list.length(); i++) {
-				Category category = new Category();
-				category.parse(list.getJSONObject(i));
-				collection.addEntity(category);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+    @Override
+    protected void parseData() {
+        try {
+            JSONArray list = this.mJSON.getJSONArray("data");
+            collection = new SimiCollection();
+            for (int i = 0; i < list.length(); i++) {
+                Category category = new Category();
+                category.parse(list.getJSONObject(i));
+                collection.addEntity(category);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = "simicategory/api/get_categories";
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = "simicategory/api/get_categories";
+    }
 
-	@Override
-	protected void setEnableCache() {
-		this.enableCache = true;
-	}
+    @Override
+    protected void setEnableCache() {
+        this.enableCache = true;
+    }
 
-	@Override
-	protected void setShowNotifi() {
-		super.setShowNotifi();
-		isShowNotify = false;
-	}
+    @Override
+    protected void setShowNotifi() {
+        super.setShowNotifi();
+        isShowNotify = false;
+    }
 }

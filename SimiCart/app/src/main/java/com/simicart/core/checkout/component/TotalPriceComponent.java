@@ -169,14 +169,14 @@ public class TotalPriceComponent extends SimiComponent {
     }
 
     protected void initCustomRow() {
-        HashMap<String,Object> hmData = new HashMap<>();
+        HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(KeyData.TOTAL_PRICE.LIST_ROWS, listRows);
         hmData.put(KeyData.TOTAL_PRICE.JSON_DATA, mTotalEntity.getJSONObject());
         SimiEvent.dispatchEvent(KeyEvent.TOTAL_PRICE_EVENT.TOTAL_PRICE_ADD_ROW, hmData);
     }
 
     protected void showTotalPrice() {
-        for(TableRow row : listRows) {
+        for (TableRow row : listRows) {
             tblPrice.addView(row);
         }
     }
@@ -295,11 +295,11 @@ public class TotalPriceComponent extends SimiComponent {
         initView();
     }
 
-    public void setTotalPrice(TotalPrice totalPrice) {
-        mTotalEntity = totalPrice;
-    }
-
     public TotalPrice getTotalPrice() {
         return mTotalEntity;
+    }
+
+    public void setTotalPrice(TotalPrice totalPrice) {
+        mTotalEntity = totalPrice;
     }
 }

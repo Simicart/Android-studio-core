@@ -12,35 +12,35 @@ import com.simicart.plugins.wishlist.block.MyWistListBlock;
 import com.simicart.plugins.wishlist.controller.MyWishListController;
 
 public class MyWishListFragment extends SimiFragment {
-	protected MyWistListBlock mBlock;
-	protected MyWishListController mController;
+    protected MyWistListBlock mBlock;
+    protected MyWishListController mController;
 
-	public static MyWishListFragment newInstance (){
-		MyWishListFragment fragment = new MyWishListFragment();
-		return fragment;
-	}
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(
-				Rconfig.getInstance().layout("plugins_wishlist_fragment_mywishlist"),
-				container, false);
-		Context context = getActivity();
-		mBlock = new MyWistListBlock(view, context);
-		mBlock.initView();
+    public static MyWishListFragment newInstance() {
+        MyWishListFragment fragment = new MyWishListFragment();
+        return fragment;
+    }
 
-		if (null == mController) {
-			mController = new MyWishListController();
-			mController.setDelegate(mBlock);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
-		
-		mBlock.setShareListener(mController.getShareListener());
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(
+                Rconfig.getInstance().layout("plugins_wishlist_fragment_mywishlist"),
+                container, false);
+        Context context = getActivity();
+        mBlock = new MyWistListBlock(view, context);
+        mBlock.initView();
 
-		return view;
-	}
+        if (null == mController) {
+            mController = new MyWishListController();
+            mController.setDelegate(mBlock);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.onResume();
+        }
+
+        mBlock.setShareListener(mController.getShareListener());
+
+        return view;
+    }
 }

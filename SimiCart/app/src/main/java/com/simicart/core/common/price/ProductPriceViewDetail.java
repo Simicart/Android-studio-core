@@ -10,7 +10,7 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductOption;
-import com.simicart.core.config.DataLocal;
+import com.simicart.core.config.AppStoreConfig;
 
 public class ProductPriceViewDetail extends ProductPriceView {
 
@@ -31,7 +31,7 @@ public class ProductPriceViewDetail extends ProductPriceView {
         ll_price.setOrientation(LinearLayout.VERTICAL);
         LayoutParams params = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             ll_price.setGravity(Gravity.RIGHT);
         } else {
             ll_price.setGravity(Gravity.LEFT);
@@ -61,7 +61,7 @@ public class ProductPriceViewDetail extends ProductPriceView {
         ll_price.setOrientation(LinearLayout.VERTICAL);
         LayoutParams params = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             ll_price.setGravity(Gravity.RIGHT);
         } else {
             ll_price.setGravity(Gravity.LEFT);
@@ -120,7 +120,7 @@ public class ProductPriceViewDetail extends ProductPriceView {
         ll_price.setOrientation(LinearLayout.VERTICAL);
         LayoutParams params = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             ll_price.setGravity(Gravity.RIGHT);
         } else {
             ll_price.setGravity(Gravity.LEFT);
@@ -159,7 +159,7 @@ public class ProductPriceViewDetail extends ProductPriceView {
         ll_price.setOrientation(LinearLayout.VERTICAL);
         LayoutParams params = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             ll_price.setGravity(Gravity.RIGHT);
         } else {
             ll_price.setGravity(Gravity.LEFT);

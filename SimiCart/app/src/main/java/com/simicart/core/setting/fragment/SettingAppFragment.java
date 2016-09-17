@@ -13,37 +13,37 @@ import com.simicart.core.setting.controller.SettingAppController;
 
 public class SettingAppFragment extends SimiFragment {
 
-	protected SettingAppBlock settingAppBlock;
-	protected SettingAppController settingAppController;
-	protected Context mContext;
+    protected SettingAppBlock settingAppBlock;
+    protected SettingAppController settingAppController;
+    protected Context mContext;
 
-	View rootView = null;
+    View rootView = null;
 
-	public static SettingAppFragment newInstance() {
-		SettingAppFragment fragment = new SettingAppFragment();
-		return fragment;
-	}
+    public static SettingAppFragment newInstance() {
+        SettingAppFragment fragment = new SettingAppFragment();
+        return fragment;
+    }
 
-	@Override
-	public View onCreateView(final LayoutInflater inflater,
-			ViewGroup container, Bundle savedInstanceState) {
-		setScreenName("Setting Screen");
-		rootView = inflater.inflate(
-				Rconfig.getInstance().layout("core_setting_layout"), container,
-				false);
+    @Override
+    public View onCreateView(final LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        setScreenName("Setting Screen");
+        rootView = inflater.inflate(
+                Rconfig.getInstance().layout("core_setting_layout"), container,
+                false);
 
-		mContext = getActivity();
-		settingAppBlock = new SettingAppBlock(rootView, mContext);
-		settingAppBlock.initView();
-		if (settingAppController == null) {
-			settingAppController = new SettingAppController();
-			settingAppController.setDelegate(settingAppBlock);
-			settingAppController.onStart();
-		} else {
-			settingAppController.setDelegate(settingAppBlock);
-			settingAppController.onResume();
-		}
+        mContext = getActivity();
+        settingAppBlock = new SettingAppBlock(rootView, mContext);
+        settingAppBlock.initView();
+        if (settingAppController == null) {
+            settingAppController = new SettingAppController();
+            settingAppController.setDelegate(settingAppBlock);
+            settingAppController.onStart();
+        } else {
+            settingAppController.setDelegate(settingAppBlock);
+            settingAppController.onResume();
+        }
 
-		return rootView;
-	}
+        return rootView;
+    }
 }

@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 public class ItemXMLHandler extends DefaultHandler {
 
+    ArrayList<String> mListSKU;
     private Boolean currentElement = false;
     private String currentValue = "";
     private String tags = "event";
     private String currentSKU;
     private String currentFullName;
-    ArrayList<String> mListSKU;
 
 
     public ItemXMLHandler(ArrayList<String> listSKU) {

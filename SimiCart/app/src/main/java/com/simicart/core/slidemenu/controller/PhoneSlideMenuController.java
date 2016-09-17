@@ -18,9 +18,7 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.cms.entity.Cms;
-import com.simicart.core.cms.fragment.CMSFragment;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
@@ -29,7 +27,6 @@ import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.fragment.MyAccountFragment;
 import com.simicart.core.customer.fragment.OrderHistoryFragment;
 import com.simicart.core.customer.fragment.SignInFragment;
-import com.simicart.core.home.fragment.HomeFragment;
 import com.simicart.core.setting.fragment.SettingAppFragment;
 import com.simicart.core.slidemenu.delegate.CloseSlideMenuDelegate;
 import com.simicart.core.slidemenu.delegate.SlideMenuDelegate;
@@ -55,8 +52,15 @@ public class PhoneSlideMenuController {
     protected SlideMenuDelegate mDelegate;
     protected int DEFAULT_POSITION = 0;
     protected CloseSlideMenuDelegate mCloseDelegate;
-    private boolean check_keyboard_first;
     protected ArrayList<ItemNavigation> mItemsAccount;
+    private boolean check_keyboard_first;
+
+    public PhoneSlideMenuController(SlideMenuDelegate delegate, Context context) {
+        mDelegate = delegate;
+        mContext = context;
+        mItems = new ArrayList<ItemNavigation>();
+        mPluginFragment = new HashMap<String, String>();
+    }
 
     public void setCloseDelegate(CloseSlideMenuDelegate delegate) {
         mCloseDelegate = delegate;
@@ -77,13 +81,6 @@ public class PhoneSlideMenuController {
     public void closeSlideMenuTablet() {
         if (mCloseDelegate != null)
             mCloseDelegate.closeSlideMenu();
-    }
-
-    public PhoneSlideMenuController(SlideMenuDelegate delegate, Context context) {
-        mDelegate = delegate;
-        mContext = context;
-        mItems = new ArrayList<ItemNavigation>();
-        mPluginFragment = new HashMap<String, String>();
     }
 
     public void create() {
@@ -232,7 +229,7 @@ public class PhoneSlideMenuController {
 
     public void removeItemRelatedPersonal() {
 
-        if(mItemsAccount != null) {
+        if (mItemsAccount != null) {
             for (ItemNavigation item : mItemsAccount) {
                 int index = checkElement(item.getName());
                 if (index != -1) {
@@ -375,7 +372,7 @@ public class PhoneSlideMenuController {
                         check_keyboard_first = true;
                     } else {
                         // replace for tablet
-                        if(item.isShowPopup()) {
+                        if (item.isShowPopup()) {
                             SimiManager.getIntance().replacePopupFragment(fragment);
                         } else {
                             SimiManager.getIntance().replaceFragment(fragment);
@@ -394,7 +391,7 @@ public class PhoneSlideMenuController {
     public SimiFragment navigateNormal(ItemNavigation item) {
         SimiFragment fragment = null;
         String name = item.getName();
-        HashMap<String,Object> hm = null;
+        HashMap<String, Object> hm = null;
         switch (name) {
             case "Home":
                 //fragment = HomeFragment.newInstance();
@@ -442,7 +439,7 @@ public class PhoneSlideMenuController {
         for (Cms cms : DataLocal.listCms) {
             if (name.equals(cms.getTitle())) {
                 String content = cms.getContent();
-                HashMap<String,Object> hm = new HashMap<>();
+                HashMap<String, Object> hm = new HashMap<>();
                 hm.put(KeyData.CMS_PAGE.CONTENT, content);
                 SimiManager.getIntance().openCMSPage(hm);
             }

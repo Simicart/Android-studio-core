@@ -14,32 +14,32 @@ import javax.xml.parsers.SAXParserFactory;
 
 public class ReadXMLLanguage {
 
-	private Context mContext;
-	private LanguageXMLHandler mHandler;
+    private Context mContext;
+    private LanguageXMLHandler mHandler;
 
-	public ReadXMLLanguage(Context context) {
-		this.mContext = context;
-	}
+    public ReadXMLLanguage(Context context) {
+        this.mContext = context;
+    }
 
-	public void parseXML(String filename) {
-		SAXParserFactory spf = SAXParserFactory.newInstance();
-		SAXParser sp;
-		XMLReader xr;
-		AssetManager assetManager = mContext.getAssets();
-		try {
-			InputStream inputStream = assetManager.open(filename);
-			InputSource inStream = new InputSource(inputStream);
-			sp = spf.newSAXParser();
-			xr = sp.getXMLReader();
-			mHandler = new LanguageXMLHandler();
-			xr.setContentHandler(mHandler);
-			xr.parse(inStream);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    public void parseXML(String filename) {
+        SAXParserFactory spf = SAXParserFactory.newInstance();
+        SAXParser sp;
+        XMLReader xr;
+        AssetManager assetManager = mContext.getAssets();
+        try {
+            InputStream inputStream = assetManager.open(filename);
+            InputSource inStream = new InputSource(inputStream);
+            sp = spf.newSAXParser();
+            xr = sp.getXMLReader();
+            mHandler = new LanguageXMLHandler();
+            xr.setContentHandler(mHandler);
+            xr.parse(inStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	public Map<String, String> getLanguages() {
-		return mHandler.getLanguages();
-	}
+    public Map<String, String> getLanguages() {
+        return mHandler.getLanguages();
+    }
 }

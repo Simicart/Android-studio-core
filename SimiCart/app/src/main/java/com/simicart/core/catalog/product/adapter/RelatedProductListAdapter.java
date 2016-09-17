@@ -22,20 +22,19 @@ import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
 
 public class RelatedProductListAdapter extends BaseAdapter {
 
-    protected ArrayList<Product> mProducts;
-    protected Context mContext;
-    protected String mTypeProduct;
     public String PRODUCT_PRICE_TYPE_1 = "simple_virtual";
     public String PRODUCT_PRICE_TYPE_2 = "bundle";
     public String PRODUCT_PRICE_TYPE_3 = "grouped";
     public String PRODUCT_PRICE_TYPE_4 = "configurable";
+    protected ArrayList<Product> mProducts;
+    protected Context mContext;
+    protected String mTypeProduct;
 
     public RelatedProductListAdapter(Context context, ArrayList<Product> ProductList) {
         mContext = context;
@@ -91,7 +90,7 @@ public class RelatedProductListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             holder.txtName.setGravity(Gravity.RIGHT);
         }
         holder.tv_special_price.setVisibility(View.VISIBLE);
@@ -151,17 +150,6 @@ public class RelatedProductListAdapter extends BaseAdapter {
 //        eventBlock.dispatchEvent("com.simicart.image.product.list",
 //                rl_product_list, product);
         return convertView;
-    }
-
-    static class ViewHolder {
-        ImageView imageView;
-        TextView txtName;
-        LinearLayout layoutStock;
-        TextView txt_outstock;
-        LinearLayout ll_price;
-        TextView tv_regular_price;
-        TextView tv_special_price;
-        TextView tv_minimal_price;
     }
 
     @Override
@@ -325,5 +313,16 @@ public class RelatedProductListAdapter extends BaseAdapter {
     protected String getHtmlForSpecialPrice(float price) {
         return "<font color='" + AppColorConfig.getInstance().getSpecialPriceColor()
                 + "'>" + AppStoreConfig.getInstance().getPrice("" + price) + "</font>";
+    }
+
+    static class ViewHolder {
+        ImageView imageView;
+        TextView txtName;
+        LinearLayout layoutStock;
+        TextView txt_outstock;
+        LinearLayout ll_price;
+        TextView tv_regular_price;
+        TextView tv_special_price;
+        TextView tv_minimal_price;
     }
 }

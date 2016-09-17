@@ -14,11 +14,9 @@ import java.util.ArrayList;
 public class ShippingMethodModel extends SimiModel {
 
     protected TotalPrice mTotalPrice;
-
-    private ArrayList<PaymentMethodEntity> mListPaymentMethod;
-
     protected String PAYMENT_METHOD_LIST = "payment_method_list";
     protected String FEE = "fee";
+    private ArrayList<PaymentMethodEntity> mListPaymentMethod;
 
     @Override
     protected void parseData() {

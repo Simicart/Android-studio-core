@@ -26,7 +26,7 @@ public class ReviewOrderModel extends SimiModel {
                 collection.addEntity(reviewOrderEntity);
             }
         } catch (JSONException e) {
-            Log.e("ReviewOrderModel ","parse DATA " + e.getMessage());
+            Log.e("ReviewOrderModel ", "parse DATA " + e.getMessage());
         }
     }
 

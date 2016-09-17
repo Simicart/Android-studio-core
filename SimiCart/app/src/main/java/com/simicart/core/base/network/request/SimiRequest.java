@@ -15,26 +15,6 @@ import java.util.Map.Entry;
 
 public class SimiRequest implements Comparable<SimiRequest> {
 
-    public interface Method {
-        int GET = 0;
-        int POST = 1;
-        int PUT = 2;
-        int DELETE = 3;
-        int HEAD = 4;
-        int OPTIONS = 5;
-        int TRACE = 6;
-        int PATCH = 7;
-    }
-
-    public enum Priority {
-        LOW, NORMAL, HIGH, IMMEDIATE
-    }
-
-    public interface TYPEREQUEST {
-        int HTTPCLIENT = 0;
-        int URL = 1;
-    }
-
     protected int mTypeMethod = Method.POST;
     protected int mTypeRequest = TYPEREQUEST.URL;
     protected String mUrl;
@@ -52,18 +32,15 @@ public class SimiRequest implements Comparable<SimiRequest> {
     protected boolean isCloud;
     protected boolean isRedirect;
     protected String mUrlRedirect;
-
     public SimiRequest(String url, RequestCallBack delegate) {
         mUrl = url;
         mCallBack = delegate;
         mHashMapBody = new HashMap<>();
     }
-
     public SimiRequest(String url, RequestCallBack delegate, int typeMethod) {
         this(url, delegate);
         mTypeMethod = typeMethod;
     }
-
     public SimiRequest(String url, RequestCallBack delegate, int typeMethod,
                        int typeRequest) {
         this(url, delegate, typeMethod);
@@ -114,7 +91,7 @@ public class SimiRequest implements Comparable<SimiRequest> {
 
     public String getUrl() {
         String baseUrl = Config.getInstance().getBaseUrl();
-        if(isCloud){
+        if (isCloud) {
             baseUrl = Config.getInstance().getBaseCloudUrl();
         }
         String fullUrl = baseUrl + mUrl;
@@ -123,10 +100,6 @@ public class SimiRequest implements Comparable<SimiRequest> {
 
     public void setUrl(String mUrl) {
         this.mUrl = mUrl;
-    }
-
-    public void setCacheKey(String cacheKey) {
-        mCacheKey = cacheKey;
     }
 
     public String getCacheKey() {
@@ -138,13 +111,17 @@ public class SimiRequest implements Comparable<SimiRequest> {
         return mCacheKey;
     }
 
+    public void setCacheKey(String cacheKey) {
+        mCacheKey = cacheKey;
+    }
+
     public String getCacheKeyForSaveResponse() {
         return mCacheKey;
     }
 
     protected void prepareRequest() {
         try {
-            if(null == mJsonBody){
+            if (null == mJsonBody) {
                 mJsonBody = new JSONObject();
             }
 
@@ -184,7 +161,6 @@ public class SimiRequest implements Comparable<SimiRequest> {
     public void setPriority(Priority priority) {
         mCurrentPriority = priority;
     }
-
 
     public void setShouldCache(boolean should_cache) {
         mShouldCache = should_cache;
@@ -244,28 +220,28 @@ public class SimiRequest implements Comparable<SimiRequest> {
         mHeader = header;
     }
 
-    public void setCloud(boolean is_cloud) {
-        isCloud = is_cloud;
-    }
-
     public boolean isCloud() {
         return isCloud;
     }
 
-    public void setRedirect(boolean is_redirect) {
-        isRedirect = is_redirect;
+    public void setCloud(boolean is_cloud) {
+        isCloud = is_cloud;
     }
 
     public boolean isRedirect() {
         return this.isRedirect;
     }
 
-    public void setUrlRedirect(String urlRedirect) {
-        mUrlRedirect = urlRedirect;
+    public void setRedirect(boolean is_redirect) {
+        isRedirect = is_redirect;
     }
 
     public String getUrlRedirect() {
         return this.mUrlRedirect;
+    }
+
+    public void setUrlRedirect(String urlRedirect) {
+        mUrlRedirect = urlRedirect;
     }
 
     @Override
@@ -276,6 +252,26 @@ public class SimiRequest implements Comparable<SimiRequest> {
         int tmp2 = right.ordinal() - left.ordinal();
         int result = left == right ? tmp1 : tmp2;
         return result;
+    }
+
+    public enum Priority {
+        LOW, NORMAL, HIGH, IMMEDIATE
+    }
+
+    public interface Method {
+        int GET = 0;
+        int POST = 1;
+        int PUT = 2;
+        int DELETE = 3;
+        int HEAD = 4;
+        int OPTIONS = 5;
+        int TRACE = 6;
+        int PATCH = 7;
+    }
+
+    public interface TYPEREQUEST {
+        int HTTPCLIENT = 0;
+        int URL = 1;
     }
 
 }

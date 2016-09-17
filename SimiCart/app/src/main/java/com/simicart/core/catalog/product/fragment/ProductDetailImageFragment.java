@@ -23,12 +23,8 @@ import com.simicart.core.style.TouchImageViewTwo;
 
 @SuppressLint("ClickableViewAccessibility")
 public class ProductDetailImageFragment extends SimiFragment {
-    private String mURL;
     protected ProductDetailParentController mParentController;
-
-    public void setDelegate(ProductDetailParentController delegate) {
-        mParentController = delegate;
-    }
+    private String mURL;
 
     public static ProductDetailImageFragment newInstance(SimiData data) {
         ProductDetailImageFragment fragment = new ProductDetailImageFragment();
@@ -36,6 +32,10 @@ public class ProductDetailImageFragment extends SimiFragment {
         bundle.putParcelable("data", data);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    public void setDelegate(ProductDetailParentController delegate) {
+        mParentController = delegate;
     }
 
     @Override

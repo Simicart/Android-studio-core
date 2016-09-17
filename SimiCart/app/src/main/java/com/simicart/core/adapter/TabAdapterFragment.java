@@ -20,85 +20,85 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TabAdapterFragment extends FragmentStatePagerAdapter {
-	protected Product mProduct;
-	protected ArrayList<SimiFragment> mListFragment;
-	protected ArrayList<String> mListTitle;
+    protected Product mProduct;
+    protected ArrayList<SimiFragment> mListFragment;
+    protected ArrayList<String> mListTitle;
 
-	public TabAdapterFragment(FragmentManager fm, Product product) {
-		super(fm);
-		this.mProduct = product;
-		mListFragment = new ArrayList<SimiFragment>();
-		mListTitle = new ArrayList<String>();
-		addFragment();
-		addTitle();
-		EventTabFragment();
-	}
+    public TabAdapterFragment(FragmentManager fm, Product product) {
+        super(fm);
+        this.mProduct = product;
+        mListFragment = new ArrayList<SimiFragment>();
+        mListTitle = new ArrayList<String>();
+        addFragment();
+        addTitle();
+        EventTabFragment();
+    }
 
-	@Override
-	public Fragment getItem(int position) {
-		return mListFragment.get(position);
-	}
+    @Override
+    public Fragment getItem(int position) {
+        return mListFragment.get(position);
+    }
 
-	@Override
-	public int getCount() {
-		return mListFragment.size();
-	}
+    @Override
+    public int getCount() {
+        return mListFragment.size();
+    }
 
-	@Override
-	public CharSequence getPageTitle(int position) {
-		return mListTitle.get(position);
-	}
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mListTitle.get(position);
+    }
 
-	private void addFragment() {
-		HashMap<String,Object> hmData = new HashMap<>();
-		hmData.put(Constants.KeyData.PRODUCT, mProduct);
-		BasicInforFragment fragment_basic = BasicInforFragment.newInstance(new SimiData(hmData));
+    private void addFragment() {
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put(Constants.KeyData.PRODUCT, mProduct);
+        BasicInforFragment fragment_basic = BasicInforFragment.newInstance(new SimiData(hmData));
 //		fragment_basic.setProduct(mProduct);
 
-		mListFragment.add(fragment_basic);
+        mListFragment.add(fragment_basic);
 
-		if (Utils.validateString(mProduct.getDecripition())) {
-			DescriptionFragment fragment_description = DescriptionFragment
-					.newInstance(new SimiData(hmData));
+        if (Utils.validateString(mProduct.getDecripition())) {
+            DescriptionFragment fragment_description = DescriptionFragment
+                    .newInstance(new SimiData(hmData));
 //			fragment_description.setDescription(mProduct.getDecripition());
-			mListFragment.add(fragment_description);
-		}
+            mListFragment.add(fragment_description);
+        }
 
-		if (!mProduct.getAttributes().isEmpty()) {
-			
-			TechSpecsFragment fragment_tech = TechSpecsFragment.newInstance(new SimiData(hmData));
+        if (!mProduct.getAttributes().isEmpty()) {
+
+            TechSpecsFragment fragment_tech = TechSpecsFragment.newInstance(new SimiData(hmData));
 //			fragment_tech.setAttributes(mProduct.getAttributes());
-			mListFragment.add(fragment_tech);
-		}
+            mListFragment.add(fragment_tech);
+        }
 
-		if (mProduct.getRate() > 0 && mProduct.getReviewNumber() > 0) {
-			CustomerReviewFragment fragment_review = CustomerReviewFragment
-					.newInstance(new SimiData(hmData));
-			mListFragment.add(fragment_review);
-		}
+        if (mProduct.getRate() > 0 && mProduct.getReviewNumber() > 0) {
+            CustomerReviewFragment fragment_review = CustomerReviewFragment
+                    .newInstance(new SimiData(hmData));
+            mListFragment.add(fragment_review);
+        }
 
-		RelatedProductFragment fragment_related = RelatedProductFragment
-				.newInstance(new SimiData(hmData));
+        RelatedProductFragment fragment_related = RelatedProductFragment
+                .newInstance(new SimiData(hmData));
 //		fragment_related.setID(mProduct.getId());
-		mListFragment.add(fragment_related);
+        mListFragment.add(fragment_related);
 
-	}
+    }
 
-	private void addTitle() {
-		mListTitle.add(SimiTranslator.getInstance().translate("Basic Info"));
-		if (Utils.validateString(mProduct.getDecripition())) {
-			mListTitle.add(SimiTranslator.getInstance().translate("Description"));
-		}
-		if (!mProduct.getAttributes().isEmpty()) {
-			mListTitle.add(SimiTranslator.getInstance().translate("Tech Specs"));
-		}
-		if (mProduct.getRate() > 0 && mProduct.getReviewNumber() > 0) {
-			mListTitle.add(SimiTranslator.getInstance().translate("Review"));
-		}
-		mListTitle.add(SimiTranslator.getInstance().translate("Related Products"));
-	}
+    private void addTitle() {
+        mListTitle.add(SimiTranslator.getInstance().translate("Basic Info"));
+        if (Utils.validateString(mProduct.getDecripition())) {
+            mListTitle.add(SimiTranslator.getInstance().translate("Description"));
+        }
+        if (!mProduct.getAttributes().isEmpty()) {
+            mListTitle.add(SimiTranslator.getInstance().translate("Tech Specs"));
+        }
+        if (mProduct.getRate() > 0 && mProduct.getReviewNumber() > 0) {
+            mListTitle.add(SimiTranslator.getInstance().translate("Review"));
+        }
+        mListTitle.add(SimiTranslator.getInstance().translate("Related Products"));
+    }
 
-	public void EventTabFragment() {
+    public void EventTabFragment() {
 //		EventBlock event = new EventBlock();
 //		CacheBlock cacheBlock = new CacheBlock();
 //		cacheBlock.setListFragment(mListFragment);
@@ -106,5 +106,5 @@ public class TabAdapterFragment extends FragmentStatePagerAdapter {
 //		cacheBlock.setSimiEntity(mProduct);
 //		event.dispatchEvent("com.simicart.core.adapter.TabAdapterFragment",
 //				cacheBlock);
-	}
+    }
 }

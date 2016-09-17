@@ -10,30 +10,30 @@ import org.json.JSONObject;
 
 public class HomeZThemeModel extends SimiModel {
 
-	@Override
-	protected void parseData() {
-		try {
-			JSONArray array = this.mJSON.getJSONArray("data");
-			collection = new SimiCollection();
-			if (null != array && array.length() > 0) {
-				for (int i = 0; i < array.length(); i++) {
-					JSONObject object = array.getJSONObject(i);
-					ZThemeCatalogEntity ZThemeCatalogEntity = new ZThemeCatalogEntity();
-					ZThemeCatalogEntity.setJSONObject(object);
-					collection.addEntity(ZThemeCatalogEntity);
-				}
-			}
-		} catch (JSONException e) {
-		}
-	}
+    @Override
+    protected void parseData() {
+        try {
+            JSONArray array = this.mJSON.getJSONArray("data");
+            collection = new SimiCollection();
+            if (null != array && array.length() > 0) {
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject object = array.getJSONObject(i);
+                    ZThemeCatalogEntity ZThemeCatalogEntity = new ZThemeCatalogEntity();
+                    ZThemeCatalogEntity.setJSONObject(object);
+                    collection.addEntity(ZThemeCatalogEntity);
+                }
+            }
+        } catch (JSONException e) {
+        }
+    }
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = "ztheme/api/get_banners_and_spot";
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = "ztheme/api/get_banners_and_spot";
+    }
 
-	@Override
-	protected void setEnableCache() {
-		this.enableCache = true;
-	}
+    @Override
+    protected void setEnableCache() {
+        this.enableCache = true;
+    }
 }

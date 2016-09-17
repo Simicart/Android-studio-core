@@ -57,7 +57,7 @@ public class SimiModel {
         if (enableCache) {
             String cache_key = createCacheKey();
             mRequest.setCacheKey(cache_key);
-            Log.e("SimiModel ","GET DATA FROM CACHE FOR " + cache_key);
+            Log.e("SimiModel ", "GET DATA FROM CACHE FOR " + cache_key);
             getDataFromCache();
         } else {
             SimiManager.getIntance().getRequestQueue().add(mRequest);
@@ -194,10 +194,10 @@ public class SimiModel {
         if (null != json) {
             SimiResponse simiResponse = new SimiResponse();
             simiResponse.parse(json.toString());
-            Log.e("SimiModel","----> GET DATA FROM CACHE ");
+            Log.e("SimiModel", "----> GET DATA FROM CACHE ");
             mRequestCallBack.callBack(simiResponse, true);
         } else {
-            Log.e("SimiModel","---->NOT DATA  FROM CACHE" );
+            Log.e("SimiModel", "---->NOT DATA  FROM CACHE");
             SimiManager.getIntance().getRequestQueue().add(mRequest);
         }
     }

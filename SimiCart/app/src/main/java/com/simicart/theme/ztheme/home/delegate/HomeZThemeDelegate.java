@@ -7,6 +7,6 @@ import java.util.ArrayList;
 
 public interface HomeZThemeDelegate extends SimiDelegate {
 
-	public ArrayList<ZThemeCatalogEntity> getListCatalog();
+    public ArrayList<ZThemeCatalogEntity> getListCatalog();
 
 }

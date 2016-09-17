@@ -22,7 +22,6 @@ import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.request.SimiRequestQueue;
 import com.simicart.core.catalog.category.fragment.CategoryFragment;
 import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
-import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.checkout.fragment.ReviewOrderFragment;
 import com.simicart.core.checkout.fragment.ThankyouFragment;
@@ -51,18 +50,17 @@ import java.util.List;
 
 public class SimiManager {
 
+    private static SimiManager instance;
+    protected SimiRequestQueue mRequestQueue;
+    protected boolean isRefreshCart = true;
+    protected int mQtyCartPrevious;
     private Activity mCurrentActivity;
     private FragmentManager mManager;
-    private static SimiManager instance;
     private PhoneSlideMenuController mSlideMenuController;
     private MenuTopController mMenuTopController;
     private FragmentManager mChildFragmentManager;
     private CategorySlideMenuController mCategorySlideMenuController;
     private SlideMenuFragment mSlideMenu;
-
-    protected SimiRequestQueue mRequestQueue;
-    protected boolean isRefreshCart = true;
-    protected int mQtyCartPrevious;
 
 
     private SimiManager() {
@@ -164,6 +162,10 @@ public class SimiManager {
         return mCurrentActivity;
     }
 
+    public void setCurrentActivity(Activity mCurrentActivity) {
+        this.mCurrentActivity = mCurrentActivity;
+    }
+
     public void hideKeyboard() {
         try {
             if (mCurrentActivity != null) {
@@ -175,11 +177,6 @@ public class SimiManager {
         } catch (Exception e) {
         }
     }
-
-    public void setCurrentActivity(Activity mCurrentActivity) {
-        this.mCurrentActivity = mCurrentActivity;
-    }
-
 
     public FragmentManager getManager() {
         return mManager;

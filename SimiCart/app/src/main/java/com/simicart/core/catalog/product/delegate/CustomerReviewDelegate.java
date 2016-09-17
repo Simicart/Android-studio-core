@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public interface CustomerReviewDelegate extends SimiDelegate {
 
-	public void onUpdateHeaderView(ArrayList<Integer> mRatingStar);
+    public void onUpdateHeaderView(ArrayList<Integer> mRatingStar);
 
-	public void addFooterView();
+    public void addFooterView();
 
-	public void removeFooterView();
+    public void removeFooterView();
 }

@@ -5,15 +5,15 @@ import com.simicart.core.config.Constants;
 
 public class PluginModel extends SimiModel {
 
-	@Override
-	protected void parseData() {
-		// TODO Auto-generated method stub
-		super.parseData();
-	}
+    @Override
+    protected void parseData() {
+        // TODO Auto-generated method stub
+        super.parseData();
+    }
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = Constants.GET_LIST_PLUGIN;
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = Constants.GET_LIST_PLUGIN;
+    }
 
 }

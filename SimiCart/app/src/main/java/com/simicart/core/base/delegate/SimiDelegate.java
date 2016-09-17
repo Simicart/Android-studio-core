@@ -4,17 +4,15 @@ import com.simicart.core.base.model.collection.SimiCollection;
 
 public interface SimiDelegate {
 
-	public void showLoading();
+    public void showLoading();
 
-	public void dismissLoading();
+    public void dismissLoading();
 
-	public void showDialogLoading();
+    public void showDialogLoading();
 
-	public void dismissDialogLoading();
+    public void dismissDialogLoading();
 
-	public void updateView(SimiCollection collection);
-	
-	
-	
-	
+    public void updateView(SimiCollection collection);
+
+
 }

@@ -4,66 +4,64 @@ import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.config.Constants;
 
 public class Condition extends SimiEntity {
-	private String mTitle;
-	private String mContent;
-	private String mCheckText;
-	private String mID;
-	private boolean isChecked;
+    protected String TITLE = "title";
+    protected String NAME = "name";
+    private String mTitle;
+    private String mContent;
+    private String mCheckText;
+    private String mID;
+    private boolean isChecked;
 
-	protected String TITLE = "title";
-	protected String NAME = "name";
+    public boolean isChecked() {
+        return isChecked;
+    }
 
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
-	public boolean isChecked() {
-		return isChecked;
-	}
+    public String getCheckText() {
+        if (null == mCheckText) {
+            mCheckText = getData(TITLE);
+        }
+        return mCheckText;
+    }
 
-	public void setChecked(boolean checked) {
-		isChecked = checked;
-	}
+    public void setCheckText(String checkText) {
+        this.mCheckText = checkText;
+    }
 
-	public String getCheckText() {
-		if (null == mCheckText) {
-			mCheckText = getData(TITLE);
-		}
-		return mCheckText;
-	}
+    public String getTitle() {
+        if (null == mTitle) {
+            mTitle = getData(NAME);
+        }
+        return mTitle;
+    }
 
-	public void setCheckText(String checkText) {
-		this.mCheckText = checkText;
-	}
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
 
-	public String getTitle() {
-		if (null == mTitle) {
-			mTitle = getData(NAME);
-		}
-		return mTitle;
-	}
+    public String getContent() {
+        if (null == mContent) {
+            mContent = getData(Constants.CONTENT);
+        }
+        return mContent;
+    }
 
-	public void setTitle(String title) {
-		this.mTitle = title;
-	}
+    public void setContent(String content) {
+        this.mContent = content;
+    }
 
-	public String getContent() {
-		if (null == mContent) {
-			mContent = getData(Constants.CONTENT);
-		}
-		return mContent;
-	}
+    public String getId() {
+        if (null == mID) {
+            mID = getData(Constants.ID);
+        }
+        return mID;
+    }
 
-	public void setContent(String content) {
-		this.mContent = content;
-	}
-
-	public String getId() {
-		if (null == mID) {
-			mID = getData(Constants.ID);
-		}
-		return mID;
-	}
-
-	public void setId(String id) {
-		this.mID = id;
-	}
+    public void setId(String id) {
+        this.mID = id;
+    }
 
 }

@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
-import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.checkout.delegate.TermConditionCallBack;
 import com.simicart.core.checkout.entity.Condition;
 import com.simicart.core.common.Utils;

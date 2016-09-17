@@ -19,7 +19,6 @@ import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.DataLocal;
 
 @SuppressLint("UseValueOf")
 public class TotalPriceView {
@@ -33,26 +32,25 @@ public class TotalPriceView {
     public TotalPriceView() {
     }
 
-    public void setSymbol(String symbol) {
-        mSymbol = symbol;
+    public TotalPriceView(TotalPrice totalPrice) {
+        mTotalPrice = totalPrice;
+        mContext = SimiManager.getIntance().getCurrentActivity();
     }
 
     public String getSymbol() {
         return mSymbol;
     }
 
+    public void setSymbol(String symbol) {
+        mSymbol = symbol;
+    }
+
     public void setColorLabel(String colorLabel) {
         mColorLabel = colorLabel;
     }
 
-
     public void setSizeText(int sizeText) {
         mTextSize = sizeText;
-    }
-
-    public TotalPriceView(TotalPrice totalPrice) {
-        mTotalPrice = totalPrice;
-        mContext = SimiManager.getIntance().getCurrentActivity();
     }
 
     public View getTotalPriceView() {
@@ -165,7 +163,7 @@ public class TotalPriceView {
             }
             TextView tv_label = (TextView) showView(label);
             TextView tv_price = (TextView) showView(price);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_subTotal.addView(tv_price);
                 tbr_subTotal.addView(tv_label);
             } else {
@@ -184,7 +182,7 @@ public class TotalPriceView {
             }
             TextView tv_label = (TextView) showView(label);
             TextView tv_price = (TextView) showView(price);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_subTotal.addView(tv_price);
                 tbr_subTotal.addView(tv_label);
             } else {
@@ -215,7 +213,7 @@ public class TotalPriceView {
 
             TextView tv_label = (TextView) showView(label);
             TextView tv_price = (TextView) showView(price);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_subTotalIncl.addView(tv_price);
                 tbr_subTotalIncl.addView(tv_label);
             } else {
@@ -252,7 +250,7 @@ public class TotalPriceView {
 
             TextView tv_label = (TextView) showView(label);
             TextView tv_price = (TextView) showView(price);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_shippingTotal.addView(tv_price);
                 tbr_shippingTotal.addView(tv_label);
             } else {
@@ -282,7 +280,7 @@ public class TotalPriceView {
                 tv_label.setTypeface(null, Typeface.BOLD);
                 TextView tv_price = (TextView) showView(price);
                 tv_price.setTypeface(null, Typeface.BOLD);
-                if (DataLocal.isLanguageRTL) {
+                if (AppStoreConfig.getInstance().isRTL()) {
                     tbr_shippingTotal.addView(tv_price);
                     tbr_shippingTotal.addView(tv_label);
                 } else {
@@ -318,7 +316,7 @@ public class TotalPriceView {
             }
             TextView tv_label = (TextView) showView(label);
             TextView tv_price = (TextView) showView(price);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_shippingHandlingIncl.addView(tv_price);
                 tbr_shippingHandlingIncl.addView(tv_label);
             } else {
@@ -357,7 +355,7 @@ public class TotalPriceView {
             tv_label.setTypeface(null, Typeface.BOLD);
             TextView tv_price = (TextView) showView(price);
             tv_price.setTypeface(null, Typeface.BOLD);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_grandTotal.addView(tv_price);
                 tbr_grandTotal.addView(tv_label);
             } else {
@@ -390,7 +388,7 @@ public class TotalPriceView {
             tv_label.setTypeface(null, Typeface.BOLD);
             TextView tv_price = (TextView) showView(price);
             tv_price.setTypeface(null, Typeface.BOLD);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_grandTotal.addView(tv_price);
                 tbr_grandTotal.addView(tv_label);
             } else {
@@ -425,7 +423,7 @@ public class TotalPriceView {
             tv_label.setTypeface(null, Typeface.BOLD);
             TextView tv_price = (TextView) showView(price);
             tv_price.setTypeface(null, Typeface.BOLD);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_grandTotalIncl.addView(tv_price);
                 tbr_grandTotalIncl.addView(tv_label);
             } else {
@@ -456,7 +454,7 @@ public class TotalPriceView {
 
             TextView tv_label = (TextView) showView(label);
             TextView tv_price = (TextView) showView(price);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_Tax.addView(tv_price);
                 tbr_Tax.addView(tv_label);
             } else {
@@ -486,7 +484,7 @@ public class TotalPriceView {
 
             TextView tv_label = (TextView) showView(label);
             TextView tv_price = (TextView) showView(price);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tbr_discount.addView(tv_price);
                 tbr_discount.addView(tv_label);
             } else {

@@ -168,14 +168,14 @@ public class NotificationPopup {
     }
 
     protected void openWebview() {
-        Log.e("NotificationPopup ","-----------------> OPEN WEB VIEW ");
+        Log.e("NotificationPopup ", "-----------------> OPEN WEB VIEW ");
         String url = mNotificationEntity.getUrl();
-        Log.e("NotificationPopup ","-----------------> OPEN WEB VIEW URL " + url);
+        Log.e("NotificationPopup ", "-----------------> OPEN WEB VIEW URL " + url);
         if (Utils.validateString(url)) {
             if (!url.contains("http")) {
                 url = "http://" + url;
             }
-            Log.e("NotificationPopup ","-----------------> URL " + url);
+            Log.e("NotificationPopup ", "-----------------> URL " + url);
             HashMap<String, Object> hm = new HashMap<>();
             hm.put(KeyData.WEBVIEW_PAGE.URL, url);
             SimiManager.getIntance().openWebviewPage(hm);

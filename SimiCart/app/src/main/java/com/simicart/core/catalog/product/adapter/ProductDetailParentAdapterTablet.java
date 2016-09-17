@@ -12,61 +12,49 @@ import com.simicart.core.catalog.product.fragment.ProductDetailChildFragment;
 import java.util.ArrayList;
 
 public class ProductDetailParentAdapterTablet extends
-		SmartFragmentStatePagerAdapter implements ProductDetailAdapterDelegate {
+        SmartFragmentStatePagerAdapter implements ProductDetailAdapterDelegate {
 
-	private ProductDelegate productDelegate;
-	
-	public void setProductDelegate(ProductDelegate productDelegate) {
-		this.productDelegate = productDelegate;
-	}
-	
-	
-	public ProductDetailParentAdapterTablet(FragmentManager fragmentManager) {
-		super(fragmentManager);
-	}
-	
+    protected ArrayList<String> mListID;
+    protected String mCurrentID = "";
+    protected ProductDetailParentController mController;
+    private ProductDelegate productDelegate;
+    public ProductDetailParentAdapterTablet(FragmentManager fragmentManager) {
+        super(fragmentManager);
+    }
 
-	protected ArrayList<String> mListID;
-	protected String mCurrentID = "";
-	protected ProductDetailParentController mController;
+    public void setProductDelegate(ProductDelegate productDelegate) {
+        this.productDelegate = productDelegate;
+    }
 
-	public void setCurrentID(String id) {
-		mCurrentID = id;
-	}
+    public void setController(ProductDetailParentController controller) {
+        mController = controller;
+    }
 
-	public void setController(ProductDetailParentController controller) {
-		mController = controller;
-	}
+    public void setListID(ArrayList<String> id) {
+        mListID = id;
+    }
 
-	public void setListID(ArrayList<String> id) {
-		mListID = id;
-	}
+    @Override
+    public float getPageWidth(int position) {
+        return 0.8f;
+    }
 
-	@Override
-	public float getPageWidth(int position) {
-		return 0.8f;
-	}
-
-	@Override
-	public void setPrimaryItem(ViewGroup container, int position, Object object) {
+    @Override
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
 //		super.setPrimaryItem(container, position, object);
-		String id = mListID.get(position);
-		if (mCurrentID.equals("")) {
-			mCurrentID = id;
-		}
+        String id = mListID.get(position);
+        if (mCurrentID.equals("")) {
+            mCurrentID = id;
+        } else if (!mCurrentID.equals(id)) {
 
-		else
+            mCurrentID = id;
+            ((ProductDetailChildFragment) object).onUpdateTopBottom();
+        }
 
-		if (!mCurrentID.equals(id)) {
+    }
 
-			mCurrentID = id;
-			((ProductDetailChildFragment) object).onUpdateTopBottom();
-		}
-
-	}
-
-	@Override
-	public Fragment getItem(int position) {
+    @Override
+    public Fragment getItem(int position) {
 //		String id = mListID.get(position);
 //		ProductDetailChildFragment fragment = ProductDetailChildFragment
 //				.newInstance(id);
@@ -74,18 +62,22 @@ public class ProductDetailParentAdapterTablet extends
 //		fragment.setProductDelegate(productDelegate);
 //		fragment.setController(mController);
 //		fragment.setProductID(id);
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public int getCount() {
-		return mListID.size();
-	}
+    @Override
+    public int getCount() {
+        return mListID.size();
+    }
 
-	// ProductDetailAdapterDelegate
-	@Override
-	public String getCurrentID() {
-		return mCurrentID;
-	}
+    // ProductDetailAdapterDelegate
+    @Override
+    public String getCurrentID() {
+        return mCurrentID;
+    }
+
+    public void setCurrentID(String id) {
+        mCurrentID = id;
+    }
 
 }

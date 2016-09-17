@@ -12,16 +12,6 @@ import org.json.JSONObject;
 
 public class ProductPriceUtils {
 
-    protected PriceV2 mPriceV2;
-    protected Product mProduct;
-    protected String color_Label = String.valueOf(AppColorConfig.getInstance().getContentColor());
-
-    protected String color_Tire = "#528F94";
-    protected int color_Price = AppColorConfig.getInstance().getPriceColor();
-    protected int color_Price_Special = AppColorConfig.getInstance().getSpecialPriceColor();
-    protected String color_Other = "#000000";
-    protected boolean isShowZero = true;
-
     public final String PRICE = SimiTranslator.getInstance().translate("Price");
     public final String FROM = SimiTranslator.getInstance().translate("From");
     public final String TO = SimiTranslator.getInstance().translate("To");
@@ -31,8 +21,14 @@ public class ProductPriceUtils {
             "Special Price");
     public final String EXCL = SimiTranslator.getInstance().translate("Excl.Tax");
     public final String INCL = SimiTranslator.getInstance().translate("Incl.Tax");
-
-
+    protected PriceV2 mPriceV2;
+    protected Product mProduct;
+    protected String color_Label = String.valueOf(AppColorConfig.getInstance().getContentColor());
+    protected String color_Tire = "#528F94";
+    protected int color_Price = AppColorConfig.getInstance().getPriceColor();
+    protected int color_Price_Special = AppColorConfig.getInstance().getSpecialPriceColor();
+    protected String color_Other = "#000000";
+    protected boolean isShowZero = true;
     protected String LABEL = "label";
     protected String VALUE = "value";
 
@@ -1315,12 +1311,16 @@ public class ProductPriceUtils {
         this.color_Other = color_Other;
     }
 
+    public PriceV2 getPriceV2() {
+        return this.mPriceV2;
+    }
+
     public void setPriceV2(PriceV2 priceV2) {
         this.mPriceV2 = priceV2;
     }
 
-    public PriceV2 getPriceV2() {
-        return this.mPriceV2;
+    public Product getProduct() {
+        return this.mProduct;
     }
 
     public void setProduct(Product product) {
@@ -1330,10 +1330,6 @@ public class ProductPriceUtils {
         } else {
             this.mPriceV2 = new PriceV2();
         }
-    }
-
-    public Product getProduct() {
-        return this.mProduct;
     }
 
     public String updateNormalPriceConfigableWithOption(ProductOption option,

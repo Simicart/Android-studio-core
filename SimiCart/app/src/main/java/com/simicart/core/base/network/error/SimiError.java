@@ -6,11 +6,11 @@ package com.simicart.core.base.network.error;
 public class SimiError {
     protected String mMessage;
 
-    public void setMessage(String message) {
-        mMessage = message;
-    }
-
     public String getMessage() {
         return mMessage;
+    }
+
+    public void setMessage(String message) {
+        mMessage = message;
     }
 }

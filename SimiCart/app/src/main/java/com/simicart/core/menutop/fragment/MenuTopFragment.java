@@ -16,50 +16,50 @@ import com.simicart.core.slidemenu.fragment.SlideMenuFragment;
 
 public class MenuTopFragment extends SimiFragment {
 
-	protected View rootView;
-	protected MenuTopBlock mBlock;
-	protected MenuTopController mController;
-	protected SlideMenuFragment mNavigationDrawerFragment;
+    protected View rootView;
+    protected MenuTopBlock mBlock;
+    protected MenuTopController mController;
+    protected SlideMenuFragment mNavigationDrawerFragment;
 
-	public static MenuTopFragment newInstance(
-			SlideMenuFragment mNavigationDrawerFragment) {
-		MenuTopFragment fragment = new MenuTopFragment();
-		fragment.mNavigationDrawerFragment = mNavigationDrawerFragment;
-		return fragment;
-	}
+    public static MenuTopFragment newInstance(
+            SlideMenuFragment mNavigationDrawerFragment) {
+        MenuTopFragment fragment = new MenuTopFragment();
+        fragment.mNavigationDrawerFragment = mNavigationDrawerFragment;
+        return fragment;
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		rootView = inflater.inflate(Rconfig.getInstance()
-				.layout("core_menutop"), container, false);
-		rootView.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        rootView = inflater.inflate(Rconfig.getInstance()
+                .layout("core_menutop"), container, false);
+        rootView.setBackgroundColor(AppColorConfig.getInstance().getKeyColor());
 
-		Context mContext = getActivity();
+        Context mContext = getActivity();
 
-		mBlock = new MenuTopBlock(rootView, mContext);
-		mBlock.initView();
+        mBlock = new MenuTopBlock(rootView, mContext);
+        mBlock.initView();
 
-		if (null == mController) {
-			mController = new MenuTopController();
-			mController.setDelegate(mBlock);
-			mController.setSlideMenu(mNavigationDrawerFragment);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.setSlideMenu(mNavigationDrawerFragment);
-			mController.onResume();
-		}
+        if (null == mController) {
+            mController = new MenuTopController();
+            mController.setDelegate(mBlock);
+            mController.setSlideMenu(mNavigationDrawerFragment);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.setSlideMenu(mNavigationDrawerFragment);
+            mController.onResume();
+        }
 
-		mBlock.setOnTouchCart(mController.getTouchCart());
-		mBlock.setOnTouchMenu(mController.getTouchMenu());
-		SimiManager.getIntance().setMenuTopController(mController);
+        mBlock.setOnTouchCart(mController.getTouchCart());
+        mBlock.setOnTouchMenu(mController.getTouchMenu());
+        SimiManager.getIntance().setMenuTopController(mController);
 
-		return rootView;
-	}
+        return rootView;
+    }
 }

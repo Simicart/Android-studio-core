@@ -3,7 +3,6 @@ package com.simicart.core.catalog.category.block;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +16,7 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.delegate.CategoryDelegate;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
@@ -42,7 +42,7 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
         tv_CategoryName = (TextView) mView.findViewById(Rconfig.getInstance()
                 .id("tv_category"));
         tv_CategoryName.setText(mName.toUpperCase());
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             tv_CategoryName.setGravity(Gravity.RIGHT);
         }
         tv_viewmore = (TextView) mView.findViewById(Rconfig.getInstance().id(
@@ -113,7 +113,7 @@ public class CategoryBlock extends SimiBlock implements CategoryDelegate {
 
     @Override
     public void showListProducts(View view) {
-        if(view != null) {
+        if (view != null) {
             tv_viewmore.setVisibility(View.VISIBLE);
             iv_showmore.setVisibility(View.VISIBLE);
             ll_listProducts.setVisibility(View.VISIBLE);

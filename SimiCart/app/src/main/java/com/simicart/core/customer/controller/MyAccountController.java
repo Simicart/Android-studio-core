@@ -1,7 +1,6 @@
 package com.simicart.core.customer.controller;
 
 import com.simicart.core.base.component.SimiMenuRowComponent;
-import com.simicart.core.base.component.SimiRowComponent;
 import com.simicart.core.base.component.callback.MenuRowCallBack;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.event.base.SimiEvent;
@@ -100,7 +99,7 @@ public class MyAccountController extends SimiController {
         });
         listRows.add(signOutRowComponent);
 
-        for(SimiMenuRowComponent row : listRows) {
+        for (SimiMenuRowComponent row : listRows) {
             mDelegate.addItemRow(row.createView());
         }
 
@@ -108,7 +107,7 @@ public class MyAccountController extends SimiController {
 
     @Override
     public void onResume() {
-        for(SimiMenuRowComponent row : listRows) {
+        for (SimiMenuRowComponent row : listRows) {
             mDelegate.addItemRow(row.createView());
         }
     }

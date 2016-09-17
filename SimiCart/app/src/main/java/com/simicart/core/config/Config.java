@@ -16,21 +16,17 @@ public class Config {
 //    private String mDemoEnable = "DEMO_ENABLE";
 
 
-    private String mBaseUrl = "http://demo.magestore.com/simicart/simipos3/index.php/";
-    private String mSecretKey = "7da5a4671cae52674c2789e86d4912265f68c98";
+    private static Config instance;
+    private String mBaseUrl = "http://6ar.co/index.php/ksa_ar/";
+    private String mSecretKey = "2b76c95a72a483c606882e8cc2e4629c5e7f";
     private String mBaseCloudUrl = "https://api.jajahub.com/rest/";
-    // key demo superior
-    private String mSecretCloudKey = "d2e8cb715ff3597e88ad6aa6a02b6cafac6a533a";
+    private String mSecretCloudKey = "6403ef2a42d8efae2810524f114e474ef57cdb95";
     private String mColorSplashScreen = "#FFFFFF";
     private String mDemoEnable = "DEMO_ENABLE";
-
     private String mFontCustom = "fonts/ProximaNovaLight.ttf";
     private String mUseStore;
     private String isFullSplash = ""; //FULL_SPLASH
-
     private String mCookie = "";
-
-    private static Config instance;
 
     public static Config getInstance() {
         if (null == instance) {
@@ -85,12 +81,12 @@ public class Config {
         return mSecretKey;
     }
 
-    public String getSecretCloudKey() {
-        return mSecretCloudKey;
-    }
-
     public void setSecretKey(String secret_key) {
         mSecretKey = secret_key;
+    }
+
+    public String getSecretCloudKey() {
+        return mSecretCloudKey;
     }
 
     public String getConnectorUrl() {

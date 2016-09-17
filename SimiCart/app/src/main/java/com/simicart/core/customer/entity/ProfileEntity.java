@@ -6,152 +6,147 @@ import com.simicart.core.config.Constants;
 
 public class ProfileEntity extends SimiEntity {
 
-	private String mName;
-	private String mEmail;
-	private String mPrefix;
-	private String mSuffix;
-	private String mDay;
-	private String mMonth;
-	private String mYear;
-	private String mGender;
+    protected String TAXVAT = "taxvat";
+    protected String PREFIX = "prefix";
+    protected String SUFFIX = "suffix";
+    protected String DAY = "day";
+    protected String MONTH = "month";
+    protected String YEAR = "year";
+    protected String GENDER = "gender";
+    private String mName;
+    private String mEmail;
+    private String mPrefix;
+    private String mSuffix;
+    private String mDay;
+    private String mMonth;
+    private String mYear;
+    private String mGender;
+    private String mTaxVat;
+    private String mCurrentPass;
+    private String mNewPass;
+    private String mConfirmPass;
 
-	private String mTaxVat;
+    public String getCurrentPass() {
+        return mCurrentPass;
+    }
 
+    public void setCurrentPass(String _currentPass) {
+        this.mCurrentPass = _currentPass;
+    }
 
-	private String mCurrentPass;
-	private String mNewPass;
-	private String mConfirmPass;
+    public String getNewPass() {
+        return mNewPass;
+    }
 
-	protected String TAXVAT = "taxvat";
-	protected String PREFIX = "prefix";
-	protected String SUFFIX = "suffix";
-	protected String DAY = "day";
-	protected String MONTH = "month";
-	protected String YEAR = "year";
-	protected String GENDER = "gender";
+    public void setNewPass(String _newPass) {
+        this.mNewPass = _newPass;
+    }
 
+    public String getConfirmPass() {
+        return mConfirmPass;
+    }
 
-	public String getCurrentPass() {
-		return mCurrentPass;
-	}
+    public void setConfirmPass(String _confirmPass) {
+        this.mConfirmPass = _confirmPass;
+    }
 
-	public void setCurrentPass(String _currentPass) {
-		this.mCurrentPass = _currentPass;
-	}
+    public String getTaxVat() {
+        if (null == mTaxVat) {
+            mTaxVat = getData(TAXVAT);
+        }
+        return mTaxVat;
+    }
 
-	public String getNewPass() {
-		return mNewPass;
-	}
+    public void setTaxVat(String _taxVat) {
+        this.mTaxVat = _taxVat;
+    }
 
-	public void setNewPass(String _newPass) {
-		this.mNewPass = _newPass;
-	}
+    public String getName() {
+        if (null == mName) {
+            mName = getData(Constants.USER_NAME);
+        }
+        return mName;
+    }
 
-	public String getConfirmPass() {
-		return mConfirmPass;
-	}
+    public void setName(String mName) {
+        this.mName = mName;
+    }
 
-	public void setConfirmPass(String _confirmPass) {
-		this.mConfirmPass = _confirmPass;
-	}
-	
-	public String getTaxVat(){
-		if (null == mTaxVat) {
-			mTaxVat = getData(TAXVAT);
-		}
-		return mTaxVat;
-	}
-	
-	public void setTaxVat(String _taxVat) {
-		this.mTaxVat = _taxVat;
-	}
+    public String getEmail() {
+        if (null == mEmail) {
+            mEmail = getData(Constants.USER_EMAIL);
+        }
+        return mEmail;
+    }
 
-	public String getName() {
-		if (null == mName) {
-			mName = getData(Constants.USER_NAME);
-		}
-		return mName;
-	}
+    public void setEmail(String mEmail) {
+        this.mEmail = mEmail;
+    }
 
-	public void setName(String mName) {
-		this.mName = mName;
-	}
+    public String getPrefix() {
+        if (null == mPrefix) {
+            mPrefix = getData(PREFIX);
+        }
+        return mPrefix;
+    }
 
-	public String getEmail() {
-		if (null == mEmail) {
-			mEmail = getData(Constants.USER_EMAIL);
-		}
-		return mEmail;
-	}
+    public void setPrefix(String mPrefix) {
+        this.mPrefix = mPrefix;
+    }
 
-	public void setEmail(String mEmail) {
-		this.mEmail = mEmail;
-	}
+    public String getSuffix() {
+        if (null == mSuffix) {
+            mSuffix = getData(SUFFIX);
+        }
+        return mSuffix;
+    }
 
-	public String getPrefix() {
-		if (null == mPrefix) {
-			mPrefix = getData(PREFIX);
-		}
-		return mPrefix;
-	}
+    public void setSuffix(String mSuffix) {
+        this.mSuffix = mSuffix;
+    }
 
-	public void setPrefix(String mPrefix) {
-		this.mPrefix = mPrefix;
-	}
+    public String getDay() {
+        if (null == mDay) {
+            mDay = getData(DAY);
+        }
+        return mDay;
+    }
 
-	public String getSuffix() {
-		if (null == mSuffix) {
-			mSuffix = getData(SUFFIX);
-		}
-		return mSuffix;
-	}
+    public void setDay(String mDay) {
+        this.mDay = mDay;
+    }
 
-	public void setSuffix(String mSuffix) {
-		this.mSuffix = mSuffix;
-	}
+    public String getMonth() {
+        if (null == mMonth) {
+            mMonth = getData(MONTH);
+        }
+        return mMonth;
+    }
 
-	public String getDay() {
-		if (null == mDay) {
-			mDay = getData(DAY);
-		}
-		return mDay;
-	}
+    public void setMonth(String mMonth) {
+        this.mMonth = mMonth;
+    }
 
-	public void setDay(String mDay) {
-		this.mDay = mDay;
-	}
+    public String getYear() {
+        if (null == mYear) {
+            mYear = getData(YEAR);
+        }
+        return mYear;
+    }
 
-	public String getMonth() {
-		if (null == mMonth) {
-			mMonth = getData(MONTH);
-		}
-		return mMonth;
-	}
+    public void setYear(String mYear) {
+        this.mYear = mYear;
+    }
 
-	public void setMonth(String mMonth) {
-		this.mMonth = mMonth;
-	}
+    public String getGender() {
+        if (null == mGender) {
+            mGender = Utils.getLabelGender(getData(GENDER));
+        }
+        return mGender;
+    }
 
-	public String getYear() {
-		if (null == mYear) {
-			mYear = getData(YEAR);
-		}
-		return mYear;
-	}
-
-	public void setYear(String mYear) {
-		this.mYear = mYear;
-	}
-
-	public String getGender() {
-		if (null == mGender) {
-			mGender = Utils.getLabelGender(getData(GENDER));
-		}
-		return mGender;
-	}
-
-	public void setGender(String mGender) {
-		this.mGender = mGender;
-	}
+    public void setGender(String mGender) {
+        this.mGender = mGender;
+    }
 
 }

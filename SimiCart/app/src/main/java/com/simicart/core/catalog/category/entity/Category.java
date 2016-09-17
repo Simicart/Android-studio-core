@@ -46,10 +46,10 @@ public class Category extends SimiEntity {
         if (hasKey("images")) {
             JSONArray array = getJSONArrayWithKey(mJSON, "images");
             try {
-                Log.e("Category","DATA " + array.toString());
+                Log.e("Category", "DATA " + array.toString());
                 parseListImage(array);
             } catch (JSONException e) {
-                Log.e("Category ","Exception " + e.getMessage());
+                Log.e("Category ", "Exception " + e.getMessage());
             }
         }
     }
@@ -59,7 +59,7 @@ public class Category extends SimiEntity {
             mListImage = new ArrayList<>();
             for (int i = 0; i < array.length(); i++) {
                 String image = array.getString(i);
-                Log.e("Category","IMAGE " + image);
+                Log.e("Category", "IMAGE " + image);
                 mListImage.add(image);
             }
         }

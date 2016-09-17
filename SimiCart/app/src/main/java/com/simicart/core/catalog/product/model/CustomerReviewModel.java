@@ -12,37 +12,37 @@ import org.json.JSONException;
 
 public class CustomerReviewModel extends SimiModel {
 
-	public CustomerReviewModel() {
-		super();
-	}
+    public CustomerReviewModel() {
+        super();
+    }
 
-	@Override
-	protected void setUrlAction() {
-		// TODO Auto-generated method stub
-		this.mUrlAction = Constants.GET_PRODUCT_REVIEW;
-	}
+    @Override
+    protected void setUrlAction() {
+        // TODO Auto-generated method stub
+        this.mUrlAction = Constants.GET_PRODUCT_REVIEW;
+    }
 
-	@Override
-	protected void parseData() {
-		try {
-			JSONArray list = this.mJSON.getJSONArray("data");
-			Log.e("CustomerReviewModel JSON ", mJSON.toString());
-			if (null == collection) {
-				collection = new SimiCollection();
-			}
-			for (int i = 0; i < list.length(); i++) {
-				CustomerReview entity = new CustomerReview();
-				entity.setJSONObject(list.getJSONObject(i));
-				collection.addEntity(entity);
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    @Override
+    protected void parseData() {
+        try {
+            JSONArray list = this.mJSON.getJSONArray("data");
+            Log.e("CustomerReviewModel JSON ", mJSON.toString());
+            if (null == collection) {
+                collection = new SimiCollection();
+            }
+            for (int i = 0; i < list.length(); i++) {
+                CustomerReview entity = new CustomerReview();
+                entity.setJSONObject(list.getJSONObject(i));
+                collection.addEntity(entity);
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	protected void setEnableCache() {
-		this.enableCache = true;
-	}
+    @Override
+    protected void setEnableCache() {
+        this.enableCache = true;
+    }
 }

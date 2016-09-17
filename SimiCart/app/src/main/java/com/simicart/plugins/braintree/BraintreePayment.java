@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.simicart.MainActivity;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.notify.SimiNotify;

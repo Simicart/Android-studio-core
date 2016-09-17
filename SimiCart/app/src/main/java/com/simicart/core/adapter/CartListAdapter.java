@@ -21,7 +21,6 @@ import com.simicart.core.checkout.entity.Option;
 import com.simicart.core.common.DrawableManager;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;
@@ -54,7 +53,7 @@ public class CartListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             convertView = mInflater.inflate(
                     Rconfig.getInstance().layout("rtl_item_cart_layout"), null);
         } else {

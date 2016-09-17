@@ -6,9 +6,9 @@ import com.simicart.core.catalog.categorydetail.entity.FilterState;
 
 public interface FilterRequestDelegate {
 
-	public void requestFilter(FilterEntity filterEntity);
+    public void requestFilter(FilterEntity filterEntity);
 
-	public void clearFilter(FilterState filter);
+    public void clearFilter(FilterState filter);
 
-	public void clearAllFilter();
+    public void clearAllFilter();
 }

@@ -6,9 +6,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,15 +44,14 @@ import java.util.HashMap;
  */
 public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    protected ArrayList<Product> listProducts;
-    protected Context mContext;
-    protected String tagView = "";
-    protected int numCollums = 0;
-
     public String PRODUCT_PRICE_TYPE_1 = "simple_virtual";
     public String PRODUCT_PRICE_TYPE_2 = "bundle";
     public String PRODUCT_PRICE_TYPE_3 = "grouped";
     public String PRODUCT_PRICE_TYPE_4 = "configurable";
+    protected ArrayList<Product> listProducts;
+    protected Context mContext;
+    protected String tagView = "";
+    protected int numCollums = 0;
 
     public CategoryDetailAdapter(ArrayList<Product> listProducts) {
         this.listProducts = listProducts;
@@ -70,7 +67,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View itemView = null;
         RecyclerView.ViewHolder holder = null;
-        if(tagView.equals(Constants.TAG_GRIDVIEW)) {
+        if (tagView.equals(Constants.TAG_GRIDVIEW)) {
             itemView = inflater.inflate(Rconfig.getInstance().layout("core_adapter_grid_products"), null, false);
             holder = new GridProductHolder(itemView);
         } else {
@@ -83,7 +80,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Product product = listProducts.get(position);
-        if(tagView.equals(Constants.TAG_GRIDVIEW)) {
+        if (tagView.equals(Constants.TAG_GRIDVIEW)) {
             createItemGridView((GridProductHolder) holder, product);
             dispatchEventForProductLabel(((GridProductHolder) holder).rl_product_list, product, ValueData.PRODUCT_LABEL.GRID);
         } else {
@@ -152,7 +149,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         holder.txtName.setText(product.getName());
 
-        Log.e("CategoryDetailAdapter ","+++++ LIST NAME " + product.getName());
+        Log.e("CategoryDetailAdapter ", "+++++ LIST NAME " + product.getName());
 
         if (holder.imageView != null && product.getImage() != null) {
             SimiDrawImage drawImage = new SimiDrawImage();
@@ -175,7 +172,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 for (int i = 0; i < listProducts.size(); i++) {
                     listID.add(listProducts.get(i).getId());
                 }
-                HashMap<String,Object> hmData = new HashMap<>();
+                HashMap<String, Object> hmData = new HashMap<>();
                 hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, id);
                 hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
                 SimiManager.getIntance().openProductDetail(hmData);
@@ -218,10 +215,10 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         int screenWidthPx = Utils.getScreenWidth();
         int itemSize;
         LinearLayout.LayoutParams params = null;
-        if(numCollums == 2) {
+        if (numCollums == 2) {
             itemSize = (int) ((screenWidthPx - 22) / 2);
             params = new LinearLayout.LayoutParams(itemSize, itemSize);
-        } else if(numCollums == 4) {
+        } else if (numCollums == 4) {
             itemSize = (int) ((screenWidthPx - 20) / 4);
             params = new LinearLayout.LayoutParams(itemSize, itemSize);
         }
@@ -235,7 +232,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 for (int i = 0; i < listProducts.size(); i++) {
                     listID.add(listProducts.get(i).getId());
                 }
-                HashMap<String,Object> hmData = new HashMap<>();
+                HashMap<String, Object> hmData = new HashMap<>();
                 hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, id);
                 hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, listID);
                 SimiManager.getIntance().openProductDetail(hmData);
@@ -245,10 +242,10 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     protected void dispatchEventForProductLabel(View view, Product product, String method) {
-        if(product.getJSONObject().has("product_label")) {
+        if (product.getJSONObject().has("product_label")) {
             try {
                 JSONArray array = product.getJSONObject().getJSONArray("product_label");
-                HashMap<String,Object> hmData = new HashMap<>();
+                HashMap<String, Object> hmData = new HashMap<>();
                 hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_VIEW, view);
                 hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_JSON, array);
                 hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_METHOD, method);
@@ -441,7 +438,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             rl_product_list = (RelativeLayout) v
                     .findViewById(Rconfig.getInstance().id("rel_product_list"));
 
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 txtName.setGravity(Gravity.RIGHT);
             }
         }
@@ -482,7 +479,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             LinearLayout.LayoutParams params4Collums = new LinearLayout.LayoutParams(
                     Utils.toDp((int) ((withScreen - 20) / 4)),
                     Utils.toDp((int) ((withScreen - 20) / 4)));
-            if(DataLocal.isTablet) {
+            if (DataLocal.isTablet) {
                 rl_product_list.setLayoutParams(params4Collums);
             } else {
                 rl_product_list.setLayoutParams(params2Collums);

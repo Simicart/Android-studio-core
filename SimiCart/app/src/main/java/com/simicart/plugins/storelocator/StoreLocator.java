@@ -39,7 +39,7 @@ public class StoreLocator {
         mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
         HashMap<String, String> mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
 
-        if(isExistStoreLocator() == false) {
+        if (isExistStoreLocator() == false) {
             ItemNavigation mItemNavigation = new ItemNavigation();
             mItemNavigation.setType(ItemNavigation.TypeItem.PLUGIN);
             mItemNavigation.setIcon(AppColorConfig.getInstance().getIcon("plugins_locator", AppColorConfig.getInstance().getMenuIconColor()));

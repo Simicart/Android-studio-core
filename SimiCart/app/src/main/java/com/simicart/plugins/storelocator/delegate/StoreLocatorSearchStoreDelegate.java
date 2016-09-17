@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 public interface StoreLocatorSearchStoreDelegate extends SimiDelegate {
 
-	public void setListConfig(ArrayList<String> listConfigs);
-	
-	public void setListCountry(ArrayList<CountryObject> listCountries);
-	
-	public void setListTag(ArrayList<String> listTags);
-	
-	public SearchObject getSearchObject();
-	
+    public void setListConfig(ArrayList<String> listConfigs);
+
+    public void setListCountry(ArrayList<CountryObject> listCountries);
+
+    public void setListTag(ArrayList<String> listTags);
+
+    public SearchObject getSearchObject();
+
 }

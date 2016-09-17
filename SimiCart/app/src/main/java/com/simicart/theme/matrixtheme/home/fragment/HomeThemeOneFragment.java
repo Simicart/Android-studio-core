@@ -14,12 +14,12 @@ import com.simicart.theme.matrixtheme.home.controller.HomeThemeOneController;
 public class HomeThemeOneFragment extends SimiFragment {
 
 
+    protected HomeThemeOneController mController;
+
     public static HomeThemeOneFragment newInstance() {
         HomeThemeOneFragment fragment = new HomeThemeOneFragment();
         return fragment;
     }
-
-    protected HomeThemeOneController mController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,14 @@ public class HomeThemeOneFragment extends SimiFragment {
         int idView = Rconfig.getInstance().layout("theme_one_fragment_home");
         rootView = inflater.inflate(idView, container, false);
         Context context = getActivity();
-        HomeThemeOneBlock block = new HomeThemeOneBlock(rootView,context);
+        HomeThemeOneBlock block = new HomeThemeOneBlock(rootView, context);
         block.initView();
 
-        if(null == mController){
+        if (null == mController) {
             mController = new HomeThemeOneController();
             mController.setDelegate(block);
             mController.onStart();
-        }else{
+        } else {
             mController.setDelegate(block);
             mController.onResume();
         }

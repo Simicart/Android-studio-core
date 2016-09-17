@@ -1,30 +1,29 @@
 package com.simicart.plugins.facebookconnect.common;
 
-import java.text.DecimalFormat;
-
 import android.content.Context;
 
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.Config;
+
+import java.text.DecimalFormat;
 
 
 public class FBUIUtils {
 
-	public static String numberToShortenedString(Context context, Long num) {
+    public static String numberToShortenedString(Context context, Long num) {
 
-		if (num < 1000)
-			return num.toString();
+        if (num < 1000)
+            return num.toString();
 
-		String format = "###,###.#";
+        String format = "###,###.#";
 
-		if (num > 9999) {
-			format = "###,###";
-		}
+        if (num > 9999) {
+            format = "###,###";
+        }
 
-		DecimalFormat oneDForm = new DecimalFormat(format);
+        DecimalFormat oneDForm = new DecimalFormat(format);
 
-		return oneDForm.format((double) num / 1000) + SimiTranslator.getInstance().translate("k");
+        return oneDForm.format((double) num / 1000) + SimiTranslator.getInstance().translate("k");
 
-	}
+    }
 
 }

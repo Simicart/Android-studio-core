@@ -5,7 +5,6 @@ import android.util.Log;
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.catalog.categorydetail.entity.LayerEntity;
-import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
@@ -21,12 +20,12 @@ import java.util.ArrayList;
  */
 public class CategoryDetailModel extends SimiModel {
 
-    private ArrayList<String> listProductIds = new ArrayList<>();
-    private ArrayList<Product> listProduct = new ArrayList<>();
     protected LayerEntity mLayerEntity;
     protected String mType;
     protected String mCustomUrl;
     protected int resultNumber;
+    private ArrayList<String> listProductIds = new ArrayList<>();
+    private ArrayList<Product> listProduct = new ArrayList<>();
 
     public CategoryDetailModel(String type) {
         mType = type;

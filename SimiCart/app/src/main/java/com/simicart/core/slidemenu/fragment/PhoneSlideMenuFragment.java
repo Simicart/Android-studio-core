@@ -16,34 +16,35 @@ import com.simicart.core.slidemenu.delegate.CloseSlideMenuDelegate;
 
 public class PhoneSlideMenuFragment extends SimiFragment {
 
-	protected PhoneSlideMenuController mController;
-	protected PhoneSlideMenuBlock mBlock;
-	protected CloseSlideMenuDelegate mCloseDelegate;
+    protected PhoneSlideMenuController mController;
+    protected PhoneSlideMenuBlock mBlock;
+    protected CloseSlideMenuDelegate mCloseDelegate;
 
-	public static PhoneSlideMenuFragment newInstance (CloseSlideMenuDelegate closeDelegate){
-		PhoneSlideMenuFragment fragment = new PhoneSlideMenuFragment();
-		fragment.mCloseDelegate = closeDelegate;
-		return fragment;
-	}
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(
-				Rconfig.getInstance().layout("core_phone_slide_menu"), null,
-				false);
-		view.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
-		Context context = getActivity();
-		
-		mBlock = new PhoneSlideMenuBlock(view, context);
-		mBlock.initView();
-		mController = new PhoneSlideMenuController(mBlock, context);
-		mController.setCloseDelegate(mCloseDelegate);
-		mController.create();
-		mBlock.setListener(mController.getListener());
-		mBlock.setClickerPersonal(mController.getOnClickPersonal());
+    public static PhoneSlideMenuFragment newInstance(CloseSlideMenuDelegate closeDelegate) {
+        PhoneSlideMenuFragment fragment = new PhoneSlideMenuFragment();
+        fragment.mCloseDelegate = closeDelegate;
+        return fragment;
+    }
 
-		SimiManager.getIntance().setSlideMenuController(mController);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(
+                Rconfig.getInstance().layout("core_phone_slide_menu"), null,
+                false);
+        view.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
+        Context context = getActivity();
 
-		return view;
-	}
+        mBlock = new PhoneSlideMenuBlock(view, context);
+        mBlock.initView();
+        mController = new PhoneSlideMenuController(mBlock, context);
+        mController.setCloseDelegate(mCloseDelegate);
+        mController.create();
+        mBlock.setListener(mController.getListener());
+        mBlock.setClickerPersonal(mController.getOnClickPersonal());
+
+        SimiManager.getIntance().setSlideMenuController(mController);
+
+        return view;
+    }
 }

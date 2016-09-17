@@ -50,6 +50,10 @@ public class OrderHisDetail extends SimiEntity {
         return mItems;
     }
 
+    public void setOrder_item(ArrayList<Cart> order_item) {
+        this.mItems = order_item;
+    }
+
     public TotalPrice getTotal_price() {
         if (null == mTotalPrice) {
             mTotalPrice = new TotalPrice();
@@ -65,10 +69,6 @@ public class OrderHisDetail extends SimiEntity {
 
     public void setTotal_price(TotalPrice total_price) {
         this.mTotalPrice = total_price;
-    }
-
-    public void setOrder_item(ArrayList<Cart> order_item) {
-        this.mItems = order_item;
     }
 
     public String getPayment_method() {

@@ -10,16 +10,6 @@ import java.util.HashMap;
  */
 public class SimiData implements Parcelable {
 
-    protected HashMap<String, Object> mData;
-
-    public SimiData(HashMap<String, Object> data) {
-        mData = data;
-    }
-
-    protected SimiData(Parcel in) {
-        mData = in.readHashMap(HashMap.class.getClassLoader());
-    }
-
     public static final Creator<SimiData> CREATOR = new Creator<SimiData>() {
         @Override
         public SimiData createFromParcel(Parcel in) {
@@ -31,6 +21,15 @@ public class SimiData implements Parcelable {
             return new SimiData[size];
         }
     };
+    protected HashMap<String, Object> mData;
+
+    public SimiData(HashMap<String, Object> data) {
+        mData = data;
+    }
+
+    protected SimiData(Parcel in) {
+        mData = in.readHashMap(HashMap.class.getClassLoader());
+    }
 
     @Override
     public int describeContents() {

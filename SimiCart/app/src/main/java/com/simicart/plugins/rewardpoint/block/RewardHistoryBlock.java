@@ -38,17 +38,17 @@ public class RewardHistoryBlock extends SimiBlock {
     public void drawView(SimiCollection collection) {
         ArrayList<SimiEntity> entities = collection.getCollection();
         listHistories = new ArrayList<>();
-        for(int i=0;i<entities.size();i++) {
+        for (int i = 0; i < entities.size(); i++) {
             ItemHistory entity = (ItemHistory) entities.get(i);
             listHistories.add(entity);
         }
-        if(listHistories.size() > 0){
+        if (listHistories.size() > 0) {
             listView.setVisibility(View.VISIBLE);
             txt_message.setVisibility(View.GONE);
             AdapterListviewHistory adapter = new AdapterListviewHistory(
                     mContext, listHistories);
             listView.setAdapter(adapter);
-        }else{
+        } else {
             txt_message.setVisibility(View.VISIBLE);
             listView.setVisibility(View.GONE);
         }

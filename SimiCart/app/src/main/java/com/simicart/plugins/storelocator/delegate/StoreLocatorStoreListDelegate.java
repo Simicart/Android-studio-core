@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public interface StoreLocatorStoreListDelegate extends SimiDelegate {
 
-	public void visibleSearchLayout(boolean visible);
-	
-	public void showLoadMore(boolean isLoading);
-	
-	public ArrayList<StoreObject> getListStore();
-	
-	public Location getCurrentLocation();
-	
+    public void visibleSearchLayout(boolean visible);
+
+    public void showLoadMore(boolean isLoading);
+
+    public ArrayList<StoreObject> getListStore();
+
+    public Location getCurrentLocation();
+
 }

@@ -22,14 +22,12 @@ import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.checkout.fragment.ReviewOrderFragment;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.FontsOverride;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.controller.AutoSignInController;
@@ -130,7 +128,7 @@ public class MainActivity extends FragmentActivity {
 
     protected void showNotification(final NotificationEntity notificationEntity) {
 
-        if(null == notificationEntity){
+        if (null == notificationEntity) {
             return;
         }
 

@@ -2,7 +2,6 @@ package com.simicart.core.checkout.block;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.AppCompatButton;
@@ -13,12 +12,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.simicart.core.adapter.CartListAdapter;
 import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
@@ -34,30 +31,26 @@ import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.material.ButtonRectangle;
 
 import java.util.ArrayList;
 
 public class CartBlock extends SimiBlock implements CartDelegate {
 
+    protected static String message = "";
     protected RecyclerView rvCart;
     protected AppCompatButton btn_Checkout;
     protected TableLayout layoutPrice;
     protected CartAdapter mAdapter;
     protected CartListenerController mListenerController;
     protected PopupCheckoutController mPCheckoutController;
-
     protected ProgressDialog pp_checkout;
     protected TextView tv_cancel;
     protected TextView tv_excustomer;
     protected TextView tv_newcustomer;
     protected TextView tv_guest;
-
     private View line_price;
     private View line_bottom;
     private View line_vertical;
-
-    protected static String message = "";
 
     public CartBlock(View view, Context context) {
         super(view, context);
@@ -220,7 +213,7 @@ public class CartBlock extends SimiBlock implements CartDelegate {
     public void showListProductsView(ArrayList<Cart> listCarts) {
         DataLocal.listCarts.clear();
         DataLocal.listCarts.addAll(listCarts);
-        if(mAdapter == null) {
+        if (mAdapter == null) {
             mAdapter = new CartAdapter(listCarts, this);
             rvCart.setAdapter(mAdapter);
         } else {

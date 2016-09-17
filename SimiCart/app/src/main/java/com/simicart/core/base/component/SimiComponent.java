@@ -1,7 +1,6 @@
 package com.simicart.core.base.component;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -44,7 +43,7 @@ public class SimiComponent {
         mIDComponent = IDComponent;
     }
 
-    public boolean isCompleteRequired(){
-        return  true;
+    public boolean isCompleteRequired() {
+        return true;
     }
 }

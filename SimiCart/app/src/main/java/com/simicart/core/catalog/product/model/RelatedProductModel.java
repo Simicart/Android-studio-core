@@ -10,33 +10,33 @@ import org.json.JSONException;
 
 public class RelatedProductModel extends SimiModel {
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = Constants.GET_RELATED_PRODUCTS;
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = Constants.GET_RELATED_PRODUCTS;
+    }
 
-	@Override
-	public void parseData() {
-		try {
-			JSONArray list = this.getDataJSON().getJSONArray("data");
-			collection = new SimiCollection();
-			if (null != list && list.length() > 0) {
-				for (int i = 0; i < list.length(); i++) {
-					Product product = new Product();
-					product.setJSONObject(list.getJSONObject(i));
-					collection.addEntity(product);
-				}
+    @Override
+    public void parseData() {
+        try {
+            JSONArray list = this.getDataJSON().getJSONArray("data");
+            collection = new SimiCollection();
+            if (null != list && list.length() > 0) {
+                for (int i = 0; i < list.length(); i++) {
+                    Product product = new Product();
+                    product.setJSONObject(list.getJSONObject(i));
+                    collection.addEntity(product);
+                }
 
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	protected void setEnableCache() {
-		this.enableCache = true;
-	}
+    @Override
+    protected void setEnableCache() {
+        this.enableCache = true;
+    }
 
 }

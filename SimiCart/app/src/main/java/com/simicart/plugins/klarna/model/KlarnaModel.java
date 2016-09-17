@@ -1,10 +1,10 @@
 package com.simicart.plugins.klarna.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import com.simicart.core.base.model.SimiModel;
 import com.simicart.plugins.klarna.fragment.KlarnaFragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class KlarnaModel extends SimiModel {
 

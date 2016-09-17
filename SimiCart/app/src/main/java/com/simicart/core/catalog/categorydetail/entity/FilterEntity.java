@@ -9,72 +9,72 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class FilterEntity extends SimiEntity   {
+public class FilterEntity extends SimiEntity {
 
-	public  String ATTRIBUTE = "attribute";
-	public  String FILTER = "filter";
-	public  String TITLE = "title";
+    public String ATTRIBUTE = "attribute";
+    public String FILTER = "filter";
+    public String TITLE = "title";
 
-	protected String mAttribute;
+    protected String mAttribute;
 
-	protected String mTitle;
+    protected String mTitle;
 
-	protected ArrayList<ValueFilterEntity> mValueFilters;
+    protected ArrayList<ValueFilterEntity> mValueFilters;
 
-	public String getmAttribute() {
+    public String getmAttribute() {
 
-		if (!Utils.validateString(mAttribute)) {
-			mAttribute = getData(ATTRIBUTE);
-		}
+        if (!Utils.validateString(mAttribute)) {
+            mAttribute = getData(ATTRIBUTE);
+        }
 
-		return mAttribute;
-	}
+        return mAttribute;
+    }
 
-	public void setmAttribute(String mAttribute) {
-		this.mAttribute = mAttribute;
-	}
+    public void setmAttribute(String mAttribute) {
+        this.mAttribute = mAttribute;
+    }
 
-	public String getmTitle() {
+    public String getmTitle() {
 
-		if (!Utils.validateString(mTitle)) {
-			mTitle = getData(TITLE);
-		}
+        if (!Utils.validateString(mTitle)) {
+            mTitle = getData(TITLE);
+        }
 
-		return mTitle;
-	}
+        return mTitle;
+    }
 
-	public void setmTitle(String mTitle) {
-		this.mTitle = mTitle;
-	}
+    public void setmTitle(String mTitle) {
+        this.mTitle = mTitle;
+    }
 
-	public ArrayList<ValueFilterEntity> getmValueFilters() {
+    public ArrayList<ValueFilterEntity> getmValueFilters() {
 
-		if (null == mValueFilters) {
-			try {
-				JSONArray array = new JSONArray(getData(FILTER));
+        if (null == mValueFilters) {
+            try {
+                JSONArray array = new JSONArray(getData(FILTER));
 
-				if (null != array && array.length() > 0) {
-					mValueFilters = new ArrayList<ValueFilterEntity>();
-					for (int i = 0; i < array.length(); i++) {
-						JSONObject json = array.getJSONObject(i);
-						ValueFilterEntity entity = new ValueFilterEntity();
-						entity.setJSONObject(json);
-						mValueFilters.add(entity);
-					}
-				}
+                if (null != array && array.length() > 0) {
+                    mValueFilters = new ArrayList<ValueFilterEntity>();
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject json = array.getJSONObject(i);
+                        ValueFilterEntity entity = new ValueFilterEntity();
+                        entity.setJSONObject(json);
+                        mValueFilters.add(entity);
+                    }
+                }
 
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
 
-		return mValueFilters;
-	}
+        return mValueFilters;
+    }
 
-	public void setmValueFilters(ArrayList<ValueFilterEntity> mValueFilters) {
-		this.mValueFilters = mValueFilters;
-	}
+    public void setmValueFilters(ArrayList<ValueFilterEntity> mValueFilters) {
+        this.mValueFilters = mValueFilters;
+    }
 
 
 }

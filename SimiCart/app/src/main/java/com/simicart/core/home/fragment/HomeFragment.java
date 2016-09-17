@@ -14,13 +14,12 @@ import com.simicart.core.home.controller.HomeController;
 
 public class HomeFragment extends SimiFragment {
 
+    protected HomeController mController;
+
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
     }
-
-    protected HomeController mController;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

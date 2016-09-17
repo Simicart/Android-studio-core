@@ -1,37 +1,16 @@
 package com.simicart.plugins.rewardpoint.fragment;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Switch;
-import android.widget.TextView;
 
-import com.simicart.core.base.delegate.ModelFailCallBack;
-import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.fragment.SimiFragment;
-import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
-import com.simicart.core.base.network.error.SimiError;
-import com.simicart.core.base.notify.SimiNotify;
-import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.KeyData;
-import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
-import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 import com.simicart.plugins.rewardpoint.block.RewardSettingBlock;
 import com.simicart.plugins.rewardpoint.controller.RewardSettingController;
-import com.simicart.plugins.rewardpoint.model.ModelRewardSetting;
 
 public class RewardSettingFragment extends SimiFragment {
 

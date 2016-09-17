@@ -32,6 +32,8 @@ import java.util.ArrayList;
  */
 public class ExpressShippingMethodFragment extends SimiFragment {
 
+    protected String mCodeShipping;
+
     public static ExpressShippingMethodFragment newInstance(SimiData data) {
         ExpressShippingMethodFragment fragment = new ExpressShippingMethodFragment();
         Bundle bundle = new Bundle();
@@ -39,9 +41,6 @@ public class ExpressShippingMethodFragment extends SimiFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    protected String mCodeShipping;
-
 
     @Nullable
     @Override

@@ -14,64 +14,64 @@ import com.simicart.core.config.Rconfig;
 
 public class CartFragment extends SimiFragment {
 
-	protected CartController mController;
-	protected CartBlock mBlock;
+    protected CartController mController;
+    protected CartBlock mBlock;
 
-	public static CartFragment newInstance() {
-		CartFragment fragment = new CartFragment();
-		return fragment;
-	}
+    public static CartFragment newInstance() {
+        CartFragment fragment = new CartFragment();
+        return fragment;
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		SimiManager.getIntance().showCartLayout(false);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        SimiManager.getIntance().showCartLayout(false);
+    }
 
-	@Override
-	public void onStart() {
-		SimiManager.getIntance().showCartLayout(false);
-		super.onStart();
-	}
+    @Override
+    public void onStart() {
+        SimiManager.getIntance().showCartLayout(false);
+        super.onStart();
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		setScreenName("Cart Screen");
-		SimiManager.getIntance().showCartLayout(false);
-		rootView = inflater.inflate(
-				Rconfig.getInstance().layout("core_fragment_cart"), container,
-				false);
-		Context context = getActivity();
-		mBlock = new CartBlock(rootView, context);
-		mBlock.initView();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        setScreenName("Cart Screen");
+        SimiManager.getIntance().showCartLayout(false);
+        rootView = inflater.inflate(
+                Rconfig.getInstance().layout("core_fragment_cart"), container,
+                false);
+        Context context = getActivity();
+        mBlock = new CartBlock(rootView, context);
+        mBlock.initView();
 
-		if (null == mController) {
-			mController = new CartController();
-			mController.setDelegate(mBlock);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
-		return rootView;
-	}
+        if (null == mController) {
+            mController = new CartController();
+            mController.setDelegate(mBlock);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.onResume();
+        }
+        return rootView;
+    }
 
-	@Override
-	public void onDestroy() {
-		SimiManager.getIntance().showCartLayout(true);
-		super.onDestroy();
-	}
+    @Override
+    public void onDestroy() {
+        SimiManager.getIntance().showCartLayout(true);
+        super.onDestroy();
+    }
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		SimiManager.getIntance().showCartLayout(true);
-	}
+    @Override
+    public void onPause() {
+        super.onPause();
+        SimiManager.getIntance().showCartLayout(true);
+    }
 
-	@Override
-	public void onResume() {
-		SimiManager.getIntance().showCartLayout(false);
-		super.onResume();
-	}
+    @Override
+    public void onResume() {
+        SimiManager.getIntance().showCartLayout(false);
+        super.onResume();
+    }
 }

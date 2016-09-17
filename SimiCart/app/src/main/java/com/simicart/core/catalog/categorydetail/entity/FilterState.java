@@ -3,15 +3,14 @@ package com.simicart.core.catalog.categorydetail.entity;
 import com.simicart.core.base.model.entity.SimiEntity;
 
 public class FilterState extends SimiEntity {
-    protected String mAttribute;
-    protected String mTitle;
-    protected String mLabel;
-    protected String mValue;
-
     public String ATTRIBUTE = "attribute";
     public String TITLE = "title";
     public String VALUE = "value";
     public String LABEL = "label";
+    protected String mAttribute;
+    protected String mTitle;
+    protected String mLabel;
+    protected String mValue;
 
     @Override
     public void parse() {

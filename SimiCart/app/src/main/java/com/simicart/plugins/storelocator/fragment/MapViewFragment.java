@@ -48,15 +48,15 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MapViewFragment extends SimiFragment {
-    private View view;
     SupportMapFragment mMapView;
-    private Bundle bundle;
     GoogleMap ggmap;
     StoreObject storeObject;
-    private int page = 0;
     List<StoreObject> store_maker;
     LatLng start;
     Activity mActivity;
+    private View view;
+    private Bundle bundle;
+    private int page = 0;
 
     public static MapViewFragment newInstance(SimiData data) {
         MapViewFragment map = new MapViewFragment();
@@ -99,22 +99,6 @@ public class MapViewFragment extends SimiFragment {
         start = new LatLng(dLat, dLong);
 
         return view;
-    }
-
-    public class InitMapAsync extends AsyncTask<Void,Void,Void> {
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            getMap();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            mMapView = new SupportMapFragment();
-            getChildFragmentManager().beginTransaction().add(Rconfig.getInstance().getIdLayout("frame_map"), mMapView).commit();
-
-            return null;
-        }
     }
 
     public void getMap() {
@@ -354,6 +338,22 @@ public class MapViewFragment extends SimiFragment {
         }
 
         return target;
+    }
+
+    public class InitMapAsync extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            getMap();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mMapView = new SupportMapFragment();
+            getChildFragmentManager().beginTransaction().add(Rconfig.getInstance().getIdLayout("frame_map"), mMapView).commit();
+
+            return null;
+        }
     }
 
 //	public class TaskLoadMaker extends AsyncTask<Void, Void, JSONObject> {

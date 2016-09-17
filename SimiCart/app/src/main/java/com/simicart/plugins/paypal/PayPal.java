@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.simicart.core.base.manager.SimiManager;
-import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.payment.Payment;
 import com.simicart.core.checkout.entity.OrderInforEntity;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
 import com.simicart.core.checkout.entity.TotalPrice;
-import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
 

@@ -4,5 +4,5 @@ import com.simicart.core.catalog.product.entity.ProductOption;
 
 public interface OptionProductDelegate {
 
-	public void updatePrice(ProductOption cacheOption, boolean isAdd);
+    public void updatePrice(ProductOption cacheOption, boolean isAdd);
 }

@@ -2,7 +2,6 @@ package com.simicart.core.checkout.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,8 @@ import com.simicart.core.config.Rconfig;
 public class ReviewOrderFragment extends SimiFragment {
 
 
+    protected ReviewOrderController mController;
+
     public static ReviewOrderFragment newInstance(SimiData data) {
         ReviewOrderFragment fragment = new ReviewOrderFragment();
         Bundle bundle = new Bundle();
@@ -24,9 +25,6 @@ public class ReviewOrderFragment extends SimiFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    protected ReviewOrderController mController;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

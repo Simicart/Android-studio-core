@@ -12,7 +12,6 @@ import com.simicart.core.base.block.SimiBlock;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.checkout.component.AddressCheckoutComponent;
 import com.simicart.core.checkout.component.ListProductCheckoutComponent;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.TotalPrice;
@@ -100,7 +99,7 @@ public class OrderHistoryDetailBlock extends SimiBlock {
 
         llShippingAddress = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_shipping_address"));
         AddressEntity shippingAddress = orderHistoryEntity.getShipping_address();
-        if(shippingAddress != null) {
+        if (shippingAddress != null) {
             AddressOrderComponent addressOrderComponent = new AddressOrderComponent(shippingAddress);
             llShippingAddress.addView(addressOrderComponent.createView());
         }
@@ -117,7 +116,7 @@ public class OrderHistoryDetailBlock extends SimiBlock {
 
         llItems = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_list_item"));
         ArrayList<Cart> listItems = orderHistoryEntity.getOrder_item();
-        if(listItems != null) {
+        if (listItems != null) {
             ListProductCheckoutComponent listProductCheckoutComponent = new ListProductCheckoutComponent(listItems, null);
             llItems.addView(listProductCheckoutComponent.createView());
         }
@@ -131,7 +130,7 @@ public class OrderHistoryDetailBlock extends SimiBlock {
         llPrice = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_price"));
         TotalPrice totalPriceEntity = orderHistoryEntity.getTotal_price();
         TotalPriceView viewPrice = new TotalPriceView(totalPriceEntity);
-        if(viewPrice != null) {
+        if (viewPrice != null) {
             //TotalPriceComponent totalPriceComponent = new TotalPriceComponent(totalPriceEntity);
             llPrice.addView(viewPrice.getTotalPriceView());
         }
@@ -148,14 +147,14 @@ public class OrderHistoryDetailBlock extends SimiBlock {
 
         llBillingAddress = (LinearLayout) mView.findViewById(Rconfig.getInstance().id("ll_billing_address"));
         AddressEntity billingAddress = orderHistoryEntity.getBilling_address();
-        if(billingAddress != null) {
+        if (billingAddress != null) {
             AddressOrderComponent addressOrderComponent = new AddressOrderComponent(billingAddress);
             llBillingAddress.addView(addressOrderComponent.createView());
         }
 
         tvPaymentCoupon = (TextView) mView.findViewById(Rconfig.getInstance().id("tv_payment_couponCode"));
         String coupon = orderHistoryEntity.getOrder_gift_code();
-        if(!Utils.validateString(coupon)) {
+        if (!Utils.validateString(coupon)) {
             coupon = SimiTranslator.getInstance().translate("None");
         }
         tvPaymentCoupon.setText(SimiTranslator.getInstance().translate("Coupon Code") + ": " + coupon);

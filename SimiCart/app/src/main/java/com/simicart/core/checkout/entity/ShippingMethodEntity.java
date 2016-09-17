@@ -3,9 +3,6 @@ package com.simicart.core.checkout.entity;
 import com.simicart.core.base.model.entity.SimiEntity;
 import com.simicart.core.common.Utils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 /**
  * Created by frank on 6/29/16.
  */

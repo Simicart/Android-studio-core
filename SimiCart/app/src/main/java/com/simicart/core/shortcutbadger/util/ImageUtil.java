@@ -19,7 +19,7 @@ import java.util.List;
  * Created with IntelliJ IDEA.
  * User: leolin
  * Date: 2013/11/14
- * Time: 
+ * Time:
  * To change this template use File | Settings | File Templates.
  */
 public class ImageUtil {
@@ -101,9 +101,9 @@ public class ImageUtil {
         // text color - #3D3D3D
         paint_text.setColor(Color.WHITE);
         // text size in pixels
-        int textSize = (int)(radius*0.7);
+        int textSize = (int) (radius * 0.7);
         if (gText.length() > 1) {
-            textSize =  (int)(radius*0.5);
+            textSize = (int) (radius * 0.5);
         }
         paint_text.setTextSize((int) (textSize * scale));
         paint_text.setFakeBoldText(true);

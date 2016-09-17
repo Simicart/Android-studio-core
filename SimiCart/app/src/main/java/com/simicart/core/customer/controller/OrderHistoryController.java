@@ -8,7 +8,6 @@ import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
@@ -16,7 +15,6 @@ import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.delegate.OrderHistoryDelegate;
 import com.simicart.core.customer.entity.OrderHistory;
-import com.simicart.core.customer.fragment.OrderHistoryDetailFragment;
 import com.simicart.core.customer.model.OrderHistoryModel;
 
 import java.util.HashMap;
