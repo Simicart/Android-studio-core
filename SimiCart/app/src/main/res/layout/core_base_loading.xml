@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:indeterminateDrawable="@drawable/progressbar_indeterminate"
         android:background="@null"/>
 
 </RelativeLayout>

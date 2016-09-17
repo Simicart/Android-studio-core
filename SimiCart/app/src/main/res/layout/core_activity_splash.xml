@@ -34,6 +34,7 @@
         android:layout_above="@+id/tv_demo"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="64dp"
-        android:indeterminateDrawable="@drawable/progressbar_indeterminate" />
+        android:background="@null"
+         />
 
 </RelativeLayout>

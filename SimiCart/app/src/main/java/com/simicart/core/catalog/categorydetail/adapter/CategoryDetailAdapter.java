@@ -22,6 +22,7 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.product.entity.PriceV2;
 import com.simicart.core.catalog.product.entity.Product;
+import com.simicart.core.common.AnimationUtil;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
 import com.simicart.core.common.Utils;
@@ -52,6 +53,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     protected Context mContext;
     protected String tagView = "";
     protected int numCollums = 0;
+    protected int previousPosition = 0;
 
     public CategoryDetailAdapter(ArrayList<Product> listProducts) {
         this.listProducts = listProducts;
@@ -89,6 +91,13 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         } else {
             createItemListView((ListProductHolder) holder, product);
             dispatchEventForProductLabel(((ListProductHolder) holder).rl_product_list, product, ValueData.PRODUCT_LABEL.LIST);
+
+//            if(position > previousPosition){
+//                AnimationUtil.animate((ListProductHolder) holder,true);
+//            }else {
+//                AnimationUtil.animate((ListProductHolder) holder,false);
+//            }
+//            previousPosition = position;
         }
     }
 
@@ -181,6 +190,10 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 SimiManager.getIntance().openProductDetail(hmData);
             }
         });
+
+
+
+
     }
 
     protected void createItemGridView(GridProductHolder holder, final Product product) {
