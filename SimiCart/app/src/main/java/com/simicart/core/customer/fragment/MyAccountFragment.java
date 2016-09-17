@@ -30,9 +30,14 @@ public class MyAccountFragment extends SimiFragment {
 		Context context = getActivity();
 		mBlock = new MyAccountBlock(view, context);
 		mBlock.initView();
-		mController = new MyAccountController();
-		mController.setDelegate(mBlock);
-		mController.onStart();
+		if(mController == null) {
+			mController = new MyAccountController();
+			mController.setDelegate(mBlock);
+			mController.onStart();
+		} else {
+			mController.setDelegate(mBlock);
+			mController.onResume();
+		}
 		return view;
 	}
 }

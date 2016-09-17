@@ -1,6 +1,7 @@
 package com.simicart.core.customer.controller;
 
 import com.simicart.core.base.component.SimiMenuRowComponent;
+import com.simicart.core.base.component.SimiRowComponent;
 import com.simicart.core.base.component.callback.MenuRowCallBack;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.event.base.SimiEvent;
@@ -15,11 +16,13 @@ import com.simicart.core.customer.delegate.MyAccountDelegate;
 import com.simicart.core.customer.fragment.AddressBookFragment;
 import com.simicart.core.customer.fragment.OrderHistoryFragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MyAccountController extends SimiController {
 
     protected MyAccountDelegate mDelegate;
+    protected ArrayList<SimiMenuRowComponent> listRows;
 
     public void setDelegate(MyAccountDelegate delegate) {
         mDelegate = delegate;
@@ -27,6 +30,8 @@ public class MyAccountController extends SimiController {
 
     @Override
     public void onStart() {
+
+        listRows = new ArrayList<>();
 
         SimiMenuRowComponent profileRowComponent = new SimiMenuRowComponent();
         profileRowComponent.setIcon("ic_acc_profile");
@@ -39,7 +44,7 @@ public class MyAccountController extends SimiController {
                 SimiManager.getIntance().openCustomerPage(hm);
             }
         });
-        mDelegate.addItemRow(profileRowComponent.createView());
+        listRows.add(profileRowComponent);
 
         SimiMenuRowComponent addressBookRowComponent = new SimiMenuRowComponent();
         addressBookRowComponent.setIcon("ic_acc_address");
@@ -58,7 +63,7 @@ public class MyAccountController extends SimiController {
                 }
             }
         });
-        mDelegate.addItemRow(addressBookRowComponent.createView());
+        listRows.add(addressBookRowComponent);
 
         SimiMenuRowComponent orderHistoryRowComponent = new SimiMenuRowComponent();
         orderHistoryRowComponent.setIcon("ic_acc_history");
@@ -74,11 +79,11 @@ public class MyAccountController extends SimiController {
                 }
             }
         });
-        mDelegate.addItemRow(orderHistoryRowComponent.createView());
+        listRows.add(orderHistoryRowComponent);
 
         // Register event for plugins
         HashMap<String, Object> hmData = new HashMap<>();
-        hmData.put(KeyData.SIMI_CONTROLLER.DELEGATE, mDelegate);
+        hmData.put(KeyData.MY_ACCOUNT.LIST_ROWS, listRows);
         SimiEvent.dispatchEvent(KeyEvent.MY_ACCOUNT_EVENT.MY_ACCOUNT_ADD_ITEM, hmData);
 
         SimiMenuRowComponent signOutRowComponent = new SimiMenuRowComponent();
@@ -93,12 +98,18 @@ public class MyAccountController extends SimiController {
                 signout.onStart();
             }
         });
-        mDelegate.addItemRow(signOutRowComponent.createView());
+        listRows.add(signOutRowComponent);
+
+        for(SimiMenuRowComponent row : listRows) {
+            mDelegate.addItemRow(row.createView());
+        }
 
     }
 
     @Override
     public void onResume() {
-
+        for(SimiMenuRowComponent row : listRows) {
+            mDelegate.addItemRow(row.createView());
+        }
     }
 }

@@ -145,8 +145,8 @@ public class RewardPoint {
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 SimiData data = bundle.getParcelable(Constants.ENTITY);
-                MyAccountDelegate mDelegate = (MyAccountDelegate) data.getData().get(KeyData.SIMI_CONTROLLER.DELEGATE);
-                addItemMyAccount(mDelegate);
+                ArrayList<SimiMenuRowComponent> listRows = (ArrayList<SimiMenuRowComponent>) data.getData().get(KeyData.MY_ACCOUNT.LIST_ROWS);
+                addItemMyAccount(listRows);
             }
         };
         SimiEvent.registerEvent(KeyEvent.MY_ACCOUNT_EVENT.MY_ACCOUNT_ADD_ITEM, addItemMyAccountReceiver);
@@ -399,7 +399,7 @@ public class RewardPoint {
         }
     }
 
-    protected void addItemMyAccount(MyAccountDelegate mDelegate) {
+    protected void addItemMyAccount(ArrayList<SimiMenuRowComponent> listRows) {
         SimiMenuRowComponent wishlistRowComponent = new SimiMenuRowComponent();
         wishlistRowComponent.setIcon("plugin_reward_ic_myacc");
         wishlistRowComponent.setLabel(SimiTranslator.getInstance().translate("Reward Point"));
@@ -410,7 +410,7 @@ public class RewardPoint {
                 SimiManager.getIntance().replacePopupFragment(fragmentRe);
             }
         });
-        mDelegate.addItemRow(wishlistRowComponent.createView());
+        listRows.add(wishlistRowComponent);
     }
 
 }

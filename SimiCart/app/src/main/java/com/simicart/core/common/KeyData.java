@@ -21,6 +21,10 @@ public class KeyData {
         public static String JSON_DATA = "json_data";
     }
 
+    public static class MY_ACCOUNT {
+        public static String LIST_ROWS = "list_row";
+    }
+
     public static class CATEGORY_DETAIL {
         public static String TYPE = "type";
         public static String KEY_WORD = "key_word";

@@ -95,8 +95,8 @@ public class WishList {
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 SimiData data = bundle.getParcelable(Constants.ENTITY);
-                MyAccountDelegate mDelegate = (MyAccountDelegate) data.getData().get(KeyData.SIMI_CONTROLLER.DELEGATE);
-                addItemMyAccount(mDelegate);
+                ArrayList<SimiMenuRowComponent> listRows = (ArrayList<SimiMenuRowComponent>) data.getData().get(KeyData.MY_ACCOUNT.LIST_ROWS);
+                addItemMyAccount(listRows);
             }
         };
         SimiEvent.registerEvent(KeyEvent.MY_ACCOUNT_EVENT.MY_ACCOUNT_ADD_ITEM, addItemMyAccountReceiver);
@@ -156,7 +156,7 @@ public class WishList {
         controllerAddWishList.onAddToWishList();
     }
 
-    protected void addItemMyAccount(MyAccountDelegate mDelegate) {
+    protected void addItemMyAccount(ArrayList<SimiMenuRowComponent> listRows) {
         SimiMenuRowComponent wishlistRowComponent = new SimiMenuRowComponent();
         wishlistRowComponent.setIcon("plugins_wishlist_iconadd2");
         wishlistRowComponent.setLabel(SimiTranslator.getInstance().translate(MY_WISH_LIST));
@@ -171,7 +171,7 @@ public class WishList {
                 }
             }
         });
-        mDelegate.addItemRow(wishlistRowComponent.createView());
+        listRows.add(wishlistRowComponent);
     }
 
 }
