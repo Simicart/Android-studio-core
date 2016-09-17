@@ -17,10 +17,11 @@ public class Config {
 
 
     private static Config instance;
-    private String mBaseUrl = "http://6ar.co/index.php/ksa_ar/";
-    private String mSecretKey = "2b76c95a72a483c606882e8cc2e4629c5e7f";
+    private String mBaseUrl = "http://demo.magestore.com/simicart/simipos3/index.php/";
+    private String mSecretKey = "7da5a4671cae52674c2789e86d4912265f68c98";
     private String mBaseCloudUrl = "https://api.jajahub.com/rest/";
-    private String mSecretCloudKey = "6403ef2a42d8efae2810524f114e474ef57cdb95";
+    // key demo superior
+    private String mSecretCloudKey = "d2e8cb715ff3597e88ad6aa6a02b6cafac6a533a";
     private String mColorSplashScreen = "#FFFFFF";
     private String mDemoEnable = "DEMO_ENABLE";
     private String mFontCustom = "fonts/ProximaNovaLight.ttf";
