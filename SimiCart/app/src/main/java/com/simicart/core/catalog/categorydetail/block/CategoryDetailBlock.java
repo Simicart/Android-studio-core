@@ -48,7 +48,6 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     @Override
     public void initView() {
         rvListProducts = (RecyclerView) mView.findViewById(Rconfig.getInstance().id("rv_list_products"));
-        listProducts = new ArrayList<>();
 
         rlBottom = (RelativeLayout) mView.findViewById(Rconfig.getInstance().id("rl_menu_bottom"));
         rlChangeView = (RelativeLayout) mView.findViewById(Rconfig.getInstance().id("rl_change_view_data"));
@@ -79,14 +78,13 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
     public void drawView(SimiCollection collection) {
         ArrayList<SimiEntity> entities = collection.getCollection();
         if (entities != null && entities.size() > 0) {
-            ArrayList<Product> products = new ArrayList<>();
+            listProducts = new ArrayList<>();
             for (SimiEntity simiEntity : entities) {
                 Product product = new Product();
                 product.parse(simiEntity.getJSONObject());
-                products.add(product);
+                Log.e("CategoryDetailBlock "," +++ DRAW VIEW " + product.getName());
+                listProducts.add(product);
             }
-            listProducts.clear();
-            listProducts.addAll(products);
             if (listProducts.size() > 0) {
                 rlBottom.setVisibility(View.VISIBLE);
                 drawListProducts();
@@ -101,6 +99,7 @@ public class CategoryDetailBlock extends SimiBlock implements CategoryDetailDele
             mAdapter.setListProducts(listProducts);
             mAdapter.notifyDataSetChanged();
         } else {
+            Log.e("CategoryDetailBlock ","---> drawListProducts create adapter");
             mAdapter = new CategoryDetailAdapter(listProducts);
             if (tagView.equals(Constants.TAG_GRIDVIEW)) {
                 mAdapter.setNumCollums(numCollums);

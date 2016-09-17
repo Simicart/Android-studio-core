@@ -51,8 +51,9 @@ public class SignOutController extends SimiController {
                 if (DataLocal.isTablet) {
                     SimiManager.getIntance().clearAllChidFragment();
                     SimiManager.getIntance().removeDialog();
+                    SimiManager.getIntance().backToHomeFragment();
                 } else {
-                    SimiManager.getIntance().backPreviousFragment();
+                    SimiManager.getIntance().backToHomeFragment();
                 }
 
 

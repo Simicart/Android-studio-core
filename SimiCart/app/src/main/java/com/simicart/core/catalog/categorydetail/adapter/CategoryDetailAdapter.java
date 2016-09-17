@@ -58,6 +58,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public CategoryDetailAdapter(ArrayList<Product> listProducts) {
         this.listProducts = listProducts;
+        Log.e("CategoryDetailAdapter ","----> CONTRUCTOR");
     }
 
     public void setNumCollums(int numCollums) {
@@ -66,6 +67,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.e("CategoryDetailAdapter ","----> onCreateViewHolder");
         mContext = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View itemView = null;
@@ -82,6 +84,7 @@ public class CategoryDetailAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Log.e("CategoryDetailAdapter ","------> onBindViewHolder");
         Product product = listProducts.get(position);
         if(tagView.equals(Constants.TAG_GRIDVIEW)) {
             createItemGridView((GridProductHolder) holder, product);
