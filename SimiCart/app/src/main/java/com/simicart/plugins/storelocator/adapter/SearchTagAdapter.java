@@ -14,6 +14,7 @@ import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
+import com.simicart.plugins.storelocator.delegate.StoreLocatorSearchStoreDelegate;
 import com.simicart.plugins.storelocator.entity.SearchObject;
 import com.simicart.plugins.storelocator.fragment.StoreLocatorMainPageFragment;
 import com.simicart.plugins.storelocator.fragment.StoreLocatorMainPageTabletFragment;
@@ -29,17 +30,19 @@ public class SearchTagAdapter extends RecyclerView.Adapter<SearchTagAdapter.Sear
     protected ArrayList<String> listTags;
     protected Context mContext;
     protected int count_tag = 0;
+    protected StoreLocatorSearchStoreDelegate mDelegate;
 
-    public SearchTagAdapter(ArrayList<String> listTags, int count_tag) {
+    public SearchTagAdapter(ArrayList<String> listTags, int count_tag, StoreLocatorSearchStoreDelegate mDelegate) {
         this.listTags = listTags;
         this.count_tag = count_tag;
+        this.mDelegate = mDelegate;
     }
 
     @Override
     public SearchTagHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(Rconfig.getInstance().layout("plugins_storelocator_item_tag"), null, false);
+        View itemView = inflater.inflate(Rconfig.getInstance().layout("plugins_store_locator_item_tag"), parent, false);
         SearchTagHolder holder = new SearchTagHolder(itemView);
 
         return holder;
@@ -69,20 +72,24 @@ public class SearchTagAdapter extends RecyclerView.Adapter<SearchTagAdapter.Sear
                     android.R.color.black));
         }
 
+        holder.txt_item.setText(tag);
+
         holder.item_tag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SearchObject search = new SearchObject();
-                search.setTag(position);
-                onSearchAction(search);
+                SearchObject search = mDelegate.getSearchObject();
+                if (search != null) {
+                    search.setTag(position);
+                    onSearchAction(search);
+                }
             }
         });
 
     }
 
-    protected void onSearchAction(SearchObject searchObject) {
+    protected void onSearchAction(SearchObject search) {
         HashMap<String, Object> hmData = new HashMap<>();
-        hmData.put(Constants.KeyData.SEARCH_OBJECT, searchObject);
+        hmData.put(Constants.KeyData.SEARCH_OBJECT, search);
         if (DataLocal.isTablet) {
             StoreLocatorMainPageTabletFragment fragment = StoreLocatorMainPageTabletFragment.newInstance(new SimiData(hmData));
             SimiManager.getIntance().replaceFragment(fragment);

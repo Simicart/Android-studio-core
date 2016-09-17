@@ -161,6 +161,8 @@ public class StoreLocatorSearchStoreController extends SimiController {
                 SimiNotify.getInstance().showNotify(error.getMessage());
             }
         });
+        tagModel.addBody("offset", "0");
+        tagModel.addBody("limit", "10");
         tagModel.request();
     }
 

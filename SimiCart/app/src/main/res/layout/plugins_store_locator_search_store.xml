@@ -31,7 +31,7 @@
                         android:layout_marginLeft="15dp"
                         android:text="Search by Area"
                         android:textColor="@android:color/black"
-                        android:textSize="16dp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -121,24 +121,8 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:background="@null" />
-
-                        <!--
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical" >
-
-                            <TextView
-                                android:id="@+id/txt_name_country"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:textColor="@android:color/black"
-                                android:textSize="14dp" />
-                        </LinearLayout>
-                        -->
+                            android:background="@null"
+                            android:paddingLeft="10dp"/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -194,7 +178,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="10dp"
                             android:singleLine="true" >
 
                             <requestFocus />
@@ -240,7 +224,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="10dp"
                             android:singleLine="true" >
 
                             <requestFocus />
@@ -286,7 +270,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="10dp"
                             android:singleLine="true" >
 
                             <requestFocus />
@@ -296,7 +280,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:paddingRight="20dp" >
 
@@ -308,28 +292,19 @@
                         android:orientation="vertical" >
                     </LinearLayout>
 
-                    <LinearLayout
+                    <android.support.v7.widget.AppCompatButton
                         android:id="@+id/btn_search"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="@dimen/height_button"
                         android:layout_weight="1"
-                        android:background="@android:color/holo_orange_dark"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/txt_search"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Search"
-                            android:textColor="@android:color/white"
-                            android:textSize="14dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/text_18">
+                    </android.support.v7.widget.AppCompatButton>
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_search_tag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -341,26 +316,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="Search by Task"
+                    android:text="Search by Tag"
                     android:textColor="@android:color/black"
-                    android:textSize="16dp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:visibility="gone" >
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/list_store_tag"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
+
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
