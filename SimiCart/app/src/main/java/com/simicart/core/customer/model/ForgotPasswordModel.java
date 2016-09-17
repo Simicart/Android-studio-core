@@ -6,9 +6,9 @@ import com.simicart.core.config.Constants;
 public class ForgotPasswordModel extends SimiModel {
 
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = Constants.FORGET_PASSWORD;
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = Constants.FORGET_PASSWORD;
+    }
 
 }

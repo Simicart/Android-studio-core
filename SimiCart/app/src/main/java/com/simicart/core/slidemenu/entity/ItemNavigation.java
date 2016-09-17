@@ -6,73 +6,72 @@ import com.simicart.core.base.model.entity.SimiEntity;
 
 public class ItemNavigation extends SimiEntity {
 
-	public enum TypeItem {
-		NORMAL, CMS, PLUGIN
-	}
+    protected boolean isShowPopup = false;
+    protected boolean isSparator;
+    protected boolean isExtended;
+    protected String mName;
+    protected Drawable mIcon;
+    protected String mUrl;
+    protected TypeItem mType = TypeItem.NORMAL;
 
-	protected boolean isShowPopup = false;
+    public boolean isShowPopup() {
+        return isShowPopup;
+    }
 
-	protected boolean isSparator;
-	protected boolean isExtended;
-	protected String mName;
-	protected Drawable mIcon;
-	protected String mUrl;
-	protected TypeItem mType = TypeItem.NORMAL;
+    public void setShowPopup(boolean isShowPopup) {
+        this.isShowPopup = isShowPopup;
+    }
 
-	public void setSparator(boolean sparator) {
-		isSparator = sparator;
-	}
+    public boolean isSparator() {
+        return isSparator;
+    }
 
-	public boolean isShowPopup() {
-		return isShowPopup;
-	}
+    public void setSparator(boolean sparator) {
+        isSparator = sparator;
+    }
 
-	public void setShowPopup(boolean isShowPopup) {
-		this.isShowPopup = isShowPopup;
-	}
+    public boolean isExtended() {
+        return isExtended;
+    }
 
-	public boolean isSparator() {
-		return isSparator;
-	}
+    public void setExtended(boolean extended) {
+        isExtended = extended;
+    }
 
-	public void setExtended(boolean extended) {
-		isExtended = extended;
-	}
+    public String getName() {
+        return mName;
+    }
 
-	public boolean isExtended() {
-		return isExtended;
-	}
+    public void setName(String name) {
+        mName = name;
+    }
 
-	public void setName(String name) {
-		mName = name;
-	}
+    public String getUrl() {
+        return mUrl;
+    }
 
-	public String getName() {
-		return mName;
-	}
+    public void setUrl(String url) {
+        mUrl = url;
+    }
 
-	public void setUrl(String url) {
-		mUrl = url;
-	}
+    public TypeItem getType() {
+        return mType;
+    }
 
-	public String getUrl() {
-		return mUrl;
-	}
+    public void setType(TypeItem type) {
+        mType = type;
+    }
 
-	public void setType(TypeItem type) {
-		mType = type;
-	}
+    public Drawable getIcon() {
+        return mIcon;
+    }
 
-	public TypeItem getType() {
-		return mType;
-	}
+    public void setIcon(Drawable icon) {
+        mIcon = icon;
+    }
 
-	public void setIcon(Drawable icon) {
-		mIcon = icon;
-	}
-
-	public Drawable getIcon() {
-		return mIcon;
-	}
+    public enum TypeItem {
+        NORMAL, CMS, PLUGIN
+    }
 
 }

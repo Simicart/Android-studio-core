@@ -26,54 +26,54 @@ import java.util.HashMap;
 
 public class ContactUs {
 
-	protected Context mContext;
-	protected ArrayList<ItemNavigation> mItems;
+    protected Context mContext;
+    protected ArrayList<ItemNavigation> mItems;
 
-	public ContactUs() {
+    public ContactUs() {
 
-		mContext = SimiManager.getIntance().getCurrentActivity();
+        mContext = SimiManager.getIntance().getCurrentActivity();
 
-		// register event: add navigation item to slide menu
-		IntentFilter addItemFilter = new IntentFilter(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE);
-		BroadcastReceiver addItemReceiver = new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				Bundle bundle = intent.getBundleExtra(Constants.DATA);
-				SimiData data = bundle.getParcelable("entity");
-				mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
-				HashMap<String, String> mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
+        // register event: add navigation item to slide menu
+        IntentFilter addItemFilter = new IntentFilter(KeyEvent.SLIDE_MENU_EVENT.ADD_ITEM_MORE);
+        BroadcastReceiver addItemReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle bundle = intent.getBundleExtra(Constants.DATA);
+                SimiData data = bundle.getParcelable("entity");
+                mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
+                HashMap<String, String> mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
 
-				if(isExistContactUs() == false) {
-					ItemNavigation mItemNavigation = new ItemNavigation();
-					mItemNavigation.setType(TypeItem.PLUGIN);
-					mItemNavigation.setShowPopup(true);
-					Drawable iconContactUs = mContext.getResources()
-							.getDrawable(
-									Rconfig.getInstance().drawable(
-											"plugins_contactus_icon"));
-					iconContactUs.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
-							PorterDuff.Mode.SRC_ATOP);
-					mItemNavigation.setName("Contact Us");
-					mItemNavigation.setIcon(iconContactUs);
-					mItems.add(mItemNavigation);
+                if (isExistContactUs() == false) {
+                    ItemNavigation mItemNavigation = new ItemNavigation();
+                    mItemNavigation.setType(TypeItem.PLUGIN);
+                    mItemNavigation.setShowPopup(true);
+                    Drawable iconContactUs = mContext.getResources()
+                            .getDrawable(
+                                    Rconfig.getInstance().drawable(
+                                            "plugins_contactus_icon"));
+                    iconContactUs.setColorFilter(AppColorConfig.getInstance().getMenuIconColor(),
+                            PorterDuff.Mode.SRC_ATOP);
+                    mItemNavigation.setName("Contact Us");
+                    mItemNavigation.setIcon(iconContactUs);
+                    mItems.add(mItemNavigation);
 
-					ContactUsFragment fragment = ContactUsFragment.newInstance();
-					mFragments.put(mItemNavigation.getName(),
-							fragment.getClass().getName());
-				}
-			}
-		};
-		LocalBroadcastManager.getInstance(mContext).registerReceiver(addItemReceiver, addItemFilter);
-	}
+                    ContactUsFragment fragment = ContactUsFragment.newInstance();
+                    mFragments.put(mItemNavigation.getName(),
+                            fragment.getClass().getName());
+                }
+            }
+        };
+        LocalBroadcastManager.getInstance(mContext).registerReceiver(addItemReceiver, addItemFilter);
+    }
 
-	protected boolean isExistContactUs() {
-		for (ItemNavigation item : mItems) {
-			if (item.getName().equals(SimiTranslator.getInstance().translate(
-					"Contact Us"))) {
-				return true;
-			}
-		}
-		return false;
-	}
+    protected boolean isExistContactUs() {
+        for (ItemNavigation item : mItems) {
+            if (item.getName().equals(SimiTranslator.getInstance().translate(
+                    "Contact Us"))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

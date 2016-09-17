@@ -79,16 +79,16 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         holder.tvItem2.setTextColor(AppColorConfig.getInstance().getContentColor());
         holder.tvItem3.setTextColor(AppColorConfig.getInstance().getContentColor());
         ArrayList<String> orderItems = orderHistoryEntity.getOrder_items();
-        if(orderItems != null && orderItems.size() > 0) {
-            if(orderItems.size() == 1) {
+        if (orderItems != null && orderItems.size() > 0) {
+            if (orderItems.size() == 1) {
                 holder.tvItem1.setText(orderItems.get(0));
                 holder.tvItem2.setVisibility(View.GONE);
                 holder.tvItem3.setVisibility(View.GONE);
-            } else if(orderItems.size() == 2) {
+            } else if (orderItems.size() == 2) {
                 holder.tvItem1.setText(orderItems.get(0));
                 holder.tvItem2.setText(orderItems.get(1));
                 holder.tvItem3.setVisibility(View.GONE);
-            } else if(orderItems.size() >= 3) {
+            } else if (orderItems.size() >= 3) {
                 holder.tvItem1.setText(orderItems.get(0));
                 holder.tvItem2.setText(orderItems.get(1));
                 holder.tvItem3.setText(orderItems.get(2));
@@ -130,6 +130,10 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         return listOrders.size();
     }
 
+    public void setListOrders(ArrayList<OrderHistory> listOrders) {
+        this.listOrders = listOrders;
+    }
+
     public static class OrderHistoryHolder extends RecyclerView.ViewHolder {
         private RelativeLayout rlItemOrder;
         private TextView tvStatusLabel, tvDateLabel, tvRecipientLabel, tvItemsLabel;
@@ -151,9 +155,5 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             tvItem3 = (TextView) itemView.findViewById(Rconfig.getInstance().id("tv_item3"));
             llItems = (LinearLayout) itemView.findViewById(Rconfig.getInstance().id("ll_items"));
         }
-    }
-
-    public void setListOrders(ArrayList<OrderHistory> listOrders) {
-        this.listOrders = listOrders;
     }
 }

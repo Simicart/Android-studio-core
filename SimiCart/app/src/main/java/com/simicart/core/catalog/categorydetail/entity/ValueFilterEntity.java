@@ -5,12 +5,11 @@ import com.simicart.core.common.Utils;
 
 public class ValueFilterEntity extends SimiEntity {
 
+    public String VALUE = "value";
+    public String LABEL = "label";
     protected String mValue;
     protected boolean isSelected;
     protected String mLabel;
-
-    public String VALUE = "value";
-    public String LABEL = "label";
 
     public boolean isSelected() {
         return isSelected;

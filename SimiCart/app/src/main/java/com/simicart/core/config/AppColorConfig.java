@@ -63,15 +63,15 @@ public class AppColorConfig extends SimiEntity {
     private String section_color = "section_color";
     private String layout = "layout";
 
+    public AppColorConfig() {
+        mContext = SimiManager.getIntance().getCurrentActivity();
+    }
+
     public static AppColorConfig getInstance() {
         if (instance == null) {
             instance = new AppColorConfig();
         }
         return instance;
-    }
-
-    public AppColorConfig() {
-        mContext = SimiManager.getIntance().getCurrentActivity();
     }
 
     @Override
@@ -204,16 +204,16 @@ public class AppColorConfig extends SimiEntity {
         return new ColorStateList(new int[][]{{0}}, new int[]{parseColor(mButtonBackground)});
     }
 
+    public void setButtonBackground(String mButtonBackground) {
+        this.mButtonBackground = mButtonBackground;
+    }
+
     public ColorStateList getButtonBackground(String color) {
         return new ColorStateList(new int[][]{{0}}, new int[]{parseColor(color)});
     }
 
     public ColorStateList getButtonBackground(int color) {
         return new ColorStateList(new int[][]{{0}}, new int[]{color});
-    }
-
-    public void setButtonBackground(String mButtonBackground) {
-        this.mButtonBackground = mButtonBackground;
     }
 
     public int getButtonTextColor() {
@@ -372,7 +372,7 @@ public class AppColorConfig extends SimiEntity {
         return mThemeType;
     }
 
-    public void setThemeType(String type){
+    public void setThemeType(String type) {
         mThemeType = type;
     }
 
@@ -380,7 +380,7 @@ public class AppColorConfig extends SimiEntity {
         try {
             return Color.parseColor(color);
         } catch (Exception e) {
-            Log.e("AppColorConfig ","parse color Exception " + e.getMessage());
+            Log.e("AppColorConfig ", "parse color Exception " + e.getMessage());
 
         }
         return Color.parseColor("#ffffff");

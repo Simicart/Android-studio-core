@@ -21,6 +21,10 @@ public class KeyData {
         public static String JSON_DATA = "json_data";
     }
 
+    public static class MY_ACCOUNT {
+        public static String LIST_ROWS = "list_row";
+    }
+
     public static class CATEGORY_DETAIL {
         public static String TYPE = "type";
         public static String KEY_WORD = "key_word";
@@ -81,9 +85,9 @@ public class KeyData {
     }
 
     public static class SLIDE_MENU {
+        public static final String ITEM_NAME = "item_name";
         public static String LIST_ITEMS = "list_items";
         public static String LIST_FRAGMENTS = "list_fragments";
-        public static final String ITEM_NAME = "item_name";
     }
 
     public static class REQUEST_PERMISSIONS {
@@ -108,7 +112,7 @@ public class KeyData {
         public static final String MESSAGE_REVIEW = "message_review";
     }
 
-    public static class PRODUCT_DETAIL{
+    public static class PRODUCT_DETAIL {
         public static final String PRODUCT_ID = "id";
         public static final String LIST_PRODUCT_ID = "list_id";
         public static final String IS_FROM_SCAN = "from_scan";
@@ -121,7 +125,7 @@ public class KeyData {
         public static final String INTENT = "intent";
     }
 
-    public static class ANALYTICS{
+    public static class ANALYTICS {
         public static final String SEND_TYPE = "send_type";
         public static final String NAME_SCREEN = "name_screen";
         public static final String DATA_ORDER = "data_order";
@@ -141,14 +145,14 @@ public class KeyData {
         public static final String ENTITY_JSON = "json_entity";
     }
 
-    public static class CUSTOMER_PAGE{
-        public static final  String OPEN_FOR = "openfor";
+    public static class CUSTOMER_PAGE {
+        public static final String OPEN_FOR = "openfor";
     }
 
-    public static class SIGN_IN{
-        public static final  String EMAIL = "email";
-        public static final  String PASSWORD = "pass";
-        public static final  String IS_CHECKOUT = "is_checkout";
+    public static class SIGN_IN {
+        public static final String EMAIL = "email";
+        public static final String PASSWORD = "pass";
+        public static final String IS_CHECKOUT = "is_checkout";
     }
 
     public static class ADDRESS_AUTO_FILL {
@@ -156,16 +160,16 @@ public class KeyData {
         public static final String LIST_COUNTRIES = "list_countries";
     }
 
-    public static class WEBVIEW_PAGE{
+    public static class WEBVIEW_PAGE {
         public static final String URL = "url";
     }
 
-    public static class THANKYOU_PAGE{
+    public static class THANKYOU_PAGE {
         public static final String ORDER_INFO_ENTITY = "order_info_entity";
         public static String PLACE_FOR = "place_for";
     }
 
-    public static class CMS_PAGE{
+    public static class CMS_PAGE {
         public static final String CONTENT = "content";
     }
 
@@ -175,7 +179,7 @@ public class KeyData {
         public static final String PRODUCT_LABEL_METHOD = "method";
     }
 
-    public static class CONDITION_PAGE{
+    public static class CONDITION_PAGE {
         public static final String CONTENT = "content";
     }
 

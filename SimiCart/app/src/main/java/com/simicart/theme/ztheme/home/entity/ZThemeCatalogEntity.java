@@ -20,8 +20,8 @@ public class ZThemeCatalogEntity extends SimiEntity {
 
         mTitle = getData(title);
 
-        if(mType != null) {
-            if(mType.equals("cat")) {
+        if (mType != null) {
+            if (mType.equals("cat")) {
                 categoryZTheme = new Category();
                 categoryZTheme.setJSONObject(mJSON);
                 categoryZTheme.parse();

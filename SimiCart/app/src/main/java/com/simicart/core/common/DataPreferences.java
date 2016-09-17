@@ -17,12 +17,6 @@ import java.util.ArrayList;
  */
 public class DataPreferences {
 
-    public static Context mContext;
-    public static SharedPreferences mSharedPre;
-    public static boolean enNotification = true;
-    public static ArrayList<CurrencyEntity> listCurrency;
-    public static ArrayList<Stores> listStores;
-
     public static final String NAME_REFERENCE = "simicart";
     private static final String RESTART_COUNT = "RestartCount";
     private static final String CATEGORY_ID = "CategoryKey";
@@ -40,6 +34,11 @@ public class DataPreferences {
     private static final String CHECK_REMEMBER_PASSWORD = "check_remember_password";
     private static final String EMAIL_CARD_CREDIT_CARD = "EmailCardCreditCard";
     private static final String SIMI_CREDIT_CARD = "SimiCreditCard";
+    public static Context mContext;
+    public static SharedPreferences mSharedPre;
+    public static boolean enNotification = true;
+    public static ArrayList<CurrencyEntity> listCurrency;
+    public static ArrayList<Stores> listStores;
 
     public static void init(Context context) {
         mContext = context;

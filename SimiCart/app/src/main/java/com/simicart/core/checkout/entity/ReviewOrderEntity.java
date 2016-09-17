@@ -8,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -109,29 +108,28 @@ public class ReviewOrderEntity extends SimiEntity {
         return mListShippingMethod;
     }
 
+    public void setListShippingMethod(ArrayList<ShippingMethodEntity> listShipping) {
+        mListShippingMethod = listShipping;
+    }
+
     public ArrayList<PaymentMethodEntity> getListPaymentMethod() {
         return mListPaymentMethod;
-    }
-
-    public TotalPrice getTotalPrice() {
-        return mTotalPrice;
-    }
-
-    public ArrayList<Condition> getListCondition() {
-        return mListCondition;
-    }
-
-
-    public void setTotalPrice(TotalPrice totalPrice) {
-        mTotalPrice = totalPrice;
     }
 
     public void setListPaymentMethod(ArrayList<PaymentMethodEntity> listPayment) {
         mListPaymentMethod = listPayment;
     }
 
-    public void setListShippingMethod(ArrayList<ShippingMethodEntity> listShipping) {
-        mListShippingMethod = listShipping;
+    public TotalPrice getTotalPrice() {
+        return mTotalPrice;
+    }
+
+    public void setTotalPrice(TotalPrice totalPrice) {
+        mTotalPrice = totalPrice;
+    }
+
+    public ArrayList<Condition> getListCondition() {
+        return mListCondition;
     }
 
     protected void setListCondition(ArrayList<Condition> conditions) {

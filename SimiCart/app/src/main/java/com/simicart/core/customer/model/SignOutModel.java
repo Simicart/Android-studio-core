@@ -6,9 +6,9 @@ import com.simicart.core.config.Constants;
 public class SignOutModel extends SimiModel {
 
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = Constants.SIGN_OUT;
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = Constants.SIGN_OUT;
+    }
 
 }

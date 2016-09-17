@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.config.DataLocal;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.entity.GenderConfig;
 
@@ -58,7 +58,7 @@ public class GenderAdapter extends BaseAdapter {
             textView.setText(SimiTranslator.getInstance().translate(
                     genderConfigs.get(position - 1).getLabel()));
         }
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             textView.setGravity(Gravity.RIGHT);
         }
         return convertView;

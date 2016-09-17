@@ -47,7 +47,7 @@ public class SpecialDayAdapter extends RecyclerView.Adapter<SpecialDayAdapter.Sp
         String[] date = specialObject.getDate().split("-");
         cal.set(Integer.parseInt(date[0]), (Integer.parseInt(date[1]) - 1), Integer.parseInt(date[2]));
         SimpleDateFormat mFormat = new SimpleDateFormat("EEE MMM dd");
-        if(isHoliday == false) {
+        if (isHoliday == false) {
             holder.txt.setText(mFormat.format(cal.getTime()) + "  " + specialObject.getTime_open() + " - " + specialObject.getTime_close());
         } else {
             holder.txt.setText(mFormat.format(cal.getTime()) + "  " + SimiTranslator.getInstance().translate("Close"));

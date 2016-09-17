@@ -14,8 +14,6 @@ import com.simicart.core.common.KeyData;
 import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 
-import java.util.HashMap;
-
 @SuppressLint("SetJavaScriptEnabled")
 public class CMSFragment extends SimiFragment {
 

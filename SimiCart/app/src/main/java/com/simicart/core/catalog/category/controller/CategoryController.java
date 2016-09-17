@@ -1,6 +1,5 @@
 package com.simicart.core.catalog.category.controller;
 
-import android.util.Log;
 import android.view.View;
 
 import com.simicart.core.base.controller.SimiController;
@@ -12,7 +11,6 @@ import com.simicart.core.catalog.category.delegate.CategoryDelegate;
 import com.simicart.core.catalog.category.entity.Category;
 import com.simicart.core.catalog.category.model.CategoryModel;
 import com.simicart.core.catalog.category.model.ListProductModel;
-import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.catalog.product.entity.Product;
 import com.simicart.core.catalog.product.entity.ProductList;
 import com.simicart.core.common.KeyData;
@@ -87,7 +85,7 @@ public class CategoryController extends SimiController {
             @Override
             public void onSuccess(SimiCollection collection) {
                 ArrayList<String> listID = listProductModel.getListID();
-                drawListProducts(listProductModel.getListProducts(),listID);
+                drawListProducts(listProductModel.getListProducts(), listID);
             }
         });
         listProductModel.request();
@@ -100,7 +98,7 @@ public class CategoryController extends SimiController {
         mDelegate.showListCategory(categoryView);
     }
 
-    public void drawListProducts(ArrayList<Product> listProducts,ArrayList<String> listID) {
+    public void drawListProducts(ArrayList<Product> listProducts, ArrayList<String> listID) {
         View listProductView = null;
         if (listProducts.size() > 0) {
             ProductList productList = new ProductList();
@@ -116,7 +114,7 @@ public class CategoryController extends SimiController {
     @Override
     public void onResume() {
         drawListCategory(((CategoryModel) mModel).getListCategory());
-        drawListProducts(listProductModel.getListProducts(),listProductModel.getListID());
+        drawListProducts(listProductModel.getListProducts(), listProductModel.getListID());
         mDelegate.updateView(mModel.getCollection());
     }
 

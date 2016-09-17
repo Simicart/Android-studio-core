@@ -2,7 +2,6 @@ package com.simicart.core.catalog.product.block;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 
 import com.simicart.core.base.block.SimiBlock;
@@ -17,67 +16,67 @@ import com.simicart.core.style.VerticalViewPager2;
 
 import java.util.ArrayList;
 
-public class ProductDetailChildBlock extends SimiBlock implements ProductDetailChildDelegate{
+public class ProductDetailChildBlock extends SimiBlock implements ProductDetailChildDelegate {
 
-	protected VerticalViewPager2 mPagerChild;
-	protected Product mProduct;
-	protected FragmentManager mFragmentChild;
-	protected ProductDetailParentController mParentController;
-	protected ProductDetailChildeAdapter mAdapter;
+    protected VerticalViewPager2 mPagerChild;
+    protected Product mProduct;
+    protected FragmentManager mFragmentChild;
+    protected ProductDetailParentController mParentController;
+    protected ProductDetailChildeAdapter mAdapter;
 
-	public void setDelegate(ProductDetailParentController delegate) {
-		mParentController = delegate;
-	}
+    public ProductDetailChildBlock(View view, Context context,
+                                   FragmentManager fragmentChild) {
+        super(view, context);
+        this.mFragmentChild = fragmentChild;
 
-	public ProductDetailChildBlock(View view, Context context,
-			FragmentManager fragmentChild) {
-		super(view, context);
-		this.mFragmentChild = fragmentChild;
+    }
 
-	}
+    public void setDelegate(ProductDetailParentController delegate) {
+        mParentController = delegate;
+    }
 
-	@Override
-	public void initView() {
-		mPagerChild = (VerticalViewPager2) mView.findViewById(Rconfig
-				.getInstance().id("pager_child"));
-		mPagerChild.setOffscreenPageLimit(3);
-	}
+    @Override
+    public void initView() {
+        mPagerChild = (VerticalViewPager2) mView.findViewById(Rconfig
+                .getInstance().id("pager_child"));
+        mPagerChild.setOffscreenPageLimit(3);
+    }
 
-	@Override
-	public void drawView(SimiCollection collection) {
-		if (null != collection) {
-			mProduct = getProductFromCollection(collection);
-			if (null != mProduct) {
-				showImage();
-			}
+    @Override
+    public void drawView(SimiCollection collection) {
+        if (null != collection) {
+            mProduct = getProductFromCollection(collection);
+            if (null != mProduct) {
+                showImage();
+            }
 
-		}
-	}
+        }
+    }
 
-	protected Product getProductFromCollection(SimiCollection collection) {
-		Product product = null;
-		ArrayList<SimiEntity> entity = collection.getCollection();
-		if (null != entity && entity.size() > 0) {
-			product = (Product) entity.get(0);
-		}
-		return product;
-	}
+    protected Product getProductFromCollection(SimiCollection collection) {
+        Product product = null;
+        ArrayList<SimiEntity> entity = collection.getCollection();
+        if (null != entity && entity.size() > 0) {
+            product = (Product) entity.get(0);
+        }
+        return product;
+    }
 
-	protected void showImage() {
-		if(mProduct.getImages() != null && mProduct.getImages().length > 0) {
-			String[] Images = mProduct.getImages();
-			mAdapter = new ProductDetailChildeAdapter(
-					mFragmentChild, Images);
-			mAdapter.setDelegate(mParentController);
+    protected void showImage() {
+        if (mProduct.getImages() != null && mProduct.getImages().length > 0) {
+            String[] Images = mProduct.getImages();
+            mAdapter = new ProductDetailChildeAdapter(
+                    mFragmentChild, Images);
+            mAdapter.setDelegate(mParentController);
 
 
-			mPagerChild.setAdapter(mAdapter);
-		}
-	}
+            mPagerChild.setAdapter(mAdapter);
+        }
+    }
 
-	@Override
-	public void updateIndicator() {
-		mParentController.updateViewPager(mPagerChild);
-	}
+    @Override
+    public void updateIndicator() {
+        mParentController.updateViewPager(mPagerChild);
+    }
 
 }

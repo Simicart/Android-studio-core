@@ -1,7 +1,6 @@
 package com.simicart.core.notification;
 
 import com.simicart.core.base.model.SimiModel;
-import com.simicart.core.base.network.request.SimiRequest;
 
 /**
  * Created by frank on 7/12/16.

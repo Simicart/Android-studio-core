@@ -103,12 +103,12 @@ public class SimiTextRowComponent extends SimiRowComponent {
         }
     }
 
-    public void setInputType(int inputType) {
-        mInputType = inputType;
-    }
-
     public int getInputType() {
         return mInputType;
+    }
+
+    public void setInputType(int inputType) {
+        mInputType = inputType;
     }
 
     public void changeValue(Object value) {

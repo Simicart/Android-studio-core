@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.simicart.core.base.delegate.ModelFailCallBack;
@@ -29,6 +28,7 @@ import java.util.HashMap;
  */
 public class TwoCheckoutFragment extends PaymentFragment {
 
+    protected LinearLayout llPayment;
     String LIVE_URL = "https://www.2checkout.com/checkout/purchase?";
     String SANBOX_URL = "https://sandbox.2checkout.com/checkout/purchase?";
 
@@ -39,8 +39,6 @@ public class TwoCheckoutFragment extends PaymentFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    protected LinearLayout llPayment;
 
     @Nullable
     @Override

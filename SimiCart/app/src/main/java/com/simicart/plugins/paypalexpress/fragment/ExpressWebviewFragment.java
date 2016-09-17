@@ -19,7 +19,6 @@ import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.payment.WebviewPaymentCallBack;
 import com.simicart.core.base.payment.WebviewPaymentComponent;
-import com.simicart.core.catalog.categorydetail.model.CategoryDetailModel;
 import com.simicart.core.checkout.entity.ShippingMethodEntity;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
@@ -35,6 +34,10 @@ import java.util.HashMap;
  */
 public class ExpressWebviewFragment extends SimiFragment {
 
+    protected LinearLayout llPayment;
+    protected String mUrl;
+    protected boolean isReviewAddress;
+
     public static ExpressWebviewFragment newInstance(SimiData data) {
         ExpressWebviewFragment fragment = new ExpressWebviewFragment();
         Bundle bundle = new Bundle();
@@ -42,10 +45,6 @@ public class ExpressWebviewFragment extends SimiFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    protected LinearLayout llPayment;
-    protected String mUrl;
-    protected boolean isReviewAddress;
 
     @Nullable
     @Override

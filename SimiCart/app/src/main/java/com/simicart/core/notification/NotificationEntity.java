@@ -34,12 +34,6 @@ public class NotificationEntity extends SimiEntity implements Serializable {
     private String message = "message";
     private String categoryName = "categoryName";
 
-    public enum TYPE_OPEN {
-        PRODUCT_DETAIL,
-        CATEGORY,
-        WEBVIEW
-    }
-
     @Override
     public void parse() {
 
@@ -70,7 +64,7 @@ public class NotificationEntity extends SimiEntity implements Serializable {
         // url
         if (hasKey(url)) {
             mUrl = getData(url);
-            Log.e("NotificationEntity ","-----> URL " + mUrl);
+            Log.e("NotificationEntity ", "-----> URL " + mUrl);
         }
 
 
@@ -114,7 +108,6 @@ public class NotificationEntity extends SimiEntity implements Serializable {
 
     }
 
-
     public String getTitle() {
         return mTitle;
     }
@@ -130,7 +123,6 @@ public class NotificationEntity extends SimiEntity implements Serializable {
     public void setUrl(String mUrl) {
         this.mUrl = mUrl;
     }
-
 
     public TYPE_OPEN getType() {
         return mType;
@@ -194,5 +186,11 @@ public class NotificationEntity extends SimiEntity implements Serializable {
 
     public void setmMessage(String mMessage) {
         this.mMessage = mMessage;
+    }
+
+    public enum TYPE_OPEN {
+        PRODUCT_DETAIL,
+        CATEGORY,
+        WEBVIEW
     }
 }

@@ -1,7 +1,5 @@
 package com.simicart.plugins.wishlist.controller;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,7 +12,6 @@ import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.simicart.MainActivity;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
@@ -28,16 +25,18 @@ import com.simicart.plugins.wishlist.delegate.MyWishListDelegate;
 import com.simicart.plugins.wishlist.entity.ItemWishList;
 import com.simicart.plugins.wishlist.model.MyWishListModel;
 
+import java.util.ArrayList;
+
 @SuppressLint("ClickableViewAccessibility")
 public class MyWishListController extends SimiController {
 
     protected MyWishListDelegate mDelegate;
     protected OnTouchListener onTouchShare;
-    private int mCurrentOffset = 0;
-    int limit = 10;
     protected String mShareMessage = "";
     protected OnTouchListener mShareListener;
     protected OnTouchListener mTabletShareListener;
+    int limit = 10;
+    private int mCurrentOffset = 0;
 
     public OnTouchListener getShareListener() {
         return mShareListener;

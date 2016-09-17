@@ -18,6 +18,8 @@ import com.simicart.core.customer.controller.CustomerController;
  */
 public class CustomerFragment extends SimiFragment {
 
+    protected CustomerController mController;
+
     public static CustomerFragment newInstance(SimiData data) {
         CustomerFragment fragment = new CustomerFragment();
         Bundle bundle = new Bundle();
@@ -25,10 +27,6 @@ public class CustomerFragment extends SimiFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-
-    protected CustomerController mController;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

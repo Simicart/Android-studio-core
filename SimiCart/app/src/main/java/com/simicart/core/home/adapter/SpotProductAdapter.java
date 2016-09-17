@@ -2,7 +2,6 @@ package com.simicart.core.home.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,7 @@ import com.simicart.core.common.ValueData;
 import com.simicart.core.common.price.ProductPriceView;
 import com.simicart.core.common.price.ProductPriceViewProductGridV03;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.DataLocal;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
 
 import org.json.JSONArray;
@@ -41,7 +40,7 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
     protected ArrayList<String> mListID;
     protected boolean isHomePage;
 
-    public SpotProductAdapter(ArrayList<Product> products){
+    public SpotProductAdapter(ArrayList<Product> products) {
         mProducts = products;
     }
 
@@ -75,7 +74,7 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
         final Product product = mProducts.get(position);
 
         if (isHomePage) {
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 holder.tv_name.setGravity(Gravity.RIGHT);
                 holder.ll_price.setGravity(Gravity.RIGHT);
             } else {
@@ -116,7 +115,7 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
             if (null != view) {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                if (DataLocal.isLanguageRTL) {
+                if (AppStoreConfig.getInstance().isRTL()) {
                     holder.ll_price.setGravity(Gravity.RIGHT);
                 } else {
                     holder.ll_price.setGravity(Gravity.LEFT);
@@ -130,20 +129,21 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
             @Override
             public void onClick(View v) {
                 String id = product.getId();
-                if(null == mListID){
-                mListID = new ArrayList<>();
-                for (int i = 0; i < mProducts.size(); i++) {
-                    mListID.add(mProducts.get(i).getId());
-                }}
-                HashMap<String,Object> hmData = new HashMap<>();
+                if (null == mListID) {
+                    mListID = new ArrayList<>();
+                    for (int i = 0; i < mProducts.size(); i++) {
+                        mListID.add(mProducts.get(i).getId());
+                    }
+                }
+                HashMap<String, Object> hmData = new HashMap<>();
                 hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, id);
-                hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID,  mListID);
+                hmData.put(KeyData.PRODUCT_DETAIL.LIST_PRODUCT_ID, mListID);
                 SimiManager.getIntance().openProductDetail(hmData);
             }
         });
 
         // dispatch event for product label
-        if(product.getJSONObject().has("product_label")) {
+        if (product.getJSONObject().has("product_label")) {
             try {
                 JSONArray array = product.getJSONObject().getJSONArray("product_label");
                 dispatchEventForProductLabel(holder.rlImage, array);
@@ -152,6 +152,22 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
             }
         }
 
+    }
+
+    protected void dispatchEventForProductLabel(View view, JSONArray array) {
+        HashMap<String, Object> hmData = new HashMap<>();
+        hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_VIEW, view);
+        hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_JSON, array);
+        hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_METHOD, ValueData.PRODUCT_LABEL.HORIZONTAL);
+        SimiEvent.dispatchEvent(KeyEvent.PRODUCT_LABEL.PRODUCT_LABEL_ADD_ITEM, hmData);
+    }
+
+    public void setHomePage(boolean isHome) {
+        isHomePage = isHome;
+    }
+
+    public void setListID(ArrayList<String> ids) {
+        mListID = ids;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -171,21 +187,5 @@ public class SpotProductAdapter extends RecyclerView.Adapter<SpotProductAdapter.
             llItem = (LinearLayout) itemView.findViewById(Rconfig.getInstance().id("product_list_details"));
             rlImage = (RelativeLayout) itemView.findViewById(Rconfig.getInstance().id("rel_product_list_spot"));
         }
-    }
-
-    protected void dispatchEventForProductLabel(View view, JSONArray array) {
-        HashMap<String,Object> hmData = new HashMap<>();
-        hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_VIEW, view);
-        hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_JSON, array);
-        hmData.put(KeyData.PRODUCT_LABEL.PRODUCT_LABEL_METHOD, ValueData.PRODUCT_LABEL.HORIZONTAL);
-        SimiEvent.dispatchEvent(KeyEvent.PRODUCT_LABEL.PRODUCT_LABEL_ADD_ITEM, hmData);
-    }
-
-    public void setHomePage(boolean isHome) {
-        isHomePage = isHome;
-    }
-
-    public void setListID(ArrayList<String> ids){
-        mListID = ids;
     }
 }

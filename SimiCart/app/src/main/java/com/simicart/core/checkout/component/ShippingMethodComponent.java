@@ -57,8 +57,7 @@ public class ShippingMethodComponent extends SimiComponent implements ShippingMe
                 if (null != mResumeValue) {
                     if (mResumeValue.equals(entity.getID())) {
                         entity.setSelected(true);
-                    }
-                    else{
+                    } else {
                         entity.setSelected(false);
                     }
                 }

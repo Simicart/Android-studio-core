@@ -28,118 +28,116 @@ import java.util.ArrayList;
 
 public class MyWistListBlock extends SimiBlock implements MyWishListDelegate {
 
-	public static final String TITLE = "My Wishlist";
-	public static final String ITEMS = "Items";
-	public static final String ITEM = "Item";
-	public static final String SHARE_WISHLIST = "Share Wishlist";
+    public static final String TITLE = "My Wishlist";
+    public static final String ITEMS = "Items";
+    public static final String ITEM = "Item";
+    public static final String SHARE_WISHLIST = "Share Wishlist";
+    protected LinearLayout ll_share_wishlist;
+    protected ImageView im_shareAll;
+    protected TextView tv_shareAll;
+    protected MyWishListAdapter mAdapter;
+    protected RelativeLayout rlt_layout_top;
+    protected RecyclerView rv_wishlist;
+    private ArrayList<ItemWishList> mWishLists;
 
-	private ArrayList<ItemWishList> mWishLists;
+    public MyWistListBlock(View view, Context context) {
+        super(view, context);
+    }
 
-	protected LinearLayout ll_share_wishlist;
-	protected ImageView im_shareAll;
-	protected TextView tv_shareAll;
-	protected MyWishListAdapter mAdapter;
-	protected RelativeLayout rlt_layout_top;
-	protected RecyclerView rv_wishlist;
+    public void setShareListener(OnTouchListener touchListener) {
+        ll_share_wishlist.setOnTouchListener(touchListener);
+    }
 
-	public void setShareListener(OnTouchListener touchListener) {
-		ll_share_wishlist.setOnTouchListener(touchListener);
-	}
+    @Override
+    public void initView() {
+        tv_shareAll = (TextView) mView.findViewById(Rconfig.getInstance().id(
+                "tv_shareall"));
+        tv_shareAll.setText(SimiTranslator.getInstance().translate(SHARE_WISHLIST));
 
-	public MyWistListBlock(View view, Context context) {
-		super(view, context);
-	}
+        ll_share_wishlist = (LinearLayout) mView.findViewById(Rconfig
+                .getInstance().id("ll_share_wishlist"));
+        im_shareAll = (ImageView) mView.findViewById(Rconfig.getInstance().id(
+                "im_shareall"));
+        im_shareAll.setBackgroundDrawable(AppColorConfig.getInstance().getIcon("wishlist_share_icon"));
+        rlt_layout_top = (RelativeLayout) mView.findViewById(Rconfig
+                .getInstance().id("rl_mywishlist_top"));
+        rv_wishlist = (RecyclerView) mView.findViewById(Rconfig.getInstance().id("rv_mywistlist"));
+        if (DataLocal.isTablet) {
+            rv_wishlist.setLayoutManager(new GridLayoutManager(mContext, 2));
+        } else {
+            rv_wishlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        }
+    }
 
-	@Override
-	public void initView() {
-		tv_shareAll = (TextView) mView.findViewById(Rconfig.getInstance().id(
-				"tv_shareall"));
-		tv_shareAll.setText(SimiTranslator.getInstance().translate(SHARE_WISHLIST));
+    @Override
+    public void drawView(SimiCollection collection) {
+        ArrayList<SimiEntity> entity = collection.getCollection();
+        if (null != entity && entity.size() > 0) {
+            mWishLists = new ArrayList<ItemWishList>();
+            for (SimiEntity simiEntity : entity) {
+                ItemWishList itemWishList = (ItemWishList) simiEntity;
+                mWishLists.add(itemWishList);
+            }
+            setWishLists();
+        }
+    }
 
-		ll_share_wishlist = (LinearLayout) mView.findViewById(Rconfig
-				.getInstance().id("ll_share_wishlist"));
-		im_shareAll = (ImageView) mView.findViewById(Rconfig.getInstance().id(
-				"im_shareall"));
-		im_shareAll.setBackgroundDrawable(AppColorConfig.getInstance().getIcon("wishlist_share_icon"));
-		rlt_layout_top = (RelativeLayout) mView.findViewById(Rconfig
-				.getInstance().id("rl_mywishlist_top"));
-		rv_wishlist = (RecyclerView) mView.findViewById(Rconfig.getInstance().id("rv_mywistlist"));
-		if(DataLocal.isTablet) {
-			rv_wishlist.setLayoutManager(new GridLayoutManager(mContext, 2));
-		} else {
-			rv_wishlist.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-		}
-	}
+    public void setWishLists() {
+        if (null == mWishLists || mWishLists.size() == 0) {
+            rlt_layout_top.setVisibility(View.GONE);
+            LinearLayout ll_body = (LinearLayout) mView.findViewById(Rconfig
+                    .getInstance().id("ll_body"));
+            ll_body.removeAllViewsInLayout();
+            TextView tv_notify = new TextView(mContext);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            params.gravity = Gravity.CENTER;
+            tv_notify.setText(SimiTranslator.getInstance().translate(
+                    "Your Wishlist is empty"));
+            tv_notify.setGravity(Gravity.CENTER);
+            tv_notify.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+            ll_body.addView(tv_notify, params);
+            return;
+        }
+        mAdapter = new MyWishListAdapter(mWishLists, this);
+        rv_wishlist.setAdapter(mAdapter);
+    }
 
-	@Override
-	public void drawView(SimiCollection collection) {
-		ArrayList<SimiEntity> entity = collection.getCollection();
-		if (null != entity && entity.size() > 0) {
-			mWishLists = new ArrayList<ItemWishList>();
-			for (SimiEntity simiEntity : entity) {
-				ItemWishList itemWishList = (ItemWishList) simiEntity;
-				mWishLists.add(itemWishList);
-			}
-			setWishLists();
-		}
-	}
+    // MyWishListDelegate
+    @Override
+    public void setWishlist_qty(int wishlist_qty) {
+        TextView tv_qtyItem = (TextView) mView.findViewById(Rconfig
+                .getInstance().id("tv_qtyItem"));
+        if (wishlist_qty < 2) {
+            tv_qtyItem.setText(wishlist_qty + " "
+                    + SimiTranslator.getInstance().translate(ITEM));
+        } else {
+            tv_qtyItem.setText(wishlist_qty + " "
+                    + SimiTranslator.getInstance().translate(ITEMS));
+        }
+    }
 
-	public void setWishLists() {
-		if (null == mWishLists || mWishLists.size() == 0) {
-			rlt_layout_top.setVisibility(View.GONE);
-			LinearLayout ll_body = (LinearLayout) mView.findViewById(Rconfig
-					.getInstance().id("ll_body"));
-			ll_body.removeAllViewsInLayout();
-			TextView tv_notify = new TextView(mContext);
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT,
-					LinearLayout.LayoutParams.MATCH_PARENT);
-			params.gravity = Gravity.CENTER;
-			tv_notify.setText(SimiTranslator.getInstance().translate(
-					"Your Wishlist is empty"));
-			tv_notify.setGravity(Gravity.CENTER);
-			tv_notify.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
-			ll_body.addView(tv_notify, params);
-			return;
-		}
-		mAdapter = new MyWishListAdapter(mWishLists, this);
-		rv_wishlist.setAdapter(mAdapter);
-	}
+    @Override
+    public void updateData(ArrayList<ItemWishList> items) {
+        mWishLists = items;
+        setWishLists();
+    }
 
-	// MyWishListDelegate
-	@Override
-	public void setWishlist_qty(int wishlist_qty) {
-		TextView tv_qtyItem = (TextView) mView.findViewById(Rconfig
-				.getInstance().id("tv_qtyItem"));
-		if (wishlist_qty < 2) {
-			tv_qtyItem.setText(wishlist_qty + " "
-					+ SimiTranslator.getInstance().translate(ITEM));
-		} else {
-			tv_qtyItem.setText(wishlist_qty + " "
-					+ SimiTranslator.getInstance().translate(ITEMS));
-		}
-	}
+    @Override
+    public boolean isShown() {
+        return mView.isShown();
+    }
 
-	@Override
-	public void updateData(ArrayList<ItemWishList> items) {
-		mWishLists = items;
-		setWishLists();
-	}
+    @Override
+    public void showDetail(String id) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public boolean isShown() {
-		return mView.isShown();
-	}
+    }
 
-	@Override
-	public void showDetail(String id) {
-		// TODO Auto-generated method stub
+    @Override
+    public void requestShowNext() {
+        // TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void requestShowNext() {
-		// TODO Auto-generated method stub
-
-	}
+    }
 }

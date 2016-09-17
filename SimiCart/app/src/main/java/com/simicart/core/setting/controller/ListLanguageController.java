@@ -16,48 +16,48 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ListLanguageController extends SimiController {
-	protected OnItemClickListener mClicker;
-	ArrayList<String> list_lag;
-	AddressEntity addressBookDetail;
-	ListOfChoiceDelegate mDelegate;
+    protected OnItemClickListener mClicker;
+    ArrayList<String> list_lag;
+    AddressEntity addressBookDetail;
+    ListOfChoiceDelegate mDelegate;
 
-	public OnItemClickListener getClicker() {
-		return mClicker;
-	}
+    public OnItemClickListener getClicker() {
+        return mClicker;
+    }
 
-	@Override
-	public void onStart() {
-		mClicker = new OnItemClickListener() {
+    @Override
+    public void onStart() {
+        mClicker = new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				selectItem(position);
-			}
-		};
-	}
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                selectItem(position);
+            }
+        };
+    }
 
-	protected void selectItem(int position) {
-		Collections.sort(list_lag);
-		String language = list_lag.get(position).toString();
-		String id = DataPreferences.getStoreID();
-		for (Stores store : DataPreferences.listStores) {
-			if (language.equals(store.getStoreName())) {
-				if (!id.equals(store.getStoreID())) {
-					DataLocal.listCms.clear();
+    protected void selectItem(int position) {
+        Collections.sort(list_lag);
+        String language = list_lag.get(position).toString();
+        String id = DataPreferences.getStoreID();
+        for (Stores store : DataPreferences.listStores) {
+            if (language.equals(store.getStoreName())) {
+                if (!id.equals(store.getStoreID())) {
+                    DataLocal.listCms.clear();
 //					UtilsEvent.itemsList.clear();
-					DataPreferences.saveStoreID(store.getStoreID());
-					SimiManager.getIntance().changeStoreView();
-				}
-			}
-		}
-	}
+                    DataPreferences.saveStoreID(store.getStoreID());
+                    SimiManager.getIntance().changeStoreView();
+                }
+            }
+        }
+    }
 
-	@Override
-	public void onResume() {
-	}
+    @Override
+    public void onResume() {
+    }
 
-	public void setListLanguage(ArrayList<String> list_lag) {
-		this.list_lag = list_lag;
-	}
+    public void setListLanguage(ArrayList<String> list_lag) {
+        this.list_lag = list_lag;
+    }
 }

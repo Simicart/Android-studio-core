@@ -4,15 +4,12 @@ import com.simicart.core.base.model.entity.SimiEntity;
 
 public class StateEntity extends SimiEntity {
 
-    private String mID;
-    private String mName;
-    private String mCode;
-
-
     protected String STATE_ID = "state_id";
     protected String STATE_NAME = "state_name";
     protected String STATE_CODE = "state_code";
-
+    private String mID;
+    private String mName;
+    private String mCode;
 
     @Override
     public void parse() {

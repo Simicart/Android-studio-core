@@ -11,7 +11,7 @@ public interface CategoryDelegate extends SimiDelegate {
 
     public void onUpdateData(ArrayList<Category> categories);
 
-	public void onSelectedItem(int position);
+    public void onSelectedItem(int position);
 
     public void showListCategory(View view);
 

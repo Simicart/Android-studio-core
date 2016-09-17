@@ -14,64 +14,64 @@ import java.util.ArrayList;
 
 public class CartModel extends SimiModel {
 
-	protected int mQty;
-	protected TotalPrice mTotalPrice;
-	protected ArrayList<Cart> listCarts;
+    protected int mQty;
+    protected TotalPrice mTotalPrice;
+    protected ArrayList<Cart> listCarts;
 
-	public int getQty() {
-		return mQty;
-	}
+    public int getQty() {
+        return mQty;
+    }
 
-	@Override
-	protected void parseData() {
-		try {
-			JSONArray list = this.mJSON.getJSONArray("data");
-			collection = new SimiCollection();
-			collection.setJSON(mJSON);
-			mQty = 0;
-			listCarts = new ArrayList<>();
-			for (int i = 0; i < list.length(); i++) {
-				Cart cart = new Cart();
-				cart.parse(list.getJSONObject(i));
-				mQty += cart.getQty();
-				collection.addEntity(cart);
-				listCarts.add(cart);
-			}
+    @Override
+    protected void parseData() {
+        try {
+            JSONArray list = this.mJSON.getJSONArray("data");
+            collection = new SimiCollection();
+            collection.setJSON(mJSON);
+            mQty = 0;
+            listCarts = new ArrayList<>();
+            for (int i = 0; i < list.length(); i++) {
+                Cart cart = new Cart();
+                cart.parse(list.getJSONObject(i));
+                mQty += cart.getQty();
+                collection.addEntity(cart);
+                listCarts.add(cart);
+            }
 
-			try {
-				if (mJSON.has(Constants.OTHER)) {
-					JSONObject jsonPrice = mJSON.getJSONObject(Constants.OTHER);
-					if (null != jsonPrice) {
-						collection.setJSONOther(jsonPrice);
-						mTotalPrice = new TotalPrice();
-						mTotalPrice.setJSONObject(jsonPrice);
-					}
-				}
-			} catch (JSONException e) {
-				mTotalPrice = null;
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+            try {
+                if (mJSON.has(Constants.OTHER)) {
+                    JSONObject jsonPrice = mJSON.getJSONObject(Constants.OTHER);
+                    if (null != jsonPrice) {
+                        collection.setJSONOther(jsonPrice);
+                        mTotalPrice = new TotalPrice();
+                        mTotalPrice.setJSONObject(jsonPrice);
+                    }
+                }
+            } catch (JSONException e) {
+                mTotalPrice = null;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = Constants.GET_CART;
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = Constants.GET_CART;
+    }
 
-	public TotalPrice getTotalPrice() {
-		return mTotalPrice;
-	}
+    public TotalPrice getTotalPrice() {
+        return mTotalPrice;
+    }
 
-	public ArrayList<Cart> getListCarts() {
-		return listCarts;
-	}
+    public ArrayList<Cart> getListCarts() {
+        return listCarts;
+    }
 
-	@Override
-	protected void setEnableCache() {
-		enableCache = true;
-	}
+    @Override
+    protected void setEnableCache() {
+        enableCache = true;
+    }
 
 }

@@ -14,7 +14,7 @@ import com.simicart.core.shortcutbadger.util.ImageUtil;
  * Created with IntelliJ IDEA.
  * User: leolin
  * Date: 2013/11/14
- * Time: 
+ * Time:
  * To change this template use File | Settings | File Templates.
  */
 @Deprecated

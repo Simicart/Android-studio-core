@@ -36,7 +36,7 @@ public class AnalyticModel extends SimiModel {
         isShowNotify = false;
     }
 
-    public String getTrackerID(){
+    public String getTrackerID() {
         return mTrackerID;
     }
 }

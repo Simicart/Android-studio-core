@@ -1,6 +1,5 @@
 package com.simicart.theme.ztheme.home.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,45 +14,45 @@ import com.simicart.theme.ztheme.home.block.HomeZThemeBlock;
 import com.simicart.theme.ztheme.home.controller.HomeZThemeController;
 
 public class HomeZThemeFragment extends SimiFragment {
-	protected HomeZThemeController mController;
-	protected HomeZThemeBlock mBlock;
+    protected HomeZThemeController mController;
+    protected HomeZThemeBlock mBlock;
 
-	public static HomeZThemeFragment newInstance() {
-		HomeZThemeFragment fragment = new HomeZThemeFragment();
-		return fragment;
-	}
+    public static HomeZThemeFragment newInstance() {
+        HomeZThemeFragment fragment = new HomeZThemeFragment();
+        return fragment;
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setScreenName("Home Screen");
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setScreenName("Home Screen");
+    }
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		rootView = inflater.inflate(
-				Rconfig.getInstance().layout("theme_z_fragment_home"), null);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        rootView = inflater.inflate(
+                Rconfig.getInstance().layout("theme_z_fragment_home"), null);
 
-		mBlock = new HomeZThemeBlock(rootView, getActivity());
-		mBlock.initView();
-		if (null == mController) {
-			mController = new HomeZThemeController();
-			mController.setDelegate(mBlock);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
-		mBlock.setListViewListener(mController.getOnGroupClickListener(), mController.getOnChildClickListener());
+        mBlock = new HomeZThemeBlock(rootView, getActivity());
+        mBlock.initView();
+        if (null == mController) {
+            mController = new HomeZThemeController();
+            mController.setDelegate(mBlock);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.onResume();
+        }
+        mBlock.setListViewListener(mController.getOnGroupClickListener(), mController.getOnChildClickListener());
 
-		// initial search
-		if(!DataLocal.isTablet) {
-			SearchComponent searchComponent = new SearchComponent();
-			View searchView = searchComponent.createView();
-			LinearLayout llSearch = (LinearLayout) rootView.findViewById(Rconfig.getInstance().id("ll_search"));
-			llSearch.addView(searchView);
-		}
+        // initial search
+        if (!DataLocal.isTablet) {
+            SearchComponent searchComponent = new SearchComponent();
+            View searchView = searchComponent.createView();
+            LinearLayout llSearch = (LinearLayout) rootView.findViewById(Rconfig.getInstance().id("ll_search"));
+            llSearch.addView(searchView);
+        }
 
-		return rootView;
-	}
+        return rootView;
+    }
 }

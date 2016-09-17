@@ -39,7 +39,7 @@ public class SimiChatActivity extends ActionBarActivity implements ChatListener 
         Toolbar toolbar = (Toolbar) findViewById(Rconfig.getInstance().id("toolbar"));
         toolbar.setBackgroundColor(Color.parseColor("#FF7E00"));
         setSupportActionBar(toolbar);
-        REQUIRE_EDITABLE = PreChatForm. Field.REQUIRED_EDITABLE;
+        REQUIRE_EDITABLE = PreChatForm.Field.REQUIRED_EDITABLE;
         OPTION_EDITABLE = PreChatForm.Field.OPTIONAL_EDITABLE;
         NOT_REQUIRE = PreChatForm.Field.NOT_REQUIRED;
 

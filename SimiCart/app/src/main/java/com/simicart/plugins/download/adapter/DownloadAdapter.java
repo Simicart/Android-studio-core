@@ -1,16 +1,5 @@
 package com.simicart.plugins.download.adapter;
 
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-
 import android.app.ActivityManager;
 import android.app.DownloadManager;
 import android.app.DownloadManager.Request;
@@ -45,7 +34,6 @@ import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.fragment.OrderHistoryDetailFragment;
@@ -54,41 +42,51 @@ import com.simicart.plugins.download.common.DownloadConstant;
 import com.simicart.plugins.download.common.DownloadService;
 import com.simicart.plugins.download.entity.DownloadEntity;
 
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
 public class DownloadAdapter extends BaseAdapter {
 
-	protected ArrayList<DownloadEntity> list_download;
-	protected Context context;
-	protected LayoutInflater inflater;
-	protected DownloadTask downloadTask = null;
-	protected DownloadManager manager;
-	protected SharedPreferences prefs;
-	ArrayList<File> listFile;
-	protected List<String> downloadingID;
-	protected HashMap<String, ViewHolder> downloading_view;
-	protected BroadcastReceiver receiver = new BroadcastReceiver() {
+    protected ArrayList<DownloadEntity> list_download;
+    protected Context context;
+    protected LayoutInflater inflater;
+    protected DownloadTask downloadTask = null;
+    protected DownloadManager manager;
+    protected SharedPreferences prefs;
+    protected List<String> downloadingID;
+    protected HashMap<String, ViewHolder> downloading_view;
+    protected BroadcastReceiver receiver = new BroadcastReceiver() {
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
-			String status = intent.getStringExtra(DownloadConstant.STATUS);
-			Log.e("Download Adapter", "Download status: " + status);
-			if (status != null) {
-				String[] raw = status.split("_");
-				Log.e("Download Adapter", ": " + raw[0]);
-				Log.e("Download Adapter", ": " + raw[1]);
-				if (raw[0].equals("Success")) {
-					if (downloading_view.containsKey(raw[1])) {
-						downloading_view.get(raw[1]).bt_download
-								.setText("Re-download");
-						downloading_view.get(raw[1]).bt_download
-								.setBackgroundColor(AppColorConfig.getInstance()
-										.getKeyColor());
-						downloading_view.get(raw[1]).bt_download
-								.setClickable(true);
-						downloading_view.get(raw[1]).bt_download
-								.setActivated(true);
-						downloading_view.remove(raw[1]);
-						/*
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            String status = intent.getStringExtra(DownloadConstant.STATUS);
+            Log.e("Download Adapter", "Download status: " + status);
+            if (status != null) {
+                String[] raw = status.split("_");
+                Log.e("Download Adapter", ": " + raw[0]);
+                Log.e("Download Adapter", ": " + raw[1]);
+                if (raw[0].equals("Success")) {
+                    if (downloading_view.containsKey(raw[1])) {
+                        downloading_view.get(raw[1]).bt_download
+                                .setText("Re-download");
+                        downloading_view.get(raw[1]).bt_download
+                                .setBackgroundColor(AppColorConfig.getInstance()
+                                        .getKeyColor());
+                        downloading_view.get(raw[1]).bt_download
+                                .setClickable(true);
+                        downloading_view.get(raw[1]).bt_download
+                                .setActivated(true);
+                        downloading_view.remove(raw[1]);
+                        /*
 						 * downloading_button.get(raw[1]).bt_open.setVisibility(View
 						 * .VISIBLE);
 						 * downloading_button.get(raw[1]).bt_open.setText
@@ -97,218 +95,219 @@ public class DownloadAdapter extends BaseAdapter {
 						 * .get(raw[1]).bt_open.setBackgroundColor
 						 * (Config.newInstance().getColorMain());
 						 */
-					}
-				} else if (raw[0].equals("Failed")) {
-					if (downloading_view.containsKey(raw[1])) {
-						downloading_view.get(raw[1]).bt_download
-								.setText("Download");
-						downloading_view.get(raw[1]).bt_download
-								.setBackgroundColor(AppColorConfig.getInstance()
-										.getKeyColor());
-						downloading_view.get(raw[1]).bt_download
-								.setClickable(true);
-						downloading_view.get(raw[1]).bt_download
-								.setActivated(true);
-						downloading_view.remove(raw[1]);
-					}
-				}
+                    }
+                } else if (raw[0].equals("Failed")) {
+                    if (downloading_view.containsKey(raw[1])) {
+                        downloading_view.get(raw[1]).bt_download
+                                .setText("Download");
+                        downloading_view.get(raw[1]).bt_download
+                                .setBackgroundColor(AppColorConfig.getInstance()
+                                        .getKeyColor());
+                        downloading_view.get(raw[1]).bt_download
+                                .setClickable(true);
+                        downloading_view.get(raw[1]).bt_download
+                                .setActivated(true);
+                        downloading_view.remove(raw[1]);
+                    }
+                }
 
-				String serialized = prefs.getString(DownloadConstant.TASKS,
-						null);
-				if (serialized != null) {
-					downloadingID = new LinkedList<String>(
-							Arrays.asList(TextUtils.split(serialized, ",")));
-				} else
-					downloadingID = new ArrayList<>();
-			}
-		}
-	};
+                String serialized = prefs.getString(DownloadConstant.TASKS,
+                        null);
+                if (serialized != null) {
+                    downloadingID = new LinkedList<String>(
+                            Arrays.asList(TextUtils.split(serialized, ",")));
+                } else
+                    downloadingID = new ArrayList<>();
+            }
+        }
+    };
+    ArrayList<File> listFile;
 
-	public DownloadAdapter(Context context,
-			ArrayList<DownloadEntity> list_download) {
-		this.context = context;
-		this.list_download = list_download;
-		this.inflater = LayoutInflater.from(context);
-		downloading_view = new HashMap<>();
-		this.prefs = context.getSharedPreferences(DownloadConstant.PREF,
-				Context.MODE_PRIVATE);
-		String serialized = prefs.getString(DownloadConstant.TASKS, null);
-		if (serialized != null) {
-			downloadingID = new LinkedList<String>(Arrays.asList(TextUtils
-					.split(serialized, ",")));
-		} else
-			downloadingID = new ArrayList<>();
-		if (!isMyServiceRunning(DownloadService.class)) {
-			Log.e("DownloadAdapter", "Service start now");
-			Intent service = new Intent(context, DownloadService.class);
-			context.startService(service);
-		} else {
-			Log.e("DownloadAdapter", "Service started");
-		}
-		IntentFilter intentFilter = new IntentFilter();
-		intentFilter.addAction(DownloadConstant.DOWNLOAD_ACTION);
-		context.registerReceiver(receiver, intentFilter);
-	}
+    public DownloadAdapter(Context context,
+                           ArrayList<DownloadEntity> list_download) {
+        this.context = context;
+        this.list_download = list_download;
+        this.inflater = LayoutInflater.from(context);
+        downloading_view = new HashMap<>();
+        this.prefs = context.getSharedPreferences(DownloadConstant.PREF,
+                Context.MODE_PRIVATE);
+        String serialized = prefs.getString(DownloadConstant.TASKS, null);
+        if (serialized != null) {
+            downloadingID = new LinkedList<String>(Arrays.asList(TextUtils
+                    .split(serialized, ",")));
+        } else
+            downloadingID = new ArrayList<>();
+        if (!isMyServiceRunning(DownloadService.class)) {
+            Log.e("DownloadAdapter", "Service start now");
+            Intent service = new Intent(context, DownloadService.class);
+            context.startService(service);
+        } else {
+            Log.e("DownloadAdapter", "Service started");
+        }
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(DownloadConstant.DOWNLOAD_ACTION);
+        context.registerReceiver(receiver, intentFilter);
+    }
 
-	public void setListDownload(ArrayList<DownloadEntity> list_download) {
-		this.list_download = list_download;
-	}
+    public void setListDownload(ArrayList<DownloadEntity> list_download) {
+        this.list_download = list_download;
+    }
 
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return list_download.size();
-	}
+    @Override
+    public int getCount() {
+        // TODO Auto-generated method stub
+        return list_download.size();
+    }
 
-	@Override
-	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return list_download.get(arg0);
-	}
+    @Override
+    public Object getItem(int arg0) {
+        // TODO Auto-generated method stub
+        return list_download.get(arg0);
+    }
 
-	@Override
-	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
-		return arg0;
-	}
+    @Override
+    public long getItemId(int arg0) {
+        // TODO Auto-generated method stub
+        return arg0;
+    }
 
-	private boolean isMyServiceRunning(Class<?> serviceClass) {
-		ActivityManager manager = (ActivityManager) context
-				.getSystemService(Context.ACTIVITY_SERVICE);
-		for (ActivityManager.RunningServiceInfo service : manager
-				.getRunningServices(Integer.MAX_VALUE)) {
-			if (serviceClass.getName().equals(service.service.getClassName())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager
+                .getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	protected boolean isDownloading(String id) {
-		for (int i = 0; i < downloadingID.size(); i++) {
-			String s = downloadingID.get(i);
-			Log.e("isDownloading",
-					s.substring(
-							s.indexOf(DownloadConstant.DOWNLOAD_ACTION) + 4,
-							s.length()));
-			if (s.substring(s.indexOf(DownloadConstant.DOWNLOAD_ACTION) + 4,
-					s.length()).equals(id.toString())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    protected boolean isDownloading(String id) {
+        for (int i = 0; i < downloadingID.size(); i++) {
+            String s = downloadingID.get(i);
+            Log.e("isDownloading",
+                    s.substring(
+                            s.indexOf(DownloadConstant.DOWNLOAD_ACTION) + 4,
+                            s.length()));
+            if (s.substring(s.indexOf(DownloadConstant.DOWNLOAD_ACTION) + 4,
+                    s.length()).equals(id.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public View getView(final int position, View convertView, ViewGroup arg2) {
-		Log.e("DownloadAdapter", "getView() " + downloading_view.size());
-		manager = (DownloadManager) context
-				.getSystemService(Context.DOWNLOAD_SERVICE);
-		listFile = getListFile();
-		final ViewHolder viewHolder;
-		if (convertView == null) {
-			convertView = this.inflater.inflate(
-					Rconfig.getInstance().layout(
-							"plugins_download_product_item_layout"), null);
-			viewHolder = new ViewHolder();
-			viewHolder.txt_order_name = (TextView) convertView
-					.findViewById(Rconfig.getInstance().id("txt_order_name"));
-			viewHolder.order_name = (TextView) convertView.findViewById(Rconfig
-					.getInstance().id("order_name"));
-			viewHolder.txt_order_date = (TextView) convertView
-					.findViewById(Rconfig.getInstance().id("txt_order_date"));
-			viewHolder.order_date = (TextView) convertView.findViewById(Rconfig
-					.getInstance().id("order_date"));
-			viewHolder.txt_order_status = (TextView) convertView
-					.findViewById(Rconfig.getInstance().id("txt_order_status"));
-			viewHolder.order_status = (TextView) convertView
-					.findViewById(Rconfig.getInstance().id("order_status"));
-			viewHolder.txt_order_remain = (TextView) convertView
-					.findViewById(Rconfig.getInstance().id("txt_order_remain"));
-			viewHolder.order_remain = (TextView) convertView
-					.findViewById(Rconfig.getInstance().id("order_remain"));
-			viewHolder.bt_download = (ButtonRectangle) convertView
-					.findViewById(Rconfig.getInstance().id("bt_download"));
-			viewHolder.bt_open = (ButtonRectangle) convertView
-					.findViewById(Rconfig.getInstance().id("bt_open_file"));
-			viewHolder.bt_order = (Button) convertView.findViewById(Rconfig
-					.getInstance().id("bt_order"));
-			convertView.setTag(viewHolder);
-		} else {
-			viewHolder = (ViewHolder) convertView.getTag();
-		}
-		final DownloadEntity item = this.list_download.get(position);
-		viewHolder.txt_order_name.setText(SimiTranslator.getInstance().translate(
-				"Product Name"));
-		viewHolder.order_name.setText(item.getOrderName());
-		viewHolder.txt_order_date.setText(SimiTranslator.getInstance().translate(
-				"Order Date"));
-		viewHolder.order_date.setText(item.getOrderDate());
-		viewHolder.txt_order_status.setText(SimiTranslator.getInstance().translate(
-				"Order Status"));
-		viewHolder.order_status.setText(item.getOrderStatus());
-		viewHolder.txt_order_remain.setText(SimiTranslator.getInstance().translate(
-				"Order Remain"));
-		viewHolder.order_remain.setText(item.getOrderRemain());
-		viewHolder.bt_download.setTextSize(14);
-		viewHolder.bt_open.setTextSize(14);
-		if (listFile.size() > 0) {
-			if(isDownloading(item.getOrderID()) == true) {
-				
-				viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
-						"Downloading"));
-				viewHolder.bt_download.setBackgroundColor(Color.GRAY);
-				viewHolder.bt_download.setClickable(false);
-				viewHolder.bt_download.setActivated(false);
-				
-				if (downloading_view.containsKey(item.getOrderID())) {
-					downloading_view.remove(item.getOrderID());
-					downloading_view.put(item.getOrderID(), viewHolder);
-				} else if (downloading_view.size() == 0) {
-					downloading_view.put(item.getOrderID(), viewHolder);
-				}
-				
-				if(isDownloaded(item.getOrderFile(), getListFile()) <= 1) {
-					if(viewHolder.bt_open.getVisibility() != View.VISIBLE)
-						viewHolder.bt_open.setVisibility(View.GONE);
-					if(viewHolder.bt_open.getVisibility() == View.VISIBLE) {
-						viewHolder.bt_open.setVisibility(View.VISIBLE);
-						viewHolder.bt_open.setText(SimiTranslator.getInstance().translate(
-								"Open file"));
-						viewHolder.bt_open.setBackgroundColor(AppColorConfig.getInstance()
-								.getKeyColor());
-					}
-					
-				} else if(isDownloaded(item.getOrderFile(), getListFile()) > 1) {
-					viewHolder.bt_open.setVisibility(View.VISIBLE);
-					viewHolder.bt_open.setText(SimiTranslator.getInstance().translate(
-							"Open file"));
-					viewHolder.bt_open.setBackgroundColor(AppColorConfig.getInstance()
-							.getKeyColor());
-				}
-			} else if(isDownloading(item.getOrderID()) == false) {
-				if(isDownloaded(item.getOrderFile(), getListFile()) == 0) {
-					viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
-							"Download"));
-					viewHolder.bt_download.setBackgroundColor(AppColorConfig.getInstance()
-							.getKeyColor());
-					viewHolder.bt_download.setClickable(true);
-					viewHolder.bt_download.setActivated(true);
-					viewHolder.bt_open.setVisibility(View.GONE);
-				} else if(isDownloaded(item.getOrderFile(), getListFile()) > 0) {
-					viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
-							"Re-download"));
-					viewHolder.bt_download.setBackgroundColor(AppColorConfig.getInstance()
-							.getKeyColor());
-					viewHolder.bt_download.setClickable(true);
-					viewHolder.bt_download.setActivated(true);
-					viewHolder.bt_open.setVisibility(View.VISIBLE);
-					viewHolder.bt_open.setText(SimiTranslator.getInstance().translate(
-							"Open file"));
-					viewHolder.bt_open.setBackgroundColor(AppColorConfig.getInstance()
-							.getKeyColor());
-				}
-			}
+    @Override
+    public View getView(final int position, View convertView, ViewGroup arg2) {
+        Log.e("DownloadAdapter", "getView() " + downloading_view.size());
+        manager = (DownloadManager) context
+                .getSystemService(Context.DOWNLOAD_SERVICE);
+        listFile = getListFile();
+        final ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = this.inflater.inflate(
+                    Rconfig.getInstance().layout(
+                            "plugins_download_product_item_layout"), null);
+            viewHolder = new ViewHolder();
+            viewHolder.txt_order_name = (TextView) convertView
+                    .findViewById(Rconfig.getInstance().id("txt_order_name"));
+            viewHolder.order_name = (TextView) convertView.findViewById(Rconfig
+                    .getInstance().id("order_name"));
+            viewHolder.txt_order_date = (TextView) convertView
+                    .findViewById(Rconfig.getInstance().id("txt_order_date"));
+            viewHolder.order_date = (TextView) convertView.findViewById(Rconfig
+                    .getInstance().id("order_date"));
+            viewHolder.txt_order_status = (TextView) convertView
+                    .findViewById(Rconfig.getInstance().id("txt_order_status"));
+            viewHolder.order_status = (TextView) convertView
+                    .findViewById(Rconfig.getInstance().id("order_status"));
+            viewHolder.txt_order_remain = (TextView) convertView
+                    .findViewById(Rconfig.getInstance().id("txt_order_remain"));
+            viewHolder.order_remain = (TextView) convertView
+                    .findViewById(Rconfig.getInstance().id("order_remain"));
+            viewHolder.bt_download = (ButtonRectangle) convertView
+                    .findViewById(Rconfig.getInstance().id("bt_download"));
+            viewHolder.bt_open = (ButtonRectangle) convertView
+                    .findViewById(Rconfig.getInstance().id("bt_open_file"));
+            viewHolder.bt_order = (Button) convertView.findViewById(Rconfig
+                    .getInstance().id("bt_order"));
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        final DownloadEntity item = this.list_download.get(position);
+        viewHolder.txt_order_name.setText(SimiTranslator.getInstance().translate(
+                "Product Name"));
+        viewHolder.order_name.setText(item.getOrderName());
+        viewHolder.txt_order_date.setText(SimiTranslator.getInstance().translate(
+                "Order Date"));
+        viewHolder.order_date.setText(item.getOrderDate());
+        viewHolder.txt_order_status.setText(SimiTranslator.getInstance().translate(
+                "Order Status"));
+        viewHolder.order_status.setText(item.getOrderStatus());
+        viewHolder.txt_order_remain.setText(SimiTranslator.getInstance().translate(
+                "Order Remain"));
+        viewHolder.order_remain.setText(item.getOrderRemain());
+        viewHolder.bt_download.setTextSize(14);
+        viewHolder.bt_open.setTextSize(14);
+        if (listFile.size() > 0) {
+            if (isDownloading(item.getOrderID()) == true) {
+
+                viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
+                        "Downloading"));
+                viewHolder.bt_download.setBackgroundColor(Color.GRAY);
+                viewHolder.bt_download.setClickable(false);
+                viewHolder.bt_download.setActivated(false);
+
+                if (downloading_view.containsKey(item.getOrderID())) {
+                    downloading_view.remove(item.getOrderID());
+                    downloading_view.put(item.getOrderID(), viewHolder);
+                } else if (downloading_view.size() == 0) {
+                    downloading_view.put(item.getOrderID(), viewHolder);
+                }
+
+                if (isDownloaded(item.getOrderFile(), getListFile()) <= 1) {
+                    if (viewHolder.bt_open.getVisibility() != View.VISIBLE)
+                        viewHolder.bt_open.setVisibility(View.GONE);
+                    if (viewHolder.bt_open.getVisibility() == View.VISIBLE) {
+                        viewHolder.bt_open.setVisibility(View.VISIBLE);
+                        viewHolder.bt_open.setText(SimiTranslator.getInstance().translate(
+                                "Open file"));
+                        viewHolder.bt_open.setBackgroundColor(AppColorConfig.getInstance()
+                                .getKeyColor());
+                    }
+
+                } else if (isDownloaded(item.getOrderFile(), getListFile()) > 1) {
+                    viewHolder.bt_open.setVisibility(View.VISIBLE);
+                    viewHolder.bt_open.setText(SimiTranslator.getInstance().translate(
+                            "Open file"));
+                    viewHolder.bt_open.setBackgroundColor(AppColorConfig.getInstance()
+                            .getKeyColor());
+                }
+            } else if (isDownloading(item.getOrderID()) == false) {
+                if (isDownloaded(item.getOrderFile(), getListFile()) == 0) {
+                    viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
+                            "Download"));
+                    viewHolder.bt_download.setBackgroundColor(AppColorConfig.getInstance()
+                            .getKeyColor());
+                    viewHolder.bt_download.setClickable(true);
+                    viewHolder.bt_download.setActivated(true);
+                    viewHolder.bt_open.setVisibility(View.GONE);
+                } else if (isDownloaded(item.getOrderFile(), getListFile()) > 0) {
+                    viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
+                            "Re-download"));
+                    viewHolder.bt_download.setBackgroundColor(AppColorConfig.getInstance()
+                            .getKeyColor());
+                    viewHolder.bt_download.setClickable(true);
+                    viewHolder.bt_download.setActivated(true);
+                    viewHolder.bt_open.setVisibility(View.VISIBLE);
+                    viewHolder.bt_open.setText(SimiTranslator.getInstance().translate(
+                            "Open file"));
+                    viewHolder.bt_open.setBackgroundColor(AppColorConfig.getInstance()
+                            .getKeyColor());
+                }
+            }
 			/*if (isDownloaded(item.getOrderFile(), listFile) == true
 					&& isDownloading(item.getOrderID()) == false) {
 				viewHolder.bt_download.setText(SimiTranslator.newInstance().translate(
@@ -361,272 +360,272 @@ public class DownloadAdapter extends BaseAdapter {
 				viewHolder.bt_download.setActivated(true);
 				viewHolder.bt_open.setVisibility(View.GONE);
 			}*/
-		} else {
-			if(isDownloading(item.getOrderID()) == true) {
-				viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
-						"Downloading"));
-				viewHolder.bt_download.setBackgroundColor(Color.GRAY);
-				viewHolder.bt_download.setClickable(false);
-				viewHolder.bt_download.setActivated(false);
-			} else {
-				viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
-						"Download"));
-				viewHolder.bt_download.setBackgroundColor(AppColorConfig.getInstance()
-						.getKeyColor());
-				viewHolder.bt_download.setClickable(true);
-				viewHolder.bt_download.setActivated(true);
-				viewHolder.bt_open.setVisibility(View.GONE);
-			}
-		}
+        } else {
+            if (isDownloading(item.getOrderID()) == true) {
+                viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
+                        "Downloading"));
+                viewHolder.bt_download.setBackgroundColor(Color.GRAY);
+                viewHolder.bt_download.setClickable(false);
+                viewHolder.bt_download.setActivated(false);
+            } else {
+                viewHolder.bt_download.setText(SimiTranslator.getInstance().translate(
+                        "Download"));
+                viewHolder.bt_download.setBackgroundColor(AppColorConfig.getInstance()
+                        .getKeyColor());
+                viewHolder.bt_download.setClickable(true);
+                viewHolder.bt_download.setActivated(true);
+                viewHolder.bt_open.setVisibility(View.GONE);
+            }
+        }
 
-		viewHolder.bt_download.setTextColor(Color.WHITE);
-		viewHolder.bt_download.setOnClickListener(new OnClickListener() {
+        viewHolder.bt_download.setTextColor(Color.WHITE);
+        viewHolder.bt_download.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (viewHolder.bt_download.getText().equals("Downloading")) {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (viewHolder.bt_download.getText().equals("Downloading")) {
 
-				} else {
-					if (item.getOrderStatus().equals("expired")) {
-						SimiNotify.getInstance().showToast(
-								SimiTranslator.getInstance().translate(
-										"The link is expired")
-										+ ".");
-					} else if (item.getOrderStatus().equals("pending")) {
-						SimiNotify.getInstance().showToast(
-								SimiTranslator.getInstance().translate(
-										"The link is not available")
-										+ ".");
-					} else {
-						downloading_view.put(item.getOrderID(), viewHolder);
-						viewHolder.bt_download.setText(SimiTranslator.getInstance()
-								.translate("Downloading"));
-						viewHolder.bt_download.setBackgroundColor(Color.GRAY);
-						viewHolder.bt_download.setClickable(false);
-						viewHolder.bt_download.setActivated(false);
+                } else {
+                    if (item.getOrderStatus().equals("expired")) {
+                        SimiNotify.getInstance().showToast(
+                                SimiTranslator.getInstance().translate(
+                                        "The link is expired")
+                                        + ".");
+                    } else if (item.getOrderStatus().equals("pending")) {
+                        SimiNotify.getInstance().showToast(
+                                SimiTranslator.getInstance().translate(
+                                        "The link is not available")
+                                        + ".");
+                    } else {
+                        downloading_view.put(item.getOrderID(), viewHolder);
+                        viewHolder.bt_download.setText(SimiTranslator.getInstance()
+                                .translate("Downloading"));
+                        viewHolder.bt_download.setBackgroundColor(Color.GRAY);
+                        viewHolder.bt_download.setClickable(false);
+                        viewHolder.bt_download.setActivated(false);
 
-						Intent i = new Intent();
-						i.setAction(DownloadConstant.DOWNLOADING_ACTION);
-						context.sendBroadcast(i);
+                        Intent i = new Intent();
+                        i.setAction(DownloadConstant.DOWNLOADING_ACTION);
+                        context.sendBroadcast(i);
 
-						onDownloadProduct(item);
-						Log.e("download button", "++" + downloading_view.size());
-					}
-				}
-			}
-		});
+                        onDownloadProduct(item);
+                        Log.e("download button", "++" + downloading_view.size());
+                    }
+                }
+            }
+        });
 
-		viewHolder.bt_open.setOnClickListener(new OnClickListener() {
+        viewHolder.bt_open.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				listFile = getListFile();
-				if (listFile.size() > 0) {
-					File file = null;
-					for (int i = 0; i < listFile.size(); i++) {
-						file = listFile.get(i);
-						if (file.getName().equals(item.getOrderFile()))
-							break;
-					}
-					if (file != null) {
-						String filename = file.getName();
-						MimeTypeMap myMime = MimeTypeMap.getSingleton();
-						Intent newIntent = new Intent(Intent.ACTION_VIEW);
-						String mimeType = myMime
-								.getMimeTypeFromExtension(fileExt(filename)
-										.substring(1));
-						newIntent.setDataAndType(Uri.fromFile(file), mimeType);
-						newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						try {
-							context.startActivity(newIntent);
-						} catch (ActivityNotFoundException e) {
-							SimiNotify.getInstance().showToast(SimiTranslator.getInstance().translate("No existing apps support viewing/opening this file"));
-						}
-					}
-				}
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                listFile = getListFile();
+                if (listFile.size() > 0) {
+                    File file = null;
+                    for (int i = 0; i < listFile.size(); i++) {
+                        file = listFile.get(i);
+                        if (file.getName().equals(item.getOrderFile()))
+                            break;
+                    }
+                    if (file != null) {
+                        String filename = file.getName();
+                        MimeTypeMap myMime = MimeTypeMap.getSingleton();
+                        Intent newIntent = new Intent(Intent.ACTION_VIEW);
+                        String mimeType = myMime
+                                .getMimeTypeFromExtension(fileExt(filename)
+                                        .substring(1));
+                        newIntent.setDataAndType(Uri.fromFile(file), mimeType);
+                        newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        try {
+                            context.startActivity(newIntent);
+                        } catch (ActivityNotFoundException e) {
+                            SimiNotify.getInstance().showToast(SimiTranslator.getInstance().translate("No existing apps support viewing/opening this file"));
+                        }
+                    }
+                }
+            }
+        });
 
-		viewHolder.bt_order.setOnClickListener(new OnClickListener() {
+        viewHolder.bt_order.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				String id = item.getOrderID();
-				HashMap<String,Object> hmData = new HashMap<String, Object>();
-				hmData.put(KeyData.ORDER_HISTORY_DETAIL.ORDER_ID, id);
-				SimiData data = new SimiData(hmData);
-				OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance(data);
-				if (DataLocal.isTablet) {
-					SimiManager.getIntance().addFragmentSub(fragment);
-				} else {
-					SimiManager.getIntance().replaceFragment(fragment);
-				}
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                String id = item.getOrderID();
+                HashMap<String, Object> hmData = new HashMap<String, Object>();
+                hmData.put(KeyData.ORDER_HISTORY_DETAIL.ORDER_ID, id);
+                SimiData data = new SimiData(hmData);
+                OrderHistoryDetailFragment fragment = OrderHistoryDetailFragment.newInstance(data);
+                if (DataLocal.isTablet) {
+                    SimiManager.getIntance().addFragmentSub(fragment);
+                } else {
+                    SimiManager.getIntance().replaceFragment(fragment);
+                }
 
-			}
-		});
+            }
+        });
 
-		return convertView;
-	}
+        return convertView;
+    }
 
-	public class ViewHolder {
-		TextView txt_order_name, order_name, txt_order_date, order_date,
-				txt_order_status, order_status, txt_order_remain, order_remain;
-		ButtonRectangle bt_download, bt_open;
-		Button bt_order;
-	}
+    private String fileExt(String url) {
+        if (url.indexOf("?") > -1) {
+            url = url.substring(0, url.indexOf("?"));
+        }
+        if (url.lastIndexOf(".") == -1) {
+            return null;
+        } else {
+            String ext = url.substring(url.lastIndexOf("."));
+            if (ext.indexOf("%") > -1) {
+                ext = ext.substring(0, ext.indexOf("%"));
+            }
+            if (ext.indexOf("/") > -1) {
+                ext = ext.substring(0, ext.indexOf("/"));
+            }
+            return ext.toLowerCase();
 
-	private String fileExt(String url) {
-		if (url.indexOf("?") > -1) {
-			url = url.substring(0, url.indexOf("?"));
-		}
-		if (url.lastIndexOf(".") == -1) {
-			return null;
-		} else {
-			String ext = url.substring(url.lastIndexOf("."));
-			if (ext.indexOf("%") > -1) {
-				ext = ext.substring(0, ext.indexOf("%"));
-			}
-			if (ext.indexOf("/") > -1) {
-				ext = ext.substring(0, ext.indexOf("/"));
-			}
-			return ext.toLowerCase();
+        }
+    }
 
-		}
-	}
+    protected ArrayList<File> getListFile() {
+        ArrayList<File> list_file = new ArrayList<>();
+        File fileList = new File("/sdcard/"
+                + context.getResources().getString(R.string.app_name));
+        if (fileList != null && fileList.listFiles() != null) {
+            File[] filenames = fileList.listFiles();
+            if (filenames.length > 0)
+                for (File tmpf : filenames) {
+                    list_file.add(tmpf);
+                }
+        }
+        return list_file;
+    }
 
-	protected ArrayList<File> getListFile() {
-		ArrayList<File> list_file = new ArrayList<>();
-		File fileList = new File("/sdcard/"
-				+ context.getResources().getString(R.string.app_name));
-		if (fileList != null && fileList.listFiles() != null) {
-			File[] filenames = fileList.listFiles();
-			if (filenames.length > 0)
-				for (File tmpf : filenames) {
-					list_file.add(tmpf);
-				}
-		}
-		return list_file;
-	}
+    protected int isDownloaded(String name, ArrayList<File> listID) {
+        int num = 0;
+        if (name.length() > 0) {
+            name = name.substring(0, name.indexOf("."));
+            Log.e("isDownloaded", name);
+            for (int i = 0; i < listID.size(); i++) {
+                if (listID.get(i).getName().contains(name))
+                    num++;
+            }
+        }
+        Log.e("isDownloaded", "" + num);
+        return num;
+    }
 
-	protected int isDownloaded(String name, ArrayList<File> listID) {
-		int num = 0;
-		if(name.length() > 0) {
-			name = name.substring(0, name.indexOf("."));
-			Log.e("isDownloaded", name);
-			for (int i = 0; i < listID.size(); i++) {
-				if (listID.get(i).getName().contains(name))
-					num++;
-			}
-		}
-		Log.e("isDownloaded", "" + num);
-		return num;
-	}
+    protected void onDownloadProduct(DownloadEntity item) {
+        if (item.getOrderLink() != null && !item.getOrderLink().equals("null")
+                && !item.getOrderLink().equals("")
+                && URLUtil.isValidUrl(item.getOrderLink())) {
 
-	protected void onDownloadProduct(DownloadEntity item) {
-		if (item.getOrderLink() != null && !item.getOrderLink().equals("null")
-				&& !item.getOrderLink().equals("")
-				&& URLUtil.isValidUrl(item.getOrderLink())) {
+            String url = Uri.parse(
+                    item.getOrderLink()
+                            + "email/"
+                            + Base64.encodeToString(DataPreferences.getEmail()
+                            .getBytes(), Base64.DEFAULT)).toString();
+            Request request = new Request(Uri.parse(url));
+            request.setDescription(SimiTranslator.getInstance().translate(
+                    "Download is processing"));
+            request.setTitle(item.getOrderName());
+            request.setAllowedNetworkTypes(Request.NETWORK_WIFI
+                    | Request.NETWORK_MOBILE);
+            request.setVisibleInDownloadsUi(true);
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            String fileName = "";
+            try {
+                fileName = new DownloadTask().execute(url).get();
+            } catch (InterruptedException | ExecutionException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            request.addRequestHeader("Cookie", "store=default; "
+                    + DownloadConstant.COOKIE);
+            request.setDestinationInExternalPublicDir(context.getResources()
+                    .getString(R.string.app_name), fileName);
+            request.setAllowedOverRoaming(false);
+            final Long downloadId = manager.enqueue(request);
+            downloadingID.add(downloadId.toString()
+                    + DownloadConstant.DOWNLOAD_ACTION + item.getOrderID());
 
-			String url = Uri.parse(
-					item.getOrderLink()
-							+ "email/"
-							+ Base64.encodeToString(DataPreferences.getEmail()
-									.getBytes(), Base64.DEFAULT)).toString();
-			Request request = new Request(Uri.parse(url));
-			request.setDescription(SimiTranslator.getInstance().translate(
-					"Download is processing"));
-			request.setTitle(item.getOrderName());
-			request.setAllowedNetworkTypes(Request.NETWORK_WIFI
-					| Request.NETWORK_MOBILE);
-			request.setVisibleInDownloadsUi(true);
-			request.allowScanningByMediaScanner();
-			request.setNotificationVisibility(Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-			String fileName = "";
-			try {
-				fileName = new DownloadTask().execute(url).get();
-			} catch (InterruptedException | ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.addRequestHeader("Cookie", "store=default; "
-					+ DownloadConstant.COOKIE);
-			request.setDestinationInExternalPublicDir(context.getResources()
-					.getString(R.string.app_name), fileName);
-			request.setAllowedOverRoaming(false);
-			final Long downloadId = manager.enqueue(request);
-			downloadingID.add(downloadId.toString()
-					+ DownloadConstant.DOWNLOAD_ACTION + item.getOrderID());
+            Editor editor = prefs.edit();
+            editor.putString(DownloadConstant.TASKS,
+                    TextUtils.join(",", downloadingID));
+            editor.commit();
+        }
+    }
 
-			Editor editor = prefs.edit();
-			editor.putString(DownloadConstant.TASKS,
-					TextUtils.join(",", downloadingID));
-			editor.commit();
-		}
-	}
+    public class ViewHolder {
+        TextView txt_order_name, order_name, txt_order_date, order_date,
+                txt_order_status, order_status, txt_order_remain, order_remain;
+        ButtonRectangle bt_download, bt_open;
+        Button bt_order;
+    }
 
-	private class DownloadTask extends AsyncTask<String, Integer, String> {
+    private class DownloadTask extends AsyncTask<String, Integer, String> {
 
-		@Override
-		protected String doInBackground(String... sUrl) {
-			HttpURLConnection connection = null;
-			String fileName = "";
-			try {
-				URL url = new URL(sUrl[0]);
-				connection = (HttpURLConnection) url.openConnection();
-				connection.connect();
+        @Override
+        protected String doInBackground(String... sUrl) {
+            HttpURLConnection connection = null;
+            String fileName = "";
+            try {
+                URL url = new URL(sUrl[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
 
-				if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-					return SimiTranslator.getInstance().translate("Connection error");
-				}
-				String content = connection
-						.getHeaderField("Content-Disposition");
-				Map<String, List<String>> headerFields = connection
-						.getHeaderFields();
-				List<String> cookiesHeader = headerFields.get("Set-Cookie");
-				if (cookiesHeader.size() > 0) {
-					DownloadConstant.COOKIE = cookiesHeader.get(0);
-					DownloadConstant.COOKIE = DownloadConstant.COOKIE
-							.substring(0, DownloadConstant.COOKIE
-									.indexOf("; expires"));
-					Log.e("Download Adapter", "Cookies: "
-							+ DownloadConstant.COOKIE);
-				}
-				int index = content.indexOf("filename=");
-				Log.e("FileName", content.substring(index + 9));
-				if (content != null && content.indexOf("=") != -1) {
-					fileName = content.substring(index + 9);
-				} else {
-					return SimiTranslator.getInstance().translate("File not found");
-				}
+                if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    return SimiTranslator.getInstance().translate("Connection error");
+                }
+                String content = connection
+                        .getHeaderField("Content-Disposition");
+                Map<String, List<String>> headerFields = connection
+                        .getHeaderFields();
+                List<String> cookiesHeader = headerFields.get("Set-Cookie");
+                if (cookiesHeader.size() > 0) {
+                    DownloadConstant.COOKIE = cookiesHeader.get(0);
+                    DownloadConstant.COOKIE = DownloadConstant.COOKIE
+                            .substring(0, DownloadConstant.COOKIE
+                                    .indexOf("; expires"));
+                    Log.e("Download Adapter", "Cookies: "
+                            + DownloadConstant.COOKIE);
+                }
+                int index = content.indexOf("filename=");
+                Log.e("FileName", content.substring(index + 9));
+                if (content != null && content.indexOf("=") != -1) {
+                    fileName = content.substring(index + 9);
+                } else {
+                    return SimiTranslator.getInstance().translate("File not found");
+                }
 
-				File mediaStorageDir = new File("/sdcard/", context
-						.getResources().getString(R.string.app_name));
-				if (!mediaStorageDir.exists()) {
-					if (!mediaStorageDir.mkdirs()) {
-						return null;
-					}
-				}
-			} catch (Exception e) {
-			} finally {
-				if (connection != null)
-					connection.disconnect();
-			}
-			return fileName;
-		}
+                File mediaStorageDir = new File("/sdcard/", context
+                        .getResources().getString(R.string.app_name));
+                if (!mediaStorageDir.exists()) {
+                    if (!mediaStorageDir.mkdirs()) {
+                        return null;
+                    }
+                }
+            } catch (Exception e) {
+            } finally {
+                if (connection != null)
+                    connection.disconnect();
+            }
+            return fileName;
+        }
 
-		@Override
-		protected void onPreExecute() {
-		}
+        @Override
+        protected void onPreExecute() {
+        }
 
-		@Override
-		protected void onProgressUpdate(Integer... progress) {
-		}
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+        }
 
-		@Override
-		protected void onPostExecute(String result) {
-		}
-	}
+        @Override
+        protected void onPostExecute(String result) {
+        }
+    }
 }

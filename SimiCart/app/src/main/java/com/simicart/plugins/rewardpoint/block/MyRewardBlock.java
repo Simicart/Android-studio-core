@@ -28,6 +28,15 @@ import org.json.JSONObject;
  */
 public class MyRewardBlock extends SimiBlock implements MyRewardDelegate {
 
+    int spending_mint = 1;
+    String passBookLogo = "";
+    String loyalty_redeem = "";
+    String passbook_text = "";
+    String background_passbook = "";
+    String passbook_foreground = "";
+    String passbook_barcode = "";
+    int is_notification;
+    int expire_notification;
     private RelativeLayout rlt_layout_card;
     private RelativeLayout rlt_layout_history;
     private RelativeLayout rlt_layout_setting;
@@ -36,12 +45,10 @@ public class MyRewardBlock extends SimiBlock implements MyRewardDelegate {
     private TextView txt_history;
     private TextView txt_setting;
     private TextView txt_ours_policies;
-
     private LinearLayout layout_point;
     private ProgressBar progress_point;
     private TextView txt_maxpoint;
     private TextView txt_availble_point;
-
     private TextView txt_number_point;
     private TextView txt_number_redeem;
     private TextView txt_changemoney;
@@ -52,24 +59,12 @@ public class MyRewardBlock extends SimiBlock implements MyRewardDelegate {
     private TextView txt_coint;
     private LinearLayout layout_policy_content;
     private RelativeLayout layout_policy;
-
     private RelativeLayout rlt_earpoint_text;
     private RelativeLayout rlt_spendpoint_text;
-
     private RelativeLayout rlt_ours_policies;
     private LinearLayout linearLayout_top;
     private LinearLayout linearLayout_center;
     private LinearLayout linearLayout_bottom;
-
-    int spending_mint = 1;
-    String passBookLogo = "";
-    String loyalty_redeem = "";
-    String passbook_text = "";
-    String background_passbook = "";
-    String passbook_foreground = "";
-    String passbook_barcode = "";
-    int is_notification;
-    int expire_notification;
 
     public MyRewardBlock(View view, Context context) {
         super(view, context);

@@ -90,7 +90,7 @@ public class SplashController {
 
     protected void enableTheme() {
         String themeType = AppColorConfig.getInstance().getThemeType();
-        Log.e("SplashController","=============> THEME TYPE " + themeType);
+        Log.e("SplashController", "=============> THEME TYPE " + themeType);
         if (Utils.validateString(themeType)) {
             if (themeType.equals(MATRIX_THEME)) {
                 new MatrixTheme();

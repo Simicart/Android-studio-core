@@ -13,11 +13,11 @@ import com.simicart.core.base.translate.SimiTranslator;
  */
 public class SimiNotify {
 
-    protected Boolean isShowedNotify = false;
     public static SimiNotify instance;
+    protected Boolean isShowedNotify = false;
 
     public static SimiNotify getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new SimiNotify();
         }
         return instance;

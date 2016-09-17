@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Product extends SimiEntity  {
+public class Product extends SimiEntity {
     protected String mStock;
     protected String mID;
     protected int mMaxQty;
@@ -41,12 +41,23 @@ public class Product extends SimiEntity  {
     protected String VALUE = "value";
     protected String TITLE = "title";
 
-    public void setAddedPriceDependent(boolean isAddedPriceDependent) {
-        this.isAddedPriceDependent = isAddedPriceDependent;
+    public Product() {
+        mPrice = -1;
+        mMinPrice = -1;
+        mMaxPrice = -1;
+        mRegularPrice = -1;
+        mRate = -1;
+        mMaxQty = -1;
+        mReviewNumbers = -1;
+        mStars = new ArrayList<Integer>();
     }
 
     public boolean isAddedPriceDependent() {
         return isAddedPriceDependent;
+    }
+
+    public void setAddedPriceDependent(boolean isAddedPriceDependent) {
+        this.isAddedPriceDependent = isAddedPriceDependent;
     }
 
     public String getDependentPriceOption() {
@@ -81,12 +92,12 @@ public class Product extends SimiEntity  {
 
     }
 
-    public void setCachePriceOptionDependent(String cachePriceOptionDependent) {
-        this.cachePriceOptionDependent = cachePriceOptionDependent;
-    }
-
     public String getCachePriceOptionDependent() {
         return cachePriceOptionDependent;
+    }
+
+    public void setCachePriceOptionDependent(String cachePriceOptionDependent) {
+        this.cachePriceOptionDependent = cachePriceOptionDependent;
     }
 
     public boolean isCompleteDependent() {
@@ -176,17 +187,6 @@ public class Product extends SimiEntity  {
 
     public void setPriceV2(PriceV2 v2) {
         mPriceV2 = v2;
-    }
-
-    public Product() {
-        mPrice = -1;
-        mMinPrice = -1;
-        mMaxPrice = -1;
-        mRegularPrice = -1;
-        mRate = -1;
-        mMaxQty = -1;
-        mReviewNumbers = -1;
-        mStars = new ArrayList<Integer>();
     }
 
     protected String[] parseImages(JSONArray arr) throws JSONException {
@@ -308,10 +308,6 @@ public class Product extends SimiEntity  {
         this.mOtherInfor = other_infor;
     }
 
-    public void setAttributes(ArrayList<Attributes> attributes) {
-        this.mAttributes = attributes;
-    }
-
     public ArrayList<Attributes> getAttributes() {
         if ((null == mAttributes) || mAttributes.size() == 0) {
             try {
@@ -327,8 +323,8 @@ public class Product extends SimiEntity  {
         return this.mAttributes;
     }
 
-    public void setOptions(ArrayList<CacheOption> options) {
-        this.mOptions = options;
+    public void setAttributes(ArrayList<Attributes> attributes) {
+        this.mAttributes = attributes;
     }
 
     public ArrayList<CacheOption> getOptions() {
@@ -348,8 +344,8 @@ public class Product extends SimiEntity  {
         return this.mOptions;
     }
 
-    public void setName(String name) {
-        this.mName = name;
+    public void setOptions(ArrayList<CacheOption> options) {
+        this.mOptions = options;
     }
 
     public String getName() {
@@ -360,8 +356,8 @@ public class Product extends SimiEntity  {
         return this.mName;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.mManufacturer = manufacturer;
+    public void setName(String name) {
+        this.mName = name;
     }
 
     public String getManufacturer() {
@@ -371,8 +367,8 @@ public class Product extends SimiEntity  {
         return this.mManufacturer;
     }
 
-    public void setType(String type) {
-        this.mType = type;
+    public void setManufacturer(String manufacturer) {
+        this.mManufacturer = manufacturer;
     }
 
     public String getType() {
@@ -382,8 +378,8 @@ public class Product extends SimiEntity  {
         return this.mType;
     }
 
-    public void setRegularPrice(float regular_price) {
-        this.mRegularPrice = regular_price;
+    public void setType(String type) {
+        this.mType = type;
     }
 
     public float getRegularPrice() {
@@ -398,8 +394,8 @@ public class Product extends SimiEntity  {
         return this.mRegularPrice;
     }
 
-    public void setMaxPrice(float max_price) {
-        this.mMaxPrice = max_price;
+    public void setRegularPrice(float regular_price) {
+        this.mRegularPrice = regular_price;
     }
 
     public float getMaxPrice() {
@@ -414,8 +410,8 @@ public class Product extends SimiEntity  {
         return this.mMaxPrice;
     }
 
-    public void setMinPrice(float min_price) {
-        this.mMinPrice = min_price;
+    public void setMaxPrice(float max_price) {
+        this.mMaxPrice = max_price;
     }
 
     public float getMinPrice() {
@@ -430,8 +426,8 @@ public class Product extends SimiEntity  {
         return this.mMinPrice;
     }
 
-    public void setPrice(float price) {
-        this.mPrice = price;
+    public void setMinPrice(float min_price) {
+        this.mMinPrice = min_price;
     }
 
     public float getPrice() {
@@ -446,8 +442,8 @@ public class Product extends SimiEntity  {
         return this.mPrice;
     }
 
-    public void setShortDecripition(String short_decripition) {
-        this.mShortDecripition = short_decripition;
+    public void setPrice(float price) {
+        this.mPrice = price;
     }
 
     public String getShortDecripition() {
@@ -458,8 +454,8 @@ public class Product extends SimiEntity  {
         return this.mShortDecripition;
     }
 
-    public void setDecripition(String decripition) {
-        this.mDecripition = decripition;
+    public void setShortDecripition(String short_decripition) {
+        this.mShortDecripition = short_decripition;
     }
 
     public String getDecripition() {
@@ -469,8 +465,8 @@ public class Product extends SimiEntity  {
         return this.mDecripition;
     }
 
-    public void setImages(String[] img) {
-        this.mImages = img;
+    public void setDecripition(String decripition) {
+        this.mDecripition = decripition;
     }
 
     public String[] getImages() {
@@ -487,8 +483,8 @@ public class Product extends SimiEntity  {
         return this.mImages;
     }
 
-    public void setImage(String img) {
-        this.mImage = img;
+    public void setImages(String[] img) {
+        this.mImages = img;
     }
 
     public String getImage() {
@@ -498,8 +494,8 @@ public class Product extends SimiEntity  {
         return this.mImage;
     }
 
-    public void setStar(ArrayList<Integer> star) {
-        this.mStars = star;
+    public void setImage(String img) {
+        this.mImage = img;
     }
 
     public ArrayList<Integer> getStar() {
@@ -513,6 +509,10 @@ public class Product extends SimiEntity  {
         }
         return mStars;
 
+    }
+
+    public void setStar(ArrayList<Integer> star) {
+        this.mStars = star;
     }
 
     private void parseStars(JSONObject json) throws JSONException {
@@ -533,10 +533,6 @@ public class Product extends SimiEntity  {
         }
     }
 
-    public void setReviewNumber(int review_number) {
-        this.mReviewNumbers = review_number;
-    }
-
     public int getReviewNumber() {
         if (mReviewNumbers < 0) {
 
@@ -549,8 +545,8 @@ public class Product extends SimiEntity  {
         return this.mReviewNumbers;
     }
 
-    public void setRate(float rate) {
-        this.mRate = rate;
+    public void setReviewNumber(int review_number) {
+        this.mReviewNumbers = review_number;
     }
 
     public float getRate() {
@@ -563,8 +559,8 @@ public class Product extends SimiEntity  {
         return this.mRate;
     }
 
-    public void setMaxQty(int max_qty) {
-        this.mMaxQty = max_qty;
+    public void setRate(float rate) {
+        this.mRate = rate;
     }
 
     public int getMaxQty() {
@@ -578,8 +574,8 @@ public class Product extends SimiEntity  {
         return this.mMaxQty;
     }
 
-    public void setId(String id) {
-        this.mID = id;
+    public void setMaxQty(int max_qty) {
+        this.mMaxQty = max_qty;
     }
 
     public String getId() {
@@ -591,8 +587,8 @@ public class Product extends SimiEntity  {
         return this.mID;
     }
 
-    public void setStock(boolean stock) {
-        this.mStock = String.valueOf(stock);
+    public void setId(String id) {
+        this.mID = id;
     }
 
     public boolean getStock() {
@@ -608,10 +604,13 @@ public class Product extends SimiEntity  {
         return false;
     }
 
+    public void setStock(boolean stock) {
+        this.mStock = String.valueOf(stock);
+    }
+
     public void setMinimal_price_label(String minimal_price_label) {
         this.mMinimalPriceLabel = minimal_price_label;
     }
-
 
 
 }

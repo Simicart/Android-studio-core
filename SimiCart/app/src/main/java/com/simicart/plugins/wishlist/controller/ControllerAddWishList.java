@@ -44,13 +44,20 @@ import java.util.ArrayList;
 
 @SuppressLint("DefaultLocale")
 public class ControllerAddWishList implements OptionProductDelegate {
+    protected ArrayList<CacheOptionView> mOptionView;
     View view;
     ButtonAddWishList bt_addWishList;
     ProductWishList productWishList;
     Context mContext;
     MyWishListDelegate mDelegate;
     boolean isUpdateWishList = false;
-    protected ArrayList<CacheOptionView> mOptionView;
+
+    public ControllerAddWishList(Context context, ButtonAddWishList button,
+                                 ProductWishList product) {
+        mContext = context;
+        bt_addWishList = button;
+        productWishList = product;
+    }
 
     public void setUpdateWishList(boolean isUpdateWishList) {
         this.isUpdateWishList = isUpdateWishList;
@@ -58,13 +65,6 @@ public class ControllerAddWishList implements OptionProductDelegate {
 
     public void setDelegate(MyWishListDelegate delegate) {
         mDelegate = delegate;
-    }
-
-    public ControllerAddWishList(Context context, ButtonAddWishList button,
-                                 ProductWishList product) {
-        mContext = context;
-        bt_addWishList = button;
-        productWishList = product;
     }
 
     public void setContext(Context context) {

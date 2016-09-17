@@ -6,7 +6,7 @@ import com.simicart.plugins.storelocator.entity.StoreObject;
 import java.util.ArrayList;
 
 public interface StoreLocatorMapDelegate extends SimiDelegate {
-	
-	public void addMarkerToMap(ArrayList<StoreObject> listStores);
-	
+
+    public void addMarkerToMap(ArrayList<StoreObject> listStores);
+
 }

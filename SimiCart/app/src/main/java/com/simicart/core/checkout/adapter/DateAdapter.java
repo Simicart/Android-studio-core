@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.common.Utils;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.Rconfig;
 
 import java.util.ArrayList;

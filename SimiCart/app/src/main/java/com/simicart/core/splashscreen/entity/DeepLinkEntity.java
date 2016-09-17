@@ -8,6 +8,13 @@ import com.simicart.core.common.Utils;
  */
 public class DeepLinkEntity extends SimiEntity {
     protected static DeepLinkEntity instance;
+    private final String id = "id";
+    private final String type = "type";
+    private final String has_child = "has_child";
+    protected String mID = "";
+    protected String mName = "";
+    protected boolean hasChild;
+    protected int mType = 0;
 
     public static DeepLinkEntity getInstance() {
         if (null == instance) {
@@ -15,16 +22,6 @@ public class DeepLinkEntity extends SimiEntity {
         }
         return instance;
     }
-
-    protected String mID = "";
-    protected String mName = "";
-    protected boolean hasChild;
-    protected int mType = 0;
-
-    private final String id = "id";
-    private final String type = "type";
-    private final String has_child = "has_child";
-
 
     @Override
     public void parse() {

@@ -6,20 +6,7 @@ import android.view.MotionEvent;
 import android.view.ViewParent;
 import android.widget.LinearLayout;
 
-public class MyMapFragmentContainer extends LinearLayout{
-
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev)
-    {
-        if (ev.getActionMasked() == MotionEvent.ACTION_DOWN)
-        {
-            ViewParent p = getParent();
-            if (p != null)
-                p.requestDisallowInterceptTouchEvent(true);
-        }
-
-        return false;
-    }
+public class MyMapFragmentContainer extends LinearLayout {
 
     public MyMapFragmentContainer(Context context) {
         super(context);
@@ -31,5 +18,16 @@ public class MyMapFragmentContainer extends LinearLayout{
 
     public MyMapFragmentContainer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (ev.getActionMasked() == MotionEvent.ACTION_DOWN) {
+            ViewParent p = getParent();
+            if (p != null)
+                p.requestDisallowInterceptTouchEvent(true);
+        }
+
+        return false;
     }
 }

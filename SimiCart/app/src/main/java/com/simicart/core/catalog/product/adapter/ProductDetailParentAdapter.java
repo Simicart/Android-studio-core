@@ -21,7 +21,6 @@ public class ProductDetailParentAdapter extends FragmentPagerAdapter implements
     protected ProductDetailParentController mController;
 
 
-
     public ProductDetailParentAdapter(FragmentManager fm) {
         super(fm);
     }

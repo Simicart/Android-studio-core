@@ -58,7 +58,6 @@ public class SimiResponse {
             }
 
 
-
             return true;
         } catch (JSONException e) {
             return false;
@@ -78,12 +77,12 @@ public class SimiResponse {
         return false;
     }
 
-    public void setSimiError(SimiError error) {
-        mError = error;
-    }
-
     public SimiError getSimiError() {
         return mError;
+    }
+
+    public void setSimiError(SimiError error) {
+        mError = error;
     }
 
     public String getStatus() {
@@ -102,19 +101,19 @@ public class SimiResponse {
         return mMessage;
     }
 
-    public void setData(String data) {
-        mData = data;
+    public void setMessage(String mMessage) {
+        this.mMessage = mMessage;
     }
 
-    public void setDataJSON(JSONObject json) {
-        mJSON = json;
+    public void setData(String data) {
+        mData = data;
     }
 
     public JSONObject getDataJSON() {
         return mJSON;
     }
 
-    public void setMessage(String mMessage) {
-        this.mMessage = mMessage;
+    public void setDataJSON(JSONObject json) {
+        mJSON = json;
     }
 }

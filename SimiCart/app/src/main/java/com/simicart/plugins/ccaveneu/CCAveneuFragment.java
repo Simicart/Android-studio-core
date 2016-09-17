@@ -1,14 +1,12 @@
 package com.simicart.plugins.ccaveneu;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.payment.PaymentFragment;
 import com.simicart.core.base.payment.WebviewPaymentCallBack;
@@ -33,6 +31,7 @@ public class CCAveneuFragment extends PaymentFragment {
     public static final String MES_REVIEW = "The order changes to reviewed";
     public static final String MES_FAIL = "Failure: Your order has been canceled";
     public static final String MES_ERROR = "Have some errors, please try again";
+    protected LinearLayout llPayment;
 
     public static CCAveneuFragment newInstance(SimiData data) {
         CCAveneuFragment fragment = new CCAveneuFragment();
@@ -41,8 +40,6 @@ public class CCAveneuFragment extends PaymentFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    protected LinearLayout llPayment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,7 +51,7 @@ public class CCAveneuFragment extends PaymentFragment {
         if (null != mOrderInforEntity) {
             url = mOrderInforEntity.getData("params");
         }
-        Log.e("CCAveneuFragment","-----> URL " + url);
+        Log.e("CCAveneuFragment", "-----> URL " + url);
         if (Utils.validateString(url)) {
 
             HashMap<String, Object> data = new HashMap<>();

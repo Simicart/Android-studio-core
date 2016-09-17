@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
  */
 public class AppStoreConfig extends SimiEntity {
 
+    public static AppStoreConfig instance;
     private String mCountryName = "";
     private String mCountryCode = "";
     private String mCurrencySymbol = "";
@@ -28,7 +29,6 @@ public class AppStoreConfig extends SimiEntity {
     private boolean isReloadPaymentMethod;
     private String mSenderID = "";
     private String mTypeProductList = "";
-
     private String country_code = "country_code";
     private String country_name = "country_name";
     private String locale_identifier = "locale_identifier";
@@ -43,8 +43,6 @@ public class AppStoreConfig extends SimiEntity {
     private String is_show_zero_price = "is_show_zero_price";
     private String is_show_link_all_product = "is_show_link_all_product";
     private String is_reload_payment_method = "is_reload_payment_method";
-
-    public static AppStoreConfig instance;
 
     public static AppStoreConfig getInstance() {
         if (instance == null) {
@@ -109,7 +107,7 @@ public class AppStoreConfig extends SimiEntity {
         // currency code
         if (hasKey(currency_code)) {
             String code = getData(currency_code);
-            if(!Utils.validateString(DataPreferences.getCurrencyID())) {
+            if (!Utils.validateString(code)) {
                 DataPreferences.saveCurrencyID(code);
             }
             setCurrencyCode(code);
@@ -146,6 +144,15 @@ public class AppStoreConfig extends SimiEntity {
             String isShowLinkAllProduct = getData(is_show_link_all_product);
             if (Utils.TRUE(isShowLinkAllProduct)) {
                 setShowLinkAllProduct(true);
+            }
+        }
+
+        if (hasKey(is_rtl)) {
+            String rtl = getData(is_rtl);
+            if (rtl.equals("1")) {
+                isRTL = true;
+            } else {
+                isRTL = false;
             }
         }
 
@@ -327,12 +334,12 @@ public class AppStoreConfig extends SimiEntity {
         this.mSenderID = senderID;
     }
 
-    public void setTypeProductList(String typeProductList) {
-        mTypeProductList = typeProductList;
-    }
-
     public String getTypeProductList() {
         return mTypeProductList;
+    }
+
+    public void setTypeProductList(String typeProductList) {
+        mTypeProductList = typeProductList;
     }
 
 

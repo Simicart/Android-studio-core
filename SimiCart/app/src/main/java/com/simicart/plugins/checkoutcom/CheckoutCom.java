@@ -10,7 +10,7 @@ public class CheckoutCom extends Payment {
 
     @Override
     protected String getKeyEvent() {
-        return KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_WEBVIEW +"SIMICHECKOUTCOM";
+        return KeyEvent.REVIEW_ORDER.FOR_PAYMENT_TYPE_WEBVIEW + "SIMICHECKOUTCOM";
     }
 
     @Override

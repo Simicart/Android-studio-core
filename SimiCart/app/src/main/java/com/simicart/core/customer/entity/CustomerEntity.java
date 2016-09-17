@@ -13,7 +13,7 @@ public class CustomerEntity extends SimiEntity {
     @Override
     public void parse() {
 
-        mAddress =new AddressEntity();
+        mAddress = new AddressEntity();
         mAddress.parse(mJSON);
 
 

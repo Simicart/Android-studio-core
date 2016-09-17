@@ -18,135 +18,134 @@ import android.widget.Button;
 import com.simicart.core.common.Utils;
 
 public class ColorButton extends Button {
-	private float radius = 7;
-	private int color = Color.RED;
+    public static final int[] ColorItem = {0x7f010000, 0x7f010001};
+    private float radius = 7;
+    private int color = Color.RED;
 
-	public ColorButton(Context context) {
-		super(context);
-	}
+    public ColorButton(Context context) {
+        super(context);
+    }
 
-	public static final int[] ColorItem = { 0x7f010000, 0x7f010001 };
+    public ColorButton(Context context, AttributeSet attrs) {
+        super(context, attrs);
 
-	public ColorButton(Context context, AttributeSet attrs) {
-		super(context, attrs);
+        TypedArray typedArray = context
+                .obtainStyledAttributes(attrs, ColorItem);
+        radius = typedArray.getFloat(0, 7);
+        color = typedArray.getColor(1, Color.RED);
+        typedArray.recycle();
 
-		TypedArray typedArray = context
-				.obtainStyledAttributes(attrs, ColorItem);
-		radius = typedArray.getFloat(0, 7);
-		color = typedArray.getColor(1, Color.RED);
-		typedArray.recycle();
+        setCustomBackground(getStateListDrawable());
+    }
 
-		setCustomBackground(getStateListDrawable());
-	}
+    public static int darker(int color, float factor) {
+        int a = Color.alpha(color);
+        int r = Color.red(color);
+        int g = Color.green(color);
+        int b = Color.blue(color);
 
-	public void setStyle(float radius, int color) {
-		this.radius = radius;
-		this.color = color;
-		setCustomBackground(getStateListDrawable());
-	}
+        return Color.argb(a, Math.max((int) (r * factor), 0),
+                Math.max((int) (g * factor), 0),
+                Math.max((int) (b * factor), 0));
+    }
 
-	private LayerDrawable getDrawable(boolean tap) {
-		Drawable color = color();
-		Drawable gradient = gradient(tap);
+    public void setStyle(float radius, int color) {
+        this.radius = radius;
+        this.color = color;
+        setCustomBackground(getStateListDrawable());
+    }
 
-		Drawable[] layers = { shadow(darker(this.color, 0.9f)), color, gradient };
-		LayerDrawable layerDrawable = new LayerDrawable(layers);
-		return layerDrawable;
-	}
+    private LayerDrawable getDrawable(boolean tap) {
+        Drawable color = color();
+        Drawable gradient = gradient(tap);
 
-	private ShapeDrawable color() {
-		ShapeDrawable shape = new ShapeDrawable(new RoundRectShape(corners(),
-				null, null));
-		shape.getPaint().setColor(color);
-		return shape;
-	}
+        Drawable[] layers = {shadow(darker(this.color, 0.9f)), color, gradient};
+        LayerDrawable layerDrawable = new LayerDrawable(layers);
+        return layerDrawable;
+    }
 
-	private GradientDrawable gradient(boolean tap) {
-		int[] colors = null;
-		if (tap) {
-			colors = new int[] { darker(this.color, 0.9f),
-					darker(this.color, 0.9f), darker(this.color, 0.9f) };
-		} else {
-			// colors = new int[] { Color.parseColor("#00000000"),
-			// Color.parseColor("#00000000"),
-			// Color.parseColor("#55000000") };
-		}
-		GradientDrawable mGradient = new GradientDrawable(
-				Orientation.TOP_BOTTOM, colors);
-		mGradient.setCornerRadii(corners());
-		// mGradient.setStroke(2, Color.parseColor("#33000000"));//vien ngoai
-		return mGradient;
-	}
+    private ShapeDrawable color() {
+        ShapeDrawable shape = new ShapeDrawable(new RoundRectShape(corners(),
+                null, null));
+        shape.getPaint().setColor(color);
+        return shape;
+    }
 
-	private float[] corners() {
-		float[] corners = new float[] { radius, radius, radius, radius, radius,
-				radius, radius, radius };
-		return corners;
-	}
+    private GradientDrawable gradient(boolean tap) {
+        int[] colors = null;
+        if (tap) {
+            colors = new int[]{darker(this.color, 0.9f),
+                    darker(this.color, 0.9f), darker(this.color, 0.9f)};
+        } else {
+            // colors = new int[] { Color.parseColor("#00000000"),
+            // Color.parseColor("#00000000"),
+            // Color.parseColor("#55000000") };
+        }
+        GradientDrawable mGradient = new GradientDrawable(
+                Orientation.TOP_BOTTOM, colors);
+        mGradient.setCornerRadii(corners());
+        // mGradient.setStroke(2, Color.parseColor("#33000000"));//vien ngoai
+        return mGradient;
+    }
 
-	private StateListDrawable getStateListDrawable() {
-		LayerDrawable tap = getDrawable(true);
-		LayerDrawable normal = getDrawable(false);
+    private float[] corners() {
+        float[] corners = new float[]{radius, radius, radius, radius, radius,
+                radius, radius, radius};
+        return corners;
+    }
 
-		StateListDrawable stateListDrawable = new StateListDrawable();
-		stateListDrawable.addState(new int[] { android.R.attr.state_pressed },
-				tap);
-		stateListDrawable.addState(new int[] { android.R.attr.state_focused },
-				tap);
-		stateListDrawable.addState(new int[] { android.R.attr.state_enabled },
-				normal);
-		return stateListDrawable;
-	}
+    private StateListDrawable getStateListDrawable() {
+        LayerDrawable tap = getDrawable(true);
+        LayerDrawable normal = getDrawable(false);
 
-	private void setCustomBackground(Drawable drawable) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			setCustomBackgroundJellyBean(drawable);
-		} else {
-			setCustomBackgroundDrawable(drawable);
-		}
-	}
+        StateListDrawable stateListDrawable = new StateListDrawable();
+        stateListDrawable.addState(new int[]{android.R.attr.state_pressed},
+                tap);
+        stateListDrawable.addState(new int[]{android.R.attr.state_focused},
+                tap);
+        stateListDrawable.addState(new int[]{android.R.attr.state_enabled},
+                normal);
+        return stateListDrawable;
+    }
 
-	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-	private void setCustomBackgroundJellyBean(Drawable drawable) {
-		try {
-			setBackground(drawable);
-		} catch (NoSuchMethodError e) {
-			setCustomBackgroundDrawable(drawable);
-		}
-	}
+    private void setCustomBackground(Drawable drawable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            setCustomBackgroundJellyBean(drawable);
+        } else {
+            setCustomBackgroundDrawable(drawable);
+        }
+    }
 
-	@SuppressWarnings("deprecation")
-	private void setCustomBackgroundDrawable(Drawable drawable) {
-		setBackgroundDrawable(drawable);
-	}
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private void setCustomBackgroundJellyBean(Drawable drawable) {
+        try {
+            setBackground(drawable);
+        } catch (NoSuchMethodError e) {
+            setCustomBackgroundDrawable(drawable);
+        }
+    }
 
-	private ShapeDrawable shadow(String color) {
-		RoundRectShape rect = new RoundRectShape(corners(), null, null);
-		ShapeDrawable shape = new ShapeDrawable(rect);
-		shape.getPaint().setStrokeWidth(1);
-		shape.getPaint().setColor(Color.parseColor(color));
-		shape.setPadding(1, 0, 0, Utils.toDp(3));
-		return shape;
-	}
+    @SuppressWarnings("deprecation")
+    private void setCustomBackgroundDrawable(Drawable drawable) {
+        setBackgroundDrawable(drawable);
+    }
 
-	private ShapeDrawable shadow(int color) {
-		RoundRectShape rect = new RoundRectShape(corners(), null, null);
-		ShapeDrawable shape = new ShapeDrawable(rect);
-		shape.getPaint().setStrokeWidth(1);
-		shape.getPaint().setColor(color);
-		shape.setPadding(1, 0, 0, Utils.toDp(3));
-		return shape;
-	}
+    private ShapeDrawable shadow(String color) {
+        RoundRectShape rect = new RoundRectShape(corners(), null, null);
+        ShapeDrawable shape = new ShapeDrawable(rect);
+        shape.getPaint().setStrokeWidth(1);
+        shape.getPaint().setColor(Color.parseColor(color));
+        shape.setPadding(1, 0, 0, Utils.toDp(3));
+        return shape;
+    }
 
-	public static int darker(int color, float factor) {
-		int a = Color.alpha(color);
-		int r = Color.red(color);
-		int g = Color.green(color);
-		int b = Color.blue(color);
-
-		return Color.argb(a, Math.max((int) (r * factor), 0),
-				Math.max((int) (g * factor), 0),
-				Math.max((int) (b * factor), 0));
-	}
+    private ShapeDrawable shadow(int color) {
+        RoundRectShape rect = new RoundRectShape(corners(), null, null);
+        ShapeDrawable shape = new ShapeDrawable(rect);
+        shape.getPaint().setStrokeWidth(1);
+        shape.getPaint().setColor(color);
+        shape.setPadding(1, 0, 0, Utils.toDp(3));
+        return shape;
+    }
 
 }

@@ -104,7 +104,7 @@ public class ProductPriceViewProductListV03 extends ProductPriceView {
     }
 
 	/*
-	 * 
+     *
 	 * This function show price of product that type of product is bundle. The
 	 * role of function is : If JSON of product have 'minimal_price_label' tag,
 	 * if product has one tax(excl_tax_minimal), price will be

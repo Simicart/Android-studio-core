@@ -1,24 +1,16 @@
 package com.simicart.plugins.rewardpoint.controller;
 
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
-import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.base.network.error.SimiError;
 import com.simicart.core.base.notify.SimiNotify;
-import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.KeyData;
-import com.simicart.core.config.AppColorConfig;
-import com.simicart.core.customer.fragment.MyAccountFragment;
-import com.simicart.core.customer.fragment.SignInFragment;
 import com.simicart.plugins.rewardpoint.delegate.MyRewardDelegate;
 import com.simicart.plugins.rewardpoint.fragment.RewardCardFragment;
 import com.simicart.plugins.rewardpoint.fragment.RewardHistoryFragment;
@@ -88,7 +80,7 @@ public class MyRewardController extends SimiController {
         onClickSetting = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,Object> hmData = new HashMap<String, Object>();
+                HashMap<String, Object> hmData = new HashMap<String, Object>();
                 hmData.put(KeyData.REWARD_POINT.EXPIRE_NOTIFICATION, mDelegate.expireNotification());
                 hmData.put(KeyData.REWARD_POINT.IS_NOTIFICATION, mDelegate.isNotification());
                 RewardSettingFragment fragment = RewardSettingFragment
@@ -99,7 +91,7 @@ public class MyRewardController extends SimiController {
         onClickCard = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,Object> hmData = new HashMap<String, Object>();
+                HashMap<String, Object> hmData = new HashMap<String, Object>();
                 hmData.put(KeyData.REWARD_POINT.LOYALTY_REDEEM, mDelegate.getLoyaltyRedeem());
                 hmData.put(KeyData.REWARD_POINT.PASSBOOK_BACKGROUND, mDelegate.getPassbookBackground());
                 hmData.put(KeyData.REWARD_POINT.PASSBOOK_BARCODE, mDelegate.getPassbookBarcode());

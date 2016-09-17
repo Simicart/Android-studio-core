@@ -26,10 +26,14 @@ public class AddressBookBlock extends SimiBlock {
     protected TextView tv_addAddress;
     protected RecyclerView rvAddress;
     protected AddressBookAdapter mAdapter;
-    private RelativeLayout rlt_layout_addadress;
     protected int openFor = -1;
     protected ArrayList<AddressEntity> listAddress;
     protected HashMap<String, Object> mData;
+    private RelativeLayout rlt_layout_addadress;
+
+    public AddressBookBlock(View view, Context context) {
+        super(view, context);
+    }
 
     @Override
     public void initView() {
@@ -79,10 +83,6 @@ public class AddressBookBlock extends SimiBlock {
             mAdapter = new AddressBookAdapter(listAddress, mData);
             rvAddress.setAdapter(mAdapter);
         }
-    }
-
-    public AddressBookBlock(View view, Context context) {
-        super(view, context);
     }
 
     public void setCreateNewListener(View.OnClickListener listener) {

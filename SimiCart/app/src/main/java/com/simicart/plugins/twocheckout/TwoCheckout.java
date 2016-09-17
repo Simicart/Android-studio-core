@@ -1,7 +1,6 @@
 package com.simicart.plugins.twocheckout;
 
 import com.simicart.core.base.payment.Payment;
-import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
 
 /**

@@ -7,7 +7,7 @@ import com.simicart.core.customer.entity.ProfileEntity;
 
 public interface SignInDelegate extends SimiDelegate {
 
-	public void changeColorSignIn(ColorStateList color);
+    public void changeColorSignIn(ColorStateList color);
 
-	public ProfileEntity getProfileSignIn();
+    public ProfileEntity getProfileSignIn();
 }

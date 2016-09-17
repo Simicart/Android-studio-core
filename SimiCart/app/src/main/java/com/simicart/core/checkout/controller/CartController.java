@@ -1,18 +1,14 @@
 package com.simicart.core.checkout.controller;
 
-import android.view.View;
-
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.checkout.component.ListProductCheckoutComponent;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.model.CartModel;
 import com.simicart.core.common.DataPreferences;
 import com.simicart.core.config.Constants;
-import com.simicart.core.config.Rconfig;
 
 import org.json.JSONObject;
 
@@ -70,7 +66,7 @@ public class CartController extends SimiController {
 
     protected void createListProducts() {
         ArrayList<Cart> listCarts = ((CartModel) mModel).getListCarts();
-        if(listCarts.size() == 0) {
+        if (listCarts.size() == 0) {
             mDelegate.visibleAllView();
         }
         mDelegate.showListProductsView(listCarts);

@@ -19,64 +19,64 @@ import com.simicart.core.config.Rconfig;
 
 public class OptionFragment extends SimiFragment {
 
-	public static OptionFragment newInstance(View view, OnClickListener listener) {
-		OptionFragment fragment = new OptionFragment();
-		fragment.view = view;
-		fragment.listener = listener;
-		return fragment;
-	}
+    View mRootView;
+    View view;
+    OnClickListener listener;
+    FrameLayout frameLayout;
 
-	View mRootView;
-	View view;
-	OnClickListener listener;
-	FrameLayout frameLayout;
+    public static OptionFragment newInstance(View view, OnClickListener listener) {
+        OptionFragment fragment = new OptionFragment();
+        fragment.view = view;
+        fragment.listener = listener;
+        return fragment;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		mRootView = inflater.inflate(
-				Rconfig.getInstance().layout("core_option_detail_layout"),
-				container, false);
-		RelativeLayout relativeLayout = (RelativeLayout) mRootView
-				.findViewById(Rconfig.getInstance().id("rlt_core_option"));
-		relativeLayout.setOnClickListener(new OnClickListener() {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        mRootView = inflater.inflate(
+                Rconfig.getInstance().layout("core_option_detail_layout"),
+                container, false);
+        RelativeLayout relativeLayout = (RelativeLayout) mRootView
+                .findViewById(Rconfig.getInstance().id("rlt_core_option"));
+        relativeLayout.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				SimiManager.getIntance().getManager().popBackStack();
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                SimiManager.getIntance().getManager().popBackStack();
+            }
+        });
 
-		TextView tv_cancel = (TextView) mRootView.findViewById(Rconfig
-				.getInstance().id("tv_cancel"));
-		tv_cancel.setText(SimiTranslator.getInstance().translate("Cancel"));
+        TextView tv_cancel = (TextView) mRootView.findViewById(Rconfig
+                .getInstance().id("tv_cancel"));
+        tv_cancel.setText(SimiTranslator.getInstance().translate("Cancel"));
 
-		TextView tv_done = (TextView) mRootView.findViewById(Rconfig
-				.getInstance().id("tv_done"));
-		tv_done.setText(SimiTranslator.getInstance().translate("Done"));
+        TextView tv_done = (TextView) mRootView.findViewById(Rconfig
+                .getInstance().id("tv_done"));
+        tv_done.setText(SimiTranslator.getInstance().translate("Done"));
 
-		ScrollView scroll_view = (ScrollView) mRootView.findViewById(Rconfig
-				.getInstance().id("scl_body"));
-		if (view.getParent() != null)
-			((ViewGroup) view.getParent()).removeView(view);
-		scroll_view.addView(view);
-		Animation animationToTop = AnimationUtils.loadAnimation(SimiManager
-				.getIntance().getCurrentActivity(),
-				Rconfig.getInstance().getId("down_to_top", "anim"));
-		animationToTop.setStartOffset(10);
-		view.setAnimation(animationToTop);
+        ScrollView scroll_view = (ScrollView) mRootView.findViewById(Rconfig
+                .getInstance().id("scl_body"));
+        if (view.getParent() != null)
+            ((ViewGroup) view.getParent()).removeView(view);
+        scroll_view.addView(view);
+        Animation animationToTop = AnimationUtils.loadAnimation(SimiManager
+                        .getIntance().getCurrentActivity(),
+                Rconfig.getInstance().getId("down_to_top", "anim"));
+        animationToTop.setStartOffset(10);
+        view.setAnimation(animationToTop);
 
-		tv_cancel.setOnClickListener(new OnClickListener() {
+        tv_cancel.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				SimiManager.getIntance().getManager().popBackStack();
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                SimiManager.getIntance().getManager().popBackStack();
+            }
+        });
 
-		tv_done.setOnClickListener(listener);
+        tv_done.setOnClickListener(listener);
 
-		return mRootView;
-	}
+        return mRootView;
+    }
 
 }

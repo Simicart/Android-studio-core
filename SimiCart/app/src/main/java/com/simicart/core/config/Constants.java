@@ -2,39 +2,48 @@ package com.simicart.core.config;
 
 public class Constants {
 
-    public static  final String ENTITY = "entity";
-    public static final  String METHOD = "method";
-
+    public static final String ENTITY = "entity";
+    public static final String METHOD = "method";
+    public static final String INVOICE_NUMBER = "invoice_number";
+    // click add new address from my account
+    public static final int NEW_ADDRESS = 0;
+    // click as new customer
+    public static final int NEW_CUSTOMER = 1;
+    // click check out as guest
+    public static final int NEW_AS_GUEST = 2;
+    // click new address from check out
+    public static final int NEW_ADDRESS_CHECKOUT = 3;
+    // edit address
+    public static final int EDIT_ADDRESS = 4;
+    // truong
+    public static final int TARGET_PRODUCTDETAIL = 1234;
+    public static final int SIZE_TEXT_BUTTON = 18;
+    public static final String SCANNER = "com.google.zxing.client.android.SCAN";
+    public static final String SCAN_MODE_BARCODE = "UPC_A,UPC_E,EAN_8,EAN_13,CODE_39,CODE_93,CODE_128";
+    public static final String SCAN_MODE = "QR_CODE_MODE";
     // type sign in
     public static String NORMAL_SIGN_IN = "normal_sign_in";
     public static String OTHER_SIGN_IN = "other_sign_in";
     public static String FACEBOOK_SIGN_IN = "facebook";
-
     public static String RESPONSE_STATUS_FAIL = "FAIL";
     public static String RESPONSE_STATUS_SUCCESS = "SUCCESS";
-
     // tag json response
     public static String DATA = "data";
     public static String STATUS = "status";
     public static String MESSAGE = "message";
-
     // tag json category
     public static String CATEGORY_ID = "category_id";
     public static String CATEGORY_NAME = "category_name";
     public static String CATEGORY_IMAGE = "category_image";
     public static String IMAGES = "images";
-
     // tag json order spot product
     public static String SPOT_ID = "spot_id";
     public static String SPOT_KEY = "spot_key";
     public static String SPOT_NAME = "spot_name";
-
     // tag store view
     public static String STORE_ID = "store_id";
     public static String STORE_NAME = "store_name";
     public static String STORE_CODE = "store_code";
-
-
     // tag json spot product
     public static String PRODUCT_IMAGES = "product_images";
     public static String PRODUCT_IMAGE = "product_image";
@@ -54,8 +63,6 @@ public class Constants {
     public static String PRODUCT_REGULAR_PRICE = "product_regular_price";
     public static String KEY = "key";
     public static String KEY_WORD = "key_word";
-
-
     public static String OFFSET = "offset";
     public static String LIMIT = "limit";
     public static String WIDTH = "width";
@@ -81,7 +88,6 @@ public class Constants {
     public static String PRODUCT_TYPE = "product_type";
     public static String PRODUCT_QTY = "product_qty";
     public static String COUPON_CODE = "coupon_code";
-
     public static String EXCL_TAX_SPECIAL = "excl_tax_special";
     public static String INCL_TAX_SPECIAL = "incl_tax_special";
     public static String INCL_TAX_TO = "incl_tax_to";
@@ -97,7 +103,6 @@ public class Constants {
     public static String PRODUCT_PRICE_CONFIG = "product_price_config";
     public static String TIER_PRICE = "tier_price";
     public static String SORT_OPTION = "sort_option";
-
     public static String OPTION_ID = "option_id";
     public static String OPTION_VALUE = "option_value";
     public static String OPTION_TITLE = "option_title";
@@ -116,6 +121,8 @@ public class Constants {
     public static String IS_DEFAULT = "is_default";
     // review
     public static String REVIEW_ID = "review_id";
+
+    // address
     public static String CUSTOMER_NAME = "customer_name";
     public static String REVIEW_TITLE = "review_title";
     public static String REVIEW_BODY = "review_body";
@@ -127,42 +134,15 @@ public class Constants {
     public static String STAR_3 = "3_star";
     public static String STAR_4 = "4_star";
     public static String STAR_5 = "5_star";
-
-    // address
-
-
-
     public static String STATE = "state";
-
-
-
-
     public static String COUNTRY_ID = "country_id";
-
-
     public static String COUNTRY = "country";
-
     public static String ZIP_CODE = "Zipcode";
     public static String zIP_CODE = "zipcode";
     public static String TELEPHONE = "telephone";
-
-
-
-
-
     public static String ADDRESS = "address";
-
-
     public static String BIRTH_DAY = "birthday";
-
     public static String DOB = "dob";
-
-
-
-
-
-
-
     // shipping method
     public static String METHOD_ID = "s_method_id";
     public static String METHOD_CODE = "s_method_code";
@@ -171,7 +151,6 @@ public class Constants {
     public static String METHOD_SELECTED = "s_method_selected";
     public static String METHOD_NAME = "s_method_name";
     public static String METHOD_FEE_INCL_TAX = "s_method_fee_incl_tax";
-
     // payment method
     public static String CARD_TYPE = "card_type";
     public static String CARD_NUMBER = "card_number";
@@ -180,7 +159,6 @@ public class Constants {
     public static String USECCV = "useccv";
     public static String CC_ID = "cc_id";
     public static String SHOW_TYPE = "show_type";
-
     // total price
     public static String SUB_TOTAL = "sub_total";
     public static String SUBTOTAL = "subtotal";
@@ -195,12 +173,10 @@ public class Constants {
     public static String GRAND_TOTAL_INCL_TAX = "grand_total_incl_tax";
     public static String GRAND_TOTAL = "grand_total";
     public static String TAX = "tax";
-
     // condition
     public static String ID = "id";
     public static String CONTENT = "content";
     public static String ICON = "icon";
-
     // store_config
     public static String LOCALE_IDENTIFIER = "locale_identifier";
     public static String CURRENCY_SYMBOL = "currency_symbol";
@@ -209,7 +185,6 @@ public class Constants {
     public static String PRIVACY = "privacy";
     public static String CONTACT_US = "contact_us";
     public static String STORE_CONFIG = "store_config";
-
     // tag json order config
     public static String CUSTOMER_PASSWORD = "customer_password";
     public static String CONFIRM_PASSWORD = "confirm_password";
@@ -217,13 +192,8 @@ public class Constants {
     public static String SHIPPING_METHOD = "shipping_method";
     public static String BILLING_ADDRESS = "billingAddress";
     public static String CARD_4DIGITS = "card_4digits";
-
-
-
     public static String V2 = "v2";
     public static String TOTAL_V2 = "total_v2";
-
-
     // scale view pager
     public static int PAGES = 5;
     public static int LOOPS = 1000;
@@ -231,11 +201,9 @@ public class Constants {
     public static float BIG_SCALE = 1.0f;
     public static float SMALL_SCALE = 0.9f;
     public static float DIFF_SCALE = BIG_SCALE - SMALL_SCALE;
-
     // get order spot
     public static String PHONE_TYPE = "phone_type";
     public static String TABLET = "tablet";
-
     // customer
     public static String USER_ID = "user_id";
     public static String USER_EMAIL = "user_email";
@@ -244,7 +212,6 @@ public class Constants {
     public static String CART_QTY = "cart_qty";
     public static String OTHER = "other";
     public static String CART_ITEM_ID = "cart_item_id";
-
     // url extension catalog
     public static String GET_ALL_PRODUCTS = "connector/catalog/get_all_products";
     public static String GET_PRODUCT_DETAIL = "connector/catalog/get_product_detail";
@@ -254,7 +221,6 @@ public class Constants {
     public static String GET_CATEGORY_LIST = "connector/catalog/get_categories";
     public static String GET_PRODUCT_REVIEW = "connector/catalog/get_product_review";
     public static String GET_SPOT_PRODUCTV2 = "spotproduct/index/get_spot_products_v2";
-
     // url extension config
     public static String GET_STORES = "connector/config/get_stores";
     public static String GET_STORE_VIEW = "connector/config/get_store_view";
@@ -265,7 +231,6 @@ public class Constants {
     public static String GET_CMS_PAGES = "connector/config/get_cms_pages";
     public static String GET_CURRENCY = "simicategory/api/get_currencies";
     public static String SAVE_CURRENCY = "simicategory/api/save_currency";
-
     // url extension checkout
     public static String ADD_TO_CART = "connector/checkout/add_to_cart";
     public static String EDIT_CART = "connector/checkout/edit_cart";
@@ -275,7 +240,6 @@ public class Constants {
     public static String PLACE_ORDER = "connector/checkout/place_order";
     public static String UPDATE_PAYPAL_PAYMENT_STATES = "connector/checkout/update_paypal_payment";
     public static String SET_COUPON = "connector/checkout/set_coupon";
-
     // url extension my account
     public static String CHECK_LOGIN_STATUS = "connector/customer/check_login_status";
     public static String REGISTER = "connector/customer/register";
@@ -290,12 +254,9 @@ public class Constants {
     public static String SAVE_ADDRESS = "connector/customer/save_address";
     public static String FORGET_PASSWORD = "connector/customer/forgot_password";
     public static String ORDER_DETAIL_REORDER = "connector/checkout/re_order";
-
-
     // cc_type payment method
     public static String CC_CODE = "cc_code";
     public static String CC_NAME = "cc_name";
-
     // order history
     public static String ORDER_ID = "order_id";
     public static String ORDER_STATUS = "order_status";
@@ -306,33 +267,14 @@ public class Constants {
     public static String ORDER_TOTAL = "order_total";
     public static String ORDER_SUBTOTAL = "order_subtotal";
     public static String ORDER_GIFT_CODE = "order_gift_code";
-
-    public static final String INVOICE_NUMBER = "invoice_number";
-
-    // click add new address from my account
-    public static final int NEW_ADDRESS = 0;
-    // click as new customer
-    public static final int NEW_CUSTOMER = 1;
-    // click check out as guest
-    public static final int NEW_AS_GUEST = 2;
-    // click new address from check out
-    public static final int NEW_ADDRESS_CHECKOUT = 3;
-    // edit address
-    public static final int EDIT_ADDRESS = 4;
-
-    // truong
-    public static final int TARGET_PRODUCTDETAIL = 1234;
     public static String itemName = "";
-    public static final int SIZE_TEXT_BUTTON = 18;
-
-    public static final String SCANNER = "com.google.zxing.client.android.SCAN";
-    public static final String SCAN_MODE_BARCODE = "UPC_A,UPC_E,EAN_8,EAN_13,CODE_39,CODE_93,CODE_128";
-    public static final String SCAN_MODE = "QR_CODE_MODE";
     public static boolean checkSearchQuery = true;
     public static String NAME_FRAGMENT = "";
     public static boolean DIRECT_TODETAIL = false;
 
     public static String DEEP_LINK = "connector/catalog/deep_link";
+    public static String TAG_LISTVIEW = "listview";
+    public static String TAG_GRIDVIEW = "gridview";
 
     public final static class KeyBus {
         public static final String ID = "id";
@@ -499,8 +441,5 @@ public class Constants {
         public final static int BILLING_ADDRESS = 5;
         public final static int SHIPPING_ADDRESS = 6;
     }
-
-    public static String TAG_LISTVIEW = "listview";
-    public static String TAG_GRIDVIEW = "gridview";
 
 }

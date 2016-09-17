@@ -6,6 +6,6 @@ import com.simicart.core.base.delegate.SimiDelegate;
 
 public interface SettingAppDelegate extends SimiDelegate {
 
-	public void addItemRow(View view);
+    public void addItemRow(View view);
 
 }

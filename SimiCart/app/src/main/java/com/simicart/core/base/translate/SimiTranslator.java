@@ -8,16 +8,15 @@ import java.util.Map;
  */
 public class SimiTranslator {
 
-    private Map<String, String> mLanguages;
-
     public static SimiTranslator instance;
+    private Map<String, String> mLanguages;
 
     public SimiTranslator() {
         mLanguages = new HashMap<String, String>();
     }
 
     public static SimiTranslator getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new SimiTranslator();
         }
         return instance;

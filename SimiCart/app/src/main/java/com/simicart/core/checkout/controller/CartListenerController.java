@@ -21,7 +21,6 @@ import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.notify.SimiNotify;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.catalog.product.fragment.ProductDetailParentFragment;
 import com.simicart.core.checkout.checkoutwebview.fragment.CheckoutWebviewFragment;
 import com.simicart.core.checkout.delegate.CartAdapterDelegate;
 import com.simicart.core.checkout.delegate.CartDelegate;
@@ -50,10 +49,6 @@ public class CartListenerController implements CartAdapterDelegate {
     protected String mMessage;
     protected String mWebviewUrl;
 
-    public void setmMessage(String mMessage) {
-        this.mMessage = mMessage;
-    }
-
     public CartListenerController() {
         mCheckoutClicker = new OnClickListener() {
 
@@ -62,6 +57,10 @@ public class CartListenerController implements CartAdapterDelegate {
                 onCheckOut();
             }
         };
+    }
+
+    public void setmMessage(String mMessage) {
+        this.mMessage = mMessage;
     }
 
     protected void onCheckOut() {
@@ -247,7 +246,6 @@ public class CartListenerController implements CartAdapterDelegate {
                     new ColorDrawable(Color.TRANSPARENT));
         }
         dialoglayout.show();
-
 
 
         TextView bt_apply = (TextView) dialoglayout.findViewById(Rconfig

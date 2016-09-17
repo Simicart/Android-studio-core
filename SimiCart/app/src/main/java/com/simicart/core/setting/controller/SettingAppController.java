@@ -2,8 +2,7 @@ package com.simicart.core.setting.controller;
 
 import android.content.Intent;
 import android.provider.Settings;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.util.Log;
 
 import com.simicart.core.base.component.SimiMenuRowComponent;
 import com.simicart.core.base.component.SimiMultiMenuRowComponent;
@@ -91,7 +90,7 @@ public class SettingAppController extends SimiController {
 
     protected void afterRequestComplete() {
         mDelegate.dismissLoading();
-        if(isGetCurrency == true && isGetStore == true) {
+        if (isGetCurrency == true && isGetStore == true) {
             drawView();
         }
     }
@@ -154,7 +153,7 @@ public class SettingAppController extends SimiController {
     }
 
     protected void changeCurrency() {
-        HashMap<String,Object> hmData = new HashMap<>();
+        HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(Constants.KeyData.CURRENT_ITEM, getCurrentCurrency());
         ListCurrencyFragment fragment = ListCurrencyFragment
                 .newInstance(new SimiData(hmData));
@@ -179,7 +178,7 @@ public class SettingAppController extends SimiController {
     }
 
     protected void changeLanguage() {
-        HashMap<String,Object> hmData = new HashMap<>();
+        HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(Constants.KeyData.CURRENT_ITEM, getCurrentLanguage());
         ListLanguageFragment fragment = ListLanguageFragment
                 .newInstance(new SimiData(hmData));

@@ -13,17 +13,17 @@ import java.util.ArrayList;
 
 public class ProductListHomeBlock extends SimiBlock implements ProductListDelegate {
 
-	protected ProductListListenerController listner;
+    protected ProductListListenerController listner;
 
-	public ProductListHomeBlock(View view, Context context) {
-		super(view, context);
-	}
+    public ProductListHomeBlock(View view, Context context) {
+        super(view, context);
+    }
 
-	@Override
-	public void initView() {
-	}
+    @Override
+    public void initView() {
+    }
 
-	public void showProduct(final ArrayList<ProductList> productList) {
+    public void showProduct(final ArrayList<ProductList> productList) {
 //		Thread thread = new Thread(){
 //			@Override
 //			public void run() {
@@ -62,7 +62,7 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 //								} else {
 //									tv_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
 //								}
-//								if (DataLocal.isLanguageRTL) {
+//								if (AppStoreConfig.getInstance().isRTL()) {
 //									tv_name.setGravity(Gravity.RIGHT);
 //								} else {
 //									tv_name.setGravity(Gravity.LEFT);
@@ -120,24 +120,24 @@ public class ProductListHomeBlock extends SimiBlock implements ProductListDelega
 //			}
 //		};
 //		thread.start();
-	}
+    }
 
-	@Override
-	public void onUpdate(ArrayList<ProductList> productLists) {
-		if (productLists == null || productLists.size() == 0) {
-			ArrayList<Product> spotProducts = new ArrayList<>();
-			for (int i = 0; i < 5; i++) {
-				Product product = new Product();
-				product.setId("fake");
-				product.setName("Example Product " + i);
-				spotProducts.add(product);
-			}
-			ProductList productList = new ProductList();
-			productList.setSpotProduct(spotProducts);
-			productList.setTitle("Feature Product");
-			productLists = new ArrayList<>();
-			productLists.add(productList);
-		}
-		showProduct(productLists);
-	}
+    @Override
+    public void onUpdate(ArrayList<ProductList> productLists) {
+        if (productLists == null || productLists.size() == 0) {
+            ArrayList<Product> spotProducts = new ArrayList<>();
+            for (int i = 0; i < 5; i++) {
+                Product product = new Product();
+                product.setId("fake");
+                product.setName("Example Product " + i);
+                spotProducts.add(product);
+            }
+            ProductList productList = new ProductList();
+            productList.setSpotProduct(spotProducts);
+            productList.setTitle("Feature Product");
+            productLists = new ArrayList<>();
+            productLists.add(productList);
+        }
+        showProduct(productLists);
+    }
 }

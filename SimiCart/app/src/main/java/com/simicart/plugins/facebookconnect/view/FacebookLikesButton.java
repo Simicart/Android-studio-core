@@ -12,30 +12,47 @@ import com.simicart.plugins.facebookconnect.common.FBUIUtils;
 
 public class FacebookLikesButton {
 
-	private Context mContext;
-	private ProgressBar mLikeProgess;
-	private TextView mLikeCount;
+    private Context mContext;
+    private ProgressBar mLikeProgess;
+    private TextView mLikeCount;
 
-	public FacebookLikesButton(Context con, ProgressBar pro, TextView txt) {
-		this.mLikeProgess = pro;
-		this.mLikeCount = txt;
-		this.mContext = con;
-		initView();
-	}
+    public FacebookLikesButton(Context con, ProgressBar pro, TextView txt) {
+        this.mLikeProgess = pro;
+        this.mLikeCount = txt;
+        this.mContext = con;
+        initView();
+    }
 
-	protected void initView() {
-		mLikeProgess.setVisibility(View.VISIBLE);
-		mLikeCount.setVisibility(View.GONE);
-	}
+    protected void initView() {
+        mLikeProgess.setVisibility(View.VISIBLE);
+        mLikeCount.setVisibility(View.GONE);
+    }
 
-	private class SharesCountFetcherTask extends AsyncTask<String, Void, Long> {
+    public void onLikeDownloaded(Long result) {
+        mLikeProgess.setVisibility(View.GONE);
+        mLikeCount.setVisibility(View.VISIBLE);
+        if (result != null) {
+            mLikeCount.setText(FBUIUtils.numberToShortenedString(mContext,
+                    result));
+        } else {
+            mLikeCount.setText(SimiTranslator.getInstance().translate("N/A"));
+        }
+    }
 
-		@Override
-		protected Long doInBackground(String... uri) {
+    public void downloadLikes(String likesUrl) {
+
+        new SharesCountFetcherTask().execute(likesUrl);
+
+    }
+
+    private class SharesCountFetcherTask extends AsyncTask<String, Void, Long> {
+
+        @Override
+        protected Long doInBackground(String... uri) {
 
 //			HttpClient httpclient = new DefaultHttpClient();
 //			HttpResponse response;
-			Long shares = null;
+            Long shares = null;
 //			try {
 //
 //				HttpGet getRequest = new HttpGet(
@@ -60,32 +77,15 @@ public class FacebookLikesButton {
 //			} catch (Exception e) {
 //				e.printStackTrace();
 //			}
-			return shares;
+            return shares;
 
-		}
+        }
 
-		@Override
-		protected void onPostExecute(Long result) {
+        @Override
+        protected void onPostExecute(Long result) {
 
-			onLikeDownloaded(result);
-		}
+            onLikeDownloaded(result);
+        }
 
-	}
-
-	public void onLikeDownloaded(Long result) {
-		mLikeProgess.setVisibility(View.GONE);
-		mLikeCount.setVisibility(View.VISIBLE);
-		if (result != null) {
-			mLikeCount.setText(FBUIUtils.numberToShortenedString(mContext,
-					result));
-		} else {
-			mLikeCount.setText(SimiTranslator.getInstance().translate("N/A"));
-		}
-	}
-
-	public void downloadLikes(String likesUrl) {
-
-		new SharesCountFetcherTask().execute(likesUrl);
-
-	}
+    }
 }

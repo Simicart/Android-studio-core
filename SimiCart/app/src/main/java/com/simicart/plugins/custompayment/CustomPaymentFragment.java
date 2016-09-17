@@ -23,6 +23,12 @@ import java.util.HashMap;
  */
 public class CustomPaymentFragment extends SimiFragment {
 
+    protected CustomPaymentEntity mCustomPaymentEntity;
+    protected OrderInforEntity mOrderInforEntity;
+    protected String mInvoiceNumber;
+    protected String mUrlAction;
+    protected LinearLayout llPayment;
+
     public static CustomPaymentFragment newIntance(SimiData data) {
         CustomPaymentFragment fragment = new CustomPaymentFragment();
         Bundle bundle = new Bundle();
@@ -30,13 +36,6 @@ public class CustomPaymentFragment extends SimiFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    protected CustomPaymentEntity mCustomPaymentEntity;
-    protected OrderInforEntity mOrderInforEntity;
-    protected String mInvoiceNumber;
-    protected String mUrlAction;
-    protected LinearLayout llPayment;
-
 
     @Nullable
     @Override

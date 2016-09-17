@@ -40,13 +40,13 @@ public class CacheOptionView {
     protected OptionProductDelegate mDelegate;
     protected boolean isShowWhenStart = false;
 
-    public void setShowWhenStart(boolean isShow) {
-        isShowWhenStart = isShow;
-    }
-
     public CacheOptionView(CacheOption cacheOption) {
         mCacheOption = cacheOption;
         mContext = SimiManager.getIntance().getCurrentActivity();
+    }
+
+    public void setShowWhenStart(boolean isShow) {
+        isShowWhenStart = isShow;
     }
 
     public void setDelegate(OptionProductDelegate delegate) {

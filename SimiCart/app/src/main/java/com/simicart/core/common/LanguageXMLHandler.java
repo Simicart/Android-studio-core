@@ -11,60 +11,58 @@ import java.util.Map;
 
 public class LanguageXMLHandler extends DefaultHandler {
 
-	public static final String TAG = "language";
-	public static final String TAG_ITEM = "item";
+    public static final String TAG = "language";
+    public static final String TAG_ITEM = "item";
+    Map<String, String> languages = new HashMap<String, String>();
+    private boolean currentElement = false;
+    private String currentValue = "";
+    private String key = "";
+    private String value = "";
 
-	private boolean currentElement = false;
-	private String currentValue = "";
-	private String key = "";
-	private String value = "";
+    public LanguageXMLHandler() {
+    }
 
-	Map<String, String> languages = new HashMap<String, String>();
+    public Map<String, String> getLanguages() {
+        return languages;
+    }
 
-	public LanguageXMLHandler() {
-	}
+    @Override
+    public void startElement(String uri, String localName, String qName,
+                             Attributes attributes) throws SAXException {
 
-	public Map<String, String> getLanguages() {
-		return languages;
-	}
+        currentElement = true;
 
-	@Override
-	public void startElement(String uri, String localName, String qName,
-			Attributes attributes) throws SAXException {
+        if (localName.equals(TAG)) {
+            // listLanguage = new ArrayList<>();
+        } else if (localName.equals(TAG_ITEM)) {
+            // item = new ItemLanguage();
+        }
+    }
 
-		currentElement = true;
+    // Called when tag closing
+    @SuppressLint("DefaultLocale")
+    @Override
+    public void endElement(String uri, String localName, String qName)
+            throws SAXException {
 
-		if (localName.equals(TAG)) {
-			// listLanguage = new ArrayList<>();
-		} else if (localName.equals(TAG_ITEM)) {
-			// item = new ItemLanguage();
-		}
-	}
+        currentElement = false;
+        /** set value */
+        if (localName.equalsIgnoreCase("key")) {
+            key = (String) currentValue.toLowerCase().trim();
+        } else if (localName.equalsIgnoreCase("value")) {
+            value = (String) currentValue.trim();
+        } else if (localName.equalsIgnoreCase(TAG_ITEM)) {
+            languages.put(key, value);
+        }
+        currentValue = "";
+    }
 
-	// Called when tag closing
-	@SuppressLint("DefaultLocale")
-	@Override
-	public void endElement(String uri, String localName, String qName)
-			throws SAXException {
-
-		currentElement = false;
-		/** set value */
-		if (localName.equalsIgnoreCase("key")) {
-			key = (String) currentValue.toLowerCase().trim();
-		} else if (localName.equalsIgnoreCase("value")) {
-			value = (String) currentValue.trim();
-		} else if (localName.equalsIgnoreCase(TAG_ITEM)) {
-			languages.put(key, value);
-		}
-		currentValue = "";
-	}
-
-	// Called to get tag characters
-	@Override
-	public void characters(char[] ch, int start, int length)
-			throws SAXException {
-		if (currentElement) {
-			currentValue = currentValue + new String(ch, start, length);
-		}
-	}
+    // Called to get tag characters
+    @Override
+    public void characters(char[] ch, int start, int length)
+            throws SAXException {
+        if (currentElement) {
+            currentValue = currentValue + new String(ch, start, length);
+        }
+    }
 }

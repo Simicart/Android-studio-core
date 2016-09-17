@@ -6,20 +6,6 @@ import com.simicart.core.base.model.entity.SimiEntity;
  * Created by frank on 30/08/2016.
  */
 public class CustomPaymentEntity extends SimiEntity {
-    protected String mPaymentMethod;
-    protected String mUrlRedirect;
-    protected String mUrlSuccess;
-    protected String mUrlFail;
-    protected String mUrlCancel;
-    protected String mUrlError;
-    protected String mMessageSuccess;
-    protected String mMessageFail;
-    protected String mMessageCancel;
-    protected String mMessageError;
-    protected String mCheckUrl;
-    protected String mUrlCheck;
-    protected String mTitleUrlAction;
-
     protected final String URL_CHECK = "url_check";
     protected final String TITLE_URL_ACTION = "title_url_action";
     protected final String PAYMENTMETHOD = "paymentmethod";
@@ -33,6 +19,19 @@ public class CustomPaymentEntity extends SimiEntity {
     protected final String MESSAGE_CANCEL = "message_cancel";
     protected final String MESSAGE_ERROR = "message_error";
     protected final String ISCHECKURL = "ischeckurl";
+    protected String mPaymentMethod;
+    protected String mUrlRedirect;
+    protected String mUrlSuccess;
+    protected String mUrlFail;
+    protected String mUrlCancel;
+    protected String mUrlError;
+    protected String mMessageSuccess;
+    protected String mMessageFail;
+    protected String mMessageCancel;
+    protected String mMessageError;
+    protected String mCheckUrl;
+    protected String mUrlCheck;
+    protected String mTitleUrlAction;
 
     @Override
     public void parse() {

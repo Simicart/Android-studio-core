@@ -35,7 +35,6 @@ import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.config.Rconfig;
-import com.simicart.core.customer.delegate.MyAccountDelegate;
 import com.simicart.core.slidemenu.entity.ItemNavigation;
 import com.simicart.core.slidemenu.entity.ItemNavigation.TypeItem;
 import com.simicart.plugins.rewardpoint.component.RewardPointComponent;
@@ -51,10 +50,10 @@ import java.util.HashMap;
 
 public class RewardPoint {
 
-    private Context mContext;
+    public static String REWARDPOINT_MENU_ITEM = "My Rewards";
     private static ArrayList<ItemNavigation> mItems;
     protected HashMap<String, String> mFragments;
-    public static String REWARDPOINT_MENU_ITEM = "My Rewards";
+    private Context mContext;
 
     public RewardPoint() {
 
@@ -68,7 +67,7 @@ public class RewardPoint {
                 SimiData data = bundle.getParcelable("entity");
                 mItems = (ArrayList<ItemNavigation>) data.getData().get(KeyData.SLIDE_MENU.LIST_ITEMS);
                 mFragments = (HashMap<String, String>) data.getData().get(KeyData.SLIDE_MENU.LIST_FRAGMENTS);
-                if(isExistReward() == false) {
+                if (isExistReward() == false) {
                     addItemToSlideMenu();
                 }
             }
@@ -145,8 +144,8 @@ public class RewardPoint {
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
                 SimiData data = bundle.getParcelable(Constants.ENTITY);
-                MyAccountDelegate mDelegate = (MyAccountDelegate) data.getData().get(KeyData.SIMI_CONTROLLER.DELEGATE);
-                addItemMyAccount(mDelegate);
+                ArrayList<SimiMenuRowComponent> listRows = (ArrayList<SimiMenuRowComponent>) data.getData().get(KeyData.MY_ACCOUNT.LIST_ROWS);
+                addItemMyAccount(listRows);
             }
         };
         SimiEvent.registerEvent(KeyEvent.MY_ACCOUNT_EVENT.MY_ACCOUNT_ADD_ITEM, addItemMyAccountReceiver);
@@ -206,7 +205,7 @@ public class RewardPoint {
             Log.e("REWARD POINT:", "Exception add item to cart ===>" + e.getMessage());
         }
 
-        if(ll_reward_card != null) {
+        if (ll_reward_card != null) {
             ll_reward_card.removeAllViews();
             LinearLayout.LayoutParams paramsImageview = new LinearLayout.LayoutParams(
                     Utils.toPixel(20), Utils.toPixel(20));
@@ -303,14 +302,14 @@ public class RewardPoint {
         if (jsonObject.has("fee")) {
             try {
                 feeJson = jsonObject.getJSONObject("fee");
-                if(feeJson.has("loyalty_spend") && feeJson.has("loyalty_rules")) {
+                if (feeJson.has("loyalty_spend") && feeJson.has("loyalty_rules")) {
                     rewardPointComponent.setJSONData(feeJson);
                     rewardPointComponent.setListComponents(listComponents);
                     for (SimiComponent component : listComponents) {
                         if (component instanceof PaymentMethodComponent) {
                             int index = listComponents.indexOf(component);
                             SimiComponent checkRewardComponent = listComponents.get(index + 1);
-                            if(checkRewardComponent instanceof RewardPointComponent) {
+                            if (checkRewardComponent instanceof RewardPointComponent) {
                                 continue;
                             }
                             listComponents.add(index + 1, rewardPointComponent);
@@ -347,7 +346,7 @@ public class RewardPoint {
                     + AppStoreConfig.getInstance().getPrice(loyalty_discount)
                     + "</font>";
             TextView textview_price_discount = (TextView) showView(priceDiscount);
-            if (DataLocal.isLanguageRTL) {
+            if (AppStoreConfig.getInstance().isRTL()) {
                 tableRowPointDiscount.addView(textview_price_discount);
                 tableRowPointDiscount.addView(textview_label_discount);
             } else {
@@ -399,7 +398,7 @@ public class RewardPoint {
         }
     }
 
-    protected void addItemMyAccount(MyAccountDelegate mDelegate) {
+    protected void addItemMyAccount(ArrayList<SimiMenuRowComponent> listRows) {
         SimiMenuRowComponent wishlistRowComponent = new SimiMenuRowComponent();
         wishlistRowComponent.setIcon("plugin_reward_ic_myacc");
         wishlistRowComponent.setLabel(SimiTranslator.getInstance().translate("Reward Point"));
@@ -410,7 +409,7 @@ public class RewardPoint {
                 SimiManager.getIntance().replacePopupFragment(fragmentRe);
             }
         });
-        mDelegate.addItemRow(wishlistRowComponent.createView());
+        listRows.add(wishlistRowComponent);
     }
 
 }

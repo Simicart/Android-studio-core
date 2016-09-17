@@ -9,7 +9,6 @@ import com.simicart.core.config.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class PlaceOrderModel extends SimiModel {
 

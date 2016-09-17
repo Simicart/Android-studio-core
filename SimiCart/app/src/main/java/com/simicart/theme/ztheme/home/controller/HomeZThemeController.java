@@ -7,10 +7,7 @@ import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
-import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.category.entity.Category;
-import com.simicart.core.catalog.category.fragment.CategoryFragment;
-import com.simicart.core.catalog.categorydetail.fragment.CategoryDetailFragment;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.Constants;
@@ -61,7 +58,7 @@ public class HomeZThemeController extends SimiController {
                 ZThemeCatalogEntity catalogEntity = mDelegate.getListCatalog().get(groupPosition);
                 if (catalogEntity.getType().equals("cat") && catalogEntity.getCategoryZTheme().hasChild() == true) {
                     Category childCategory = catalogEntity.getCategoryZTheme().getListChildCategory().get(childPosition);
-                    if(childCategory.hasChild() == true) {
+                    if (childCategory.hasChild() == true) {
                         openCate(childCategory);
                     } else {
                         openListProduct(childCategory);
@@ -79,7 +76,7 @@ public class HomeZThemeController extends SimiController {
                 if (catalogEntity.getType().equals("cat")) {
                     Category categoryEntity = catalogEntity.getCategoryZTheme();
                     if (categoryEntity.hasChild() == true) {
-                        if(DataLocal.isTablet) {
+                        if (DataLocal.isTablet) {
                             SimiManager.getIntance().openSubCategory(categoryEntity.getCategoryId(), categoryEntity.getCategoryName());
                             return true;
                         }
@@ -104,7 +101,7 @@ public class HomeZThemeController extends SimiController {
     }
 
     protected void openListProduct(ZThemeSpotEntity spot) {
-        HashMap<String,Object> hm = new HashMap<>();
+        HashMap<String, Object> hm = new HashMap<>();
         hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CUSTOM);
         hm.put("key", spot.getKey());
         hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, spot.getName());
@@ -113,7 +110,7 @@ public class HomeZThemeController extends SimiController {
     }
 
     protected void openListProduct(Category category) {
-        HashMap<String,Object> hm = new HashMap<>();
+        HashMap<String, Object> hm = new HashMap<>();
         hm.put(KeyData.CATEGORY_DETAIL.TYPE, ValueData.CATEGORY_DETAIL.CATE);
         hm.put(KeyData.CATEGORY_DETAIL.CATE_ID, category.getCategoryId());
         hm.put(KeyData.CATEGORY_DETAIL.CATE_NAME, category.getCategoryName());

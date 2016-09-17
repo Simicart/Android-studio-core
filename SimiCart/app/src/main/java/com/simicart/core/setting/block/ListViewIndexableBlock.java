@@ -16,48 +16,48 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ListViewIndexableBlock extends SimiBlock {
-	protected IndexableListView lv_language;
-	protected IndexableListAdapter mAdapter;
-	protected ArrayList<String> mList;
-	protected String itemChecked;
+    protected IndexableListView lv_language;
+    protected IndexableListAdapter mAdapter;
+    protected ArrayList<String> mList;
+    protected String itemChecked;
 
-	public ListViewIndexableBlock(View view, Context context) {
-		super(view, context);
-	}
+    public ListViewIndexableBlock(View view, Context context) {
+        super(view, context);
+    }
 
-	public void setOnItemClicker(OnItemClickListener clicker) {
-		lv_language.setOnItemClickListener(clicker);
-	}
+    public void setOnItemClicker(OnItemClickListener clicker) {
+        lv_language.setOnItemClickListener(clicker);
+    }
 
-	@Override
-	public void initView() {
-		lv_language = (IndexableListView) mView.findViewById(Rconfig
-				.getInstance().id("listview"));
-		ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance()
-				.getLineColor());
-		lv_language.setDivider(sage);
-		lv_language.setDividerHeight(1);
-		if (mList.size() > 0) {
-			if (null == mAdapter) {
-				Collections.sort(mList);
-				mAdapter = new IndexableListAdapter(mContext, mList,
-						itemChecked);
-				lv_language.setAdapter(mAdapter);
-			}
-		}
-		lv_language.setFastScrollEnabled(true);
+    @Override
+    public void initView() {
+        lv_language = (IndexableListView) mView.findViewById(Rconfig
+                .getInstance().id("listview"));
+        ColorDrawable sage = new ColorDrawable(AppColorConfig.getInstance()
+                .getLineColor());
+        lv_language.setDivider(sage);
+        lv_language.setDividerHeight(1);
+        if (mList.size() > 0) {
+            if (null == mAdapter) {
+                Collections.sort(mList);
+                mAdapter = new IndexableListAdapter(mContext, mList,
+                        itemChecked);
+                lv_language.setAdapter(mAdapter);
+            }
+        }
+        lv_language.setFastScrollEnabled(true);
 
-	}
+    }
 
-	@Override
-	public void drawView(SimiCollection collection) {
-	}
+    @Override
+    public void drawView(SimiCollection collection) {
+    }
 
-	public void setList(ArrayList<String> list_string) {
-		this.mList = list_string;
-	}
+    public void setList(ArrayList<String> list_string) {
+        this.mList = list_string;
+    }
 
-	public void setItemChecked(String itemChecked) {
-		this.itemChecked = itemChecked;
-	}
+    public void setItemChecked(String itemChecked) {
+        this.itemChecked = itemChecked;
+    }
 }

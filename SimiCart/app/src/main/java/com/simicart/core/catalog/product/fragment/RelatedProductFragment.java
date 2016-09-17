@@ -15,48 +15,48 @@ import com.simicart.core.config.Constants;
 import com.simicart.core.config.Rconfig;
 
 public class RelatedProductFragment extends SimiFragment {
-	protected String mID;
-	protected RelatedProductBlock mBlock;
-	protected RelatedProductController mController;
-	protected Product mProduct;
+    protected String mID;
+    protected RelatedProductBlock mBlock;
+    protected RelatedProductController mController;
+    protected Product mProduct;
 
-	public static RelatedProductFragment newInstance(SimiData data) {
-		RelatedProductFragment fragment = new RelatedProductFragment();
-		Bundle bundle = new Bundle();
-		bundle.putParcelable(KEY_DATA, data);
-		fragment.setArguments(bundle);
-		return fragment;
-	}
+    public static RelatedProductFragment newInstance(SimiData data) {
+        RelatedProductFragment fragment = new RelatedProductFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY_DATA, data);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(
-				Rconfig.getInstance().layout(
-						"core_information_related_product_layout"), container,
-				false);
-		Context context = getActivity();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(
+                Rconfig.getInstance().layout(
+                        "core_information_related_product_layout"), container,
+                false);
+        Context context = getActivity();
 
-		if(mData != null) {
-			mProduct = (Product) getValueWithKey(Constants.KeyData.PRODUCT);
-			if(mProduct != null) {
-				mID = mProduct.getId();
-			}
-		}
-		
-		mBlock = new RelatedProductBlock(view, context);
-		mBlock.initView();
-		if (mController == null) {
-			mController = new RelatedProductController();
-			mController.setProductId(mID);
-			mController.setDelegate(mBlock);
-			mController.onStart();
-		} else {
-			mController.setProductId(mID);
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
-		return view;
-	}
-	
+        if (mData != null) {
+            mProduct = (Product) getValueWithKey(Constants.KeyData.PRODUCT);
+            if (mProduct != null) {
+                mID = mProduct.getId();
+            }
+        }
+
+        mBlock = new RelatedProductBlock(view, context);
+        mBlock.initView();
+        if (mController == null) {
+            mController = new RelatedProductController();
+            mController.setProductId(mID);
+            mController.setDelegate(mBlock);
+            mController.onStart();
+        } else {
+            mController.setProductId(mID);
+            mController.setDelegate(mBlock);
+            mController.onResume();
+        }
+        return view;
+    }
+
 }

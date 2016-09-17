@@ -90,7 +90,7 @@ public class ProductLabel {
     }
 
     public void showLabelOnGridProduct(View view, String imagetext,
-                                     String imageLabel, String position) {
+                                       String imageLabel, String position) {
         if (DataLocal.isTablet) {
             this.textSize = 16;
             this.sizeLable = 50;
@@ -102,7 +102,7 @@ public class ProductLabel {
     }
 
     public void showLabelOnListProduct(View view, String imagetext,
-                                     String imageLabel, String position) {
+                                       String imageLabel, String position) {
         if (DataLocal.isTablet) {
             this.textSize = 10;
             this.sizeLable = 30;

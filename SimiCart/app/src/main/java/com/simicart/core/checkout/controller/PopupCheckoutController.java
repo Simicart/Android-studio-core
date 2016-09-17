@@ -91,7 +91,7 @@ public class PopupCheckoutController extends SimiController {
                     }
                     case MotionEvent.ACTION_UP: {
                         mBlockDelegate.dismissPopupCheckout();
-                        HashMap<String,Object> hmData = new HashMap<>();
+                        HashMap<String, Object> hmData = new HashMap<>();
                         hmData.put(KeyData.SIGN_IN.IS_CHECKOUT, true);
                         SignInFragment fragment = SignInFragment.newInstance(new SimiData(hmData));
                         if (DataLocal.isTablet) {
@@ -122,9 +122,9 @@ public class PopupCheckoutController extends SimiController {
                     }
                     case MotionEvent.ACTION_UP: {
                         mBlockDelegate.dismissPopupCheckout();
-                        HashMap<String,Object> hm = new HashMap<>();
+                        HashMap<String, Object> hm = new HashMap<>();
                         hm.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CHECKOUT);
-                        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION,ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW_CUSTOMER);
+                        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION, ValueData.ADDRESS_BOOK_DETAIL.ACTION_NEW_CUSTOMER);
                         SimiManager.getIntance().openAddressBookDetail(hm);
 
                     }
@@ -151,9 +151,9 @@ public class PopupCheckoutController extends SimiController {
                     }
                     case MotionEvent.ACTION_UP: {
                         mBlockDelegate.dismissPopupCheckout();
-                        HashMap<String,Object> hm = new HashMap<>();
+                        HashMap<String, Object> hm = new HashMap<>();
                         hm.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CHECKOUT);
-                        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION,ValueData.ADDRESS_BOOK_DETAIL.ACTION_GUEST);
+                        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION, ValueData.ADDRESS_BOOK_DETAIL.ACTION_GUEST);
                         SimiManager.getIntance().openAddressBookDetail(hm);
                     }
 

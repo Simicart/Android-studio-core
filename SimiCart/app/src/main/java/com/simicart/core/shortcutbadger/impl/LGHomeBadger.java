@@ -9,7 +9,7 @@ import com.simicart.core.shortcutbadger.ShortcutBadger;
  * Created with IntelliJ IDEA.
  * User: leolin
  * Date: 2013/11/14
- * Time: 
+ * Time:
  * To change this template use File | Settings | File Templates.
  */
 public class LGHomeBadger extends ShortcutBadger {

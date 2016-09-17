@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.simicart.core.base.component.callback.MenuRowCallBack;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppColorConfig;
+import com.simicart.core.config.AppStoreConfig;
 
 /**
  * Created by Martial on 8/31/2016.
@@ -28,10 +29,14 @@ public class SimiMultiMenuRowComponent extends SimiComponent {
 
     @Override
     public View createView() {
-        rootView = findLayout("core_component_multi_menu_row");
+        if (AppStoreConfig.getInstance().isRTL()) {
+            rootView = findLayout("rtl_core_component_multi_menu_row");
+        } else {
+            rootView = findLayout("core_component_multi_menu_row");
+        }
 
         ivIcon = (ImageView) findView("iv_icon");
-        if(Utils.validateString(icon)) {
+        if (Utils.validateString(icon)) {
             Drawable icIcon = AppColorConfig.getInstance().getIcon(icon, AppColorConfig.getInstance().getContentColor());
             ivIcon.setImageDrawable(icIcon);
         }
@@ -45,13 +50,18 @@ public class SimiMultiMenuRowComponent extends SimiComponent {
         tvLabel.setTextColor(AppColorConfig.getInstance().getContentColor());
 
         ivExtend = (ImageView) findView("iv_extend");
-        Drawable icExtend = AppColorConfig.getInstance().getIcon("ic_extend", AppColorConfig.getInstance().getContentColor());
+        Drawable icExtend = null;
+        if (AppStoreConfig.getInstance().isRTL()) {
+            icExtend = AppColorConfig.getInstance().getIcon("core_back", AppColorConfig.getInstance().getContentColor());
+        } else {
+            icExtend = AppColorConfig.getInstance().getIcon("ic_extend", AppColorConfig.getInstance().getContentColor());
+        }
         ivExtend.setImageDrawable(icExtend);
 
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mCallBack != null) {
+                if (mCallBack != null) {
                     mCallBack.onClick();
                 }
             }
@@ -74,7 +84,7 @@ public class SimiMultiMenuRowComponent extends SimiComponent {
 
     public void setCurrent(String current) {
         this.current = current;
-        if(tvCurrent != null) {
+        if (tvCurrent != null) {
             tvCurrent.setText(current);
         }
     }

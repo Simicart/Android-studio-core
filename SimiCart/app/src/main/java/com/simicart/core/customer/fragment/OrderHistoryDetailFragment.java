@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.common.KeyData;
-import com.simicart.core.config.DataLocal;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.block.OrderHistoryDetailBlock;
 import com.simicart.core.customer.controller.OrderHistoryDetailController;
@@ -44,7 +44,7 @@ public class OrderHistoryDetailFragment extends SimiFragment {
             setTargetFragment(this, target);
         }
 
-        if (DataLocal.isLanguageRTL) {
+        if (AppStoreConfig.getInstance().isRTL()) {
             rootView = inflater
                     .inflate(
                             Rconfig.getInstance().layout(

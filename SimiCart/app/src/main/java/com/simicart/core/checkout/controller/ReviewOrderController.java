@@ -1,13 +1,10 @@
 package com.simicart.core.checkout.controller;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.paypal.android.sdk.co;
 import com.simicart.core.base.component.SimiComponent;
 import com.simicart.core.base.controller.SimiController;
 import com.simicart.core.base.delegate.ModelFailCallBack;
@@ -35,7 +32,6 @@ import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.delegate.ReviewOrderDelegate;
 import com.simicart.core.checkout.delegate.ShippingMethodCallBack;
 import com.simicart.core.checkout.delegate.TermConditionCallBack;
-import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.Condition;
 import com.simicart.core.checkout.entity.OrderInforEntity;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
@@ -43,7 +39,6 @@ import com.simicart.core.checkout.entity.ReviewOrderEntity;
 import com.simicart.core.checkout.entity.ShippingMethodEntity;
 import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.checkout.fragment.ConditionFragment;
-import com.simicart.core.checkout.fragment.ThankyouFragment;
 import com.simicart.core.checkout.model.CouponCodeModel;
 import com.simicart.core.checkout.model.PaymentMethodModel;
 import com.simicart.core.checkout.model.PlaceOrderModel;
@@ -56,7 +51,6 @@ import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
 import com.simicart.core.config.AppCheckoutConfig;
 import com.simicart.core.config.AppStoreConfig;
-import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
 import com.simicart.core.customer.entity.AddressEntity;
 
@@ -358,10 +352,10 @@ public class ReviewOrderController extends SimiController {
             hm.put(KeyData.ADDRESS_BOOK_DETAIL.BILLING_ADDRESS, mBillingAddress);
         } else {
 
-            Log.e("Review Order ","------> Edit BILLING : BiLLING NAME " + mBillingAddress.getName());
+            Log.e("Review Order ", "------> Edit BILLING : BiLLING NAME " + mBillingAddress.getName());
             hm.put(KeyData.ADDRESS_BOOK_DETAIL.ADDRESS_FOR_EDIT, mBillingAddress);
 
-            Log.e("Review Order ","------> Edit BILLING : SHIPPING NAME " + mShippingAddress.getName());
+            Log.e("Review Order ", "------> Edit BILLING : SHIPPING NAME " + mShippingAddress.getName());
             hm.put(KeyData.ADDRESS_BOOK_DETAIL.SHIPPING_ADDRESS, mShippingAddress);
         }
         hm.put(KeyData.ADDRESS_BOOK_DETAIL.EDIT_FOR, ValueData.ADDRESS_BOOK_DETAIL.EDIT_FOR_NEW_CUSTOMER);
@@ -774,12 +768,12 @@ public class ReviewOrderController extends SimiController {
         mData = data;
     }
 
-    public void setDelegate(ReviewOrderDelegate delegate) {
-        this.mDelegate = delegate;
-    }
-
     public ReviewOrderDelegate getDelegate() {
         return mDelegate;
+    }
+
+    public void setDelegate(ReviewOrderDelegate delegate) {
+        this.mDelegate = delegate;
     }
 
     public ArrayList<SimiComponent> getListComponent() {

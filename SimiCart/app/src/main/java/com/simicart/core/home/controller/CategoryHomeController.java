@@ -11,36 +11,36 @@ import java.util.ArrayList;
 
 public class CategoryHomeController extends SimiController {
 
-	protected CategoryHomeDelegate mDelegate;
-	protected ArrayList<Category> listCategory = new ArrayList<Category>();
+    protected CategoryHomeDelegate mDelegate;
+    protected ArrayList<Category> listCategory = new ArrayList<Category>();
 
-	public CategoryHomeController() {
-	}
+    public CategoryHomeController() {
+    }
 
-	public void setDelegate(CategoryHomeDelegate delegate) {
-		this.mDelegate = delegate;
-	}
+    public CategoryHomeDelegate getDelegate() {
+        return mDelegate;
+    }
 
-	public CategoryHomeDelegate getDelegate() {
-		return mDelegate;
-	}
+    public void setDelegate(CategoryHomeDelegate delegate) {
+        this.mDelegate = delegate;
+    }
 
-	@Override
-	public void onStart() {
-		// mDelegate.showLoading();
-		mModel.setSuccessListener(new ModelSuccessCallBack() {
-			@Override
-			public void onSuccess(SimiCollection collection) {
-				mDelegate.updateView(mModel.getCollection());
-			}
-		});
-		mModel = new CategoryHomeModel();
-		mModel.request();
-	}
+    @Override
+    public void onStart() {
+        // mDelegate.showLoading();
+        mModel.setSuccessListener(new ModelSuccessCallBack() {
+            @Override
+            public void onSuccess(SimiCollection collection) {
+                mDelegate.updateView(mModel.getCollection());
+            }
+        });
+        mModel = new CategoryHomeModel();
+        mModel.request();
+    }
 
-	@Override
-	public void onResume() {
-		mDelegate.updateView(mModel.getCollection());
-	}
+    @Override
+    public void onResume() {
+        mDelegate.updateView(mModel.getCollection());
+    }
 
 }

@@ -46,6 +46,7 @@ public class ProductDetailParentBlock extends SimiBlock implements
     protected Product mProduct;
     protected CirclePageIndicator mIndicator;
     protected TextView tvMore;
+    protected ImageView imgMore;
     protected ViewPager vpProducts;
 
     public ProductDetailParentBlock(View view, Context context) {
@@ -104,14 +105,16 @@ public class ProductDetailParentBlock extends SimiBlock implements
         tvMore = (TextView) id("tv_more");
         tvMore.setText(SimiTranslator.getInstance().translate("More"));
         tvMore.setTextColor(AppColorConfig.getInstance().getContentColor());
+        tvMore.setVisibility(View.GONE);
 
-        ImageView imgMore = (ImageView) mView.findViewById(Rconfig
+        imgMore = (ImageView) mView.findViewById(Rconfig
                 .getInstance().id("img_more"));
         Drawable icon = mContext.getResources().getDrawable(
                 Rconfig.getInstance().drawable("core_icon_more"));
         icon.setColorFilter(AppColorConfig.getInstance().getContentColor(),
                 PorterDuff.Mode.SRC_ATOP);
         imgMore.setImageDrawable(icon);
+        imgMore.setVisibility(View.GONE);
 
         View imgSeperate = id("v_separate");
         Drawable icon_img_seprate = mContext.getResources().getDrawable(
@@ -150,6 +153,8 @@ public class ProductDetailParentBlock extends SimiBlock implements
                 rltTop.setVisibility(View.VISIBLE);
                 btn_addtocart.setVisibility(View.VISIBLE);
                 btn_option.setVisibility(View.VISIBLE);
+                tvMore.setVisibility(View.VISIBLE);
+                imgMore.setVisibility(View.VISIBLE);
 
                 showNameProduct();
                 showOption();

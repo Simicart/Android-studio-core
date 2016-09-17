@@ -57,6 +57,10 @@ public class SignInController extends SimiController {
         return mDelegate;
     }
 
+    public void setDelegate(SignInDelegate delegate) {
+        mDelegate = delegate;
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onStart() {
@@ -276,10 +280,6 @@ public class SignInController extends SimiController {
     @Override
     public void onResume() {
         mDelegate.updateView(null);
-    }
-
-    public void setDelegate(SignInDelegate delegate) {
-        mDelegate = delegate;
     }
 
     public OnClickListener getSignInClicker() {

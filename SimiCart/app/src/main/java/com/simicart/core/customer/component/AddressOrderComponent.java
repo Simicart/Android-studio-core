@@ -27,42 +27,42 @@ public class AddressOrderComponent extends SimiComponent {
         TextView tvName = (TextView) rootView.findViewById(Rconfig.getInstance().id("tv_name"));
         tvName.setTextColor(AppColorConfig.getInstance().getContentColor());
         String name = addressEntity.getName();
-        if(Utils.validateString(name)) {
+        if (Utils.validateString(name)) {
             tvName.setText(name);
         }
 
         TextView tvStreet = (TextView) rootView.findViewById(Rconfig.getInstance().id("tv_street"));
         tvStreet.setTextColor(AppColorConfig.getInstance().getContentColor());
         String street = addressEntity.getStreet();
-        if(Utils.validateString(street)) {
+        if (Utils.validateString(street)) {
             tvStreet.setText(street);
         }
 
         TextView tvCity = (TextView) rootView.findViewById(Rconfig.getInstance().id("tv_city"));
         tvCity.setTextColor(AppColorConfig.getInstance().getContentColor());
         String city = addressEntity.getCity();
-        if(Utils.validateString(city)) {
+        if (Utils.validateString(city)) {
             tvCity.setText(city);
         }
 
         TextView tvCountry = (TextView) rootView.findViewById(Rconfig.getInstance().id("tv_country"));
         tvCountry.setTextColor(AppColorConfig.getInstance().getContentColor());
         String country = addressEntity.getCountryName();
-        if(Utils.validateString(country)) {
+        if (Utils.validateString(country)) {
             tvCountry.setText(country);
         }
 
         TextView tvPhone = (TextView) rootView.findViewById(Rconfig.getInstance().id("tv_phone"));
         tvPhone.setTextColor(AppColorConfig.getInstance().getContentColor());
         String phone = addressEntity.getPhone();
-        if(Utils.validateString(phone)) {
+        if (Utils.validateString(phone)) {
             tvPhone.setText(phone);
         }
 
         TextView tvEmail = (TextView) rootView.findViewById(Rconfig.getInstance().id("tv_email"));
         tvEmail.setTextColor(AppColorConfig.getInstance().getContentColor());
         String email = addressEntity.getEmail();
-        if(Utils.validateString(email)) {
+        if (Utils.validateString(email)) {
             tvEmail.setText(email);
         }
 

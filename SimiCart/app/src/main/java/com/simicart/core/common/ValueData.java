@@ -20,28 +20,28 @@ public class ValueData {
         public static int ACTION_GUEST = 2;
         public static int ACTION_NEW_CUSTOMER = 3;
         public static int EDIT_FOR_NEW_CUSTOMER = 4;
-        public static  int EDIT_FOR_GUEST = 5;
+        public static int EDIT_FOR_GUEST = 5;
     }
 
     public static class REVIEW_ORDER {
         public static int PLACE_FOR_NEW_CUSTOMER = 999;
         public static int PLACE_FOR_GUEST = 996;
-        public static  int PLACE_FOR_EXISTING_CUSTOMER = 995;
+        public static int PLACE_FOR_EXISTING_CUSTOMER = 995;
     }
 
-    public static class CUSTOMER_PAGE{
+    public static class CUSTOMER_PAGE {
         public static int OPEN_FOR_REGISTER = 994;
         public static int OPEN_FOR_EDIT = 993;
     }
 
-    public static class CATEGORY_DETAIL{
+    public static class CATEGORY_DETAIL {
         public static String ALL = "all";
         public static String SEARCH = "search";
         public static String CATE = "cate";
         public static String CUSTOM = "custom";
     }
 
-    public static class ANALYTICS{
+    public static class ANALYTICS {
         public static String SCREEN_TYPE = "screen_type";
         public static String BANNER_TYPE = "banner_type";
         public static String ORDER_TYPE = "order_type";

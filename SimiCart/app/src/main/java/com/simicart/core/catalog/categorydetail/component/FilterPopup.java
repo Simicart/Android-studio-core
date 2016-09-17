@@ -1,7 +1,6 @@
 package com.simicart.core.catalog.categorydetail.component;
 
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;

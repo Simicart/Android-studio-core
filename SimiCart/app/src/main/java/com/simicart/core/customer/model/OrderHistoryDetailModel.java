@@ -10,28 +10,28 @@ import org.json.JSONException;
 
 public class OrderHistoryDetailModel extends SimiModel {
 
-	@Override
-	protected void parseData() {
-		try {
-			JSONArray list = this.mJSON.getJSONArray("data");
-			collection = new SimiCollection();
-			for (int i = 0; i < list.length(); i++) {
-				OrderHisDetail orderHis = new OrderHisDetail();
-				orderHis.parse(list.getJSONObject(i));
-				collection.addEntity(orderHis);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
+    @Override
+    protected void parseData() {
+        try {
+            JSONArray list = this.mJSON.getJSONArray("data");
+            collection = new SimiCollection();
+            for (int i = 0; i < list.length(); i++) {
+                OrderHisDetail orderHis = new OrderHisDetail();
+                orderHis.parse(list.getJSONObject(i));
+                collection.addEntity(orderHis);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = Constants.GET_ORDER_DETAIL;
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = Constants.GET_ORDER_DETAIL;
+    }
 
-	@Override
-	protected void setEnableCache() {
-		enableCache = true;
-	}
+    @Override
+    protected void setEnableCache() {
+        enableCache = true;
+    }
 }

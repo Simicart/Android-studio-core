@@ -82,7 +82,7 @@ public class SimiBlock implements SimiDelegate {
     }
 
     public void event(String name, SimiCollection collection) {
-        HashMap<String,Object> hmData = new HashMap<>();
+        HashMap<String, Object> hmData = new HashMap<>();
         hmData.put(KeyData.SIMI_BLOCK.BLOCK, this);
         hmData.put(KeyData.SIMI_BLOCK.COLLECTION, collection);
         hmData.put(KeyData.SIMI_BLOCK.VIEW, mView);

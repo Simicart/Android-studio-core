@@ -7,7 +7,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
-import com.simicart.core.base.delegate.SimiDelegate;
 import com.simicart.core.checkout.delegate.PaymentMethodCallBack;
 import com.simicart.core.checkout.entity.PaymentMethodEntity;
 import com.simicart.core.common.Utils;

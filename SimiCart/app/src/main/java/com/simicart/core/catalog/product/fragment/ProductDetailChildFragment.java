@@ -1,7 +1,6 @@
 package com.simicart.core.catalog.product.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.catalog.product.block.ProductDetailChildBlock;
 import com.simicart.core.catalog.product.controller.ProductDetailChildController;
 import com.simicart.core.catalog.product.controller.ProductDetailParentController;
-import com.simicart.core.catalog.product.delegate.ProductDelegate;
 import com.simicart.core.catalog.product.delegate.ProductDetailAdapterDelegate;
 import com.simicart.core.config.Rconfig;
 

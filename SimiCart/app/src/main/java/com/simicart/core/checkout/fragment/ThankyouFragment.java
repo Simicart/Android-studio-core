@@ -22,10 +22,6 @@ import com.simicart.core.config.AppColorConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.controller.AutoSignInController;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 
 public class ThankyouFragment extends SimiFragment {

@@ -7,8 +7,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.simicart.core.base.component.SimiComponent;
-import com.simicart.core.base.delegate.SimiDelegate;
-import com.simicart.core.checkout.adapter.CartAdapter;
 import com.simicart.core.checkout.adapter.ListProductCheckoutAdapter;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.config.AppColorConfig;
@@ -47,7 +45,7 @@ public class ListProductCheckoutComponent extends SimiComponent {
         tvTitle.setBackgroundColor(bgColor);
         int bgText = AppColorConfig.getInstance().getContentColor();
         tvTitle.setTextColor(bgText);
-        if(title != null) {
+        if (title != null) {
             tvTitle.setText(title);
         } else {
             tvTitle.setVisibility(View.GONE);

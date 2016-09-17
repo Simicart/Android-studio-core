@@ -11,7 +11,6 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.analytics.ecommerce.Product;
 import com.google.android.gms.analytics.ecommerce.ProductAction;
-import com.magestore.simicart.R;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.event.base.SimiEvent;
 import com.simicart.core.base.manager.SimiManager;
@@ -23,7 +22,6 @@ import com.simicart.core.checkout.entity.TotalPrice;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.Utils;
 import com.simicart.core.common.ValueData;
-import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Constants;
 import com.simicart.core.config.DataLocal;
 

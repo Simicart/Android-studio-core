@@ -9,7 +9,6 @@ import com.simicart.core.base.fragment.SimiFragment;
 import com.simicart.core.base.model.entity.SimiData;
 import com.simicart.core.config.Rconfig;
 import com.simicart.core.customer.block.AddressBookDetailBlock;
-import com.simicart.core.customer.controller.AddressBookDetailController;
 import com.simicart.plugins.paypalexpress.controller.ExpressEditAddressController;
 
 /**
@@ -19,6 +18,7 @@ public class ExpressEditAddressFragment extends SimiFragment {
 
     public static int EDIT_BILLING_ADDRESS = 0;
     public static int EDIT_SHIPPING_ADDRESS = 1;
+    protected ExpressEditAddressController mController;
 
     public static ExpressEditAddressFragment newInstance(SimiData data) {
         ExpressEditAddressFragment fragment = new ExpressEditAddressFragment();
@@ -27,8 +27,6 @@ public class ExpressEditAddressFragment extends SimiFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    protected ExpressEditAddressController mController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -13,36 +13,36 @@ import com.simicart.core.customer.controller.ForgotPasswordController;
 
 public class ForgotPasswordFragment extends SimiFragment {
 
-	protected ForgotPasswordController mController;
-	protected ForgotPasswordBlock mBlock;
+    protected ForgotPasswordController mController;
+    protected ForgotPasswordBlock mBlock;
 
-	public static ForgotPasswordFragment newInstance() {
-		ForgotPasswordFragment fragment = new ForgotPasswordFragment();
-		return fragment;
-	}
+    public static ForgotPasswordFragment newInstance() {
+        ForgotPasswordFragment fragment = new ForgotPasswordFragment();
+        return fragment;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		setScreenName("Forgot Password Screen");
-		View view = inflater.inflate(
-				Rconfig.getInstance().layout("core_forgotpassword_layout"),
-				container, false);
-		Context context = getActivity();
-		mBlock = new ForgotPasswordBlock(view, context);
-		mBlock.initView();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        setScreenName("Forgot Password Screen");
+        View view = inflater.inflate(
+                Rconfig.getInstance().layout("core_forgotpassword_layout"),
+                container, false);
+        Context context = getActivity();
+        mBlock = new ForgotPasswordBlock(view, context);
+        mBlock.initView();
 
-		if (null == mController) {
-			mController = new ForgotPasswordController();
-			mController.setDelegate(mBlock);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
+        if (null == mController) {
+            mController = new ForgotPasswordController();
+            mController.setDelegate(mBlock);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.onResume();
+        }
 
-		mBlock.setOnClicker(mController.getClicker());
-		return view;
-	}
+        mBlock.setOnClicker(mController.getClicker());
+        return view;
+    }
 
 }

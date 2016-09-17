@@ -12,25 +12,25 @@ import java.util.Collections;
 
 public class AddressBookModel extends SimiModel {
 
-	@Override
-	protected void parseData() {
-		try {
-			JSONArray list = this.mJSON.getJSONArray("data");
-			collection = new SimiCollection();
-			for (int i = 0; i < list.length(); i++) {
-				AddressEntity address = new AddressEntity();
-				address.parse(list.getJSONObject(i));
-				collection.addEntity(address);
-			}
-			Collections.reverse(collection.getCollection());
+    @Override
+    protected void parseData() {
+        try {
+            JSONArray list = this.mJSON.getJSONArray("data");
+            collection = new SimiCollection();
+            for (int i = 0; i < list.length(); i++) {
+                AddressEntity address = new AddressEntity();
+                address.parse(list.getJSONObject(i));
+                collection.addEntity(address);
+            }
+            Collections.reverse(collection.getCollection());
 //			ConfigCheckout.newInstance().setCollectionAddressBook(collection);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	protected void setUrlAction() {
-		mUrlAction = Constants.GET_USER_ADDRESS;
-	}
+    @Override
+    protected void setUrlAction() {
+        mUrlAction = Constants.GET_USER_ADDRESS;
+    }
 }

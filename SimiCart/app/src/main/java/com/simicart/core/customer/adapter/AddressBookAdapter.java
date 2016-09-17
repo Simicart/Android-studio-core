@@ -126,6 +126,31 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
         return listAddress.size();
     }
 
+    protected void onChooseAddressEdit(AddressEntity addressEntity) {
+        HashMap<String, Object> hm = new HashMap<>();
+        hm.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CUSTOMER);
+        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION, ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT);
+        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ADDRESS_FOR_EDIT, addressEntity);
+        SimiManager.getIntance().openAddressBookDetail(hm);
+    }
+
+    protected void onChooseAddressCheckout(AddressEntity addressEntity) {
+        HashMap<String, Object> hm = new HashMap<>();
+        if (actionEdit == ValueData.ADDRESS_BOOK.ACTION_EDIT_BILLING_ADDRESS) {
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+            AddressEntity oldShippingAddress = (AddressEntity) mData.get(KeyData.ADDRESS_BOOK.SHIPPING_ADDRESS);
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, oldShippingAddress);
+        } else if (actionEdit == ValueData.ADDRESS_BOOK.ACTION_EDIT_SHIPPING_ADDRESS) {
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+            AddressEntity oldBillingAddress = (AddressEntity) mData.get(KeyData.ADDRESS_BOOK.BILLING_ADDRESS);
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, oldBillingAddress);
+        } else {
+            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
+            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
+        }
+        SimiManager.getIntance().openReviewOrder(hm);
+    }
+
     public static class AddressBookHolder extends RecyclerView.ViewHolder {
         private RelativeLayout rlItemAddressBook;
         private TextView tvName, tvStreet, tvCity, tvCountry, tvPhone, tvEmail;
@@ -158,31 +183,6 @@ public class AddressBookAdapter extends RecyclerView.Adapter<AddressBookAdapter.
             vAddress = (View) itemView.findViewById(Rconfig.getInstance().id("v_address"));
 
         }
-    }
-
-    protected void onChooseAddressEdit(AddressEntity addressEntity) {
-        HashMap<String, Object> hm = new HashMap<>();
-        hm.put(KeyData.ADDRESS_BOOK_DETAIL.OPEN_FOR, ValueData.ADDRESS_BOOK_DETAIL.OPEN_FOR_CUSTOMER);
-        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ACTION, ValueData.ADDRESS_BOOK_DETAIL.ACTION_EDIT);
-        hm.put(KeyData.ADDRESS_BOOK_DETAIL.ADDRESS_FOR_EDIT, addressEntity);
-        SimiManager.getIntance().openAddressBookDetail(hm);
-    }
-
-    protected void onChooseAddressCheckout(AddressEntity addressEntity) {
-        HashMap<String, Object> hm = new HashMap<>();
-        if (actionEdit == ValueData.ADDRESS_BOOK.ACTION_EDIT_BILLING_ADDRESS) {
-            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
-            AddressEntity oldShippingAddress = (AddressEntity) mData.get(KeyData.ADDRESS_BOOK.SHIPPING_ADDRESS);
-            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, oldShippingAddress);
-        } else if (actionEdit == ValueData.ADDRESS_BOOK.ACTION_EDIT_SHIPPING_ADDRESS) {
-            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
-            AddressEntity oldBillingAddress = (AddressEntity) mData.get(KeyData.ADDRESS_BOOK.BILLING_ADDRESS);
-            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, oldBillingAddress);
-        } else {
-            hm.put(KeyData.REVIEW_ORDER.SHIPPING_ADDRESS, addressEntity);
-            hm.put(KeyData.REVIEW_ORDER.BILLING_ADDRESS, addressEntity);
-        }
-        SimiManager.getIntance().openReviewOrder(hm);
     }
 
 }

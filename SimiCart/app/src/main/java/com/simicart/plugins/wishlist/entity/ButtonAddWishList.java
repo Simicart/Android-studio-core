@@ -10,52 +10,52 @@ import com.simicart.core.style.material.floatingactionbutton.FloatingActionButto
 
 public class ButtonAddWishList {
 
-	FloatingActionButton imageAddWishList;
-	boolean isEnable;
-	Drawable icon;
-	Drawable icon2;
+    FloatingActionButton imageAddWishList;
+    boolean isEnable;
+    Drawable icon;
+    Drawable icon2;
 
-	public FloatingActionButton getImageAddWishList() {
-		return imageAddWishList;
-	}
+    public ButtonAddWishList(Context context) {
+        icon = SimiManager
+                .getIntance()
+                .getCurrentActivity()
+                .getResources()
+                .getDrawable(
+                        Rconfig.getInstance().drawable("plugins_wishlist_iconadd1"));
 
-	public void setImageAddWishList(FloatingActionButton imageAddWishList) {
-		this.imageAddWishList = imageAddWishList;
-	}
+        icon2 = SimiManager
+                .getIntance()
+                .getCurrentActivity()
+                .getResources()
+                .getDrawable(
+                        Rconfig.getInstance().drawable("plugins_wishlist_iconadd2"));
 
-	public boolean isEnable() {
-		return isEnable;
-	}
+        imageAddWishList = new FloatingActionButton(context);
+        imageAddWishList.setColorNormal(Color.parseColor("#FFFFFF"));
+        imageAddWishList.setColorPressed(Color.parseColor("#f4f4f4"));
+        imageAddWishList.setIconDrawable(icon2);
+        imageAddWishList.setColorFilter(Color.YELLOW);
+    }
 
-	public void setEnable(boolean isEnable) {
-		if (isEnable = true) {
-			getImageAddWishList().setIconDrawable(icon);
-		} else {
-			getImageAddWishList().setIconDrawable(icon2);
-		}
-		this.isEnable = isEnable;
-	}
-	
-	public ButtonAddWishList(Context context) {
-		icon = SimiManager
-				.getIntance()
-				.getCurrentActivity()
-				.getResources()
-				.getDrawable(
-						Rconfig.getInstance().drawable("plugins_wishlist_iconadd1"));
+    public FloatingActionButton getImageAddWishList() {
+        return imageAddWishList;
+    }
 
-		icon2 = SimiManager
-				.getIntance()
-				.getCurrentActivity()
-				.getResources()
-				.getDrawable(
-						Rconfig.getInstance().drawable("plugins_wishlist_iconadd2"));
+    public void setImageAddWishList(FloatingActionButton imageAddWishList) {
+        this.imageAddWishList = imageAddWishList;
+    }
 
-		imageAddWishList = new FloatingActionButton(context);
-		imageAddWishList.setColorNormal(Color.parseColor("#FFFFFF"));
-		imageAddWishList.setColorPressed(Color.parseColor("#f4f4f4"));
-		imageAddWishList.setIconDrawable(icon2);
-		imageAddWishList.setColorFilter(Color.YELLOW);
-	}
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean isEnable) {
+        if (isEnable = true) {
+            getImageAddWishList().setIconDrawable(icon);
+        } else {
+            getImageAddWishList().setIconDrawable(icon2);
+        }
+        this.isEnable = isEnable;
+    }
 
 }

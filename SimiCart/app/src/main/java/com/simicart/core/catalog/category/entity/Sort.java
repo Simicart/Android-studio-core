@@ -7,10 +7,9 @@ import org.json.JSONObject;
 
 
 public class Sort {
+    protected String TITLE = "title";
     private int mID;
     private String mTitle;
-
-    protected String TITLE = "title";
 
     public boolean parse(JSONObject json) {
         try {

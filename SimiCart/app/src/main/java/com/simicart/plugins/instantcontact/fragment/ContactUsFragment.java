@@ -1,6 +1,5 @@
 package com.simicart.plugins.instantcontact.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,34 +12,34 @@ import com.simicart.plugins.instantcontact.controller.ContactUsController;
 
 public class ContactUsFragment extends SimiFragment {
 
-	protected ContactUsBlock mBlock;
-	protected ContactUsController mController;
+    protected ContactUsBlock mBlock;
+    protected ContactUsController mController;
 
-	public static ContactUsFragment newInstance() {
-		ContactUsFragment fragment = new ContactUsFragment();
-		return fragment;
-	}
+    public static ContactUsFragment newInstance() {
+        ContactUsFragment fragment = new ContactUsFragment();
+        return fragment;
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(
-				Rconfig.getInstance().layout("plugins_contactus_fragment"),
-				container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(
+                Rconfig.getInstance().layout("plugins_contactus_fragment"),
+                container, false);
 
-		mBlock = new ContactUsBlock(view, getActivity());
-		mBlock.initView();
+        mBlock = new ContactUsBlock(view, getActivity());
+        mBlock.initView();
 
-		if (null == mController) {
-			mController = new ContactUsController();
-			mController.setDelegate(mBlock);
-			mController.onStart();
-		} else {
-			mController.setDelegate(mBlock);
-			mController.onResume();
-		}
+        if (null == mController) {
+            mController = new ContactUsController();
+            mController.setDelegate(mBlock);
+            mController.onStart();
+        } else {
+            mController.setDelegate(mBlock);
+            mController.onResume();
+        }
 
-		return view;
-	}
+        return view;
+    }
 
 }

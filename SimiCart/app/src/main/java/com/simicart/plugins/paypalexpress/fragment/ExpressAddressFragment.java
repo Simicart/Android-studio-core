@@ -35,6 +35,9 @@ import java.util.HashMap;
  */
 public class ExpressAddressFragment extends SimiFragment {
 
+    protected AddressEntity shippingAddress;
+    protected AddressEntity billingAddress;
+
     public static ExpressAddressFragment newInstance(SimiData data) {
         ExpressAddressFragment fragment = new ExpressAddressFragment();
         Bundle bundle = new Bundle();
@@ -42,10 +45,6 @@ public class ExpressAddressFragment extends SimiFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
-    protected AddressEntity shippingAddress;
-    protected AddressEntity billingAddress;
-
 
     @Nullable
     @Override

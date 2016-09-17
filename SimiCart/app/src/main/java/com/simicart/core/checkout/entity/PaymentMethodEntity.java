@@ -7,21 +7,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by frank on 6/29/16.
  */
-public class PaymentMethodEntity extends SimiEntity  {
-
-    public enum PAYMENTMETHODTYPE {
-        OFFLINE,
-        CARD,
-        SDK,
-        WEBVIEW
-    }
+public class PaymentMethodEntity extends SimiEntity {
 
     protected String mPaymentMethod;
     protected String mContent;
@@ -35,7 +27,6 @@ public class PaymentMethodEntity extends SimiEntity  {
      */
     protected CreditCard mCurrentCardEntity;
     protected boolean isSavedLocal;
-
     private String payment_method = "payment_method";
     private String title = "title";
     private String useccv = "useccv";
@@ -43,7 +34,6 @@ public class PaymentMethodEntity extends SimiEntity  {
     private String p_method_selected = "p_method_selected";
     private String cc_types = "cc_types";
     private String content = "content";
-
 
     @Override
     public void parse() {
@@ -129,7 +119,6 @@ public class PaymentMethodEntity extends SimiEntity  {
 
         return data;
     }
-
 
     protected void addParamForCard(HashMap<String, String> data) {
 
@@ -227,12 +216,19 @@ public class PaymentMethodEntity extends SimiEntity  {
         this.mListCCType = mListCCType;
     }
 
+    public boolean isSavedLocal() {
+        return this.isSavedLocal;
+    }
+
     public void setSavedLocal(boolean isSaved) {
         this.isSavedLocal = isSaved;
     }
 
-    public boolean isSavedLocal() {
-        return this.isSavedLocal;
+    public enum PAYMENTMETHODTYPE {
+        OFFLINE,
+        CARD,
+        SDK,
+        WEBVIEW
     }
 
 }

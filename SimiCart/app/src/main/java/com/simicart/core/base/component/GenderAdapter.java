@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class GenderAdapter extends BaseAdapter {
 
     protected ArrayList<GenderConfig> mGenders;
-    int idView = Rconfig.getInstance().layout("core_item_gender_layout");
     protected LayoutInflater mInflater;
+    int idView = Rconfig.getInstance().layout("core_item_gender_layout");
 
 
     public GenderAdapter(ArrayList<GenderConfig> genders) {

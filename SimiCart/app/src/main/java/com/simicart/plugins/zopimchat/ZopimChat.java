@@ -37,10 +37,10 @@ import java.util.HashMap;
  */
 public class ZopimChat {
 
-    Context mContext;
-    ArrayList<ItemNavigation> mItems;
     protected HashMap<String, String> mFragments;
     protected boolean isConfigZopim = false;
+    Context mContext;
+    ArrayList<ItemNavigation> mItems;
 
     public ZopimChat() {
 
@@ -50,7 +50,7 @@ public class ZopimChat {
         BroadcastReceiver addItemReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if(isConfigZopim == false) {
+                if (isConfigZopim == false) {
                     configZopim();
                 }
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
@@ -81,7 +81,7 @@ public class ZopimChat {
         BroadcastReceiver blockReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if(isConfigZopim == false) {
+                if (isConfigZopim == false) {
                     configZopim();
                 }
                 Bundle bundle = intent.getBundleExtra(Constants.DATA);
@@ -165,7 +165,7 @@ public class ZopimChat {
     protected void configZopim() {
         try {
             JSONObject storeViewObj = AppStoreConfig.getInstance().getJSONObject();
-            if(storeViewObj.has("zopim_config")) {
+            if (storeViewObj.has("zopim_config")) {
                 JSONObject object = storeViewObj.getJSONObject("zopim_config");
                 if (object.has("enable")) {
                     ConstantZopim.ZOPIM_ENABLE = object.getString("enable");

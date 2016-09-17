@@ -32,7 +32,7 @@ public class StoreLocatorStoreListFragment extends SimiFragment {
         // TODO Auto-generated method stub
         rootView = inflater.inflate(Rconfig.getInstance().layout("plugins_store_locator_store_list"), container, false);
 
-        if(mData != null) {
+        if (mData != null) {
             searchObject = (SearchObject) getValueWithKey(Constants.KeyData.SEARCH_OBJECT);
         }
 

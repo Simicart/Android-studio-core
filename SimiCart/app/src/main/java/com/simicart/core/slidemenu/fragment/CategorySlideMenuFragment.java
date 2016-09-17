@@ -32,7 +32,7 @@ public class CategorySlideMenuFragment extends SimiFragment {
     protected FragmentManager manager;
 
     public static CategorySlideMenuFragment newInstance(SimiData data) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new CategorySlideMenuFragment();
             Bundle bundle = new Bundle();
             bundle.putParcelable(KEY_DATA, data);
@@ -47,7 +47,7 @@ public class CategorySlideMenuFragment extends SimiFragment {
         rootView = inflater.inflate(Rconfig.getInstance().layout("core_fragment_category"), container, false);
         rootView.setBackgroundColor(AppColorConfig.getInstance().getMenuBackground());
 
-        if(mData != null) {
+        if (mData != null) {
             mCategoryID = (String) getValueWithKey("category_id");
             mCategoryName = (String) getValueWithKey("category_name");
             mNavigationDrawerFragment = (SlideMenuFragment) getValueWithKey("navigation_drawer");
@@ -56,7 +56,7 @@ public class CategorySlideMenuFragment extends SimiFragment {
         mBlock = new CategorySlideMenuBlock(rootView, getActivity());
         mBlock.setCategoryName(mCategoryName);
         mBlock.initView();
-        if(mController == null) {
+        if (mController == null) {
             mController = new CategorySlideMenuController();
             mController.setCategoryName(mCategoryName);
             mController.setCategoryID(mCategoryID);

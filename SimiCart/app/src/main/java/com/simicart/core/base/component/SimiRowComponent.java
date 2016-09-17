@@ -7,23 +7,12 @@ import android.view.View;
  */
 public class SimiRowComponent extends SimiComponent {
 
-    public enum TYPE_ROW {
-        TEXT,
-        NAVIGATION,
-        ADAPTER,
-        SELECT,
-        PARENT,
-        ICON_DELETE,
-        DOB
-    }
-
     protected String mKey;
     protected String mTitle;
     protected Object mValue;
     protected String mSuggestValue;
     protected boolean isRequired;
     protected TYPE_ROW mType;
-
 
     @Override
     public View createView() {
@@ -49,12 +38,12 @@ public class SimiRowComponent extends SimiComponent {
 
     }
 
-    public void setValue(Object value) {
-        mValue = value;
-    }
-
     public Object getValue() {
         return null;
+    }
+
+    public void setValue(Object value) {
+        mValue = value;
     }
 
     public String getKey() {
@@ -95,5 +84,15 @@ public class SimiRowComponent extends SimiComponent {
 
     public void setType(TYPE_ROW mType) {
         this.mType = mType;
+    }
+
+    public enum TYPE_ROW {
+        TEXT,
+        NAVIGATION,
+        ADAPTER,
+        SELECT,
+        PARENT,
+        ICON_DELETE,
+        DOB
     }
 }

@@ -39,7 +39,7 @@ public class OrderProduct extends SimiEntity {
 
                 JSONArray array = getJSONArrayWithKey(json, "images");
                 if (null != array && array.length() > 0) {
-                    Log.e("OrderProduct","ARRAY IMAGE " + array.toString());
+                    Log.e("OrderProduct", "ARRAY IMAGE " + array.toString());
                     mUrlImage = new ArrayList<>();
                     parseListImage(array);
                 }
@@ -54,7 +54,7 @@ public class OrderProduct extends SimiEntity {
     protected void parseListImage(JSONArray array) throws JSONException {
         for (int i = 0; i < array.length(); i++) {
             String image = array.getString(i);
-            Log.e("OrderProduct","IMAGES " + image);
+            Log.e("OrderProduct", "IMAGES " + image);
             mUrlImage.add(image);
         }
     }

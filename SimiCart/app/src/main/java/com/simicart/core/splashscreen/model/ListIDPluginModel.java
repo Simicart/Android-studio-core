@@ -24,6 +24,7 @@ public class ListIDPluginModel extends SimiModel {
     public String getListIDPlugin() {
         return mIDBuilder.toString();
     }
+
     @Override
     protected void setTypeMethod() {
         mTypeMethod = SimiRequest.Method.GET;
@@ -43,7 +44,7 @@ public class ListIDPluginModel extends SimiModel {
     protected void parseData() {
         if (mJSON.has(site_plugins)) {
             try {
-                Log.e("ListIDPluginModel ","DATA " + mJSON);
+                Log.e("ListIDPluginModel ", "DATA " + mJSON);
                 JSONArray array = mJSON.getJSONArray(site_plugins);
                 if (null != array && array.length() > 0) {
                     for (int i = 0; i < array.length(); i++) {

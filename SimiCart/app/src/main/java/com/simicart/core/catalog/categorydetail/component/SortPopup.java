@@ -1,25 +1,15 @@
 package com.simicart.core.catalog.categorydetail.component;
 
-import android.content.Context;
-import android.os.Build;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.simicart.core.adapter.SortAdapter;
 import com.simicart.core.base.component.SimiPopup;
-import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.translate.SimiTranslator;
 import com.simicart.core.catalog.category.entity.Sort;
 import com.simicart.core.catalog.categorydetail.delegate.SortCallBack;
-import com.simicart.core.config.Rconfig;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

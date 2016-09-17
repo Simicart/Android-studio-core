@@ -10,48 +10,47 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ProductList extends SimiEntity {
-	private ArrayList<Product> mSpotProduct;
-	private String mTitle;
+    protected String TITLE = "title";
+    private ArrayList<Product> mSpotProduct;
+    private String mTitle;
 
-	protected String TITLE = "title";
+    @Override
+    public void parse() {
+        mTitle = getData(TITLE);
+        parseListSpot();
+    }
 
-	@Override
-	public void parse() {
-		mTitle = getData(TITLE);
-		parseListSpot();
-	}
+    protected void parseListSpot() {
+        try {
+            mSpotProduct = new ArrayList<>();
+            JSONArray productList = new JSONArray(getData(Constants.DATA));
+            if (null != productList && productList.length() > 0) {
+                for (int i = 0; i < productList.length(); i++) {
+                    Product product = new Product();
+                    JSONObject json = productList.getJSONObject(i);
+                    if (null != json) {
+                        product.setJSONObject(json);
+                        mSpotProduct.add(product);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+        }
+    }
 
-	protected void parseListSpot(){
-		try {
-			mSpotProduct = new ArrayList<>();
-			JSONArray productList = new JSONArray(getData(Constants.DATA));
-			if (null != productList && productList.length() > 0) {
-				for (int i = 0; i < productList.length(); i++) {
-					Product product = new Product();
-					JSONObject json = productList.getJSONObject(i);
-					if (null != json) {
-						product.setJSONObject(json);
-						mSpotProduct.add(product);
-					}
-				}
-			}
-		} catch (JSONException e) {
-		}
-	}
+    public ArrayList<Product> getSpotProduct() {
+        return mSpotProduct;
+    }
 
-	public ArrayList<Product> getSpotProduct() {
-		return mSpotProduct;
-	}
+    public void setSpotProduct(ArrayList<Product> spotProduct) {
+        mSpotProduct = spotProduct;
+    }
 
-	public void setSpotProduct(ArrayList<Product> spotProduct) {
-		mSpotProduct = spotProduct;
-	}
+    public String getTitle() {
+        return mTitle;
+    }
 
-	public String getTitle() {
-		return mTitle;
-	}
-
-	public void setTitle(String title) {
-		this.mTitle = title;
-	}
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
 }

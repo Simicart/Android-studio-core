@@ -46,7 +46,7 @@ public class ContactUsAdapter extends RecyclerView.Adapter<ContactUsAdapter.Cont
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View itemView = null;
         ContactHolder holder = null;
-        if(style.equals("2")) {
+        if (style.equals("2")) {
             itemView = inflater.inflate(Rconfig.getInstance().layout("plugins_contactus_adapter_item_grid"), null, false);
         } else {
             itemView = inflater.inflate(Rconfig.getInstance().layout("plugins_contactus_adapter_item_list"), null, false);
@@ -69,7 +69,7 @@ public class ContactUsAdapter extends RecyclerView.Adapter<ContactUsAdapter.Cont
     protected void createItemContact(ContactHolder holder, final ContactUsEntity contactUsEntity) {
 
         final String name = contactUsEntity.getNameContactUs();
-        if(Utils.validateString(name)) {
+        if (Utils.validateString(name)) {
             holder.tvName.setText(SimiTranslator.getInstance().translate(name));
         }
 
@@ -101,128 +101,128 @@ public class ContactUsAdapter extends RecyclerView.Adapter<ContactUsAdapter.Cont
     }
 
     protected void onClickEmail(ContactUsEntity contact) {
-		int size = contact.getEmail().size();
-		String[] TO = new String[size];
-		for (int i = 0; i < size; i++) {
-			TO[i] = contact.getEmail().get(i);
-		}
-		Intent intentEmail = new Intent(Intent.ACTION_SEND);
-		intentEmail.setData(Uri.parse("mailto:"));
-		intentEmail.setType("message/rfc822");
-		intentEmail.putExtra(Intent.EXTRA_EMAIL, TO);
-		intentEmail.putExtra(Intent.EXTRA_SUBJECT, SimiTranslator.getInstance().translate("Your subject"));
-		intentEmail.putExtra(Intent.EXTRA_TEXT,
+        int size = contact.getEmail().size();
+        String[] TO = new String[size];
+        for (int i = 0; i < size; i++) {
+            TO[i] = contact.getEmail().get(i);
+        }
+        Intent intentEmail = new Intent(Intent.ACTION_SEND);
+        intentEmail.setData(Uri.parse("mailto:"));
+        intentEmail.setType("message/rfc822");
+        intentEmail.putExtra(Intent.EXTRA_EMAIL, TO);
+        intentEmail.putExtra(Intent.EXTRA_SUBJECT, SimiTranslator.getInstance().translate("Your subject"));
+        intentEmail.putExtra(Intent.EXTRA_TEXT,
                 SimiTranslator.getInstance().translate("Enter your FeedBack"));
-		try {
-			mContext.startActivity(Intent.createChooser(intentEmail, SimiTranslator.getInstance().translate("Send FeedBack" + "...")));
-		} catch (ActivityNotFoundException e) {
+        try {
+            mContext.startActivity(Intent.createChooser(intentEmail, SimiTranslator.getInstance().translate("Send FeedBack" + "...")));
+        } catch (ActivityNotFoundException e) {
             SimiNotify.getInstance().showToast(SimiTranslator.getInstance().translate("There is no email client installed" + "."));
-			String urlEmail = "https://mail.google.com";
-			Intent i = new Intent(Intent.ACTION_VIEW);
-			i.setData(Uri.parse(urlEmail));
-			mContext.startActivity(i);
-		}
+            String urlEmail = "https://mail.google.com";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(urlEmail));
+            mContext.startActivity(i);
+        }
     }
 
     protected void onClickMessage(ContactUsEntity contact) {
         if (!checkTelephonyFeature()) {
-			return;
-		}
+            return;
+        }
 
-		if (contact.getMessage().size() > 1) {
-			AlertDialog.Builder builderSingle = new AlertDialog.Builder(
-					mContext);
-			builderSingle.setTitle(SimiTranslator.getInstance().translate(
-					"Select a phone number"));
-			final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-					mContext, android.R.layout.select_dialog_singlechoice);
-			for (int i = 0; i < contact.getMessage().size(); i++) {
-				arrayAdapter.add(contact.getMessage().get(i));
-			}
+        if (contact.getMessage().size() > 1) {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                    mContext);
+            builderSingle.setTitle(SimiTranslator.getInstance().translate(
+                    "Select a phone number"));
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                    mContext, android.R.layout.select_dialog_singlechoice);
+            for (int i = 0; i < contact.getMessage().size(); i++) {
+                arrayAdapter.add(contact.getMessage().get(i));
+            }
 
-			builderSingle.setAdapter(arrayAdapter,
-					new DialogInterface.OnClickListener() {
+            builderSingle.setAdapter(arrayAdapter,
+                    new DialogInterface.OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							String phone_number = arrayAdapter.getItem(which);
-							sendSMS(phone_number);
-						}
-					});
-			builderSingle.show();
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String phone_number = arrayAdapter.getItem(which);
+                            sendSMS(phone_number);
+                        }
+                    });
+            builderSingle.show();
 
-		} else {
-			String phone_number = contact.getMessage().get(0);
-			sendSMS(phone_number);
-		}
+        } else {
+            String phone_number = contact.getMessage().get(0);
+            sendSMS(phone_number);
+        }
     }
 
     protected void sendSMS(String phone_number) {
-		Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-		smsIntent.setData(Uri.parse("sms:" + phone_number));
-		mContext.startActivity(smsIntent);
-	}
+        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+        smsIntent.setData(Uri.parse("sms:" + phone_number));
+        mContext.startActivity(smsIntent);
+    }
 
     protected void onClickCall(ContactUsEntity contact) {
         if (!checkTelephonyFeature()) {
-			return;
-		}
-		if (contact.getPhone().size() > 1) {
-			AlertDialog.Builder builderSingle = new AlertDialog.Builder(
-					mContext);
-			builderSingle.setTitle(SimiTranslator.getInstance().translate(
-					"Select a phone number"));
-			final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-					mContext, android.R.layout.select_dialog_singlechoice);
-			for (int i = 0; i < contact.getPhone().size(); i++) {
-				arrayAdapter.add(contact.getPhone().get(i));
-			}
+            return;
+        }
+        if (contact.getPhone().size() > 1) {
+            AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                    mContext);
+            builderSingle.setTitle(SimiTranslator.getInstance().translate(
+                    "Select a phone number"));
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                    mContext, android.R.layout.select_dialog_singlechoice);
+            for (int i = 0; i < contact.getPhone().size(); i++) {
+                arrayAdapter.add(contact.getPhone().get(i));
+            }
 
-			builderSingle.setAdapter(arrayAdapter,
-					new DialogInterface.OnClickListener() {
+            builderSingle.setAdapter(arrayAdapter,
+                    new DialogInterface.OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							String phone_number = arrayAdapter.getItem(which);
-							call(phone_number);
-						}
-					});
-			builderSingle.show();
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String phone_number = arrayAdapter.getItem(which);
+                            call(phone_number);
+                        }
+                    });
+            builderSingle.show();
 
-		} else {
-			String phone_number = contact.getPhone().get(0);
-			call(phone_number);
-		}
+        } else {
+            String phone_number = contact.getPhone().get(0);
+            call(phone_number);
+        }
     }
 
     protected boolean checkTelephonyFeature() {
-		if (!mContext.getPackageManager().hasSystemFeature(
-				PackageManager.FEATURE_TELEPHONY)) {
+        if (!mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_TELEPHONY)) {
             SimiNotify.getInstance().showToast("Your device does not support message and phone calling feature.");
-			return false;
-		}
-		return true;
-	}
+            return false;
+        }
+        return true;
+    }
 
     protected void call(String phone_number) {
-		try {
-			Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"
-					+ phone_number));
-			mContext.startActivity(intent);
-		} catch (Exception e) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"
+                    + phone_number));
+            mContext.startActivity(intent);
+        } catch (Exception e) {
 
-		}
+        }
 
-	}
+    }
 
     protected void onClickWebsite(ContactUsEntity contact) {
         String url = contact.getWebsite();
-		if (!url.startsWith("http://") && !url.startsWith("https://")) {
-			url = "http://" + url;
-		}
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(url));
-		mContext.startActivity(i);
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "http://" + url;
+        }
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        mContext.startActivity(i);
     }
 
     public class ContactHolder extends RecyclerView.ViewHolder {

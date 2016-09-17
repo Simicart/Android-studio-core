@@ -14,7 +14,7 @@ public class ConfigCustomerAddress extends SimiEntity {
     public static String OPTION_REQUIRE = "req";
     public static String OPTION_OPTIONAL = "opt";
     public static String OPTION_HIDE = "";
-
+    protected static ConfigCustomerAddress instance;
     protected String prefix;
     protected String suffix;
     protected String dob;
@@ -32,24 +32,12 @@ public class ConfigCustomerAddress extends SimiEntity {
     protected String fax;
     protected String name;
     protected String email;
-
-    protected static ConfigCustomerAddress instance;
-
-    public static ConfigCustomerAddress getInstance() {
-        if (null == instance) {
-            instance = new ConfigCustomerAddress();
-        }
-
-        return instance;
-    }
-
     protected String prefix_show = "prefix_show";
     protected String suffix_show = "suffix_show";
     protected String dob_show = "dob_show";
     protected String taxvat_show = "taxvat_show";
     protected String gender_show = "gender_show";
     protected String gender_value = "gender_value";
-
     public ConfigCustomerAddress() {
         setPrefix(OPTION_HIDE);
         setName(OPTION_REQUIRE);
@@ -67,6 +55,14 @@ public class ConfigCustomerAddress extends SimiEntity {
         setDob(OPTION_HIDE);
         setGender(OPTION_HIDE);
         setTaxvat(OPTION_HIDE);
+    }
+
+    public static ConfigCustomerAddress getInstance() {
+        if (null == instance) {
+            instance = new ConfigCustomerAddress();
+        }
+
+        return instance;
     }
 
     @Override
@@ -138,12 +134,12 @@ public class ConfigCustomerAddress extends SimiEntity {
         }
     }
 
-    public void setVat_id(String vat_id) {
-        this.vat_id = vat_id;
-    }
-
     public String getVat_id() {
         return vat_id;
+    }
+
+    public void setVat_id(String vat_id) {
+        this.vat_id = vat_id;
     }
 
     public String getPrefix() {

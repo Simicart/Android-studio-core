@@ -24,7 +24,6 @@ import com.simicart.core.base.drawImage.SimiDrawImage;
 import com.simicart.core.base.manager.SimiManager;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.translate.SimiTranslator;
-import com.simicart.core.checkout.component.ListProductCheckoutComponent;
 import com.simicart.core.checkout.delegate.CartDelegate;
 import com.simicart.core.checkout.entity.Cart;
 import com.simicart.core.checkout.entity.Option;
@@ -63,7 +62,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public CartViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(Rconfig.getInstance().layout("core_adapter_cart_item"), parent, false);
+        View itemView = null;
+        if (AppStoreConfig.getInstance().isRTL()) {
+            itemView = inflater.inflate(Rconfig.getInstance().layout("rtl_core_adapter_cart_item"), parent, false);
+        } else {
+            itemView = inflater.inflate(Rconfig.getInstance().layout("core_adapter_cart_item"), parent, false);
+        }
         CartViewHolder holder = new CartViewHolder(itemView);
         return holder;
     }
@@ -120,7 +124,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.rlCartImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,Object> hmData = new HashMap<String, Object>();
+                HashMap<String, Object> hmData = new HashMap<String, Object>();
                 hmData.put(KeyData.PRODUCT_DETAIL.PRODUCT_ID, cartEntity.getProduct_id());
                 ArrayList<String> listID = new ArrayList<String>();
                 listID.add(cartEntity.getProduct_id());
@@ -196,7 +200,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         numberPicker.setMinValue(min);
         numberPicker.setMaxValue(max);
-        if(qty > 0) {
+        if (qty > 0) {
             numberPicker.setValue(qty);
         }
         numberPicker.setWrapSelectorWheel(false);
@@ -236,7 +240,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             public void onSuccess(SimiCollection collection) {
                 mDelegate.dismissDialogLoading();
                 ArrayList<Cart> listQuotes = ((EditCartItemModel) editModel).getListCarts();
-                if(listQuotes.size() > 0) {
+                if (listQuotes.size() > 0) {
                     createListProducts(listQuotes);
                     ((CartDelegate) mDelegate).onUpdateTotalPrice(((EditCartItemModel) editModel)
                             .getTotalPrice());
@@ -266,7 +270,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     protected void createListProducts(ArrayList<Cart> listQuotes) {
-        ((CartDelegate)mDelegate).showListProductsView(listQuotes);
+        ((CartDelegate) mDelegate).showListProductsView(listQuotes);
     }
 
     public void setListCarts(ArrayList<Cart> listCarts) {

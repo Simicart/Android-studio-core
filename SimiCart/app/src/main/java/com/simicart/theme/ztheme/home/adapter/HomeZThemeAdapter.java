@@ -2,6 +2,7 @@ package com.simicart.theme.ztheme.home.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,10 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 
-import com.simicart.core.base.drawImage.SimiDrawImage;
 import com.simicart.core.catalog.category.entity.Category;
+import com.simicart.core.common.DrawableManager;
 import com.simicart.core.common.Utils;
+import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Rconfig;
 import com.simicart.theme.ztheme.home.entity.ZThemeCatalogEntity;
 
@@ -37,7 +39,7 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
         ZThemeCatalogEntity catalogEntity = mCategories.get(groupPosition);
         if (catalogEntity.getType().equals("cat")) {
             Category category = catalogEntity.getCategoryZTheme();
-            if(category.hasChild() == true) {
+            if (category.hasChild() == true) {
                 return catalogEntity.getCategoryZTheme().getListChildCategory().size();
             }
         }
@@ -54,7 +56,7 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
         ZThemeCatalogEntity catalogEntity = mCategories.get(groupPosition);
         if (catalogEntity.getType().equals("cat")) {
             Category category = catalogEntity.getCategoryZTheme();
-            if(category.hasChild() == true) {
+            if (category.hasChild() == true) {
                 return category.getListChildCategory().get(childPosition);
             }
         }
@@ -70,7 +72,7 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
     @Override
     public long getChildId(int groupPosition, int childPosition) {
         // TODO Auto-generated method stub
-        return 0;
+        return childPosition;
     }
 
     @Override
@@ -84,40 +86,33 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        ViewHolder holder;
-        if (convertView == null) {
-            holder = new ViewHolder();
-            convertView = inflater.inflate(
-                    Rconfig.getInstance().layout("theme_z_adapter_home_item"), null);
-            holder.img_category = (ImageView) convertView.findViewById(Rconfig
-                    .getInstance().id("iv_home"));
-            holder.img_category.setScaleType(ScaleType.FIT_XY);
-            holder.tv_catename = (TextView) convertView.findViewById(Rconfig
-                    .getInstance().id("tv_title"));
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
+        convertView = inflater.inflate(
+                Rconfig.getInstance().layout("theme_z_adapter_home_item"), parent, false);
+        ImageView img_category = (ImageView) convertView.findViewById(Rconfig
+                .getInstance().id("iv_home"));
+        img_category.setScaleType(ScaleType.FIT_XY);
+        TextView tv_catename = (TextView) convertView.findViewById(Rconfig
+                .getInstance().id("tv_title"));
 
         ZThemeCatalogEntity catalogEntity = mCategories.get(groupPosition);
 
-        if (holder.tv_catename != null) {
+        if (tv_catename != null) {
             String title = catalogEntity.getTitle();
             if (!Utils.validateString(title)) {
-                holder.tv_catename.setVisibility(View.GONE);
+                tv_catename.setVisibility(View.GONE);
             } else {
-                holder.tv_catename.setText(title);
+                tv_catename.setText(title);
             }
         }
 
         String image = null;
-        if(catalogEntity.getType().equals("cat")) {
+        if (catalogEntity.getType().equals("cat")) {
             image = catalogEntity.getCategoryZTheme().getCategoryImage();
         } else {
             image = catalogEntity.getZThemeSpotEntity().getImage();
         }
-        if(Utils.validateString(image)) {
-            new SimiDrawImage().drawImage(holder.img_category, image, Utils.getScreenWidth(), Utils.toPixel(230));
+        if (Utils.validateString(image)) {
+            DrawableManager.fetchDrawableOnThread(image, img_category, Utils.getScreenWidth(), Utils.toPixel(230));
         }
 
         return convertView;
@@ -133,13 +128,16 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
         TextView txt_category = (TextView) convertView.findViewById(Rconfig
                 .getInstance().id("tv_name"));
         txt_category.setTextColor(Color.parseColor("#000000"));
+        if (AppStoreConfig.getInstance().isRTL()) {
+            txt_category.setGravity(Gravity.RIGHT);
+        }
         ZThemeCatalogEntity catalogEntity = mCategories.get(groupPosition);
-        if(catalogEntity.getType().equals("cat")) {
+        if (catalogEntity.getType().equals("cat")) {
             Category category = catalogEntity.getCategoryZTheme();
-            if(category.hasChild() == true) {
+            if (category.hasChild() == true) {
                 Category childCategory = category.getListChildCategory().get(childPosition);
                 String childName = childCategory.getCategoryName();
-                if(Utils.validateString(childName)) {
+                if (Utils.validateString(childName)) {
                     txt_category.setText(childName);
                 }
             }
@@ -147,13 +145,13 @@ public class HomeZThemeAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    public class ViewHolder {
-        TextView tv_catename;
-        ImageView img_category;
-    }
-
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    public class ViewHolder {
+        TextView tv_catename;
+        ImageView img_category;
     }
 }

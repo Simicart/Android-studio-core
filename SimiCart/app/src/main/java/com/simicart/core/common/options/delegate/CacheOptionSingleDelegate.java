@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 public interface CacheOptionSingleDelegate {
 
-	public void onSendDependOption(ArrayList<String> dependList,
-								   String currentID);
+    public void onSendDependOption(ArrayList<String> dependList,
+                                   String currentID);
 
-	public void updateStateCacheOption(String id, boolean isSeletecd);
+    public void updateStateCacheOption(String id, boolean isSeletecd);
 
-	public void updatePriceForHeader(String price);
+    public void updatePriceForHeader(String price);
 
-	public void updatePriceParent(ProductOption option, boolean operation);
+    public void updatePriceParent(ProductOption option, boolean operation);
 
-	public void clearCheckAll(String id);
+    public void clearCheckAll(String id);
 
 }
