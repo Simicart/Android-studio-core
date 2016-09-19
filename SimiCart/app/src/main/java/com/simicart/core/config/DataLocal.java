@@ -23,6 +23,8 @@ public class DataLocal {
     public static ArrayList<Cart> listCarts;
     public static boolean isNewSignIn = false;
     public static String qtyCartAuto = "";
+    public static  String longtitude;
+    public static String latitude;
 
 
     public static void init() {

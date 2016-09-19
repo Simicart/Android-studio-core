@@ -1,6 +1,7 @@
 package com.simicart;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
 
 import com.magestore.simicart.R;
@@ -26,6 +28,8 @@ import com.simicart.core.common.DataPreferences;
 import com.simicart.core.common.FontsOverride;
 import com.simicart.core.common.KeyData;
 import com.simicart.core.common.KeyEvent;
+import com.simicart.core.common.SCLocation;
+import com.simicart.core.common.SCLocationCallBack;
 import com.simicart.core.common.Utils;
 import com.simicart.core.config.Config;
 import com.simicart.core.config.DataLocal;
@@ -47,6 +51,7 @@ import java.util.List;
 public class MainActivity extends FragmentActivity {
 
     public static boolean isActive;
+    protected SCLocation scLocation;
     protected AlertDialog alertDialogNotification = null;
 
     @Override
@@ -54,6 +59,15 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         SimiManager.getIntance().setCurrentActivity(this);
         setContentView(R.layout.core_main_activity);
+
+        scLocation = new SCLocation(this);
+        scLocation.setCallBack(new SCLocationCallBack() {
+            @Override
+            public void getLocationComplete(boolean isSuccess) {
+                registerNotification();
+            }
+        });
+        scLocation.connect();
 
         // DataPreferences.init(this);
         if (DataPreferences.isSignInComplete()) {
@@ -89,7 +103,6 @@ public class MainActivity extends FragmentActivity {
             showNotification(notificationData);
         }
 
-        registerNotification();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         MenuTopFragment fragment = MenuTopFragment
@@ -243,6 +256,12 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        scLocation.disconnect();
+    }
+
+    @Override
     protected void onDestroy() {
         isActive = false;
         System.gc();
@@ -254,13 +273,20 @@ public class MainActivity extends FragmentActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        HashMap<String, Object> hmData = new HashMap<>();
-        hmData.put(KeyData.BAR_CODE.INTENT, data);
-        hmData.put(KeyData.BAR_CODE.REQUEST_CODE, requestCode);
-        hmData.put(KeyData.BAR_CODE.RESULT_CODE, resultCode);
-        SimiEvent.dispatchEvent(KeyEvent.BAR_CODE.BAR_CODE_ON_RESULT, hmData);
-
+        if (requestCode == SCLocation.LOCATION_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                scLocation.updateLocation();
+            } else {
+                registerNotification();
+            }
+        }
+        {
+            HashMap<String, Object> hmData = new HashMap<>();
+            hmData.put(KeyData.BAR_CODE.INTENT, data);
+            hmData.put(KeyData.BAR_CODE.REQUEST_CODE, requestCode);
+            hmData.put(KeyData.BAR_CODE.RESULT_CODE, resultCode);
+            SimiEvent.dispatchEvent(KeyEvent.BAR_CODE.BAR_CODE_ON_RESULT, hmData);
+        }
     }
 
 

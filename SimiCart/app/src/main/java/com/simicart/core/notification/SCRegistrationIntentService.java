@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.renderscript.Double2;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -12,8 +13,10 @@ import com.simicart.core.base.delegate.ModelFailCallBack;
 import com.simicart.core.base.delegate.ModelSuccessCallBack;
 import com.simicart.core.base.model.collection.SimiCollection;
 import com.simicart.core.base.network.error.SimiError;
+import com.simicart.core.common.Utils;
 import com.simicart.core.config.AppStoreConfig;
 import com.simicart.core.config.Config;
+import com.simicart.core.config.DataLocal;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,14 +35,8 @@ public class SCRegistrationIntentService extends IntentService {
 
     public SCRegistrationIntentService() {
         super("");
-        getCurrentLocation();
     }
 
-    protected void getCurrentLocation() {
-        GPSTracker gps = new GPSTracker();
-        longtitude = gps.getLongitude();
-        lattitude = gps.getLatitude();
-    }
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -55,12 +52,10 @@ public class SCRegistrationIntentService extends IntentService {
             InstanceID instanceID = InstanceID.getInstance(this);
 
             String defaultSenderId = AppStoreConfig.getInstance().getSenderID();
-            Log.e("SCRegistrationIntentService ", " defaultSenderId " + defaultSenderId);
 
             String token = instanceID.getToken(defaultSenderId,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             // [END get_token]
-            Log.i("SCRegistrationIntentService", "GCM Registration Token: " + token);
 
             sendRegistrationToServer(token);
 
@@ -73,7 +68,6 @@ public class SCRegistrationIntentService extends IntentService {
             sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, true).apply();
             // [END register_for_gcm]
         } catch (Exception e) {
-            Log.d("SCRegistrationIntentService", "Failed to complete token refresh", e);
             // If an exception happens while fetching the new token or updating our registration data
             // on a third-party server, this ensures that we'll attempt the update at a later time.
             sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, false).apply();
@@ -119,8 +113,26 @@ public class SCRegistrationIntentService extends IntentService {
         } else {
             json.put("is_demo", "0");
         }
-        json.put("latitude", lattitude);
-        json.put("longitude", longtitude);
+
+        if (Utils.validateString(DataLocal.latitude)) {
+            try {
+                lattitude = Double.parseDouble(DataLocal.latitude);
+                json.put("latitude", lattitude);
+            } catch (Exception e) {
+                Log.e("Registeration Service ", " ------> Parse Lattitude " + e.getMessage());
+            }
+        }
+
+        if (Utils.validateString(DataLocal.longtitude)) {
+            try {
+                longtitude = Double.parseDouble(DataLocal.longtitude);
+                json.put("longitude", longtitude);
+
+            } catch (Exception e) {
+                Log.e("Registeration Service ", " ------> Parse Longtitude " + e.getMessage());
+            }
+
+        }
         return json;
 
     }
