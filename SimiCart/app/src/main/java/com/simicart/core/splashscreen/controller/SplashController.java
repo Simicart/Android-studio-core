@@ -135,7 +135,7 @@ public class SplashController {
             public void onSuccess(SimiCollection collection) {
                 isSuccessSku = true;
                 ArrayList<String> listSKU = listSKUPluginModel.getListSKU();
-                listSKU.add("simi_developer");
+                //listSKU.add("simi_developer");
                 if (null != listSKU && listSKU.size() > 0) {
                     enablePlugins(listSKU);
                 }

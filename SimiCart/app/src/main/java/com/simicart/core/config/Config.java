@@ -15,20 +15,18 @@ public class Config {
 //    private String mColorSplashScreen = "SPLASH_SCREEN";
 //    private String mDemoEnable = "DEMO_ENABLE";
 
-
-    private static Config instance;
     private String mBaseUrl = "http://demo.magestore.com/simicart/simipos3/index.php/";
-    private String mSecretKey = "7da5a4671cae52674c2789e86d4912265f68c98";
+    private String mSecretKey = "3f447fbaf2b16b42438bb747c8351c49faa4ab";
     private String mBaseCloudUrl = "https://api.jajahub.com/rest/";
-    // key demo superior
-    private String mSecretCloudKey = "d2e8cb715ff3597e88ad6aa6a02b6cafac6a533a";
-    private String mColorSplashScreen = "#FFFFFF";
-    private String mDemoEnable = "DEMO_ENABLE";
+    private String mSecretCloudKey = "c7b4e5216b79a8793ea56d9625fecffa614913e8";
+    private String mColorSplashScreen = "#ffefef";
+    private String mDemoEnable = "YES";
     private String mFontCustom = "fonts/ProximaNovaLight.ttf";
     private String mUseStore;
     private String isFullSplash = ""; //FULL_SPLASH
     private String mCookie = "";
 
+    private static Config instance;
     public static Config getInstance() {
         if (null == instance) {
             instance = new Config();
